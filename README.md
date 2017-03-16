@@ -1,6 +1,6 @@
-#SEPM Group 4 - Team 1
+# SEPM Group 4 - Team 1
 
-######Members:
+###### Members:
  - Lukas AUKENTHALER
  - Stefan MATTERSBERGER
  - Bernd MENIA
