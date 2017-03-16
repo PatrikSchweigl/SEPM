@@ -1,6 +1,6 @@
-SEPM Group 4 - Team 1
+#SEPM Group 4 - Team 1
 
-Members:
+######Members:
  - Lukas AUKENTHALER
  - Stefan MATTERSBERGER
  - Bernd MENIA
@@ -17,6 +17,6 @@ The project utilizes Spring Boot and is configured as maven web application proj
  - embedded H2 in-memory database (including H2 console)
  - support for PrimeFaces
 
-Just execute  "mvn spring-boot:run" to start the project and connect to
+Just execute  `mvn spring-boot:run` to start the project and connect to
 http://localhost:8080/ to access the nurseries web application. You may login
-with "admin" and "passwd".
+with *"admin"* and *"passwd"*.
