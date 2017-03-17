@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.model;
+package at.qe.sepm.asn_app.models;
 
 import java.util.Date;
 import java.util.Objects;

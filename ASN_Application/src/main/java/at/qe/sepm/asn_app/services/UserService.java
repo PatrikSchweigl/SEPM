@@ -1,7 +1,7 @@
 package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.repositories.UserRepository;
-import at.qe.sepm.asn_app.model.User;
+import at.qe.sepm.asn_app.models.User;
 
 import java.util.Collection;
 import java.util.Date;
