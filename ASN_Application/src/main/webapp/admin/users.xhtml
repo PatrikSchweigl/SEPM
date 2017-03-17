@@ -7,6 +7,10 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name ="content">
+        <div align="right" style="margin-bottom:10px;">
+            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ User" title="+ User" style="align-items:right;"></p:commandButton>
+
+        </div>
         <h:form id="userForm">
             <p:dataTable id="usersTable" var="user" value="#{userListController.users}">
                 <p:column headerText="Username">
@@ -35,13 +39,15 @@
                 </p:column>
             </p:dataTable>
 
+
+            <!-- Edit User Dialog -->
             <p:dialog header="Edit User" id="userEditDialog" widgetVar="userEditDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
                     <h:panelGrid columns="2">
-                        <p:outputLabel for="username" value="Username: " />
-                        <p:inputText id="username" value="#{userDetailController.user.username}" disabled="true"/>
-                        <p:outputLabel for="password" value="Password: " />
-                        <p:password id="password" value="#{userDetailController.user.password}" disabled="true"/>
+                        <p:outputLabel for="userName" value="Username: " />
+                        <p:inputText id="userName" value="#{userDetailController.user.username}" disabled="true"/>
+                        <p:outputLabel for="passWord" value="Password: " />
+                        <p:password id="passWord" value="#{userDetailController.user.password}" disabled="true"/>
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="2">
@@ -64,6 +70,40 @@
                         <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}" oncomplete="PF('userEditDialog').hide()" update=":userForm:usersTable"/>
                         <p:commandButton value="Reload" action="#{userDetailController.doReloadUser()}" update=":userForm:userData"/>
                         <p:commandButton value="Abort" onclick="PF('userEditDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <!-- Create User Dialog -->
+            <p:dialog header="Create User" id="userCreateDialog" widgetVar="userCreateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="userDataCreate">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="username" value="Username: " />
+                        <p:inputText id="username" value="#{userAddController.user.username}"/>
+                        <p:outputLabel for="password" value="Password: " />
+                        <p:password id="password" value="#{userAddController.user.password}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="firstname" value="First Name: " />
+                        <p:inputText id="firstname" value="#{userAddController.user.firstName}"/>
+                        <p:outputLabel for="lastname" value="Last Name: " />
+                        <p:inputText id="lastname" value="#{userAddController.user.lastName}"/>
+                        <p:outputLabel for="mail" value="E-Mail: " />
+                        <p:inputText id="mail" value="#{userAddController.user.email}"/>
+                        <p:outputLabel for="phonenumber" value="Phone: " />
+                        <p:inputMask id="phonenumber" value="#{userAddController.user.phone}" mask="+99? 999 9999999"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="enable" value="Enabled: " />
+                        <p:selectBooleanCheckbox id="enable" value="#{userAddController.user.enabled}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{userAddController.doSaveUser()}" oncomplete="PF('userCreateDialog').hide()" update=":userForm:usersTable"/>
+                        <p:commandButton value="Abort" onclick="PF('userCreateDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>
             </p:dialog>
