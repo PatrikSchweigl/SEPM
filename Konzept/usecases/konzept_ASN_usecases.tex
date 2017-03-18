@@ -1,0 +1,814 @@
+\newpage
+\section{Use Cases}
+  in diesem Kapitel werden die Akteure beschrieben (Kapitel 2.1), das Use-Case-Diagramm wird gezeigt (Kapitel 2.2) und die einzelnen Use Cases werden detailliert beschrieben (Kapitel 2.3 ff.)
+  
+\subsection{Akteure}
+  \subsubsection{Mitarbeiter}
+    Unter Mitarbeiter fallen P"adagogen und Praktikanten, die in der Kinderkrippe arbeiten.
+    
+  \subsubsection{aktiver Elternteil}
+    Unter aktiven Elternteilen versteht man Personen, die mindestens ein Kind in der Kinderkrippe angemeldet haben.
+    
+  \subsubsection{inaktiver Elternteil}
+    Unter Inaktive Elternteilen versteht man Personen, deren Kind aus der Kinderkrippe abgemeldet wurde.
+    
+  \subsubsection{System}  
+    
+ \newpage
+ \subsection{Use-Case-Diagramm}
+ 
+ \newpage
+ \subsection{Use-Case  Anmelden}
+  \paragraph{Identifier}
+    UC 2.01
+  \paragraph{Beschreibung}
+    Um diese Applikation nutzen zu k"onnen, muss sich der Nutzer mit Username und Passwort anmelden.
+  \paragraph{Ausl"oser}
+    Der Nutzer gibt in den daf"ur vorgesehenen Schaltfl"achen den Benutzernamen und das zugeh"orige Passwort ein und best"atigt seine Eingaben mit dem Button \dq Login \dq.
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Es existiert ein g"ultiger Account
+   \item Der Nutzer befindet sich in Maske M1-Login
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item User gibt seinen Username und sein Passwort ein.
+   \item Der Benutzer best"atigt seine Eingaben mit dem Button \dq Login\dq
+   \item Das System "uberpr"uft die Daten
+   \item Der User wird auf die Maske M2-Grundstellung weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+   \setcounter{enumi}{3}
+   \item Die eingegebenen Daten sind nicht korrekt. Der User bekommt eine entsprechende Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+    Der Benutzer befindet sich im angemeldeten Zustand und befindet sich in Maske M2-Grundstellung.
+  \paragraph{Involvierte Klassen}
+  M"ussen noch gemacht werden TODO.
+  
+ \newpage
+ \subsection{Use-Case Abmelden}
+  \paragraph{Identifier}
+  UC 2.02
+  \paragraph{Beschreibung}
+  Die aktuelle Sitzung zwischen Benutzer und System wird beendet.
+  \paragraph{Ausl"oser}
+  \begin{itemize}
+   \item Der Benutzer klickt auf den Button \dq Logout\dq
+   \item Es hat f"ur einen gewissen Zeitraum keine Eingabe gegeben
+   \item Die Applikation wird beendet
+  \end{itemize}
+
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Logout\dq
+   \item Das System "andert den Status des Benutzers auf \dq abgemeldet\dq
+   \item Der Benutzer wird auf die Login Seite M1-Login weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{0}
+   \item Die Applikation wird geschlossen
+   \setcounter{enumi}{0}
+   \item Der Benutzer hat f"ur eine gewisse Zeit keine Eingabe get"atigt
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Alle aktiven Sitzungen wurden beendet und der Benutzer befindet sich in Maske M1-Login
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+ \newpage
+ \subsection{Use-Case Maximalbelegung eintragen}
+  \paragraph{Identifier}
+  UC 2.03
+  \paragraph{Beschreibung}
+  Die Mitarbeiter der Kinderkrippe k"onnen nur eine gewisse Anzahl Kinder in Abh"angigkeit der anwesenden P"ädagogen und Praktikanten aufnehmen. Diese Anzahl wird gespeichert.
+  \paragraph{Ausl"oser}
+  Der Mitarbeiter klickt auf den Button \dq Maximalbelegung eintragen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Mitarbeiter ist angemeldet
+   \item Der Mitarbeiter hat den Rang \dq P"adagoge\dq
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Mitarbeiter klickt auf den Button \dq Maximalbelegung eintragen\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer gibt die gew"unschte Anzahl ein und best"atigt mit \dq OK\dq
+   \item Die Maximalbelegung wird f"ur den heutigen Tag gespeichert
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{3}
+   \item Die Eingabe ist ung"ultig und der Benutzer erh"alt eine entsprechende Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Feiertage und Ferienzeiten eintragen}
+  \paragraph{Identifier}
+  UC 2.04
+  \paragraph{Beschreibung}
+  Der Mitarbeiter kann Feiertage und kinderkrippenspezifische Ferientage in den Kalender eintragen.
+  \paragraph{Ausl"oser}
+  Der Mitarbeiter klickt auf den Button \dq Feiertage/Ferien eintragen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item der Mitarbeiter ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Feiertage/Ferien eintragen\dq
+   \item Der Benutzer wird auf Maske M3-Kalender weitergeleitet
+   \item Der Benutzer kann "uber das Kalendermen"u den gew"unschten Tag ausw"ahlen
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Mitarbeiter gibt den gew"unschten Grund und optional eine Anmerkung hinzu
+   \item Das System speichert ddie Daten und der Benutzer wird auf Maske M2-Grundstellung weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Feiertag/Ferientag ist f"ur alle auf Makse M3-Kalender sichtbar
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+ \newpage
+ \subsection{Use-Case Kind anmelden}
+  \paragraph{Identifier}
+  UC 2.05
+  \paragraph{Beschreibung}
+    Die Mitarbeiter k"onnen "uber eine Schaltfl"ache neue Kinder hinzuf"ugen.
+  \paragraph{Ausl"oser}
+    Der Benutzer klickt qauf den Button \dq Kind hinzuf"ugen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Mitarbeiter ist angemeldet
+   \item Ein Elternteil des Kindes ist registriert
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Mitarbeiter sucht "uber die Suchfunktion nach dem Elternteil
+   \item Der Mitarbeiter w"ahlt das Elternteil aus und akzeptiert die Eingabe.
+   \item Der Benutzer klickt auf den Button \dq Kind hinzuf"ugen\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Mitarbeiter gibt alle verpflichtenden Felder ein (Name, Geschlecht, Geburtsdatum, Foto, Notfallkontakt)
+   \item Der Mitarbeiter gibt eventuell optionale Felder ein (Allergien, Unvertr"aglichkeiten, Geschwister, sontige Anmerkungen)
+   \item Der Mitarbeiter best"atigt seine Eingaben
+   \item Das System legt ein neues Kind in der Datenbank an, falls das Elternteil inaktiv war, wird es auf aktiv gesetzt
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{5}
+   \item Die eingegeben Daten waren nicht korrekt, dem Benutzer bekommt eine Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Der Benutzer befindet sich auf Maske M2-Grundstellung und das Kind befindet sich in der Datenbank
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Kind abmelden}
+  \paragraph{Identifier}
+  UC 2.06
+  \paragraph{Beschreibung}
+  Das Kind kann von der Kinderkrippe abgemeldet werden, wenn das Abmeldedatum "uberschritten wird oder das Personal manuell eine Abmeldung durchf"uhrt.
+  \paragraph{Ausl"oser}
+  \begin{itemize}
+   \item Das Abmeldedatum wird "uberschritten
+   \item Das Person meldet das Kind manuell ab
+  \end{itemize}
+
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Mitarbeiter ist angemeldet
+   \item Das Kind ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Mitarbeiter such "uber die Suchfunktion das Kind
+   \item Der Benutzer best"atigt seine Auswahl
+   \item Der Benutzer klickt auf den Button \dq Kind abmleden\dq
+   \item Es "offnet sich ein Pop-up Fenster mit einer Abmeldebest"atigung
+   \item Der Mitarbeiter best"atigt mit dem Button \dq OK\dq
+   \item Das System l"oscht das Kind und alle korrelierten Kontakte, ist kein kind mehr des Elternteils angemeldet, so wird das Elternteil auf inaktiv gesetzt
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Benutzer befindet sich auf Maske M2-Grundstellung und das Kind wurde abgemeldet
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Benutzerdaten "andern}
+  \paragraph{Identifier}
+  UC 2.07
+  \paragraph{Beschreibung}
+  Der Mitarbeiter kann die Daten von Eltern und Kinder "andern oder aktualisieren.
+  \paragraph{Ausl"oser}
+  Der Mitarbeiter klickt auf den Button \dq Benutzerdaten "andern\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Mitarbeiter ist angemeldet
+   \item Der zu "andernde User ist registriert
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Mitarbeiter sucht "uber die Suchfunktion die zu "andernde Person
+   \item Der Benutzer best"atigt sein Auswahl
+   \item Der Benutzer klickt auf den Button \dq Nutzerdaten "andern\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Mitarbeiter "andert die gew"unschten Felder
+   \item Der Mitarbeiter best"atigt sine Eingabe
+   \item Das System speichert die Daten und wechselt zu Maske M2-Grundstellung
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{4}
+   \item Die eingegebenen Daten sind ung"ultig und der Mitarbeiter bekommt eine entsprechende Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Die Nutzerdaten wurden ge"andert und der Benutzer befindet sich auf Maske M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Daten drucken}
+  \paragraph{Identifier}
+  UC 2.08
+  \paragraph{Beschreibung}
+  Es k"onnen Tagesplaner, Stammbl"atter, Kontaktlisten, Auditlog und Kalender ausgedruckt werden
+  \paragraph{Ausl"oser}
+    Der Benutzer klickt aud den Button \dq Drucken\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sich in einem der folgenden Masken: M3-Kalender, M4-Auditlog, M5-Tagesplaner, M6-Stammblatt, M7-Kontakte
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Drucken \dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer w"ahlt den Drucker aus und best"atigt seine Auswahl
+   \item Das System sendet einen Druckerauftrag und wechselt zu M2-Grundstellung
+  \end{enumerate}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Nutzer befindet sich in Maske M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Daten exportieren}
+  \paragraph{Identifier}
+  UC 2.09
+  \paragraph{Beschreibung}
+    Es k"onnen Tagesplaner, Stammbl"atter, Kontaktlisten, Auditlog, Kalender und Essensbesllung in CSV/PDF/JSON exportiert werden
+  \paragraph{Ausl"oser}
+    Der Benutzer klickt aud den Button \dq Daten exportieren\dq
+
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+    \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sich in einem der folgenden Masken: M3-Kalender, M4-Auditlog, M5-Tagesplaner, M6-Stammblatt, M7-Kontakte
+  \end{itemize}
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Daten exportieren \dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer w"ahlt den das Format und den Speicherort aus und best"atigt seine Auswahl
+   \item Das System konvertiert und speichert die Daten und wechselt zu M2-Grundstellung
+  \end{enumerate}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Nutzer befindet sich in Maske M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Elternteil registrieren}
+  \paragraph{Identifier}
+  UC 2.10
+  \paragraph{Beschreibung}
+  Wenn ein neues Elternteil dem Verein beitritt, kann es von einem Mitarbeiter registriert werden
+  \paragraph{Ausl"oser}
+  Der Mitarbeiter klickt auf den Button \dq Elternteil registrieren\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Mitarbeiter ist angemeldet
+  \end{itemize}
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Elternteil registrieren\dq
+   \item Der Mitarbeiter gibt alle verpflichtenden Felder ein (Name, Geschlecht, Geburtsdatum, Foto)
+   \item Der Mitarbeiter best"atigt seine Eingaben
+   \item Das System legt einen neuen inaktiven Nutzer an und wechselt zu Maske M2-Grundstellung 
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{1}
+   \item Die eingegebenen Daten sind ung"ultig und der Nutzer erh"alt eine Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Der neue Nutzer befindet sich in der Datenbank und der Mitarbeiter befindet sich in Maske M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Betreuungstage eintragen}
+  \paragraph{Identifier}
+  UC 2.11
+  \paragraph{Beschreibung}
+  Damit die Mitarbeiter wissen, wer an welchem Tag gearbeitet hat, m"ussen Mitarbeiter ihre Betreuungstage eintragen. 
+  \paragraph{Ausl"oser}
+  Der Mitarbeiter klickt auf den Button \dq Check-in\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sich in M3-Kalender
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer kllickt in M3-Kalender den gew"unschten Tag
+   \item Der Benutzer klickt auf den Button \dq Einchecken\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer gibt Start- und Endzeit ein
+   \item Das System speichert die Daten und der User wird auf M2-GRundstellung weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Die Arbeitszeit wird gespeichert und der User wird auf M2-Grundstellung weitergeleitet
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Kontaktliste einsehen}
+  \paragraph{Identifier}
+  UC 2.12
+  \paragraph{Beschreibung}
+  Der Mitarbeiter kann auf eine kompakte Liste mit Namen, Telefonnummer und die angemeldeten Kinder der Eltern zugreifen 
+  \paragraph{Ausl"oser}
+  Der Mitarbeiter klickt auf den Button \dq Kontaktliste aufrufen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Kontaktliste aufrufen\dq
+   \item Das ystem wechselt zu Maske M7-Kontakte
+   \item der Benutzer kann die Kontaktliste "uber Filterfunktionen weiter verfeinern
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Benutzer befindet sich in M7-Kontakte
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Kinderstammblatt einsehen }
+  \paragraph{Identifier}
+  UC 2.13
+  \paragraph{Beschreibung}
+  In dieser Ansicht erh"alt der Mitarbeiter die vollst"andigen Information "uber das Kind
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button \dq Kinderstammblatt "offnen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Mitarbeiter such "uber die Suchfunktion das Kind
+   \item Der Benutzer best"atigt seine Auswahl
+   \item Der Benutzer klickt auf den Button \dq Stammblatt "offnen\dq
+   \item Es "offnet sich ein Pop-up Fenster mit allen Informationen
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Tagesplaner einsehen}
+  \paragraph{Identifier}
+  UC 2.14
+  \paragraph{Beschreibung}
+  In dieser Ansicht erh"alt der Mitarbeiter eine kompakte "Ubersicht "uber die geplanten T"atigkeiten des gew"ahlten Tages
+  \paragraph{Ausl"oser}
+  Der 
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benuzer befindet sich in Maske M3-Kalender
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt in Maske M3-Kalender auf den gew"unschten Tag
+   \item Der Benutzer klickt auf den Button \dq Tagesplaner einsehen\dq
+   \item Der Benutzer wird auf die Maske M5-Tagesplaner weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Benutzer befindet sich in Maske M5-Tagesplaner
+  \paragraph{Involvierte Klassen}
+  TODO
+ 
+ \newpage
+ \subsection{Use-Case Aufgaben der Eltern eintragen}
+  \paragraph{Identifier}
+  UC 2.15
+  \paragraph{Beschreibung}
+  Die Mitarbeiter der Kinderkrippe k"onnen anfallende Arbeiten Elternteile zuweisen
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button \dq Aufgaben verteilen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sich in Maske M3-Kalender
+   \item Alternativ: Der Benutzer sucht das gew"unschte Elternteil "uber die Suchfunktion
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+  \item Der Benutzer klickt in Maske M3-Kalender auf den gew"unschten Tag
+  \item Der Benutzer klickt auf den Button \dq Aufgaben verteilen\dq
+  \item Es "offnet sich ein Pop-up Fenster
+  \item der Benutzer gibt alle notwendigen Daten ein (Name, Aufgabe, Zeipunkt, Zeitraum)
+  \item Der Benutzer best"atigt seine Eingabe
+  \item Das System sendet eine Benachrichtigung an das Elternteil und wechselt zu M2-Grundstellung
+  \end{enumerate}
+  
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+   \item Der Benutzer gibt in die Suchfunktion das gew"unschte Elternteile ein
+   \item Der Benutzer klicht auf den Button \dq Aufgabe zuweisen\dq
+   \item Es "offnet sich ein Pop-up Fenster
+  \item der Benutzer gibt alle notwendigen Daten ein (Name, Aufgabe, Zeipunkt, Zeitraum)
+  \item Der Benutzer best"atigt seine Eingabe
+  \item Das System sendet eine Benachrichtigung an das Elternteil und wechselt zu M2-Grundstellung
+  \end{enumerate}
+  \paragraph{Nachbedingungen}
+  Das Elternteil erh"alt eine Benachrichtigung und der Nutzer befindet sich in M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Auditlog einsehen}
+  \paragraph{Identifier}
+  UC 2.16
+  \paragraph{Beschreibung}
+  Der Auditlog ist eine unver"anderliche Logdatei, die alle Aktionen chronologisch mit Zeitstempel speichert. Auf diese kann "uber unsere Applikation lesend zugegriffen werden 
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button \dq Auditlog lesen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Nutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Mitarbeiter klickt auf den Button \dq Auditlog lesen\dq
+   \item Das System wechselt zur Maske M4-Auditlog
+  \end{enumerate}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  Der Nutzer befindet sich in Maske M4-Auditlog
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Bring- und Abholzeiten eintragen}
+  \paragraph{Identifier}
+  UC 2.17
+  \paragraph{Beschreibung}
+  Um den Mitarbeitern die Zeiteinteilung zu erleichtern, k"onnen Eltern die Bring- und Abholzeiten eintragen.
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button \dq Bringen/Abholen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sich in Maske M3-Kalender
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt in M3-Kalender den gew"unschten Tag an
+   \item Der Benutzer klickt auf den Button \dq Bringen/Abholen\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer gibt die Daten (Bringzeit, Abholzeit, Kind, Selbstabholung oder Fremdabholung) ein und best"atigt seine Eingaben
+   \item Das System "uberpr"uft, ob die Bring und Abholzeiten normal oder abweichend sind und markiert sie dementsprechend
+   \item Das System speichert die Daten und wechselt zur Maske M2-Grundstellung
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{4}
+   \item  Die Eingaben sind ung"ultig und der Benutzer erh"alt eine Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Die Bring und Abholzeiten werden in der Datenbank gespeichert und der Nutzer befindet sich in M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  TODO
+  
+  \newpage
+ \subsection{Use-Case Abwesenheit eintragen}
+  \paragraph{Identifier}
+  UC 2.18
+  \paragraph{Beschreibung}
+  Das Elternteil kann f"ur das Kind eine au"ssernat"urliche Abwesenheit wie Krankheit oder Arztbesuch eintragen.
+  \paragraph{Ausl"oser}
+  Der Nutzer klickt auf den Button \dq Abwesenheit eintragen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sichin M3-Kalender
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf M3-Kalender auf den gew"unschten Tag
+   \item Der Benutzer klickt auf den Button \dq Abwesenheit eintragen\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer gibt die erforderlichen Daten (Zeit, Grund) ein und best"atigt seine Eingaben
+   \item Das System speichert die Abwesenheit und wechselt zu M2-Grundstellung
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{4}
+   \item Die eingegeben Daten sind ung"ultig und der Benutzer erh``alt eine Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Der Abwesenheitsgrund wird gespeichert und der Nutzter befindet sich auf M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Mittagessen anmelden/abmelden}
+  \paragraph{Identifier}
+  UC 2.19
+  \paragraph{Beschreibung}
+  Das Kind kann w"ochentlich f"ur das Mittagessen angemeldet werden. Eine Abmeldung ist bis zum Stichtag m"oglich.
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button Mitagessen Anmelden/Abmelden
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+   \item Der Benutzer befindet sich in M3-Kalender
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt in M3-Kalender auf den gew"unschten Tag
+   \item Der Benutzer klickt auf den Button \dq Mittagessen Anmelden/Abmelden\dq
+   \item Wenn der Benutzer an diesem Tag zu keinem Mittagessen angemeldet ist, "offnet sich ein Pop-up Fenster
+   \item Der Benutzer gibt die Wochentage f"ur die folgende Wochen ein, in der das Kind Mittagessen konsumiert
+   \item Der Benutzer best"atigt die Eingabe
+   \item Das System speichert die Daten und der User wird auf M2-Grundstellung weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+  \setcounter{enumi}{2}
+   \item  Wenn der Benutzer an diesem Tag f"ur ein Mittagessen angemeldet ist, wird die ANmeldung an diesem Tag storniert.
+   \item Das System speichert die "Anderung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Die Anmeldung befindet sich in der Datenbank
+  \paragraph{Involvierte Klassen}
+  
+    \newpage
+ \subsection{Use-Case Eigene Daten bearbeiten}
+  \paragraph{Identifier}
+  UC 2.20
+  \paragraph{Beschreibung}
+  Die Anwender der Applikation k"onnen jederezeit ihre personenbezogenen Daten "andern
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button \dq Eigene Daten bearbeiten\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, aktiver Elternteil, inaktiver Benutzer
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Eingen Daten bearbeiten\dq
+   \item Es "offnet sich ein Pop-up Fenster
+   \item Der Benutzer kann seine Daten "andern
+   \item Der Benutzer klcikt auf den Button \dq annehmen\dq
+   \item Das System speichert die "Anderung und der User wird auf M2-Grundstellung weitergeleitet
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+   \item Die eingegebenen Daten sind ung"ultig und der User erh"alt eine Fehlermeldung
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  Der Benutzer befindet sich in M2-Grundstellung
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Benachrichtigungen einsehen und bearbeiten}
+  \paragraph{Identifier}
+  UC 2.21
+  \paragraph{Beschreibung}
+  Bei gewissen Aktionen erhalten Benutzer eine Banachrichtigung, die dort angesehen und bearbeitet werden k"onnen
+  \paragraph{Ausl"oser}
+  Der Benutzer klickt auf den Button \dq Benachrichtigungen\dq
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt auf den Button \dq Benachrichtigungen\dq
+   \item Das System wechselt zur Maske M8-Benachrichtigungen
+   \item Der Benutzer kann nun die Benachrichtigungen als best"atigt markieren
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Messageboard "offnen (SF)}
+  \paragraph{Identifier}
+  UC 2.22
+  \paragraph{Beschreibung}
+  \paragraph{Ausl"oser}
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \paragraph{Schritte}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Nachricht auf Messageboard posten (SF)}
+  \paragraph{Identifier}
+  UC 2.23
+  \paragraph{Beschreibung}
+  \paragraph{Ausl"oser}
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \paragraph{Schritte}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Privatnachricht senden (SF)}
+  \paragraph{Identifier}
+  UC 2.24
+  \paragraph{Beschreibung}
+  \paragraph{Ausl"oser}
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \paragraph{Schritte}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Bildergalerie "offnen (SF)}
+  \paragraph{Identifier}
+  UC 2.25
+  \paragraph{Beschreibung}
+  \paragraph{Ausl"oser}
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \paragraph{Schritte}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Bilder kommentieren (SF)}
+  \paragraph{Identifier}
+  UC 2.26
+  \paragraph{Beschreibung}
+  \paragraph{Ausl"oser}
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \paragraph{Schritte}
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
+  \newpage
+ \subsection{Use-Case Personen suchen}
+  \paragraph{Identifier}
+  UC 2.27
+  \paragraph{Beschreibung}
+  Um die Handhabung mit Personen zu vereinfachen, k"onnen die Benutzer der Anwendung die Personen "uber verschiedene Filterfunktionen suchen
+  \paragraph{Ausl"oser}
+  Der Benutzer gibt den Namen der Person in die Suchmaske ein
+  \paragraph{Beteiligte Akteure}   \leavevmode \newline
+    Mitarbeiter, inaktiver Elternteil, aktiver Elternteil
+  \paragraph{Vorbedingungen}
+  \begin{itemize}
+   \item Der Benutzer ist angemeldet
+  \end{itemize}
+
+  \paragraph{Schritte}
+  \begin{enumerate}
+   \item Der Beuntzer gibt den Namen in die Suchmaske ein
+   \item Das System gibt dynamisch passende Personen zur"uck
+  \end{enumerate}
+
+  \paragraph{Alternative Schritte}
+  \begin{enumerate}
+   \item Der Benutzer klickt bei der Suchmaske auf \dq Filter anwenden\dq
+   \item Der Benutzer verwendet die verschiedenen Filter
+   \item Das System gibt dynamisch passende Personen zur"uck
+  \end{enumerate}
+
+  \paragraph{Nachbedingungen}
+  \paragraph{Involvierte Klassen}
+  
