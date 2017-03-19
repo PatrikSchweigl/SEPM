@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.models.parent;
+package at.qe.sepm.asn_app.models.referencePerson;
 
 import org.springframework.data.domain.Persistable;
 
@@ -18,10 +18,10 @@ public class Caregiver implements Persistable<Long>{
     private int id;
     private String firstName;
     private String lastName;
-    private String relationship;    // This could be an enum.
+    private Relationship relationship;
     private String imgName;
 
-    public Caregiver(String firstName, String lastName, String relationship, String imgName) {
+    public Caregiver(String firstName, String lastName, Relationship relationship, String imgName) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,11 +46,11 @@ public class Caregiver implements Persistable<Long>{
         this.lastName = lastName;
     }
 
-    public String getRelationship() {
+    public Relationship getRelationship() {
         return relationship;
     }
 
-    public void setRelationship(String relationship) {
+    public void setRelationship(Relationship relationship) {
         this.relationship = relationship;
     }
 

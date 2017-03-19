@@ -1,7 +1,8 @@
 package at.qe.sepm.asn_app.models.child;
 
 
-import at.qe.sepm.asn_app.models.parent.Parent;
+import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -33,10 +34,14 @@ public class Child implements Persistable<Long>{
     @OneToMany
     private Set<Sibling> listSiblings;
     private boolean isRegistered;
+    private Custody custody;
+    private Religion religion;
+
 
     public Child(String firstName, String lastName, Date birthday, String imgName,
                  Set<String> furtherRemarks, Parent father, Parent mother, Set<String> listAllergies,
-                 Set<String> listFoodIntolerances, Set<Sibling> listSiblings, boolean isRegistered) {
+                 Set<String> listFoodIntolerances, Set<Sibling> listSiblings, boolean isRegistered,
+                 Custody custody, Religion religion) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -48,6 +53,8 @@ public class Child implements Persistable<Long>{
         this.listFoodIntolerances = listFoodIntolerances;
         this.listSiblings = listSiblings;
         this.isRegistered = isRegistered;
+        this.custody = custody;
+        this.religion = religion;
     }
 
     public String getFirstName() {
@@ -136,6 +143,22 @@ public class Child implements Persistable<Long>{
 
     public void setRegistered(boolean registered) {
         isRegistered = registered;
+    }
+
+    public Custody getCustody() {
+        return custody;
+    }
+
+    public void setCustody(Custody custody) {
+        this.custody = custody;
+    }
+
+    public Religion getReligion() {
+        return religion;
+    }
+
+    public void setReligion(Religion religion) {
+        this.religion = religion;
     }
 
     @Override

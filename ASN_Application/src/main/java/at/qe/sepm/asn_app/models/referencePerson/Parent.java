@@ -1,14 +1,12 @@
-package at.qe.sepm.asn_app.models.parent;
+package at.qe.sepm.asn_app.models.referencePerson;
 
 
 
 import at.qe.sepm.asn_app.models.child.Child;
-import at.qe.sepm.asn_app.models.child.Sibling;
-import at.qe.sepm.asn_app.models.general.Person;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,7 +23,9 @@ public class Parent implements Persistable<Long>{
     private String userName;
     private String password;
     private String imgName;
-
+    private String location;
+    private String postcode;
+    private String streetName;
     @OneToMany
     private Set<Child> listChildren;
     @OneToMany
@@ -33,18 +33,23 @@ public class Parent implements Persistable<Long>{
     @OneToMany
     @ElementCollection
     private Set<Assignment> listAssignments;
+    private FamilyStatus familyStatus;
 
-    public Parent(String firstName, String lastName, String userName, String password,
-                  String imgName, Set<Child> listChildren, Set<Caregiver> listCaregivers,
-                  Set<Assignment> listAssignments) {
+    public Parent(String firstName, String lastName, String userName, String password, String imgName,
+                  String location, String postcode, String streetName, Set<Child> listChildren,
+                  Set<Caregiver> listCaregivers, Set<Assignment> listAssignments, FamilyStatus familyStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.imgName = imgName;
+        this.location = location;
+        this.postcode = postcode;
+        this.streetName = streetName;
         this.listChildren = listChildren;
         this.listCaregivers = listCaregivers;
         this.listAssignments = listAssignments;
+        this.familyStatus = familyStatus;
     }
 
     public String getFirstName() {
@@ -109,6 +114,38 @@ public class Parent implements Persistable<Long>{
 
     public void setListAssignments(Set<Assignment> listAssignments) {
         this.listAssignments = listAssignments;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public FamilyStatus getFamilyStatus() {
+        return familyStatus;
+    }
+
+    public void setFamilyStatus(FamilyStatus familyStatus) {
+        this.familyStatus = familyStatus;
     }
 
     @Override

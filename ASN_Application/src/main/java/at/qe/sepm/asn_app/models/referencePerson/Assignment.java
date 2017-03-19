@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.models.parent;
+package at.qe.sepm.asn_app.models.referencePerson;
 
 import org.springframework.data.domain.Persistable;
 
