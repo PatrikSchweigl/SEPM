@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.models.referencePerson;
 
 
 
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import org.springframework.data.domain.Persistable;
@@ -44,10 +45,11 @@ public class Parent implements Persistable<Long>{
     @NotNull
     private FamilyStatus familyStatus;
     private boolean status;
+    private UserRole role;
 
     public Parent(String firstName, String lastName, String userName, String password, String imgName,
                   String location, String postcode, String streetName, Set<Child> listChildren,
-                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
+                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status, UserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -156,6 +158,14 @@ public class Parent implements Persistable<Long>{
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     @Override
