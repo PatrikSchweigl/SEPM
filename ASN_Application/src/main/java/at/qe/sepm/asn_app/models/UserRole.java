@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.model;
+package at.qe.sepm.asn_app.models;
 
 /**
  * Enumeration of available user roles.

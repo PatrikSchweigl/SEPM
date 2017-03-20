@@ -1,7 +1,7 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.model.User;
+import at.qe.sepm.asn_app.models.User;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
