@@ -9,7 +9,6 @@ public enum Religion {
     CHRISTENTUM,
     JUDENTUM,
     BUDDHISMUS,
-    PROTESTANTENTUM,
     HINDUISMUS,
     ATHEISMUS
 }
