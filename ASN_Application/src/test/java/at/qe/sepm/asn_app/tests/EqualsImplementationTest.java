@@ -1,7 +1,7 @@
 package at.qe.sepm.asn_app.tests;
 
-import at.qe.sepm.asn_app.model.User;
-import at.qe.sepm.asn_app.model.UserRole;
+import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserRole;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;

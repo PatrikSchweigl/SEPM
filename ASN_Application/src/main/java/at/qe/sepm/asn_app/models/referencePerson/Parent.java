@@ -28,25 +28,26 @@ public class Parent implements Persistable<Long>{
     private String userName;
     @NotNull
     private String password;
+    @NotNull
     private String imgName;
     @NotNull
     private String location;
     @NotNull
     private String postcode;
+    @NotNull
     private String streetName;
     @OneToMany
     private Set<Child> listChildren;
     @OneToMany
-    private Set<Caregiver> listCaregivers;
-    @OneToMany
     @ElementCollection
     private Set<Assignment> listAssignments;
+    @NotNull
     private FamilyStatus familyStatus;
-    private boolean isRegistered;
+    private boolean status;
 
     public Parent(String firstName, String lastName, String userName, String password, String imgName,
                   String location, String postcode, String streetName, Set<Child> listChildren,
-                  Set<Caregiver> listCaregivers, Set<Assignment> listAssignments, FamilyStatus familyStatus) {
+                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -56,9 +57,9 @@ public class Parent implements Persistable<Long>{
         this.postcode = postcode;
         this.streetName = streetName;
         this.listChildren = listChildren;
-        this.listCaregivers = listCaregivers;
         this.listAssignments = listAssignments;
         this.familyStatus = familyStatus;
+        this.status = status;
     }
 
     public String getFirstName() {
@@ -109,14 +110,6 @@ public class Parent implements Persistable<Long>{
         this.listChildren = listChildren;
     }
 
-    public Set<Caregiver> getListCaregivers() {
-        return listCaregivers;
-    }
-
-    public void setListCaregivers(Set<Caregiver> listCaregivers) {
-        this.listCaregivers = listCaregivers;
-    }
-
     public Set<Assignment> getListAssignments() {
         return listAssignments;
     }
@@ -155,6 +148,14 @@ public class Parent implements Persistable<Long>{
 
     public void setFamilyStatus(FamilyStatus familyStatus) {
         this.familyStatus = familyStatus;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override

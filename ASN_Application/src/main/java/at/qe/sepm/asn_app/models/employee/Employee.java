@@ -40,7 +40,7 @@ public class Employee implements Persistable<Long>{
     private String phoneNumber;
     private FamilyStatus familyStatus;
     private Role role;
-    private Status status;
+    private Status workingState;
 
 
     public Employee(String username, String password, String firstName, String lastName, Date birthday,
@@ -58,7 +58,7 @@ public class Employee implements Persistable<Long>{
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
         this.role = role;
-        this.status = status;
+        this.workingState = status;
     }
 
     public String getUsername() {
@@ -157,12 +157,12 @@ public class Employee implements Persistable<Long>{
         this.role = role;
     }
 
-    public Status getStatus() {
-        return status;
+    public Status getWorkingState() {
+        return workingState;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setWorkingState(Status workingState) {
+        this.workingState = workingState;
     }
 
     @Override

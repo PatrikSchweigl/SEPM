@@ -6,11 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by zerus on 17.03.17.
  */
-/** Edit by Stefan Mattersberger on 18.03.2017 */
 @Entity
 public class Admin implements Persistable<Long>{
     private static final long serialVersionUID = 1L;
@@ -18,12 +18,34 @@ public class Admin implements Persistable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @NotNull
+    private String username;
+    @NotNull
+    private String password;
     private String firstName;
     private String lastName;
 
-    public Admin(String firstName, String lastName) {
+    public Admin(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
