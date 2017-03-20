@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.models.employee;
 
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import org.springframework.data.domain.Persistable;
@@ -39,13 +40,13 @@ public class Employee implements Persistable<Long>{
     @NotNull
     private String phoneNumber;
     private FamilyStatus familyStatus;
-    private Role role;
+    private UserRole role;
     private Status workingState;
 
 
     public Employee(String username, String password, String firstName, String lastName, Date birthday,
                     String location, String streetName, String postcode, Religion religion, String phoneNumber,
-                    FamilyStatus familyStatus, Role role,Status status) {
+                    FamilyStatus familyStatus, UserRole role,Status status) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -149,11 +150,11 @@ public class Employee implements Persistable<Long>{
         this.familyStatus = familyStatus;
     }
 
-    public Role getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
