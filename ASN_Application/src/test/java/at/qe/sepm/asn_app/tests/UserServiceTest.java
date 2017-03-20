@@ -1,8 +1,8 @@
 package at.qe.sepm.asn_app.tests;
 
 import at.qe.sepm.asn_app.Main;
-import at.qe.sepm.asn_app.model.User;
-import at.qe.sepm.asn_app.model.UserRole;
+import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.services.UserService;
 import org.junit.Assert;
 import org.junit.Test;

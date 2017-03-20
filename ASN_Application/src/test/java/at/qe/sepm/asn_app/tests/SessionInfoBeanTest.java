@@ -1,7 +1,7 @@
 package at.qe.sepm.asn_app.tests;
 
 import at.qe.sepm.asn_app.Main;
-import at.qe.sepm.asn_app.model.UserRole;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import org.junit.Assert;

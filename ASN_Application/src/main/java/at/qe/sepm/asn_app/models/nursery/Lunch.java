@@ -3,10 +3,7 @@ package at.qe.sepm.asn_app.models.nursery;
 import at.qe.sepm.asn_app.models.child.Child;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +24,7 @@ public class Lunch implements Persistable<Long> {
     @NotNull
     private String meal;
     private double cost;
+    @OneToMany
     private List<Child> listChildren;
 
 
