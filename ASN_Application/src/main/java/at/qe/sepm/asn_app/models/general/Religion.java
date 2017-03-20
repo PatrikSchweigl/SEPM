@@ -11,4 +11,5 @@ public enum Religion {
     BUDDHISMUS,
     PROTESTANTENTUM,
     HINDUISMUS,
+    ATHEISMUS
 }

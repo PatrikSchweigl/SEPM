@@ -14,6 +14,9 @@ import java.util.Date;
 @Entity
 public class Assignment implements Persistable<Long>{
 
+    private static final long serialVersionUID = 1L;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

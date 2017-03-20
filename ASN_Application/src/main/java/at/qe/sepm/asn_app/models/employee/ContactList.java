@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.models.pedagogue;
+package at.qe.sepm.asn_app.models.employee;
 
 /**
  * Created by zerus on 17.03.17.

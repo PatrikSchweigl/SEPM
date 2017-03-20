@@ -12,7 +12,7 @@ public class Nursery {
     private PairTime bringTime;
     private PairTime pickUpTime;
     private AuditLog auditLog;
-    private Messageboard messageboard;
+    private Message messageboard;
     private PictureGallery pictureGallery;
     private List<Room> listRooms;
     private Terminal terminal;

@@ -15,6 +15,8 @@ import java.util.Set;
 /** Edit by Stefan Mattersberger on 18.03.2017 */
 @Entity
 public class Child implements Persistable<Long>{
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -33,15 +35,13 @@ public class Child implements Persistable<Long>{
     private Set<String> listFoodIntolerances;
     @OneToMany
     private Set<Sibling> listSiblings;
-    private boolean isRegistered;
     private Custody custody;
     private Religion religion;
 
 
     public Child(String firstName, String lastName, Date birthday, String imgName,
                  Set<String> furtherRemarks, Parent father, Parent mother, Set<String> listAllergies,
-                 Set<String> listFoodIntolerances, Set<Sibling> listSiblings, boolean isRegistered,
-                 Custody custody, Religion religion) {
+                 Set<String> listFoodIntolerances, Set<Sibling> listSiblings, Custody custody, Religion religion) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -52,7 +52,6 @@ public class Child implements Persistable<Long>{
         this.listAllergies = listAllergies;
         this.listFoodIntolerances = listFoodIntolerances;
         this.listSiblings = listSiblings;
-        this.isRegistered = isRegistered;
         this.custody = custody;
         this.religion = religion;
     }
@@ -137,13 +136,6 @@ public class Child implements Persistable<Long>{
         this.listSiblings = listSiblings;
     }
 
-    public boolean isRegistered() {
-        return isRegistered;
-    }
-
-    public void setRegistered(boolean registered) {
-        isRegistered = registered;
-    }
 
     public Custody getCustody() {
         return custody;

@@ -1,40 +1,51 @@
-package at.qe.sepm.asn_app.models.pedagogue;
+package at.qe.sepm.asn_app.models.employee;
 
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
  * Created by zerus on 17.03.17.
  */
 @Entity
-public class Pedagogue implements Persistable<Long>{
+public class Employee implements Persistable<Long>{
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
+    @Column(unique=true)
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private Date birthday;
+    @NotNull
     private String location;
     private String streetName;
+    @NotNull
     private String postcode;
     private Religion religion;
+    @NotNull
     private String phoneNumber;
-    private String prevEmployer;
     private FamilyStatus familyStatus;
+    private Role role;
+    private Status status;
 
 
-    public Pedagogue(String username, String password, String firstName, String lastName, Date birthday,
-                     String location, String streetName, String postcode, Religion religion, String phoneNumber,
-                     String prevEmployer, FamilyStatus familyStatus) {
+    public Employee(String username, String password, String firstName, String lastName, Date birthday,
+                    String location, String streetName, String postcode, Religion religion, String phoneNumber,
+                    FamilyStatus familyStatus, Role role,Status status) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -45,8 +56,9 @@ public class Pedagogue implements Persistable<Long>{
         this.postcode = postcode;
         this.religion = religion;
         this.phoneNumber = phoneNumber;
-        this.prevEmployer = prevEmployer;
         this.familyStatus = familyStatus;
+        this.role = role;
+        this.status = status;
     }
 
     public String getUsername() {
@@ -129,20 +141,28 @@ public class Pedagogue implements Persistable<Long>{
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPrevEmployer() {
-        return prevEmployer;
-    }
-
-    public void setPrevEmployer(String prevEmployer) {
-        this.prevEmployer = prevEmployer;
-    }
-
     public FamilyStatus getFamilyStatus() {
         return familyStatus;
     }
 
     public void setFamilyStatus(FamilyStatus familyStatus) {
         this.familyStatus = familyStatus;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override

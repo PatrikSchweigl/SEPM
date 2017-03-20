@@ -13,6 +13,9 @@ import javax.persistence.Id;
 @Entity
 public class Sibling implements Persistable<Long> {
 
+    private static final long serialVersionUID = 1L;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

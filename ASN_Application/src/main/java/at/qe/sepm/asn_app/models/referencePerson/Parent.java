@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -14,16 +15,23 @@ import java.util.Set;
  */
 @Entity
 public class Parent implements Persistable<Long>{
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String userName;
+    @NotNull
     private String password;
     private String imgName;
+    @NotNull
     private String location;
+    @NotNull
     private String postcode;
     private String streetName;
     @OneToMany
@@ -34,6 +42,7 @@ public class Parent implements Persistable<Long>{
     @ElementCollection
     private Set<Assignment> listAssignments;
     private FamilyStatus familyStatus;
+    private boolean isRegistered;
 
     public Parent(String firstName, String lastName, String userName, String password, String imgName,
                   String location, String postcode, String streetName, Set<Child> listChildren,
