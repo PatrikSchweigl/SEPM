@@ -2,11 +2,13 @@ package at.qe.sepm.asn_app.configs;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -50,13 +52,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login.xhtml")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/secured/welcome.xhtml");
+                .defaultSuccessUrl("/secured/welcome.xhtml").successHandler(successHandler());
         // :TODO: user failureUrl(/login.xhtml?error) and make sure that a corresponding message is displayed
 
         http.exceptionHandling().accessDeniedPage("/error/denied.xhtml");
 
         http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
 
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new LoginHandler();
     }
 
     @Autowired
