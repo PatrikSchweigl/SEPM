@@ -43,13 +43,13 @@ public class Parent implements Persistable<Long>{
     @ElementCollection
     private Set<Assignment> listAssignments;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
     private boolean status;
-    private UserRole role;
 
     public Parent(String firstName, String lastName, String userName, String password, String imgName,
                   String location, String postcode, String streetName, Set<Child> listChildren,
-                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status, UserRole role) {
+                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -158,14 +158,6 @@ public class Parent implements Persistable<Long>{
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     @Override
