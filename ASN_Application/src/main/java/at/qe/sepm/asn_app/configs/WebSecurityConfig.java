@@ -70,8 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //Configure roles and passwords via datasource
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from user where username=?")
-                .authoritiesByUsernameQuery("select user_username, roles from user_user_role where user_username=?");
+                .usersByUsernameQuery("select username, password, true from user where username=?")
+                .authoritiesByUsernameQuery("select username, user_role from user where username=?");
         // :TODO: use passwordEncoder and do not store passwords in plain text
     }
 
