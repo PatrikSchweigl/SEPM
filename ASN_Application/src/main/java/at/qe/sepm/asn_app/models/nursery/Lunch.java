@@ -28,8 +28,8 @@ public class Lunch implements Persistable<Long> {
     private List<Child> listChildren;
 
 
-    public Lunch(Date dayOfWeek, String meal, double cost, List<Child> listChildren) {
-        this.date = dayOfWeek;
+    public Lunch(Date date, String meal, double cost, List<Child> listChildren) {
+        this.date = date;
         this.meal = meal;
         this.cost = cost;
         this.listChildren = listChildren;
