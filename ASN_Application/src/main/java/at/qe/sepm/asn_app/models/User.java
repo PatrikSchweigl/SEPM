@@ -11,12 +11,12 @@ import org.springframework.data.domain.Persistable;
  * Entity representing users.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Persistable<String> {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String password;
     private String username;

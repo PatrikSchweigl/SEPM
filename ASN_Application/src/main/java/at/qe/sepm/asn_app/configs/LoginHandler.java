@@ -47,7 +47,6 @@ public class LoginHandler implements AuthenticationSuccessHandler {
     protected String determineTargetUrl(Authentication authentication) {
         boolean isAdmin = false;
         boolean isPedagogue = false;
-        boolean isTrainee = false;
         boolean isParent = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
@@ -56,9 +55,6 @@ public class LoginHandler implements AuthenticationSuccessHandler {
                 break;
             } else if (grantedAuthority.getAuthority().equals("PÄDAGOGE")) {
                 isPedagogue = true;
-                break;
-            } else if (grantedAuthority.getAuthority().equals("PRAKTIKANT")) {
-                isTrainee = true;
                 break;
             }else if (grantedAuthority.getAuthority().equals("ELTERN")) {
                 isParent = true;
@@ -72,9 +68,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
             return "login.xhtml";
         } else if (isPedagogue) {
             return "/login.xhtml";
-        }else if (isTrainee) {
-            return "/login.xhtml";
-        } else {
+        }else {
             throw new IllegalStateException();
         }
     }
