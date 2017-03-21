@@ -27,6 +27,7 @@ public class Employee extends User{
     private String streetName;
     @NotNull
     private String postcode;
+    @Enumerated(EnumType.STRING)
     private Religion religion;
     @NotNull
     private String phoneNumber;
