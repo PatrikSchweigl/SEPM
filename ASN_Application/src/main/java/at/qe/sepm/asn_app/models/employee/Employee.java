@@ -39,14 +39,17 @@ public class Employee implements Persistable<Long>{
     private Religion religion;
     @NotNull
     private String phoneNumber;
+    @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
-    private UserRole role;
+    @Enumerated(EnumType.STRING)
     private Status workingState;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
     public Employee(String username, String password, String firstName, String lastName, Date birthday,
                     String location, String streetName, String postcode, Religion religion, String phoneNumber,
-                    FamilyStatus familyStatus, UserRole role,Status status) {
+                    FamilyStatus familyStatus,Status status, Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -58,7 +61,6 @@ public class Employee implements Persistable<Long>{
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
-        this.role = role;
         this.workingState = status;
     }
 
@@ -150,20 +152,20 @@ public class Employee implements Persistable<Long>{
         this.familyStatus = familyStatus;
     }
 
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
-
     public Status getWorkingState() {
         return workingState;
     }
 
     public void setWorkingState(Status workingState) {
         this.workingState = workingState;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

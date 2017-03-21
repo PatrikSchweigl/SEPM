@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .invalidateHttpSession(true)
+                .invalidateHttpSession(false)
                 .logoutSuccessUrl("/login.xhtml");
 
         http.authorizeRequests()

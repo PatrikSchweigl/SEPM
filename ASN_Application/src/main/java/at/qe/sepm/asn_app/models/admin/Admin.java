@@ -3,10 +3,7 @@ package at.qe.sepm.asn_app.models.admin;
 import at.qe.sepm.asn_app.models.UserRole;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -25,14 +22,12 @@ public class Admin implements Persistable<Long>{
     private String password;
     private String firstName;
     private String lastName;
-    private UserRole role;
 
-    public Admin(String firstName, String lastName, String username, String password, UserRole role) {
+    public Admin(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.role = role;
     }
 
     public String getUsername() {
@@ -65,14 +60,6 @@ public class Admin implements Persistable<Long>{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     @Override
