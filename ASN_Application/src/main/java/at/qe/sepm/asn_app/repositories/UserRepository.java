@@ -20,7 +20,7 @@ public interface UserRepository extends AbstractRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE CONCAT(u.firstName, ' ', u.lastName) = :wholeName")
     List<User> findByWholeNameConcat(@Param("wholeName") String wholeName);
 
-    @Query("SELECT u FROM User u WHERE :role MEMBER OF u.roles")
-    List<User> findByRole(@Param("role") UserRole role);
+    //@Query("SELECT u FROM User u WHERE :role MEMBER OF u.roles")
+    //List<User> findByRole(@Param("role") UserRole role);
 
 }

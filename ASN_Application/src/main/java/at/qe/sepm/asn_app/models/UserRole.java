@@ -5,7 +5,6 @@ package at.qe.sepm.asn_app.models;
  */
 public enum UserRole {
     ADMIN,
-    PÄDAGOGE,
-    PRAKTIKANT,
+    ANGESTELLTER,
     ELTERN
 }
