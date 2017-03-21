@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.models.employee;
 
+import at.qe.sepm.asn_app.models.User;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
@@ -13,22 +14,12 @@ import java.util.Date;
  * Created by zerus on 17.03.17.
  */
 @Entity
-public class Employee implements Persistable<Long>{
+public class Employee extends User{
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @NotNull
-    @Column(unique=true)
-    private String username;
-    @NotNull
-    private String password;
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
+
+
     @NotNull
     private Date birthday;
     @NotNull
@@ -46,14 +37,10 @@ public class Employee implements Persistable<Long>{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
-    public Employee(String username, String password, String firstName, String lastName, Date birthday,
-                    String location, String streetName, String postcode, Religion religion, String phoneNumber,
-                    FamilyStatus familyStatus,Status status, Role role) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Employee(String password, String username, String firstName, String lastName,
+                    Date birthday, String location, String streetName, String postcode, Religion religion,
+                    String phoneNumber, FamilyStatus familyStatus, Status workingState, Role role) {
+        super(password, username, firstName, lastName, UserRole.ANGESTELLTER);
         this.birthday = birthday;
         this.location = location;
         this.streetName = streetName;
@@ -61,40 +48,10 @@ public class Employee implements Persistable<Long>{
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
-        this.workingState = status;
+        this.workingState = workingState;
+        this.role = role;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public Date getBirthday() {
         return birthday;
@@ -167,15 +124,4 @@ public class Employee implements Persistable<Long>{
     public void setRole(Role role) {
         this.role = role;
     }
-
-    @Override
-    public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean isNew() {
-        return (null == firstName && null == lastName);
-    }
-
 }
