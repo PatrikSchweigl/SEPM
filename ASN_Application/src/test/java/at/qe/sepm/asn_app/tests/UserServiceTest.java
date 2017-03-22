@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.tests;
 
-import at.qe.sepm.asn_app.Main;
+/*import at.qe.sepm.asn_app.Main;
 import at.qe.sepm.asn_app.models.User;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.services.UserService;
@@ -14,12 +14,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
+*/
 /**
  * Some very basic tests for {@link UserService}.
  *
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
+/*
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Main.class)
 @WebAppConfiguration
@@ -188,3 +189,4 @@ public class UserServiceTest {
     }
 
 }
+*/

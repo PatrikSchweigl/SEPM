@@ -1,7 +1,8 @@
 package at.qe.sepm.asn_app.configs;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -46,15 +47,15 @@ public class LoginHandler implements AuthenticationSuccessHandler {
 
     protected String determineTargetUrl(Authentication authentication) {
         boolean isAdmin = false;
-        boolean isPedagogue = false;
+        boolean isEmployee = false;
         boolean isParent = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ADMIN")) {
                 isAdmin = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("PÄDAGOGE")) {
-                isPedagogue = true;
+            } else if (grantedAuthority.getAuthority().equals("ANGESTELLTER")) {
+                isEmployee = true;
                 break;
             }else if (grantedAuthority.getAuthority().equals("ELTERN")) {
                 isParent = true;
@@ -65,9 +66,9 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         if (isAdmin) {
             return "/secured/test.xhtml";
         } else if (isParent) {
-            return "login.xhtml";
-        } else if (isPedagogue) {
-            return "/login.xhtml";
+            return "/secured/test.xhtml";
+        } else if (isEmployee) {
+            return "/secured/welcome.xhtml";
         }else {
             throw new IllegalStateException();
         }
