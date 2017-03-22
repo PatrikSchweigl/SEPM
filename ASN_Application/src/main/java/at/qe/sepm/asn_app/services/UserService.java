@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -53,11 +54,8 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public User saveUser(User user) {
-        if (user.isNew()) {
-
-        } else {
-
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword( passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

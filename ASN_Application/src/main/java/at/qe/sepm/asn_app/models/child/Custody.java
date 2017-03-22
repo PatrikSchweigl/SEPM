@@ -5,7 +5,7 @@ package at.qe.sepm.asn_app.models.child;
  * on 19.03.2017
  */
 public enum Custody {
-    MUTTER,
-    VATER,
-    GEMEINSAMES,
+    FATHER,
+    MOTHER,
+    BOTH,
 }

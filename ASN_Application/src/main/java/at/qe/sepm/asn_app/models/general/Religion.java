@@ -6,9 +6,9 @@ package at.qe.sepm.asn_app.models.general;
  */
 public enum Religion {
     ISLAM,
-    CHRISTENTUM,
-    JUDENTUM,
-    BUDDHISMUS,
-    HINDUISMUS,
-    ATHEISMUS
+    CHRISTIANITY,
+    JUDAISM,
+    BUDDHISM,
+    HINDUISM,
+    ATHEISM
 }

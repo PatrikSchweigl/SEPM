@@ -5,6 +5,6 @@ package at.qe.sepm.asn_app.models.employee;
  * on 21.03.2017
  */
 public enum Role {
-    PÄDAGOGE,
-    PRAKTIKANT
+    PEDAGOGUE,
+    TRAINEE
 }

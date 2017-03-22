@@ -43,7 +43,7 @@ public class Employee extends User{
     public Employee(String password, String username, String firstName, String lastName,
                     Date birthday, String location, String streetName, String postcode, Religion religion,
                     String phoneNumber, FamilyStatus familyStatus, Status workingState, Role role) {
-        super(password, username, firstName, lastName, UserRole.ANGESTELLTER);
+        super(password, username, firstName, lastName, UserRole.EMPLOYEE);
         this.birthday = birthday;
         this.location = location;
         this.streetName = streetName;

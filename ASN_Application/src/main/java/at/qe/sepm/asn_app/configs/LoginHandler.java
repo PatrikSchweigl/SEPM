@@ -54,10 +54,10 @@ public class LoginHandler implements AuthenticationSuccessHandler {
             if (grantedAuthority.getAuthority().equals("ADMIN")) {
                 isAdmin = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ANGESTELLTER")) {
+            } else if (grantedAuthority.getAuthority().equals("EMPLOYEE")) {
                 isEmployee = true;
                 break;
-            }else if (grantedAuthority.getAuthority().equals("ELTERN")) {
+            }else if (grantedAuthority.getAuthority().equals("PARENT")) {
                 isParent = true;
                 break;
             }

@@ -42,7 +42,7 @@ public class Parent extends User{
     public Parent(String password, String username, String firstName, String lastName,
                   String imgName, String location, String postcode, String streetName, Set<Child> listChildren,
                   Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
-        super(password, username, firstName, lastName, UserRole.ELTERN);
+        super(password, username, firstName, lastName, UserRole.PARENT);
         this.imgName = imgName;
         this.location = location;
         this.postcode = postcode;
