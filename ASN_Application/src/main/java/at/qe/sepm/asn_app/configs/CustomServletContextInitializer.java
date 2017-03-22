@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
-
+//hi
 
 @Configuration
 public class CustomServletContextInitializer implements ServletContextInitializer {
