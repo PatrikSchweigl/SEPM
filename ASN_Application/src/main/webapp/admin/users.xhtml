@@ -12,7 +12,7 @@
 
         </div>
         <h:form id="userForm">
-            <p:dataTable id="usersTable" var="user" value="#{userListController.users}">
+            <p:dataTable id="usersTable" var="user" value="#{userListController.getUsers()}">
                 <p:column headerText="Username">
                     <h:outputText value="#{user.username}"/>
                 </p:column>
@@ -23,10 +23,7 @@
                     <h:outputText value="#{user.lastName}"/>
                 </p:column>
                 <p:column headerText="Roles">
-                    <h:outputText value="#{user.roles}" />
-                </p:column>
-                <p:column headerText="Enabled">
-                    <h:selectBooleanCheckbox value="#{user.enabled}" disabled="true"/>
+                    <h:outputText value="#{user.userRole}" />
                 </p:column>
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton update=":userForm:userEditDialog" oncomplete="PF('userEditDialog').show()" icon="ui-icon-note" title="Edit">
@@ -61,11 +58,6 @@
                         <p:inputMask id="phone" value="#{userDetailController.user.phone}" mask="+99? 999 9999999"/>
                     </h:panelGrid>
                     <p:separator />
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="enabled" value="Enabled: " />
-                        <p:selectBooleanCheckbox id="enabled" value="#{userDetailController.user.enabled}"/>
-                    </h:panelGrid>
-                    <p:separator />
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{userDetailController.doSaveUser()}" oncomplete="PF('userEditDialog').hide()" update=":userForm:usersTable"/>
                         <p:commandButton value="Reload" action="#{userDetailController.doReloadUser()}" update=":userForm:userData"/>
@@ -90,15 +82,6 @@
                         <p:inputText id="firstname" value="#{userAddController.user.firstName}"/>
                         <p:outputLabel for="lastname" value="Last Name: " />
                         <p:inputText id="lastname" value="#{userAddController.user.lastName}"/>
-                        <p:outputLabel for="mail" value="E-Mail: " />
-                        <p:inputText id="mail" value="#{userAddController.user.email}"/>
-                        <p:outputLabel for="phonenumber" value="Phone: " />
-                        <p:inputMask id="phonenumber" value="#{userAddController.user.phone}" mask="+99? 999 9999999"/>
-                    </h:panelGrid>
-                    <p:separator />
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="enable" value="Enabled: " />
-                        <p:selectBooleanCheckbox id="enable" value="#{userAddController.user.enabled}"/>
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="3">

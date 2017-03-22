@@ -38,6 +38,8 @@ public class Employee extends User{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public Employee(){//required for jpa repository
+    }
     public Employee(String password, String username, String firstName, String lastName,
                     Date birthday, String location, String streetName, String postcode, Religion religion,
                     String phoneNumber, FamilyStatus familyStatus, Status workingState, Role role) {
