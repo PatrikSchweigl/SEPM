@@ -5,6 +5,8 @@ import at.qe.sepm.asn_app.models.User;
 
 import java.util.Collection;
 import java.util.Date;
+
+import ch.qos.logback.core.joran.action.ActionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
 
 /**
  * Service for accessing and manipulating user data.

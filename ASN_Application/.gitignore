@@ -4,3 +4,6 @@
 /src/main/resources/asnDB.mv.db
 /src/main/resources/asnDB.trace.db
 /src/main/resources/application.properties
+
+*.iml
+/.gitignore
