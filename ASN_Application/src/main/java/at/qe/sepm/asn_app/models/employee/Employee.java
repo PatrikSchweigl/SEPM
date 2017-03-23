@@ -4,7 +4,6 @@ import at.qe.sepm.asn_app.models.User;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
-import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,8 +16,6 @@ import java.util.Date;
 public class Employee extends User{
 
     private static final long serialVersionUID = 1L;
-
-
 
     @NotNull
     private Date birthday;

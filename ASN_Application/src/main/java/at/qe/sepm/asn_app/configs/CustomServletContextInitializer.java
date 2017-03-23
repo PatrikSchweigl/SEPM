@@ -1,18 +1,17 @@
 package at.qe.sepm.asn_app.configs;
 
+
+import org.springframework.boot.web.servlet.ServletContextInitializer;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import org.springframework.boot.web.servlet.ServletContextInitializer;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Spring configuration for servlet context.
  *
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
-//hi
 
-@Configuration
 public class CustomServletContextInitializer implements ServletContextInitializer {
 
     @Override
