@@ -53,6 +53,8 @@ public class Parent extends User{
         this.status = status;
     }
 
+    public Parent(){}
+
     public String getImgName() {
         return imgName;
     }

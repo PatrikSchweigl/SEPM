@@ -29,7 +29,8 @@ public class UserListController {
      * @return
      */
     public Collection<Parent> getUsers() {
-        return parentService.getFuckerzz();
+
+        return parentService.getAllParents();
     }
 
 }

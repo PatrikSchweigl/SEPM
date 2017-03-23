@@ -12,7 +12,7 @@ import org.springframework.data.domain.Persistable;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements Persistable<String> {
+public class User implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -105,7 +105,7 @@ public class User implements Persistable<String> {
     }
 
     @Override
-    public String getId() {
+    public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

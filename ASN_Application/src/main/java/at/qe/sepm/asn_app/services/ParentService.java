@@ -23,7 +23,7 @@ public class ParentService {
     private ParentRepository parentRepository;
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
-    public Collection<Parent> getFuckerzz() {
+    public Collection<Parent> getAllParents() {
          return parentRepository.getAllParents();
     }
 

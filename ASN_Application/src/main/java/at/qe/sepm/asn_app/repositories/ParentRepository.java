@@ -12,9 +12,9 @@ import java.util.List;
  * on 20.03.2017
  */
 @Transactional
-public interface ParentRepository extends UserBaseRepository<Parent> {
+public interface ParentRepository extends UserBaseRepository<Parent>, AbstractRepository<Parent,Long> {
 
-    @Query("Select p.username, p.firstName, p.lastName, p.status From Parent p, User u where u.id = p.id")
+    @Query("select u from Parent u")
     List<Parent> getAllParents();
 
 }

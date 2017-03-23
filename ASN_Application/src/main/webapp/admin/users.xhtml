@@ -22,8 +22,8 @@
                 <p:column headerText="Last Name">
                     <h:outputText value="#{user.lastName}"/>
                 </p:column>
-                <p:column headerText="Roles">
-                    <h:outputText value="#{user.userRole}" />
+                <p:column headerText="Status">
+                    <h:outputText value="#{user.status}" />
                 </p:column>
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton update=":userForm:userEditDialog" oncomplete="PF('userEditDialog').show()" icon="ui-icon-note" title="Edit">
