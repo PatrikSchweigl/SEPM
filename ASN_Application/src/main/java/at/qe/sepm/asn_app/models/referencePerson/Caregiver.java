@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by zerus on 17.03.17.
@@ -18,9 +19,13 @@ public class Caregiver implements Persistable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private Relationship relationship;
+    @NotNull
     private String imgName;
 
     public Caregiver(String firstName, String lastName, Relationship relationship, String imgName) {

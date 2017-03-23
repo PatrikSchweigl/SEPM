@@ -7,6 +7,7 @@
     <version>1.0.0</version>
     <packaging>war</packaging>
 
+
     <name>ASN_Application</name>
     <description>This project is about developing an administrative software for nurseries (ASN.
         The project is based on the project "sepm_skeleton", which was offered to us
@@ -40,6 +41,7 @@
     </parent>
 
     <properties>
+        <start-class>at.qe.sepm.asn_app.Main</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -70,7 +72,7 @@
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>2.2.13</version>
+            <version>2.2.14</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -93,7 +95,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>5.3</version>
+            <version>6.0</version>
             <scope>compile</scope>
         </dependency>
 

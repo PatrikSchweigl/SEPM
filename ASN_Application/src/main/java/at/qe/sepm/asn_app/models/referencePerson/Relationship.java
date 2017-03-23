@@ -5,8 +5,8 @@ package at.qe.sepm.asn_app.models.referencePerson;
  * on 19.03.2017
  */
 public enum Relationship {
-    TANTE_ONKEL,
-    GROSSMUTTER_GROSSVATER,
-    FREUND_DER_FAMILIE,
-    SCHWESTER_BRUDER
+    AUNT_UNCLE,
+    GRANDPARET,
+    FRIEND_OF_THE_FAMILY,
+    SIBLING
 }

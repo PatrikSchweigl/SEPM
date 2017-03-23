@@ -1,8 +1,9 @@
 package at.qe.sepm.asn_app.models.employee;
 
+import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
-import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,22 +13,10 @@ import java.util.Date;
  * Created by zerus on 17.03.17.
  */
 @Entity
-public class Employee implements Persistable<Long>{
+public class Employee extends User{
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @NotNull
-    @Column(unique=true)
-    private String username;
-    @NotNull
-    private String password;
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
     @NotNull
     private Date birthday;
     @NotNull
@@ -35,21 +24,23 @@ public class Employee implements Persistable<Long>{
     private String streetName;
     @NotNull
     private String postcode;
+    @Enumerated(EnumType.STRING)
     private Religion religion;
     @NotNull
     private String phoneNumber;
+    @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
+    @Enumerated(EnumType.STRING)
+    private Status workingState;
+    @Enumerated(EnumType.STRING)
     private Role role;
-    private Status status;
 
-
-    public Employee(String username, String password, String firstName, String lastName, Date birthday,
-                    String location, String streetName, String postcode, Religion religion, String phoneNumber,
-                    FamilyStatus familyStatus, Role role,Status status) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Employee(){//required for jpa repository
+    }
+    public Employee(String password, String username, String firstName, String lastName,
+                    Date birthday, String location, String streetName, String postcode, Religion religion,
+                    String phoneNumber, FamilyStatus familyStatus, Status workingState, Role role) {
+        super(password, username, firstName, lastName, UserRole.EMPLOYEE);
         this.birthday = birthday;
         this.location = location;
         this.streetName = streetName;
@@ -57,41 +48,10 @@ public class Employee implements Persistable<Long>{
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
+        this.workingState = workingState;
         this.role = role;
-        this.status = status;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public Date getBirthday() {
         return birthday;
@@ -149,6 +109,14 @@ public class Employee implements Persistable<Long>{
         this.familyStatus = familyStatus;
     }
 
+    public Status getWorkingState() {
+        return workingState;
+    }
+
+    public void setWorkingState(Status workingState) {
+        this.workingState = workingState;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -156,23 +124,4 @@ public class Employee implements Persistable<Long>{
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    @Override
-    public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean isNew() {
-        return (null == firstName && null == lastName);
-    }
-
 }

@@ -2,11 +2,15 @@ package at.qe.sepm.asn_app.configs;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -30,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .invalidateHttpSession(true)
+                .invalidateHttpSession(false)
                 .logoutSuccessUrl("/login.xhtml");
 
         http.authorizeRequests()
@@ -44,13 +48,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyAuthority("ADMIN")
                 //Permit access only for some roles
                 .antMatchers("/secured/**")
-                .hasAnyAuthority("ADMIN", "MANAGER", "EMPLOYEE")
+                .hasAnyAuthority("ADMIN", "EMPLOYEE", "PARENT")
                 //If user doesn't have permission, forward him to login page
                 .and()
                 .formLogin()
                 .loginPage("/login.xhtml")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/secured/welcome.xhtml");
+                .defaultSuccessUrl("/secured/welcome.xhtml").successHandler(successHandler());
         // :TODO: user failureUrl(/login.xhtml?error) and make sure that a corresponding message is displayed
 
         http.exceptionHandling().accessDeniedPage("/error/denied.xhtml");
@@ -59,13 +63,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new LoginHandler();
+    }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //Configure roles and passwords via datasource
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from user where username=?")
-                .authoritiesByUsernameQuery("select user_username, roles from user_user_role where user_username=?");
-        // :TODO: use passwordEncoder and do not store passwords in plain text
+                .usersByUsernameQuery("select username, password, true from user where username=?")
+                .authoritiesByUsernameQuery("select username, user_role from user where username=?")
+                .passwordEncoder(passwordEncoder());
+
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
 
 }

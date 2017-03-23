@@ -3,10 +3,7 @@ package at.qe.sepm.asn_app.models.nursery;
 import at.qe.sepm.asn_app.models.child.Child;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -23,26 +20,27 @@ public class Lunch implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    private Date dayOfWeek;
+    private Date date;
     @NotNull
     private String meal;
     private double cost;
+    @OneToMany
     private List<Child> listChildren;
 
 
-    public Lunch(Date dayOfWeek, String meal, double cost, List<Child> listChildren) {
-        this.dayOfWeek = dayOfWeek;
+    public Lunch(Date date, String meal, double cost, List<Child> listChildren) {
+        this.date = date;
         this.meal = meal;
         this.cost = cost;
         this.listChildren = listChildren;
     }
 
-    public Date getDayOfWeek() {
-        return dayOfWeek;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDayOfWeek(Date dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getMeal() {
@@ -76,7 +74,7 @@ public class Lunch implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return (null == dayOfWeek && null == meal);
+        return (null == date && null == meal);
     }
 }
 

@@ -5,12 +5,16 @@ import at.qe.sepm.asn_app.models.User;
 
 import java.util.Collection;
 import java.util.Date;
+
+import ch.qos.logback.core.joran.action.ActionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
 
 /**
  * Service for accessing and manipulating user data.
@@ -46,23 +50,15 @@ public class UserService {
     }
 
     /**
-     * Saves the user. This method will also set {@link User#createDate} for new
-     * entities or {@link User#updateDate} for updated entities. The user
-     * requesting this operation will also be stored as {@link User#createDate}
-     * or {@link User#updateUser} respectively.
+     * Saves the user.
      *
      * @param user the user to save
      * @return the updated user
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public User saveUser(User user) {
-        if (user.isNew()) {
-            user.setCreateDate(new Date());
-            user.setCreateUser(getAuthenticatedUser());
-        } else {
-            user.setUpdateDate(new Date());
-            user.setUpdateUser(getAuthenticatedUser());
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword( passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

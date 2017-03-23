@@ -5,6 +5,6 @@ package at.qe.sepm.asn_app.models.employee;
  * on 20.03.2017
  */
 public enum Status {
-    ANWESEND,
-    ABWESEND
+    PRESENT,
+    ABSENT
 }

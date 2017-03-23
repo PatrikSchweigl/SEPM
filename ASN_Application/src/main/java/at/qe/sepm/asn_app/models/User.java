@@ -3,61 +3,38 @@ package at.qe.sepm.asn_app.models;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
 import org.springframework.data.domain.Persistable;
 
 /**
  * Entity representing users.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements Persistable<String> {
 
     private static final long serialVersionUID = 1L;
-
     @Id
-    @Column(length = 100)
-    private String username;
-
-    @ManyToOne(optional = false)
-    private User createUser;
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-    @ManyToOne(optional = true)
-    private User updateUser;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateDate;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String password;
-
+    private String username;
     private String firstName;
     private String lastName;
-    private String email;
-    private String phone;
-
-    boolean enabled;
-
-    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "User_UserRole")
     @Enumerated(EnumType.STRING)
-    private Set<UserRole> roles;
+    private UserRole userRole;
 
-    public String getUsername() {
-        return username;
+    public User(String password, String username, String firstName, String lastName, UserRole userRole) {
+        this.password = password;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userRole = userRole;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public User(){
+
     }
 
     public String getPassword() {
@@ -66,6 +43,14 @@ public class User implements Persistable<String> {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -84,68 +69,12 @@ public class User implements Persistable<String> {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<UserRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<UserRole> roles) {
-        this.roles = roles;
-    }
-
-    public User getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(User createUser) {
-        this.createUser = createUser;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public User getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(User updateUser) {
-        this.updateUser = updateUser;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setUserRole(UserRole role) {
+        this.userRole = role;
     }
 
     @Override
@@ -182,7 +111,7 @@ public class User implements Persistable<String> {
 
     @Override
     public boolean isNew() {
-        return (null == createDate);
+        return (null == username);
     }
 
 }
