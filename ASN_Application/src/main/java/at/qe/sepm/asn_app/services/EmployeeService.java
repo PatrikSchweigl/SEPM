@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -27,10 +28,22 @@ public class EmployeeService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public Employee saveEmployee(Employee employee) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        employee.setPassword( passwordEncoder.encode(employee.getPassword()));
-        employee.setUserRole(UserRole.EMPLOYEE);
-        System.out.println(employee.getPassword() + employee.getReligion() + employee.getBirthday()); //just to test if the program reaches this part
+        if(employee.isNew()){
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+            employee.setUserRole(UserRole.EMPLOYEE);
+        }
+
         return employeeRepository.save(employee);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
+    public Employee loadUser(String username) {
+        return employeeRepository.findFirstByUsername(username);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
     }
 }

@@ -18,15 +18,12 @@ public class Employee extends User{
     private static final long serialVersionUID = 1L;
 
 
-    private Date birthday;
-    @NotNull
+    private String birthday;
     private String location;
     private String streetName;
-    @NotNull
     private String postcode;
     @Enumerated(EnumType.STRING)
     private Religion religion;
-    @NotNull
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
@@ -38,7 +35,7 @@ public class Employee extends User{
     public Employee(){//required for jpa repository
     }
     public Employee(String password, String username, String firstName, String lastName,
-                    Date birthday, String location, String streetName, String postcode, Religion religion,
+                    String birthday, String location, String streetName, String postcode, Religion religion,
                     String phoneNumber, FamilyStatus familyStatus, Status workingState, Role role) {
         super(password, username, firstName, lastName, UserRole.EMPLOYEE);
         this.birthday = birthday;
@@ -53,11 +50,11 @@ public class Employee extends User{
     }
 
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

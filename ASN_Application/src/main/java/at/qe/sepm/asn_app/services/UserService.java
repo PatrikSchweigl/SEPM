@@ -35,7 +35,7 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public Collection<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllAdmin();
     }
 
     /**
@@ -59,7 +59,7 @@ public class UserService {
     public User saveUser(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword( passwordEncoder.encode(user.getPassword()));
-        return saveUser(user);
+        return userRepository.save(user);
     }
 
     /**

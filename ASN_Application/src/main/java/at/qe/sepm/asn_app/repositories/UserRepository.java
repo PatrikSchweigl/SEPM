@@ -28,4 +28,7 @@ public interface UserRepository extends UserBaseRepository<User>, AbstractReposi
     @Query("SELECT u FROM User u WHERE :role = u.userRole")
     List<User> findByRole(@Param("role") UserRole role);
 
+    @Query("SELECT u FROM User u WHERE u.userRole = 'ADMIN'")
+    List<User> findAllAdmin();
+
 }
