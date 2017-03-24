@@ -21,16 +21,16 @@ public class UserListController {
 
 
     @Autowired
-    private ParentService parentService;
+    private UserService userService;
 
     /**
      * Returns a list of all users.
      *
      * @return
      */
-    public Collection<Parent> getUsers() {
+    public Collection<User> getUsers() {
 
-        return parentService.getAllParents();
+        return userService.getAllUsers();
     }
 
 }

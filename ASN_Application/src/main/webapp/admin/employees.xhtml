@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name ="content">
+        <div align="right" style="margin-bottom:10px;">
+            <p:commandButton oncomplete="PF('employeeAddDialog').show()" value="+ Employee"  style="align-items:right;"></p:commandButton>
+        </div>
+        <h:form id="employeeForm">
+            <p:dataTable id="employeeTable" var="employee" value="#{employeeController.employees}">
+                <p:column headerText="Username">
+                    <h:outputText value="#{employee.username}"/>
+                </p:column>
+                <p:column headerText="First Name">
+                    <h:outputText value="#{employee.firstName}"/>
+                </p:column>
+                <p:column headerText="Last Name">
+                    <h:outputText value="#{employee.lastName}"/>
+                </p:column>
+                <p:column headerText="Religion">
+                    <h:outputText value="#{employee.religion}" />
+                </p:column>
+            </p:dataTable>
+
+            <!-- Create Employee Dialog -->
+            <p:dialog header="Create Employee" id="employeeAddDialog" widgetVar="employeeAddDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="employeeDataCreate">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="username" value="Username: " />
+                        <p:inputText id="username" value="#{employeeController.employee.username}"/>
+                        <p:outputLabel for="password" value="Password: " />
+                        <p:password id="password" value="#{employeeController.employee.password}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="firstname" value="First Name: " />
+                        <p:inputText id="firstname" value="#{employeeController.employee.firstName}"/>
+                        <p:outputLabel for="lastname" value="Last Name: " />
+                        <p:inputText id="lastname" value="#{employeeController.employee.lastName}"/>
+                        <p:outputLabel for="birthday" value="Birthdate: " />
+                        <p:inputMask id="birthday" value="#{employeeController.employee.birthday}" mask="99/99/9999"/>
+                        <p:outputLabel for="location" value="Location: " />
+                        <p:inputText id="location" value="#{employeeController.employee.location}"/>
+                        <p:outputLabel for="street" value="Streetname: " />
+                        <p:inputText id="street" value="#{employeeController.employee.streetName}"/>
+                        <p:outputLabel for="postcode" value="Postcode: " />
+                        <p:inputText id="postcode" value="#{employeeController.employee.postcode}"/>
+                        <p:outputLabel for="phonenumber" value="Phonenumber: " />
+                        <p:inputText id="phonenumber" value="#{employeeController.employee.phoneNumber}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="familystatus" value="Familystatus: " />
+                        <p:selectOneMenu id="familystatus" value="#{employeeController.employee.familyStatus}" style="width:150px">
+                            <f:selectItem itemLabel="Select Familystatus" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{enumController.familyStatus}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="religion" value="Religion: " />
+                        <p:selectOneMenu id="religion" value="#{employeeController.employee.familyStatus}" style="width:150px">
+                            <f:selectItem itemLabel="Select Religion" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{enumController.getReligions()}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{employeeController.doSaveEmployee()}" oncomplete="PF('employeeAddDialog').hide()" update=":employeeForm:employeeTable"/>
+                        <p:commandButton value="Abort" onclick="PF('employeeAddDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

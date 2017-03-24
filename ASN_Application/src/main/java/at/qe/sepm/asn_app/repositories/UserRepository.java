@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
 @Transactional
-public interface UserRepository extends UserBaseRepository<User> {
+public interface UserRepository extends UserBaseRepository<User>, AbstractRepository<User,Long> {
 
 
     List<User> findByUsernameContaining(String username);

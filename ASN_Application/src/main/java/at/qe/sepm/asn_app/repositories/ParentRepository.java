@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 public interface ParentRepository extends UserBaseRepository<Parent>, AbstractRepository<Parent,Long> {
 
-    @Query("select u from Parent u")
-    List<Parent> getAllParents();
+    //@Query("select u from Parent u")
+    //List<Parent> getAllParents();
 
 }

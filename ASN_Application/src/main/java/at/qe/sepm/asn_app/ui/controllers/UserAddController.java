@@ -33,7 +33,7 @@ public class UserAddController {
     }
 
     public void doSaveUser() {
-        user = this.userService.saveUser(user);
+        user = userService.saveUser(user);
         user = null;
         initNewUser();
     }

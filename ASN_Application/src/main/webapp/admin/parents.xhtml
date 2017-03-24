@@ -7,23 +7,21 @@
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name ="content">
         <div align="right" style="margin-bottom:10px;">
-            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Admin"  style="align-items:right;"></p:commandButton>
-            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Employee"  style="align-items:right;"></p:commandButton>
             <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Parent"  style="align-items:right;"></p:commandButton>
         </div>
         <h:form id="userForm">
-            <p:dataTable id="usersTable" var="user" value="#{userListController.getUsers()}">
+            <p:dataTable id="usersTable" var="parent" value="#{parentListController.getParents()}">
                 <p:column headerText="Username">
-                    <h:outputText value="#{user.username}"/>
+                    <h:outputText value="#{parent.username}"/>
                 </p:column>
                 <p:column headerText="First Name">
-                    <h:outputText value="#{user.firstName}"/>
+                    <h:outputText value="#{parent.firstName}"/>
                 </p:column>
                 <p:column headerText="Last Name">
-                    <h:outputText value="#{user.lastName}"/>
+                    <h:outputText value="#{parent.lastName}"/>
                 </p:column>
                 <p:column headerText="Status">
-                    <h:outputText value="#{user.status}" />
+                    <h:outputText value="#{parent.status}" />
                 </p:column>
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton update=":userForm:userEditDialog" oncomplete="PF('userEditDialog').show()" icon="ui-icon-note" title="Edit">

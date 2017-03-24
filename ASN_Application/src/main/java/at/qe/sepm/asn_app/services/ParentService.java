@@ -24,7 +24,7 @@ public class ParentService {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Collection<Parent> getAllParents() {
-         return parentRepository.getAllParents();
+         return parentRepository.findAll();
     }
 
 }
