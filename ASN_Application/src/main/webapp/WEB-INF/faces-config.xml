@@ -11,5 +11,13 @@
     <factory>
         <exception-handler-factory>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory</exception-handler-factory>
     </factory>
+    
+    <render-kit>
+    	<renderer>
+        	<component-family>javax.faces.Output</component-family>
+        	<renderer-type>javax.faces.Head</renderer-type>
+        	<renderer-class>at.qe.sepm.asn_app.configs.HeadRendererBlitzerTheme</renderer-class>
+    	</renderer>
+	</render-kit>
 
 </faces-config>
