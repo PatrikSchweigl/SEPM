@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.render.Renderer;
 
 @ResourceDependencies({
-    @ResourceDependency(library="primefaces-blitzer", name="theme.css"),
+    @ResourceDependency(library="primefaces-aristo", name="theme.css"),
     @ResourceDependency(library="primefaces", name="primefaces.js"), // Only necessary when at least one validation JS files needs to be included.
     @ResourceDependency(library="primefaces", name="validation/validation.js"), // Only necessary when you need <p:clientValidator>.
     @ResourceDependency(library="primefaces", name="validation/beanvalidation.js") // Only necessary when you use JSR303 bean validation.

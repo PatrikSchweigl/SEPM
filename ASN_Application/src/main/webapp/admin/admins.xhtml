@@ -7,7 +7,7 @@
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name ="content">
         <div align="right" style="margin-bottom:10px;">
-            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Admin"  style="align-items:right;"></p:commandButton>
+            <p:commandButton oncomplete="userCreateDialog.show()" value="+ Admin"  style="align-items:right;"></p:commandButton>
         </div>
         <h:form id="userForm">
             <p:dataTable id="usersTable" var="user" value="#{userListController.users}">
