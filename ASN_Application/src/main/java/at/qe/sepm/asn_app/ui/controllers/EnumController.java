@@ -1,5 +1,9 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.employee.WorkRole;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -7,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by stefa on 24.03.2017.
+ * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
+ * on 24.03.2017
  */
 
 @Component
@@ -17,11 +22,9 @@ public class EnumController {
     public Map<String,String> getFamilyStatus(){
         Map<String,String> familystatus = new HashMap<String,String>();
 
-        familystatus.put("MARRIED","MARRIED");
-        familystatus.put("NOT_MARRIED","NOT_MARRIED");
-        familystatus.put("DIVORCED","DIVORCED");
-        familystatus.put("WIDOWED","WIDOWED");
-        familystatus.put("REGISTERED_PARTNERSHIP","REGISTERED_PARTNERSHIP");
+        for(FamilyStatus fm: FamilyStatus.values()){
+            familystatus.put(fm.name(),fm.name());
+        }
 
         return familystatus;
     }
@@ -29,20 +32,18 @@ public class EnumController {
     public Map<String,String> getReligions(){
         Map<String,String> religions =  new HashMap<String, String>();
 
-        religions.put("ISLAM", "ISLAM");
-        religions.put("CHRISTIANITY","CHRISTIANITY");
-        religions.put("JUDAISM","JUDAISM");
-        religions.put("BUDDHISM","BUDDHISM");
-        religions.put("HINDUISM","HINDUISM");
-        religions.put("ATHEISM","ATHEISM");
+        for(Religion r : Religion.values()){
+            religions.put(r.name(),r.name());
+        }
         return religions;
     }
 
     public Map<String,String> getWorkRoles(){
         Map<String,String> roles =  new HashMap<String, String>();
 
-        roles.put("PEDAGOGUE", "PEDAGOGUE");
-        roles.put("TRAINEE","TRAINEE");
+        for(WorkRole r: WorkRole.values()){
+            roles.put(r.name(),r.name());
+        }
         return roles;
     }
 }

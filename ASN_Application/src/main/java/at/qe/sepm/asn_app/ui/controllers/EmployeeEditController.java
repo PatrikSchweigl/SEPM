@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by stefa on 24.03.2017.
+ * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
+ * on 24.03.2017
  */
 
 @Component
