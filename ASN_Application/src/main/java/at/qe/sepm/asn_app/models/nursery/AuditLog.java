@@ -33,6 +33,10 @@ public class AuditLog implements Persistable<Long> {
         this.date = date;
     }
 
+    public AuditLog(){
+
+    }
+
     public String getUserName() {
         return userName;
     }

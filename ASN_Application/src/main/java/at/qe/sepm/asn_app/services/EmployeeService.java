@@ -1,10 +1,17 @@
 package at.qe.sepm.asn_app.services;
+
+import at.qe.sepm.asn_app.models.User;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.employee.Employee;
+import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.EmployeeRepository;
+import at.qe.sepm.asn_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +25,14 @@ import java.util.Date;
 @Component
 @Scope("application")
 public class EmployeeService {
-    @Autowired EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private AuditLogRepository auditLogRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+
 
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
@@ -44,6 +58,14 @@ public class EmployeeService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteEmployee(Employee employee) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ employee.getUsername() + " [" + employee.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
         employeeRepository.delete(employee);
+
+    }
+
+    private User getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.findFirstByUsername(auth.getName());
     }
 }

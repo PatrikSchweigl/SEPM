@@ -19,7 +19,6 @@ import java.util.Set;
 public class Parent extends User{
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     private String imgName;
     @NotNull
     private String location;
@@ -32,7 +31,6 @@ public class Parent extends User{
     @OneToMany
     @ElementCollection
     private Set<Assignment> listAssignments;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
     private boolean status;

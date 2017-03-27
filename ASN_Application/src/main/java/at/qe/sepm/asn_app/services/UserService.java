@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.services;
 
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.models.User;
 
@@ -59,6 +60,7 @@ public class UserService {
     public User saveUser(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword( passwordEncoder.encode(user.getPassword()));
+        user.setUserRole(UserRole.ADMIN);
         return userRepository.save(user);
     }
 

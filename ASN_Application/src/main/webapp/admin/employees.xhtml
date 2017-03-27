@@ -7,7 +7,7 @@
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name ="content">
         <div align="right" style="margin-bottom:10px;">
-            <p:commandButton oncomplete="PF('employeeAddDialog').show()" value="+ Employee"  style="align-items:right;"></p:commandButton>
+            <p:commandButton oncomplete="PF('employeeAddDialog').show()" value="+ Employee"  style="align-items:right;"/>
         </div>
         <h:form id="employeeForm">
             <p:dataTable id="employeeTable" var="employee" value="#{employeeController.employees}">
@@ -65,22 +65,22 @@
                         <p:outputLabel for="familystatus" value="Familystatus: " />
                         <p:selectOneMenu id="familystatus" value="#{employeeController.employee.familyStatus}" style="width:150px">
                             <f:selectItem itemLabel="Select Familystatus" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{employeeController.familyStatus}" />
+                            <f:selectItems value="#{enumController.familyStatus}" />
                         </p:selectOneMenu>
                         <p:outputLabel for="religion" value="Religion: " />
                         <p:selectOneMenu id="religion" value="#{employeeController.employee.religion}" style="width:150px">
                             <f:selectItem itemLabel="Select Religion" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{employeeController.religions}" />
+                            <f:selectItems value="#{enumController.religions}" />
                         </p:selectOneMenu>
                         <p:outputLabel for="role" value="Role: " />
                         <p:selectOneMenu id="role" value="#{employeeController.employee.role}" style="width:150px">
                             <f:selectItem itemLabel="Select Role" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{employeeController.workRoles}" />
+                            <f:selectItems value="#{enumController.workRoles}" />
                         </p:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid columns="3">
                         <p:commandButton value="Save" action="#{employeeController.doSaveEmployee()}" oncomplete="PF('employeeAddDialog').hide()" update=":employeeForm:employeeTable"/>
-                        <p:commandButton value="Abort" onclick="PF('employeeAddDialog').hide()"/>
+                        <p:commandButton value="Abort" oncomplete="employeeAddDialog.hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>
             </p:dialog>
@@ -116,17 +116,17 @@
                         <p:outputLabel for="familyStatus" value="Familystatus: " />
                         <p:selectOneMenu id="familyStatus" value="#{employeeEditController.employee.familyStatus}" style="width:150px">
                             <f:selectItem itemLabel="Select Familystatus" itemValue="#{employeeEditController.employee.familyStatus}" />
-                            <f:selectItems value="#{employeeController.familyStatus}" />
+                            <f:selectItems value="#{enumController.familyStatus}" />
                         </p:selectOneMenu>
                         <p:outputLabel for="Religion" value="Religion: " />
                         <p:selectOneMenu id="Religion" value="#{employeeEditController.employee.religion}" style="width:150px">
                             <f:selectItem itemLabel="Select Religion" itemValue="#{employeeEditController.employee.religion}"/>
-                            <f:selectItems value="#{employeeController.religions}" />
+                            <f:selectItems value="#{enumController.religions}" />
                         </p:selectOneMenu>
                         <p:outputLabel for="Role" value="Role: " />
                         <p:selectOneMenu id="Role" value="#{employeeEditController.employee.role}" style="width:150px">
                             <f:selectItem itemLabel="Select Role" itemValue="#{employeeEditController.employee.role}" />
-                            <f:selectItems value="#{employeeController.workRoles}" />
+                            <f:selectItems value="#{enumController.workRoles}" />
                         </p:selectOneMenu>
                     </h:panelGrid>
                     <p:separator />

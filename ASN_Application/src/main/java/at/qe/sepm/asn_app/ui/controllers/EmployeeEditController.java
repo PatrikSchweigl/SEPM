@@ -22,12 +22,12 @@ public class EmployeeEditController {
         return employee;
     }
 
-    public void setEmployee(Employee employeeEdit) {
-        this.employee = employeeEdit;
-        doReloadUser();
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        doReloadEmployee();
     }
 
-    public void doReloadUser() {
+    public void doReloadEmployee() {
         employee = employeeService.loadUser(employee.getUsername());
     }
 
