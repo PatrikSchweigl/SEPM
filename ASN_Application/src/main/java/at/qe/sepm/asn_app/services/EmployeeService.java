@@ -42,11 +42,9 @@ public class EmployeeService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public Employee saveEmployee(Employee employee) {
-        if(employee.isNew()){
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-            employee.setUserRole(UserRole.EMPLOYEE);
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        employee.setUserRole(UserRole.EMPLOYEE);
 
         return employeeRepository.save(employee);
     }

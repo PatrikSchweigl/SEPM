@@ -111,7 +111,7 @@ public class User implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return (null == username);
+        return (username.equals(""));
     }
 
 }

@@ -31,11 +31,10 @@ public class ParentService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public Parent saveParent(Parent parent) {
-        if(parent.isNew()){
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            parent.setPassword(passwordEncoder.encode(parent.getPassword()));
-            parent.setUserRole(UserRole.PARENT);
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        parent.setPassword(passwordEncoder.encode(parent.getPassword()));
+        parent.setUserRole(UserRole.PARENT);
 
         return parentRepository.save(parent);
     }
