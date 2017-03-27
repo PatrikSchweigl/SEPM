@@ -6,7 +6,7 @@
     <h:body>
         <ui:composition>
             <h:form>
-                <p:menubar>
+                <p:menubar rendered="#{sessionInfoBean.loggedIn}">
                     <p:submenu label="Employee Submenu 1" rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
                         <p:menuitem value="Employee Action 1 - 1"/>
                         <p:menuitem value="Employee Action 1 - 2"/>
