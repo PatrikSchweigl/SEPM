@@ -109,7 +109,7 @@
                         <p:selectBooleanCheckbox value="#{parentController.parent.status}" />
                     </h:panelGrid>
                     <h:panelGrid columns="3">
-                        <p:commandButton value="Save" action="#{parentController.doSaveParent()}" oncomplete="PF('parentCreateDialog').hide()" update=":parentForm:parentTable"/>
+                        <p:commandButton value="Save" action="#{parentController.doSaveParent()}" oncomplete="PF('parentCreateDialog').hide()" update=":parentForm"/>
                         <p:commandButton value="Abort" onclick="PF('parentCreateDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>

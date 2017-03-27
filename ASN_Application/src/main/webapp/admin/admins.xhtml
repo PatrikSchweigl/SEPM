@@ -76,7 +76,7 @@
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="3">
-                        <p:commandButton value="Save" action="#{userAddController.doSaveUser()}" oncomplete="PF('userCreateDialog').hide()" update=":userForm:usersTable"/>
+                        <p:commandButton value="Save" action="#{userAddController.doSaveUser()}" oncomplete="PF('userCreateDialog').hide()" update=":userForm"/>
                         <p:commandButton value="Abort" onclick="PF('userCreateDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>
