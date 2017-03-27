@@ -72,8 +72,8 @@
                             <f:selectItem itemLabel="Select Religion" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{enumController.religions}" />
                         </p:selectOneMenu>
-                        <p:outputLabel for="role" value="Role: " />
-                        <p:selectOneMenu id="role" value="#{employeeController.employee.role}" style="width:150px">
+                        <p:outputLabel for="workRole" value="Role: " />
+                        <p:selectOneMenu id="workRole" value="#{employeeController.employee.workRole}" style="width:150px">
                             <f:selectItem itemLabel="Select Role" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{enumController.workRoles}" />
                         </p:selectOneMenu>
@@ -124,8 +124,8 @@
                             <f:selectItems value="#{enumController.religions}" />
                         </p:selectOneMenu>
                         <p:outputLabel for="Role" value="Role: " />
-                        <p:selectOneMenu id="Role" value="#{employeeEditController.employee.role}" style="width:150px">
-                            <f:selectItem itemLabel="Select Role" itemValue="#{employeeEditController.employee.role}" />
+                        <p:selectOneMenu id="Role" value="#{employeeEditController.employee.workRole}" style="width:150px">
+                            <f:selectItem itemLabel="Select Role" itemValue="#{employeeEditController.employee.workRole}" />
                             <f:selectItems value="#{enumController.workRoles}" />
                         </p:selectOneMenu>
                     </h:panelGrid>
