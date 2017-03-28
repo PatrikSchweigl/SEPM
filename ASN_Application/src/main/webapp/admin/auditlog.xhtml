@@ -9,7 +9,7 @@
         <h:form id="auditLogForm">
             <p:dataTable id="auditLogTable" var="log" value="#{auditLogController.auditLogs}">
                 <p:column headerText="Username">
-                    <h:outputText value="#{log.username}"/>
+                    <h:outputText value="#{log.userName}"/>
                 </p:column>
                 <p:column headerText="Log">
                     <h:outputText value="#{log.log}"/>

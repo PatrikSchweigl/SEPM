@@ -6,7 +6,7 @@
     <h:body>
         <ui:composition>
             <h:form>
-                <p:menubar>
+                <p:menubar rendered="#{sessionInfoBean.loggedIn}">
                     <p:submenu label="Employee Submenu 1" rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
                         <p:menuitem value="Employee Action 1 - 1"/>
                         <p:menuitem value="Employee Action 1 - 2"/>
@@ -23,16 +23,14 @@
                         <p:menuitem value="Manage Employees" url="/admin/employees.xhtml"/>
                         <p:menuitem value="Manage Parents" url="/admin/parents.xhtml"/>
                         <p:menuitem value="Manage Administrators" url="/admin/admins.xhtml"/>
-                        <p:menuitem value="Manage Test" url="/admin/test.xhtml"/>
-
-
-
                     </p:submenu>
                     <p:submenu label="Test Submenu" rendered="#{sessionInfoBean.loggedIn}">
                         <p:menuitem value="Security Test" url="/secured/test.xhtml"/>
                     </p:submenu>
+                    <p:menuitem value="View Audit Log" url="/admin/auditlog.xhtml" rendered="#{sessionInfoBean.hasRole('ADMIN')}"/>
+
                     <p:menuitem value="Login" url="/login.xhtml" rendered="#{!sessionInfoBean.loggedIn}"/>
-                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}"/>
+                    <p:menuitem value="Logout" url="/logout" rendered="#{sessionInfoBean.loggedIn}" style="position: absolute; right: 8px;"/>
                 </p:menubar>
             </h:form>
         </ui:composition>
