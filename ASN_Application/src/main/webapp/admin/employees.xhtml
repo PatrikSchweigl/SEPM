@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name ="content">
+        <div align="right" style="margin-bottom:10px;">
+            <p:commandButton oncomplete="PF('employeeAddDialog').show()" value="+ Employee"  style="align-items:right;"/>
+        </div>
+        <h:form id="employeeForm">
+            <p:dataTable id="employeeTable" var="employee" value="#{employeeController.employees}">
+                <p:column headerText="Username">
+                    <h:outputText value="#{employee.username}"/>
+                </p:column>
+                <p:column headerText="First Name">
+                    <h:outputText value="#{employee.firstName}"/>
+                </p:column>
+                <p:column headerText="Last Name">
+                    <h:outputText value="#{employee.lastName}"/>
+                </p:column>
+                <p:column headerText="Religion">
+                    <h:outputText value="#{employee.religion}" />
+                </p:column>
+                <p:column style="width:100px;text-align: center">
+                    <p:commandButton update=":employeeForm:employeeEditDialog" oncomplete="PF('employeeEditDialog').show()" icon="ui-icon-note" title="Edit">
+                        <f:setPropertyActionListener value="#{employee}" target="#{employeeEditController.employee}" />
+                    </p:commandButton>
+                    <p:commandButton action="#{employeeEditController.doDeleteEmployee}" icon="ui-icon-trash" title="Delete" update=":employeeForm:employeeTable">
+                        <f:setPropertyActionListener value="#{employee}" target="#{employeeEditController.employee}" />
+                        <p:confirm header="Confirmation" message="Are you sure that you want to delete this employee? You cannot undo this operation." icon="ui-icon-alert" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <!-- Create Employee Dialog -->
+            <p:dialog header="Create Employee" id="employeeAddDialog" widgetVar="employeeAddDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="employeeDataCreate">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="username" value="Username: " />
+                        <p:inputText id="username" value="#{employeeController.employee.username}"/>
+                        <p:outputLabel for="password" value="Password: " />
+                        <p:password id="password" value="#{employeeController.employee.password}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="firstname" value="First Name: " />
+                        <p:inputText id="firstname" value="#{employeeController.employee.firstName}"/>
+                        <p:outputLabel for="lastname" value="Last Name: " />
+                        <p:inputText id="lastname" value="#{employeeController.employee.lastName}"/>
+                        <p:outputLabel for="birthday" value="Birthdate: " />
+                        <p:inputMask mask="99/99/9999" id="birthday" value="#{employeeController.employee.birthday}"/>
+                        <p:outputLabel for="location" value="Location: " />
+                        <p:inputText id="location" value="#{employeeController.employee.location}"/>
+                        <p:outputLabel for="street" value="Streetname: " />
+                        <p:inputText id="street" value="#{employeeController.employee.streetName}"/>
+                        <p:outputLabel for="postcode" value="Postcode: " />
+                        <p:inputText id="postcode" value="#{employeeController.employee.postcode}"/>
+                        <p:outputLabel for="phonenumber" value="Phonenumber: " />
+                        <p:inputText id="phonenumber" value="#{employeeController.employee.phoneNumber}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="familystatus" value="Familystatus: " />
+                        <p:selectOneMenu id="familystatus" value="#{employeeController.employee.familyStatus}" style="width:150px">
+                            <f:selectItem itemLabel="Select Familystatus" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{enumController.familyStatus}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="religion" value="Religion: " />
+                        <p:selectOneMenu id="religion" value="#{employeeController.employee.religion}" style="width:150px">
+                            <f:selectItem itemLabel="Select Religion" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{enumController.religions}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="workRole" value="Role: " />
+                        <p:selectOneMenu id="workRole" value="#{employeeController.employee.workRole}" style="width:150px">
+                            <f:selectItem itemLabel="Select Role" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{enumController.workRoles}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{employeeController.doSaveEmployee()}" oncomplete="PF('employeeAddDialog').hide()" update=":employeeForm"/>
+                        <p:commandButton value="Abort" oncomplete="employeeAddDialog.hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+            <!-- Edit Employee Dialog -->
+            <p:dialog header="Edit Employee" id="employeeEditDialog" widgetVar="employeeEditDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="employeeDataEdit" rendered="#{not empty employeeEditController.employee}">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="userName" value="Username: " />
+                        <p:inputText id="userName" value="#{employeeEditController.employee.username}" disabled="true"/>
+                        <p:outputLabel for="passWord" value="Password: " />
+                        <p:password id="passWord" value="#{employeeEditController.employee.password}" disabled="true"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="firstName" value="First Name: " />
+                        <p:inputText id="firstName" value="#{employeeEditController.employee.firstName}"/>
+                        <p:outputLabel for="lastName" value="Last Name: " />
+                        <p:inputText id="lastName" value="#{employeeEditController.employee.lastName}"/>
+                        <p:outputLabel for="birthDay" value="Birthdate: " />
+                        <p:inputMask mask="99/99/9999" id="birthDay" value="#{employeeEditController.employee.birthday}"/>
+                        <p:outputLabel for="Location" value="Location: " />
+                        <p:inputText id="Location" value="#{employeeEditController.employee.location}"/>
+                        <p:outputLabel for="Street" value="Streetname: " />
+                        <p:inputText id="Street" value="#{employeeEditController.employee.streetName}"/>
+                        <p:outputLabel for="postCode" value="Postcode: " />
+                        <p:inputText id="postCode" value="#{employeeEditController.employee.postcode}"/>
+                        <p:outputLabel for="phoneNumber" value="Phonenumber: " />
+                        <p:inputText id="phoneNumber" value="#{employeeEditController.employee.phoneNumber}"/>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="familyStatus" value="Familystatus: " />
+                        <p:selectOneMenu id="familyStatus" value="#{employeeEditController.employee.familyStatus}" style="width:150px">
+                            <f:selectItem itemLabel="Select Familystatus" itemValue="#{employeeEditController.employee.familyStatus}" />
+                            <f:selectItems value="#{enumController.familyStatus}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="Religion" value="Religion: " />
+                        <p:selectOneMenu id="Religion" value="#{employeeEditController.employee.religion}" style="width:150px">
+                            <f:selectItem itemLabel="Select Religion" itemValue="#{employeeEditController.employee.religion}"/>
+                            <f:selectItems value="#{enumController.religions}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="Role" value="Role: " />
+                        <p:selectOneMenu id="Role" value="#{employeeEditController.employee.workRole}" style="width:150px">
+                            <f:selectItem itemLabel="Select Role" itemValue="#{employeeEditController.employee.workRole}" />
+                            <f:selectItems value="#{enumController.workRoles}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:separator />
+                    <h:panelGrid columns="3">
+                        <p:commandButton value="Save" action="#{employeeEditController.doSaveEmployee()}" oncomplete="PF('employeeEditDialog').hide()" update=":employeeForm:employeeTable"/>
+                        <p:commandButton value="Reload" action="#{employeeEditController.doReloadUser()}" update=":employeeForm:employeeDataEdit"/>
+                        <p:commandButton value="Abort" onclick="PF('employeeEditDialog').hide()"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

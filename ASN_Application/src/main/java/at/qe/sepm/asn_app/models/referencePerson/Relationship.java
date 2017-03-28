@@ -6,7 +6,7 @@ package at.qe.sepm.asn_app.models.referencePerson;
  */
 public enum Relationship {
     AUNT_UNCLE,
-    GRANDPARET,
+    GRANDPARENT,
     FRIEND_OF_THE_FAMILY,
     SIBLING
 }

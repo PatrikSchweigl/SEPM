@@ -7,12 +7,10 @@
                 template="/WEB-INF/templates/main.xhtml">
     <ui:define name ="content">
         <div align="right" style="margin-bottom:10px;">
-            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Admin"  style="align-items:right;"></p:commandButton>
-            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Employee"  style="align-items:right;"></p:commandButton>
-            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Parent"  style="align-items:right;"></p:commandButton>
+            <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Admin"  style="align-items:right;"/>
         </div>
         <h:form id="userForm">
-            <p:dataTable id="usersTable" var="user" value="#{userListController.getUsers()}">
+            <p:dataTable id="usersTable" var="user" value="#{userListController.users}">
                 <p:column headerText="Username">
                     <h:outputText value="#{user.username}"/>
                 </p:column>
@@ -21,9 +19,6 @@
                 </p:column>
                 <p:column headerText="Last Name">
                     <h:outputText value="#{user.lastName}"/>
-                </p:column>
-                <p:column headerText="Roles">
-                    <h:outputText value="#{user.userRole}" />
                 </p:column>
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton update=":userForm:userEditDialog" oncomplete="PF('userEditDialog').show()" icon="ui-icon-note" title="Edit">
@@ -64,7 +59,7 @@
 
 
             <!-- Create Admin Dialog -->
-            <p:dialog header="Create User" id="userCreateDialog" widgetVar="userCreateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:dialog header="Create User" id="userCreateDialog" widgetVar="userCreateDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
                 <p:outputPanel id="userDataCreate">
                     <h:panelGrid columns="2">
                         <p:outputLabel for="username" value="Username: " />
@@ -79,17 +74,9 @@
                         <p:outputLabel for="lastname" value="Last Name: " />
                         <p:inputText id="lastname" value="#{userAddController.user.lastName}"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                        <p:outputLabel for="role" value="Role:" />
-                        <p:selectOneRadio id="role" value="#{userAddController.user.userRole}">
-                            <f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
-                            <f:selectItem itemLabel="EMPLOYEE" itemValue="EMPLOYEE" />
-                            <f:selectItem itemLabel="PARENT" itemValue="PARENT" />
-                        </p:selectOneRadio>
-                    </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="3">
-                        <p:commandButton value="Save" action="#{userAddController.doSaveUser()}" oncomplete="PF('userCreateDialog').hide()" update=":userForm:usersTable"/>
+                        <p:commandButton value="Save" action="#{userAddController.doSaveUser()}" oncomplete="PF('userCreateDialog').hide()" update=":userForm"/>
                         <p:commandButton value="Abort" onclick="PF('userCreateDialog').hide()"/>
                     </h:panelGrid>
                 </p:outputPanel>

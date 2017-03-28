@@ -6,16 +6,19 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
+
+import javax.transaction.Transactional;
 
 /**
  * Repository for managing {@link User} entities.
  *
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
-public interface UserRepository extends AbstractRepository<User, Long> {
+@Transactional
+public interface UserRepository extends UserBaseRepository<User>, AbstractRepository<User,Long> {
 
-    User findFirstByUsername(String username);
 
     List<User> findByUsernameContaining(String username);
 
@@ -24,5 +27,8 @@ public interface UserRepository extends AbstractRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE :role = u.userRole")
     List<User> findByRole(@Param("role") UserRole role);
+
+    @Query("SELECT u FROM User u WHERE u.userRole = 'ADMIN'")
+    List<User> findAllAdmin();
 
 }

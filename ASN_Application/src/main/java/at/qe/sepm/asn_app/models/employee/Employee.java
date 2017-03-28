@@ -6,8 +6,6 @@ import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * Created by zerus on 17.03.17.
@@ -17,29 +15,26 @@ public class Employee extends User{
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    private Date birthday;
-    @NotNull
+
+    private String birthday;
     private String location;
     private String streetName;
-    @NotNull
     private String postcode;
     @Enumerated(EnumType.STRING)
     private Religion religion;
-    @NotNull
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
     @Enumerated(EnumType.STRING)
     private Status workingState;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private WorkRole workRole;
 
     public Employee(){//required for jpa repository
     }
     public Employee(String password, String username, String firstName, String lastName,
-                    Date birthday, String location, String streetName, String postcode, Religion religion,
-                    String phoneNumber, FamilyStatus familyStatus, Status workingState, Role role) {
+                    String birthday, String location, String streetName, String postcode, Religion religion,
+                    String phoneNumber, FamilyStatus familyStatus, Status workingState, WorkRole workRole) {
         super(password, username, firstName, lastName, UserRole.EMPLOYEE);
         this.birthday = birthday;
         this.location = location;
@@ -49,15 +44,15 @@ public class Employee extends User{
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
         this.workingState = workingState;
-        this.role = role;
+        this.workRole = workRole;
     }
 
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -117,11 +112,11 @@ public class Employee extends User{
         this.workingState = workingState;
     }
 
-    public Role getRole() {
-        return role;
+    public WorkRole getWorkRole() {
+        return workRole;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setWorkRole(WorkRole workRole) {
+        this.workRole = workRole;
     }
 }

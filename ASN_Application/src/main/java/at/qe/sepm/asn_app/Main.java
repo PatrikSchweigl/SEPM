@@ -28,7 +28,7 @@ public class Main extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-
+    
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(new Class[]{Main.class, CustomServletContextInitializer.class, WebSecurityConfig.class});

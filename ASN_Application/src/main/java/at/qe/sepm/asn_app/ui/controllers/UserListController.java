@@ -1,5 +1,7 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.models.User;
 
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Component;
 @Scope("view")
 public class UserListController {
 
+
     @Autowired
     private UserService userService;
 
@@ -26,6 +29,7 @@ public class UserListController {
      * @return
      */
     public Collection<User> getUsers() {
+
         return userService.getAllUsers();
     }
 
