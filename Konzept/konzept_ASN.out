@@ -1,4 +1,4 @@
-\BOOKMARK [1][-]{section.1}{System\374berblick}{}% 1
+\BOOKMARK [1][-]{section.1}{System"uberblick}{}% 1
 \BOOKMARK [1][-]{section.2}{Use Cases}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Akteure}{section.2}% 3
 \BOOKMARK [3][-]{subsubsection.2.1.1}{Mitarbeiter}{subsection.2.1}% 4
@@ -12,7 +12,7 @@
 \BOOKMARK [2][-]{subsection.2.6}{Use-Case Feiertage und Ferienzeiten eintragen}{section.2}% 12
 \BOOKMARK [2][-]{subsection.2.7}{Use-Case Kind anmelden}{section.2}% 13
 \BOOKMARK [2][-]{subsection.2.8}{Use-Case Kind abmelden}{section.2}% 14
-\BOOKMARK [2][-]{subsection.2.9}{Use-Case Benutzerdaten \344ndern}{section.2}% 15
+\BOOKMARK [2][-]{subsection.2.9}{Use-Case Benutzerdaten "andern}{section.2}% 15
 \BOOKMARK [2][-]{subsection.2.10}{Use-Case Daten drucken}{section.2}% 16
 \BOOKMARK [2][-]{subsection.2.11}{Use-Case Daten exportieren}{section.2}% 17
 \BOOKMARK [2][-]{subsection.2.12}{Use-Case Elternteil registrieren}{section.2}% 18
@@ -27,9 +27,13 @@
 \BOOKMARK [2][-]{subsection.2.21}{Use-Case Mittagessen anmelden/abmelden}{section.2}% 27
 \BOOKMARK [2][-]{subsection.2.22}{Use-Case Eigene Daten bearbeiten}{section.2}% 28
 \BOOKMARK [2][-]{subsection.2.23}{Use-Case Benachrichtigungen einsehen und bearbeiten}{section.2}% 29
-\BOOKMARK [2][-]{subsection.2.24}{Use-Case Messageboard \366ffnen \(SF\)}{section.2}% 30
+\BOOKMARK [2][-]{subsection.2.24}{Use-Case Messageboard "offnen \(SF\)}{section.2}% 30
 \BOOKMARK [2][-]{subsection.2.25}{Use-Case Nachricht auf Messageboard posten \(SF\)}{section.2}% 31
 \BOOKMARK [2][-]{subsection.2.26}{Use-Case Privatnachricht senden \(SF\)}{section.2}% 32
-\BOOKMARK [2][-]{subsection.2.27}{Use-Case Bildergalerie \366ffnen \(SF\)}{section.2}% 33
+\BOOKMARK [2][-]{subsection.2.27}{Use-Case Bildergalerie "offnen \(SF\)}{section.2}% 33
 \BOOKMARK [2][-]{subsection.2.28}{Use-Case Bilder kommentieren \(SF\)}{section.2}% 34
 \BOOKMARK [2][-]{subsection.2.29}{Use-Case Personen suchen}{section.2}% 35
+\BOOKMARK [1][-]{section.3}{Software Stack}{}% 36
+\BOOKMARK [2][-]{subsection.3.1}{Spring Framework}{section.3}% 37
+\BOOKMARK [2][-]{subsection.3.2}{Prime Faces/ CSS}{section.3}% 38
+\BOOKMARK [2][-]{subsection.3.3}{H2}{section.3}% 39

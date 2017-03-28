@@ -1,4 +1,3 @@
-\select@language {ngerman}
 \contentsline {section}{\numberline {1}System"uberblick}{2}{section.1}
 \contentsline {section}{\numberline {2}Use Cases}{3}{section.2}
 \contentsline {subsection}{\numberline {2.1}Akteure}{3}{subsection.2.1}
@@ -277,3 +276,7 @@
 \contentsline {paragraph}{Alternative Schritte}{33}{section*.242}
 \contentsline {paragraph}{Nachbedingungen}{33}{section*.243}
 \contentsline {paragraph}{Involvierte Klassen}{33}{section*.244}
+\contentsline {section}{\numberline {3}Software Stack}{34}{section.3}
+\contentsline {subsection}{\numberline {3.1}Spring Framework}{34}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Prime Faces/ CSS}{34}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}H2}{34}{subsection.3.3}
