@@ -21,7 +21,7 @@
 	Sibling ist eine kleinere Version der Child-Klasse. Jede/r Schwester/Bruder ist zwar ebenfalls als Kind in der Kinderkrippe registriert, wird hier aber nur mit dem vollständigen Namen und Alter referenziert um unnötige Datenduplizierung zu vermeiden. 
 
 \subsection{Employee}
-	In Employee werden alle Pädagogen und Auszubildene festgehalten. Pädagogen (Enum WorkRole) haben Zugriff auf alle Daten der Kinder und der Auszubildenden. 
+	In Employee werden alle Pädagogen und Auszubildenden festgehalten. Pädagogen (Enum WorkRole) haben Zugriff auf alle Daten der Kinder und der Auszubildenden. 
 \paragraph{Status}
 	Beinhaltet Information über An- und Abwesenheit eines Mitarbeiters. 
 \paragraph{WorkRole}
@@ -29,9 +29,9 @@
 	
 \subsection{Nursery}
 \paragraph{AuditLog}
-	Im AuditLog werden alle Ereignisse gespeichert die Datenbanktechnisch relevant sind. Hierzu gehören erstellen, löschen und editieren von Benutzern. Jeder Eintrag im AuditLog wird mit einer timestamp und dem Benutzer versehen, welcher den Eintrag hervorgerufen hat. 
+	Im AuditLog werden alle Ereignisse gespeichert die datenbanktechnisch relevant sind. Hierzu gehören erstellen, löschen und editieren von Benutzern. Jeder Eintrag im AuditLog wird mit einem Zeitstempel und dem Benutzer versehen, welcher den Eintrag hervorgerufen hat. 
 \paragraph{Lunch}
-	Speichert alle nötigen Werte für das tägliche Mittagessen, zu dem die Eltern ihre Kinder anmelden können. Es werden Datum, Mahlzeit, Kosten und die Liste der angemoldenen Kinder vermerkt. Sowohl Mitarbeiter als auch Eltern haben Zugriff auf diese Klasse, wobei nur Mitarbeiter die Werte verändern können.
+	Speichert alle nötigen Werte für das tägliche Mittagessen, zu dem die Eltern ihre Kinder anmelden können. Es werden Datum, Mahlzeit, Kosten und die Liste der angemeldeten Kinder vermerkt. Sowohl Mitarbeiter als auch Eltern haben Zugriff auf diese Klasse, wobei nur Mitarbeiter die Werte verändern können.
 \paragraph{Message}
 	Benutzer können im Messageboard Nachrichten erstellen. Um dies zu ermöglichen verwenden wir "Message" als Hilfsklasse. 
 \paragraph{NurseryInformation}
@@ -39,6 +39,6 @@
 	
 \subsection{User}
 User ist die Ausgangsklasse für die Klassen Employee und Parent. Sie bietet grundlegende Attribute wie etwa userName, password, firstName, lastName und die userRole. 
-In unserer Implementierung ist ein Admin vorhanden, jedoch nicht als eigene Klasse, da wir Datenbanktechnisch in einige Probleme liefen. Es hat sich daher für unse als sinnvoller herausgestellt ihn nur als User mit einer zusätzlichen UserRole zu implementieren. 
+In unserer Implementierung ist ein Admin vorhanden, jedoch nicht als eigene Klasse, da wir datenbanktechnisch in einige Probleme liefen. Es hat sich daher für uns als sinnvoller herausgestellt ihn nur als User mit einer zusätzlichen UserRole zu implementieren. 
 \paragraph{UserRole}
 Gibt an welcher Position ein Benutzer zugehörig ist (Admin, Employee oder Parent). 
