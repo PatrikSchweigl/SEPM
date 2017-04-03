@@ -437,7 +437,36 @@
 		Der Elternteil bricht die Anlegung einer Bezugsperson ab. Das Pop-up Fenster wird wieder geschlossen und es werden keine Daten in der Datenbank gespeichert. 	
 		\paragraph{Nachbedingungen}
 		Die Bezugsperson ist in der Datenbank gespeichert, aber noch nicht im System freigegeben. Die Freischaltung einer Bezugsperson kann daraufhin über einen Mitarbeiter erfolgen. 
-  
+		
+		
+		
+	
+	\newpage
+	\subsection{Use-Case L"oschen von Bezugspersonen (Elternteil)}
+	\paragraph{Beschreibung}
+		Ein Elternteil kann eine Bezugsperson für sein Kind wieder l"oschen
+		\paragraph{Ausl"oser}
+		Der Elternteil klickt auf den Button \dq Bezugsperson l"oschen\dq
+		\paragraph{Beteiligte Akteure}   \leavevmode \newline
+		Elternteil
+		\paragraph{Vorbedingungen}
+		\begin{itemize}
+			\item Der Elternteil ist angemeldet
+			\item Mindestens eine Bezugsperson für ein Kind des Elternteils ist in der Kinderkrippe registriert
+		\end{itemize}
+		
+		\paragraph{Schritte}
+		\begin{enumerate}
+			\item Der Elternteil klickt auf den Button \dq Bezugsperson l"oschen\dq
+			\item Es "offnet sich ein Pop-up Fenster in welchem alle Bezugspersonen der Kinder des Elternteils angegeben sind
+			\item Der Elternteil w"ahlt eine Bezugsperson aus
+			\item Der Elternteil best"atigt den L"oschvorgang mit einem Klick auf den Button "Best"atigen"
+		\end{enumerate}
+		
+		\paragraph{Alternative Schritte}
+		Der Elternteil bricht das Löschen einer Bezugsperson ab. Das Pop-up Fenster wird wieder geschlossen und es werden keine Daten in der Datenbank gel"oscht. 	
+		\paragraph{Nachbedingungen}
+		Die Bezugsperson ist aus der Datenbank entfernt worden. 
   
   
   
