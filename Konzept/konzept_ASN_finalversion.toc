@@ -196,7 +196,7 @@
 \contentsline {paragraph}{Schritte}{27}{section*.167}
 \contentsline {paragraph}{Alternative Schritte}{27}{section*.168}
 \contentsline {paragraph}{Nachbedingungen}{27}{section*.169}
-\contentsline {subsection}{\numberline {2.24}Use-Case Messageboard "offnen (SF)}{28}{subsection.2.24}
+\contentsline {subsection}{\numberline {2.24}Use-Case Messageboard "offnen (Sonderfunktion)}{28}{subsection.2.24}
 \contentsline {paragraph}{Identifier}{28}{section*.170}
 \contentsline {paragraph}{Beschreibung}{28}{section*.171}
 \contentsline {paragraph}{Ausl"oser}{28}{section*.172}
@@ -205,7 +205,7 @@
 \contentsline {paragraph}{Schritte}{28}{section*.175}
 \contentsline {paragraph}{Alternative Schritte}{28}{section*.176}
 \contentsline {paragraph}{Nachbedingungen}{28}{section*.177}
-\contentsline {subsection}{\numberline {2.25}Use-Case Nachricht auf Messageboard posten (SF)}{29}{subsection.2.25}
+\contentsline {subsection}{\numberline {2.25}Use-Case Nachricht auf Messageboard posten (Sonderfunktion)}{29}{subsection.2.25}
 \contentsline {paragraph}{Identifier}{29}{section*.178}
 \contentsline {paragraph}{Beschreibung}{29}{section*.179}
 \contentsline {paragraph}{Ausl"oser}{29}{section*.180}
@@ -214,7 +214,7 @@
 \contentsline {paragraph}{Schritte}{29}{section*.183}
 \contentsline {paragraph}{Alternative Schritte}{29}{section*.184}
 \contentsline {paragraph}{Nachbedingungen}{29}{section*.185}
-\contentsline {subsection}{\numberline {2.26}Use-Case Privatnachricht senden (SF)}{30}{subsection.2.26}
+\contentsline {subsection}{\numberline {2.26}Use-Case Privatnachricht senden (Sonderfunktion)}{30}{subsection.2.26}
 \contentsline {paragraph}{Identifier}{30}{section*.186}
 \contentsline {paragraph}{Beschreibung}{30}{section*.187}
 \contentsline {paragraph}{Ausl"oser}{30}{section*.188}
@@ -223,7 +223,7 @@
 \contentsline {paragraph}{Schritte}{30}{section*.191}
 \contentsline {paragraph}{Alternative Schritte}{30}{section*.192}
 \contentsline {paragraph}{Nachbedingungen}{30}{section*.193}
-\contentsline {subsection}{\numberline {2.27}Use-Case Bildergalerie "offnen (SF)}{31}{subsection.2.27}
+\contentsline {subsection}{\numberline {2.27}Use-Case Bildergalerie "offnen (Sonderfunktion)}{31}{subsection.2.27}
 \contentsline {paragraph}{Identifier}{31}{section*.194}
 \contentsline {paragraph}{Beschreibung}{31}{section*.195}
 \contentsline {paragraph}{Ausl"oser}{31}{section*.196}
@@ -232,7 +232,7 @@
 \contentsline {paragraph}{Schritte}{31}{section*.199}
 \contentsline {paragraph}{Alternative Schritte}{31}{section*.200}
 \contentsline {paragraph}{Nachbedingungen}{31}{section*.201}
-\contentsline {subsection}{\numberline {2.28}Use-Case Bilder kommentieren (SF)}{32}{subsection.2.28}
+\contentsline {subsection}{\numberline {2.28}Use-Case Bilder kommentieren (Sonderfunktion)}{32}{subsection.2.28}
 \contentsline {paragraph}{Identifier}{32}{section*.202}
 \contentsline {paragraph}{Beschreibung}{32}{section*.203}
 \contentsline {paragraph}{Ausl"oser}{32}{section*.204}
@@ -268,20 +268,22 @@
 \contentsline {subsection}{\numberline {3.5}User}{36}{subsection.3.5}
 \contentsline {paragraph}{UserRole}{36}{section*.228}
 \contentsline {section}{\numberline {4}Software Stack}{37}{section.4}
-\contentsline {subsection}{\numberline {4.1}Spring Framework}{39}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Prime Faces/ CSS}{39}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}H2}{39}{subsection.4.3}
-\contentsline {section}{\numberline {5}GUI-Prototypen}{40}{section.5}
-\contentsline {subsection}{\numberline {5.1}Loginseite}{40}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Templateseite}{41}{subsection.5.2}
-\contentsline {section}{\numberline {6}Projektplan}{42}{section.6}
-\contentsline {subsection}{\numberline {6.1}Arbeitsaufteilung}{42}{subsection.6.1}
-\contentsline {paragraph}{Datenbankmodellierung}{42}{section*.229}
-\contentsline {paragraph}{Konzept}{42}{section*.230}
-\contentsline {paragraph}{GUI}{42}{section*.231}
-\contentsline {paragraph}{Implementierung Use-Cases Benutzer}{42}{section*.232}
-\contentsline {paragraph}{Implementierung Use-Cases aktiver Benutzer}{42}{section*.233}
-\contentsline {paragraph}{Implementierung Use-Case Angestellter}{42}{section*.234}
-\contentsline {paragraph}{Implementierung Sonderfeature}{42}{section*.235}
-\contentsline {paragraph}{Tests}{42}{section*.236}
-\contentsline {subsection}{\numberline {6.2}Meilensteine}{43}{subsection.6.2}
+\contentsline {subsection}{\numberline {4.1}Spring Framework}{38}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Prime Faces/ CSS}{38}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}H2}{38}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Testen}{38}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Version Control}{38}{subsection.4.5}
+\contentsline {section}{\numberline {5}GUI-Prototypen}{39}{section.5}
+\contentsline {subsection}{\numberline {5.1}Loginseite}{39}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Templateseite}{40}{subsection.5.2}
+\contentsline {section}{\numberline {6}Projektplan}{41}{section.6}
+\contentsline {subsection}{\numberline {6.1}Arbeitsaufteilung}{41}{subsection.6.1}
+\contentsline {paragraph}{Datenbankmodellierung}{41}{section*.229}
+\contentsline {paragraph}{Konzept}{41}{section*.230}
+\contentsline {paragraph}{GUI}{41}{section*.231}
+\contentsline {paragraph}{Implementierung Use-Cases Benutzer}{41}{section*.232}
+\contentsline {paragraph}{Implementierung Use-Cases aktiver Benutzer}{41}{section*.233}
+\contentsline {paragraph}{Implementierung Use-Case Angestellter}{41}{section*.234}
+\contentsline {paragraph}{Implementierung Sonderfeature}{41}{section*.235}
+\contentsline {paragraph}{Tests}{41}{section*.236}
+\contentsline {subsection}{\numberline {6.2}Meilensteine}{42}{subsection.6.2}
