@@ -467,33 +467,69 @@
 		Der Elternteil bricht das Löschen einer Bezugsperson ab. Das Pop-up Fenster wird wieder geschlossen und es werden keine Daten in der Datenbank gel"oscht. 	
 		\paragraph{Nachbedingungen}
 		Die Bezugsperson ist aus der Datenbank entfernt worden. 
+		
+		
+		
+		
+		\newpage
+		\subsection{Use-Case L"oschen von Bezugspersonen (Elternteil)}
+		\paragraph{Beschreibung}
+		Ein Elternteil kann eine Bezugsperson für sein Kind wieder l"oschen
+		\paragraph{Ausl"oser}
+		Der Elternteil klickt auf den Button \dq Bezugsperson l"oschen\dq
+		\paragraph{Beteiligte Akteure}   \leavevmode \newline
+		Elternteil
+		\paragraph{Vorbedingungen}
+		\begin{itemize}
+			\item Der Elternteil ist angemeldet
+			\item Mindestens eine Bezugsperson für ein Kind des Elternteils ist in der Kinderkrippe registriert
+		\end{itemize}
+		
+		\paragraph{Schritte}
+		\begin{enumerate}
+			\item Der Elternteil klickt auf den Button \dq Bezugsperson l"oschen\dq
+			\item Es "offnet sich ein Pop-up Fenster in welchem alle Bezugspersonen der Kinder des Elternteils angegeben sind
+			\item Der Elternteil w"ahlt eine Bezugsperson aus
+			\item Der Elternteil best"atigt den L"oschvorgang mit einem Klick auf den Button "Best"atigen"
+		\end{enumerate}
+		
+		\paragraph{Alternative Schritte}
+		Der Elternteil bricht das Löschen einer Bezugsperson ab. Das Pop-up Fenster wird wieder geschlossen und es werden keine Daten in der Datenbank gel"oscht. 	
+		\paragraph{Nachbedingungen}
+		Die Bezugsperson ist aus der Datenbank entfernt worden. 
   
   
   
-  \newpage
-  \subsection{Use-Case Kinderstammblatt einsehen (Elternteil)}
-  \paragraph{Beschreibung}
-  In dieser Ansicht erh"alt der Elternteil die vollst"andigen Information "uber das Kind
-  \paragraph{Ausl"oser}
-  Der Elternteil klickt auf den Button \dq Kinderstammblatt "offnen\dq
-  \paragraph{Beteiligte Akteure}   \leavevmode \newline
-  Mitarbeiter
-  \paragraph{Vorbedingungen}
-  \begin{itemize}
-  	\item Der Elternteil ist angemeldet
-  	\item Mindestens ein Kind des Elternteils ist in der Kinderkrippe registriert 
-  \end{itemize}
-  
-  \paragraph{Schritte}
-  \begin{enumerate}
-  	\item Der Elternteil sucht "uber die Suchfunktion sein Kind
-  	\item Der Elternteil best"atigt seine Auswahl
-  	\item Der Elternteil klickt auf den Button \dq Kinderstammblatt "offnen\dq
-  	\item Es "offnet sich ein Pop-up Fenster mit allen Informationen
-  \end{enumerate}
-	
-	\paragraph{Alternative Schritte}
-	\paragraph{Nachbedingungen}
+	\newpage
+	\subsection{Use-Case Freischaltung der Bezugspersonen}
+		\paragraph{Beschreibung}
+		Mitarbeitern ist es möglich die angelegten Bezusgpersonen der Kinder der Elternteile freizuschalten
+		\paragraph{Ausl"oser}
+		Der Elternteil klickt auf den Button \dq Bezuspgersonen freischalten\dq
+		\paragraph{Beteiligte Akteure}   \leavevmode \newline
+		Mitarbeiter
+		\paragraph{Vorbedingungen}
+		\begin{itemize}
+		 	\item Der Mitarbeiter ist angemeldet
+		\end{itemize}
+		
+		\paragraph{Schritte}
+		\begin{enumerate}
+		 	\item Der Mitarbeiter klickt auf den Button \dq Bezugspersonen freischalten\dq
+		 	\item Es "offnet sich ein Pop-up Fenster mit allen freizuschaltenden Bezugspersonen
+		 	\item Der Mitarbeiter w"ahlt alle Bezugspersonen aus, welche freigeschalten werden sollen
+		 	\item der Mitarbeiter best"atigt seine Auswahl mit einem Klick auf den Button \dq Auswahl best"atigen\dq
+		\end{enumerate}
+		
+		\paragraph{Alternative Schritte}
+		\begin{enumerate}
+			\item Der Mitarbeiter klickt auf den Button \dq Bezugspersonen freischalten\dq
+			\item Es "offnet sich ein Pop-up Fenster mit allen freizuschaltenden Bezugspersonen
+			\item Der Mitarbeiter bricht die Freischaltung der Bezugspersonen mit einem Klick auf den Butt \dq Abbrechen \dq ab
+		\end{enumerate}
+			
+		\paragraph{Nachbedingungen}
+		Die Bezugspersonen sind im System freigeschaltet. Diese Änderung ist auch in der Datenbank geändert worden. 
 	  
     
   
@@ -641,18 +677,33 @@
   \item Das System sendet eine Benachrichtigung an das Elternteil und wechselt zu M2-Grundstellung
   \end{enumerate}
   
-  \paragraph{Alternative Schritte}
-  \begin{enumerate}
-   \item Der Benutzer gibt in die Suchfunktion das gew"unschte Elternteile ein
-   \item Der Benutzer klicht auf den Button \dq Aufgabe zuweisen\dq
-   \item Es "offnet sich ein Pop-up Fenster
-  \item der Benutzer gibt alle notwendigen Daten ein (Name, Aufgabe, Zeipunkt, Zeitraum)
-  \item Der Benutzer best"atigt seine Eingabe
-  \item Das System sendet eine Benachrichtigung an das Elternteil und wechselt zu M2-Grundstellung
-  \end{enumerate}
-  \paragraph{Nachbedingungen}
-  Das Elternteil erh"alt eine Benachrichtigung und der Nutzer befindet sich in M2-Grundstellung
+  
+  
+  
+	\newpage
+	\subsection{Use-Case Einsehen der eigenen Aufgaben}
+	\paragraph{Beschreibung}
+	Elternteile können die ihnen zugeteilten Aufgaben einsehen 
+	\paragraph{Ausl"oser}
+	Der Elternteil klickt auf den Button \dq Aufgaben ansehen\dq
+	\paragraph{Beteiligte Akteure}   \leavevmode \newline
+	Elternteil
+	\paragraph{Vorbedingungen}
+	\begin{itemize}
+		\item Der Elternteil ist angemeldet
+	\end{itemize}
+	
+	\paragraph{Schritte}
+	\begin{enumerate}
+		\item Der Elternteil klickt auf den Button \dq Eigene Aufgaben ansehen \dq
+		\item Es "offnet sich ein Pop-up Fenster in dem alle dem Elternteil zugeteilten Aufgaben vermerkt sind
+	\end{enumerate}
+  
+	\paragraph{Alternative Schritte}
+	\paragraph{Nachbedingungen}
 
+  
+  
   
   \newpage
  \subsection{Use-Case Auditlog einsehen}
