@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.models.child;
 
 
 import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
 
@@ -41,12 +42,13 @@ public class Child implements Persistable<Long>{
     private Set<PairTime> pairTime;
     private Custody custody;
     private Religion religion;
+    @OneToMany
+    private Set<Caregiver> cargivers;
 
 
-    public Child(String firstName, String lastName, Date birthday, String imgName,
-                 Set<String> furtherRemarks, Parent parent1, Parent parent2, Set<String> listAllergies,
-                 Set<String> listFoodIntolerances, Set<Sibling> listSiblings, Custody custody,
-                 Religion religion, String emergencyNumber, Set<PairTime> pairTime) {
+    public Child(String firstName, String lastName, Date birthday, String imgName, Set<String> furtherRemarks,
+                 Parent parent1, Parent parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
+                 Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -54,13 +56,14 @@ public class Child implements Persistable<Long>{
         this.furtherRemarks = furtherRemarks;
         this.parent1 = parent1;
         this.parent2 = parent2;
+        this.emergencyNumber = emergencyNumber;
         this.listAllergies = listAllergies;
         this.listFoodIntolerances = listFoodIntolerances;
         this.listSiblings = listSiblings;
+        this.pairTime = pairTime;
         this.custody = custody;
         this.religion = religion;
-        this.emergencyNumber = emergencyNumber;
-        this.pairTime = pairTime;
+        this.cargivers = cargivers;
     }
 
     public String getFirstName() {
@@ -182,6 +185,14 @@ public class Child implements Persistable<Long>{
 
     public void setPairTime(Set<PairTime> pairTime) {
         this.pairTime = pairTime;
+    }
+
+    public Set<Caregiver> getCargivers() {
+        return this.cargivers;
+    }
+
+    public void setCargivers(Set<Caregiver> cargivers) {
+        this.cargivers = cargivers;
     }
 
     @Override
