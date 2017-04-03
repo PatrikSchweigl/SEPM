@@ -410,6 +410,37 @@
   Der Benutzer befindet sich in M7-Kontakte
   
   
+  
+	
+	\newpage
+	\subsection{Use-Case Anlegen von Bezugspersonen}
+		\paragraph{Beschreibung}
+		Ein Elternteil kann eine Bezugsperson für sein Kind anlegen
+		\paragraph{Ausl"oser}
+		Der Elternteil klickt auf den Button \dq Bezugsperson hinzuf"ugen\dq
+		\paragraph{Beteiligte Akteure}   \leavevmode \newline
+		Elternteil
+		\paragraph{Vorbedingungen}
+			\begin{itemize}
+			 	\item Der Elternteil ist angemeldet
+			\end{itemize}
+		
+		\paragraph{Schritte}
+			\begin{enumerate}
+			 	\item Der Elternteil klickt auf den Button \dq Bezugsperson hinzuf"ugen\dq
+			 		\item Es "offnet sich ein Pop-up Fenster in welchem die Daten der Bezugsperson eingetragen werden können
+			 	\item Der Elternteil tragt die Daten der Bezugsperson ein
+			 	\item Der Elternteil best"atigt die Anlegung mit einem Klick auf den Button "Best"atigen"
+			\end{enumerate}
+		
+		\paragraph{Alternative Schritte}
+		Der Elternteil bricht die Anlegung einer Bezugsperson ab. Das Pop-up Fenster wird wieder geschlossen und es werden keine Daten in der Datenbank gespeichert. 	
+		\paragraph{Nachbedingungen}
+		Die Bezugsperson ist in der Datenbank gespeichert, aber noch nicht im System freigegeben. Die Freischaltung einer Bezugsperson kann daraufhin über einen Mitarbeiter erfolgen. 
+  
+  
+  
+  
   \newpage
   \subsection{Use-Case Kinderstammblatt einsehen (Elternteil)}
   \paragraph{Beschreibung}
@@ -426,11 +457,16 @@
   
   \paragraph{Schritte}
   \begin{enumerate}
-  	\item Der Mitarbeiter sucht "uber die Suchfunktion sein Kind
+  	\item Der Elternteil sucht "uber die Suchfunktion sein Kind
   	\item Der Elternteil best"atigt seine Auswahl
   	\item Der Elternteil klickt auf den Button \dq Kinderstammblatt "offnen\dq
   	\item Es "offnet sich ein Pop-up Fenster mit allen Informationen
   \end{enumerate}
+	
+	\paragraph{Alternative Schritte}
+	\paragraph{Nachbedingungen}
+	  
+    
   
   
   \newpage
@@ -456,6 +492,10 @@
    \item Der Mitarbeiter klickt auf den Button \dq Kinderstammblatt "offnen\dq
    \item Es "offnet sich ein Pop-up Fenster mit allen Informationen
   \end{enumerate}
+  
+  \paragraph{Alternative Schritte}
+  \paragraph{Nachbedingungen}
+  
   
   
   
