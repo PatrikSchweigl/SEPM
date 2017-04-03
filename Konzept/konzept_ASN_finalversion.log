@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.3)  3 APR 2017 13:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.4.3)  3 APR 2017 14:01
 entering extended mode
 **./konzept_ASN_finalversion.tex
 (konzept_ASN_finalversion.tex
@@ -870,7 +870,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 [2] (systemoverview/konzept_ASN_systemoverview.tex)
 (usecases/konzept_ASN_usecases.tex [3] [4]
-<pictures/usecasediagram.jpg, id=285, 1109.14375pt x 1238.6275pt>
+<pictures/usecasediagram.jpg, id=295, 1109.14375pt x 1238.6275pt>
 File: pictures/usecasediagram.jpg Graphic file (type jpg)
 
 <use pictures/usecasediagram.jpg>
@@ -950,7 +950,7 @@ Overfull \hbox (24.7368pt too wide) in paragraph at lines 718--719
  []
 
 [29] [30] [31] [32]) (classdiagram/classdiagram.tex [33]
-<pictures/class_diagram_intellij_bright.png, id=745, 2024.56375pt x 1610.015pt>
+<pictures/class_diagram_intellij_bright.png, id=755, 2024.56375pt x 1610.015pt>
 File: pictures/class_diagram_intellij_bright.png Graphic file (type png)
 <use pictures/class_diagram_intellij_bright.png>
 Package pdftex.def Info: pictures/class_diagram_intellij_bright.png used on inp
@@ -963,22 +963,36 @@ Overfull \hbox (81.79134pt too wide) in paragraph at lines 8--9
 
 [34 <./pictures/class_diagram_intellij_bright.png (PNG copy)>] [35])
 (component/softwarestack.tex [36]
-<component/Komponentendiagramm.png, id=770, 1145.27875pt x 1426.32875pt>
+<component/Komponentendiagramm.png, id=780, 1025.8325pt x 1436.36626pt>
 File: component/Komponentendiagramm.png Graphic file (type png)
 
 <use component/Komponentendiagramm.png>
 Package pdftex.def Info: component/Komponentendiagramm.png used on input line 5
 .
-(pdftex.def)             Requested size: 372.60063pt x 464.03017pt.
+(pdftex.def)             Requested size: 372.60063pt x 521.71599pt.
 
 Overfull \hbox (27.60063pt too wide) in paragraph at lines 5--6
 [][] 
  []
 
-[37 <./component/Komponentendiagramm.png>]) (gui/gui.tex [38]
-<pictures/Login.png, id=781, 1120.185pt x 700.6175pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[37] [38]
+File: component/Komponentendiagramm.png Graphic file (type png)
+ <use component/Komponentendiagramm.png>
+Package pdftex.def Info: component/Komponentendiagramm.png used on input line 2
+8.
+(pdftex.def)             Requested size: 410.32574pt x 574.53633pt.
+
+Overfull \hbox (65.32574pt too wide) in paragraph at lines 28--29
+[][] 
+ []
+
+) (gui/gui.tex <pictures/Login.png, id=790, 1120.185pt x 700.6175pt>
 File: pictures/Login.png Graphic file (type png)
- <use pictures/Login.png>
+
+<use pictures/Login.png>
 Package pdftex.def Info: pictures/Login.png used on input line 8.
 (pdftex.def)             Requested size: 426.79134pt x 266.9323pt.
 
@@ -986,8 +1000,7 @@ Overfull \hbox (81.79134pt too wide) in paragraph at lines 8--9
 [][] 
  []
 
-[39 <./pictures/Login.png>]
-<pictures/Template.png, id=786, 1118.1775pt x 701.62125pt>
+[39] <pictures/Template.png, id=795, 1118.1775pt x 701.62125pt>
 File: pictures/Template.png Graphic file (type png)
 
 <use pictures/Template.png>
@@ -998,34 +1011,36 @@ Overfull \hbox (81.79134pt too wide) in paragraph at lines 14--15
 [][] 
  []
 
-) (timeline/timeline.tex [40 <./pictures/Template.png>]
+) (timeline/timeline.tex [40]
 Overfull \hbox (6.12091pt too wide) in paragraph at lines 15--16
  []\OT1/cmr/bx/n/10 Implementierung Use-Case An-ge-stell-ter[] \OT1/cmr/m/n/12 
 Ste-fan Mat-ters-ber-ger, Ema-
  []
 
-[41] <pictures/Zeitplanneu.PNG, id=803, 398.99063pt x 1169.87062pt>
+[41] <pictures/Zeitplanneu.PNG, id=812, 398.99063pt x 1169.87062pt>
 File: pictures/Zeitplanneu.PNG Graphic file (type png)
 
 <use pictures/Zeitplanneu.PNG>
 Package pdftex.def Info: pictures/Zeitplanneu.PNG used on input line 23.
 (pdftex.def)             Requested size: 193.47873pt x 567.29732pt.
-) [42 <./pictures/Zeitplanneu.PNG>]
+) [42]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 225.
+ [2 <./component/Komponentendiagramm.png>]
+[3] [4 <./pictures/Login.png> <./pictures/Template.png>] [5 <./pictures/Zeitpla
+nneu.PNG>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 225.
-
-(konzept_ASN_finalversion.aux)
+ (konzept_ASN_finalversion.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 225.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 225.
 Package rerunfilecheck Info: File `konzept_ASN_finalversion.out' has not change
 d.
-(rerunfilecheck)             Checksum: 7F269BF50DCC1BFD70A1B240CE43B688;3788.
+(rerunfilecheck)             Checksum: B13EAE92958ADDE1CF5B54B8067F2AD9;3911.
  ) 
 Here is how much of TeX's memory you used:
- 10924 strings out of 493333
- 155103 string characters out of 3139189
+ 10932 strings out of 493333
+ 155191 string characters out of 3139189
  286939 words of memory out of 3000000
- 13769 multiletter control sequences out of 15000+200000
+ 13771 multiletter control sequences out of 15000+200000
  12113 words of font info for 47 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,8n,67p,815b,498s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1034,9 +1049,9 @@ ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on konzept_ASN_finalversion.pdf (43 pages, 1540677 bytes).
+Output written on konzept_ASN_finalversion.pdf (47 pages, 1543304 bytes).
 PDF statistics:
- 924 PDF objects out of 1000 (max. 8388607)
- 452 named destinations out of 1000 (max. 500000)
- 439 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 951 PDF objects out of 1000 (max. 8388607)
+ 458 named destinations out of 1000 (max. 500000)
+ 455 words of extra memory for PDF output out of 10000 (max. 10000000)
 
