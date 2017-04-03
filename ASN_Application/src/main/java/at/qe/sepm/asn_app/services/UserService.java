@@ -1,6 +1,8 @@
 package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.models.User;
 
@@ -28,6 +30,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AuditLogRepository auditLogRepository;
 
     /**
      * Returns a collection of all users.
@@ -71,8 +75,9 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(User user) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ user.getUsername() + " [" + user.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
         userRepository.delete(user);
-        // :TODO: write some audit log stating who and when this user was permanently deleted.
     }
 
     private User getAuthenticatedUser() {
