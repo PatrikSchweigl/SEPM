@@ -594,9 +594,9 @@
   
   
   \newpage
-  \subsection{Use-Case Kinderstammblatt bearbeiten (Eltern)}
+  \subsection{Use-Case Kinderstammblatt bearbeiten (Elternteil)}
   \paragraph{Beschreibung}
-  Eltern können die Kinderstammblätter ihrer eigenen Kinder bearbeiten. 
+  Elternteile können die Kinderstammblätter ihrer eigenen Kinder bearbeiten. 
   \paragraph{Ausl"oser}
   Der Elternteil klickt auf den Button \dq Kinderstammblatt "offnen\dq
   \paragraph{Beteiligte Akteure}   \leavevmode \newline
@@ -760,7 +760,7 @@
 
   
   \newpage
- \subsection{Use-Case Bring- und Abholzeiten eintragen}
+ \subsection{Use-Case Bring- und Abholzeiten eintragen (Eltern)}
   \paragraph{Identifier}
   UC 2.17
   \paragraph{Beschreibung}
@@ -781,7 +781,7 @@
    \item Der Benutzer klickt auf den Button \dq Bringen/Abholen\dq
    \item Es "offnet sich ein Pop-up Fenster
    \item Der Benutzer gibt die Daten (Bringzeit, Abholzeit, Kind, Selbstabholung oder Fremdabholung) ein und best"atigt seine Eingaben
-   \item Das System "uberpr"uft, ob die Bring und Abholzeiten normal oder abweichend sind und markiert sie dementsprechend
+   \item Das System "uberpr"uft, ob die Bring- und Abholzeiten normal oder abweichend sind und markiert sie dementsprechend
    \item Das System speichert die Daten und wechselt zur Maske M2-Grundstellung
   \end{enumerate}
 
@@ -793,6 +793,44 @@
 
   \paragraph{Nachbedingungen}
   Die Bring und Abholzeiten werden in der Datenbank gespeichert und der Nutzer befindet sich in M2-Grundstellung
+  
+  
+  
+  
+	\newpage
+	\subsection{Use-Case Bring- und Abholzeiten eintragen (Mitarbeiter)}
+	\paragraph{Beschreibung}
+	Um den Eltern die Zeiteinteilung zu erleichtern, k"onnen Mitarbeiter die Bring- und Abholzeiten eintragen.
+	\paragraph{Ausl"oser}
+	Der Mitarbeiter klickt auf den Button \dq Bringen/Abholen\dq
+	\paragraph{Beteiligte Akteure}   \leavevmode \newline
+	Mitarbeiter
+	\paragraph{Vorbedingungen}
+	\begin{itemize}
+		\item Der Mitarbeiter ist angemeldet
+		\item Der Mitarbeiter befindet sich in Maske M3-Kalender
+	\end{itemize}
+	
+	\paragraph{Schritte}
+	\begin{enumerate}
+		\item Der Mitarbeiter klickt in M3-Kalender den gew"unschten Tag an
+		\item Der Mitarbeiter klickt auf den Button \dq Bringen/Abholen\dq
+		\item Es "offnet sich ein Pop-up Fenster
+		\item Der Mitarbeiter gibt die Daten (Bringzeit, Abholzeit, Kind, Selbstabholung oder Fremdabholung) ein und best"atigt seine Eingaben
+		\item Das System "uberpr"uft, ob die Bring- und Abholzeiten normal oder abweichend sind und markiert sie dementsprechend
+		\item Das System speichert die Daten und wechselt zur Maske M2-Grundstellung
+	\end{enumerate}
+	
+	\paragraph{Alternative Schritte}
+	\begin{enumerate}
+		\setcounter{enumi}{4}
+		\item  Die Eingaben sind ung"ultig und der Mitarbeiter erh"alt eine Fehlermeldung
+	\end{enumerate}
+	
+	\paragraph{Nachbedingungen}
+	Die Bring und Abholzeiten werden in der Datenbank gespeichert und der Mitarbeiter befindet sich in M2-Grundstellung
+
+
 
   
   \newpage
