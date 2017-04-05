@@ -19,33 +19,36 @@
 \BOOKMARK [2][-]{subsection.2.13}{Use-Case Betreuungstage eintragen}{section.2}% 19
 \BOOKMARK [2][-]{subsection.2.14}{Use-Case Kontaktliste einsehen}{section.2}% 20
 \BOOKMARK [2][-]{subsection.2.15}{Use-Case Kinderstammblatt einsehen }{section.2}% 21
-\BOOKMARK [2][-]{subsection.2.16}{Use-Case Tagesplaner einsehen}{section.2}% 22
-\BOOKMARK [2][-]{subsection.2.17}{Use-Case Aufgaben der Eltern eintragen}{section.2}% 23
-\BOOKMARK [2][-]{subsection.2.18}{Use-Case Auditlog einsehen}{section.2}% 24
-\BOOKMARK [2][-]{subsection.2.19}{Use-Case Bring- und Abholzeiten eintragen}{section.2}% 25
-\BOOKMARK [2][-]{subsection.2.20}{Use-Case Abwesenheit eintragen}{section.2}% 26
-\BOOKMARK [2][-]{subsection.2.21}{Use-Case Mittagessen anmelden/abmelden}{section.2}% 27
-\BOOKMARK [2][-]{subsection.2.22}{Use-Case Eigene Daten bearbeiten}{section.2}% 28
-\BOOKMARK [2][-]{subsection.2.23}{Use-Case Benachrichtigungen einsehen und bearbeiten}{section.2}% 29
-\BOOKMARK [2][-]{subsection.2.24}{Use-Case Messageboard \366ffnen \(SF\)}{section.2}% 30
-\BOOKMARK [2][-]{subsection.2.25}{Use-Case Nachricht auf Messageboard posten \(SF\)}{section.2}% 31
-\BOOKMARK [2][-]{subsection.2.26}{Use-Case Privatnachricht senden \(SF\)}{section.2}% 32
-\BOOKMARK [2][-]{subsection.2.27}{Use-Case Bildergalerie \366ffnen \(SF\)}{section.2}% 33
-\BOOKMARK [2][-]{subsection.2.28}{Use-Case Bilder kommentieren \(SF\)}{section.2}% 34
-\BOOKMARK [2][-]{subsection.2.29}{Use-Case Personen suchen}{section.2}% 35
-\BOOKMARK [1][-]{section.3}{Klassendiagramm}{}% 36
-\BOOKMARK [2][-]{subsection.3.1}{Klassendiagramm}{section.3}% 37
-\BOOKMARK [2][-]{subsection.3.2}{Child}{section.3}% 38
-\BOOKMARK [2][-]{subsection.3.3}{Employee}{section.3}% 39
-\BOOKMARK [2][-]{subsection.3.4}{Nursery}{section.3}% 40
-\BOOKMARK [2][-]{subsection.3.5}{User}{section.3}% 41
-\BOOKMARK [1][-]{section.4}{Software Stack}{}% 42
-\BOOKMARK [2][-]{subsection.4.1}{Spring Framework}{section.4}% 43
-\BOOKMARK [2][-]{subsection.4.2}{Prime Faces/ CSS}{section.4}% 44
-\BOOKMARK [2][-]{subsection.4.3}{H2}{section.4}% 45
-\BOOKMARK [1][-]{section.5}{GUI-Prototypen}{}% 46
-\BOOKMARK [2][-]{subsection.5.1}{Loginseite}{section.5}% 47
-\BOOKMARK [2][-]{subsection.5.2}{Templateseite}{section.5}% 48
-\BOOKMARK [1][-]{section.6}{Projektplan}{}% 49
-\BOOKMARK [2][-]{subsection.6.1}{Arbeitsaufteilung}{section.6}% 50
-\BOOKMARK [2][-]{subsection.6.2}{Meilensteine}{section.6}% 51
+\BOOKMARK [2][-]{subsection.2.16}{Use-Case Kinderstammblatt bearbeiten \(Eltern\)}{section.2}% 22
+\BOOKMARK [2][-]{subsection.2.17}{Use-Case Tagesplaner einsehen}{section.2}% 23
+\BOOKMARK [2][-]{subsection.2.18}{Use-Case Aufgaben der Eltern eintragen}{section.2}% 24
+\BOOKMARK [2][-]{subsection.2.19}{Use-Case Auditlog einsehen}{section.2}% 25
+\BOOKMARK [2][-]{subsection.2.20}{Use-Case Bring- und Abholzeiten eintragen}{section.2}% 26
+\BOOKMARK [2][-]{subsection.2.21}{Use-Case Abwesenheit eintragen}{section.2}% 27
+\BOOKMARK [2][-]{subsection.2.22}{Use-Case Mittagessen anmelden/abmelden}{section.2}% 28
+\BOOKMARK [2][-]{subsection.2.23}{Use-Case Eigene Daten bearbeiten}{section.2}% 29
+\BOOKMARK [2][-]{subsection.2.24}{Use-Case Benachrichtigungen einsehen und bearbeiten}{section.2}% 30
+\BOOKMARK [2][-]{subsection.2.25}{Use-Case Messageboard \366ffnen \(Sonderfunktion\)}{section.2}% 31
+\BOOKMARK [2][-]{subsection.2.26}{Use-Case Nachricht auf Messageboard posten \(Sonderfunktion\)}{section.2}% 32
+\BOOKMARK [2][-]{subsection.2.27}{Use-Case Privatnachricht senden \(Sonderfunktion\)}{section.2}% 33
+\BOOKMARK [2][-]{subsection.2.28}{Use-Case Bildergalerie \366ffnen \(Sonderfunktion\)}{section.2}% 34
+\BOOKMARK [2][-]{subsection.2.29}{Use-Case Bilder kommentieren \(Sonderfunktion\)}{section.2}% 35
+\BOOKMARK [2][-]{subsection.2.30}{Use-Case Personen suchen}{section.2}% 36
+\BOOKMARK [1][-]{section.3}{Klassendiagramm}{}% 37
+\BOOKMARK [2][-]{subsection.3.1}{Klassendiagramm}{section.3}% 38
+\BOOKMARK [2][-]{subsection.3.2}{Child}{section.3}% 39
+\BOOKMARK [2][-]{subsection.3.3}{Employee}{section.3}% 40
+\BOOKMARK [2][-]{subsection.3.4}{Nursery}{section.3}% 41
+\BOOKMARK [2][-]{subsection.3.5}{User}{section.3}% 42
+\BOOKMARK [1][-]{section.4}{Software Stack}{}% 43
+\BOOKMARK [2][-]{subsection.4.1}{Spring Framework}{section.4}% 44
+\BOOKMARK [2][-]{subsection.4.2}{Prime Faces/ CSS}{section.4}% 45
+\BOOKMARK [2][-]{subsection.4.3}{H2}{section.4}% 46
+\BOOKMARK [2][-]{subsection.4.4}{Testen}{section.4}% 47
+\BOOKMARK [2][-]{subsection.4.5}{Version Control}{section.4}% 48
+\BOOKMARK [1][-]{section.5}{GUI-Prototypen}{}% 49
+\BOOKMARK [2][-]{subsection.5.1}{Loginseite}{section.5}% 50
+\BOOKMARK [2][-]{subsection.5.2}{Templateseite}{section.5}% 51
+\BOOKMARK [1][-]{section.6}{Projektplan}{}% 52
+\BOOKMARK [2][-]{subsection.6.1}{Arbeitsaufteilung}{section.6}% 53
+\BOOKMARK [2][-]{subsection.6.2}{Meilensteine}{section.6}% 54
