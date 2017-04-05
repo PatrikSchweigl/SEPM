@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.30)  3 APR 2017 10:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.6.30)  5 APR 2017 02:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -966,18 +966,19 @@ Overfull \hbox (113.10338pt too wide) in paragraph at lines 5--6
  []
 
 [37] [38 <./component/Komponentendiagramm.png>]) (./gui/gui.tex [39]
-<pictures/Login.png, id=791, 1120.185pt x 700.6175pt>
-File: pictures/Login.png Graphic file (type png)
- <use pictures/Login.png>
-Package pdftex.def Info: pictures/Login.png used on input line 8.
-(pdftex.def)             Requested size: 426.79134pt x 266.9323pt.
+<pictures/Login.PNG, id=791, 1055.44313pt x 591.71063pt>
+File: pictures/Login.PNG Graphic file (type png)
+
+<use pictures/Login.PNG>
+Package pdftex.def Info: pictures/Login.PNG used on input line 8.
+(pdftex.def)             Requested size: 426.79134pt x 239.27132pt.
 
 Overfull \hbox (81.79134pt too wide) in paragraph at lines 8--9
 [][] 
  []
 
-[40 <./pictures/Login.png>]
-<pictures/Template.png, id=796, 1118.1775pt x 701.62125pt>
+[40 <./pictures/Login.PNG>]
+<pictures/Template.png, id=797, 1118.1775pt x 701.62125pt>
 File: pictures/Template.png Graphic file (type png)
 
 <use pictures/Template.png>
@@ -994,7 +995,7 @@ Overfull \hbox (6.12091pt too wide) in paragraph at lines 15--16
 Ste-fan Mat-ters-ber-ger, Ema-
  []
 
-[42] <pictures/Zeitplanneu.PNG, id=814, 398.99063pt x 1169.87062pt>
+[42] <pictures/Zeitplanneu.PNG, id=815, 398.99063pt x 1169.87062pt>
 File: pictures/Zeitplanneu.PNG Graphic file (type png)
 
 <use pictures/Zeitplanneu.PNG>
@@ -1024,9 +1025,9 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on konzept_ASN_finalversion.pdf (44 pages, 1465379 bytes).
+Output written on konzept_ASN_finalversion.pdf (44 pages, 1103717 bytes).
 PDF statistics:
- 937 PDF objects out of 1000 (max. 8388607)
+ 938 PDF objects out of 1000 (max. 8388607)
  869 compressed objects within 9 object streams
  453 named destinations out of 1000 (max. 500000)
  439 words of extra memory for PDF output out of 10000 (max. 10000000)
