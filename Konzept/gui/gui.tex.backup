@@ -5,10 +5,17 @@ Die Templateseite unterscheidet sich minimal bei den unterschiedlichen Akteuren 
 
 \subsection{Loginseite}
  \begin{figure}[ht!]
-  \includegraphics[width = 150mm]{pictures/Login.png}
+  \includegraphics[width = 150mm]{pictures/Login.PNG}
  \end{figure}
  
- \subsection{Templateseite}
+ \newpage
+ \subsection{Templateseite Elternteil}
  \begin{figure}[ht!]
-  \includegraphics[width = 150mm]{pictures/Template.png}
+  \includegraphics[width = 150mm]{pictures/Grundstellung_Elternteil.PNG}
  \end{figure}
+ 
+  \subsection{Templateseite Mitarbeiter}
+ \begin{figure}[ht!]
+  \includegraphics[width = 150mm]{pictures/Grundstellung_Mitarbeiter.PNG}
+ \end{figure}
+ 
