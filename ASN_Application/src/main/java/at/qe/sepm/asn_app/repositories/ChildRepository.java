@@ -7,4 +7,5 @@ import at.qe.sepm.asn_app.models.child.Child;
  * on 20.03.2017.
  */
 public interface ChildRepository extends AbstractRepository<Child, Long> {
+    Child findFirstByUsername(String username);
 }

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+//import org.joda.time.DateTime;
 import java.util.Set;
 
 /**
@@ -24,13 +24,17 @@ public class Child implements Persistable<Long>{
     private int id;
     private String firstName;
     private String lastName;
-    private Date birthday;
+    private String username;
+    //private DateTime birthday;
+    private String birthday;
     private String imgName;
     @ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
     @NotNull
-    private Parent parent1;
-    private Parent parent2;
+    //private Parent parent1;
+    private String parent1;
+    //private Parent parent2;
+    private String parent2;
     private String emergencyNumber;
     @ElementCollection(targetClass=String.class)
     private Set<String> listAllergies;
@@ -46,11 +50,22 @@ public class Child implements Persistable<Long>{
     private Set<Caregiver> cargivers;
 
 
-    public Child(String firstName, String lastName, Date birthday, String imgName, Set<String> furtherRemarks,
-                 Parent parent1, Parent parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
+    /* CONSTRUCTORS */
+    public Child() {}
+
+    public Child(String firstName, String lastName, String birthday, Religion religion) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.religion = religion;
+    }
+
+    public Child(String firstName, String lastName, String birthday, String imgName, Set<String> furtherRemarks,
+                 String parent1, String parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
                  Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = firstName + lastName;   // TODO Write a counter so children can have the same names.
         this.birthday = birthday;
         this.imgName = imgName;
         this.furtherRemarks = furtherRemarks;
@@ -82,11 +97,19 @@ public class Child implements Persistable<Long>{
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -106,20 +129,20 @@ public class Child implements Persistable<Long>{
         this.furtherRemarks = furtherRemarks;
     }
 
-    public Parent getParent1() {
+    public String getParent1() {
         return parent1;
     }
 
-    public void setParent1(Parent parent1) {
+    public void setParent1(String parent1) {
         this.parent1 = parent1;
     }
 
-    public Parent getMother() {
+    public String getParent2() {
         return parent2;
     }
 
-    public void setMother(Parent mother) {
-        this.parent2 = mother;
+    public void setParent2(String parent2) {
+        this.parent2 = parent2;
     }
 
     public Set<String> getListAllergies() {
@@ -169,14 +192,6 @@ public class Child implements Persistable<Long>{
 
     public void setEmergencyNumber(String emergencyNumber) {
         this.emergencyNumber = emergencyNumber;
-    }
-
-    public Parent getParent2() {
-        return parent2;
-    }
-
-    public void setParent2(Parent parent2) {
-        this.parent2 = parent2;
     }
 
     public Set<PairTime> getPairTime() {
