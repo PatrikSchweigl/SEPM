@@ -24,7 +24,6 @@ public class Child implements Persistable<Long>{
     private int id;
     private String firstName;
     private String lastName;
-    private String username;
     //private DateTime birthday;
     private String birthday;
     private String imgName;
@@ -65,7 +64,6 @@ public class Child implements Persistable<Long>{
                  Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = firstName + lastName;   // TODO Write a counter so children can have the same names.
         this.birthday = birthday;
         this.imgName = imgName;
         this.furtherRemarks = furtherRemarks;
@@ -95,14 +93,6 @@ public class Child implements Persistable<Long>{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getBirthday() {
