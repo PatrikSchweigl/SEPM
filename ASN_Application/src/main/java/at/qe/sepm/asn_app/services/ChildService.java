@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.services;
 
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
@@ -70,7 +70,7 @@ public class ChildService {
 
     }
 
-    private User getAuthenticatedUser() {
+    private UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }

@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.models.employee;
 
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Created by zerus on 17.03.17.
  */
 @Entity
-public class Employee extends User{
+public class Employee extends UserData {
 
     private static final long serialVersionUID = 1L;
 

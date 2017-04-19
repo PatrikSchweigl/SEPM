@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.ui.beans;
 
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class SessionInfoBean {
     /**
      * Attribute to cache the current user.
      */
-    private User currentUser;
+    private UserData currentUserData;
 
     /**
      * Returns the currently logged on user, null if no user is authenticated
@@ -33,15 +33,15 @@ public class SessionInfoBean {
      *
      * @return
      */
-    public User getCurrentUser() {
-        if (currentUser == null) {
+    public UserData getCurrentUserData() {
+        if (currentUserData == null) {
             String currentUserName = getCurrentUserName();
             if (currentUserName.isEmpty()) {
                 return null;
             }
-            currentUser = userService.loadUser(currentUserName);
+            currentUserData = userService.loadUser(currentUserName);
         }
-        return currentUser;
+        return currentUserData;
     }
 
     /**

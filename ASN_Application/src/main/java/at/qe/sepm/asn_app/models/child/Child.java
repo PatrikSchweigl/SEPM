@@ -29,8 +29,10 @@ public class Child implements Persistable<Long>{
     private String imgName;
     @ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
+    @ManyToOne(optional = false)
     private Parent parent1;
     //private String parent1;
+    @ManyToOne(optional = false)
     private Parent parent2;
    // private String parent2;
     private String emergencyNumber;
@@ -44,6 +46,7 @@ public class Child implements Persistable<Long>{
     private Set<PairTime> pairTime;
     @Enumerated(EnumType.STRING)
     private Custody custody;
+    @Enumerated(EnumType.STRING)
     private Religion religion;
     @OneToMany
     private Set<Caregiver> cargivers;

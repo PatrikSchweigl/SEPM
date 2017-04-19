@@ -1,15 +1,14 @@
 package at.qe.sepm.asn_app.services;
 
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
-import at.qe.sepm.asn_app.models.User;
 
 import java.util.Collection;
 import java.util.Date;
 
-import ch.qos.logback.core.joran.action.ActionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,7 +38,7 @@ public class UserService {
      * @return
      */
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Collection<User> getAllUsers() {
+    public Collection<UserData> getAllUsers() {
         return userRepository.findAllAdmin();
     }
 
@@ -50,37 +49,37 @@ public class UserService {
      * @return the user with the given username
      */
     @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
-    public User loadUser(String username) {
+    public UserData loadUser(String username) {
         return userRepository.findFirstByUsername(username);
     }
 
     /**
-     * Saves the user.
+     * Saves the userData.
      *
-     * @param user the user to save
-     * @return the updated user
+     * @param userData the userData to save
+     * @return the updated userData
      */
     @PreAuthorize("hasAuthority('ADMIN')")
-    public User saveUser(User user) {
+    public UserData saveUser(UserData userData) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword( passwordEncoder.encode(user.getPassword()));
-        user.setUserRole(UserRole.ADMIN);
-        return userRepository.save(user);
+        userData.setPassword( passwordEncoder.encode(userData.getPassword()));
+        userData.setUserRole(UserRole.ADMIN);
+        return userRepository.save(userData);
     }
 
     /**
-     * Deletes the user.
+     * Deletes the userData.
      *
-     * @param user the user to delete
+     * @param userData the userData to delete
      */
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteUser(User user) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ user.getUsername() + " [" + user.getUserRole() +"]", new Date());
+    public void deleteUser(UserData userData) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ userData.getUsername() + " [" + userData.getUserRole() +"]", new Date());
         auditLogRepository.save(log);
-        userRepository.delete(user);
+        userRepository.delete(userData);
     }
 
-    private User getAuthenticatedUser() {
+    private UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }

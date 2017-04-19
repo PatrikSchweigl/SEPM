@@ -1,8 +1,6 @@
 package at.qe.sepm.asn_app.models;
 
-import java.util.Date;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.*;
 
 import org.springframework.data.domain.Persistable;
@@ -12,7 +10,7 @@ import org.springframework.data.domain.Persistable;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements Persistable<Long> {
+public class UserData implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -25,7 +23,7 @@ public class User implements Persistable<Long> {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    public User(String password, String username, String firstName, String lastName, UserRole userRole) {
+    public UserData(String password, String username, String firstName, String lastName, UserRole userRole) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
@@ -33,7 +31,7 @@ public class User implements Persistable<Long> {
         this.userRole = userRole;
     }
 
-    public User(){
+    public UserData(){
 
     }
 
@@ -89,10 +87,10 @@ public class User implements Persistable<Long> {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof User)) {
+        if (!(obj instanceof UserData)) {
             return false;
         }
-        final User other = (User) obj;
+        final UserData other = (UserData) obj;
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
@@ -101,7 +99,7 @@ public class User implements Persistable<Long> {
 
     @Override
     public String toString() {
-        return "User[ id=" + username + " ]";
+        return "UserData[ id=" + username + " ]";
     }
 
     @Override
