@@ -15,7 +15,6 @@ public class Employee extends User{
 
     private static final long serialVersionUID = 1L;
 
-
     private String birthday;
     private String location;
     private String streetName;
