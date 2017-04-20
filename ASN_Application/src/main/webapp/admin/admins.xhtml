@@ -10,43 +10,43 @@
             <p:commandButton oncomplete="PF('userCreateDialog').show()" value="+ Admin"  style="align-items:right;"/>
         </div>
         <h:form id="userForm">
-            <p:dataTable id="usersTable" var="user" value="#{userListController.users}">
+            <p:dataTable id="usersTable" var="userData" value="#{userListController.users}">
                 <p:column headerText="Username">
-                    <h:outputText value="#{user.username}"/>
+                    <h:outputText value="#{userData.username}"/>
                 </p:column>
                 <p:column headerText="First Name">
-                    <h:outputText value="#{user.firstName}"/>
+                    <h:outputText value="#{userData.firstName}"/>
                 </p:column>
                 <p:column headerText="Last Name">
-                    <h:outputText value="#{user.lastName}"/>
+                    <h:outputText value="#{userData.lastName}"/>
                 </p:column>
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton update=":userForm:userEditDialog" oncomplete="PF('userEditDialog').show()" icon="ui-icon-note" title="Edit">
-                        <f:setPropertyActionListener value="#{user}" target="#{userDetailController.user}" />
+                        <f:setPropertyActionListener value="#{userData}" target="#{userDetailController.userData}" />
                     </p:commandButton>
                     <p:commandButton action="#{userDetailController.doDeleteUser}" icon="ui-icon-trash" title="Delete" update=":userForm:usersTable">
-                        <f:setPropertyActionListener value="#{user}" target="#{userDetailController.user}" />
-                        <p:confirm header="Confirmation" message="Are you sure that you want to delete this user? You cannot undo this operation." icon="ui-icon-alert" />
+                        <f:setPropertyActionListener value="#{userData}" target="#{userDetailController.userData}" />
+                        <p:confirm header="Confirmation" message="Are you sure that you want to delete this userData? You cannot undo this operation." icon="ui-icon-alert" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
 
 
-            <!-- Edit User Dialog -->
+            <!-- EUserDataUser Dialog -->
             <p:dialog header="Edit User" id="userEditDialog" widgetVar="userEditDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                <p:outputPanel id="userData" rendered="#{not empty userDetailController.user}">
+                <p:outputPanel id="userData" rendered="#{not empty userDetailController.userData}">
                     <h:panelGrid columns="2">
                         <p:outputLabel for="userName" value="Username: " />
-                        <p:inputText id="userName" value="#{userDetailController.user.username}" disabled="true"/>
+                        <p:inputText id="userName" value="#{userDetailController.userData.username}" disabled="true"/>
                         <p:outputLabel for="passWord" value="Password: " />
-                        <p:password id="passWord" value="#{userDetailController.user.password}" disabled="true"/>
+                        <p:password id="passWord" value="#{userDetailController.userData.password}" disabled="true"/>
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="2">
                         <p:outputLabel for="firstName" value="First Name: " />
-                        <p:inputText id="firstName" value="#{userDetailController.user.firstName}"/>
+                        <p:inputText id="firstName" value="#{userDetailController.userData.firstName}"/>
                         <p:outputLabel for="firstName" value="Last Name: " />
-                        <p:inputText id="lastName" value="#{userDetailController.user.lastName}"/>
+                        <p:inputText id="lastName" value="#{userDetailController.userData.lastName}"/>
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="3">
@@ -63,16 +63,16 @@
                 <p:outputPanel id="userDataCreate">
                     <h:panelGrid columns="2">
                         <p:outputLabel for="username" value="Username: " />
-                        <p:inputText id="username" value="#{userAddController.user.username}"/>
+                        <p:inputText id="username" value="#{userAddController.userData.username}"/>
                         <p:outputLabel for="password" value="Password: " />
-                        <p:password id="password" value="#{userAddController.user.password}"/>
+                        <p:password id="password" value="#{userAddController.userData.password}"/>
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="2">
                         <p:outputLabel for="firstname" value="First Name: " />
-                        <p:inputText id="firstname" value="#{userAddController.user.firstName}"/>
+                        <p:inputText id="firstname" value="#{userAddController.userData.firstName}"/>
                         <p:outputLabel for="lastname" value="Last Name: " />
-                        <p:inputText id="lastname" value="#{userAddController.user.lastName}"/>
+                        <p:inputText id="lastname" value="#{userAddController.userData.lastName}"/>
                     </h:panelGrid>
                     <p:separator />
                     <h:panelGrid columns="3">

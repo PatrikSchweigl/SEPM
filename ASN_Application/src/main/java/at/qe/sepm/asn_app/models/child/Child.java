@@ -29,11 +29,12 @@ public class Child implements Persistable<Long>{
     private String imgName;
     @ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
-    @NotNull
-    //private Parent parent1;
-    private String parent1;
-    //private Parent parent2;
-    private String parent2;
+    @ManyToOne(optional = false)
+    private Parent parent1;
+    //private String parent1;
+    @ManyToOne(optional = false)
+    private Parent parent2;
+   // private String parent2;
     private String emergencyNumber;
     @ElementCollection(targetClass=String.class)
     private Set<String> listAllergies;
@@ -43,7 +44,9 @@ public class Child implements Persistable<Long>{
     private Set<Sibling> listSiblings;
     @OneToMany
     private Set<PairTime> pairTime;
+    @Enumerated(EnumType.STRING)
     private Custody custody;
+    @Enumerated(EnumType.STRING)
     private Religion religion;
     @OneToMany
     private Set<Caregiver> cargivers;
@@ -60,7 +63,7 @@ public class Child implements Persistable<Long>{
     }
 
     public Child(String firstName, String lastName, String birthday, String imgName, Set<String> furtherRemarks,
-                 String parent1, String parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
+                 Parent parent1, Parent parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
                  Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -119,19 +122,19 @@ public class Child implements Persistable<Long>{
         this.furtherRemarks = furtherRemarks;
     }
 
-    public String getParent1() {
+    public Parent getParent1() {
         return parent1;
     }
 
-    public void setParent1(String parent1) {
+    public void setParent1(Parent parent1) {
         this.parent1 = parent1;
     }
 
-    public String getParent2() {
+    public Parent getParent2() {
         return parent2;
     }
 
-    public void setParent2(String parent2) {
+    public void setParent2(Parent parent2) {
         this.parent2 = parent2;
     }
 

@@ -2,9 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.services.ChildService;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -31,7 +29,7 @@ public class ChildController {
     }
 
     public void doReloadUser() {
-        child = childService.loadUser(child.getUsername());
+        child = childService.loadUser(null);
     }
 
     @PostConstruct

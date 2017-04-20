@@ -34,7 +34,7 @@ public class SessionInfoBeanTest {
     public void testLoggedIn() {
         Assert.assertTrue("sessionInfoBean.isLoggedIn does not return true for authenticated user", sessionInfoBean.isLoggedIn());
         Assert.assertEquals("sessionInfoBean.getCurrentUserName does not return authenticated user's name", "user1", sessionInfoBean.getCurrentUserName());
-        Assert.assertEquals("sessionInfoBean.getCurrentUser does not return authenticated user", "user1", sessionInfoBean.getCurrentUser().getUsername());
+        Assert.assertEquals("sessionInfoBean.getCurrentUserData does not return authenticated user", "user1", sessionInfoBean.getCurrentUserData().getUsername());
         Assert.assertEquals("sessionInfoBean.getCurrentUserRoles does not return authenticated user's roles", "EMPLOYEE", sessionInfoBean.getCurrentUserRoles());
         Assert.assertTrue("sessionInfoBean.hasRole does not return true for a role the authenticated user has", sessionInfoBean.hasRole("EMPLOYEE"));
         Assert.assertFalse("sessionInfoBean.hasRole does not return false for a role the authenticated user does not have", sessionInfoBean.hasRole("ADMIN"));
@@ -44,7 +44,7 @@ public class SessionInfoBeanTest {
     public void testNotLoggedIn() {
         Assert.assertFalse("sessionInfoBean.isLoggedIn does return true for not authenticated user", sessionInfoBean.isLoggedIn());
         Assert.assertEquals("sessionInfoBean.getCurrentUserName does not return empty string when not logged in", "", sessionInfoBean.getCurrentUserName());
-        Assert.assertNull("sessionInfoBean.getCurrentUser does not return null when not logged in", sessionInfoBean.getCurrentUser());
+        Assert.assertNull("sessionInfoBean.getCurrentUserData does not return null when not logged in", sessionInfoBean.getCurrentUserData());
         Assert.assertEquals("sessionInfoBean.getCurrentUserRoles does not return empty string when not logged in", "", sessionInfoBean.getCurrentUserRoles());
         for (UserRole role : UserRole.values()) {
             Assert.assertFalse("sessionInfoBean.hasRole does not return false for all possible roales", sessionInfoBean.hasRole(role.name()));

@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -20,21 +20,21 @@ public class UserAddController {
     @Autowired
     private UserService userService;
 
-    private User user;
+    private UserData userData;
 
 
     @PostConstruct
     public void initNewUser() {
-        this.user = new User();
+        this.userData = new UserData();
     }
 
-    public User getUser() {
-        return user;
+    public UserData getUserData() {
+        return userData;
     }
 
     public void doSaveUser() {
-        user = userService.saveUser(user);
-        user = null;
+        userData = userService.saveUser(userData);
+        userData = null;
         initNewUser();
     }
 

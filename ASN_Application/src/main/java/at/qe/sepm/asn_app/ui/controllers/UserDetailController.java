@@ -1,13 +1,13 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * Controller for the user detail view.
+ * Controller for the userData detail view.
  *
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
@@ -19,52 +19,52 @@ public class UserDetailController {
     private UserService userService;
 
     /**
-     * Attribute to cache the currently displayed user
+     * Attribute to cache the currently displayed userData
      */
-    private User user;
+    private UserData userData;
 
     /**
-     * Sets the currently displayed user and reloads it form db. This user is
+     * Sets the currently displayed userData and reloads it form db. This userData is
      * targeted by any further calls of
      * {@link #doReloadUser()}, {@link #doSaveUser()} and
      * {@link #doDeleteUser()}.
      *
-     * @param user
+     * @param userData
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserData(UserData userData) {
+        this.userData = userData;
         doReloadUser();
     }
 
     /**
-     * Returns the currently displayed user.
+     * Returns the currently displayed userData.
      *
      * @return
      */
-    public User getUser() {
-        return user;
+    public UserData getUserData() {
+        return userData;
     }
 
     /**
-     * Action to force a reload of the currently displayed user.
+     * Action to force a reload of the currently displayed userData.
      */
     public void doReloadUser() {
-        user = userService.loadUser(user.getUsername());
+        userData = userService.loadUser(userData.getUsername());
     }
 
     /**
-     * Action to save the currently displayed user.
+     * Action to save the currently displayed userData.
      */
     public void doSaveUser() {
-        user = this.userService.saveUser(user);
+        userData = this.userService.saveUser(userData);
     }
 
     /**
-     * Action to delete the currently displayed user.
+     * Action to delete the currently displayed userData.
      */
     public void doDeleteUser() {
-        this.userService.deleteUser(user);
-        user = null;
+        this.userService.deleteUser(userData);
+        userData = null;
     }
 
 }

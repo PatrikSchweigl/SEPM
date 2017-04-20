@@ -2,11 +2,10 @@ package at.qe.sepm.asn_app.models.referencePerson;
 
 
 
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
-import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,7 +15,7 @@ import java.util.Set;
  * Created by zerus on 17.03.17.
  */
 @Entity
-public class Parent extends User{
+public class Parent extends UserData {
     private static final long serialVersionUID = 1L;
 
     private String imgName;

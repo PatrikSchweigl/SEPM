@@ -55,11 +55,6 @@
     <dependencies>
         <!-- joda time-->
         <!--Warning: this include does not work yet! The library must be included via the project structure!-->
-        <dependency>
-            <groupId>org.joda.time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.9</version>
-        </dependency>
 
 		<dependency>
    			<groupId>org.primefaces.themes</groupId>
@@ -134,6 +129,11 @@
             <artifactId>equalsverifier</artifactId>
             <version>2.1.6</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
         </dependency>
 
     </dependencies>

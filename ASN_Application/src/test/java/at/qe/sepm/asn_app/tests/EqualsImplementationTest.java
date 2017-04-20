@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.tests;
 
-import at.qe.sepm.asn_app.models.User;
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -17,11 +17,11 @@ public class EqualsImplementationTest {
 
     @Test
     public void testUserEqualsContract() {
-        User user1 = new User();
-        user1.setUsername("user2");
-        User user2 = new User();
-        user2.setUsername("user2");
-        EqualsVerifier.forClass(User.class).withPrefabValues(User.class, user1, user2).suppress(Warning.STRICT_INHERITANCE, Warning.ALL_FIELDS_SHOULD_BE_USED).verify();
+        UserData userData1 = new UserData();
+        userData1.setUsername("userData2");
+        UserData userData2 = new UserData();
+        userData2.setUsername("userData2");
+        EqualsVerifier.forClass(UserData.class).withPrefabValues(UserData.class, userData1, userData2).suppress(Warning.STRICT_INHERITANCE, Warning.ALL_FIELDS_SHOULD_BE_USED).verify();
     }
 
     @Test
