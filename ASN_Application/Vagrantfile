@@ -6,6 +6,7 @@ Vagrant.configure(2) do |config|
   end
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update -y
+	apt-get install default-jdk -y
     apt-get install -y curl unzip maven --force-yes
 	apt-get -y install mysql-server-5.7
 	apt-get -y install mysql-client-core-5.7
