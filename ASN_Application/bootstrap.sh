@@ -15,6 +15,4 @@ mysql -u root -pasnTeam1 <<EOFMYSQL
 CREATE DATABASE asndb;
 quit
 EOFMYSQL
-cd /vagrant
-mvn spring-boot:run
 
