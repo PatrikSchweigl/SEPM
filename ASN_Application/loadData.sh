@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 mysql -u root -pasnTeam1 <<EOFMYSQL
 USE asndb;
