@@ -53,7 +53,7 @@ public class ChildService {
 
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
-    public Collection<Child> getAllChilds(){
+    public Collection<Child> getAllChildren(){
         return childRepository.findAll();
     }
 

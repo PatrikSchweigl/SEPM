@@ -8,12 +8,10 @@
     <ui:define name ="content">
         <div align="right" style="margin-bottom:10px;">
             <p:commandButton oncomplete="PF('childAddDialog').show()" value="+ child"  style="align-items:right;"/>
-        </div>
+        </div
+
         <h:form id="childForm">
-            <p:dataTable id="childTable" var="child" value="#{childController.childs}">
-                <p:column headerText="Username">
-                    <h:outputText value="#{child.username}"/>
-                </p:column>
+            <p:dataTable id="childTable" var="child" value="#{childController.children}">
                 <p:column headerText="First Name">
                     <h:outputText value="#{child.firstName}"/>
                 </p:column>
@@ -48,9 +46,9 @@
                         <p:outputLabel for="birthday" value="Birthdate: " />
                         <p:inputMask mask="99/99/9999" id="birthday" value="#{childController.child.birthday}"/>
                         <p:outputLabel for="parent1" value="Parent1: " />
-                        <p:inputText id="parent1" value="#{childController.child.parent1}"/>
+                        <p:inputText id="parent1" value="#{childController.child.parent1.id}"/>
                         <p:outputLabel for="parent2" value="Parent2: " />
-                        <p:inputText id="parent2" value="#{childController.child.parent2}"/>
+                        <p:inputText id="parent2" value="#{childController.child.parent2.id}"/>
                         <p:outputLabel for="emergencyNumber" value="EmergencyNumber: " />
                         <p:inputText id="emergencyNumber" value="#{childController.child.emergencyNumber}"/>
                     </h:panelGrid>
@@ -75,11 +73,6 @@
             <!-- Edit child Dialog -->
             <p:dialog header="Edit child" id="childEditDialog" widgetVar="childEditDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="childDataEdit" rendered="#{not empty childEditController.child}">
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="userName" value="Username: " />
-                        <p:inputText id="userName" value="#{childEditController.child.username}" disabled="true"/>
-                    </h:panelGrid>
-                    <p:separator />
                     <h:panelGrid columns="6">
                         <p:outputLabel for="firstName" value="First Name: " />
                         <p:inputText id="firstName" value="#{childEditController.child.firstName}"/>
