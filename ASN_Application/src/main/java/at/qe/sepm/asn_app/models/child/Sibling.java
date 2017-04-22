@@ -21,12 +21,12 @@ public class Sibling implements Persistable<Long> {
     private int id;
     private String firstName;
     private String lastName;
-    private String age;
+    private String birthday;
 
-    public Sibling(String firstName, String lastName, String age) {
+    public Sibling(String firstName, String lastName, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.birthday = birthday;
     }
 
 
@@ -46,12 +46,12 @@ public class Sibling implements Persistable<Long> {
         this.lastName = lastName;
     }
 
-    public String getAge() {
-        return age;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     @Override

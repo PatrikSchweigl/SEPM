@@ -41,8 +41,8 @@ public class ChildController {
         return child;
     }
 
-    public Collection<Child> getChilds(){
-        return childService.getAllChilds();
+    public Collection<Child> getChildren(){
+        return childService.getAllChildren();
     }
 
     public void doSaveChild(){
