@@ -1,0 +1,164 @@
+html {
+	font-size: 10px;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+*::after, *::before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	main, menu, nav, section, summary {
+	display: block;
+}
+
+.pull-left {
+	float: left !important;
+}
+
+.img-circle {
+	border-radius: 50%;
+}
+
+img {
+	vertical-align: middle;
+}
+
+img {
+	border: 0;
+}
+
+p {
+	margin: 0 0 10px;
+}
+
+a {
+	color: #337ab7;
+	text-decoration: none;
+}
+
+a {
+	background-color: transparent;
+}
+
+.text-success {
+	color: #3c763d;
+}
+
+ol, ul {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.navbar-nav>li>a {
+	line-height: 20px;
+}
+
+a:focus, a:hover {
+	color: #23527c;
+}
+
+a {
+	color: #337ab7;
+}
+
+.nav {
+	list-style: none;
+}
+.navbar-nav {
+    margin: 7.5px -15px;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.navbar-nav>li>a {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.navbar-nav>li>a {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	line-height: 20px;
+}
+
+.nav>li>a {
+	position: relative;
+	display: block;
+	padding: 10px 25px;
+}
+
+.navbar-nav>li {
+	float: left;
+}
+
+.nav>li {
+	position: relative;
+	display: block;
+}
+
+.dropdown, .dropup {
+	position: relative;
+}
+
+.label-danger {
+    background-color: #d9534f;
+}
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.navbar-nav > li > a {
+    line-height: 20px;
+}
+
+.btn-group-vertical>.btn-group::after, .btn-toolbar::after, .clearfix::after,
+	.container-fluid::after, .container::after, .dl-horizontal dd::after,
+	.form-horizontal .form-group::after, .modal-footer::after, .nav::after,
+	.navbar-collapse::after, .navbar-header::after, .navbar::after, .pager::after,
+	.panel-body::after, .row::after {
+	clear: both;
+}
+
+.btn-group-vertical>.btn-group::after, .btn-group-vertical>.btn-group::before,
+	.btn-toolbar::after, .btn-toolbar::before, .clearfix::after, .clearfix::before,
+	.container-fluid::after, .container-fluid::before, .container::after,
+	.container::before, .dl-horizontal dd::after, .dl-horizontal dd::before,
+	.form-horizontal .form-group::after, .form-horizontal .form-group::before,
+	.modal-footer::after, .modal-footer::before, .nav::after, .nav::before,
+	.navbar-collapse::after, .navbar-collapse::before, .navbar-header::after,
+	.navbar-header::before, .navbar::after, .navbar::before, .pager::after,
+	.pager::before, .panel-body::after, .panel-body::before, .row::after,
+	.row::before {
+	display: table;
+	content: " ";
+}
