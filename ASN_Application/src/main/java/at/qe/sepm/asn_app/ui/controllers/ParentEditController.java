@@ -1,0 +1,43 @@
+package at.qe.sepm.asn_app.ui.controllers;
+
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.services.ParentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
+ * on 24.03.2017
+ */
+@Component
+@Scope("view")
+public class ParentEditController {
+
+    @Autowired
+    private ParentService parentService;
+
+    private Parent parent;
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+        doReloadParent();
+    }
+
+    public void doReloadParent() {
+        parent = parentService.loadUser(parent.getUsername());
+    }
+
+    public void doSaveParent(){
+        parent = parentService.saveParent(parent);
+    }
+
+    public void doDeleteParent() {
+        this.parentService.deleteParent(parent);
+        parent = null;
+    }
+}

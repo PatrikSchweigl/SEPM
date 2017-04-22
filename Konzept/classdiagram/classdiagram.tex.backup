@@ -1,0 +1,12 @@
+\section{Klassendiagramm}
+\subsection{Child}
+\paragraph{Child}
+	Haupt-Klasse für alle Kinder die in der Kinderkrippe registriert sind. Zusätzlich zu Attributen wie Namen, Geburtsdatum oder Elternteile sind in dieser Klasse auch Informationen zu Allergien, Nahrungsmittelunverträglichkeiten oder Geschwistern vorhanden. 
+\paragraph{Absence}
+	Wenn ein Kind an einem regulären Tag von der Kinderkrippe fernbleibt muss dieser Verbleib in dieser Klasse festgehalten werden. Dafür wird der Grund in Form eines Strings abgespeichter und zusätzlich nocht das Kind selber und das Datum der Abwesenheit notiert.
+\paragraph{Custody}
+	Gibt an welche Elternteile (Vater, Mutter oder beide) für die Obhut eines Kindes verantwortlich sind. 
+\paragraph{Pairtime}
+	Diese Klasse besteht aus einem Paar von java.util.Date. Wir haben diese Klasse erstellt um zum Beispiel Abhol- und Bringzeiten klar darstellen zu können. 
+\paragraph{Sibling}
+	Sibling ist eine kleinere Version der Child-Klasse. Jeder Bruder / Schwester ist zwar ebenfalls als Kind in der Kinderkrippe registriert, wird hier aber nur mit dem vollständigen Namen und Alter referenziert um unnötige Datenduplizierung zu vermeiden. 

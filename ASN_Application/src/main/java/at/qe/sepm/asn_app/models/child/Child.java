@@ -2,13 +2,15 @@ package at.qe.sepm.asn_app.models.child;
 
 
 import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+//import org.joda.time.DateTime;
 import java.util.Set;
+
 
 /**
  * Created by zerus on 17.03.17.
@@ -23,13 +25,17 @@ public class Child implements Persistable<Long>{
     private int id;
     private String firstName;
     private String lastName;
-    private Date birthday;
+    //private DateTime birthday;
+    private String birthday;
     private String imgName;
     @ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
-    @NotNull
+    @ManyToOne(optional = false)
     private Parent parent1;
+    //private String parent1;
+    @ManyToOne(optional = false)
     private Parent parent2;
+   // private String parent2;
     private String emergencyNumber;
     @ElementCollection(targetClass=String.class)
     private Set<String> listAllergies;
@@ -39,14 +45,27 @@ public class Child implements Persistable<Long>{
     private Set<Sibling> listSiblings;
     @OneToMany
     private Set<PairTime> pairTime;
+    @Enumerated(EnumType.STRING)
     private Custody custody;
+    @Enumerated(EnumType.STRING)
     private Religion religion;
+    @OneToMany
+    private Set<Caregiver> cargivers;
 
 
-    public Child(String firstName, String lastName, Date birthday, String imgName,
-                 Set<String> furtherRemarks, Parent parent1, Parent parent2, Set<String> listAllergies,
-                 Set<String> listFoodIntolerances, Set<Sibling> listSiblings, Custody custody,
-                 Religion religion, String emergencyNumber, Set<PairTime> pairTime) {
+    /* CONSTRUCTORS */
+    public Child() {}
+
+    public Child(String firstName, String lastName, String birthday, Religion religion) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.religion = religion;
+    }
+
+    public Child(String firstName, String lastName, String birthday, String imgName, Set<String> furtherRemarks,
+                 Parent parent1, Parent parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
+                 Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -54,13 +73,14 @@ public class Child implements Persistable<Long>{
         this.furtherRemarks = furtherRemarks;
         this.parent1 = parent1;
         this.parent2 = parent2;
+        this.emergencyNumber = emergencyNumber;
         this.listAllergies = listAllergies;
         this.listFoodIntolerances = listFoodIntolerances;
         this.listSiblings = listSiblings;
+        this.pairTime = pairTime;
         this.custody = custody;
         this.religion = religion;
-        this.emergencyNumber = emergencyNumber;
-        this.pairTime = pairTime;
+        this.cargivers = cargivers;
     }
 
     public String getFirstName() {
@@ -79,11 +99,11 @@ public class Child implements Persistable<Long>{
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -111,12 +131,12 @@ public class Child implements Persistable<Long>{
         this.parent1 = parent1;
     }
 
-    public Parent getMother() {
+    public Parent getParent2() {
         return parent2;
     }
 
-    public void setMother(Parent mother) {
-        this.parent2 = mother;
+    public void setParent2(Parent parent2) {
+        this.parent2 = parent2;
     }
 
     public Set<String> getListAllergies() {
@@ -168,20 +188,20 @@ public class Child implements Persistable<Long>{
         this.emergencyNumber = emergencyNumber;
     }
 
-    public Parent getParent2() {
-        return parent2;
-    }
-
-    public void setParent2(Parent parent2) {
-        this.parent2 = parent2;
-    }
-
     public Set<PairTime> getPairTime() {
         return pairTime;
     }
 
     public void setPairTime(Set<PairTime> pairTime) {
         this.pairTime = pairTime;
+    }
+
+    public Set<Caregiver> getCargivers() {
+        return this.cargivers;
+    }
+
+    public void setCargivers(Set<Caregiver> cargivers) {
+        this.cargivers = cargivers;
     }
 
     @Override

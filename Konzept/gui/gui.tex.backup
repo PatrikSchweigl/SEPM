@@ -1,0 +1,21 @@
+\newpage
+\section{GUI-Prototypen}
+Im Grunde besteht das Projekt aus zwei grundlegenden Prototypen. Der Loginseite und der Templateseite f"ur alle weiteren Seiten. 
+Die Templateseite unterscheidet sich minimal bei den unterschiedlichen Akteuren durch ihre Funktionalit"at.
+
+\subsection{Loginseite}
+ \begin{figure}[ht!]
+  \includegraphics[width = 150mm]{pictures/Login.PNG}
+ \end{figure}
+ 
+ \newpage
+ \subsection{Templateseite Elternteil}
+ \begin{figure}[ht!]
+  \includegraphics[width = 150mm]{pictures/Grundstellung_Elternteil.PNG}
+ \end{figure}
+ 
+  \subsection{Templateseite Mitarbeiter}
+ \begin{figure}[ht!]
+  \includegraphics[width = 150mm]{pictures/Grundstellung_Mitarbeiter.PNG}
+ \end{figure}
+ 

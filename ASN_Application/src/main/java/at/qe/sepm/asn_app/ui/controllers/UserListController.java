@@ -1,7 +1,7 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.models.User;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Scope("view")
 public class UserListController {
 
+
     @Autowired
     private UserService userService;
 
@@ -25,7 +26,8 @@ public class UserListController {
      *
      * @return
      */
-    public Collection<User> getUsers() {
+    public Collection<UserData> getUsers() {
+
         return userService.getAllUsers();
     }
 
