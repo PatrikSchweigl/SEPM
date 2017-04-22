@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.ownExceptions.BirthdayConstraintException;
+import at.qe.sepm.asn_app.models.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.ChildRepository;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 //import java.util.Collection;
@@ -70,7 +72,7 @@ public class ChildService {
             if(!checkConstraints()) {
                 return null;
             }
-        } catch (BirthdayConstraintException e) {
+        } catch (BirthdayConstraintException | SiblingConstraintException e) {
             e.printStackTrace();
         }
 
@@ -105,7 +107,7 @@ public class ChildService {
      *
      * @return true iff no constraints are violated.
      */
-    public boolean checkConstraints() throws BirthdayConstraintException {
+    public boolean checkConstraints() throws BirthdayConstraintException, SiblingConstraintException {
         if(!checkBirthdayConstraints()) {
             return false;   // Returning false here makes no sense since we throw an exception in the method.
         }
@@ -180,13 +182,14 @@ public class ChildService {
      * A child can not have the same sibling twice or more.
      * @return iff no constraints are violated.
      */
-    public boolean checkSiblingsConstraints() {
-        Set<Sibling> setSiblings = this.child.getListSiblings();
+    public boolean checkSiblingsConstraints() throws SiblingConstraintException {
+        HashSet<Sibling> setSiblings = (HashSet) this.child.getListSiblings();
 
         // Check if the child is a sibling of itself.
         for (Sibling s : setSiblings) {
-            if(s.equals(this.child)) {
-                return false;
+            System.out.println(s.getFirstName());
+            if(s.equals(new Sibling(child.getFirstName(), child.getLastName(), child.getBirthday()))) {
+                throw new SiblingConstraintException("A child cannot be a sibling of itself.");
             }
         }
 
@@ -196,7 +199,7 @@ public class ChildService {
 
             for (Sibling s2 : setSiblings) {
                 if (s.equals(s2)) {
-                    return false;
+                    throw new SiblingConstraintException("A child cannot have the same sibling twice or more.");
                 }
             }
         }
