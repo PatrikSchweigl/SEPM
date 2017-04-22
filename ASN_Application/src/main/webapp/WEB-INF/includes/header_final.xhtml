@@ -5,7 +5,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<ui:composition>
-		<body class="theme-purple">
+	<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+		<body class="theme-yellow">
 			<div class="wrapper">
 
 				<header class="main-header">
@@ -52,12 +53,14 @@
 										<li class="header"></li>
 										<li class="footer"><a href="#"></a>Kalender öffnen</li>
 									</ul></li>
-								<li class="dropdown tasks-menu"><a href="#"
+									<ui:fragment value="Logout" url="/logout">
+								<li class="dropdown tasks-menu"><a href="/logout"
 									class="dropdown-toggle" data-toggle="dropdown"
 									aria-expanded="false"> <i class="fa fa-sign-out fa-5x"></i>
 								</a>
 									<ul class="dropdown-menu">
 									</ul></li>
+									</ui:fragment>
 							</ul>
 						</div>
 					</nav>
@@ -77,6 +80,7 @@
 			<script src="../../dist/js/app.min.js" type="text/javascript"></script>
 
 		</body>
+		</ui:fragment>
 	</ui:composition>
 </h:body>
 </html>
