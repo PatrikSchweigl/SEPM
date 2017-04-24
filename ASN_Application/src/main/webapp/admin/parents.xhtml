@@ -10,7 +10,13 @@
             <p:commandButton oncomplete="PF('parentCreateDialog').show()" value="+ Parent"  style="align-items:right;"></p:commandButton>
         </div>
         <h:form id="parentForm">
-            <p:dataTable id="parentTable" var="parent" value="#{parentController.parents}">
+            <p:dataTable id="parentTable" var="parent" value="#{parentController.parents}"
+                         rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,25,50"
+
+            >
+
                 <p:column headerText="Username">
                     <h:outputText value="#{parent.username}"/>
                 </p:column>
