@@ -14,19 +14,18 @@
                          rows="10" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="10,25,50"
-
             >
 
-                <p:column headerText="Username">
+                <p:column headerText="Username" filterBy="#{parent.username}" sortBy="#{parent.username}" filterMatchMode="contains">
                     <h:outputText value="#{parent.username}"/>
                 </p:column>
-                <p:column headerText="First Name">
+                <p:column headerText="First Name" filterBy="#{parent.firstName}" sortBy="#{parent.firstName}" filterMatchMode="contains">
                     <h:outputText value="#{parent.firstName}"/>
                 </p:column>
-                <p:column headerText="Last Name">
+                <p:column headerText="Last Name" filterBy="#{parent.lastName}" sortBy="#{parent.lastName}" filterMatchMode="contains">
                     <h:outputText value="#{parent.lastName}"/>
                 </p:column>
-                <p:column headerText="Location">
+                <p:column headerText="Location" filterBy="#{parent.location}" sortBy="#{parent.location}" filterMatchMode="contains">
                     <h:outputText value="#{parent.location}" />
                 </p:column>
                 <p:column style="width:100px;text-align: center">
