@@ -26,7 +26,15 @@
                     <h:outputText value="#{parent.lastName}"/>
                 </p:column>
                 <p:column headerText="Location" filterBy="#{parent.location}" sortBy="#{parent.location}" filterMatchMode="contains">
-                    <h:outputText value="#{parent.location}" />
+                    <h:outputText value="#{parent.location}"/>
+                </p:column>
+                <p:column headerText="Status" filterBy="#{parent.status}" sortBy="#{parent.status}" filterMatchMode="in">
+                    <f:facet name="filter">
+                        <p:selectCheckboxMenu label="Status" style="width:80px;" panelStyle="width:125px" scrollHeight="150">
+                            <f:selectItems value="#{'TODO select active/inactive'}"/>
+                        </p:selectCheckboxMenu>
+                    </f:facet>
+                    <h:outputText value="#{parent.status ? 'active' : 'inactive'}"/>
                 </p:column>
                 <p:column style="width:100px;text-align: center">
                     <p:commandButton update=":parentForm:parentEditDialog" oncomplete="PF('parentEditDialog').show()" icon="ui-icon-note" title="Edit">
