@@ -28,6 +28,7 @@ public class Caregiver implements Persistable<Long>{
     @NotNull
     private String imgName;
 
+    public Caregiver(){}
     public Caregiver(String firstName, String lastName, Relationship relationship, String imgName) {
 
         this.firstName = firstName;
@@ -52,6 +53,8 @@ public class Caregiver implements Persistable<Long>{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getFullName(){ return getLastName() + getFirstName();}
 
     public Relationship getRelationship() {
         return relationship;

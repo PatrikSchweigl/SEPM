@@ -61,6 +61,8 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public UserData saveUser(UserData userData) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"SAVED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
+        auditLogRepository.save(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userData.setPassword( passwordEncoder.encode(userData.getPassword()));
         userData.setUserRole(UserRole.ADMIN);

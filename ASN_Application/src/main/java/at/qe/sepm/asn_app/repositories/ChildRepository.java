@@ -8,4 +8,5 @@ import at.qe.sepm.asn_app.models.child.Child;
  */
 public interface ChildRepository extends AbstractRepository<Child, Long> {
 
+
 }
