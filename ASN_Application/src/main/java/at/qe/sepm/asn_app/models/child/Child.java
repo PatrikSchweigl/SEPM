@@ -50,7 +50,7 @@ public class Child implements Persistable<Long>{
     @Enumerated(EnumType.STRING)
     private Religion religion;
     @OneToMany
-    private Set<Caregiver> cargivers;
+    private Set<Caregiver> caregivers;
 
 
     /* CONSTRUCTORS */
@@ -65,7 +65,7 @@ public class Child implements Persistable<Long>{
 
     public Child(String firstName, String lastName, String birthday, String imgName, Set<String> furtherRemarks,
                  Parent parent1, Parent parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
-                 Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
+                 Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> caregivers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -80,7 +80,7 @@ public class Child implements Persistable<Long>{
         this.pairTime = pairTime;
         this.custody = custody;
         this.religion = religion;
-        this.cargivers = cargivers;
+        this.caregivers = caregivers;
     }
 
     public String getFirstName() {
@@ -196,12 +196,12 @@ public class Child implements Persistable<Long>{
         this.pairTime = pairTime;
     }
 
-    public Set<Caregiver> getCargivers() {
-        return this.cargivers;
+    public Set<Caregiver> getCaregivers() {
+        return this.caregivers;
     }
 
-    public void setCargivers(Set<Caregiver> cargivers) {
-        this.cargivers = cargivers;
+    public void setCaregivers(Set<Caregiver> caregivers) {
+        this.caregivers = caregivers;
     }
 
     @Override
