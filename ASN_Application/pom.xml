@@ -114,6 +114,17 @@
             <version>6.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.16</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
         <!-- special test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

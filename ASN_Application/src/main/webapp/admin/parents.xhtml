@@ -11,12 +11,33 @@
         </div>
         <h:form id="parentForm">
             <p:dataTable id="parentTable" var="parent" value="#{parentController.parents}"
-                         rows="10" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         paginator="true"
+                         rows="10"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                          rowsPerPageTemplate="10,25,50"
             >
 
-                <p:column headerText="Username" filterBy="#{parent.username}" sortBy="#{parent.username}" filterMatchMode="contains">
+                <f:facet name="{Exporters}">
+                    <div style="float: right; vertical-align: middle;">
+                    <h:commandLink>
+                        <p:graphicImage id="excel" name="pictures/excel.png" width="32"/><p:spacer width="7"/>
+                        <p:tooltip for="excel" showEffect="blind" hideEffect="blind" value="export excel"/>
+                        <p:dataExporter type="xls" target="parentTable" fileName="Parents" />
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage id="pdf" name="pictures/pdf.png" width="32"/><p:spacer width="7"/>
+                        <p:tooltip for="pdf" showEffect="blind" hideEffect="blind" value="export pdf"/>
+                        <p:dataExporter type="pdf" target="parentTable" fileName="Parents"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage id="csv" name="pictures/csv.png" width="32"/>
+                        <p:tooltip for="csv" showEffect="blind" hideEffect="blind" value="export csv"/>
+                        <p:dataExporter type="csv" target="parentTable" fileName="Parents" />
+                    </h:commandLink></div>
+                </f:facet>
+
+            <p:column headerText="Username" filterBy="#{parent.username}" sortBy="#{parent.username}" filterMatchMode="contains">
                     <h:outputText value="#{parent.username}"/>
                 </p:column>
                 <p:column headerText="First Name" filterBy="#{parent.firstName}" sortBy="#{parent.firstName}" filterMatchMode="contains">
@@ -36,7 +57,7 @@
                     </f:facet>
                     <h:outputText value="#{parent.status ? 'active' : 'inactive'}"/>
                 </p:column>
-                <p:column style="width:100px;text-align: center">
+                <p:column style="width:100px;text-align: center" exportable="false">
                     <p:commandButton update=":parentForm:parentEditDialog" oncomplete="PF('parentEditDialog').show()" icon="ui-icon-note" title="Edit">
                         <f:setPropertyActionListener value="#{parent}" target="#{parentEditController.parent}" />
                     </p:commandButton>
