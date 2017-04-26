@@ -63,24 +63,4 @@ public class Sibling implements Persistable<Long> {
     public boolean isNew() {
         return (null == firstName && null == lastName);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Sibling)) {
-            return false;
-        }
-
-        Sibling other = (Sibling) obj;
-        if (this.getFirstName().equals(other.getFirstName()) &&
-                this.getLastName().equals(other.getLastName()) &&
-                this.getBirthday().equals(other.getBirthday())) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 }

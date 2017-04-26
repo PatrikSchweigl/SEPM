@@ -108,34 +108,13 @@ public class childServiceTest {
     }
 
 
-    /**
-     * Test the violation of the constraint that no child can be a sibling of itself.
-     * @throws SiblingConstraintException
-     */
     @Test (expected = SiblingConstraintException.class)
     public void checkSiblingsConstraints2() throws SiblingConstraintException {
         childService.setChild(child1);
         Set<Sibling> siblingSet = new HashSet<>();
         siblingSet.add(sibling3);
         childService.getChild().setListSiblings(siblingSet);
-        childService.checkSiblingsConstraints();
     }
-
-
-    /**
-     * Test the violation of the constraint that no child can have the same sibling twice or more.
-     * @throws SiblingConstraintException
-     */
-    @Test (expected = SiblingConstraintException.class)
-    public void checkSiblingsConstraints3() throws SiblingConstraintException {
-        childService.setChild(child2);
-        Set<Sibling> siblingSet = new HashSet<>();
-        siblingSet.add(sibling1);
-        siblingSet.add(sibling3);
-        childService.getChild().setListSiblings(siblingSet);
-        childService.checkSiblingsConstraints();
-    }
-
 
     @After
     public void cleanUp() {
