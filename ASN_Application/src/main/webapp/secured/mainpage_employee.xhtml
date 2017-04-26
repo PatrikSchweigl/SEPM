@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/templates/main.xhtml">
-<h:body>
-	<ui:composition>
-		<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
-			<body class="theme-blue sidebar-mini sidebar-collapse">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
 
-				<div class="wrapper">
-					<!-- =============================================== -->
+					<div class="wrapper">
+
 
 					<!-- Left side column. contains the sidebar -->
 					<aside class="main-sidebar">
@@ -39,7 +39,7 @@
 										<span style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
 
 								</a></li>
-								<li class="treeview"><a href="#"> <i class="fa fa-users fa-3x"></i>
+								<li class="treeview"><a href="parentspage_employee.xhtml"> <i class="fa fa-users fa-3x"></i>
 										<span style="padding-left: 40px; font-size: 25px">Elternteile</span>
 
 								</a></li>
@@ -51,38 +51,26 @@
 							</ul>
 						</section>
 					</aside>
+						<!-- =============================================== -->
 
-					<!-- =============================================== -->
+						<div class="content-wrapper" style="min-height: 1126px;">
+							<section class="content">
 
-					<div class="content-wrapper" style="min-height: 1126px;">
-						<section class="content">
+								<!-- Default box -->
+								<div class="box">
+									<div class="box-body">Mainpage</div>
+								</div>
+								<!-- /.box -->
 
-							<!-- Default box -->
-							<div class="box">
-								<div class="box-body">Content</div>
-							</div>
-							<!-- /.box -->
-
-						</section>
-						<!-- /.content -->
+							</section>
+							<!-- /.content -->
+						</div>
 					</div>
 
-
-
-
-
-				</div>
-				<h:outputScript library="js" name="topbar.js" />
-
-            <h:outputScript library="js" name="login.js"/>
-            <h:outputScript library="js" name="topbar.js"/>
-            <h:outputStylesheet library="css" name="login.css" target="head" />
-            <h:outputStylesheet library="css" name="toppanel.css" target="head" />
-            <h:outputStylesheet library="css" name="themes.css" target="head" />
-            <h:outputStylesheet library="css" name="default.css" target="head" />
-			</body>
-						<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		</ui:fragment>
-	</ui:composition>
-</h:body>
+				</body>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+		</h:body>
+	</ui:define>
 </ui:composition>
