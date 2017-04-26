@@ -213,7 +213,8 @@ body {
     display: block !important;
     position: absolute;
     width: 180px;
-    left: 50px;
+    left: 80px;
+    height: 45px;
   }
   .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span {
     top: 0;
