@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * Created by root on 20.04.17.
+ * Created by Bernd Menia on 20.04.17.
  */
 public class childServiceTest {
 
