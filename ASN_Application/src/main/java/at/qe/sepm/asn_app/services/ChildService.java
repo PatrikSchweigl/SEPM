@@ -187,8 +187,8 @@ public class ChildService {
 
         // Check if the child is a sibling of itself.
         for (Sibling s : setSiblings) {
-            System.out.println(s.getFirstName());
             if(s.equals(new Sibling(child.getFirstName(), child.getLastName(), child.getBirthday()))) {
+                System.out.println("A child cannot be a sibling of itself");
                 throw new SiblingConstraintException("A child cannot be a sibling of itself.");
             }
         }
@@ -199,6 +199,7 @@ public class ChildService {
 
             for (Sibling s2 : setSiblings) {
                 if (s.equals(s2)) {
+                    System.out.println("A child cannot have the same sibling twice or more.");
                     throw new SiblingConstraintException("A child cannot have the same sibling twice or more.");
                 }
             }
