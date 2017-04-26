@@ -70,28 +70,36 @@
 
 										<p:lightBox styleClass="imagebox" id="lighbox1">
 
-											<h:outputLink value="../../resources/pictures/tiger.jpg" title="tiger">
+											<h:outputLink value="../../resources/pictures/tiger.jpg"
+												title="tiger">
 												<h:graphicImage name="pictures/tiger.jpg" id="tiger"
 													style="height: 77px; width: 100px; margin-right:20px" />
 											</h:outputLink>
 
-											<h:outputLink value="../../resources/pictures/ball.jpg" title="ball">
+											<h:outputLink value="../../resources/pictures/ball.jpg"
+												title="ball">
 												<h:graphicImage name="pictures/ball.jpg" id="ball"
 													style="height: 77px; width: 100px; margin-right:20px" />
 											</h:outputLink>
 
 
-											<h:outputLink value="../../resources/pictures/blueworld.jpg" title="blueworld">
+											<h:outputLink value="../../resources/pictures/blueworld.jpg"
+												title="blueworld">
 												<h:graphicImage name="pictures/blueworld.jpg" id="blueworld"
 													style="height: 77px; width: 100px;  margin-right:20px" />
 											</h:outputLink>
 
 
-											<h:outputLink value="../../resources/pictures/mario.jpg" title="Nature 2">
+											<h:outputLink value="../../resources/pictures/mario.jpg"
+												title="Nature 2">
 												<h:graphicImage name="pictures/mario.jpg" id="mario"
 													style="height: 77px; width: 100px;  margin-right:20px" />
 											</h:outputLink>
-											<p:draggable for="mario" />
+											<p:draggable for="mario" axis="x" />
+											<p:draggable for="blueworld" axis="x" />
+											<p:draggable for="ball" axis="x" />
+											<p:draggable for="tiger" axis="x"/>
+
 
 
 										</p:lightBox>
