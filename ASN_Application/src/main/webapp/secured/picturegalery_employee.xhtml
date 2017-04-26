@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
+
+					<div class="wrapper">
+
+
+						<!-- Left side column. contains the sidebar -->
+						<aside class="main-sidebar">
+							<!-- sidebar: style can be found in sidebar.less -->
+							<section class="sidebar" style="height: auto;">
+								<form action="#" method="get" class="sidebar-form"></form>
+								<ul class="sidebar-menu">
+									<li class="treeview"><a href="#"> <i
+											class="fa fa-home fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
+									</a></li>
+									<li class="treeview"><a href="#"> <i
+											class="fa fa-picture-o fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
+									</a></li>
+									<li><a href="#"> <i class="fa fa-sticky-note-o fa-3x"></i>
+											<span style="padding-left: 40px; font-size: 25px">Messageboard</span>
+									</a></li>
+									<li class="treeview"><a href="#"> <i
+											class="fa fa-envelope-o fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Privatnachricht</span>
+									</a></li>
+									<li class="treeview"><a href="#"> <i
+											class="fa fa-calendar fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Kalender</span>
+									</a></li>
+									<li class="treeview"><a href="#"> <i
+											class="fa fa-database fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Eigene
+												Daten</span>
+
+									</a></li>
+									<li class="treeview"><a href="parentspage_employee.xhtml">
+											<i class="fa fa-users fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Elternteile</span>
+
+									</a></li>
+									<li class="treeview"><a href="#"> <i
+											class="fa fa-edit fa-3x"></i> <span
+											style="padding-left: 40px; font-size: 25px">Einstellungen</span>
+
+									</a></li>
+
+								</ul>
+							</section>
+						</aside>
+						<!-- =============================================== -->
+
+						<div class="content-wrapper" style="min-height: 1126px;">
+							<section class="content">
+
+								<!-- Default box -->
+								<div class="box">
+									<div class="box-body">
+
+										<p:lightBox styleClass="imagebox" id="lighbox1">
+
+											<h:outputLink value="../../resources/pictures/tiger.jpg" title="tiger">
+												<h:graphicImage name="pictures/tiger.jpg" id="tiger"
+													style="height: 77px; width: 100px; margin-right:20px" />
+											</h:outputLink>
+
+											<h:outputLink value="../../resources/pictures/ball.jpg" title="ball">
+												<h:graphicImage name="pictures/ball.jpg" id="ball"
+													style="height: 77px; width: 100px; margin-right:20px" />
+											</h:outputLink>
+
+
+											<h:outputLink value="../../resources/pictures/blueworld.jpg" title="blueworld">
+												<h:graphicImage name="pictures/blueworld.jpg" id="blueworld"
+													style="height: 77px; width: 100px;  margin-right:20px" />
+											</h:outputLink>
+
+
+											<h:outputLink value="../../resources/pictures/mario.jpg" title="Nature 2">
+												<h:graphicImage name="pictures/mario.jpg" id="mario"
+													style="height: 77px; width: 100px;  margin-right:20px" />
+											</h:outputLink>
+											<p:draggable for="mario" />
+
+
+										</p:lightBox>
+									</div>
+								</div>
+								<!-- /.box -->
+
+							</section>
+							<!-- /.content -->
+						</div>
+					</div>
+
+				</body>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+		</h:body>
+	</ui:define>
+</ui:composition>
