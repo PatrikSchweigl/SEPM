@@ -67,42 +67,44 @@
 								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
+										<p:imageSwitch effect="fade" widgetVar="switcher" slideshowAuto="false">
 
-										<p:lightBox styleClass="imagebox" id="lighbox1">
+											<p:lightBox styleClass="imagebox" id="lighbox1">
+												<h:outputLink value="../../resources/pictures/tiger.jpg"
+													title="tiger">
+													<h:graphicImage class="picture" name="pictures/tiger.jpg" id="tiger"
+														 />
+												</h:outputLink>
 
-											<h:outputLink value="../../resources/pictures/tiger.jpg"
-												title="tiger">
-												<h:graphicImage name="pictures/tiger.jpg" id="tiger"
-													style="height: 77px; width: 100px; margin-right:20px" />
-											</h:outputLink>
-
-											<h:outputLink value="../../resources/pictures/ball.jpg"
-												title="ball">
-												<h:graphicImage name="pictures/ball.jpg" id="ball"
-													style="height: 77px; width: 100px; margin-right:20px" />
-											</h:outputLink>
-
-
-											<h:outputLink value="../../resources/pictures/blueworld.jpg"
-												title="blueworld">
-												<h:graphicImage name="pictures/blueworld.jpg" id="blueworld"
-													style="height: 77px; width: 100px;  margin-right:20px" />
-											</h:outputLink>
+												<h:outputLink value="../../resources/pictures/ball.jpg"
+													title="ball">
+													<h:graphicImage class="picture" name="pictures/ball.jpg" id="ball"
+														/>
+												</h:outputLink>
 
 
-											<h:outputLink value="../../resources/pictures/mario.jpg"
-												title="Nature 2">
-												<h:graphicImage name="pictures/mario.jpg" id="mario"
-													style="height: 77px; width: 100px;  margin-right:20px" />
-											</h:outputLink>
-											<p:draggable for="mario" axis="x" />
-											<p:draggable for="blueworld" axis="x" />
-											<p:draggable for="ball" axis="x" />
-											<p:draggable for="tiger" axis="x"/>
+												<h:outputLink value="../../resources/pictures/blueworld.jpg"
+													title="blueworld">
+													<h:graphicImage class="picture" name="pictures/blueworld.jpg"
+														id="blueworld"
+											/>
+												</h:outputLink>
 
 
+												<h:outputLink value="../../resources/pictures/mario.jpg"
+													title="Nature 2">
+													<h:graphicImage class="picture" name="pictures/mario.jpg" id="mario"
+											 />
+												</h:outputLink>
+												<p:draggable for="mario" axis="x" />
+												<p:draggable for="blueworld" axis="x" />
+												<p:draggable for="ball" axis="x" />
+												<p:draggable for="tiger" axis="x" />
 
-										</p:lightBox>
+
+											</p:lightBox>
+										</p:imageSwitch>
+
 									</div>
 								</div>
 								<!-- /.box -->
