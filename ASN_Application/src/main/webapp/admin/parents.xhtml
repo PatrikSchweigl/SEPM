@@ -12,9 +12,28 @@
         <h:form id="parentForm">
             <p:dataTable id="parentTable" var="parent" value="#{parentController.parents}"
                          rows="10" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                          rowsPerPageTemplate="10,25,50"
             >
+
+                <f:facet name="{Exporters}">
+                    <h:commandLink>
+                        <p:commandButton value="test"/>
+                        <p:dataExporter type="xls" target="parentTable" fileName="Parents" />
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="/resources/pictures/pdf.png" width="24"/>
+                        <p:dataExporter type="pdf" target="parentTable" fileName="Parents"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="/resources/pictures/csv.png" width="24"/>
+                        <p:dataExporter type="csv" target="parentTable" fileName="Parents" />
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="/resources/pictures/xml.png" width="24"/>
+                        <p:dataExporter type="xml" target="parentTable" fileName="Parents" />
+                    </h:commandLink>
+                </f:facet>
 
                 <p:column headerText="Username" filterBy="#{parent.username}" sortBy="#{parent.username}" filterMatchMode="contains">
                     <h:outputText value="#{parent.username}"/>
