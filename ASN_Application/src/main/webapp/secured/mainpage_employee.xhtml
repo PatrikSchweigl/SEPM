@@ -16,7 +16,7 @@
 								<section class="sidebar" style="height: auto;">
 									<form action="#" method="get" class="sidebar-form"></form>
 									<ul class="sidebar-menu">
-										<li class="treeview"><a href="#"> <i
+										<li class="treeview"><a href="mainpage_employee.xhtml"> <i
 												class="fa fa-home fa-3x"></i> <span
 												style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 										</a></li>
@@ -38,7 +38,7 @@
 												<i class="fa fa-calendar fa-3x"></i> <span
 												style="padding-left: 40px; font-size: 25px">Kalender</span>
 										</a></li>
-										<li class="treeview"><a href="#"> <i
+										<li class="treeview"><a onclick="PF('ownSettings').show()" href="#"> <i
 												class="fa fa-database fa-3x"></i> <span
 												style="padding-left: 40px; font-size: 25px">Eigene
 													Daten</span>
@@ -93,6 +93,7 @@
 								<!-- /.content -->
 							</div>
 						</div>
+						<h:form>
 						<p:dialog header="Farbeinstellung" id="colorSettings"
 							widgetVar="colorSettings" modal="true" showEffect="fade"
 							hideEffect="fade" resizable="false">
@@ -139,6 +140,17 @@
 								</ul>
 							</p:outputPanel>
 						</p:dialog>
+						</h:form>
+						<h:form>
+												<p:dialog header="Farbeinstellung" id="ownSettings"
+							widgetVar="ownSettings" modal="true" showEffect="fade"
+							hideEffect="fade" resizable="false">
+							<p:outputPanel id="parentData">
+
+
+							</p:outputPanel>
+						</p:dialog>
+						</h:form>
 					</div>
 				</body>
 
