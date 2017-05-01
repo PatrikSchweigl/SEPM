@@ -69,38 +69,7 @@
 									<div class="box">
 										<div class="box-body">
 											<h:form>
-												<p:accordionPanel multiple="true">
-													<p:tab title="Anwesende Kinder">
-														<p:dataTable id="childTable" var="child"
-															value="#{childController.children}">
-															<p:column headerText="First Name">
-																<h:outputText value="#{child.firstName}" />
-															</p:column>
-															<p:column headerText="Last Name">
-																<h:outputText value="#{child.lastName}" />
-															</p:column>
 
-
-														</p:dataTable>
-													</p:tab>
-													<p:tab title="Kinder, die heute zu Mittag essen">
-																												<p:dataTable id="childTableEating" var="child"
-															value="#{childController.children}">
-															<p:column headerText="First Name">
-																<h:outputText value="#{child.firstName}" />
-															</p:column>
-															<p:column headerText="Last Name">
-																<h:outputText value="#{child.lastName}" />
-															</p:column>
-
-
-														</p:dataTable>
-													</p:tab>
-													<p:tab title="Sonstige Benachrichtigungen">
-														<h:panelGrid columns="2" cellpadding="10">
-														</h:panelGrid>
-													</p:tab>
-												</p:accordionPanel>
 											</h:form>
 										</div>
 									</div>
