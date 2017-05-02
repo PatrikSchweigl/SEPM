@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.models.ownExceptions;
+package at.qe.sepm.asn_app.ownExceptions;
 
 /**
  * Created by root on 26.04.17.

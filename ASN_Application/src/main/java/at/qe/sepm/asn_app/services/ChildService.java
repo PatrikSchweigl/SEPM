@@ -1,13 +1,12 @@
 package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.models.UserData;
-import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
-import at.qe.sepm.asn_app.models.ownExceptions.BirthdayConstraintException;
-import at.qe.sepm.asn_app.models.ownExceptions.ParentConstraintException;
-import at.qe.sepm.asn_app.models.ownExceptions.SiblingConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.ChildRepository;
@@ -18,15 +17,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 //import java.util.Collection;
 //import java.util.Date;
 
