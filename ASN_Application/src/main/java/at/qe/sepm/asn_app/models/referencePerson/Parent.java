@@ -26,6 +26,7 @@ public class Parent extends UserData {
     @NotNull
     private String streetName;
     @OneToMany
+    @ElementCollection
     private Set<Child> listChildren;
     @OneToMany
     @ElementCollection

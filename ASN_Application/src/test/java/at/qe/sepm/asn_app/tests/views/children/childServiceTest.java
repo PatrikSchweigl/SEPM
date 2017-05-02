@@ -4,15 +4,14 @@ package at.qe.sepm.asn_app.tests.views.children;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.general.Religion;
-import at.qe.sepm.asn_app.models.ownExceptions.BirthdayConstraintException;
-import at.qe.sepm.asn_app.models.ownExceptions.SiblingConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
