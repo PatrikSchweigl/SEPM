@@ -76,44 +76,64 @@
 								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
-										<h:outputLink onclick="PF('comments').show()" value="#tiger">
-											<h:graphicImage class="picture" name="pictures/tiger.jpg"
-												id="tiger" />
-										</h:outputLink>
-
-										<h:outputLink onclick="PF('comments').show()" value="#ball"
-											title="ball">
-											<h:graphicImage class="picture" name="pictures/ball.jpg"
-												id="ball" />
-										</h:outputLink>
-
-
-										<h:outputLink onclick="PF('comments').show()"
-											value="#blueworld" title="blueworld">
-											<h:graphicImage class="picture" name="pictures/blueworld.jpg"
-												id="blueworld" />
-										</h:outputLink>
-
-
-										<h:outputLink onclick="PF('comments').show()" value="#mario"
-											title="Nature 2">
-											<h:graphicImage class="picture" name="pictures/mario.jpg"
-												id="mario" />
-										</h:outputLink>
+										<p:dataTable id="auditLogTable" var="log"
+											value="#{auditLogController.auditLogs}">
+											<p:column headerText="Username">
+												<h:outputText value="#{log.userName}" />
+											</p:column>
+											<p:column headerText="Log">
+												<h:outputText value="#{log.log}" />
+											</p:column>
+											<p:column headerText="Date">
+												<h:outputText value="#{log.date}" />
+											</p:column>
+										</p:dataTable>
 
 									</div>
 								</div>
-								<!-- /.box -->
 
 							</section>
 							<!-- /.content -->
 						</div>
 					</div>
-					<p:dialog header="Kommentare" id="comments" widgetVar="comments"
-						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+					<p:dialog header="Farbeinstellung" id="colorSettings"
+						widgetVar="colorSettings" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false">
 						<p:outputPanel id="parentData">
 
-							<ul>
+							<ul class="list-unstyled clearfix">
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-blue"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #3c8dbc; border-radius: 20%"></span>
+								</a></li>
+
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-green"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #00a65a; border-radius: 20%"></span>
+								</a></li>
+
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-red"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #dd4b39; border-radius: 20%"></span>
+								</a></li>
+
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-yellow"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #f39c12; border-radius: 20%"></span>
+								</a></li>
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-purple"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #605ca8; border-radius: 20%"></span>
+								</a></li>
 							</ul>
 						</p:outputPanel>
 					</p:dialog>

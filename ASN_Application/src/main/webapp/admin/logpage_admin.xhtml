@@ -16,42 +16,26 @@
 								<section class="sidebar" style="height: auto;">
 									<form action="#" method="get" class="sidebar-form"></form>
 									<ul class="sidebar-menu">
-										<li class="treeview"><a href="mainpage_employee.xhtml">
-												<i class="fa fa-home fa-3x"></i> <span
-												style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
-										</a></li>
-										<li class="treeview"><a
-											href="picturegalery_employee.xhtml"> <i
-												class="fa fa-picture-o fa-3x"></i> <span
-												style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
-										</a></li>
-										<li><a href="messageboard_employee.xhtml"> <i
-												class="fa fa-sticky-note-o fa-3x"></i> <span
-												style="padding-left: 40px; font-size: 25px">Messageboard</span>
-										</a></li>
-										<li class="treeview"><a
-											href="private_message_employee.xhtml"> <i
-												class="fa fa-envelope-o fa-3x"></i> <span
-												style="padding-left: 40px; font-size: 25px">Privatnachricht</span>
-										</a></li>
-										<li class="treeview"><a href="calendar_employee.xhtml">
-												<i class="fa fa-calendar fa-3x"></i> <span
-												style="padding-left: 40px; font-size: 25px">Kalender</span>
-										</a></li>
-										<li class="treeview"><a
-											onclick="PF('ownSettings').show()" href="#"> <i
-												class="fa fa-database fa-3x"></i> <span
-												style="padding-left: 40px; font-size: 25px">Eigene
-													Daten</span>
+
+										<li class="treeview"><a href="adminpage_admin.xhtml">
+												<i class="fa fa-male fa-3x"></i> <span
+												style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
 
 										</a></li>
-										<li class="treeview"><a href="parentspage_employee.xhtml">
+
+										<li class="treeview"><a href="parentspage_admin.xhtml">
 												<i class="fa fa-users fa-3x"></i> <span
 												style="padding-left: 40px; font-size: 25px">Elternteile</span>
 
 										</a></li>
-										<li class="treeview"><a href="logpage_employee.xhtml">
-												<i class="fa fa-file-archive-o fa-3x"></i> <span
+
+										<li class="treeview"><a href="employeepage_admin.xhtml">
+												<i class="fa fa-female fa-3x"></i> <span
+												style="padding-left: 40px; font-size: 25px">Angestellte</span>
+
+										</a></li>
+										<li class="treeview"><a href="logpage_admin.xhtml"> <i
+												class="fa fa-file-archive-o fa-3x"></i> <span
 												style="padding-left: 40px; font-size: 25px">Logdatei</span>
 
 										</a></li>
@@ -73,12 +57,21 @@
 									<!-- Default box -->
 									<div class="box">
 										<div class="box-body">
-											<h:form>
+											<p:dataTable id="auditLogTable" var="log"
+												value="#{auditLogController.auditLogs}">
+												<p:column headerText="Username">
+													<h:outputText value="#{log.userName}" />
+												</p:column>
+												<p:column headerText="Log">
+													<h:outputText value="#{log.log}" />
+												</p:column>
+												<p:column headerText="Date">
+													<h:outputText value="#{log.date}" />
+												</p:column>
+											</p:dataTable>
 
-											</h:form>
 										</div>
 									</div>
-									<!-- /.box -->
 
 								</section>
 								<!-- /.content -->
@@ -133,7 +126,7 @@
 							</p:dialog>
 						</h:form>
 						<h:form>
-							<p:dialog header="Farbeinstellung" id="ownSettings"
+							<p:dialog header="Eigene Daten" id="ownSettings"
 								widgetVar="ownSettings" modal="true" showEffect="fade"
 								hideEffect="fade" resizable="false">
 								<p:outputPanel id="parentData">
@@ -142,7 +135,9 @@
 								</p:outputPanel>
 							</p:dialog>
 						</h:form>
+
 					</div>
+
 				</body>
 
 
