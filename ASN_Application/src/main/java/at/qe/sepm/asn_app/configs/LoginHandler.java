@@ -64,9 +64,9 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         }
 
         if (isAdmin) {
-            return "/secured/mainpage_employee.xhtml";
+            return "/employee/mainpage_employee.xhtml";
         } else if (isParent) {
-            return "/secured/mainpage_active_parent.xhtml";
+            return "/parent/mainpage_active_parent.xhtml";
         } else if (isEmployee) {
             return "/secured/welcome.xhtml";
         }else {

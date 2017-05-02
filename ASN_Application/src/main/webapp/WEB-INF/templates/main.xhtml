@@ -13,8 +13,9 @@
   
         <div id="page">
 
-            <div id="header">
-                <ui:include src="/WEB-INF/includes/header_final.xhtml" />
+            <div   id="header">
+                <ui:include rendered="#{sessionInfoBean.hasRole('ADMIN')}" src="/WEB-INF/includes/header_final_admin.xhtml" />
+                
             <div id="content">
                 <ui:insert name="content">Content</ui:insert>
             </div>
