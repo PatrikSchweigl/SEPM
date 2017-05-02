@@ -15,10 +15,6 @@ public class Employee extends UserData {
 
     private static final long serialVersionUID = 1L;
 
-    private String birthday;
-    private String location;
-    private String streetName;
-    private String postcode;
     @Enumerated(EnumType.STRING)
     private Religion religion;
     private String phoneNumber;
@@ -28,24 +24,23 @@ public class Employee extends UserData {
     private Status workingState;
     @Enumerated(EnumType.STRING)
     private WorkRole workRole;
+    private String birthday;
 
     public Employee(){//required for jpa repository
     }
+
+
     public Employee(String password, String username, String firstName, String lastName,
-                    String birthday, String location, String streetName, String postcode, Religion religion,
-                    String phoneNumber, FamilyStatus familyStatus, Status workingState, WorkRole workRole) {
-        super(password, username, firstName, lastName, UserRole.EMPLOYEE);
-        this.birthday = birthday;
-        this.location = location;
-        this.streetName = streetName;
-        this.postcode = postcode;
+                    String location, String streetName, String postcode, UserRole userRole, Religion religion,
+                    String phoneNumber, FamilyStatus familyStatus, Status workingState, WorkRole workRole, String birthday) {
+        super(password, username, firstName, lastName, location, streetName, postcode, userRole);
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
         this.workingState = workingState;
         this.workRole = workRole;
+        this.birthday = birthday;
     }
-
 
     public String getBirthday() {
         return birthday;
@@ -53,30 +48,6 @@ public class Employee extends UserData {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
     }
 
     public Religion getReligion() {

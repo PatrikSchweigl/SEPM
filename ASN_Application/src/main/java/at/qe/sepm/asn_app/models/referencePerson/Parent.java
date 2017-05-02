@@ -19,12 +19,6 @@ public class Parent extends UserData {
     private static final long serialVersionUID = 1L;
 
     private String imgName;
-    @NotNull
-    private String location;
-    @NotNull
-    private String postcode;
-    @NotNull
-    private String streetName;
     @OneToMany
     @ElementCollection
     private Set<Child> listChildren;
@@ -35,21 +29,24 @@ public class Parent extends UserData {
     private FamilyStatus familyStatus;
     private boolean status;
 
+
+
+    public Parent(){}
+
+
     public Parent(String password, String username, String firstName, String lastName,
-                  String imgName, String location, String postcode, String streetName, Set<Child> listChildren,
-                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
-        super(password, username, firstName, lastName, UserRole.PARENT);
+                  String location, String streetName, String postcode, UserRole userRole,
+                  String imgName, String location1, String postcode1, String streetName1,
+                  Set<Child> listChildren, Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
+        super(password, username, firstName, lastName, location, streetName, postcode, userRole);
         this.imgName = imgName;
-        this.location = location;
-        this.postcode = postcode;
-        this.streetName = streetName;
         this.listChildren = listChildren;
         this.listAssignments = listAssignments;
         this.familyStatus = familyStatus;
         this.status = status;
     }
 
-    public Parent(){}
+
 
     public String getImgName() {
         return imgName;
@@ -75,29 +72,6 @@ public class Parent extends UserData {
         this.listAssignments = listAssignments;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
 
     public FamilyStatus getFamilyStatus() {
         return familyStatus;
@@ -134,9 +108,6 @@ public class Parent extends UserData {
         if (this.getFirstName().equals(other.getFirstName()) &&
                 this.getLastName().equals(other.getLastName()) &&
                 this.getUserRole().equals(other.getUserRole()) &&
-                this.location.equals(other.location) &&
-                this.postcode.equals(other.postcode) &&
-                this.streetName.equals(other.streetName) &&
                 this.familyStatus.equals(other.familyStatus)) {
             return true;
         }

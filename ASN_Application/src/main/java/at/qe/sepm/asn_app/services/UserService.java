@@ -69,6 +69,14 @@ public class UserService {
         return userRepository.save(userData);
     }
 
+
+    public UserData changeData(UserData userData) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"CHANGED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
+        auditLogRepository.save(log);
+
+        return userRepository.save(userData);
+    }
+
     /**
      * Deletes the userData.
      *
