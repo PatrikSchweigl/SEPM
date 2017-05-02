@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.ownExceptions.BirthdayConstraintException;
+import at.qe.sepm.asn_app.models.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.models.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
@@ -72,7 +73,7 @@ public class ChildService {
             if(!checkConstraints()) {
                 return null;
             }
-        } catch (BirthdayConstraintException | SiblingConstraintException e) {
+        } catch (BirthdayConstraintException | ParentConstraintException | SiblingConstraintException e) {
             e.printStackTrace();
         }
 
@@ -107,7 +108,7 @@ public class ChildService {
      *
      * @return true iff no constraints are violated.
      */
-    public boolean checkConstraints() throws BirthdayConstraintException, SiblingConstraintException {
+    public boolean checkConstraints() throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
         if(!checkBirthdayConstraints()) {
             return false;   // Returning false here makes no sense since we throw an exception in the method.
         }
@@ -158,18 +159,22 @@ public class ChildService {
 
 
     /**
+     * At least one parent must be registered in the nursery.
      * Parents may not be the same person.
      * @return true iff no constraints regarding parents are violated.
      */
-    public boolean checkParentsConstraints() {
-        Parent p1 = new Parent();
-        Parent p2 = new Parent();
+    public boolean checkParentsConstraints() throws ParentConstraintException {
+        Parent p1 = child.getParent1();
+        Parent p2 = child.getParent2();
 
+        if (p1 == null && p2 == null) {
+            throw new ParentConstraintException ("It is not allowed that both parents are null!");
+        }
 
         if (p1.equals(p2)) {
-            System.out.println("equal");
-            return false;
+            throw new ParentConstraintException("Parent1 and parent2 may not be equal!");
         }
+
         return true;
     }
 
