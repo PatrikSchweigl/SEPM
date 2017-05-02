@@ -105,28 +105,28 @@
                     <p:outputPanel id="parentDataCreate">
                     <h:panelGrid columns="2">
                         <p:outputLabel for="username" value="Username: " />
-                        <p:inputText id="username" value="#{userDetailController.currentData.username}" disabled="true"/>
+                        <p:inputText id="username" value="#{sessionInfoBean.currentUserData.username}" disabled="true"/>
                         <p:outputLabel for="password" value="Password: " />
-                        <p:password id="password" value="#{userDetailController.currentData.username}"/>
+                        <p:password id="password" value="#{sessionInfoBean.currentUserData.password}" disabled="true"/>
                     </h:panelGrid>
                         <p:separator />
                         <h:panelGrid columns="2">
                             <p:outputLabel for="firstname" value="Firstname: " />
-                            <p:inputText id="firstname" value="#{userDetailController.currentData.firstName}" disabled="true"/>
+                            <p:inputText id="firstname" value="#{sessionInfoBean.currentUserData.firstName}" disabled="true"/>
                             <p:outputLabel for="lastname" value="Lastname: " />
-                            <p:inputText id="lastname" value="#{userDetailController.currentData.lastName}" disabled="true"/>
+                            <p:inputText id="lastname" value="#{sessionInfoBean.currentUserData.lastName}" disabled="true"/>
                         </h:panelGrid>
                         <p:separator />
                         <h:panelGrid columns="2">
                             <p:outputLabel for="street" value="Street: " />
-                            <p:inputText id="street" value="#{userDetailController.currentData.streetName}"/>
+                            <p:inputText id="street" value="#{sessionInfoBean.currentUserData.streetName}"/>
                             <p:outputLabel for="location" value="Location: " />
-                            <p:inputText id="location" value="#{userDetailController.currentData.location}"/>
+                            <p:inputText id="location" value="#{sessionInfoBean.currentUserData.location}"/>
                             <p:outputLabel for="postcode" value="Postcode: " />
-                            <p:inputText id="postcode" value="#{userDetailController.currentData.postcode}"/>
+                            <p:inputText id="postcode" value="#{sessionInfoBean.currentUserData.postcode}"/>
                         </h:panelGrid>
                         <h:panelGrid columns="3">
-                            <p:commandButton value="Save" action="#{userDetailController.doChangeUser()}" oncomplete="PF('ownDataDialog').hide()"/>
+                            <p:commandButton value="Save" action="#{sessionInfoBean.doSaveUser()}" oncomplete="PF('ownDataDialog').hide()"/>
                             <p:commandButton value="Abort" onclick="PF('ownDataDialog').hide()"/>
                         </h:panelGrid>
                     </p:outputPanel>
