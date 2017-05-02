@@ -71,6 +71,7 @@ at\qe\sepm\asn_app\repositories\MessageRepository.class
 at\qe\sepm\asn_app\models\UserRole.class
 at\qe\sepm\asn_app\repositories\CaregiverRepository.class
 at\qe\sepm\asn_app\models\UserData.class
+at\qe\sepm\asn_app\models\ownExceptions\ParentConstraintException.class
 at\qe\sepm\asn_app\repositories\EmployeeRepository.class
 at\qe\sepm\asn_app\services\ChildService.class
 at\qe\sepm\asn_app\models\general\Comment.class
