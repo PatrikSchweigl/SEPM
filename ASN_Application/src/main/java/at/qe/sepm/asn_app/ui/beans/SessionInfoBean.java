@@ -44,6 +44,11 @@ public class SessionInfoBean {
         return currentUserData;
     }
 
+
+    public void doSaveUser() {
+        currentUserData = this.userService.changeData(currentUserData);
+    }
+
     /**
      * Returns the username of the user for this session, empty string if no
      * user has been authenticated for this session.
