@@ -16,15 +16,11 @@ public class Caregiver implements Persistable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
-    @NotNull
+    @Enumerated(EnumType.STRING)
     private Relationship relationship;
-    @Column
     private String imgName;
-    @Column
     private String phoneNumber;
 
     public Caregiver(){}
