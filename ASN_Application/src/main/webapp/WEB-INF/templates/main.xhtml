@@ -14,8 +14,11 @@
         <div id="page">
 
             <div   id="header">
-                <ui:include rendered="#{sessionInfoBean.hasRole('ADMIN')}" src="/WEB-INF/includes/header_final_admin.xhtml" />
-                
+                <ui:include src="/WEB-INF/includes/header_final.xhtml" />
+               </div> 
+                           <div   id="content2">
+                <ui:include src="/WEB-INF/includes/sidebar.xhtml" />
+               </div> 
             <div id="content">
                 <ui:insert name="content">Content</ui:insert>
             </div>
@@ -24,7 +27,7 @@
             </div>
 
         </div>
-        </div>
+
         	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
             <h:outputScript library="js" name="login.js"/>
             <h:outputScript library="js" name="topbar.js"/>
