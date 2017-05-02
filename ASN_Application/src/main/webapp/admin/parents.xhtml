@@ -44,16 +44,16 @@
                     </h:commandLink></div>
                 </f:facet>
 
-            <p:column headerText="Username" sortBy="#{parent.username}">
+            <p:column headerText="Username" sortBy="#{parent.username}" filterBy="#{parent.username}">
                     <h:outputText value="#{parent.username}"/>
                 </p:column>
-                <p:column headerText="First Name" sortBy="#{parent.firstName}">
+                <p:column headerText="First Name" sortBy="#{parent.firstName}" filterBy="#{parent.firstName}">
                     <h:outputText value="#{parent.firstName}"/>
                 </p:column>
-                <p:column headerText="Last Name" sortBy="#{parent.lastName}">
+                <p:column headerText="Last Name" sortBy="#{parent.lastName}" filterBy="#{parent.lastName}">
                     <h:outputText value="#{parent.lastName}"/>
                 </p:column>
-                <p:column headerText="Location" sortBy="#{parent.location}">
+                <p:column headerText="Location" sortBy="#{parent.location}" filterBy="#{parent.location}">
                     <h:outputText value="#{parent.location}"/>
                 </p:column>
                 <p:column headerText="Status" filterBy="#{parent.status}" filterMatchMode="equals">
