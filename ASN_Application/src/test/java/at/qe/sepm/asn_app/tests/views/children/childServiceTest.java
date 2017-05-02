@@ -3,8 +3,10 @@ package at.qe.sepm.asn_app.tests.views.children;
 
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
@@ -41,6 +43,8 @@ public class childServiceTest {
     private Parent parent4;
     private Parent parent5;
 
+    // TODO Check if a parent exists in the nursery
+    // TODO check naming constraints (e.g numbers etc. )
 
     @Before
     public void initialize() {
@@ -57,6 +61,15 @@ public class childServiceTest {
         sibling1 = new Sibling(child1.getFirstName(), child1.getLastName(), child1.getBirthday());
         sibling2 = new Sibling(child2.getFirstName(), child2.getLastName(), child2.getBirthday());
         sibling3 = new Sibling(child3.getFirstName(), child3.getLastName(), child3.getBirthday());
+
+        /*
+        public Parent(String password, String username, String firstName, String lastName,
+                  String imgName, String location, String postcode, String streetName, Set<Child> listChildren,
+                  Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status)
+         */
+        parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentImgName1","ParentLocation1", "ParentPostcode1", "ParentStreetName1", new HashSet<>(), new HashSet<>(), FamilyStatus.MARRIED, true);
+        parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentImgName2","ParentLocation2", "ParentPostcode2", "ParentStreetName2", new HashSet<>(), new HashSet<>(), FamilyStatus.DIVORCED, true);
+        parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentImgName3","ParentLocation3", "ParentPostcode3", "ParentStreetName3", new HashSet<>(), new HashSet<>(), FamilyStatus.NOT_MARRIED, true);
     }
 
 
@@ -75,7 +88,7 @@ public class childServiceTest {
      * Test the birthday constraints for a child that is too young.
      * @throws BirthdayConstraintException
      */
-    @Test (expected = BirthdayConstraintException.class)
+    @Test(expected = BirthdayConstraintException.class)
     public void checkBirthdayConstraints2() throws BirthdayConstraintException {
         childService.setChild(child4);
         childService.checkBirthdayConstraints();
@@ -88,8 +101,33 @@ public class childServiceTest {
      */
     @Test (expected = BirthdayConstraintException.class)
     public void checkBirthdayConstraints3() throws BirthdayConstraintException {
-        this.childService.setChild(child2);
-        this.childService.checkBirthdayConstraints();
+        childService.setChild(child2);
+        childService.checkBirthdayConstraints();
+    }
+
+
+    /**
+     * Test parents constraints without any violation.
+     */
+    @Test
+    public void checkParentsConstraints1() throws ParentConstraintException {
+        childService.setChild(child1);
+        child1.setParent1(parent1);
+        child1.setParent2(parent2);
+        childService.checkParentsConstraints();
+    }
+
+
+    /**
+     * Check the violation of the constraint that a child may not have the same parent twice.
+     * @throws ParentConstraintException
+     */
+    @Test (expected = ParentConstraintException.class)
+    public void checkParentsConstraints2() throws ParentConstraintException {
+        childService.setChild(child1);
+        child1.setParent1(parent1);
+        child1.setParent2(parent1);
+        childService.checkParentsConstraints();
     }
 
 
@@ -114,6 +152,7 @@ public class childServiceTest {
         siblingSet.add(sibling3);
         childService.getChild().setListSiblings(siblingSet);
     }
+
 
     @After
     public void cleanUp() {

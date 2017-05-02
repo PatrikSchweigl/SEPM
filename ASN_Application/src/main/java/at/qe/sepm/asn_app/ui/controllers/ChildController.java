@@ -53,6 +53,11 @@ public class ChildController {
     }
 
 
+    public void parseBirthday(String birthday) {
+        System.out.println("Test successful");
+    }
+
+
     /*
     public void parseDate(String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd-MM-yyyy");
