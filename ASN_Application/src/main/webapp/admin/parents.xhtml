@@ -10,7 +10,7 @@
             <p:commandButton oncomplete="PF('parentCreateDialog').show()" value="+ Parent"  style="align-items:right;"></p:commandButton>
         </div>
         <h:form id="parentForm">
-            <p:dataTable id="parentTable" var="parent" value="#{parentController.parents}"
+            <p:dataTable id="parentTable" var="parent" value="#{parentController.parents}" widgetVar="parentTable"
                          paginator="true"
                          rows="10"
                          paginatorPosition="bottom"
@@ -49,14 +49,18 @@
                 <p:column headerText="Location" filterBy="#{parent.location}" sortBy="#{parent.location}" filterMatchMode="contains">
                     <h:outputText value="#{parent.location}"/>
                 </p:column>
-                <p:column headerText="Status" filterBy="#{parent.status}" sortBy="#{parent.status}" filterMatchMode="in">
+                <p:column headerText="Status" filterBy="#{parent.status}" filterMatchMode="equals">
                     <f:facet name="filter">
-                        <p:selectCheckboxMenu label="Status" style="width:80px;" panelStyle="width:125px" scrollHeight="150">
-                            <f:selectItems value="#{'TODO select active/inactive'}"/>
-                        </p:selectCheckboxMenu>
+                        <p:selectOneButton onchange="PF('parentTable').filter()">
+                            <f:converter converterId="javax.faces.Boolean" />
+                            <f:selectItem itemLabel="All" itemValue="" />
+                            <f:selectItem itemLabel="Active" itemValue="true" />
+                            <f:selectItem itemLabel="Inactive" itemValue="false" />
+                        </p:selectOneButton>
                     </f:facet>
                     <h:outputText value="#{parent.status ? 'active' : 'inactive'}"/>
                 </p:column>
+
                 <p:column style="width:100px;text-align: center" exportable="false">
                     <p:commandButton update=":parentForm:parentEditDialog" oncomplete="PF('parentEditDialog').show()" icon="ui-icon-note" title="Edit">
                         <f:setPropertyActionListener value="#{parent}" target="#{parentEditController.parent}" />
