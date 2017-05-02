@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
+
+					<div class="wrapper">
+						<!-- =============================================== -->
+
+						<div class="content-wrapper" style="min-height: 1126px;">
+							<section class="content">
+
+								<!-- Default box -->
+								<div class="box">
+									<div class="box-body">
+										<div class="picture-nursery">
+											<h:graphicImage class="picture-nursery" name="pictures/KiTa_Logo_4c.jpg"
+												id="tiger" />
+										</div>
+										<div class="picture-text">Lorem ipsum dolor sit amet,
+											consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+											invidunt ut labore et dolore magna aliquyam erat, sed diam
+											voluptua. At vero eos et accusam et justo duo dolores et ea
+											rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+											Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+											consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+											invidunt ut labore et dolore magna aliquyam erat, sed diam
+											voluptua. At vero eos et accusam et justo duo dolores et ea
+											rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+											Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+											consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+											invidunt ut labore et dolore magna aliquyam erat, sed diam
+											voluptua. At vero eos et accusam et justo duo dolores et ea
+											rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+											Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor
+											in hendrerit in vulputate velit esse molestie consequat, vel
+											illum dolore eu feugiat nulla facilisis at vero eros et
+											accumsan et iusto odio dignissim qui blandit praesent
+											luptatum zzril delenit augue duis dolore te feugait nulla
+											facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing
+											elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+											dolore magna aliquam erat volutpat. Ut wisi enim ad minim
+											veniam, quis nostrud exerci tation ullamcorper suscipit
+											lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+											vel eum iriure dolor in hendrerit in vulputate velit esse
+											molestie consequat, vel illum dolore eu feugiat nulla
+											facilisis at vero eros et accumsan et iusto odio dignissim
+											qui blandit praesent luptatum zzril delenit augue duis dolore
+											te feugait nulla facilisi. Nam liber tempor cum soluta nobis
+											eleifend option congue nihil imperdiet doming id quod mazim
+											placerat facer possim assum. Lorem ipsum dolor sit amet,
+											consectetuer adipiscing elit, sed diam nonummy nibh euismod
+											tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+											wisi enim ad minim veniam, quis nostrud exerci tation
+											ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+											consequat. Duis autem vel eum iriure dolor in hendrerit in
+											vulputate velit esse molestie consequat, vel illum dolore eu
+											feugiat nulla facilisis. At vero eos et accusam et justo duo
+											dolores et ea rebum. Stet clita kasd gubergren, no sea
+											takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+											dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+											eirmod tempor invidunt ut labore et dolore magna aliquyam
+											erat, sed diam voluptua. At vero eos et accusam et justo duo
+											dolores et ea rebum. Stet clita kasd gubergren, no sea
+											takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+											dolor sit amet, consetetur sadipscing elitr, At accusam
+											aliquyam diam diam dolore dolores duo eirmod eos erat, et
+											nonumy sed tempor et et invidunt justo labore Stet clita ea
+											et gubergren, kasd magna no rebum. sanctus sea sed takimata
+											ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum
+											dolor sit amet, consetetur</div>
+
+
+									</div>
+								</div>
+								<!-- /.box -->
+
+							</section>
+							<!-- /.content -->
+						</div>
+					</div>
+					<p:dialog header="Kommentare" id="comments" widgetVar="comments"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="parentData">
+
+							<ul>
+							</ul>
+						</p:outputPanel>
+					</p:dialog>
+				</body>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+		</h:body>
+	</ui:define>
+</ui:composition>

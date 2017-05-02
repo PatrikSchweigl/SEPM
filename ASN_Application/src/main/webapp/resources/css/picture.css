@@ -5,12 +5,14 @@
 }
 
 .picture-nursery{
+
 		width: 400px;
 	height: 400px;
 	margin: auto;
 }
 
 .picture-text{
+		padding-top: 100px;
 	padding-left: 200px;
 	padding-right: 200px;
 }
