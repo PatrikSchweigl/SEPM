@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
+
+					<div class="wrapper">
+						<!-- =============================================== -->
+
+						<div class="content-wrapper" style="min-height: 1126px;">
+							<section class="content">
+
+								<!-- Default box -->
+								<div class="box">
+									<div class="box-body">
+
+
+										<div class="row">
+											<div class="col-md-12">
+
+												<ul class="messageboard">
+
+													<li><i class="fa fa-circle-o"></i>
+
+														<div class="messageboard-item">
+															<span class="time"><i class="fa fa-clock-o"></i>
+																00:00</span>
+
+											
+
+															<div class="messageboard-body"></div>
+
+														</div></li>
+												</ul>
+											</div>
+											<!-- /.col -->
+										</div>
+
+									</div>
+								</div>
+
+							</section>
+							<!-- /.content -->
+						</div>
+					</div>
+					<p:dialog header="Farbeinstellung" id="colorSettings"
+						widgetVar="colorSettings" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="false">
+						<p:outputPanel id="parentDataColor">
+
+							<ul class="list-unstyled clearfix">
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-blue"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #3c8dbc; border-radius: 20%"></span>
+								</a></li>
+
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-green"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #00a65a; border-radius: 20%"></span>
+								</a></li>
+
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-red"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #dd4b39; border-radius: 20%"></span>
+								</a></li>
+
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-yellow"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #f39c12; border-radius: 20%"></span>
+								</a></li>
+
+								<li style="float: left; width: 33.33333%; padding: 5px;"><a
+									href="javascript:void(0);" data-skin="skin-purple"
+									class="clearfix full-opacity-hover"> <span
+										style="display: block; width: 100px; float: left; height: 100px; background: #605ca8; border-radius: 20%"></span>
+								</a></li>
+							</ul>
+						</p:outputPanel>
+					</p:dialog>
+				</body>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+		</h:body>
+	</ui:define>
+</ui:composition>
