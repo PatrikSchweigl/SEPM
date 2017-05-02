@@ -114,4 +114,31 @@ public class Parent extends UserData {
         this.status = status;
     }
 
+
+    /**
+     * This method doesn't check for equality of every object because it is not needed.
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Parent)) {
+            return false;
+        }
+
+        Parent other = (Parent) obj;
+        if (this.getFirstName().equals(other.getFirstName()) &&
+                this.getLastName().equals(other.getLastName()) &&
+                this.getUserRole().equals(other.getUserRole()) &&
+                this.location.equals(other.location) &&
+                this.postcode.equals(other.postcode) &&
+                this.streetName.equals(other.streetName) &&
+                this.familyStatus.equals(other.familyStatus)) {
+            return true;
+        }
+        return false;
+    }
 }
