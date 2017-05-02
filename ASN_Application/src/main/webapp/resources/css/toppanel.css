@@ -141,8 +141,6 @@ body {
 .main-sidebar,
 .left-side {
   position: absolute;
-  top: auto;
-  left: 10px;
   padding-top: 20px;
   min-height: 100%;
   width: 300px;
