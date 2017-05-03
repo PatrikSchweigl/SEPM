@@ -43,8 +43,8 @@
 .messageboard > li > .messageboard-item > .time {
   color: #999;
   float: right;
-  padding: 10px;
   font-size: 12px;
+  bottom: 10px;
 }
 .messageboard > li > .messageboard-item > .messageboard-header {
   margin: 0;

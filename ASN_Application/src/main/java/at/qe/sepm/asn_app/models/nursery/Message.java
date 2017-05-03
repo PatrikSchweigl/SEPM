@@ -53,8 +53,8 @@ public class Message implements Persistable<Long> {
         this.message = message;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        return date.toString();
     }
 
     public void setDate(Date date) {

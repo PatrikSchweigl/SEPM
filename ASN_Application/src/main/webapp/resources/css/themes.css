@@ -663,13 +663,17 @@
 .skin-purple .rectangle-speech-border {
   position:relative;
   border:5px solid #605ca8;
-  text-align:center;
   color:#333;
   background:#fff;
+  	text-align: center;
   /* css3 */
   -webkit-border-radius:20px;
   -moz-border-radius:20px;
   border-radius:20px;
+  bottom: 10px;
+}
+.skin-purple .rectangle-speech-border .text{
+	font-size: 20px;
 }
 
 /* creates larger curve */

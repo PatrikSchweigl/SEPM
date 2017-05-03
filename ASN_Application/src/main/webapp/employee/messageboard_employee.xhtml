@@ -28,39 +28,27 @@
 											<div class="col-md-12">
 
 												<ul class="messageboard">
-
+												
+												<ui:repeat var="message" value="#{messageService.getAllMessages()}">
 													<li>
-
+													
 														<div class="messageboard-item">
-
-
-
-
+														<span class="time">
+																	
+																	<i class="fa fa-clock-o"></i>
+																		 #{message.date}</span>
 															<div class="messageboard-body">
 																<blockquote class="rectangle-speech-border">
-																	<span class="time">
-																	<h3>Stefan Mattersberger schrieb:</h3>
-																	<i class="fa fa-clock-o"></i>
-																		00:00</span>
-																	<div>
-																		<p>Lorem ipsum dolor sit amet, consetetur
-																			sadipscing elitr, sed diam nonumy eirmod tempor
-																			invidunt ut labore et dolore magna aliquyam erat, sed
-																			diam voluptua. At vero eos et accusam et justo duo
-																			dolores et ea rebum. Stet clita kasd gubergren, no
-																			sea takimata sanctus est Lorem ipsum dolor sit amet.
-																			Lorem ipsum dolor sit amet, consetetur sadipscing
-																			elitr, sed diam nonumy eirmod tempor invidunt ut
-																			labore et dolore magna aliquyam erat, sed diam
-																			voluptua. At vero eos et accusam et justo duo dolores
-																			et ea rebum. Stet clita kasd gubergren, no sea
-																			takimata sanctus est Lorem ipsum dolor sit amet.</p>
+																<h3>#{message.username} schrieb:</h3>
+																	
+																	<div class="text">
+																		<p>#{message.message}</p>
 																	</div>
 																</blockquote>
 															</div>
-
 														</div>
 													</li>
+													</ui:repeat>
 												</ul>
 											</div>
 											<!-- /.col -->
@@ -74,7 +62,7 @@
 										hideEffect="fade" resizable="false">
 										<p:inputTextarea id="messageInput"
 											value="#{messageService.text}" rows="5" cols="30"
-											counter="display" maxlength="160"
+											counter="display" maxlength="500"
 											counterTemplate="{0} Zeichen übrig." autoResize="false" />
 										<p:separator />
 										<h:outputText id="display" />

@@ -13,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
@@ -41,7 +43,9 @@ public class MessageService implements Serializable {
     private String text;
 
     public Collection<Message> getAllMessages(){
-        return messageRepository.findAll();
+    	Collection<Message> temp = messageRepository.findAll();
+        Collections.reverse( (List<?>) temp );
+        return temp;
     }
     
     
