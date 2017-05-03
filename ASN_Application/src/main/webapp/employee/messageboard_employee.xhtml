@@ -23,23 +23,44 @@
 											<p:commandButton oncomplete="PF('createMessage').show()"
 												value="Nachricht senden" style="align-items:right;"></p:commandButton>
 										</div>
-										
+
 										<div class="row">
 											<div class="col-md-12">
 
 												<ul class="messageboard">
 
-													<li><i class="fa fa-circle-o"></i>
+													<li>
 
 														<div class="messageboard-item">
-															<span class="time"><i class="fa fa-clock-o"></i>
-																00:00</span>
 
 
 
-															<div class="messageboard-body"></div>
 
-														</div></li>
+															<div class="messageboard-body">
+																<blockquote class="rectangle-speech-border">
+																	<span class="time">
+																	<h3>Stefan Mattersberger schrieb:</h3>
+																	<i class="fa fa-clock-o"></i>
+																		00:00</span>
+																	<div>
+																		<p>Lorem ipsum dolor sit amet, consetetur
+																			sadipscing elitr, sed diam nonumy eirmod tempor
+																			invidunt ut labore et dolore magna aliquyam erat, sed
+																			diam voluptua. At vero eos et accusam et justo duo
+																			dolores et ea rebum. Stet clita kasd gubergren, no
+																			sea takimata sanctus est Lorem ipsum dolor sit amet.
+																			Lorem ipsum dolor sit amet, consetetur sadipscing
+																			elitr, sed diam nonumy eirmod tempor invidunt ut
+																			labore et dolore magna aliquyam erat, sed diam
+																			voluptua. At vero eos et accusam et justo duo dolores
+																			et ea rebum. Stet clita kasd gubergren, no sea
+																			takimata sanctus est Lorem ipsum dolor sit amet.</p>
+																	</div>
+																</blockquote>
+															</div>
+
+														</div>
+													</li>
 												</ul>
 											</div>
 											<!-- /.col -->
@@ -48,19 +69,20 @@
 									</div>
 								</div>
 								<h:form>
-								<p:dialog header="Nachricht schreiben" id="createMessage"
-									widgetVar="createMessage" modal="false" showEffect="fade"
-									hideEffect="fade" resizable="false">
-									<p:inputTextarea id="messageInput" value="#{messageService.text}" rows="5" cols="30" counter="display"
-										maxlength="160" counterTemplate="{0} Zeichen übrig."
-										autoResize="false" />
-										<p:separator/>
-									<h:outputText id="display" />
-									<p:separator/>
-								<p:commandButton id="button" value="Senden"
-								actionListener="#{messageService.saveMessage(messageService.text)}"
-								oncomplete="PF('createMessage').hide()" />
-								</p:dialog>
+									<p:dialog header="Nachricht schreiben" id="createMessage"
+										widgetVar="createMessage" modal="false" showEffect="fade"
+										hideEffect="fade" resizable="false">
+										<p:inputTextarea id="messageInput"
+											value="#{messageService.text}" rows="5" cols="30"
+											counter="display" maxlength="160"
+											counterTemplate="{0} Zeichen übrig." autoResize="false" />
+										<p:separator />
+										<h:outputText id="display" />
+										<p:separator />
+										<p:commandButton id="button" value="Senden"
+											actionListener="#{messageService.saveMessage(messageService.text)}"
+											oncomplete="PF('createMessage').hide()" />
+									</p:dialog>
 								</h:form>
 							</section>
 							<!-- /.content -->
