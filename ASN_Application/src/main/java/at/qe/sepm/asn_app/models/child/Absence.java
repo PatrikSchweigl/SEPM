@@ -62,4 +62,31 @@ public class Absence implements Persistable<Long> {
     public boolean isNew() {
         return (null == child);
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Absence)) {
+            return false;
+        }
+
+        Absence other = (Absence) obj;
+        if (this.getChild().equals(other.getChild()) &&
+                this.getDate().equals(other.getDate()) &&
+                this.getReason().equals(other.getReason())) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + this.getDate() + "\n" +
+                "Child: " + this.getChild() + "\n" +
+                "Reason: " + this.getReason() + "\n";
+    }
 }
