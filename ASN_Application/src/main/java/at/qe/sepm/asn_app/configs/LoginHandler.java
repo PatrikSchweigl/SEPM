@@ -9,6 +9,17 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Date;
+
+import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.repositories.AuditLogRepository;
+import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +35,8 @@ import java.util.Collection;
 public class LoginHandler implements AuthenticationSuccessHandler {
 
     protected Log logger = LogFactory.getLog(this.getClass());
-
+    private UserRepository userRepository;
+    private AuditLogRepository auditLogRepository;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
@@ -62,8 +74,8 @@ public class LoginHandler implements AuthenticationSuccessHandler {
                 break;
             }
         }
-
         if (isAdmin) {
+
             return "/employee/mainpage_employee.xhtml";
         } else if (isParent) {
             return "/parent/mainpage_active_parent.xhtml";
