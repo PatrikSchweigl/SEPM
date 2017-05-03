@@ -78,7 +78,7 @@ public class ScheduleView implements Serializable {
             System.err.println("Ahoy");
         }
         else{
-            System.err.println("")
+            System.err.println("T");
         }
         return eventModel;
     }
