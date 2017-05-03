@@ -23,6 +23,10 @@ public class PictureService {
     public Collection<Picture> getAllPictures(){
         return pictureRepository.findAll();
     }
+    
+    public Picture savePicture(Picture picture){
+    	return pictureRepository.save(picture);
+    }
 
 
 }

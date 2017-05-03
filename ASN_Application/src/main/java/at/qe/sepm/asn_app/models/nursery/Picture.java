@@ -19,6 +19,7 @@ public class Picture implements Persistable<Long> {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String url;
     @ManyToOne(optional = false)
@@ -32,11 +33,9 @@ public class Picture implements Persistable<Long> {
     public Picture() {
     }
 
-    public Picture(int id, String url, UserData publisher, Set<Comment> comment, Date date, String title) {
-        this.id = id;
+    public Picture(String url, UserData publisher, Date date, String title) {
         this.url = url;
         this.publisher = publisher;
-        this.comment = comment;
         this.date = date;
         this.title = title;
     }
