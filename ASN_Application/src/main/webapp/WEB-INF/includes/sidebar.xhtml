@@ -10,7 +10,7 @@
 	<ui:composition>
 		<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
 
-			<ui:fragment rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+			<ui:fragment rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 				<aside class="main-sidebar">
 					<section class="sidebar">
 						<ul class="sidebar-menu">
@@ -59,7 +59,7 @@
 					</section>
 				</aside>
 			</ui:fragment>
-						<ui:fragment rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+						<ui:fragment rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 			<aside class="main-sidebar">
 				<section class="sidebar" style="height: auto;">
 					<form action="#" method="get" class="sidebar-form"></form>

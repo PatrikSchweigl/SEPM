@@ -2,10 +2,7 @@ package at.qe.sepm.asn_app.models.referencePerson;
 
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,24 +16,33 @@ public class Caregiver implements Persistable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
-    @NotNull
+    @Enumerated(EnumType.STRING)
     private Relationship relationship;
-    @NotNull
     private String imgName;
+    private String phoneNumber;
 
     public Caregiver(){}
-    public Caregiver(String firstName, String lastName, Relationship relationship, String imgName) {
+
+
+    public Caregiver(String firstName, String lastName, Relationship relationship, String imgName, String phoneNumber) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.relationship = relationship;
         this.imgName = imgName;
+        this.phoneNumber = phoneNumber;
+
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -54,7 +60,7 @@ public class Caregiver implements Persistable<Long>{
         this.lastName = lastName;
     }
 
-    public String getFullName(){ return getLastName() + getFirstName();}
+    public String getFullName(){ return getLastName() + " " + getFirstName();}
 
     public Relationship getRelationship() {
         return relationship;
