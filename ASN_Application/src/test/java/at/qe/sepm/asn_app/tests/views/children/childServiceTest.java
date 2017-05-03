@@ -1,10 +1,12 @@
 package at.qe.sepm.asn_app.tests.views.children;
 
 
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.referencePerson.Assignment;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
@@ -67,9 +69,16 @@ public class childServiceTest {
                   String imgName, String location, String postcode, String streetName, Set<Child> listChildren,
                   Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status)
          */
-        //parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentImgName1", new HashSet<>(), new HashSet<>(), FamilyStatus.MARRIED, true);
-        //parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentImgName2", new HashSet<>(), new HashSet<>(), FamilyStatus.DIVORCED, true);
-        //parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentImgName3","ParentLocation3", "ParentPostcode3", "ParentStreetName3", new HashSet<>(), new HashSet<>(), FamilyStatus.NOT_MARRIED, true);
+        Set<Child> ParentListChildren1 = new HashSet<>();
+        Set<Child> ParentListChildren2 = new HashSet<>();
+        Set<Child> ParentListChildren3 = new HashSet<>();
+        Set<Assignment> ParentListAssignments1 = new HashSet<>();
+        Set<Assignment> ParentListAssignments2 = new HashSet<>();
+        Set<Assignment> ParentListAssignments3 = new HashSet<>();
+        parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", ParentListChildren1, ParentListAssignments1, FamilyStatus.MARRIED, true);
+        parent1 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", ParentListChildren2, ParentListAssignments2, FamilyStatus.DIVORCED, true);
+        parent1 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true);
+
     }
 
 
@@ -119,11 +128,22 @@ public class childServiceTest {
 
 
     /**
-     * Check the violation of the constraint that a child may not have the same parent twice.
+     * It is not allowed to register children in the nursery if not at least one parent is registered beforehand.
      * @throws ParentConstraintException
      */
     @Test (expected = ParentConstraintException.class)
     public void checkParentsConstraints2() throws ParentConstraintException {
+        childService.setChild(child1);
+        childService.checkParentsConstraints();
+    }
+
+
+    /**
+     * Check the violation of the constraint that a child may not have the same parent twice.
+     * @throws ParentConstraintException
+     */
+    @Test (expected = ParentConstraintException.class)
+    public void checkParentsConstraints3() throws ParentConstraintException {
         childService.setChild(child1);
         child1.setParent1(parent1);
         child1.setParent2(parent1);
@@ -145,12 +165,32 @@ public class childServiceTest {
     }
 
 
+    /**
+     * Test the violation of the constraint that a child can't be a sibling of itself.
+     * @throws SiblingConstraintException
+     */
     @Test (expected = SiblingConstraintException.class)
     public void checkSiblingsConstraints2() throws SiblingConstraintException {
         childService.setChild(child1);
         Set<Sibling> siblingSet = new HashSet<>();
         siblingSet.add(sibling3);
         childService.getChild().setListSiblings(siblingSet);
+        childService.checkSiblingsConstraints();
+    }
+
+
+    /**
+     * Test the violation of the constraint that a child can't have the same sibling twice or more.
+     * @throws SiblingConstraintException
+     */
+    @Test (expected = SiblingConstraintException.class)
+    public void checkSiblingsConstraints3() throws SiblingConstraintException {
+        childService.setChild(child5);
+        Set<Sibling> siblingSet = new HashSet<>();
+        siblingSet.add(sibling1);
+        siblingSet.add(sibling3);
+        childService.getChild().setListSiblings(siblingSet);
+        childService.checkSiblingsConstraints();
     }
 
 

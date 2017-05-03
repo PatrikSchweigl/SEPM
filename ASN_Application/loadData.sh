@@ -2,6 +2,6 @@
 
 mysql -u root -pasnTeam1 <<EOFMYSQL
 USE asndb;
-source /src/main/resources/data.sql
+source /vagrant/src/main/resources/data.sql
 quit
 EOFMYSQL
