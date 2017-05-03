@@ -27,7 +27,10 @@ public class Message implements Persistable<Long> {
     @NotNull
     private Date date;
 
-
+    public Message(){
+    	
+    }
+    
     public Message(String username, String message, Date date) {
         this.username = username;
         this.message = message;

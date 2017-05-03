@@ -16,12 +16,14 @@
 
 						<div class="content-wrapper" style="min-height: 1126px;">
 							<section class="content">
-
-								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
 
-
+										<div align="right" style="margin-bottom: 10px;">
+											<p:commandButton oncomplete="PF('createMessage').show()"
+												value="Nachricht senden" style="align-items:right;"></p:commandButton>
+										</div>
+										
 										<div class="row">
 											<div class="col-md-12">
 
@@ -33,7 +35,7 @@
 															<span class="time"><i class="fa fa-clock-o"></i>
 																00:00</span>
 
-											
+
 
 															<div class="messageboard-body"></div>
 
@@ -45,7 +47,21 @@
 
 									</div>
 								</div>
-
+								<h:form>
+								<p:dialog header="Nachricht schreiben" id="createMessage"
+									widgetVar="createMessage" modal="false" showEffect="fade"
+									hideEffect="fade" resizable="false">
+									<p:inputTextarea id="messageInput" value="#{messageService.text}" rows="5" cols="30" counter="display"
+										maxlength="160" counterTemplate="{0} Zeichen übrig."
+										autoResize="false" />
+										<p:separator/>
+									<h:outputText id="display" />
+									<p:separator/>
+								<p:commandButton id="button" value="Senden"
+								actionListener="#{messageService.saveMessage(messageService.text)}"
+								oncomplete="PF('createMessage').hide()" />
+								</p:dialog>
+								</h:form>
 							</section>
 							<!-- /.content -->
 						</div>

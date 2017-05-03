@@ -57,7 +57,6 @@ public class FileUploadView{
     public void upload() {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
-        System.out.println("HEEEEEEEEEEEEE");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         picture = new Picture("hi", userRepository.findFirstByUsername(auth.getName()), new Date(), "hi");
         pictureService.savePicture(picture);
