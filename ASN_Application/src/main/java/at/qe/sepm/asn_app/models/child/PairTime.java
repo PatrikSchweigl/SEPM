@@ -52,4 +52,29 @@ public class PairTime implements Persistable<Long>{
     public boolean isNew() {
         return (null == endTime && null == startTime);
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof PairTime)) {
+            return false;
+        }
+
+        PairTime other = (PairTime) obj;
+        if (startTime.equals(other.startTime) &&
+                endTime.equals(other.endTime)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public String toString() {
+        return "StartTime: " + startTime + "\n" +
+                "EndTime: " + endTime + "\n";
+    }
 }

@@ -74,9 +74,9 @@ public class Absence implements Persistable<Long> {
         }
 
         Absence other = (Absence) obj;
-        if (this.getChild().equals(other.getChild()) &&
-                this.getDate().equals(other.getDate()) &&
-                this.getReason().equals(other.getReason())) {
+        if (child.equals(other.child) &&
+                date.equals(other.date) &&
+                reason.equals(other.reason)) {
             return true;
         }
         return false;
@@ -85,8 +85,8 @@ public class Absence implements Persistable<Long> {
 
     @Override
     public String toString() {
-        return "Date: " + this.getDate() + "\n" +
-                "Child: " + this.getChild() + "\n" +
-                "Reason: " + this.getReason() + "\n";
+        return "Date: " + date + "\n" +
+                "Child: " + child + "\n" +
+                "Reason: " + reason + "\n";
     }
 }
