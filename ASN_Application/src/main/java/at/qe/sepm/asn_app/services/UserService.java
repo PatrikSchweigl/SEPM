@@ -88,7 +88,7 @@ public class UserService {
         userRepository.delete(userData);
     }
 
-    private UserData getAuthenticatedUser() {
+    public UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
