@@ -75,9 +75,9 @@ public class Sibling implements Persistable<Long> {
         }
 
         Sibling other = (Sibling) obj;
-        if (this.getBirthday().equals(other.getBirthday()) &&
-                this.getFirstName().equals(other.getFirstName()) &&
-                this.getLastName().equals(other.getLastName())) {
+        if (birthday.equals(other.birthday) &&
+                firstName.equals(other.firstName) &&
+                lastName.equals(other.lastName)) {
             return true;
         }
         return false;
@@ -87,8 +87,8 @@ public class Sibling implements Persistable<Long> {
     // TODO getId() doesn't work yet
     @Override
     public String toString() {
-        return "Name: " + this.getFirstName() + "\n" +
-                "LastName: " + this.getLastName() + "\n" +
-                "Birthday: " + this.getBirthday() + "\n";
+        return "Name: " + firstName + "\n" +
+                "LastName: " + lastName + "\n" +
+                "Birthday: " + birthday + "\n";
     }
 }
