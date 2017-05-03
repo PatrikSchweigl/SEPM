@@ -80,7 +80,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         } else if (isParent) {
             return "/parent/mainpage_active_parent.xhtml";
         } else if (isEmployee) {
-            return "/secured/welcome.xhtml";
+            return "/employee/mainpage_employee.xhtml";
         }else {
             throw new IllegalStateException();
         }
