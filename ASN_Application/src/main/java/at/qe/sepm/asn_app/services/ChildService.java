@@ -186,6 +186,10 @@ public class ChildService {
     public boolean checkSiblingsConstraints() throws SiblingConstraintException {
         HashSet<Sibling> setSiblings = (HashSet) this.child.getListSiblings();
 
+        for(Sibling s : setSiblings) {
+            System.out.println(s);
+        }
+
         // Check if the child is a sibling of itself.
         for (Sibling s : setSiblings) {
             System.out.println(s.getFirstName());

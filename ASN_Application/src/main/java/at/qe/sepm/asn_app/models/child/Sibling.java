@@ -63,4 +63,32 @@ public class Sibling implements Persistable<Long> {
     public boolean isNew() {
         return (null == firstName && null == lastName);
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Sibling)) {
+            return false;
+        }
+
+        Sibling other = (Sibling) obj;
+        if (this.getBirthday().equals(other.getBirthday()) &&
+                this.getFirstName().equals(other.getFirstName()) &&
+                this.getLastName().equals(other.getLastName())) {
+            return true;
+        }
+        return false;
+    }
+
+
+    // TODO getId() doesn't work yet
+    @Override
+    public String toString() {
+        return "Name: " + this.getFirstName() + "\n" +
+                "LastName: " + this.getLastName() + "\n" +
+                "Birthday: " + this.getBirthday() + "\n";
+    }
 }
