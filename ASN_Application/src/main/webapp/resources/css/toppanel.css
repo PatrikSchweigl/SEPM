@@ -141,8 +141,6 @@ body {
 .main-sidebar,
 .left-side {
   position: absolute;
-  top: 0;
-  left: 0;
   padding-top: 20px;
   min-height: 100%;
   width: 300px;
@@ -188,7 +186,7 @@ body {
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     transform: translate(0, 0);
-    width: 50px !important;
+    width: 80px !important;
     z-index: 850;
   }
   .sidebar-mini.sidebar-collapse .sidebar-menu > li {
@@ -453,6 +451,7 @@ body {
   right: 0;
   left: auto;
 }
+
 
 
 bg-red,

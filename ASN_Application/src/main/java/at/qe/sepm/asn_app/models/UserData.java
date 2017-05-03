@@ -20,19 +20,52 @@ public class UserData implements Persistable<Long> {
     private String username;
     private String firstName;
     private String lastName;
+    private String location;
+    private String streetName;
+    private String postcode;
+
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    public UserData(String password, String username, String firstName, String lastName, UserRole userRole) {
+    public UserData(String password, String username, String firstName,
+                    String lastName, String location, String streetName,
+                    String postcode, UserRole userRole) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.location = location;
+        this.streetName = streetName;
+        this.postcode = postcode;
         this.userRole = userRole;
     }
 
     public UserData(){
 
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
     }
 
     public String getPassword() {

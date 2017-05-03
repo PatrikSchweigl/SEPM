@@ -67,9 +67,9 @@ public class childServiceTest {
                   String imgName, String location, String postcode, String streetName, Set<Child> listChildren,
                   Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status)
          */
-        parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentImgName1","ParentLocation1", "ParentPostcode1", "ParentStreetName1", new HashSet<>(), new HashSet<>(), FamilyStatus.MARRIED, true);
-        parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentImgName2","ParentLocation2", "ParentPostcode2", "ParentStreetName2", new HashSet<>(), new HashSet<>(), FamilyStatus.DIVORCED, true);
-        parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentImgName3","ParentLocation3", "ParentPostcode3", "ParentStreetName3", new HashSet<>(), new HashSet<>(), FamilyStatus.NOT_MARRIED, true);
+        //parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentImgName1", new HashSet<>(), new HashSet<>(), FamilyStatus.MARRIED, true);
+        //parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentImgName2", new HashSet<>(), new HashSet<>(), FamilyStatus.DIVORCED, true);
+        //parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentImgName3","ParentLocation3", "ParentPostcode3", "ParentStreetName3", new HashSet<>(), new HashSet<>(), FamilyStatus.NOT_MARRIED, true);
     }
 
 
