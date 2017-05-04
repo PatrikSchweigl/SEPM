@@ -14,12 +14,14 @@
 				<aside class="main-sidebar">
 					<section class="sidebar">
 						<ul class="sidebar-menu">
-							<li class="treeview"><a href="/employee/mainpage_employee.xhtml">
-									<i class="fa fa-home fa-3x"></i> <span
+							<li class="treeview"><a
+								href="/employee/mainpage_employee.xhtml"> <i
+									class="fa fa-home fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
-							<li class="treeview"><a href="/employee/picturegalery_employee.xhtml">
-									<i class="fa fa-picture-o fa-3x"></i> <span
+							<li class="treeview"><a
+								href="/employee/picturegalery_employee.xhtml"> <i
+									class="fa fa-picture-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
 							</a></li>
 							<li><a href="/employee/messageboard_employee.xhtml"> <i
@@ -27,24 +29,27 @@
 									style="padding-left: 40px; font-size: 25px">Messageboard</span>
 							</a></li>
 							<li class="treeview"><a
-								href="/employee/private_message_employee.xhtml"> <i
+								onclick="PF('privateMessage').show()"> <i
 									class="fa fa-envelope-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Privatnachricht</span>
 							</a></li>
-							<li class="treeview"><a href="/employee/calendar_employee.xhtml">
-									<i class="fa fa-calendar fa-3x"></i> <span
+							<li class="treeview"><a
+								href="/employee/calendar_employee.xhtml"> <i
+									class="fa fa-calendar fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kalender</span>
 							</a></li>
 							<li class="treeview"><a onclick="PF('ownDataDialog').show()">
 									<i class="fa fa-database fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
 							</a></li>
-							<li class="treeview"><a href="/employee/parentspage_employee.xhtml">
-									<i class="fa fa-users fa-3x"></i> <span
+							<li class="treeview"><a
+								href="/employee/parentspage_employee.xhtml"> <i
+									class="fa fa-users fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Elternteile</span>
 
 							</a></li>
-							<li class="treeview"><a href="/employee/logpage_employee.xhtml"> <i
+							<li class="treeview"><a
+								href="/employee/logpage_employee.xhtml"> <i
 									class="fa fa-file-archive-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 
@@ -59,44 +64,46 @@
 					</section>
 				</aside>
 			</ui:fragment>
-						<ui:fragment rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-			<aside class="main-sidebar">
-				<section class="sidebar" style="height: auto;">
-					<form action="#" method="get" class="sidebar-form"></form>
-					<ul class="sidebar-menu">
+			<ui:fragment rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+				<aside class="main-sidebar">
+					<section class="sidebar" style="height: auto;">
+						<form action="#" method="get" class="sidebar-form"></form>
+						<ul class="sidebar-menu">
 
-						<li class="treeview"><a href="/admin/adminpage_admin.xhtml"> <i
-								class="fa fa-male fa-3x"></i> <span
-								style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
+							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
+									<i class="fa fa-male fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
 
-						</a></li>
+							</a></li>
 
-						<li class="treeview"><a href="/admin/parentspage_admin.xhtml"> <i
-								class="fa fa-users fa-3x"></i> <span
-								style="padding-left: 40px; font-size: 25px">Elternteile</span>
+							<li class="treeview"><a
+								href="/admin/parentspage_admin.xhtml"> <i
+									class="fa fa-users fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Elternteile</span>
 
-						</a></li>
+							</a></li>
 
-						<li class="treeview"><a href="/admin/employeepage_admin.xhtml">
-								<i class="fa fa-female fa-3x"></i> <span
-								style="padding-left: 40px; font-size: 25px">Angestellte</span>
+							<li class="treeview"><a
+								href="/admin/employeepage_admin.xhtml"> <i
+									class="fa fa-female fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Angestellte</span>
 
-						</a></li>
-						<li class="treeview"><a href="/admin/logpage_admin.xhtml"> <i
-								class="fa fa-file-archive-o fa-3x"></i> <span
-								style="padding-left: 40px; font-size: 25px">Logdatei</span>
+							</a></li>
+							<li class="treeview"><a href="/admin/logpage_admin.xhtml">
+									<i class="fa fa-file-archive-o fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 
-						</a></li>
-						<li class="treeview"><a onclick="PF('colorSettings').show()"
-							href="#"> <i class="fa fa-edit fa-3x"></i> <span
-								style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
+							</a></li>
+							<li class="treeview"><a onclick="PF('colorSettings').show()"
+								href="#"> <i class="fa fa-edit fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
 
-						</a></li>
+							</a></li>
 
-					</ul>
-				</section>
-			</aside>
-						</ui:fragment>
+						</ul>
+					</section>
+				</aside>
+			</ui:fragment>
 			<h:form>
 				<p:dialog header="Farbeinstellung" id="colorSettings"
 					widgetVar="colorSettings" modal="true" showEffect="fade"
@@ -178,6 +185,80 @@
 								onclick="PF('ownDataDialog').hide()" />
 						</h:panelGrid>
 					</p:outputPanel>
+				</p:dialog>
+
+
+			</h:form>
+			<h:form>
+				<p:dialog header="Privatnachricht" id="privateMessage"
+					widgetVar="privateMessage" modal="false" showEffect="fade"
+					hideEffect="fade" resizable="true" position="right,bottom"
+					responsive="true" width="400" height="400">
+						<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:commandLink>
+
+								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+							</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+							
+						</h:panelGrid>
+						<hr />
+						
+												<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:commandLink>
+
+								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+							</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+							
+						</h:panelGrid>
+						<hr />
+												
+												<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:commandLink>
+
+								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+							</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+							
+						</h:panelGrid>
+						<hr />
+												
+												<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:commandLink>
+
+								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+							</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+							
+						</h:panelGrid>
+						<hr />
+												
+												<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:commandLink>
+
+								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+							</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+							
+						</h:panelGrid>
+						<hr />
+												
+												<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:commandLink>
+
+								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+							</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+							
+						</h:panelGrid>
+						<hr />
 				</p:dialog>
 			</h:form>
 		</ui:fragment>

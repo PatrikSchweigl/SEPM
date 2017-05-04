@@ -33,7 +33,7 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   margin-top: 0;
-  background: #fff;
+  background: #f8f8f8;
   color: #444;
   margin-left: 200px;
   margin-right: 200px;
@@ -87,7 +87,7 @@
   border-radius: 4px;
 }
 .messageboard-inverse > li > .messageboard-item {
-  background: #f0f0f0;
+  background: #f8f8f8;
   border: 1px solid #ddd;
   -webkit-box-shadow: none;
   box-shadow: none;
