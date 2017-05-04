@@ -1,85 +1,89 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3c.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/main.xhtml">
-	<ui:define name="content">
-		<h:body>
-			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
-				<body class="theme-blue sidebar-mini sidebar-collapse">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+                <body class="theme-blue sidebar-mini sidebar-collapse">
 
-					<div class="wrapper">
-						<!-- =============================================== -->
+                <div class="wrapper">
+                    <!-- =============================================== -->
 
-						<div class="content-wrapper" style="min-height: 1126px;">
-							<section class="content">
-								<div class="box">
-									<div class="box-body">
+                    <div class="content-wrapper" style="min-height: 1126px;">
+                        <section class="content">
+                            <div class="box">
+                                <div class="box-body">
 
-										<div align="right" style="margin-bottom: 10px;">
-											<p:commandButton class="button" oncomplete="PF('createMessage').show()"
-												value="Nachricht senden" style="align-items:right;"></p:commandButton>
-										</div>
+                                    <div align="right" style="margin-bottom: 10px;">
+                                        <p:commandButton class="button" oncomplete="PF('createMessage').show()"
+                                                         value="Nachricht senden"
+                                                         style="align-items:right;"></p:commandButton>
+                                    </div>
 
-										<div class="row">
-											<div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h:form id="messages">
+                                                <ul class="messageboard">
 
-												<ul class="messageboard">
-												
-												<ui:repeat var="message" value="#{messageService.getAllMessages()}">
-													<li>
-													
-														<div class="messageboard-item">
+
+                                                    <ui:repeat var="message" value="#{messageService.getAllMessages()}">
+                                                        <li>
+
+                                                            <div class="messageboard-item">
 														<span class="time">
 																	
 																	<i class="fa fa-clock-o"></i>
-																		 #{message.date}</span>
-															<div class="messageboard-body">
-																<blockquote class="rectangle-speech-border">
-																<h3>#{message.username} schrieb:</h3>
-																	
-																	<div class="text">
-																		<p>#{message.message}</p>
-																	</div>
-																</blockquote>
-															</div>
-														</div>
-													</li>
-													</ui:repeat>
-												</ul>
-											</div>
-											<!-- /.col -->
-										</div>
+                                                            #{message.date}</span>
+                                                                <div class="messageboard-body">
+                                                                    <blockquote class="rectangle-speech-border">
+                                                                        <h3>#{message.username} schrieb:</h3>
 
-									</div>
-								</div>
-								<h:form>
-									<p:dialog header="Nachricht schreiben" id="createMessage"
-										widgetVar="createMessage" modal="true" showEffect="fade"
-										hideEffect="fade" resizable="false">
-										<p:inputTextarea id="messageInput"
-											value="#{messageService.text}" rows="5" cols="30"
-											counter="display" maxlength="500"
-											counterTemplate="{0} Zeichen übrig." autoResize="false" />
-										<p:separator />
-										<h:outputText id="display" />
-										<p:separator />
-										<p:commandButton id="button" value="Senden"
-											actionListener="#{messageService.saveMessage(messageService.text)}"
-											oncomplete="PF('createMessage').hide()" />
-									</p:dialog>
-								</h:form>
-							</section>
-							<!-- /.content -->
-						</div>
-					</div>
-				</body>
-				<link rel="stylesheet"
-					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-			</ui:fragment>
-		</h:body>
-	</ui:define>
+                                                                        <div class="text">
+                                                                            <p>#{message.message}</p>
+                                                                        </div>
+                                                                    </blockquote>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ui:repeat>
+
+                                                </ul>
+                                            </h:form>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <h:form>
+                                <p:dialog header="Nachricht schreiben" id="createMessage"
+                                          widgetVar="createMessage" modal="true" showEffect="fade"
+                                          hideEffect="fade" resizable="false">
+                                    <p:inputTextarea id="messageInput"
+                                                     value="#{messageService.text}" rows="5" cols="30"
+                                                     counter="display" maxlength="500"
+                                                     counterTemplate="{0} Zeichen übrig." autoResize="false"/>
+                                    <p:separator/>
+                                    <h:outputText id="display"/>
+                                    <p:separator/>
+                                    <p:commandButton id="button" value="Senden"
+                                                     actionListener="#{messageService.saveMessage(messageService.text)}"
+                                                     oncomplete="PF('createMessage').hide()" update=":messages"/>
+                                </p:dialog>
+                            </h:form>
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                </div>
+                </body>
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            </ui:fragment>
+        </h:body>
+    </ui:define>
 </ui:composition>
