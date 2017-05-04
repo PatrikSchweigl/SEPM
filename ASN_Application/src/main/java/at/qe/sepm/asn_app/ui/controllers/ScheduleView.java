@@ -2,25 +2,19 @@ package at.qe.sepm.asn_app.ui.controllers;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import at.qe.sepm.asn_app.repositories.EventRepository;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,8 +25,6 @@ import org.springframework.stereotype.Component;
 @Component
 @ViewScoped
 public class ScheduleView implements Serializable {
-    @Autowired
-    private EventRepository eventRepository;
 
     private ScheduleModel eventModel;
 
@@ -63,12 +55,6 @@ public class ScheduleView implements Serializable {
     @PostConstruct
     public void init(){
         eventModel = new DefaultScheduleModel();
-        List<ScheduleEvent> listEvents= eventRepository.findAll();
-        if (!listEvents.isEmpty()) {
-            for (ScheduleEvent e : listEvents) {
-                eventModel.addEvent(e);
-            }
-        }
     }
     public String test(){
         return "123";
