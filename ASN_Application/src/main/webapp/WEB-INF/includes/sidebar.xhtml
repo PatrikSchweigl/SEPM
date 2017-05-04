@@ -193,76 +193,38 @@
 				<p:dialog header="Privatnachricht" id="privateMessage"
 					widgetVar="privateMessage" modal="false" showEffect="clip"
 					hideEffect="clip" resizable="true" position="right,bottom"
-					responsive="true" width="400" height="400">
+					responsive="true" width="250" height="400">
+					<h3>Mitarbeiter</h3>
 
-					<h:panelGrid columns="2" style="width:100%"
-						columnClasses="logo,detail">
+					<ui:repeat var="employee" value="#{employeeService.getAllEmployees()}">
+						<h:panelGrid columns="2" style="width:50px;"
+							columnClasses="logo,detail">
+							<p:commandLink
+								onclick="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-						<p:commandLink
-							onclick="PF('privateMessageSend').show();PF('privateMessage').hide()">
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+							</p:commandLink>
+							<h:outputText value="#{employee.username}"/>
 
-							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-						</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
+						</h:panelGrid>
+						<hr />
+					</ui:repeat>
 
-					</h:panelGrid>
-					<hr />
+					<h3>Eltern</h3>
+										<ui:repeat var="parent" value="#{parentService.getAllParents()}">
+						<h:panelGrid columns="2" style="width:50px;"
+							columnClasses="logo,detail">
 
-					<h:panelGrid columns="2" style="width:100%"
-						columnClasses="logo,detail">
-						<p:commandLink>
+							<p:commandLink
+								onclick="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-						</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+							</p:commandLink>
+							<h:outputText value="#{parent.username}"/>
 
-					</h:panelGrid>
-					<hr />
-
-					<h:panelGrid columns="2" style="width:100%"
-						columnClasses="logo,detail">
-						<p:commandLink>
-
-							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-						</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-
-					</h:panelGrid>
-					<hr />
-
-					<h:panelGrid columns="2" style="width:100%"
-						columnClasses="logo,detail">
-						<p:commandLink>
-
-							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-						</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-
-					</h:panelGrid>
-					<hr />
-
-					<h:panelGrid columns="2" style="width:100%"
-						columnClasses="logo,detail">
-						<p:commandLink>
-
-							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-						</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-
-					</h:panelGrid>
-					<hr />
-
-					<h:panelGrid columns="2" style="width:100%"
-						columnClasses="logo,detail">
-						<p:commandLink>
-
-							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-						</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-
-					</h:panelGrid>
-					<hr />
-
+						</h:panelGrid>
+						<hr />
+					</ui:repeat>
 				</p:dialog>
 			</h:form>
 			<h:form>
