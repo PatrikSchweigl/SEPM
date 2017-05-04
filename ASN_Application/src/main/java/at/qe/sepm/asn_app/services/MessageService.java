@@ -56,6 +56,12 @@ public class MessageService implements Serializable {
     	return messageRepository.save(message);
     }
     
+    public void deleteMessage(Message message){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+        auditLogRepository.save(log);
+        messageRepository.delete(message);
+    }
+    
     public UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
@@ -69,6 +75,11 @@ public class MessageService implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+
+	public Message loadMessage(long id) {
+        return messageRepository.findOne(id);
 	}
 
 }
