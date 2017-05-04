@@ -1,7 +1,7 @@
 
 .center-login {
 	height: 100px;
-
+  color: #b3b3b3;
 	position: absolute;
 	top:-300px;
 	bottom: 0;
@@ -26,16 +26,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.form button {
-  text-transform: uppercase;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  font-size: 20px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
+
 
 .form .message {
   margin: 15px 0 0;

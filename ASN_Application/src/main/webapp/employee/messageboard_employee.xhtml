@@ -20,7 +20,7 @@
 									<div class="box-body">
 
 										<div align="right" style="margin-bottom: 10px;">
-											<p:commandButton oncomplete="PF('createMessage').show()"
+											<p:commandButton class="button" oncomplete="PF('createMessage').show()"
 												value="Nachricht senden" style="align-items:right;"></p:commandButton>
 										</div>
 
@@ -58,7 +58,7 @@
 								</div>
 								<h:form>
 									<p:dialog header="Nachricht schreiben" id="createMessage"
-										widgetVar="createMessage" modal="false" showEffect="fade"
+										widgetVar="createMessage" modal="true" showEffect="fade"
 										hideEffect="fade" resizable="false">
 										<p:inputTextarea id="messageInput"
 											value="#{messageService.text}" rows="5" cols="30"
