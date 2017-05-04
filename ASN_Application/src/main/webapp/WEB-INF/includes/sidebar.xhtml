@@ -191,74 +191,85 @@
 			</h:form>
 			<h:form>
 				<p:dialog header="Privatnachricht" id="privateMessage"
-					widgetVar="privateMessage" modal="false" showEffect="fade"
-					hideEffect="fade" resizable="true" position="right,bottom"
+					widgetVar="privateMessage" modal="false" showEffect="clip"
+					hideEffect="clip" resizable="true" position="right,bottom"
 					responsive="true" width="400" height="400">
-						<h:panelGrid columns="2" style="width:100%"
-							columnClasses="logo,detail">
-							<p:commandLink>
 
-								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-							</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-							
-						</h:panelGrid>
-						<hr />
-						
-												<h:panelGrid columns="2" style="width:100%"
-							columnClasses="logo,detail">
-							<p:commandLink>
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
 
-								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-							</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-							
-						</h:panelGrid>
-						<hr />
-												
-												<h:panelGrid columns="2" style="width:100%"
-							columnClasses="logo,detail">
-							<p:commandLink>
+						<p:commandLink
+							onclick="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-							</p:commandLink>
+							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+						</p:commandLink>
 						<div style="font-size: 24;">Stefan</div>
-							
-						</h:panelGrid>
-						<hr />
-												
-												<h:panelGrid columns="2" style="width:100%"
-							columnClasses="logo,detail">
-							<p:commandLink>
 
-								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-							</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-							
-						</h:panelGrid>
-						<hr />
-												
-												<h:panelGrid columns="2" style="width:100%"
-							columnClasses="logo,detail">
-							<p:commandLink>
+					</h:panelGrid>
+					<hr />
 
-								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-							</p:commandLink>
-						<div style="font-size: 24;">Stefan</div>
-							
-						</h:panelGrid>
-						<hr />
-												
-												<h:panelGrid columns="2" style="width:100%"
-							columnClasses="logo,detail">
-							<p:commandLink>
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+						<p:commandLink>
 
-								<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
-							</p:commandLink>
+							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+						</p:commandLink>
 						<div style="font-size: 24;">Stefan</div>
-							
-						</h:panelGrid>
-						<hr />
+
+					</h:panelGrid>
+					<hr />
+
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+						<p:commandLink>
+
+							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+						</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+
+					</h:panelGrid>
+					<hr />
+
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+						<p:commandLink>
+
+							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+						</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+
+					</h:panelGrid>
+					<hr />
+
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+						<p:commandLink>
+
+							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+						</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+
+					</h:panelGrid>
+					<hr />
+
+					<h:panelGrid columns="2" style="width:100%"
+						columnClasses="logo,detail">
+						<p:commandLink>
+
+							<p:graphicImage name="pictures/tiger.jpg" width="50" height="50" />
+						</p:commandLink>
+						<div style="font-size: 24;">Stefan</div>
+
+					</h:panelGrid>
+					<hr />
+
+				</p:dialog>
+			</h:form>
+			<h:form>
+				<p:dialog header="Privatnachricht Senden" id="privateMessageSend"
+					widgetVar="privateMessageSend" modal="false" showEffect="clip"
+					hideEffect="clip" resizable="true" position="right,bottom"
+					responsive="true" width="400" height="400">
 				</p:dialog>
 			</h:form>
 		</ui:fragment>
