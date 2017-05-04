@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.models.calendar;
+package at.qe.sepm.asn_app.services;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
