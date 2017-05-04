@@ -22,6 +22,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    private Collection<Employee> employees;
+
+    public void setEmployees(Collection<Employee> employees) {
+        this.employees = employees;
+    }
+
     private Employee employee;
 
     public void setUser(Employee employeeEdit) {
@@ -38,12 +44,17 @@ public class EmployeeController {
         employee = new Employee();
     }
 
+    @PostConstruct
+    private void initList(){
+        setEmployees(employeeService.getAllEmployees());
+    }
+
     public Employee getEmployee() {
         return employee;
     }
 
     public Collection<Employee> getEmployees(){
-        return employeeService.getAllEmployees();
+        return employees;
     }
 
     public void doSaveEmployee(){

@@ -21,11 +21,13 @@ public class ParentController {
     @Autowired
     private ParentService parentService;
 
+    private Collection<Parent> parents;
+
     private Parent parent;
 
     public Collection<Parent> getParents() {
 
-        return parentService.getAllParents();
+        return parents;
     }
 
     public void setUser(Parent parent) {
@@ -33,9 +35,18 @@ public class ParentController {
         doReloadUser();
     }
 
+    public void setParents(Collection<Parent> parents) {
+        this.parents = parents;
+    }
+
     @PostConstruct
     public void initNewParent() {
         parent = new Parent();
+    }
+
+    @PostConstruct
+    public void initList(){
+        setParents(parentService.getAllParents());
     }
 
     public void doSaveParent() {

@@ -80,7 +80,7 @@
 
 													<p:column headerText="Username"
 														filterBy="#{employee.username}"
-														sortBy="#{employee.username}" filterStyle="display:none">
+														sortBy="#{employee.username}" filterStyle="display:none" filterMatchMode="contains">
 														<h:outputText value="#{employee.username}" />
 													</p:column>
 													<p:column headerText="First Name"

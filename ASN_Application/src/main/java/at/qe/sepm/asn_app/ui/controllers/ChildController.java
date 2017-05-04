@@ -23,6 +23,13 @@ public class ChildController {
 
     private Child child;
 
+    private Collection<Child> children;
+
+
+    public void setChildren(Collection<Child> children) {
+        this.children = children;
+    }
+
     public void setUser(Child childEdit) {
         this.child = childEdit;
         doReloadUser();
@@ -37,12 +44,17 @@ public class ChildController {
         child = new Child();
     }
 
+    @PostConstruct
+    private void initList(){
+        setChildren(childService.getAllChildren());
+    }
+
     public Child getChild() {
         return child;
     }
 
     public Collection<Child> getChildren(){
-        return childService.getAllChildren();
+        return children;
     }
 
     public void doSaveChild(){
