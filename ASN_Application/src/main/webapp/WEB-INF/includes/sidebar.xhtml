@@ -193,7 +193,7 @@
 				<p:dialog header="Privatnachricht" id="privateMessage"
 					widgetVar="privateMessage" modal="false" showEffect="clip"
 					hideEffect="clip" resizable="true" position="right,bottom"
-					responsive="true" width="250" height="400">
+					responsive="true" width="300" height="400" minimizable="true" minWidth="270">
 					<h3>Mitarbeiter</h3>
 
 					<ui:repeat var="employee" value="#{employeeService.getAllEmployees()}">
@@ -231,7 +231,7 @@
 				<p:dialog header="Privatnachricht Senden" id="privateMessageSend"
 					widgetVar="privateMessageSend" modal="false" showEffect="clip"
 					hideEffect="clip" resizable="true" position="right,bottom"
-					responsive="true" width="400" height="400">
+					responsive="true" width="400" height="400" minimizable="true" minWidth="350">
 				</p:dialog>
 			</h:form>
 		</ui:fragment>
