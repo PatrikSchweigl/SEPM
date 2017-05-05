@@ -21,8 +21,8 @@
 										<div class="box-body">
 											<h:form>
 
-        <p:schedule aspectRatio="1.5" style="padding-left:400px;" leftHeaderTemplate="today"
-rightHeaderTemplate="prev,next"
+        <p:schedule locale="de" aspectRatio="1.5" style="padding-left:200px; padding-right: 200px;" leftHeaderTemplate="prev, today"
+rightHeaderTemplate="next"
 centerHeaderTemplate="month, agendaWeek, agendaDay" id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
  
             <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
