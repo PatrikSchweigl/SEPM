@@ -7,6 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/main.xhtml"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	<h:head></h:head>
 	<ui:define name="content">
 		<h:body>
 			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
@@ -14,29 +15,22 @@
 
 					<div class="wrapper">
 						<!-- =============================================== -->
-
 						<div class="content-wrapper" style="min-height: 1126px;">
 							<section class="content">
 								<div class="box">
 									<div class="box-body">
-										<h:form  enctype="multipart/form-data">
-										<div align="right">
-											<p:growl id="messages" showDetail="true" />
-
-											<p:fileUpload value="#{fileUploadView.file}" mode="simple"
-												skinSimple="true" style="align-items:right;" />
-
-											<p:commandButton value="Submit" ajax="false"
-												actionListener="#{fileUploadView.upload}" style="align-items:right;" />
-												</div>
-										</h:form>
-																								<ui:repeat var="picture"
-															value="#{pictureController.getPictures()}">
-										<h:outputLink onclick="PF('comments').show()" value="#{picture.url}">
-											<h:graphicImage class="picture" name="pictures/#{picture.url}.jpg"
-												id="tiger" />
-										</h:outputLink>
-</ui:repeat>
+									<h:form enctype="multipart/form-data">
+										<p:fileUpload
+											fileUploadListener="#{fileBean.handleFileUpload}" />
+											</h:form>
+										<ui:repeat var="picture"
+											value="#{pictureController.getPictures()}">
+											<h:outputLink onclick="PF('comments').show()"
+												value="#{picture.url}">
+												<h:graphicImage class="picture"
+													name="pictures/#{picture.url}.jpg" id="tiger" />
+											</h:outputLink>
+										</ui:repeat>
 
 									</div>
 								</div>
