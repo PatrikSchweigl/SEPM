@@ -134,7 +134,7 @@
                                             </p:column>
                                         </p:dataTable>
 
-                                        <p:dialog header="Stammdaten" widgetVar="infoDialog" id="infoDialog"
+                                        <p:dialog header="#{parentEditController.parent.firstName} #{parentEditController.parent.lastName}" widgetVar="infoDialog" id="infoDialog"
                                                   modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                             <p:outputPanel id="infosheet" style="text-align:center;">
                                                 <p:panelGrid columns="2" columnClasses="label,value">
