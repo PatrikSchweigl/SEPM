@@ -32,6 +32,10 @@ body {
           box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+    padding: 7px;
+}
+
 .dropdown-menu > li > a {
   display: block;
   padding: 3px 20px;
