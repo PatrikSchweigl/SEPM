@@ -29,7 +29,7 @@ public class ParentEditController {
     }
 
     public void doReloadParent() {
-        parent = parentService.loadUser(parent.getUsername());
+        parent = parentService.loadParent(parent.getUsername());
     }
 
     public void doSaveParent(){

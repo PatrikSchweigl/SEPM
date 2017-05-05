@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.Collection;
+
 /**
  * Created by root on 19.04.17.
  */
@@ -17,6 +20,7 @@ public class ChildEditController {
 
     private Child child;
 
+
     public Child getChild() {
         return child;
     }
@@ -26,17 +30,18 @@ public class ChildEditController {
         doReloadChild();
     }
 
-    public void doReloadChild() {
-        //child = childService.loadUser(child.getUsername());
-        child = childService.loadUser(null);
-    }
-
-    public void doSaveChild(){
-        child = childService.saveChild(child);
-    }
-
     public void doDeleteChild() {
         this.childService.deleteChild(child);
         child = null;
+    }
+
+    public void doSaveChild(){
+        System.out.println("HHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEEEEEEEEE222222");
+
+        child = childService.saveChild(child);
+    }
+
+    public void doReloadChild(){
+        child = childService.loadChild(child.getId());
     }
 }
