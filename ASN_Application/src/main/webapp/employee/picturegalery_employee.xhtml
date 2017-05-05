@@ -26,34 +26,17 @@
 											<p:fileUpload value="#{fileUploadView.file}" mode="simple"
 												skinSimple="true" style="align-items:right;" />
 
-											<p:commandButton value="Submit" ajax="true"
+											<p:commandButton value="Submit" ajax="false"
 												actionListener="#{fileUploadView.upload}" style="align-items:right;" />
 												</div>
 										</h:form>
-										<h:outputLink onclick="PF('comments').show()" value="#tiger">
-											<h:graphicImage class="picture" name="pictures/tiger.jpg"
+																								<ui:repeat var="picture"
+															value="#{pictureController.getPictures()}">
+										<h:outputLink onclick="PF('comments').show()" value="#{picture.url}">
+											<h:graphicImage class="picture" name="pictures/#{picture.url}.jpg"
 												id="tiger" />
 										</h:outputLink>
-
-										<h:outputLink onclick="PF('comments').show()" value="#ball"
-											title="ball">
-											<h:graphicImage class="picture" name="pictures/ball.jpg"
-												id="ball" />
-										</h:outputLink>
-
-
-										<h:outputLink onclick="PF('comments').show()"
-											value="#blueworld" title="blueworld">
-											<h:graphicImage class="picture" name="pictures/blueworld.jpg"
-												id="blueworld" />
-										</h:outputLink>
-
-
-										<h:outputLink onclick="PF('comments').show()" value="#mario"
-											title="Nature 2">
-											<h:graphicImage class="picture" name="pictures/mario.jpg"
-												id="mario" />
-										</h:outputLink>
+</ui:repeat>
 
 									</div>
 								</div>

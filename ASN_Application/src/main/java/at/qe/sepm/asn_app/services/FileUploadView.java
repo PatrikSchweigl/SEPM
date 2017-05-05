@@ -20,6 +20,7 @@ import org.primefaces.model.UploadedFile;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
@@ -27,10 +28,9 @@ import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.models.UserData;
 import org.springframework.stereotype.Component;
-import org.springframework.context.annotation.Scope;
 import org.primefaces.model.DefaultUploadedFile;
 @Component
-@ViewScoped
+@Scope("view")
 public class FileUploadView{
 	@Autowired
 	private PictureService pictureService;
@@ -41,10 +41,14 @@ public class FileUploadView{
 	private Picture picture;
     private UploadedFile file;
  
-    @PostConstruct
-    public void init(){
-    	file = new DefaultUploadedFile();
+    public Picture getPicture(){
+    	return picture;
     }
+    
+    public void setPicture(Picture picture){
+    	this.picture = picture;
+    }
+    
     
     public UploadedFile getFile() {
         return file;
@@ -55,13 +59,16 @@ public class FileUploadView{
     }
      
     public void upload() {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        picture = new Picture("hi", userRepository.findFirstByUsername(auth.getName()), new Date(), "hi");
-        pictureService.savePicture(picture);
+        System.out.println("HEEEEEEEEEEEEEEEEE" + "     " + file.getSize());
+
         if(file != null) {
         	try{
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+                auditLogRepository.save(log);
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                System.out.println(file.getFileName());
+                picture = new Picture(file.getFileName(), userRepository.findFirstByUsername(auth.getName()), new Date(), file.getFileName());
+                pictureService.savePicture(picture);
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             String filename = FilenameUtils.getName(file.getFileName());

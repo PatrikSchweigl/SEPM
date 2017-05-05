@@ -33,7 +33,6 @@ public class ParentService {
     @Autowired
     private UserRepository userRepository;
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Collection<Parent> getAllParents() {
          return parentRepository.findAll();
     }
@@ -48,7 +47,6 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
     public Parent loadUser(String username) {
         return parentRepository.findFirstByUsername(username);
     }

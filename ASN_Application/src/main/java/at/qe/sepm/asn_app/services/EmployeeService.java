@@ -35,7 +35,6 @@ public class EmployeeService {
 
 
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Collection<Employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
@@ -49,7 +48,6 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
     public Employee loadUser(String username) {
         return employeeRepository.findFirstByUsername(username);
     }
