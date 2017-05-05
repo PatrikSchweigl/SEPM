@@ -7,7 +7,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/main.xhtml"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-	<h:head></h:head>
 	<ui:define name="content">
 		<h:body>
 			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
@@ -21,7 +20,7 @@
 									<div class="box-body">
 									<h:form enctype="multipart/form-data">
 										<p:fileUpload
-											fileUploadListener="#{fileBean.handleFileUpload}" />
+											fileUploadListener="#{fileBean.handleFileUpload}" auto="true" />
 											</h:form>
 										<ui:repeat var="picture"
 											value="#{pictureController.getPictures()}">
