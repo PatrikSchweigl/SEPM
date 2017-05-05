@@ -9,97 +9,101 @@
 
 	<ui:composition>
 		<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
-
-			<ui:fragment rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 				<aside class="main-sidebar">
 					<section class="sidebar">
 						<ul class="sidebar-menu">
-							<li class="treeview"><a
-								href="/employee/mainpage_employee.xhtml"> <i
-									class="fa fa-home fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
-							</a></li>
-							<li class="treeview"><a
-								href="/employee/picturegalery_employee.xhtml"> <i
-									class="fa fa-picture-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
-							</a></li>
-							<li><a href="/employee/messageboard_employee.xhtml"> <i
-									class="fa fa-sticky-note-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Messageboard</span>
-							</a></li>
-							<li class="treeview"><a
-								onclick="PF('privateMessage').show()"> <i
-									class="fa fa-envelope-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Privatnachricht</span>
-							</a></li>
-							<li class="treeview"><a
-								href="/employee/calendar_employee.xhtml"> <i
-									class="fa fa-calendar fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kalender</span>
-							</a></li>
-							<li class="treeview"><a onclick="PF('ownDataDialog').show()">
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a
+										href="/employee/mainpage_employee.xhtml"> <i
+										class="fa fa-home fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a
+										href="/employee/picturegalery_employee.xhtml"> <i
+										class="fa fa-picture-o fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li><a href="/employee/messageboard_employee.xhtml"> <i
+										class="fa fa-sticky-note-o fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Messageboard</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a
+										onclick="PF('privateMessage').show()"> <i
+										class="fa fa-envelope-o fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Privatnachricht</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a
+										href="/employee/calendar_employee.xhtml"> <i
+										class="fa fa-calendar fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Kalender</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a onclick="PF('ownDataDialog').show()">
 									<i class="fa fa-database fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
-							</a></li>
-							<li class="treeview"><a
-								href="/employee/parentspage_employee.xhtml"> <i
-									class="fa fa-users fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Elternteile</span>
-
-							</a></li>
-							<li class="treeview"><a
-								href="/employee/logpage_employee.xhtml"> <i
-									class="fa fa-file-archive-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Logdatei</span>
-
-							</a></li>
-							<li class="treeview"><a onclick="PF('colorSettings').show()"
-								href="#"> <i class="fa fa-edit fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
-
-							</a></li>
-
-						</ul>
-					</section>
-				</aside>
-			</ui:fragment>
-			<ui:fragment rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-				<aside class="main-sidebar">
-					<section class="sidebar" style="height: auto;">
-						<form action="#" method="get" class="sidebar-form"></form>
-						<ul class="sidebar-menu">
-
-							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
+										style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a
+										href="/employee/parentspage_employee.xhtml"> <i
+										class="fa fa-users fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Elternteile</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a
+										href="/employee/logpage_employee.xhtml"> <i
+										class="fa fa-file-archive-o fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Logdatei</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+								<li class="treeview"><a onclick="PF('colorSettings').show()"
+														href="#"> <i class="fa fa-edit fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+								<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
 									<i class="fa fa-male fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
-
-							</a></li>
-
-							<li class="treeview"><a
-								href="/admin/parentspage_admin.xhtml"> <i
-									class="fa fa-users fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Elternteile</span>
-
-							</a></li>
-
-							<li class="treeview"><a
-								href="/admin/employeepage_admin.xhtml"> <i
-									class="fa fa-female fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Angestellte</span>
-
-							</a></li>
-							<li class="treeview"><a href="/admin/logpage_admin.xhtml">
+										style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+								<li class="treeview" ><a
+										href="/admin/parentspage_admin.xhtml"> <i
+										class="fa fa-users fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Elternteile</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+								<li class="treeview"><a
+										href="/admin/employeepage_admin.xhtml"> <i
+										class="fa fa-female fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Angestellte</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+								<li class="treeview"><a href="/admin/logpage_admin.xhtml">
 									<i class="fa fa-file-archive-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Logdatei</span>
-
-							</a></li>
-							<li class="treeview"><a onclick="PF('colorSettings').show()"
-								href="#"> <i class="fa fa-edit fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
-
-							</a></li>
-
+										style="padding-left: 40px; font-size: 25px">Logdatei</span>
+								</a></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+								<li class="treeview"><a onclick="PF('colorSettings').show()"
+														href="#"> <i class="fa fa-edit fa-3x"></i> <span
+										style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
+								</a></li>
+							</h:panelGroup>
 						</ul>
 					</section>
 				</aside>
@@ -196,7 +200,7 @@
 					responsive="true" width="300" height="400" minimizable="true" minWidth="270">
 					<h3>Mitarbeiter</h3>
 
-					<ui:repeat var="employee" value="#{employeeService.getAllEmployees()}">
+					<ui:repeat var="employee" value="#{employeeController.employees}">
 						<h:panelGrid columns="2" style="width:50px;"
 							columnClasses="logo,detail">
 							<p:commandLink
@@ -234,7 +238,6 @@
 					responsive="true" width="400" height="400" minimizable="true" minWidth="350">
 				</p:dialog>
 			</h:form>
-		</ui:fragment>
 	</ui:composition>
 </h:body>
 </html>

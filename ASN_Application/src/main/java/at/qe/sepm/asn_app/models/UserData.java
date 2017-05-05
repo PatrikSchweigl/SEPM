@@ -15,7 +15,7 @@ public class UserData implements Persistable<Long> {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String password;
     private String username;
     private String firstName;
@@ -137,7 +137,7 @@ public class UserData implements Persistable<Long> {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
     @Override

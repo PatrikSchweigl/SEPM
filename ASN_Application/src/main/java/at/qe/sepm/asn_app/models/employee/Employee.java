@@ -30,9 +30,9 @@ public class Employee extends UserData {
     }
 
 
-    public Employee(String password, String username, String firstName, String lastName,
-                    String location, String streetName, String postcode, UserRole userRole, Religion religion,
-                    String phoneNumber, FamilyStatus familyStatus, Status workingState, WorkRole workRole, String birthday) {
+    public Employee(String password, String username, String firstName, String lastName, String location,
+                    String streetName, String postcode, UserRole userRole, Religion religion, String phoneNumber,
+                    FamilyStatus familyStatus, Status workingState, WorkRole workRole, String birthday, boolean isAdmin) {
         super(password, username, firstName, lastName, location, streetName, postcode, userRole);
         this.religion = religion;
         this.phoneNumber = phoneNumber;
@@ -40,6 +40,10 @@ public class Employee extends UserData {
         this.workingState = workingState;
         this.workRole = workRole;
         this.birthday = birthday;
+    }
+
+
+    public void setAdmin(boolean admin) {
     }
 
     public String getBirthday() {
