@@ -37,7 +37,7 @@ public class ParentService {
          return parentRepository.findAll();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public Parent saveParent(Parent parent) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -47,11 +47,11 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-    public Parent loadUser(String username) {
+    public Parent loadParent(String username) {
         return parentRepository.findFirstByUsername(username);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public void deleteParent(Parent parent) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
         auditLogRepository.save(log);

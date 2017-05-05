@@ -30,9 +30,9 @@ public class ParentController {
         return parents;
     }
 
-    public void setUser(Parent parent) {
+    public void setParent(Parent parent) {
         this.parent = parent;
-        doReloadUser();
+        doReloadParent();
     }
 
     public void setParents(Collection<Parent> parents) {
@@ -59,8 +59,8 @@ public class ParentController {
         return parent;
     }
 
-    public void doReloadUser() {
-        parent = parentService.loadUser(parent.getUsername());
+    public void doReloadParent() {
+        parent = parentService.loadParent(parent.getUsername());
     }
 
 

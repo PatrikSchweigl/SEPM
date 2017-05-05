@@ -22,59 +22,46 @@ public class ChildController {
     private ChildService childService;
 
     private Child child;
-
     private Collection<Child> children;
-
 
     public void setChildren(Collection<Child> children) {
         this.children = children;
-    }
-
-    public void setUser(Child childEdit) {
-        this.child = childEdit;
-        doReloadUser();
-    }
-
-    public void doReloadUser() {
-        child = childService.loadUser(null);
-    }
-
-    @PostConstruct
-    private void initNewChild(){
-        child = new Child();
-    }
-
-    @PostConstruct
-    private void initList(){
-        setChildren(childService.getAllChildren());
-    }
-
-    public Child getChild() {
-        return child;
     }
 
     public Collection<Child> getChildren(){
         return children;
     }
 
+    @PostConstruct
+    public void initList(){
+        setChildren(childService.getAllChildren());
+    }
+
+    @PostConstruct
+    public void initNewChild(){
+        child = new Child();
+    }
+
+    public Child getChild() {
+        return child;
+    }
+
+    public void setChild(Child child) {
+        this.child = child;
+        doReloadChild();
+    }
+
     public void doSaveChild(){
-        //System.out.println("Saving child: " + child.getFirstName() + " " + child.getLastName());
-        child = childService.saveChild(child);
+
+
+        System.out.println("HHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEEEEEEEEE333333");
+
+        childService.saveChild(child);
         child = null;
         initNewChild();
     }
 
-
-    public void parseBirthday(String birthday) {
-        System.out.println("Test successful");
+    public void doReloadChild(){
+        child = childService.loadChild(child.getId());
     }
-
-
-    /*
-    public void parseDate(String date) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd-MM-yyyy");
-        DateTime dateTime = dateTimeFormatter.parseDateTime(date);
-        child.setBirthday(dateTime);
-    }
-    */
 }
