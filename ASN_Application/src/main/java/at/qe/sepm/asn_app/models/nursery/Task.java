@@ -22,15 +22,17 @@ public class Task implements Persistable<Long> {
     private Employee  sender;
     @ManyToOne(optional = false)
     private Parent receiver;
-    private Date date;
+    private Date beginDate;
+    private Date endDate;
 
     public Task(){}
 
-    public Task(String description, Employee sender, Parent receiver, Date date) {
+    public Task(String description, Employee sender, Parent receiver, Date beginDate, Date endDate) {
         this.description = description;
         this.sender = sender;
         this.receiver = receiver;
-        this.date = date;
+        this.beginDate = beginDate;
+        this.setEndDate(endDate);
     }
 
     public String getDescription() {
@@ -57,12 +59,12 @@ public class Task implements Persistable<Long> {
         this.receiver = receiver;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setBeginDate(Date date) {
+        this.beginDate = date;
     }
 
     @Override
@@ -74,4 +76,12 @@ public class Task implements Persistable<Long> {
     public boolean isNew() {
         return getSender() == null;
     }
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 }

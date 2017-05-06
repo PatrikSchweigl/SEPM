@@ -31,6 +31,8 @@ public class ScheduleView implements Serializable {
     private ScheduleModel lazyEventModel;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
+    
+    private boolean visible;
 /*
     @PostConstruct
     public void init() {
@@ -244,4 +246,10 @@ public class ScheduleView implements Serializable {
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+	public boolean getVisible() {
+		return visible;
+	}
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 }

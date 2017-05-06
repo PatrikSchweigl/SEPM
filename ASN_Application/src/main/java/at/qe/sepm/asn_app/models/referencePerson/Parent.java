@@ -94,7 +94,7 @@ public class Parent extends UserData {
      * @param obj
      * @return
      */
-    @Override
+   /* @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -111,5 +111,5 @@ public class Parent extends UserData {
             return true;
         }
         return false;
-    }
+    }*/
 }
