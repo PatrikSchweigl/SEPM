@@ -52,10 +52,6 @@ public class ChildController {
     }
 
     public void doSaveChild(){
-
-
-        System.out.println("HHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEEEEEEEEE333333");
-
         childService.saveChild(child);
         child = null;
         initNewChild();
