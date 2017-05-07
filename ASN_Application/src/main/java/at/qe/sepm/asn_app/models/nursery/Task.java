@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.models.nursery;
 
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
@@ -19,15 +20,15 @@ public class Task implements Persistable<Long> {
     private Long id;
     private String description;
     @ManyToOne(optional = false)
-    private Employee  sender;
+    private UserData  sender;
     @ManyToOne(optional = false)
-    private Parent receiver;
+    private UserData receiver;
     private Date beginDate;
     private Date endDate;
 
     public Task(){}
 
-    public Task(String description, Employee sender, Parent receiver, Date beginDate, Date endDate) {
+    public Task(String description, UserData sender, UserData receiver, Date beginDate, Date endDate) {
         this.description = description;
         this.sender = sender;
         this.receiver = receiver;
@@ -43,19 +44,19 @@ public class Task implements Persistable<Long> {
         this.description = description;
     }
 
-    public Employee getSender() {
+    public UserData getSender() {
         return sender;
     }
 
-    public void setSender(Employee sender) {
+    public void setSender(UserData sender) {
         this.sender = sender;
     }
 
-    public Parent getReceiver() {
+    public UserData getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(Parent receiver) {
+    public void setReceiver(UserData receiver) {
         this.receiver = receiver;
     }
 

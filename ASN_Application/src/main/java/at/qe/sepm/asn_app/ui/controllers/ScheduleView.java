@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.ui.controllers;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -15,7 +16,15 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.nursery.Task;
+import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.TaskService;
 
 /**
  * Created by Auki on 02.05.2017.
@@ -33,30 +42,25 @@ public class ScheduleView implements Serializable {
     private ScheduleEvent event = new DefaultScheduleEvent();
     
     private boolean visible;
-/*
-    @PostConstruct
-    public void init() {
-        eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Essen", today12Am(), today1Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Schlafen", today1Pm(), nextDay12Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Essen", nextDay12Am(), nextDay1Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Schlafen", nextDay1Pm(), fourDaysLater3pm()));
+    
+    @Autowired
+    private TaskService taskService;
+    
+    @Autowired
+    private UserRepository userRepository;
 
-        lazyEventModel = new LazyScheduleModel() {
+    private Task task;
+    private Collection<Task> tasks;
 
-            @Override
-            public void loadEvents(Date start, Date end) {
-                Date random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 1", random, random));
-
-                random = getRandomDate(start);
-                addEvent(new DefaultScheduleEvent("Lazy Event 2", random, random));
-            }
-        };
-    } */
     @PostConstruct
     public void init(){
         eventModel = new DefaultScheduleModel();
+    	tasks = taskService.getAllTasks();
+    	for( Task t : tasks ){
+            System.err.println(t.getBeginDate() + "           " + previousDay11Pm());
+
+    		eventModel.addEvent(new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate()));
+    	}
     }
     public String test(){
         return "123";
@@ -211,11 +215,15 @@ public class ScheduleView implements Serializable {
     }
 
     public void addEvent(ActionEvent actionEvent) {
-        if(event.getId() == null)
+        if(event.getId() == null){
             eventModel.addEvent(event);
-        else
+        Task task = new Task(event.getDescription(),getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+        taskService.saveTask(task);
+        
+        }
+        else{
             eventModel.updateEvent(event);
-
+        }
         event = new DefaultScheduleEvent();
     }
 
@@ -252,4 +260,10 @@ public class ScheduleView implements Serializable {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+	
+    public UserData getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		return userRepository.findFirstByUsername(auth.getName());
+    }
 }
