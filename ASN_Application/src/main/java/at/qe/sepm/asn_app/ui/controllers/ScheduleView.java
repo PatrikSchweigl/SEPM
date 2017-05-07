@@ -55,15 +55,15 @@ public class ScheduleView implements Serializable {
     @PostConstruct
     public void init(){
         eventModel = new DefaultScheduleModel();
-    	tasks = taskService.getAllTasks();
+
+    }
+    public void test(){
+    	eventModel.clear();
+    	tasks = taskService.getAllTasksBySender(getAuthenticatedUser().getId());
     	for( Task t : tasks ){
-            System.err.println(t.getBeginDate() + "           " + previousDay11Pm());
 
     		eventModel.addEvent(new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate()));
     	}
-    }
-    public String test(){
-        return "123";
     }
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
@@ -241,18 +241,20 @@ public class ScheduleView implements Serializable {
         System.err.println("MoveEv");
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
 
-        addMessage(message);
     }
 
     public void onEventResize(ScheduleEntryResizeEvent event) {
         System.err.println("ResizeEv");
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
 
-        addMessage(message);
     }
 
-    private void addMessage(FacesMessage message) {
-        FacesContext.getCurrentInstance().addMessage(null, message);
+
+	
+    public UserData getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		return userRepository.findFirstByUsername(auth.getName());
     }
 	public boolean getVisible() {
 		return visible;
@@ -260,10 +262,4 @@ public class ScheduleView implements Serializable {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
-    public UserData getAuthenticatedUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		return userRepository.findFirstByUsername(auth.getName());
-    }
 }
