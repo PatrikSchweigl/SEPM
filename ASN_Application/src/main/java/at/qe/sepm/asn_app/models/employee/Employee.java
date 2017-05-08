@@ -93,4 +93,8 @@ public class Employee extends UserData {
     public void setWorkRole(WorkRole workRole) {
         this.workRole = workRole;
     }
+    
+    public String toString(){
+    	return String.valueOf(getId());
+    }
 }

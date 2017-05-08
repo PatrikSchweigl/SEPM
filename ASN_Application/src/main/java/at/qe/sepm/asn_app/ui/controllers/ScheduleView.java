@@ -26,6 +26,7 @@ import at.qe.sepm.asn_app.models.nursery.MyEvent;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.TaskService;
+import at.qe.sepm.asn_app.services.UserService;
 
 /**
  * Created by Auki on 02.05.2017.
@@ -38,9 +39,9 @@ public class ScheduleView implements Serializable {
 
     private ScheduleModel eventModel;
 
-    private ScheduleModel lazyEventModel;
-
     private ScheduleEvent event = new DefaultScheduleEvent();
+    @Autowired
+    private UserService userService;
     
     private boolean visible;
     
@@ -51,6 +52,7 @@ public class ScheduleView implements Serializable {
     private UserRepository userRepository;
 
     private Task task;
+    private String reciever;
     private Collection<Task> tasks;
 
     @PostConstruct
@@ -60,7 +62,7 @@ public class ScheduleView implements Serializable {
     }
     public void test(){
     	eventModel.clear();
-    	tasks = taskService.getAllTasksBySender(getAuthenticatedUser().getId());
+    	tasks = taskService.getAllTasksByReceiver(getAuthenticatedUser().getId());
     	for( Task t : tasks ){
     		DefaultScheduleEvent ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
     		eventModel.addEvent(ev);
@@ -106,13 +108,34 @@ public class ScheduleView implements Serializable {
     public void addEvent() {
         if(event.getId() == null){
             eventModel.addEvent(event);
-            Task task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
-            taskService.saveTask(task);
+            Task task;
+            if(reciever == null)
+            	task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+            else{
+                UserData user = userService.loadUser(reciever);
+                System.err.println(reciever);
+            	if(user != null){
+            		task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user, event.getStartDate(), event.getEndDate());
+            	}
+            	else{
+            		task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
 
+            	}
+            }
+            taskService.saveTask(task);
         }
+        
         else{
         	Task task = taskService.getTaskByStringId(event.getId());
-        	Task temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+        	Task temp;
+        	if(reciever == null){
+        		temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+        	}
+        	else{
+            	UserData user = userService.loadUser(reciever);
+            	temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user, event.getStartDate(), event.getEndDate());
+            	
+        	}
             eventModel.updateEvent(event);
         	event.setId(temp.getStringId());
 
@@ -173,5 +196,11 @@ public class ScheduleView implements Serializable {
 	}
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	public String getReciever() {
+		return reciever;
+	}
+	public void setReciever(String reciever) {
+		this.reciever = reciever;
 	}
 }
