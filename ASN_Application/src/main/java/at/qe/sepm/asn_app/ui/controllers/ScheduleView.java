@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.nursery.MyEvent;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.TaskService;
@@ -62,7 +63,7 @@ public class ScheduleView implements Serializable {
     	tasks = taskService.getAllTasksBySender(getAuthenticatedUser().getId());
     	for( Task t : tasks ){
 
-    		eventModel.addEvent(new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate()));
+    		eventModel.addEvent(t.getEvent());
     	}
     }
     public Date getRandomDate(Date base) {
@@ -94,117 +95,6 @@ public class ScheduleView implements Serializable {
         return lazyEventModel;
     }
 
-    private Calendar today() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar;
-    }
-
-    private Date open(){
-            Calendar t = (Calendar) today().clone(); //TODO: get opening hours
-
-            return t.getTime();
-    }
-
-    private Date close(){
-        Calendar t = (Calendar) today().clone(); //TODO: get closing hours
-
-        return t.getTime();
-    }
-
-    private Date previousDay8Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-        t.set(Calendar.HOUR, 8);
-
-        return t.getTime();
-    }
-
-    private Date previousDay11Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
-    }
-
-    private Date today1Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 1);
-
-        return t.getTime();
-    }
-
-    private Date today12Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.HOUR, 12);
-
-        return t.getTime();
-    }
-
-    private Date theDayAfter3Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 3);
-
-        return t.getTime();
-    }
-
-    private Date today6Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 6);
-
-        return t.getTime();
-    }
-
-    private Date nextDay9Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 9);
-
-        return t.getTime();
-    }
-
-    private Date nextDay11Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
-    }
-    private Date nextDay12Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 12);
-
-        return t.getTime();
-    }
-    private Date nextDay1Pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.HOUR, 1);
-
-        return t.getTime();
-    }
-    private Date fourDaysLater3pm() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.PM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-        t.set(Calendar.HOUR, 3);
-
-        return t.getTime();
-    }
 
     public ScheduleEvent getEvent() {
         return event;
@@ -217,8 +107,9 @@ public class ScheduleView implements Serializable {
     public void addEvent(ActionEvent actionEvent) {
         if(event.getId() == null){
             eventModel.addEvent(event);
-        Task task = new Task(event.getDescription(),getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
-        taskService.saveTask(task);
+            MyEvent myEvent = new MyEvent(event.getId(), event.getDescription(), event.getStartDate(), event.getEndDate());
+            Task task = new Task(event.getDescription(), myEvent, getAuthenticatedUser(), getAuthenticatedUser());
+            taskService.saveTask(task);
         
         }
         else{

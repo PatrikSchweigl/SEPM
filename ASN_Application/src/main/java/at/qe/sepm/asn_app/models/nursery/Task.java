@@ -18,22 +18,21 @@ public class Task implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private MyEvent event;
     private String description;
     @ManyToOne(optional = false)
     private UserData  sender;
     @ManyToOne(optional = false)
     private UserData receiver;
-    private Date beginDate;
-    private Date endDate;
+
 
     public Task(){}
 
-    public Task(String description, UserData sender, UserData receiver, Date beginDate, Date endDate) {
+    public Task(String description, MyEvent event, UserData sender, UserData receiver) {
         this.description = description;
+        this.event = event;
         this.sender = sender;
         this.receiver = receiver;
-        this.beginDate = beginDate;
-        this.setEndDate(endDate);
     }
 
     public String getDescription() {
@@ -60,14 +59,6 @@ public class Task implements Persistable<Long> {
         this.receiver = receiver;
     }
 
-    public Date getBeginDate() {
-        return beginDate;
-    }
-
-    public void setBeginDate(Date date) {
-        this.beginDate = date;
-    }
-
     @Override
     public Long getId() {
         return id;
@@ -78,11 +69,13 @@ public class Task implements Persistable<Long> {
         return getSender() == null;
     }
 
-	public Date getEndDate() {
-		return endDate;
+
+	public MyEvent getEvent() {
+		return event;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEvent(MyEvent event) {
+		this.event = event;
 	}
+
 }
