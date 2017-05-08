@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.models.child;
 
 
+import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
@@ -24,9 +25,13 @@ public class Child implements Persistable<Long>{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
+
+
+
     private String lastName;
     private String birthday;
     private String imgName;
+    private Gender gender;
     /*@ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
     @ManyToOne(optional = false)
@@ -53,11 +58,12 @@ public class Child implements Persistable<Long>{
     /* CONSTRUCTORS */
     public Child() {}
 
-    public Child(String firstName, String lastName, String birthday, String imgName) {
+    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.imgName = imgName;
+        this.gender = gender;
     }
 
     public String getFirstName() {
@@ -90,6 +96,10 @@ public class Child implements Persistable<Long>{
 
     public void setImgName(String imgName) {
         this.imgName = imgName;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
 
