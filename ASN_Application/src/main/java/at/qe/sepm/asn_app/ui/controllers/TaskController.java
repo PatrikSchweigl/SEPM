@@ -60,18 +60,39 @@ public class TaskController {
         this.tasks = tasks;
     }
 
-    public void doSaveTask(Task task){
+    public void doSaveTask(){
         taskService.saveTask(task);
         task = null;
         initNewTask();
+        initList();
     }
 
-    public void doDeleteTask(Task task){
-        taskService.deleteTask(task);
+    public void doDeleteTask(){
+        this.taskService.deleteTask(taskEdit);
     }
 
     public void doReloadTask(){
         task = taskService.loadTask(task.getId());
+    }
+
+    private Task taskEdit;
+
+    public Task getTaskEdit() {
+        return taskEdit;
+    }
+
+    public void setTaskEdit(Task task) {
+        this.taskEdit = task;
+        doReloadTaskEdit();
+    }
+
+    public void doSaveTaskEdit(Task task) {
+        taskService.saveTask(task);
+        initList();
+    }
+
+    public void doReloadTaskEdit(){
+        taskEdit = taskService.loadTask(taskEdit.getId());
     }
 
 }

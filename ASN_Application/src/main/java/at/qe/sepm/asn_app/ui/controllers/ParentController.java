@@ -53,6 +53,7 @@ public class ParentController {
         parent = parentService.saveParent(parent);
         parent = null;
         initNewParent();
+        initList();
     }
 
     public Parent getParent() {
@@ -60,7 +61,32 @@ public class ParentController {
     }
 
     public void doReloadParent() {
-        parent = parentService.loadParent(parent.getUsername());
+        parent = parentService.loadParent(parent.getId());
+    }
+
+    private Parent parentEdit;
+
+    public Parent getParentEdit() {
+        return parentEdit;
+    }
+
+    public void setParentEdit(Parent parent) {
+        this.parentEdit = parent;
+        doReloadParentEdit();
+    }
+
+    public void doReloadParentEdit() {
+        parentEdit = parentService.loadParent(parentEdit.getId());
+    }
+
+    public void doSaveParentEdit(){
+        parentEdit = parentService.saveParent(parentEdit);
+        initList();
+    }
+
+    public void doDeleteParentEdit() {
+        this.parentService.deleteParent(parentEdit);
+        parentEdit = null;
     }
 
 

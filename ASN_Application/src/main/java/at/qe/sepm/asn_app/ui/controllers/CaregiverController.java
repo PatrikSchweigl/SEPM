@@ -24,6 +24,7 @@ public class CaregiverController {
     private CaregiverService caregiverService;
 
     private Caregiver caregiver;
+    private Caregiver caregiverEdit;
 
     private Collection<Caregiver> caregivers;
 
@@ -58,11 +59,6 @@ public class CaregiverController {
         return caregivers;
     }
 
-    /*
-    public Collection<Caregiver> getCaregiver(Child child){
-        return caregiverService.getAllChildren();
-    }
-    */
 
     public void doSaveCaregiver(){
         //System.out.println("Saving child: " + child.getFirstName() + " " + child.getLastName());
@@ -72,11 +68,30 @@ public class CaregiverController {
     }
 
 
-    /*
-    public void parseDate(String date) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd-MM-yyyy");
-        DateTime dateTime = dateTimeFormatter.parseDateTime(date);
-        child.setBirthday(dateTime);
+
+
+    public Caregiver getCaregiverEdit() {
+        return caregiverEdit;
     }
-    */
+
+    public void setCaregiverEdit(Caregiver caregiver) {
+        this.caregiverEdit = caregiver;
+        doReloadCaregiverEdit();
+    }
+
+    public void doReloadCaregiverEdit() {
+        //child = childService.loadUser(child.getUsername());
+        caregiverEdit = caregiverService.loadCaregiver(caregiverEdit.getId());
+    }
+
+    public void doSaveCaregiverEdit(){
+        caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
+    }
+
+    public void doDeleteCaregiverEdit() {
+        this.caregiverService.deleteCaregiver(caregiverEdit);
+        caregiverEdit = null;
+    }
+
+
 }

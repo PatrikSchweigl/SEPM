@@ -39,6 +39,8 @@ public class ParentService {
 
 
     public Parent saveParent(Parent parent) {
+
+        System.out.println(parent.getFirstName() + "MOTHERFUUUUUUUUUUUUUUUUUUUUUUUCKER");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
@@ -47,8 +49,8 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-    public Parent loadParent(String username) {
-        return parentRepository.findFirstByUsername(username);
+    public Parent loadParent(Long id) {
+        return parentRepository.findOne(id);
     }
 
 

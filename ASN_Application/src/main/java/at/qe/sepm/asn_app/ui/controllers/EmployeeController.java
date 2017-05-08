@@ -21,22 +21,21 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-
     private Collection<Employee> employees;
+    private Employee employee;
+    private Employee employeeEdit;
 
+
+
+    public void setEmployee(Employee employeeEdit) {
+        this.employee = employeeEdit;
+        doReloadEmployee();
+    }
     public void setEmployees(Collection<Employee> employees) {
         this.employees = employees;
     }
-
-    private Employee employee;
-
-    public void setUser(Employee employeeEdit) {
-        this.employee = employeeEdit;
-        doReloadUser();
-    }
-
-    public void doReloadUser() {
-        employee = employeeService.loadUser(employee.getUsername());
+    public void doReloadEmployee() {
+        employee = employeeService.loadUser(employee.getId());
     }
 
     @PostConstruct
@@ -61,7 +60,32 @@ public class EmployeeController {
         employee = employeeService.saveEmployee(employee);
         employee = null;
         initNewEmployee();
+        initList();
+    }
 
+    public Employee getEmployeeEdit() {
+        return employeeEdit;
+    }
+
+    public void setEmployeeEdit(Employee employee) {
+        this.employeeEdit = employee;
+        doReloadEmployeeEdit();
+    }
+
+
+    public void doReloadEmployeeEdit() {
+        employeeEdit = employeeService.loadUser(employeeEdit.getId());
+    }
+
+    public void doSaveEmployeeEdit(){
+        employeeEdit = employeeService.saveEmployee(employeeEdit);
+        initList();
+    }
+
+    public void doDeleteEmployee() {
+        System.out.println(employeeEdit.getFirstName());
+        //employeeService.deleteEmployee(employeeEdit);
+        employeeEdit = null;
     }
 
 }

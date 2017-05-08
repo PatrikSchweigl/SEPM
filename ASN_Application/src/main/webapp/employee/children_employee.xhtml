@@ -93,14 +93,14 @@
                                                                  oncomplete="PF('childEditDialog').show()"
                                                                  icon="ui-icon-note" title="Edit">
                                                     <f:setPropertyActionListener value="#{child}"
-                                                                                 target="#{childEditController.child}" />
+                                                                                 target="#{childController.childEdit}" />
                                                 </p:commandButton>
                                                 <p:commandButton
-                                                        action="#{childEditController.doDeleteChild}"
+                                                        action="#{childController.doDeleteChild}"
                                                         icon="ui-icon-trash" title="Delete"
                                                         update=":childForm:childTable">
                                                     <f:setPropertyActionListener value="#{child}"
-                                                                                 target="#{childEditController.child}"/>
+                                                                                 target="#{childController.childEdit}"/>
                                                     <p:confirm header="Confirmation"
                                                                message="Are you sure that you want to delete this Child? You cannot undo this operation."
                                                                icon="ui-icon-alert"/>
@@ -121,29 +121,29 @@
                                                   widgetVar="childEditDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
                                             <p:outputPanel id="childDataEdit"
-                                                           rendered="#{not empty childEditController.child}">
+                                                           rendered="#{not empty childController.childEdit}">
                                                 <h:panelGrid columns="2">
                                                     <p:outputLabel for="firstname" value="Firstname: " />
                                                     <p:inputText id="firstname"
-                                                                 value="#{childEditController.child.firstName}" />
+                                                                 value="#{childController.childEdit.firstName}" />
                                                     <p:outputLabel for="lastname" value="Lastname: " />
                                                     <p:inputText id="lastname"
-                                                                 value="#{childEditController.child.lastName}"/>
+                                                                 value="#{childController.childEdit.lastName}"/>
                                                     <p:outputLabel for="birthday" value="Birthday: " />
                                                     <p:inputMask mask="99/99/9999" id="birthday"
-                                                                 value="#{childController.child.birthday}"/>
+                                                                 value="#{childController.childEdit.birthday}"/>
                                                     <p:outputLabel for="imgName" value="Bildname: " />
                                                     <p:inputText id="imgName"
-                                                                 value="#{childEditController.child.imgName}"/>
+                                                                 value="#{childController.childEdit.imgName}"/>
                                                 </h:panelGrid>
                                                 <p:separator />
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
-                                                                     action="#{childEditController.doSaveChild()}"
+                                                                     action="#{childController.doSaveChildEdit()}"
                                                                      oncomplete="PF('childEditDialog').hide()"
                                                                      update=":childForm"/>
                                                     <p:commandButton value="Reload"
-                                                                     action="#{childEditController.doReloadChild()}"
+                                                                     action="#{childController.doReloadChild()}"
                                                                      update=":childForm:childEditDialog" />
                                                     <p:commandButton value="Abort"
                                                                      onclick="PF('childEditDialog').hide()" />
