@@ -36,7 +36,8 @@
 													update="eventDetails"
 													oncomplete="PF('eventDialog').show();" />
 												<p:ajax event="eventMove"
-													listener="#{scheduleView.onEventMove}" />
+													listener="#{scheduleView.onEventMove}"
+													oncomplete="scheduleView.addEvent()" />
 												<p:ajax event="eventResize"
 													listener="#{scheduleView.onEventResize}" />
 
@@ -131,7 +132,7 @@
 														'Mi', 'Do', 'Fr', 'Sa',
 														'So' ],
 												weekHeader : 'KW',
-												firstDay : 1,
+												firstDay : 0,
 												isRTL : false,
 												showMonthAfterYear : false,
 												yearSuffix : '',

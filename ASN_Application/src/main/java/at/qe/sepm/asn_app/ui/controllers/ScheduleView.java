@@ -65,7 +65,6 @@ public class ScheduleView implements Serializable {
     		DefaultScheduleEvent ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
     		eventModel.addEvent(ev);
     		ev.setId(t.getStringId());
-            System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.err.println(t.getStringId());
             System.err.println(ev.getId());
 
@@ -88,10 +87,8 @@ public class ScheduleView implements Serializable {
 
     public ScheduleModel getEventModel() {
         if(eventModel == null) {
-            System.err.println("Ahoy");
         }
         else{
-            System.err.println("T");
         }
         return eventModel;
     }
@@ -106,13 +103,11 @@ public class ScheduleView implements Serializable {
         this.event = event;
     }
 
-    public void addEvent(ActionEvent actionEvent) {
+    public void addEvent() {
         if(event.getId() == null){
             eventModel.addEvent(event);
             Task task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
             taskService.saveTask(task);
-            System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-            System.err.println(event.getId());
 
         }
         else{
@@ -128,7 +123,6 @@ public class ScheduleView implements Serializable {
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-        System.err.println("SelectEv");
         event = (ScheduleEvent) selectEvent.getObject();
         System.err.println(event.getDescription());
         System.err.println(event.getId());
@@ -138,19 +132,32 @@ public class ScheduleView implements Serializable {
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
-        System.err.println("SelectDt");
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
     }
 
-    public void onEventMove(ScheduleEntryMoveEvent event) {
-        System.err.println("MoveEv");
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+    public void onEventMove(ScheduleEntryMoveEvent moveEvent) {
+        event = moveEvent.getScheduleEvent();
+        
+    	Task task = taskService.getTaskByStringId(event.getId());
+    	Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+        eventModel.updateEvent(event);
+    	event.setId(temp.getStringId());
 
+        taskService.deleteTask(task);
+        taskService.saveTask(temp);
     }
 
-    public void onEventResize(ScheduleEntryResizeEvent event) {
-        System.err.println("ResizeEv");
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+    public void onEventResize(ScheduleEntryResizeEvent resizeEvent) {
+        event = resizeEvent.getScheduleEvent();
+        
+        
+    	Task task = taskService.getTaskByStringId(event.getId());
+    	Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+        eventModel.updateEvent(event);
+    	event.setId(temp.getStringId());
+
+        taskService.deleteTask(task);
+        taskService.saveTask(temp);
 
     }
 
