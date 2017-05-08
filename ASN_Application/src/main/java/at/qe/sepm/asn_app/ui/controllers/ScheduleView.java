@@ -62,8 +62,13 @@ public class ScheduleView implements Serializable {
     	eventModel.clear();
     	tasks = taskService.getAllTasksBySender(getAuthenticatedUser().getId());
     	for( Task t : tasks ){
+    		DefaultScheduleEvent ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
+    		eventModel.addEvent(ev);
+    		ev.setId(t.getStringId());
+            System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            System.err.println(t.getStringId());
+            System.err.println(ev.getId());
 
-    		eventModel.addEvent(t.getEvent());
     	}
     }
     public Date getRandomDate(Date base) {
@@ -91,9 +96,6 @@ public class ScheduleView implements Serializable {
         return eventModel;
     }
 
-    public ScheduleModel getLazyEventModel() {
-        return lazyEventModel;
-    }
 
 
     public ScheduleEvent getEvent() {
@@ -107,13 +109,20 @@ public class ScheduleView implements Serializable {
     public void addEvent(ActionEvent actionEvent) {
         if(event.getId() == null){
             eventModel.addEvent(event);
-            MyEvent myEvent = new MyEvent(event.getId(), event.getDescription(), event.getStartDate(), event.getEndDate());
-            Task task = new Task(event.getDescription(), myEvent, getAuthenticatedUser(), getAuthenticatedUser());
+            Task task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
             taskService.saveTask(task);
-        
+            System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            System.err.println(event.getId());
+
         }
         else{
+        	Task task = taskService.getTaskByStringId(event.getId());
+        	Task temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
             eventModel.updateEvent(event);
+        	event.setId(temp.getStringId());
+
+            taskService.deleteTask(task);
+            taskService.saveTask(temp);
         }
         event = new DefaultScheduleEvent();
     }
@@ -121,6 +130,11 @@ public class ScheduleView implements Serializable {
     public void onEventSelect(SelectEvent selectEvent) {
         System.err.println("SelectEv");
         event = (ScheduleEvent) selectEvent.getObject();
+        System.err.println(event.getDescription());
+        System.err.println(event.getId());
+
+
+        
     }
 
     public void onDateSelect(SelectEvent selectEvent) {

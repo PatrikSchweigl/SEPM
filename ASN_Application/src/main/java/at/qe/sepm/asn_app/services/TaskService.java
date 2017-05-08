@@ -42,5 +42,9 @@ public class TaskService {
     public Collection<Task> getAllTasksByReceiver(Long id){
         return taskRepository.getTasksByReceiver(id);
     }
+    
+    public Task getTaskByStringId(String id){
+        return taskRepository.getTaskByStringId(id);
+    }
 
 }
