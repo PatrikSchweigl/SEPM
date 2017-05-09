@@ -9,6 +9,7 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Assignment;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
+import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ui.constraints.ParentConstraints;
 import org.junit.After;
 import org.junit.Before;
@@ -54,8 +55,8 @@ public class ParentConstraintsTest {
         // Having a '0' in front of the month could maybe be a problem because usually a 0 in front of a number means oct-numbers
         listParents = new ArrayList<>();
         listParents.add(parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", ParentListChildren1, ParentListAssignments1, FamilyStatus.MARRIED, true, "24/05/1980"));
-        listParents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", ParentListChildren2, ParentListAssignments2, FamilyStatus.DIVORCED, true, "11/11/2003"));
-        listParents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));
+        listParents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", ParentListChildren2, ParentListAssignments2, FamilyStatus.DIVORCED, true, "11/11/2003"));  // Too young
+        listParents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Too old
 
         listChildren = new ArrayList<>();
         listChildren.add(child1 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName1", Gender.MALE, parent1));
@@ -77,6 +78,17 @@ public class ParentConstraintsTest {
     @Test
     public void checkBirthdayConstraintsTest1() throws BirthdayConstraintException {
         parentConstraints = new ParentConstraints(parent1);
+        parentConstraints.checkBirthdayConstraints();
+    }
+
+
+    /**
+     * Check for the violation of the constraint that a parent must not be younger than 14 years old.
+     * @throws BirthdayConstraintException
+     */
+    @Test(expected = BirthdayConstraintException.class)
+    public void checkBirthdayConstraintsTest2() throws BirthdayConstraintException {
+        parentConstraints = new ParentConstraints(parent2);
         parentConstraints.checkBirthdayConstraints();
     }
 
