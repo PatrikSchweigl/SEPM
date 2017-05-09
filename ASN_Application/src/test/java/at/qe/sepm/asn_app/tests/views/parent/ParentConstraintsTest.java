@@ -83,12 +83,23 @@ public class ParentConstraintsTest {
 
 
     /**
-     * Check for the violation of the constraint that a parent must not be younger than 14 years old.
+     * Check for the violation of the constraint that a parent must not be younger than 14 years.
      * @throws BirthdayConstraintException
      */
     @Test(expected = BirthdayConstraintException.class)
     public void checkBirthdayConstraintsTest2() throws BirthdayConstraintException {
         parentConstraints = new ParentConstraints(parent2);
+        parentConstraints.checkBirthdayConstraints();
+    }
+
+
+    /**
+     * Check for the violation of the constraint that a parent must not be older than 99 years.
+     * @throws BirthdayConstraintException
+     */
+    @Test(expected = BirthdayConstraintException.class)
+    public void checkBirthdayConstraintsTest3() throws BirthdayConstraintException {
+        parentConstraints = new ParentConstraints(parent3);
         parentConstraints.checkBirthdayConstraints();
     }
 
