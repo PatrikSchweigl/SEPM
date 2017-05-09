@@ -32,6 +32,34 @@ public class Child implements Persistable<Long>{
     private String birthday;
     private String imgName;
     private Gender gender;
+
+
+    @ManyToOne(optional = false)
+    private Parent parent1;
+
+    @ManyToOne // only 1 parent required for child
+    private Parent parent2;
+
+    private String emergencyNumber;
+    @ElementCollection(targetClass = String.class)
+    private Set<String> allergies;
+    @ElementCollection(targetClass = String.class)
+    private Set<String> foodIntolerances;
+
+
+    @OneToMany
+    private Set<Sibling> siblings;
+
+    @Enumerated(EnumType.STRING)
+    private Custody custody;
+
+    @Enumerated(EnumType.STRING)
+    private Religion religion;
+
+    //@ElementCollection(targetClass = Caregiver.class)
+    @OneToMany
+    private Set<Caregiver> caregivers;
+
     /*@ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
     @ManyToOne(optional = false)
@@ -40,9 +68,9 @@ public class Child implements Persistable<Long>{
     private Parent parent2;
     private String emergencyNumber;
     @ElementCollection(targetClass=String.class)
-    private Set<String> listAllergies;
+    private Set<String> allergies;
     @ElementCollection(targetClass=String.class)
-    private Set<String> listFoodIntolerances;
+    private Set<String> foodIntolerances;
     @OneToMany
     private Set<Sibling> listSiblings;
     @OneToMany
@@ -58,12 +86,41 @@ public class Child implements Persistable<Long>{
     /* CONSTRUCTORS */
     public Child() {}
 
-    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender) {
+    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent parent) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.imgName = imgName;
         this.gender = gender;
+        this.parent1 = parent;
+    }
+    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1, Parent par2, String emergencyNumber, Custody custody, Religion religion) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.imgName = imgName;
+        this.gender = gender;
+        this.parent1 = par1;
+        this.parent2 = par2;
+        this.emergencyNumber = emergencyNumber;
+        this.custody = custody;
+        this.religion = religion;
+    }
+
+    public void addCaregiver(Caregiver c){
+        caregivers.add(c);
+    }
+
+    public void addAllergy(String s){
+        allergies.add(s);
+    }
+
+    public void addFoodIntolerance(String s){
+        foodIntolerances.add(s);
+    }
+
+    public void addSibling(Sibling s){
+        siblings.add(s);
     }
 
     public String getFirstName() {
@@ -102,6 +159,61 @@ public class Child implements Persistable<Long>{
         return gender;
     }
 
+    public String getEmergencyNumber() {
+        return emergencyNumber;
+    }
+
+    public void setEmergencyNumber(String emergencyNumber) {
+        this.emergencyNumber = emergencyNumber;
+    }
+
+    public Set<String> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(Set<String> allergies) {
+        this.allergies = allergies;
+    }
+
+    public Set<String> getFoodIntolerances() {
+        return foodIntolerances;
+    }
+
+    public void setFoodIntolerances(Set<String> foodIntolerances) {
+        this.foodIntolerances = foodIntolerances;
+    }
+
+    public Set<Sibling> getSiblings() {
+        return siblings;
+    }
+
+    public void setSiblings(Set<Sibling> siblings) {
+        this.siblings = siblings;
+    }
+
+    public Custody getCustody() {
+        return custody;
+    }
+
+    public void setCustody(Custody custody) {
+        this.custody = custody;
+    }
+
+    public Religion getReligion() {
+        return religion;
+    }
+
+    public void setReligion(Religion religion) {
+        this.religion = religion;
+    }
+
+    public Set<Caregiver> getCaregivers() {
+        return caregivers;
+    }
+
+    public void setCaregivers(Set<Caregiver> caregivers) {
+        this.caregivers = caregivers;
+    }
 
     @Override
     public Long getId() {
