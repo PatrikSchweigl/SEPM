@@ -53,6 +53,7 @@ public class TaskController {
 
     public void setTask(Task task) {
         this.task = task;
+		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
         doReloadTask();
     }
 

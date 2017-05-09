@@ -20,13 +20,12 @@ public class PrivateMessage implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String usernameSender;
-    @NotNull
+
     private String usernameReceiver;
-    @NotNull
+
     private String message;
-    @NotNull
+
 	private Date date;
 
 	public PrivateMessage() {

@@ -1,17 +1,22 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.models.nursery.PrivateMessage;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.MessageService;
 import at.qe.sepm.asn_app.services.PrivateMessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
@@ -23,8 +28,14 @@ public class PrivateMessageController {
 
     @Autowired
     private PrivateMessageService messageService;
-    
+	@Autowired
+	private UserRepository userRepository;
+
     private PrivateMessage message;
+    
+    private String privateMessage;
+    
+    private String username;
     
     public PrivateMessage getMessage() {
         return message;
@@ -33,6 +44,7 @@ public class PrivateMessageController {
     @PostConstruct
     public void init(){
     	message = new PrivateMessage();
+    	privateMessage = new String();
     }
     
     public void setMessage(PrivateMessage message) {
@@ -43,7 +55,7 @@ public class PrivateMessageController {
         message = messageService.loadPrivateMessage(message.getId());
     }
 
-    public Collection<PrivateMessage> getMessages(){
+    public Collection<PrivateMessage> getAllPrivateMessages(){
         return messageService.getAllPrivateMessages();
     }
     
@@ -52,10 +64,52 @@ public class PrivateMessageController {
         message = null;
     }
     
+    public void savePrivateMessage(){
+		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+    	PrivateMessage privateMessages = new PrivateMessage();
+    	privateMessages.setDate(new Date());
+    	privateMessages.setMessage(privateMessage);
+    	privateMessages.setUsernameSender(getAuthenticatedUser().getUsername());
+    	privateMessages.setUsername(username);
+    	messageService.savePrivateMessage(privateMessages);
+    }
+    
     public Collection<PrivateMessage> getPrivateMessagesBySender(String username){
         return messageService.getAllPrivateMessagesBySender(username);
     }
     public Collection<PrivateMessage> getPrivateMessagesByReceiver(String username){
         return messageService.getAllPrivateMessagesByReceiver(username);
     }
+   
+    
+    
+    public UserData getAuthenticatedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		return userRepository.findFirstByUsername(auth.getName());
+    }
+
+	public String getUsername() {
+		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
+		System.err.println(username);
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+		return username;
+	}
+
+	public void setUsername(String username) {
+		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
+		System.err.println(username);
+		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
+
+		this.username = username;
+	}
+
+	public String getPrivateMessage() {
+		return privateMessage;
+	}
+
+	public void setPrivateMessage(String privateMessage) {
+		this.privateMessage = privateMessage;
+	}
 }

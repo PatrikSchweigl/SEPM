@@ -85,7 +85,8 @@
 									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/general/parentspage_admin.xhtml"> <i
 									class="fa fa-users fa-3x"></i> <span
@@ -207,126 +208,72 @@
 				responsive="true" width="300" height="400" minimizable="true"
 				minWidth="270">
 				<h3>Mitarbeiter</h3>
+				<div>
+					<ui:repeat var="employee" value="#{employeeController.employees}">
+						<h:panelGrid columns="2" style="width:50px;"
+							columnClasses="logo,detail">
+							<p:commandLink value="#{employee.username}"
+								action="#{privateMessageController.setUsername(employee.username)}"
+								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-				<ui:repeat var="employee" value="#{employeeController.employees}">
-					<h:panelGrid columns="2" style="width:50px;"
-						columnClasses="logo,detail">
-						<p:commandLink
-							onclick="PF('privateMessageSend').show();PF('privateMessage').hide()">
-
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+								<h:outputText value="#{employee.username}" />
+							</p:commandLink>
+						</h:panelGrid>
+						<hr />
+					</ui:repeat>
+				</div>
+				<div>
+					<h3>Eltern</h3>
+					<ui:repeat var="parent" value="#{parentService.getAllParents()}">
+						<h:panelGrid columns="2" style="width:50px;"
+							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
-						</p:commandLink>
-						<h:outputText value="#{employee.username}" />
+							<p:commandLink value="#{parent.username}"
+								action="#{privateMessageController.setUsername(parent.username)}"
+								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-					</h:panelGrid>
-					<hr />
-				</ui:repeat>
-
-				<h3>Eltern</h3>
-				<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-					<h:panelGrid columns="2" style="width:50px;"
-						columnClasses="logo,detail">
-
-						<p:commandLink
-							onclick="PF('privateMessageSend').show();PF('privateMessage').hide()">
-
-							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
-						</p:commandLink>
-						<h:outputText value="#{parent.username}" />
-
-					</h:panelGrid>
-					<hr />
-				</ui:repeat>
+								<h:outputText value="#{parent.username}" />
+							</p:commandLink>
+						</h:panelGrid>
+						<hr />
+					</ui:repeat>
+				</div>
 			</p:dialog>
 		</h:form>
 		<h:form>
-			<p:dialog header="Privatnachricht Senden" id="privateMessageSend"
+			<p:dialog header="Privatnachricht" id="privateMessageSend"
 				widgetVar="privateMessageSend" modal="false" showEffect="clip"
 				hideEffect="clip" resizable="true" position="right,bottom"
 				responsive="true" width="400" height="400" minimizable="true"
 				minWidth="350">
 
-				<ui:repeat var="parent" value="#{parentService.getAllParents()}">
 
-					<div class="messageboard-item">
-						<div class="messageboard-body">
-							<blockquote class="triangle-border">
+				<div>
+					<ui:repeat var="message"
+						value="#{privateMessageController.getAllPrivateMessages()}">
+						<div class="messageboard-item">
+							<div class="messageboard-body">
 
-								<div>
-									<p>Nachricht</p>
-									<ui:fragment
-										rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
-										<div align="right">
-											<p:commandLink
-												action="#{messageService.deleteMessage(message)}"
-												icon="ui-icon-trash" title="Nachricht löschen"
-												>
-											</p:commandLink>
-
+								<p:outputPanel id="myOutputPanel">
+									<blockquote class="triangle-border-new">
+										<div>
+											<p>#{message.message}</p>
 										</div>
-									</ui:fragment>
-								</div>
-							</blockquote>
+									</blockquote>
+								</p:outputPanel>
 
+							</div>
 						</div>
-					</div>
-					<hr/>
-				</ui:repeat>
-				
-								<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-
-					<div class="messageboard-item">
-						<div class="messageboard-body">
-							<blockquote class="triangle-border">
-								<p>Nachricht</p>
-
-								<div>
-									<p>#{message.message}</p>
-									<ui:fragment
-										rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
-										<div align="right">
-											<p:commandLink
-												action="#{messageService.deleteMessage(message)}"
-												icon="ui-icon-trash" title="Nachricht löschen"
-												>
-											</p:commandLink>
-
-										</div>
-									</ui:fragment>
-								</div>
-							</blockquote>
-
-						</div>
-					</div>
-				</ui:repeat>
-				
-												<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-
-					<div class="messageboard-item">
-						<div class="messageboard-body">
-							<blockquote class="triangle-border-new">
-								<p>Nachricht</p>
-
-								<div>
-									<p>#{message.message}</p>
-									<ui:fragment
-										rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
-										<div align="right">
-											<p:commandLink
-												action="#{messageService.deleteMessage(message)}"
-												icon="ui-icon-trash" title="Nachricht löschen"
-												>
-											</p:commandLink>
-
-										</div>
-									</ui:fragment>
-								</div>
-							</blockquote>
-
-						</div>
-					</div>
-				</ui:repeat>
-
+					</ui:repeat>
+				</div>
+				<div>
+					<p:inputTextarea placeholder="Nachricht" id="messageInput"
+						value="#{privateMessageController.privateMessage}" rows="5"
+						cols="30" autoResize="false" />
+					<p:commandButton value="Senden"
+						action="#{privateMessageController.savePrivateMessage()}" />
+				</div>
 			</p:dialog>
 		</h:form>
 	</ui:composition>

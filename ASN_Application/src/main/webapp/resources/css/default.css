@@ -8,6 +8,10 @@ body {
   margin: 0;
 }
 
+.private-message-input{
+	width: 100%;
+}
+
 
 .dropdown-menu {
   position: absolute;
