@@ -249,14 +249,38 @@
 				<ui:repeat var="parent" value="#{parentService.getAllParents()}">
 
 					<div class="messageboard-item">
-						<span class="time"> <i class="fa fa-clock-o"></i>
-							#{message.date}
-						</span>
 						<div class="messageboard-body">
-							<blockquote class="rectangle-speech-border">
-								<h3>#{message.username} schrieb:</h3>
+							<blockquote class="triangle-border">
 
-								<div class="text">
+								<div>
+									<p>Nachricht</p>
+									<ui:fragment
+										rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
+										<div align="right">
+											<p:commandLink
+												action="#{messageService.deleteMessage(message)}"
+												icon="ui-icon-trash" title="Nachricht löschen"
+												update=":messages">
+											</p:commandLink>
+
+										</div>
+									</ui:fragment>
+								</div>
+							</blockquote>
+
+						</div>
+					</div>
+					<hr/>
+				</ui:repeat>
+				
+								<ui:repeat var="parent" value="#{parentService.getAllParents()}">
+
+					<div class="messageboard-item">
+						<div class="messageboard-body">
+							<blockquote class="triangle-border">
+								<p>Nachricht</p>
+
+								<div>
 									<p>#{message.message}</p>
 									<ui:fragment
 										rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
@@ -265,11 +289,33 @@
 												action="#{messageService.deleteMessage(message)}"
 												icon="ui-icon-trash" title="Nachricht löschen"
 												update=":messages">
-												<span class="time"> <i class="fa fa-trash-o bg-gray"></i>
-												</span>
-												<p:confirm header="Bestätigung"
-													message="Sind Sie sicher, dass Sie die Nachricht löschen wollen? Dies lässt sich nicht rückgängig machen."
-													icon="ui-icon-alert" />
+											</p:commandLink>
+
+										</div>
+									</ui:fragment>
+								</div>
+							</blockquote>
+
+						</div>
+					</div>
+				</ui:repeat>
+				
+												<ui:repeat var="parent" value="#{parentService.getAllParents()}">
+
+					<div class="messageboard-item">
+						<div class="messageboard-body">
+							<blockquote class="triangle-border-new">
+								<p>Nachricht</p>
+
+								<div>
+									<p>#{message.message}</p>
+									<ui:fragment
+										rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
+										<div align="right">
+											<p:commandLink
+												action="#{messageService.deleteMessage(message)}"
+												icon="ui-icon-trash" title="Nachricht löschen"
+												update=":messages">
 											</p:commandLink>
 
 										</div>

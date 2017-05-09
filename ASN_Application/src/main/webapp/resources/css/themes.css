@@ -4,6 +4,65 @@
     color: #fff;
 }
 
+
+.triangle-border {
+  position:relative;
+  margin:1em 0 3em;
+  border:1px solid #5a8f00;
+  color:#333;
+  background:#fff;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+.triangle-border-new {
+  position:relative;
+  margin:1em 0 3em;
+  border:1px solid #5a8f00;
+  color:#333;
+  background:#fff;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+.triangle-border.left {
+  margin-left:30px;
+}
+
+
+.triangle-border.right {
+  margin-right:30px;
+}
+
+.triangle-border:before {
+  content:"";
+  position:absolute;
+  bottom:-20px; /* value = - border-top-width - border-bottom-width */
+  left:40px; /* controls horizontal position */
+  border-width:20px 20px 0;
+  border-style:solid;
+  border-color:#5a8f00 transparent;
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:0;
+}
+
+.triangle-border::after {
+    content: "";
+    position: absolute;
+    bottom: -17px;
+    left: 40px;
+    border-width: 18px 20px 0;
+    border-style: solid;
+    border-color: #fff transparent;
+    display: block;
+    width: 0;
+}
+
 .skin-green .rectangle-speech-border {
     position:relative;
     border:5px solid #00a65a;
