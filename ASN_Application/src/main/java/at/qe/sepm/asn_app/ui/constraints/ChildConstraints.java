@@ -8,6 +8,7 @@ import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.parser.BirthdayParser;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.ChildRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
@@ -94,14 +95,14 @@ public class ChildConstraints {
      * @return true iff a child is between the age of 1/2 and 3 years.
      */
     public boolean checkBirthdayConstraints() throws BirthdayConstraintException {
-        // This parsing is only needed because birthday is stored as a string.
-        // TODO Change attribute birthday from String to LocalDateTime.
+        /*
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime birthdayTmp = LocalDateTime.parse(this.child.getBirthday() + " 00:00", formatter);
         System.out.println(birthdayTmp);
-
-        long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         long birthday = birthdayTmp.toEpochSecond(ZoneOffset.UTC);
+        */
+        long birthday = BirthdayParser.parseBirthdayToLong(this.child.getBirthday());
+        long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         int ageDays = (int)((dateNow-birthday)/60/60/24);
         System.out.println("date now: " + dateNow);
         System.out.println("birthday: " + birthday);
