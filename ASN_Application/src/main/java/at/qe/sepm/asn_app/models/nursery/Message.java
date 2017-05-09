@@ -25,24 +25,24 @@ public class Message implements Persistable<Long> {
     @NotNull
     private String message;
     @NotNull
-    private Date date;
+	private Date date;
 
-    public Message(){
-    	
-    }
-    
-    public Message(String username, String message, Date date) {
-        this.username = username;
-        this.message = message;
-        this.date = date;
-    }
+	public Message() {
 
-    public String getUsername() {
-        return username;
-    }
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
+	public Message(String username, String message, Date date) {
+		this.username = username;
+		this.message = message;
+		this.date = date;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
     }
 
     public String getMessage() {
