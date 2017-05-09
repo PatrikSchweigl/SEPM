@@ -107,6 +107,10 @@ public class Child implements Persistable<Long>{
         this.religion = religion;
     }
 
+    public String getPrimaryParentFullName(){
+        return parent1.getFirstName() + " " + parent1.getLastName();
+    }
+
     public void addCaregiver(Caregiver c){
         caregivers.add(c);
     }
