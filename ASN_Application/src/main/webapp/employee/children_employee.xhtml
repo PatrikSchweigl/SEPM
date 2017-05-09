@@ -123,6 +123,8 @@
                                             <p:outputPanel id="childDataEdit"
                                                            rendered="#{not empty childController.childEdit}">
                                                 <h:panelGrid columns="2">
+                                                    <p:outputLabel for="pFirstName" value="Primary Parent: "/>
+                                                    <p:inputText disabled="true" id="pFirstName" value="#{childController.childEdit.getPrimaryParentFullName()}"/>
                                                     <p:outputLabel for="firstname" value="Firstname: " />
                                                     <p:inputText id="firstname"
                                                                  value="#{childController.childEdit.firstName}" />
@@ -135,6 +137,7 @@
                                                     <p:outputLabel for="imgName" value="Bildname: " />
                                                     <p:inputText id="imgName"
                                                                  value="#{childController.childEdit.imgName}"/>
+
                                                 </h:panelGrid>
                                                 <p:separator />
                                                 <h:panelGrid columns="3">
@@ -159,6 +162,22 @@
                                             <p:outputPanel id="childDataAdd"
                                                            rendered="#{not empty childController.child}">
                                                 <h:panelGrid columns="2">
+                                                    <p:outputLabel for="parent" value="Primary Parent"/>
+                                                    <p:selectOneListbox id="parent" value="#{childController.parentUserName}" var="p" filter="true"
+                                                                        filterMatchMode="contains">
+                                                        <f:selectItems value="#{parentService.getAllParents()}"
+                                                                       var="parent" itemLabel="#{parent.username}"
+                                                                       itemValue="#{parent.username}" />
+
+                                                        <p:column>
+                                                            <p:graphicImage name="pictures/tiger.jpg" width="32"
+                                                                            height="32" />
+                                                        </p:column>
+
+                                                        <p:column>
+                                                            <h:outputText value="#{p}" />
+                                                        </p:column>
+                                                    </p:selectOneListbox>
                                                     <p:outputLabel for="firstName" value="Firstname: " />
                                                     <p:inputText id="firstName"
                                                                  value="#{childController.child.firstName}"/>
