@@ -46,7 +46,7 @@ public class MessageController {
         return messageService.getAllMessages();
     }
     
-    public void doDeleteParent() {
+    public void doDeleteMessage() {
         this.messageService.deleteMessage(message);
         message = null;
     }

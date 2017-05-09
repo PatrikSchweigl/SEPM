@@ -10,9 +10,9 @@ import at.qe.sepm.asn_app.models.nursery.PrivateMessage;
 
 public interface PrivateMessageRepository extends AbstractRepository<PrivateMessage, Long>{
 	
-    @Query("SELECT p FROM privateMessage p WHERE :username = p.userenameSender")
+    @Query("SELECT p FROM PrivateMessage p WHERE :username = p.usernameSender")
     List<PrivateMessage> getPrivateMessagesBySender(@Param("username") String id);
 
-    @Query("SELECT p FROM privateMessage p WHERE :username = p.usernameReceiver")
+    @Query("SELECT p FROM PrivateMessage p WHERE :username = p.usernameReceiver")
     List<PrivateMessage> getPrivateMessagesByReceiver(@Param("username") String id);
 }
