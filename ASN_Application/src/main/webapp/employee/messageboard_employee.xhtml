@@ -53,7 +53,7 @@
                                                                                             action="#{messageService.deleteMessage(message)}"
                                                                                             icon="ui-icon-trash"
                                                                                             title="Nachricht löschen"
-                                                                                            update=":messages">
+                                                                                            >
 																							<span class="time"> <i
                                                                                                     class="fa fa-trash-o bg-gray"></i>
 																							</span>
@@ -73,6 +73,29 @@
                                                     </ui:repeat>
 
                                                 </ul>
+
+                                                <p:dialog header="Nachricht schreiben" id="createMessage"
+                                                          widgetVar="createMessage" modal="true" showEffect="fade"
+                                                          hideEffect="fade" resizable="false">
+                                                    <p:inputTextarea id="messageInput"
+                                                                     value="#{messageService.text}" rows="5" cols="30"
+                                                                     counter="display" maxlength="500"
+                                                                     counterTemplate="{0} Zeichen übrig." autoResize="false"/>
+                                                    <p:separator/>
+                                                    <h:outputText id="display"/>
+                                                    <p:separator/>
+                                                    <p:commandButton id="button" value="Senden"
+                                                                     actionListener="#{messageService.saveMessage(messageService.text)}"
+                                                                     oncomplete="PF('createMessage').hide()" />
+                                                </p:dialog>
+
+                                                <p:confirmDialog global="true" showEffect="fade"
+                                                                 hideEffect="fade" width="300">
+                                                    <p:commandButton value="Ja" type="button"
+                                                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                                    <p:commandButton value="Nein" type="button"
+                                                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                                </p:confirmDialog>
                                             </h:form>
                                         </div>
                                         <!-- /.col -->
@@ -80,31 +103,6 @@
 
                                 </div>
                             </div>
-                            <h:form>
-                                <p:dialog header="Nachricht schreiben" id="createMessage"
-                                          widgetVar="createMessage" modal="true" showEffect="fade"
-                                          hideEffect="fade" resizable="false">
-                                    <p:inputTextarea id="messageInput"
-                                                     value="#{messageService.text}" rows="5" cols="30"
-                                                     counter="display" maxlength="500"
-                                                     counterTemplate="{0} Zeichen übrig." autoResize="false"/>
-                                    <p:separator/>
-                                    <h:outputText id="display"/>
-                                    <p:separator/>
-                                    <p:commandButton id="button" value="Senden"
-                                                     actionListener="#{messageService.saveMessage(messageService.text)}"
-                                                     oncomplete="PF('createMessage').hide()" update=":messages"/>
-                                </p:dialog>
-                            </h:form>
-                            <h:form>
-                                <p:confirmDialog global="true" showEffect="fade"
-                                                 hideEffect="fade" width="300">
-                                    <p:commandButton value="Ja" type="button"
-                                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                                    <p:commandButton value="Nein" type="button"
-                                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-                                </p:confirmDialog>
-                            </h:form>
                         </section>
                         <!-- /.content -->
                     </div>

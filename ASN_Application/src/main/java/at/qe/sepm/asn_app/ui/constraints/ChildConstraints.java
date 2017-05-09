@@ -94,6 +94,7 @@ public class ChildConstraints {
      * A child may not be younger than 1/2 year and not older than 3 years.
      * @return true iff a child is between the age of 1/2 and 3 years.
      */
+    // TODO There is no need for this method to be a boolean if we throw errors anyways. I am not sure though what the best practice is.
     public boolean checkBirthdayConstraints() throws BirthdayConstraintException {
         /*
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
