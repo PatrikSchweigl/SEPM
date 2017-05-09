@@ -164,7 +164,7 @@
                                                 <h:panelGrid columns="2">
                                                     <p:outputLabel for="parent" value="Primary Parent"/>
                                                     <p:selectOneListbox id="parent" value="#{childController.parentUserName}" var="p" filter="true"
-                                                                        filterMatchMode="contains">
+                                                                        filterMatchMode="contains" required="true">
                                                         <f:selectItems value="#{parentService.getAllParents()}"
                                                                        var="parent" itemLabel="#{parent.username}"
                                                                        itemValue="#{parent.username}" />
