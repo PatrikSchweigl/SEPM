@@ -40,7 +40,7 @@ public class ParentService {
 
     public Parent saveParent(Parent parent) {
 
-        System.out.println(parent.getFirstName() + "MOTHERFUUUUUUUUUUUUUUUUUUUUUUUCKER");
+        System.out.println(parent.getFirstName());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
