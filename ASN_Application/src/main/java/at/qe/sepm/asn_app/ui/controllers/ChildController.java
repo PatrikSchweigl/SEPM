@@ -3,6 +3,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.services.ChildService;
 
+import at.qe.sepm.asn_app.services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,10 +22,14 @@ public class ChildController {
 
     @Autowired
     private ChildService childService;
+    @Autowired
+    private ParentService parentService;
 
     private Child child;
     private Child childEdit;
     private Collection<Child> children;
+
+    private String parentUserName;
 
     public void setChildren(Collection<Child> children) {
         this.children = children;
@@ -62,7 +67,20 @@ public class ChildController {
         doReloadChildEdit();
     }
 
+    public void findParentByUsername(String usrn){
+        child.setPrimaryParent(parentService.loadParent(usrn));
+    }
+
+    public String getParentUserName() {
+        return parentUserName;
+    }
+
+    public void setParentUserName(String parentUserName) {
+        this.parentUserName = parentUserName;
+    }
+
     public void doSaveChild(){
+        findParentByUsername(parentUserName);
         child = childService.saveChild(child);
         child = null;
         initNewChild();

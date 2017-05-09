@@ -52,6 +52,8 @@ public class ParentService {
         return parentRepository.findOne(id);
     }
 
+    public Parent loadParent(String usrn) {return parentRepository.findFirstByUsername(usrn);}
+
 
     public void deleteParent(Parent parent) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
