@@ -87,7 +87,7 @@
                                             </p:column>
                                             <p:column style="width:100px;text-align: center"
                                                       exportable="false">
-                                                <p:commandButton
+                                                <p:commandButton rendered="#{not sessionInfoBean.hasRole('ADMIN')}"
                                                         action="#{userDetailController.doDeleteUser}"
                                                         icon="ui-icon-trash" title="Delete"
                                                         update=":userForm:usersTable">
