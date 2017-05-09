@@ -36,8 +36,9 @@ public class Parent extends UserData {
 
     public Parent(String password, String username, String firstName, String lastName,
                   String location, String streetName, String postcode, UserRole userRole,
-                  String imgName, Set<Child> listChildren, Set<Assignment> listAssignments, FamilyStatus familyStatus, boolean status) {
-        super(password, username, firstName, lastName, location, streetName, postcode, userRole);
+                  String imgName, Set<Child> listChildren, Set<Assignment> listAssignments,
+                  FamilyStatus familyStatus, boolean status, String birthday) {
+        super(password, username, firstName, lastName, location, streetName, postcode, userRole, birthday);
         this.imgName = imgName;
         this.listChildren = listChildren;
         this.listAssignments = listAssignments;
@@ -94,7 +95,7 @@ public class Parent extends UserData {
      * @param obj
      * @return
      */
-   /* @Override
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -111,5 +112,5 @@ public class Parent extends UserData {
             return true;
         }
         return false;
-    }*/
+    }
 }

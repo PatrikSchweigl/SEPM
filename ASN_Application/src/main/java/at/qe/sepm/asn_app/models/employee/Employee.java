@@ -24,7 +24,6 @@ public class Employee extends UserData {
     private Status workingState;
     @Enumerated(EnumType.STRING)
     private WorkRole workRole;
-    private String birthday;
 
     public Employee(){//required for jpa repository
     }
@@ -33,25 +32,16 @@ public class Employee extends UserData {
     public Employee(String password, String username, String firstName, String lastName, String location,
                     String streetName, String postcode, UserRole userRole, Religion religion, String phoneNumber,
                     FamilyStatus familyStatus, Status workingState, WorkRole workRole, String birthday, boolean isAdmin) {
-        super(password, username, firstName, lastName, location, streetName, postcode, userRole);
+        super(password, username, firstName, lastName, location, streetName, postcode, userRole, birthday);
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
         this.workingState = workingState;
         this.workRole = workRole;
-        this.birthday = birthday;
     }
 
 
     public void setAdmin(boolean admin) {
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public Religion getReligion() {

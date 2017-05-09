@@ -84,8 +84,9 @@ public class EmployeeController {
 
     public void doDeleteEmployee() {
         System.out.println(employeeEdit.getFirstName());
-        //employeeService.deleteEmployee(employeeEdit);
+        employeeService.deleteEmployee(employeeEdit);
         employeeEdit = null;
+        initList();
     }
 
 }
