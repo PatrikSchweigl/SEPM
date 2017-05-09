@@ -60,13 +60,6 @@
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a onclick="#{scheduleView.test()}"
-								href="/employee/parentspage_employee.xhtml"> <i
-									class="fa fa-users fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Elternteile</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/logpage_employee.xhtml"> <i
 									class="fa fa-file-archive-o fa-3x"></i> <span
@@ -85,9 +78,9 @@
 									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
-								href="/admin/parentspage_admin.xhtml"> <i
+								href="/general/parentspage_admin.xhtml"> <i
 									class="fa fa-users fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Elternteile</span>
 							</a></li>
