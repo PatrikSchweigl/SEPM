@@ -86,6 +86,7 @@ public class ParentController {
     public void doDeleteParentEdit() {
         this.parentService.deleteParent(parentEdit);
         parentEdit = null;
+        initList();
     }
 
 
