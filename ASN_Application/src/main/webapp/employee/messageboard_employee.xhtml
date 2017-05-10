@@ -53,6 +53,7 @@
                                                                                             action="#{messageService.deleteMessage(message)}"
                                                                                             icon="ui-icon-trash"
                                                                                             title="Nachricht löschen"
+                                                                                            update=":messages"
                                                                                             >
 																							<span class="time"> <i
                                                                                                     class="fa fa-trash-o bg-gray"></i>
@@ -85,8 +86,9 @@
                                                     <h:outputText id="display"/>
                                                     <p:separator/>
                                                     <p:commandButton id="button" value="Senden"
-                                                                     actionListener="#{messageService.saveMessage(messageService.text)}"
-                                                                     oncomplete="PF('createMessage').hide()" />
+                                                                     action="#{messageService.saveMessage(messageService.text)}"
+                                                                     oncomplete="PF('createMessage').hide()"
+                                                                     update=":messages" />
                                                 </p:dialog>
 
                                                 <p:confirmDialog global="true" showEffect="fade"
