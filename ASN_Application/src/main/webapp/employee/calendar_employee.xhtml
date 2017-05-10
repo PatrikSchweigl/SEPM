@@ -45,7 +45,8 @@
 												showEffect="clip" hideEffect="clip">
 												<h:panelGrid id="eventDetails" columns="2">
 													<p:outputLabel for="title" value="Titel:" />
-													<p:inputText id="title" value="#{scheduleView.event.description}" />
+													<p:inputText id="title"
+														value="#{scheduleView.event.description}" />
 
 													<p:outputLabel for="from" value="Beginn:" />
 													<p:calendar id="from"
@@ -68,8 +69,8 @@
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 														<h:selectBooleanCheckbox id="reciever"
 															value="#{scheduleView.visible}">
-															<p:ajax update="eventDetails"/>
-															</h:selectBooleanCheckbox>
+															<p:ajax update="eventDetails" />
+														</h:selectBooleanCheckbox>
 													</ui:fragment>
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE') and scheduleView.visible}">
@@ -93,7 +94,7 @@
 																<h:outputText value="#{p}" />
 															</p:column>
 														</p:selectOneListbox>
-</ui:fragment>
+													</ui:fragment>
 													<p:commandButton type="reset" value="Reset" />
 													<p:commandButton id="addButton" value="Speichern"
 														actionListener="#{scheduleView.addEvent}"
