@@ -5,6 +5,10 @@ package at.qe.sepm.asn_app.ownExceptions;
  */
 public class BirthdayConstraintException extends Exception {
 
+    public BirthdayConstraintException() {
+        super();
+    }
+
     public BirthdayConstraintException(String message) {
         super(message);
     }
