@@ -88,4 +88,33 @@ public class Caregiver implements Persistable<Long>{
     public boolean isNew() {
         return (null == firstName && null == lastName);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Caregiver)) {
+            return false;
+        }
+
+        Caregiver other = (Caregiver) obj;
+        if (this.firstName.equals(other.firstName) &&
+                this.lastName.equals(other.lastName) &&
+                this.relationship.equals(other.relationship) &&
+                this.getPhoneNumber().equals(other.phoneNumber)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "First name: " + firstName + "\n" +
+                "Last name: " + lastName + "\n" +
+                "Relationship: " + relationship + "\n" +
+                "Phone number: " + phoneNumber + "\n";
+    }
 }
