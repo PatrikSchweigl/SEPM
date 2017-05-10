@@ -254,7 +254,7 @@
 												<p:scrollPanel style="width:370px; height:350px">
 				
 					<ui:repeat var="message"
-						value="#{privateMessageController.getAllPrivateMessages()}">
+						value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername())}">
 						<div class="messageboard-item">
 							<div class="messageboard-body">
 

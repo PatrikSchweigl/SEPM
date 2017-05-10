@@ -56,6 +56,8 @@ public class PrivateMessageController {
     }
 
     public Collection<PrivateMessage> getAllPrivateMessages(){
+		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
         return messageService.getAllPrivateMessages();
     }
     
@@ -76,9 +78,21 @@ public class PrivateMessageController {
     }
     
     public Collection<PrivateMessage> getPrivateMessagesBySender(String username){
+    	if(username == null){
+    		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
+            return messageService.getAllPrivateMessages();
+ 
+    	}
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
         return messageService.getAllPrivateMessagesBySender(username);
     }
     public Collection<PrivateMessage> getPrivateMessagesByReceiver(String username){
+
         return messageService.getAllPrivateMessagesByReceiver(username);
     }
    
