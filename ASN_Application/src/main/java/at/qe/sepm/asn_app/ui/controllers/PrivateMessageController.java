@@ -73,14 +73,14 @@ public class PrivateMessageController {
     	privateMessages.setDate(new Date());
     	privateMessages.setMessage(privateMessage);
     	privateMessages.setUsernameSender(getAuthenticatedUser().getUsername());
-    	privateMessages.setUsername(username);
+    	privateMessages.setUsernameReceiver(username);
     	messageService.savePrivateMessage(privateMessages);
     }
     
-    public Collection<PrivateMessage> getPrivateMessagesBySender(String username){
+    public Collection<PrivateMessage> getPrivateMessagesBySender(String usernameS, String usernameR){
     	if(username == null){
     		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-            return messageService.getAllPrivateMessages();
+            return messageService.getAllPrivateMessagesBySender("cheng", "fatima");
  
     	}
 		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
@@ -89,7 +89,7 @@ public class PrivateMessageController {
 		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
 		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
 		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-        return messageService.getAllPrivateMessagesBySender(username);
+        return messageService.getAllPrivateMessagesBySender(usernameS, usernameR);
     }
     public Collection<PrivateMessage> getPrivateMessagesByReceiver(String username){
 
@@ -111,12 +111,13 @@ public class PrivateMessageController {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public String setUsername(String username) {
 		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
 		System.err.println(username);
 		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
 
 		this.username = username;
+		return username;
 	}
 
 	public String getPrivateMessage() {

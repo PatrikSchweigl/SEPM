@@ -230,7 +230,7 @@
 							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 							<p:commandLink value="#{parent.username}"
-								action="#{privateMessageController.setUsername(parent.username)}"
+								action="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}"
 								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
 								<h:outputText value="#{parent.username}" />
@@ -254,7 +254,7 @@
 												<p:scrollPanel style="width:370px; height:350px">
 				
 					<ui:repeat var="message"
-						value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername())}">
+						value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}">
 						<div class="messageboard-item">
 							<div class="messageboard-body">
 
@@ -278,6 +278,9 @@
 						<p:separator/>
 					<p:commandButton value="Senden"
 						action="#{privateMessageController.savePrivateMessage()}"
+						update=":form" />
+					<p:commandButton value="Laden"
+						action="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}"
 						update=":form" />
 				</div>
 										</h:form>

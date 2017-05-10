@@ -44,8 +44,8 @@ public class PrivateMessageService implements Serializable {
         return privateMessageRepository.findOne(id);
     }
 
-    public Collection<PrivateMessage> getAllPrivateMessagesBySender(String username){
-        return privateMessageRepository.getPrivateMessagesBySender(username);
+    public Collection<PrivateMessage> getAllPrivateMessagesBySender(String usernameS, String usernameR){
+        return privateMessageRepository.getPrivateMessagesBySender(usernameS, usernameR);
     }
 
     public Collection<PrivateMessage> getAllPrivateMessagesByReceiver(String username){

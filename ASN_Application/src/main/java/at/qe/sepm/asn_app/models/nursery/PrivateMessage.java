@@ -43,7 +43,7 @@ public class PrivateMessage implements Persistable<Long> {
 		return usernameReceiver;
 	}
 
-	public void setUsername(String usernameReceiver) {
+	public void setUsernameReceiver(String usernameReceiver) {
 		this.usernameReceiver = usernameReceiver;
     }
 	
