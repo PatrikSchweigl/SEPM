@@ -56,8 +56,6 @@ public class PrivateMessageController {
     }
 
     public Collection<PrivateMessage> getAllPrivateMessages(){
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
         return messageService.getAllPrivateMessages();
     }
     
@@ -67,28 +65,21 @@ public class PrivateMessageController {
     }
     
     public void savePrivateMessage(){
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
     	PrivateMessage privateMessages = new PrivateMessage();
     	privateMessages.setDate(new Date());
     	privateMessages.setMessage(privateMessage);
     	privateMessages.setUsernameSender(getAuthenticatedUser().getUsername());
     	privateMessages.setUsernameReceiver(username);
     	messageService.savePrivateMessage(privateMessages);
+    	privateMessage = "";
     }
     
     public Collection<PrivateMessage> getPrivateMessagesBySender(String usernameS, String usernameR){
     	if(username == null){
-    		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
             return messageService.getAllPrivateMessagesBySender("cheng", "fatima");
  
     	}
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
+
         return messageService.getAllPrivateMessagesBySender(usernameS, usernameR);
     }
     public Collection<PrivateMessage> getPrivateMessagesByReceiver(String username){
@@ -105,17 +96,10 @@ public class PrivateMessageController {
     }
 
 	public String getUsername() {
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println(username);
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
 		return username;
 	}
 
 	public String setUsername(String username) {
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println(username);
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-
 		this.username = username;
 		return username;
 	}
