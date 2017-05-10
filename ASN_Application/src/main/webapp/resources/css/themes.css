@@ -18,6 +18,7 @@
 }
 
 .triangle-border-new {
+	width:350px;
   position:relative;
   margin:1em 0 1em;
   border:1px solid #5a8f00;

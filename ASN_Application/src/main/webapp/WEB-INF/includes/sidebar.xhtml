@@ -244,29 +244,31 @@
 			<p:dialog header="Privatnachricht" id="privateMessageSend"
 				widgetVar="privateMessageSend" modal="false" showEffect="clip"
 				hideEffect="clip" resizable="true" position="right,bottom"
-				responsive="true" width="500" height="400" minimizable="true"
+				responsive="true" width="400" height="500" minimizable="true"
 				minWidth="350">
 
 		<h:form id="form">
 
 
 				<div>
+												<p:scrollPanel style="width:370px; height:350px">
+				
 					<ui:repeat var="message"
 						value="#{privateMessageController.getAllPrivateMessages()}">
 						<div class="messageboard-item">
 							<div class="messageboard-body">
 
-								<p:outputPanel id="myOutputPanel">
 									<blockquote class="triangle-border-new">
 										<div>
 											<p>#{message.message}</p>
 										</div>
 									</blockquote>
-								</p:outputPanel>
 
 							</div>
 						</div>
 					</ui:repeat>
+													</p:scrollPanel>
+					
 				</div>
 				
 				<div>
