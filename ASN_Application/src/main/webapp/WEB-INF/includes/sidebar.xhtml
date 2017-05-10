@@ -241,6 +241,45 @@
 				</div>
 			</p:dialog>
 		</h:form>
+			<p:dialog header="Privatnachricht" id="privateMessageSend"
+				widgetVar="privateMessageSend" modal="false" showEffect="clip"
+				hideEffect="clip" resizable="true" position="right,bottom"
+				responsive="true" width="400" height="400" minimizable="true"
+				minWidth="350">
+
+		<h:form id="form">
+
+
+				<div>
+					<ui:repeat var="message"
+						value="#{privateMessageController.getAllPrivateMessages()}">
+						<div class="messageboard-item">
+							<div class="messageboard-body">
+
+								<p:outputPanel id="myOutputPanel">
+									<blockquote class="triangle-border-new">
+										<div>
+											<p>#{message.message}</p>
+										</div>
+									</blockquote>
+								</p:outputPanel>
+
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
+				
+				<div>
+					<p:inputTextarea placeholder="Nachricht" id="messageInput"
+						value="#{privateMessageController.privateMessage}" rows="5"
+						cols="30" autoResize="false" />
+					<p:commandButton value="Senden"
+						action="#{privateMessageController.savePrivateMessage()}"
+						update=":form" />
+				</div>
+										</h:form>
+				
+			</p:dialog>
 
 	</ui:composition>
 </h:body>
