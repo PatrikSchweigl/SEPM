@@ -45,8 +45,8 @@ public class ScheduleView implements Serializable {
 	private ScheduleEvent event = new DefaultScheduleEvent();
 	@Autowired
 	private UserService userService;
-    @Autowired
-    private AuditLogRepository auditLogRepository;
+	@Autowired
+	private AuditLogRepository auditLogRepository;
 
 	private boolean visible;
 	private boolean important;
@@ -78,9 +78,11 @@ public class ScheduleView implements Serializable {
 			System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 			System.err.println(t.getStyleClass());
 			DefaultScheduleEvent ev;
-			if(t.getImportant())
+			if (t.getImportant())
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "important");
-			else if(getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE && t.getReceiver().getUserRole() == UserRole.PARENT && (getAuthenticatedUser().getUsername().compareTo(t.getSender().getUsername())) == 0)
+			else if (getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE
+					&& t.getReceiver().getUserRole() == UserRole.PARENT
+					&& (getAuthenticatedUser().getUsername().compareTo(t.getSender().getUsername())) == 0)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
 			else
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
@@ -126,21 +128,18 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void addEvent() {
-		System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-		System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-		System.err.println(important);
 
-		
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 			Task task;
-			if (reciever == null){
+			if (reciever == null) {
 				task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
 						event.getStartDate(), event.getEndDate());
-		        AuditLog log = new AuditLog(task.getReceiver().getUsername(),"TASK CREATED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-		        auditLogRepository.save(log);
-			}
-			else {
+				AuditLog log = new AuditLog(task.getReceiver().getUsername(), "TASK CREATED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+						new Date());
+				auditLogRepository.save(log);
+			} else {
 				UserData user = userService.loadUser(reciever);
 				System.err.println(reciever);
 				if (user != null) {
@@ -159,32 +158,34 @@ public class ScheduleView implements Serializable {
 
 		else {
 			Task task = taskService.getTaskByStringId(event.getId());
-			Task temp;
-			if (reciever == null) {
-				temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
-						event.getStartDate(), event.getEndDate());
-			} else {
-				UserData user = userService.loadUser(reciever);
-				temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
-						event.getStartDate(), event.getEndDate());
+			if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
+				Task temp;
+				if (reciever == null) {
+					temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(),
+							getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
+				} else {
+					UserData user = userService.loadUser(reciever);
+					temp = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
+							event.getStartDate(), event.getEndDate());
 
+				}
+				eventModel.updateEvent(event);
+				event.setId(temp.getStringId());
+
+				taskService.deleteTask(task);
+				temp.setImportant(important);
+				taskService.saveTask(temp);
+				AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK CHANGED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+						new Date());
+				auditLogRepository.save(log);
 			}
-			eventModel.updateEvent(event);
-			event.setId(temp.getStringId());
-
-			taskService.deleteTask(task);
-			taskService.saveTask(temp);
-	        AuditLog log = new AuditLog(temp.getReceiver().getUsername(),"TASK CHANGED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-	        auditLogRepository.save(log);
 		}
 		event = new DefaultScheduleEvent();
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
 		event = (ScheduleEvent) selectEvent.getObject();
-		System.err.println(event.getDescription());
-		System.err.println(event.getId());
-
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
@@ -195,6 +196,7 @@ public class ScheduleView implements Serializable {
 		event = moveEvent.getScheduleEvent();
 
 		Task task = taskService.getTaskByStringId(event.getId());
+		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
 		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
 				event.getStartDate(), event.getEndDate());
 		eventModel.updateEvent(event);
@@ -202,14 +204,18 @@ public class ScheduleView implements Serializable {
 
 		taskService.deleteTask(task);
 		taskService.saveTask(temp);
-        AuditLog log = new AuditLog(temp.getReceiver().getUsername(),"TASK MOVED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+		AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK MOVED: "
+				+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+				new Date());
+		auditLogRepository.save(log);
+		}
 	}
 
 	public void onEventResize(ScheduleEntryResizeEvent resizeEvent) {
 		event = resizeEvent.getScheduleEvent();
 
 		Task task = taskService.getTaskByStringId(event.getId());
+		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
 		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
 				event.getStartDate(), event.getEndDate());
 		eventModel.updateEvent(event);
@@ -217,9 +223,11 @@ public class ScheduleView implements Serializable {
 
 		taskService.deleteTask(task);
 		taskService.saveTask(temp);
-        AuditLog log = new AuditLog(temp.getReceiver().getUsername(),"TASK RESIZED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
-
+		AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK RESIZED: "
+				+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+				new Date());
+		auditLogRepository.save(log);
+		}
 	}
 
 	public UserData getAuthenticatedUser() {
@@ -235,7 +243,7 @@ public class ScheduleView implements Serializable {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
 	public boolean getImportant() {
 		return important;
 	}
