@@ -23,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.MyEvent;
 import at.qe.sepm.asn_app.models.nursery.Task;
@@ -48,6 +49,7 @@ public class ScheduleView implements Serializable {
     private AuditLogRepository auditLogRepository;
 
 	private boolean visible;
+	private boolean important;
 
 	@Autowired
 	private TaskService taskService;
@@ -67,9 +69,22 @@ public class ScheduleView implements Serializable {
 
 	public void test() {
 		eventModel.clear();
-		tasks = taskService.getAllTasksByReceiver(getAuthenticatedUser().getId());
+		tasks = taskService.getAllTasksByReceiverAndImportance(getAuthenticatedUser().getId());
 		for (Task t : tasks) {
-			DefaultScheduleEvent ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
+			System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+			System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+			System.err.println(t.getImportant());
+			System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+			System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+			System.err.println(t.getStyleClass());
+			DefaultScheduleEvent ev;
+			if(t.getImportant())
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "important");
+			else if(getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE && t.getReceiver().getUserRole() == UserRole.PARENT && (getAuthenticatedUser().getUsername().compareTo(t.getSender().getUsername())) == 0)
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+			else
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
+
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
 			System.err.println(t.getStringId());
@@ -111,6 +126,11 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void addEvent() {
+		System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		System.err.println(important);
+
+		
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 			Task task;
@@ -132,6 +152,7 @@ public class ScheduleView implements Serializable {
 
 				}
 			}
+			task.setImportant(important);
 			taskService.saveTask(task);
 
 		}
@@ -213,6 +234,14 @@ public class ScheduleView implements Serializable {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	
+	public boolean getImportant() {
+		return important;
+	}
+
+	public void setImportant(boolean important) {
+		this.important = important;
 	}
 
 	public String getReciever() {

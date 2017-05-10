@@ -39,6 +39,7 @@ public class Task implements Persistable<Long> {
         this.endingDate = endDate;
         this.sender = sender;
         this.receiver = receiver;
+        this.important = false;
     }
 
     public String getDescription() {

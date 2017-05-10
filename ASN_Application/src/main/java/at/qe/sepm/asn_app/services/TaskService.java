@@ -43,6 +43,10 @@ public class TaskService {
         return taskRepository.getTasksByReceiver(id);
     }
     
+    public Collection<Task> getAllTasksByReceiverAndImportance(String id){
+        return taskRepository.getTasksByReceiverAndImportance(id);
+    }
+    
     public Task getTaskByStringId(String id){
         return taskRepository.getTaskByStringId(id);
     }
