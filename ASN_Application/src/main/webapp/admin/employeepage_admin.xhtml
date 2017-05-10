@@ -135,64 +135,13 @@
                                                     <p:password id="password"
                                                                 value="#{employeeController.employee.password}"/>
                                                 </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="6">
-                                                    <p:outputLabel for="firstname" value="First Name: "/>
-                                                    <p:inputText id="firstname"
-                                                                 value="#{employeeController.employee.firstName}"/>
-                                                    <p:outputLabel for="lastname" value="Last Name: "/>
-                                                    <p:inputText id="lastname"
-                                                                 value="#{employeeController.employee.lastName}"/>
-                                                    <p:outputLabel for="birthday" value="Birthdate: "/>
-                                                    <p:inputMask mask="99/99/9999" id="birthday"
-                                                                 value="#{employeeController.employee.birthday}"/>
-                                                    <p:outputLabel for="location" value="Location: "/>
-                                                    <p:inputText id="location"
-                                                                 value="#{employeeController.employee.location}"/>
-                                                    <p:outputLabel for="street" value="Streetname: "/>
-                                                    <p:inputText id="street"
-                                                                 value="#{employeeController.employee.streetName}"/>
-                                                    <p:outputLabel for="postcode" value="Postcode: "/>
-                                                    <p:inputText id="postcode"
-                                                                 value="#{employeeController.employee.postcode}"/>
-                                                    <p:outputLabel for="phonenumber" value="Phonenumber: "/>
-                                                    <p:inputText id="phonenumber"
-                                                                 value="#{employeeController.employee.phoneNumber}"/>
-                                                </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="6">
-                                                    <p:outputLabel for="familystatus" value="Familystatus: "/>
-                                                    <p:selectOneMenu id="familystatus"
-                                                                     value="#{employeeController.employee.familyStatus}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Select Familystatus"
-                                                                      itemValue="" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{enumController.familyStatus}"/>
-                                                    </p:selectOneMenu>
-                                                    <p:outputLabel for="religion" value="Religion: "/>
-                                                    <p:selectOneMenu id="religion"
-                                                                     value="#{employeeController.employee.religion}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Select Religion" itemValue=""
-                                                                      noSelectionOption="true"/>
-                                                        <f:selectItems value="#{enumController.religions}"/>
-                                                    </p:selectOneMenu>
-                                                    <p:outputLabel for="workRole" value="Role: "/>
-                                                    <p:selectOneMenu id="workRole"
-                                                                     value="#{employeeController.employee.workRole}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Select Role" itemValue=""
-                                                                      noSelectionOption="true"/>
-                                                        <f:selectItems value="#{enumController.workRoles}"/>
-                                                    </p:selectOneMenu>
-                                                </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
-                                                                     action="#{employeeController.doSaveEmployee()}"
-                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()"
-                                                                     update=":employeeForm"/>
+                                                                     action="#{employeeController.doSaveEmployee()}"/>
+                                                                     <!--oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()" update=":employeeForm" -->
+
                                                     <p:commandButton value="Abort"
-                                                                     oncomplete="employeeAddDialog.hide()"/>
+                                                                     oncomplete="PF('employeeAddDialog').hide()"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </p:dialog>

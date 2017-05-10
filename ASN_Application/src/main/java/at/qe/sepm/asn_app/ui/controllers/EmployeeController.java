@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.services.EmployeeService;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -61,6 +62,8 @@ public class EmployeeController {
         employee = null;
         initNewEmployee();
         initList();
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('employeeAddDialog').hide();");
     }
 
     public Employee getEmployeeEdit() {
