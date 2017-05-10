@@ -126,11 +126,11 @@
                                                   widgetVar="employeeAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
                                             <p:outputPanel id="employeeDataCreate">
-                                                <h:panelGrid columns="3">
+                                                <h:panelGrid columns="2">
                                                     <p:outputLabel for="username" value="Username: "/>
                                                     <p:inputText id="username"
                                                                  value="#{employeeController.employee.username}" required="true"/>
-                                                    <p:message for="username"/>
+
                                                     <p:outputLabel for="password" value="Password: "/>
                                                     <p:password id="password"
                                                                 value="#{employeeController.employee.password}"/>
@@ -189,7 +189,7 @@
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
                                                                      action="#{employeeController.doSaveEmployee()}"
-                                                                     oncomplete="if (args &amp; &amp; args.validationfailed) PF('employeeAddDialog').hide()"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()"
                                                                      update=":employeeForm"/>
                                                     <p:commandButton value="Abort"
                                                                      oncomplete="employeeAddDialog.hide()"/>
