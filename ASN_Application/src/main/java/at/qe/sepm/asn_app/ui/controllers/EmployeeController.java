@@ -35,7 +35,7 @@ public class EmployeeController {
         this.employees = employees;
     }
     public void doReloadEmployee() {
-        employee = employeeService.loadUser(employee.getId());
+        employee = employeeService.loadEmployee(employee.getId());
     }
 
     @PostConstruct
@@ -74,7 +74,7 @@ public class EmployeeController {
 
 
     public void doReloadEmployeeEdit() {
-        employeeEdit = employeeService.loadUser(employeeEdit.getId());
+        employeeEdit = employeeService.loadEmployee(employeeEdit.getId());
     }
 
     public void doSaveEmployeeEdit(){

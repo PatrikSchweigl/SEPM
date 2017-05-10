@@ -48,8 +48,8 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee loadUser(Long id) {
-        return employeeRepository.findOne(id);
+    public Employee loadEmployee(String username) {
+        return employeeRepository.findFirstByUsername(username);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

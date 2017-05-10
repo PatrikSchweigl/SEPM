@@ -39,6 +39,7 @@ public class ParentService {
 
 
     public Parent saveParent(Parent parent) {
+        System.out.println(parent.getFirstName()+"-------------------------------------------saveParent()");
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -48,14 +49,11 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-    public Parent loadParent(Long id) {
-        return parentRepository.findOne(id);
-    }
-
-    public Parent loadParent(String usrn) {return parentRepository.findFirstByUsername(usrn);}
+    public Parent loadParent(String username) {return parentRepository.findFirstByUsername(username);}
 
 
     public void deleteParent(Parent parent) {
+        System.out.println(parent.getFirstName()+"-------------------------------------------deleteParent()");
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
         auditLogRepository.save(log);
         parentRepository.delete(parent);

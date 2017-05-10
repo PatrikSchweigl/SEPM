@@ -35,11 +35,11 @@ public class TaskService {
         return taskRepository.findOne(id);
     }
 
-    public Collection<Task> getAllTasksBySender(Long id){
+    public Collection<Task> getAllTasksBySender(String id){
         return taskRepository.getTasksBySender(id);
     }
 
-    public Collection<Task> getAllTasksByReceiver(Long id){
+    public Collection<Task> getAllTasksByReceiver(String id){
         return taskRepository.getTasksByReceiver(id);
     }
     
