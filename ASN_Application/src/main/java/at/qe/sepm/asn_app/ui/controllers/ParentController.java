@@ -21,8 +21,8 @@ public class ParentController {
     private ParentService parentService;
 
     private Collection<Parent> parents;
-
     private Parent parent;
+    private Parent parentEdit;
 
     public Collection<Parent> getParents() {
 
@@ -33,9 +33,14 @@ public class ParentController {
         this.parent = parent;
         doReloadParent();
     }
-
+    public Parent getParent() {
+        return parent;
+    }
     public void setParents(Collection<Parent> parents) {
         this.parents = parents;
+    }
+    public void doReloadParent() {
+        parent = parentService.loadParent(parent.getId());
     }
 
     @PostConstruct
@@ -49,21 +54,13 @@ public class ParentController {
     }
 
     public void doSaveParent() {
+        System.out.println("doSaveParentEdit ------------------" +parent.getFirstName() +"---------------------------------------");
         parent = parentService.saveParent(parent);
         parent = null;
         initNewParent();
         initList();
     }
 
-    public Parent getParent() {
-        return parent;
-    }
-
-    public void doReloadParent() {
-        parent = parentService.loadParent(parent.getId());
-    }
-
-    private Parent parentEdit;
 
     public Parent getParentEdit() {
         return parentEdit;
@@ -79,6 +76,7 @@ public class ParentController {
     }
 
     public void doSaveParentEdit(){
+        System.out.println("doSaveParentEdit ------------------" +parentEdit.getFirstName() +"---------------------------------------");
         parentEdit = parentService.saveParent(parentEdit);
         initList();
     }
@@ -88,6 +86,11 @@ public class ParentController {
         parentEdit = null;
         initList();
     }
+
+
+
+
+
 
 
 }

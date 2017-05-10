@@ -212,11 +212,11 @@
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
-                                                                     action="#{parentController.doSaveParentEdit()}"
+                                                                     action="#{parentController.doSaveParentEdit}"
                                                                      oncomplete="PF('parentEditDialog').hide()"
-                                                                     update=":parentForm:parentTable"/>
+                                                                     update=":parentForm"/>
                                                     <p:commandButton value="Reload"
-                                                                     action="#{parentController.doReloadParent()}"
+                                                                     action="#{parentController.doReloadParentEdit()}"
                                                                      update=":parentForm:parentTable"/>
                                                     <p:commandButton value="Abort"
                                                                      onclick="PF('parentEditDialog').hide()"/>
@@ -272,7 +272,7 @@
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
-                                                                     action="#{parentController.doSaveParent()}"
+                                                                     action="#{parentController.doReloadParent}"
                                                                      oncomplete="PF('parentCreateDialog').hide()"
                                                                      update=":parentForm"/>
                                                     <p:commandButton value="Abort"

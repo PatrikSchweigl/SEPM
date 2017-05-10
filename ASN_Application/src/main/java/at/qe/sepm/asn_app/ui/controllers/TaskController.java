@@ -30,10 +30,10 @@ public class TaskController {
         return tasks;
     }
 
-    public Collection<Task> getTasksBySender(Long id){
+    public Collection<Task> getTasksBySender(String id){
         return taskService.getAllTasksBySender(id);
     }
-    public Collection<Task> getTasksByReceiver(Long id){
+    public Collection<Task> getTasksByReceiver(String id){
         return taskService.getAllTasksByReceiver(id);
     }
 
@@ -53,7 +53,6 @@ public class TaskController {
 
     public void setTask(Task task) {
         this.task = task;
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
         doReloadTask();
     }
 

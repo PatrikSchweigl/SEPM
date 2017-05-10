@@ -10,14 +10,12 @@ import org.springframework.data.domain.Persistable;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class UserData implements Persistable<Long> {
+public class UserData implements Persistable<String> {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String password;
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String location;
@@ -146,8 +144,8 @@ public class UserData implements Persistable<Long> {
     }
 
     @Override
-    public Long getId() {
-    	return id;
+    public String getId() {
+    	return username;
     }
 
     @Override

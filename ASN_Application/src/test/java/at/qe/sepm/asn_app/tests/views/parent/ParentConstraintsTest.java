@@ -10,6 +10,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Assignment;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
+import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.ui.constraints.ParentConstraints;
 import org.junit.After;
 import org.junit.Before;
@@ -18,6 +19,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by zerus on 08.05.17.
@@ -37,8 +40,10 @@ public class ParentConstraintsTest {
     private Parent parent1;
     private Parent parent2;
     private Parent parent3;
+    private Parent parent4;
     private ArrayList<Parent> listParents;
     private ParentConstraints parentConstraints;
+    private ParentService parentService;
 
     /**
      * Initialize every attribute with static values.
@@ -57,6 +62,9 @@ public class ParentConstraintsTest {
         listParents.add(parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", ParentListChildren1, ParentListAssignments1, FamilyStatus.MARRIED, true, "24/05/1980"));
         listParents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", ParentListChildren2, ParentListAssignments2, FamilyStatus.DIVORCED, true, "11/11/2003"));  // Too young
         listParents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Too old
+        listParents.add(parent4 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Same as parent3
+
+        parentService = new ParentService();
 
         listChildren = new ArrayList<>();
         listChildren.add(child1 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName1", Gender.MALE, parent1));
@@ -104,6 +112,15 @@ public class ParentConstraintsTest {
     }
 
 
+    // TODO the parent repository in parentService is null somehow.
+    @Test
+    public void alreadyExistsTest() {
+        parentService.saveParent(parent3);
+        parentConstraints= new ParentConstraints(parent4);
+        assertTrue(parentConstraints.alreadyExists());
+    }
+
+
     /**
      * Set every attribute to null so it is assured that every test works with clean attributes.
      */
@@ -125,6 +142,7 @@ public class ParentConstraintsTest {
         listParents = null;
 
         parentConstraints = null;
+        parentService = null;
     }
 
 }
