@@ -244,7 +244,7 @@
 			<p:dialog header="Privatnachricht" id="privateMessageSend"
 				widgetVar="privateMessageSend" modal="false" showEffect="clip"
 				hideEffect="clip" resizable="true" position="right,bottom"
-				responsive="true" width="400" height="400" minimizable="true"
+				responsive="true" width="500" height="400" minimizable="true"
 				minWidth="350">
 
 		<h:form id="form">
@@ -273,6 +273,7 @@
 					<p:inputTextarea placeholder="Nachricht" id="messageInput"
 						value="#{privateMessageController.privateMessage}" rows="5"
 						cols="30" autoResize="false" />
+						<p:separator/>
 					<p:commandButton value="Senden"
 						action="#{privateMessageController.savePrivateMessage()}"
 						update=":form" />

@@ -12,6 +12,11 @@ body {
 	width: 100%;
 }
 
+p {
+	word-wrap:break-word;
+    max-width: 100%;
+}
+
 
 .dropdown-menu {
   position: absolute;
