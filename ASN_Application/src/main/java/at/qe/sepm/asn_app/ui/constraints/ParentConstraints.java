@@ -3,9 +3,11 @@ package at.qe.sepm.asn_app.ui.constraints;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.parser.BirthdayParser;
+import at.qe.sepm.asn_app.services.ParentService;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Collection;
 
 /**
  * Created by zerus on 08.05.17.
@@ -13,10 +15,14 @@ import java.time.ZoneOffset;
 public class ParentConstraints {
 
     private Parent parent;
+    private ParentService parentService;
 
     public ParentConstraints(Parent parent) {
         this.parent = parent;
+        parentService = new ParentService();
     }
+
+    
 
     public void checkBirthdayConstraints() throws BirthdayConstraintException {
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
@@ -35,5 +41,19 @@ public class ParentConstraints {
         if (ageDays > (99*365)) {
             throw new BirthdayConstraintException("Too old");
         }
+    }
+
+
+    /**
+     * @return true if the parent already exists in the database; false otherwise
+     */
+    public boolean alreadyExists() {
+        Collection<Parent> parents = parentService.getAllParents();
+        for (Parent p : parents) {
+            if (p.equals(parent)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
