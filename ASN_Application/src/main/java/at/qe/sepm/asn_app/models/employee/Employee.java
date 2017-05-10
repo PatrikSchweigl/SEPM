@@ -83,8 +83,55 @@ public class Employee extends UserData {
     public void setWorkRole(WorkRole workRole) {
         this.workRole = workRole;
     }
-    
-    public String toString(){
-    	return String.valueOf(getId());
+
+
+    /**
+     * This method doesn't check for every attribute because some are unnecessary to check (e.g. username).
+     * @param obj the object to compare
+     * @return true iff the current instance of Employee and the parameter object are the same Employee.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Employee)) {
+            return false;
+        }
+
+        Employee other = (Employee) obj;
+        if (this.getFamilyStatus().equals(other.getFamilyStatus()) &&
+                this.getPhoneNumber().equals(other.getPhoneNumber()) &&
+                this.getReligion().equals(other.getReligion()) &&
+                this.getBirthday().equals(other.getBirthday()) &&
+                this.getFirstName().equals(other.getFirstName()) &&
+                this.getLastName().equals(other.getLastName()) &&
+                this.getLocation().equals(other.getLocation()) &&
+                this.getPostcode().equals(other.getPostcode()) &&
+                this.getStreetName().equals(other.getStreetName())) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Id: " + String.valueOf(getId()) + "\n" +
+                "Username: " + getUsername() + "\n" +
+                "First name: " + getFirstName() + "\n" +
+                "Last name: " + getLastName() + "\n" +
+                "Birthday: " + getBirthday() + "\n" +
+                "Religion: " + religion + "\n" +
+                "Phone number: " + getPhoneNumber() + "\n" +
+                "Location: " + getLocation() + "\n" +
+                "Postcode: " + getPostcode() + "\n" +
+                "Street name: " + getStreetName() + "\n" +
+                "Family status: " + getFamilyStatus() + "\n" +
+                "Working state: " + getWorkingState() + "\n" +
+                "Work role: " + getWorkRole() + "\n" +
+                "User role: " + getUserRole();
     }
 }

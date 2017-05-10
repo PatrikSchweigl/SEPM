@@ -61,6 +61,7 @@ public class ParentConstraints {
     /**
      * @return true if the parent already exists in the database; false otherwise
      */
+    // TODO instead of getting all parents it suffices to get only the one with the same identifier
     public boolean alreadyExists() {
         Collection<Parent> parents = parentService.getAllParents();
         for (Parent p : parents) {
