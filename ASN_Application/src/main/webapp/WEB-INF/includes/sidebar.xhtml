@@ -231,7 +231,7 @@
 							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 							<p:commandLink value="#{parent.username}"
-								action="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}"
+								action="#{privateMessageController.setUsername(employee.username)}"
 								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
 								<h:outputText value="#{parent.username}" />
