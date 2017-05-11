@@ -121,7 +121,7 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void addEvent() {
-
+		
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 			Task task;
