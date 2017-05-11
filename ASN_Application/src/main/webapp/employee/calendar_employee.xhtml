@@ -19,7 +19,7 @@
 								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
-										<h:form>
+										<h:form id="sheduleForm">
 											<p:schedule locale="de" aspectRatio="1.5"
 												style="padding-left:200px; padding-right: 200px;"
 												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
@@ -41,66 +41,90 @@
 													listener="#{scheduleView.onEventResize}" />
 
 											</p:schedule>
-											<p:dialog widgetVar="eventDialog" header="Termine setzen"
-												showEffect="clip" hideEffect="clip">
-												<h:panelGrid id="eventDetails" columns="2">
-													<p:outputLabel for="title" value="Titel:" />
-													<p:inputText id="title" value="#{scheduleView.event.description}" />
 
-													<p:outputLabel for="from" value="Beginn:" />
-													<p:calendar id="from"
-														value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy HH:mm" />
+										<p:dialog widgetVar="eventDialog" header="Termine setzen"
+											showEffect="clip" hideEffect="clip">
+											<h:panelGrid id="eventDetails" columns="2">
+												<p:outputLabel for="title" value="Titel:" />
+												<p:inputText id="title"
+													value="#{scheduleView.event.description}" />
 
-													<p:outputLabel for="to" value="Ende:" />
-													<p:calendar id="to" value="#{scheduleView.event.endDate}"
-														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+												<p:outputLabel for="from" value="Beginn:" />
+												<p:calendar id="from"
+													value="#{scheduleView.event.startDate}" timeZone="GMT+2"
+													pattern="dd/MM/yyyy HH:mm" />
 
-													<p:outputLabel for="allDay" value="Ganztägig:" />
-													<h:selectBooleanCheckbox id="allDay"
-														value="#{scheduleView.event.allDay}" />
-													<ui:fragment
-														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-														<p:outputLabel for="reciever" value="Aufgabe:" />
-													</ui:fragment>
+												<p:outputLabel for="to" value="Ende:" />
+												<p:calendar id="to" value="#{scheduleView.event.endDate}"
+													timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
 
-													<ui:fragment
-														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-														<h:selectBooleanCheckbox id="reciever"
-															value="#{scheduleView.visible}">
-															<p:ajax update="eventDetails"/>
-															</h:selectBooleanCheckbox>
-													</ui:fragment>
-													<ui:fragment
-														rendered="#{sessionInfoBean.hasRole('EMPLOYEE') and scheduleView.visible}">
-														<p:outputLabel for="reciever" value="Elternteil:" />
-													</ui:fragment>
-													<ui:fragment
-														rendered="#{sessionInfoBean.hasRole('EMPLOYEE') and scheduleView.visible}">
-														<p:selectOneListbox style="width: 100%;" id="advanced"
-															value="#{scheduleView.reciever}" var="p" filter="true"
-															filterMatchMode="contains">
-															<f:selectItems value="#{parentService.getAllParents()}"
-																var="parent" itemLabel="#{parent.username}"
-																itemValue="#{parent.username}" />
+												<p:outputLabel for="allDay" value="Ganztägig:" />
+												<h:selectBooleanCheckbox id="allDay"
+													value="#{scheduleView.event.allDay}" />
 
-															<p:column>
-																<p:graphicImage name="pictures/tiger.jpg" width="32"
-																	height="32" />
-															</p:column>
 
-															<p:column>
-																<h:outputText value="#{p}" />
-															</p:column>
-														</p:selectOneListbox>
-</ui:fragment>
-													<p:commandButton type="reset" value="Reset" />
-													<p:commandButton id="addButton" value="Speichern"
-														actionListener="#{scheduleView.addEvent}"
-														oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-												</h:panelGrid>
-											</p:dialog>
-										</h:form>
+
+
+												<ui:fragment
+													rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+													<p:outputLabel for="important" value="wichtiges Ereignis:" />
+												</ui:fragment>
+
+												<ui:fragment
+													rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+													<h:selectBooleanCheckbox id="important"
+														value="#{scheduleView.important}">
+														<p:ajax update="eventDetails" />
+													</h:selectBooleanCheckbox>
+												</ui:fragment>
+
+
+
+
+												<ui:fragment
+													rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+													<p:outputLabel for="reciever" value="Aufgabe:" />
+												</ui:fragment>
+
+												<ui:fragment
+													rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+													<h:selectBooleanCheckbox id="reciever"
+														value="#{scheduleView.visible}">
+														<p:ajax update="eventDetails" />
+													</h:selectBooleanCheckbox>
+												</ui:fragment>
+												<ui:fragment
+													rendered="#{sessionInfoBean.hasRole('EMPLOYEE') and scheduleView.visible}">
+													<p:outputLabel for="reciever" value="Elternteil:" />
+												</ui:fragment>
+												<ui:fragment
+													rendered="#{sessionInfoBean.hasRole('EMPLOYEE') and scheduleView.visible}">
+													<p:selectOneListbox style="width: 100%;" id="advanced"
+														value="#{scheduleView.reciever}" var="p" filter="true"
+														filterMatchMode="contains">
+														<f:selectItems value="#{parentService.getAllParents()}"
+															var="parent" itemLabel="#{parent.username}"
+															itemValue="#{parent.username}" />
+
+														<p:column>
+															<p:graphicImage name="pictures/tiger.jpg" width="32"
+																height="32" />
+														</p:column>
+
+														<p:column>
+															<h:outputText value="#{p}" />
+														</p:column>
+													</p:selectOneListbox>
+												</ui:fragment>
+												<p:commandButton type="reset" value="Reset" />
+												<p:commandButton id="addButton" value="Speichern"
+													actionListener="#{scheduleView.addEvent}"
+													oncomplete="PF('myschedule').update();PF('eventDialog').hide();"
+													update="schedule" />
+											</h:panelGrid>
+										</p:dialog>
+																				</h:form>
+										
 										<script type="text/javascript">
 											PrimeFaces.locales['de'] = {
 												closeText : 'Schliessen',

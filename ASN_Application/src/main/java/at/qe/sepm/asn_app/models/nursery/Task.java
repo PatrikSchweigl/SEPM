@@ -26,6 +26,8 @@ public class Task implements Persistable<Long> {
     private UserData  sender;
     @ManyToOne(optional = false)
     private UserData receiver;
+    private boolean important;
+    private String styleClass;
 
 
     public Task(){}
@@ -37,6 +39,7 @@ public class Task implements Persistable<Long> {
         this.endingDate = endDate;
         this.sender = sender;
         this.receiver = receiver;
+        this.important = false;
     }
 
     public String getDescription() {
@@ -96,6 +99,22 @@ public class Task implements Persistable<Long> {
 
 	public void setStringId(String stringId) {
 		this.stringId = stringId;
+	}
+
+	public String getStyleClass() {
+		return styleClass;
+	}
+
+	public void setStyleClass(String styleClass) {
+		this.styleClass = styleClass;
+	}
+
+	public boolean getImportant() {
+		return important;
+	}
+
+	public void setImportant(boolean important) {
+		this.important = important;
 	}
 
 }

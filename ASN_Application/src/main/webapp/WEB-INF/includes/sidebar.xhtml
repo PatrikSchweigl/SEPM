@@ -122,7 +122,7 @@
 				hideEffect="fade" resizable="false" closeOnEscape="true">
 				<p:outputPanel id="parentData">
 
-					<ul class="list-unstyled clearfix">
+					<ul class="list-unstyled clearfix" style="list-style: none;">
 						<li style="float: left; width: 33.33333%; padding: 5px;"><a
 							href="javascript:void(0);" data-skin="skin-green"
 							class="clearfix full-opacity-hover"> <span
@@ -212,11 +212,12 @@
 					<ui:repeat var="employee" value="#{employeeController.employees}">
 						<h:panelGrid columns="2" style="width:50px;"
 							columnClasses="logo,detail">
+							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+
 							<p:commandLink value="#{employee.username}"
 								action="#{privateMessageController.setUsername(employee.username)}"
 								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 								<h:outputText value="#{employee.username}" />
 							</p:commandLink>
 						</h:panelGrid>
@@ -230,7 +231,7 @@
 							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 							<p:commandLink value="#{parent.username}"
-								action="#{privateMessageController.setUsername(parent.username)}"
+								action="#{privateMessageController.setUsername(employee.username)}"
 								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
 								<h:outputText value="#{parent.username}" />
@@ -241,22 +242,22 @@
 				</div>
 			</p:dialog>
 		</h:form>
-			<p:dialog header="Privatnachricht" id="privateMessageSend"
-				widgetVar="privateMessageSend" modal="false" showEffect="clip"
-				hideEffect="clip" resizable="true" position="right,bottom"
-				responsive="true" width="400" height="500" minimizable="true"
-				minWidth="350">
+		<p:dialog header="Privatnachricht" id="privateMessageSend"
+			widgetVar="privateMessageSend" modal="false" showEffect="clip"
+			hideEffect="clip" resizable="true" position="right,bottom"
+			responsive="true" width="400" height="500" minimizable="true"
+			minWidth="350">
 
-		<h:form id="form">
+			<h:form id="form">
 
 
 				<div>
-												<p:scrollPanel style="width:370px; height:350px">
-				
-					<ui:repeat var="message"
-						value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername())}">
-						<div class="messageboard-item">
-							<div class="messageboard-body">
+					<p:scrollPanel style="width:370px; height:350px">
+
+						<ui:repeat var="message"
+							value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}">
+							<div class="messageboard-item">
+								<div class="messageboard-body">
 
 									<blockquote class="triangle-border-new">
 										<div>
@@ -264,25 +265,28 @@
 										</div>
 									</blockquote>
 
+								</div>
 							</div>
-						</div>
-					</ui:repeat>
-													</p:scrollPanel>
-					
+						</ui:repeat>
+					</p:scrollPanel>
+
 				</div>
-				
+
 				<div>
 					<p:inputTextarea placeholder="Nachricht" id="messageInput"
 						value="#{privateMessageController.privateMessage}" rows="5"
-						cols="30" autoResize="false" />
-						<p:separator/>
+						cols="37" autoResize="false" />
+					<p:separator />
 					<p:commandButton value="Senden"
 						action="#{privateMessageController.savePrivateMessage()}"
 						update=":form" />
+					<p:commandButton value="Laden"
+						action="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}"
+						update=":form" />
 				</div>
-										</h:form>
-				
-			</p:dialog>
+			</h:form>
+
+		</p:dialog>
 
 	</ui:composition>
 </h:body>

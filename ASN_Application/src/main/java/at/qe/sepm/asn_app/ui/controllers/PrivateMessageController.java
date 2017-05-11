@@ -56,8 +56,6 @@ public class PrivateMessageController {
     }
 
     public Collection<PrivateMessage> getAllPrivateMessages(){
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
         return messageService.getAllPrivateMessages();
     }
     
@@ -67,29 +65,22 @@ public class PrivateMessageController {
     }
     
     public void savePrivateMessage(){
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
     	PrivateMessage privateMessages = new PrivateMessage();
     	privateMessages.setDate(new Date());
     	privateMessages.setMessage(privateMessage);
     	privateMessages.setUsernameSender(getAuthenticatedUser().getUsername());
-    	privateMessages.setUsername(username);
+    	privateMessages.setUsernameReceiver(username);
     	messageService.savePrivateMessage(privateMessages);
+    	privateMessage = "";
     }
     
-    public Collection<PrivateMessage> getPrivateMessagesBySender(String username){
+    public Collection<PrivateMessage> getPrivateMessagesBySender(String usernameS, String usernameR){
     	if(username == null){
-    		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-            return messageService.getAllPrivateMessages();
+            return messageService.getAllPrivateMessagesBySender("cheng", "fatima");
  
     	}
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
-        return messageService.getAllPrivateMessagesBySender(username);
+
+        return messageService.getAllPrivateMessagesBySender(usernameS, usernameR);
     }
     public Collection<PrivateMessage> getPrivateMessagesByReceiver(String username){
 
@@ -105,18 +96,12 @@ public class PrivateMessageController {
     }
 
 	public String getUsername() {
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println(username);
-		System.err.println("TTTTTTTTTTTTTTTTTTTTT");
 		return username;
 	}
 
-	public void setUsername(String username) {
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-		System.err.println(username);
-		System.err.println("HHHHHHHHHHHHHHHHHHHHH");
-
+	public String setUsername(String username) {
 		this.username = username;
+		return username;
 	}
 
 	public String getPrivateMessage() {

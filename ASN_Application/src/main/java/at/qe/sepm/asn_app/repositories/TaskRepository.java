@@ -20,4 +20,7 @@ public interface TaskRepository  extends AbstractRepository<Task, Long> {
     
     @Query("SELECT t FROM Task t WHERE :stringID = t.stringId")
     Task getTaskByStringId(@Param("stringID") String id);
+    
+    @Query("SELECT t FROM Task t WHERE :receiverID = t.receiver.username or t.important = true")
+    List<Task> getTasksByReceiverAndImportance(@Param("receiverID") String id);
 }
