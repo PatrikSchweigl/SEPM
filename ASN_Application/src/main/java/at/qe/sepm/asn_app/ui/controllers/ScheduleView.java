@@ -5,8 +5,9 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
-
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -82,6 +83,8 @@ public class ScheduleView implements Serializable {
 
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
+			System.err.println(ev.getId());
+
 			System.err.println(t.getStringId());
 			System.err.println(ev.getId());
 
@@ -119,6 +122,14 @@ public class ScheduleView implements Serializable {
 	public void setEvent(ScheduleEvent event) {
 		this.event = event;
 	}
+	
+	
+	public void deleteEvent(){
+		Task task = taskService.getTaskByStringId(event.getId());
+		if(task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0)
+			taskService.deleteTaskById(event.getId());
+		else
+			FacesContext.getCurrentInstance().addMessage("myform:newPassword1", new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));	}
 
 	public void addEvent() {
 		
@@ -179,6 +190,7 @@ public class ScheduleView implements Serializable {
 
 	public void onEventSelect(SelectEvent selectEvent) {
 		event = (ScheduleEvent) selectEvent.getObject();
+		System.err.println(event.getId());
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {

@@ -44,6 +44,7 @@
 
 										<p:dialog widgetVar="eventDialog" header="Termine setzen"
 											showEffect="clip" hideEffect="clip">
+											    <p:growl id="growl" showDetail="true" sticky="true" />  
 											<h:panelGrid id="eventDetails" columns="2">
 												<p:outputLabel for="title" value="Titel:" />
 												<p:inputText id="title"
@@ -116,7 +117,8 @@
 														</p:column>
 													</p:selectOneListbox>
 												</ui:fragment>
-												<p:commandButton type="reset" value="Reset" />
+												<p:commandButton id="deleteButton" value="Löschen" 
+													action="#{scheduleView.deleteEvent}"/>
 												<p:commandButton id="addButton" value="Speichern"
 													actionListener="#{scheduleView.addEvent}"
 													oncomplete="PF('myschedule').update();PF('eventDialog').hide();"
