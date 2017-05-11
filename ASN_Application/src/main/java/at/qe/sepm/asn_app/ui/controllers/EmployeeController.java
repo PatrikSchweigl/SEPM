@@ -62,8 +62,6 @@ public class EmployeeController {
         employee = null;
         initNewEmployee();
         initList();
-        RequestContext context = RequestContext.getCurrentInstance();
-        context.execute("PF('employeeAddDialog').hide();");
     }
 
     public Employee getEmployeeEdit() {

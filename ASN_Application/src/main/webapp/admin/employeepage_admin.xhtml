@@ -125,20 +125,23 @@
                                         <p:dialog header="Create Employee" id="employeeAddDialog"
                                                   widgetVar="employeeAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
+                                            <p:messages id="messages" autoUpdate="true"/>
                                             <p:outputPanel id="employeeDataCreate">
                                                 <h:panelGrid columns="2">
                                                     <p:outputLabel for="username" value="Username: "/>
                                                     <p:inputText id="username"
-                                                                 value="#{employeeController.employee.username}" required="true"/>
-
+                                                                 value="#{employeeController.employee.username}" required="true"
+                                                                 requiredMessage="Username is missing!"/>
                                                     <p:outputLabel for="password" value="Password: "/>
                                                     <p:password id="password"
-                                                                value="#{employeeController.employee.password}"/>
+                                                                value="#{employeeController.employee.password}" required="true"
+                                                                requiredMessage="Password is missing!"/>
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
-                                                                     action="#{employeeController.doSaveEmployee()}"/>
-                                                                     <!--oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()" update=":employeeForm" -->
+                                                                     action="#{employeeController.doSaveEmployee()}"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()"
+                                                                     update=":employeeForm:employeeTable"/>
 
                                                     <p:commandButton value="Abort"
                                                                      oncomplete="PF('employeeAddDialog').hide()"/>
