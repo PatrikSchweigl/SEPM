@@ -84,6 +84,7 @@ public class ScheduleView implements Serializable {
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
 			System.err.println(ev.getId());
+			System.err.println(t.getDescription());
 
 			System.err.println(t.getStringId());
 			System.err.println(ev.getId());
@@ -135,8 +136,13 @@ public class ScheduleView implements Serializable {
 		
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
+			System.err.println("OHOHOHOHHOHOHHOHO12121212");
+
 			Task task;
 			if (reciever == null || !visible) {
+				System.err.println("OHOHOHOHHOHOHHOHO");
+				System.err.println(event.getDescription());
+
 				task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
 						event.getStartDate(), event.getEndDate());
 				AuditLog log = new AuditLog(task.getReceiver().getUsername(), "TASK CREATED: "
@@ -144,6 +150,8 @@ public class ScheduleView implements Serializable {
 						new Date());
 				auditLogRepository.save(log);
 			} else {
+				System.err.println("OHOHOHOHHOHOHHOHO2222222222");
+
 				UserData user = userService.loadUser(reciever);
 				System.err.println(reciever);
 				if (user != null) {
