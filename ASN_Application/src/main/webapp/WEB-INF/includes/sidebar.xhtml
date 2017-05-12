@@ -19,20 +19,27 @@
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+							<li class="treeview"><a
+								href="/employee/mainpage_employee.xhtml"> <i
+									class="fa fa-home fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
+							</a></li>
+						</h:panelGroup>
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								href="/employee/picturegalery_employee.xhtml"> <i
 									class="fa fa-picture-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li><a href="/employee/messageboard_employee.xhtml"> <i
 									class="fa fa-sticky-note-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Messageboard</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								onclick="PF('privateMessage').show()"> <i
 									class="fa fa-envelope-o fa-3x"></i> <span
@@ -46,14 +53,14 @@
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								href="/employee/calendar_employee.xhtml"> <i
 									class="fa fa-calendar fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kalender</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a onclick="PF('ownDataDialog').show()">
 									<i class="fa fa-database fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
@@ -66,7 +73,7 @@
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a onclick="PF('colorSettings').show()"
 								href="#"> <i class="fa fa-edit fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
