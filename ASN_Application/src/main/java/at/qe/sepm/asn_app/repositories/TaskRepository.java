@@ -30,6 +30,6 @@ public interface TaskRepository  extends AbstractRepository<Task, Long> {
     @Query("Delete FROM Task t WHERE :stringID = t.stringId")
     void DeleteTaskByStringId(@Param("stringID") String id);
     
-    @Query("SELECT t FROM Task t WHERE :receiverID = t.receiver.username or t.important = true")
+    @Query("SELECT t FROM Task t WHERE :receiverID = t.receiver.username or :receiverID = t.sender.username or t.important = true")
     List<Task> getTasksByReceiverAndImportance(@Param("receiverID") String id);
 }

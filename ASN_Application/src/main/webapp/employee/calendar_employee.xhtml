@@ -20,6 +20,7 @@
 								<div class="box">
 									<div class="box-body">
 										<h:form id="sheduleForm">
+										    <p:growl id="growl" showDetail="true" sticky="true" />  
 											<p:schedule locale="de" aspectRatio="1.5"
 												style="padding-left:200px; padding-right: 200px;"
 												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
@@ -44,7 +45,6 @@
 
 										<p:dialog widgetVar="eventDialog" header="Termine setzen"
 											showEffect="clip" hideEffect="clip">
-											    <p:growl id="growl" showDetail="true" sticky="true" />  
 											<h:panelGrid id="eventDetails" columns="2">
 												<p:outputLabel for="title" value="Titel:" />
 												<p:inputText id="title"

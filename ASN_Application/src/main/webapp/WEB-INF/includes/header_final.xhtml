@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <h:body>
 	<ui:composition>
 		<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
@@ -15,7 +15,7 @@
 					<header class="main-header">
 
 						<a href="/nursery/nursery_info.xhtml" class="logo"> <span
-							class="logo-mini"> ASN </span> <b>Kinderkrippe</b>
+							class="logo-mini"> ASN </span> <span class="logo-lg">Kinderkrippe</span>
 
 						</a>
 
@@ -27,39 +27,44 @@
 							</a>
 							<div class="navbar-custom-menu">
 								<ul class="nav navbar-nav">
-								<ui:fragment rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
-									<li class="dropdown messages-menu"><a href="#">
-										<i class="fa fa-envelope-o fa-4x"></i>
-										<span class="label label-danger">!</span>
-									</a>
-										<ul class="dropdown-menu">
-											<li class="header">Sie haben keine Nachrichten</li>
-											<li>
-												<ul class="menu">
-													<li><a href="#"> </a></li>
-												</ul>
-											</li>
-											<li class="footer"><a onclick="PF('privateMessage').show()">Privatnachrichten
-													aufrufen</a></li>
-										</ul></li>
-									<li class="dropdown notifications-menu"><a onclick="#{scheduleView.test()}" href="/employee/messageboard_employee.xhtml">
-										<i class="fa fa-sticky-note-o fa-4x"></i>
-										<span class="label label-danger">!</span>
-									</a>
-										<ul class="dropdown-menu">
-											<li class="header">keine neuen Nachrichten</li>
-											<li>
-												<ul class="menu">
-												</ul>
-											</li>
-											<li class="footer"><a href="#">Messageboard öffnen</a></li>
-										</ul></li>
+									<ui:fragment
+										rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+										<li class="dropdown messages-menu"><a href="#"> <i
+												class="fa fa-envelope-o fa-4x"></i> <span
+												class="label label-danger">!</span>
+										</a>
+											<ul class="dropdown-menu">
+												<li class="header">Sie haben keine Nachrichten</li>
+												<li>
+													<ul class="menu">
+														<li><a href="#"> </a></li>
+													</ul>
+												</li>
+												<li class="footer"><a
+													onclick="PF('privateMessage').show()">Privatnachrichten
+														aufrufen</a></li>
+											</ul></li>
+										<li class="dropdown notifications-menu"><a
+											onclick="#{scheduleView.test()}"
+											href="/employee/messageboard_employee.xhtml"> <i
+												class="fa fa-sticky-note-o fa-4x"></i> <span
+												class="label label-danger">!</span>
+										</a>
+											<ul class="dropdown-menu">
+												<li class="header">keine neuen Nachrichten</li>
+												<li>
+													<ul class="menu">
+													</ul>
+												</li>
+												<li class="footer"><a href="#">Messageboard öffnen</a></li>
+											</ul></li>
 
-									<li class="dropdown tasks-menu"><a href="/employee/calendar_employee.xhtml">
-										<i class="fa fa-calendar fa-4x"></i>
-										<span class="label label-danger">!</span>
-									</a></li>
-										</ui:fragment>
+										<li class="dropdown tasks-menu"><a
+											href="/employee/calendar_employee.xhtml"> <i
+												class="fa fa-calendar fa-4x"></i> <span
+												class="label label-danger">!</span>
+										</a></li>
+									</ui:fragment>
 									<ui:fragment value="Logout" url="/logout">
 										<li class="dropdown tasks-menu"><a href="/logout"> <i
 												class="fa fa-sign-out fa-4x"></i>

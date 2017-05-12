@@ -75,11 +75,13 @@ public class ScheduleView implements Serializable {
 			if (t.getImportant())
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "important");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE
-					&& t.getReceiver().getUserRole() == UserRole.PARENT
-					&& (getAuthenticatedUser().getUsername().compareTo(t.getSender().getUsername())) == 0)
+					&& t.getReceiver().getUserRole() == UserRole.PARENT)
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+			else if(getAuthenticatedUser().getUserRole() == UserRole.PARENT && t.getSender().getUserRole() == UserRole.EMPLOYEE)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
 			else
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate());
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
+
 
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
@@ -130,17 +132,15 @@ public class ScheduleView implements Serializable {
 		if(task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0)
 			taskService.deleteTaskById(event.getId());
 		else
-			FacesContext.getCurrentInstance().addMessage("myform:newPassword1", new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));	}
+			FacesContext.getCurrentInstance().addMessage("scheduleForm", new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));	}
 
 	public void addEvent() {
 		
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
-			System.err.println("OHOHOHOHHOHOHHOHO12121212");
 
 			Task task;
 			if (reciever == null || !visible) {
-				System.err.println("OHOHOHOHHOHOHHOHO");
 				System.err.println(event.getDescription());
 
 				task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
@@ -150,7 +150,6 @@ public class ScheduleView implements Serializable {
 						new Date());
 				auditLogRepository.save(log);
 			} else {
-				System.err.println("OHOHOHOHHOHOHHOHO2222222222");
 
 				UserData user = userService.loadUser(reciever);
 				System.err.println(reciever);
@@ -207,14 +206,14 @@ public class ScheduleView implements Serializable {
 
 	public void onEventMove(ScheduleEntryMoveEvent moveEvent) {
 		event = moveEvent.getScheduleEvent();
-
 		Task task = taskService.getTaskByStringId(event.getId());
 		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
-		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
+		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), task.getReceiver(),
 				event.getStartDate(), event.getEndDate());
+		temp.setImportant(task.getImportant());
+		temp.setStyleClass(task.getStyleClass());
 		eventModel.updateEvent(event);
 		event.setId(temp.getStringId());
-
 		taskService.deleteTask(task);
 		taskService.saveTask(temp);
 		AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK MOVED: "
@@ -229,8 +228,9 @@ public class ScheduleView implements Serializable {
 
 		Task task = taskService.getTaskByStringId(event.getId());
 		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
-		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
+		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), task.getReceiver(),
 				event.getStartDate(), event.getEndDate());
+		temp.setImportant(task.getImportant());
 		eventModel.updateEvent(event);
 		event.setId(temp.getStringId());
 
