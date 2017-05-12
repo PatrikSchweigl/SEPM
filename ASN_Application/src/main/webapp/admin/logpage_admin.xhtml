@@ -31,7 +31,7 @@
 
 													<f:facet name="header">
 														<p:outputPanel>
-															<h:outputText value="Search all: " />
+															<h:outputText value="Suche: " />
 															<p:inputText id="globalFilter"
 																onkeyup="PF('auditLogTable').filter()"
 																style="width:150px" placeholder="Enter keyword" />
@@ -52,7 +52,7 @@
 																<p:graphicImage id="excel" name="pictures/extractors/excel.png"
 																	width="32" />
 																<p:spacer width="10" />
-																<p:tooltip for="excel" value="export excel"
+																<p:tooltip for="excel" value="Excel"
 																	position="top" />
 																<p:dataExporter type="xls" target="auditLogTable"
 																	fileName="auditLog" />
@@ -61,21 +61,21 @@
 																<p:graphicImage id="pdf" name="pictures/extractors/pdf.png"
 																	width="32" />
 																<p:spacer width="10" />
-																<p:tooltip for="pdf" value="export pdf" position="top" />
+																<p:tooltip for="pdf" value="PDF" position="top" />
 																<p:dataExporter type="pdf" target="auditLogTable"
 																	fileName="auditLog" />
 															</h:commandLink>
 															<h:commandLink>
 																<p:graphicImage id="csv" name="pictures/extractors/csv.png"
 																	width="32" />
-																<p:tooltip for="csv" value="export csv" position="top" />
+																<p:tooltip for="csv" value="CSV" position="top" />
 																<p:dataExporter type="csv" target="auditLogTable"
 																	fileName="auditLog" />
 															</h:commandLink>
 														</div>
 													</f:facet>
 
-													<p:column headerText="Username" sortBy="#{log.username}"
+													<p:column headerText="Benutzernam" sortBy="#{log.username}"
 														filterBy="#{log.userName}" filterStyle="display:none">
 														<h:outputText value="#{log.userName}" />
 													</p:column>
@@ -83,7 +83,7 @@
 														filterBy="#{log.log}" filterStyle="display:none">
 														<h:outputText value="#{log.log}" />
 													</p:column>
-													<p:column headerText="Date" sortBy="#{log.date}"
+													<p:column headerText="Datum" sortBy="#{log.date}"
 														filterBy="#{log.date}" filterStyle="display:none">
 														<h:outputText value="#{log.date}" />
 													</p:column>
