@@ -22,7 +22,7 @@
                                 <div class="box-body">
                                     <div align="right" style="margin-bottom: 10px;">
                                         <p:commandButton oncomplete="PF('employeeAddDialog').show()"
-                                                         value="+ Employee"
+                                                         value="Angestellten hinzufügen"
                                                          style="align-items:right;"></p:commandButton>
                                     </div>
                                     <h:form id="employeeForm">
@@ -35,10 +35,10 @@
 
                                             <f:facet name="header">
                                                 <p:outputPanel>
-                                                    <h:outputText value="Search all: "/>
+                                                    <h:outputText value="Suche: "/>
                                                     <p:inputText id="globalFilter"
                                                                  onkeyup="PF('employeeTable').filter()"
-                                                                 style="width:150px" placeholder="Enter keyword"/>
+                                                                 style="width:150px" placeholder="Suchwort eingeben"/>
                                                 </p:outputPanel>
                                             </f:facet>
 
@@ -57,7 +57,7 @@
                                                         <p:graphicImage id="excel" name="pictures/extractors/excel.png"
                                                                         width="32"/>
                                                         <p:spacer width="10"/>
-                                                        <p:tooltip for="excel" value="export excel"
+                                                        <p:tooltip for="excel" value="Excel"
                                                                    position="top"/>
                                                         <p:dataExporter type="xls" target="employeeTable"
                                                                         fileName="Employees"/>
@@ -66,31 +66,31 @@
                                                         <p:graphicImage id="pdf" name="pictures/extractors/pdf.png"
                                                                         width="32"/>
                                                         <p:spacer width="10"/>
-                                                        <p:tooltip for="pdf" value="export pdf" position="top"/>
+                                                        <p:tooltip for="pdf" value="PDF" position="top"/>
                                                         <p:dataExporter type="pdf" target="employeeTable"
                                                                         fileName="Employees"/>
                                                     </h:commandLink>
                                                     <h:commandLink>
                                                         <p:graphicImage id="csv" name="pictures/extractors/csv.png"
                                                                         width="32"/>
-                                                        <p:tooltip for="csv" value="export csv" position="top"/>
+                                                        <p:tooltip for="csv" value="CSV" position="top"/>
                                                         <p:dataExporter type="csv" target="employeeTable"
                                                                         fileName="Employees"/>
                                                     </h:commandLink>
                                                 </div>
                                             </f:facet>
 
-                                            <p:column headerText="Username"
+                                            <p:column headerText="Benutzername"
                                                       filterBy="#{employee.username}"
                                                       sortBy="#{employee.username}" filterStyle="display:none">
                                                 <h:outputText value="#{employee.username}"/>
                                             </p:column>
-                                            <p:column headerText="First Name"
+                                            <p:column headerText="Vorname"
                                                       filterBy="#{employee.firstName}"
                                                       sortBy="#{employee.firstName}" filterStyle="display:none">
                                                 <h:outputText value="#{employee.firstName}"/>
                                             </p:column>
-                                            <p:column headerText="Last Name"
+                                            <p:column headerText="Nachname"
                                                       filterBy="#{employee.lastName}"
                                                       sortBy="#{employee.lastName}" filterStyle="display:none">
                                                 <h:outputText value="#{employee.lastName}"/>
@@ -104,25 +104,25 @@
                                                       exportable="false">
                                                 <p:commandButton update=":employeeForm:employeeEditDialog"
                                                                  oncomplete="PF('employeeEditDialog').show()"
-                                                                 icon="ui-icon-note" title="Edit">
+                                                                 icon="ui-icon-note" title="Ändern">
                                                     <f:setPropertyActionListener value="#{employee}"
                                                                                  target="#{employeeController.employeeEdit}"/>
                                                 </p:commandButton>
                                                 <p:commandButton
                                                         action="#{employeeController.doDeleteEmployee}"
-                                                        icon="ui-icon-trash" title="Delete"
+                                                        icon="ui-icon-trash" title="Löschen"
                                                         update=":employeeForm:employeeTable">
                                                     <f:setPropertyActionListener value="#{employee}"
                                                                                  target="#{employeeController.employeeEdit}"/>
-                                                    <p:confirm header="Confirmation"
-                                                               message="Are you sure that you want to delete this employee? You cannot undo this operation."
+                                                    <p:confirm header="Bestätigung"
+                                                               message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
                                                 </p:commandButton>
                                             </p:column>
                                         </p:dataTable>
 
                                         <!-- Create Employee Dialog -->
-                                        <p:dialog header="Create Employee" id="employeeAddDialog"
+                                        <p:dialog header="Angestellten anlegen" id="employeeAddDialog"
                                                   widgetVar="employeeAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
                                             <p:messages id="messages" autoUpdate="true"/>
@@ -150,48 +150,48 @@
                                         </p:dialog>
 
                                         <!-- Edit Employee Dialog -->
-                                        <p:dialog header="Edit Employee" id="employeeEditDialog"
+                                        <p:dialog header="Angestellten ändern" id="employeeEditDialog"
                                                   widgetVar="employeeEditDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
                                             <p:outputPanel id="employeeDataEdit"
                                                            rendered="#{not empty employeeController.employeeEdit}">
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="userName" value="Username: "/>
+                                                    <p:outputLabel for="userName" value="Benutzername: "/>
                                                     <p:inputText id="userName"
                                                                  value="#{employeeController.employeeEdit.username}"
                                                                  disabled="true"/>
-                                                    <p:outputLabel for="passWord" value="Password: "/>
+                                                    <p:outputLabel for="passWord" value="Passwort: "/>
                                                     <p:password id="passWord"
                                                                 value="#{employeeController.employeeEdit.password}"
                                                                 disabled="true"/>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="6">
-                                                    <p:outputLabel for="firstName" value="First Name: "/>
+                                                    <p:outputLabel for="firstName" value="Vorname: "/>
                                                     <p:inputText id="firstName"
                                                                  value="#{employeeController.employeeEdit.firstName}"/>
-                                                    <p:outputLabel for="lastName" value="Last Name: "/>
+                                                    <p:outputLabel for="lastName" value="Nachname "/>
                                                     <p:inputText id="lastName"
                                                                  value="#{employeeController.employeeEdit.lastName}"/>
-                                                    <p:outputLabel for="birthDay" value="Birthdate: "/>
+                                                    <p:outputLabel for="birthDay" value="Gerburtsdatum: "/>
                                                     <p:inputMask mask="99/99/9999" id="birthDay"
                                                                  value="#{employeeController.employeeEdit.birthday}"/>
-                                                    <p:outputLabel for="Location" value="Location: "/>
+                                                    <p:outputLabel for="Location" value="Wohnort: "/>
                                                     <p:inputText id="Location"
                                                                  value="#{employeeController.employeeEdit.location}"/>
-                                                    <p:outputLabel for="Street" value="Streetname: "/>
+                                                    <p:outputLabel for="Street" value="Straße: "/>
                                                     <p:inputText id="Street"
                                                                  value="#{employeeController.employeeEdit.streetName}"/>
-                                                    <p:outputLabel for="postCode" value="Postcode: "/>
+                                                    <p:outputLabel for="postCode" value="Postleitzahl: "/>
                                                     <p:inputText id="postCode"
                                                                  value="#{employeeController.employeeEdit.postcode}"/>
-                                                    <p:outputLabel for="phoneNumber" value="Phonenumber: "/>
+                                                    <p:outputLabel for="phoneNumber" value="Telefonnummer: "/>
                                                     <p:inputText id="phoneNumber"
                                                                  value="#{employeeController.employeeEdit.phoneNumber}"/>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="6">
-                                                    <p:outputLabel for="familyStatus" value="Familystatus: "/>
+                                                    <p:outputLabel for="familyStatus" value="Familienstatus: "/>
                                                     <p:selectOneMenu id="familyStatus"
                                                                      value="#{employeeController.employeeEdit.familyStatus}"
                                                                      style="width:150px">
@@ -207,7 +207,7 @@
                                                                       itemValue="#{employeeController.employeeEdit.religion}"/>
                                                         <f:selectItems value="#{enumController.religions}"/>
                                                     </p:selectOneMenu>
-                                                    <p:outputLabel for="Role" value="Role: "/>
+                                                    <p:outputLabel for="Role" value="Rolle: "/>
                                                     <p:selectOneMenu id="Role"
                                                                      value="#{employeeController.employeeEdit.workRole}"
                                                                      style="width:150px">
@@ -218,14 +218,14 @@
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Save"
+                                                    <p:commandButton value="Speichern"
                                                                      action="#{employeeController.doSaveEmployeeEdit()}"
                                                                      oncomplete="PF('employeeEditDialog').hide()"
                                                                      update=":employeeForm:employeeTable"/>
-                                                    <p:commandButton value="Reload"
+                                                    <p:commandButton value="Neu laden"
                                                                      action="#{employeeController.doReloadEmployee()}"
                                                                      update=":employeeForm:employeeDataEdit"/>
-                                                    <p:commandButton value="Abort"
+                                                    <p:commandButton value="Abbruch"
                                                                      onclick="PF('employeeEditDialog').hide()"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
@@ -233,9 +233,9 @@
 
                                         <p:confirmDialog global="true" showEffect="fade"
                                                          hideEffect="fade" width="300">
-                                            <p:commandButton value="Yes" type="button"
+                                            <p:commandButton value="Ja" type="button"
                                                              styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                                            <p:commandButton value="No" type="button"
+                                            <p:commandButton value="Nein" type="button"
                                                              styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                                         </p:confirmDialog>
                                     </h:form>
