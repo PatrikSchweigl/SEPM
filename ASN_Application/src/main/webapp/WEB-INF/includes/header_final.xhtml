@@ -28,7 +28,7 @@
 							<div class="navbar-custom-menu">
 								<ul class="nav navbar-nav">
 									<ui:fragment
-										rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+										rendered="#{not sessionInfoBean.hasDefaultPasswd()}">
 										<li class="dropdown messages-menu"><a href="#"> <i
 												class="fa fa-envelope-o fa-4x"></i> <span
 												class="label label-danger">!</span>

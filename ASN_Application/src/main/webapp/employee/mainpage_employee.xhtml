@@ -20,6 +20,34 @@
 									<!-- Default box -->
 									<div class="box">
 										<div class="box-body">
+											<h:form id="dialogForm">
+												<p:dialog id="dialogTest"
+													visible="#{sessionInfoBean.hasDefaultPasswd()}"
+													width="400px" closable="false" widgetVar="dialogTest"
+													header="Passwort ändern" resizeable="false" modal="true">
+													<h:outputText
+														value="Sie müssen, um fortfahren zu können, Ihr Passwort wechseln." />
+													<p:messages id="messages" showDetail="true"
+														autoUpdate="true" />
+
+													<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+														<h:outputLabel for="pwd1" value="Password 1: *" />
+														<p:password id="pwd1" value="#{employeeController.password}"
+															match="pwd2" label="Passwort:" required="true"
+															feedback="true"
+															requiredMessage="Kein Passwort eingegeben" />
+
+														<h:outputLabel for="pwd2" value="Password 2: *" />
+														<p:password id="pwd2" value="#{employeeController.password}"
+															label="Wiederholung: " required="true" />
+													</h:panelGrid>
+													<h:panelGrid columns="3">
+														<p:commandButton
+															action="#{employeeController.changePassword(employeeController.password)}"
+															update=":dialogForm" value="Speichern" />
+													</h:panelGrid>
+												</p:dialog>
+											</h:form>
 											<h:form>
 												<p:accordionPanel multiple="true">
 													<p:tab title="Anwesende Kinder">
@@ -36,7 +64,7 @@
 														</p:dataTable>
 													</p:tab>
 													<p:tab title="Kinder, die heute zu Mittag essen">
-																												<p:dataTable id="childTableEating" var="child"
+														<p:dataTable id="childTableEating" var="child"
 															value="#{childController.children}">
 															<p:column headerText="First Name">
 																<h:outputText value="#{child.firstName}" />
