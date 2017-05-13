@@ -2,7 +2,6 @@ package at.qe.sepm.asn_app.ui.constraints;
 
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.PasswordConstraintException;
 
 /**
@@ -10,6 +9,12 @@ import at.qe.sepm.asn_app.ownExceptions.PasswordConstraintException;
  */
 public class PasswordConstraints {
 
+    /**
+     * This method gets called for all password who are not associated with a Parent. It calls all necessary
+     * password constraints methods and throws a PasswordConstraintException if a constraint is violated.
+     * @param password The password to be validated.
+     * @throws PasswordConstraintException if a password constraint is violated.
+     */
     public static void checkPasswordConstraints(String password) throws PasswordConstraintException {
         if (checkPasswordComplexity(password) == false) {
             throw new PasswordConstraintException("The password doesn't match the criteria.");
@@ -18,11 +23,11 @@ public class PasswordConstraints {
 
 
     /**
-     * Since checkPasswordChildName(String password, Parent parent) is only called for parents there is need of a
-     * separate
-     * @param password
-     * @param parent
-     * @throws PasswordConstraintException
+     * Since checkPasswordChildName(String password) is only called for non-parents there is need of a
+     * separate method in which the password constraints for parents are validated.
+     * @param password The password to be validated.
+     * @param parent The parent of which the names of their children get validated.
+     * @throws PasswordConstraintException if a password constraint is violated.
      */
     public static void checkPasswordConstraintsParent(String password, Parent parent) throws PasswordConstraintException {
         if (checkPasswordComplexity(password) == false) {
@@ -35,6 +40,7 @@ public class PasswordConstraints {
 
 
     /**
+     * Validates various password constraints:
      * ^                 # start-of-string
      * (?=.*[0-9])       # a digit must occur at least once
      * (?=.*[a-z])       # a lower case letter must occur at least once
@@ -43,7 +49,7 @@ public class PasswordConstraints {
      * (?=\S+$)          # no whitespace allowed in the entire string
      * .{8,}             # anything, at least eight places though
      * $                 # end-of-string
-     * @param password
+     * @param password The password to be validated.
      * @return iff all constraints are satisfied.
      * @see <a href="http://stackoverflow.com/questions/3802192/regexp-java-for-password-validation">http://stackoverflow.com/questions/3802192/regexp-java-for-password-validation</a>
      */
@@ -55,7 +61,8 @@ public class PasswordConstraints {
 
     /**
      *
-     * @param password
+     * @param password The password to be validated.
+     * @param parent The parent of which the names of their children get validated.
      * @return iff the name of a child of a parent is no substring of the password.
      */
     public static boolean checkPasswordChildName(String password, Parent parent) {
