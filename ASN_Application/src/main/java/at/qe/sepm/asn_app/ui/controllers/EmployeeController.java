@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.services.EmployeeService;
+import at.qe.sepm.asn_app.services.MailService;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +23,8 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private MailService mailService;
     private Collection<Employee> employees;
     private Employee employee;
     private Employee employeeEdit;
@@ -59,6 +62,7 @@ public class EmployeeController {
 
     public void doSaveEmployee(){
         employee = employeeService.saveEmployee(employee);
+        mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test", "Hallo,  ich bin es, das System!");
         employee = null;
         initNewEmployee();
         initList();
