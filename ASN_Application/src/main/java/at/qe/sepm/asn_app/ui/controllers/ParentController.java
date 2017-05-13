@@ -1,10 +1,15 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.ParentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +28,9 @@ public class ParentController {
     private Collection<Parent> parents;
     private Parent parent;
     private Parent parentEdit;
+    private String password;
+    @Autowired
+	private UserRepository userRepository;
 
     public Collection<Parent> getParents() {
 
@@ -86,10 +94,27 @@ public class ParentController {
         parentEdit = null;
         initList();
     }
+    
+    public void changePassword(String password){
+    	UserData user = getAuthenticatedUser();
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
 
+	public UserData getAuthenticatedUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-
-
+		return userRepository.findFirstByUsername(auth.getName());
+	}
+	
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
 
 
 

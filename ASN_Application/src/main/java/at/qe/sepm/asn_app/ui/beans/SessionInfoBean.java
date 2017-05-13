@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -115,6 +116,15 @@ public class SessionInfoBean {
 			}
 		}
 		return false;
+	}
+	
+	public boolean hasDefaultPasswd(){
+		UserData user = getCurrentUserData();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(passwordEncoder.matches("passwd", user.getPassword()))
+        	return true;
+        else
+        	return false;
 	}
 
 }
