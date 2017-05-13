@@ -17,17 +17,30 @@
   border-radius:10px;
 }
 
-.triangle-border-new {
-	width:350px;
+.skin-green .triangle-border-new-left {
+	width:250px;
   position:relative;
   margin:1em 0 1em;
-  border:1px solid #5a8f00;
+  border:3px solid #5a8f00;
   color:#333;
   background:#fff;
   /* css3 */
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
+}
+
+.skin-green .triangle-border-new-right {
+    width: 250px;
+    position: relative;
+    margin: 1em 0px 1em;
+    border: 1px solid #5a8f00;
+    color: #333;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-left: 118px;
 }
 
 .triangle-border.left {

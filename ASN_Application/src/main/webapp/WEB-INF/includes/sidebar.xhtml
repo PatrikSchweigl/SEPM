@@ -19,27 +19,30 @@
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								href="/employee/mainpage_employee.xhtml"> <i
 									class="fa fa-home fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								href="/employee/picturegalery_employee.xhtml"> <i
 									class="fa fa-picture-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li><a href="/employee/messageboard_employee.xhtml"> <i
 									class="fa fa-sticky-note-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Messageboard</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								onclick="PF('privateMessage').show()"> <i
 									class="fa fa-envelope-o fa-3x"></i> <span
@@ -53,14 +56,16 @@
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
 								href="/employee/calendar_employee.xhtml"> <i
 									class="fa fa-calendar fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kalender</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a onclick="PF('ownDataDialog').show()">
 									<i class="fa fa-database fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
@@ -73,7 +78,8 @@
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
-												<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a onclick="PF('colorSettings').show()"
 								href="#"> <i class="fa fa-edit fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
@@ -231,7 +237,7 @@
 							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 							<p:commandLink value="#{parent.username}"
-								action="#{privateMessageController.setUsername(employee.username)}"
+								action="#{privateMessageController.setUsername(parent.username)}"
 								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
 								<h:outputText value="#{parent.username}" />
@@ -258,13 +264,29 @@
 							value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}">
 							<div class="messageboard-item">
 								<div class="messageboard-body">
-
-									<blockquote class="triangle-border-new">
-										<div>
-											<p>#{message.message}</p>
-										</div>
-									</blockquote>
-
+									<ui:fragment
+										rendered="#{message.usernameSender eq sessionInfoBean.currentUserData.username}">
+										<blockquote class="triangle-border-new-left">
+											<div>
+												<p>#{message.message}</p>
+												<p>#{sessionInfoBean.currentUserData.username}</p>
+												<p>#{message.usernameSender}</p>
+												<p>#{message.usernameReceiver}</p>
+											</div>
+										</blockquote>
+									</ui:fragment>
+									<ui:fragment
+										rendered="#{message.usernameSender ne sessionInfoBean.currentUserData.username}">
+										<blockquote class="triangle-border-new-right">
+											<div>
+												<p>#{message.message}</p>
+												<p>#{sessionInfoBean.currentUserData.username}</p>
+												<p>#{message.usernameSender}</p>
+																								<p>#{message.usernameReceiver}</p>
+												
+											</div>
+										</blockquote>
+									</ui:fragment>
 								</div>
 							</div>
 						</ui:repeat>

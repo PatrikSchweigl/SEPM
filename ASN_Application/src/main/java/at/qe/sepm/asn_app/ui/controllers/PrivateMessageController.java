@@ -70,15 +70,15 @@ public class PrivateMessageController {
     	privateMessages.setMessage(privateMessage);
     	privateMessages.setUsernameSender(getAuthenticatedUser().getUsername());
     	privateMessages.setUsernameReceiver(username);
+    	System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+    	System.err.println(username);
+    	System.err.println(getAuthenticatedUser().getUsername());
     	messageService.savePrivateMessage(privateMessages);
     	privateMessage = "";
     }
     
     public Collection<PrivateMessage> getPrivateMessagesBySender(String usernameS, String usernameR){
-    	if(username == null){
-            return messageService.getAllPrivateMessagesBySender("cheng", "fatima");
- 
-    	}
 
         return messageService.getAllPrivateMessagesBySender(usernameS, usernameR);
     }
