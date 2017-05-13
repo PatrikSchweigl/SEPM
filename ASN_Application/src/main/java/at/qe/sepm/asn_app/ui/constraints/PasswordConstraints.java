@@ -1,5 +1,7 @@
 package at.qe.sepm.asn_app.ui.constraints;
 
+import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.PasswordConstraintException;
 
@@ -25,11 +27,27 @@ public class PasswordConstraints {
      * .{8,}             # anything, at least eight places though
      * $                 # end-of-string
      * @param password
-     * @return
+     * @return iff all constraints are satisfied.
      * @see <a href="http://stackoverflow.com/questions/3802192/regexp-java-for-password-validation">http://stackoverflow.com/questions/3802192/regexp-java-for-password-validation</a>
      */
     public static boolean checkPasswordComplexity(String password) {
         String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         return password.matches(pattern);
+    }
+
+
+    /**
+     *
+     * @param password
+     * @return iff the name of a child of a parent is no substring of the password.
+     */
+    public static boolean checkPasswordChildName(String password, Parent parent) {
+        for (Child child : parent.getListChildren()) {
+            if (password.toLowerCase().contains(child.getFirstName().toLowerCase()) ||
+                    password.toLowerCase().contains(child.getLastName().toLowerCase())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
