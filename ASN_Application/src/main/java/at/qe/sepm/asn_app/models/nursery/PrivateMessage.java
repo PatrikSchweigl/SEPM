@@ -48,7 +48,7 @@ public class PrivateMessage implements Persistable<Long> {
     }
 	
 	public String getUsernameSender() {
-		return usernameReceiver;
+		return usernameSender;
 	}
 
 	public void setUsernameSender(String usernameSender) {

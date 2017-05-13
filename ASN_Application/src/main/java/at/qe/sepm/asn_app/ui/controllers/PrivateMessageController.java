@@ -70,10 +70,6 @@ public class PrivateMessageController {
     	privateMessages.setMessage(privateMessage);
     	privateMessages.setUsernameSender(getAuthenticatedUser().getUsername());
     	privateMessages.setUsernameReceiver(username);
-    	System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-
-    	System.err.println(username);
-    	System.err.println(getAuthenticatedUser().getUsername());
     	messageService.savePrivateMessage(privateMessages);
     	privateMessage = "";
     }
@@ -82,9 +78,9 @@ public class PrivateMessageController {
 
         return messageService.getAllPrivateMessagesBySender(usernameS, usernameR);
     }
-    public Collection<PrivateMessage> getPrivateMessagesByReceiver(String username){
+    public Collection<PrivateMessage> getPrivateMessagesBySender(String username){
 
-        return messageService.getAllPrivateMessagesByReceiver(username);
+        return messageService.getAllPrivateMessagesBySender(username);
     }
    
     

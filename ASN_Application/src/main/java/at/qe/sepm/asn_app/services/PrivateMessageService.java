@@ -48,8 +48,8 @@ public class PrivateMessageService implements Serializable {
         return privateMessageRepository.getPrivateMessagesBySender(usernameS, usernameR);
     }
 
-    public Collection<PrivateMessage> getAllPrivateMessagesByReceiver(String username){
-        return privateMessageRepository.getPrivateMessagesByReceiver(username);
+    public Collection<PrivateMessage> getAllPrivateMessagesBySender(String username){
+        return privateMessageRepository.getPrivateMessagesBySender(username);
     }
     
 
