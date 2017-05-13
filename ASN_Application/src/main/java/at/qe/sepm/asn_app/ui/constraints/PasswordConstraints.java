@@ -18,6 +18,23 @@ public class PasswordConstraints {
 
 
     /**
+     * Since checkPasswordChildName(String password, Parent parent) is only called for parents there is need of a
+     * separate
+     * @param password
+     * @param parent
+     * @throws PasswordConstraintException
+     */
+    public static void checkPasswordConstraintsParent(String password, Parent parent) throws PasswordConstraintException {
+        if (checkPasswordComplexity(password) == false) {
+            throw new PasswordConstraintException("The password doesn't match the criteria.");
+        }
+        else if(!checkPasswordChildName(password, parent)) {
+            throw new PasswordConstraintException("The name of a parents own child is not allowed as a substring in the password.");
+        }
+    }
+
+
+    /**
      * ^                 # start-of-string
      * (?=.*[0-9])       # a digit must occur at least once
      * (?=.*[a-z])       # a lower case letter must occur at least once
