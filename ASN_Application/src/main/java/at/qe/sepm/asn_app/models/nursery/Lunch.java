@@ -16,6 +16,7 @@ import java.util.List;
 public class Lunch implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -34,6 +35,7 @@ public class Lunch implements Persistable<Long> {
         this.cost = cost;
         this.listChildren = listChildren;
     }
+
 
     public Date getDate() {
         return date;

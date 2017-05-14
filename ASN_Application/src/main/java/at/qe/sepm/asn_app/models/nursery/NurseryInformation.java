@@ -15,6 +15,7 @@ import java.util.Date;
  */
 @Entity
 public class NurseryInformation implements Persistable<Long> {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -23,7 +24,7 @@ public class NurseryInformation implements Persistable<Long> {
     @NotNull
     private Date bringTimeStart;
     @NotNull
-    private Date bingTimeEnd;
+    private Date bringTimeEnd;
     @NotNull
     private Date pickUpTimeStart;
     @NotNull
@@ -31,13 +32,15 @@ public class NurseryInformation implements Persistable<Long> {
     @NotNull
     private int maxOccupancy;
 
-    public NurseryInformation(Date bringTimeStart, Date bingTimeEnd, Date pickUpTimeStart, Date pickUpTimeEnd, int maxOccupancy) {
+
+    public NurseryInformation(Date bringTimeStart, Date bringTimeEnd, Date pickUpTimeStart, Date pickUpTimeEnd, int maxOccupancy) {
         this.bringTimeStart = bringTimeStart;
-        this.bingTimeEnd = bingTimeEnd;
+        this.bringTimeEnd = bringTimeEnd;
         this.pickUpTimeStart = pickUpTimeStart;
         this.pickUpTimeEnd = pickUpTimeEnd;
         this.maxOccupancy = maxOccupancy;
     }
+
 
     public Date getBringTimeStart() {
         return bringTimeStart;
@@ -47,12 +50,12 @@ public class NurseryInformation implements Persistable<Long> {
         this.bringTimeStart = bringTimeStart;
     }
 
-    public Date getBingTimeEnd() {
-        return bingTimeEnd;
+    public Date getbringTimeEnd() {
+        return bringTimeEnd;
     }
 
-    public void setBingTimeEnd(Date bingTimeEnd) {
-        this.bingTimeEnd = bingTimeEnd;
+    public void setbringTimeEnd(Date bringTimeEnd) {
+        this.bringTimeEnd = bringTimeEnd;
     }
 
     public Date getPickUpTimeStart() {
@@ -79,14 +82,38 @@ public class NurseryInformation implements Persistable<Long> {
         this.maxOccupancy = maxOccupancy;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public boolean isNew() {
         return (null == bringTimeStart && null == pickUpTimeEnd);
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if(!(obj instanceof NurseryInformation)) {
+            return false;
+        }
+
+        NurseryInformation other = (NurseryInformation) obj;
+        if (this.bringTimeStart.equals(other.bringTimeStart) &&
+                this.bringTimeEnd.equals(other.bringTimeEnd) &&
+                this.maxOccupancy == other.maxOccupancy &&
+                this.pickUpTimeStart.equals(other.pickUpTimeStart) &&
+                this.pickUpTimeEnd.equals(other.pickUpTimeEnd)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

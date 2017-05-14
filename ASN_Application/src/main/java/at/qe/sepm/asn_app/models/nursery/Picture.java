@@ -30,6 +30,7 @@ public class Picture implements Persistable<Long> {
     private Date date;
     private String title;
 
+
     public Picture() {
     }
 
@@ -85,13 +86,47 @@ public class Picture implements Persistable<Long> {
         this.title = title;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (url.equals(""));
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (!(obj instanceof Picture)) {
+            return false;
+        }
+
+        Picture other = (Picture) obj;
+        if (this.comment.equals(other.comment) &&
+                this.date.equals(other.date) &&
+                this.publisher.equals(other.publisher) &&
+                this.title.equals(other.title) &&
+                this.url.equals(other.url)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n" +
+                "Title: " + title + "\n" +
+                "Publisher: " + publisher + "\n" +
+                "Comment: " + comment + "\n" +
+                "URL: " + url;
     }
 }

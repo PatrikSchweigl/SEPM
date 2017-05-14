@@ -25,9 +25,9 @@ public class Employee extends UserData {
     @Enumerated(EnumType.STRING)
     private WorkRole workRole;
 
+
     public Employee(){//required for jpa repository
     }
-
 
     public Employee(String password, String username, String firstName, String lastName, String location,
                     String streetName, String postcode, UserRole userRole, Religion religion, String phoneNumber,
