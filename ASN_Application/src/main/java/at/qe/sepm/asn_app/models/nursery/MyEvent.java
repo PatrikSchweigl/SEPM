@@ -16,13 +16,13 @@ public class MyEvent {
 	private String stringId;
 	private String descript;
 	private Date beginDate;
-	private Date endingDate;
+	private Date endDate;
 	
 	public MyEvent(){}
 	
 	public MyEvent(String stringId, String description, Date beginDate, Date endDate){
 		this.setStringId(stringId);
-		this.endingDate = endDate;
+		this.endDate = endDate;
 		this.beginDate = beginDate;
 		this.setDescript(description);
 	}
@@ -51,12 +51,12 @@ public class MyEvent {
 		this.descript = descript;
 	}
 
-	public Date getEndingDate() {
-		return endingDate;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setEndingDate(Date endingDate) {
-		this.endingDate = endingDate;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 
@@ -72,7 +72,7 @@ public class MyEvent {
 		MyEvent other = (MyEvent) obj;
 		if (this.beginDate.equals(other.beginDate) &&
 				this.descript.equals(other.descript) &&
-				this.endingDate.equals(other.endingDate) &&
+				this.endDate.equals(other.endDate) &&
 				this.stringId.equals(other.stringId)) {
 			return true;
 		}
@@ -86,7 +86,7 @@ public class MyEvent {
 	public String toString() {
 		return "BeginDate: " + beginDate + "\n" +
 				"Descript: " + descript + "\n" +
-				"EndingDate: " + endingDate + "\n"+
+				"EndDate: " + endDate + "\n"+
 				"StringId: " + stringId;
 	}
 }

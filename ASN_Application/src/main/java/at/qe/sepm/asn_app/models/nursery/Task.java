@@ -20,7 +20,7 @@ public class Task implements Persistable<Long> {
     private Long id;
 	private String stringId;
 	private Date beginDate;
-	private Date endingDate;
+	private Date endDate;
     private String description;
     @ManyToOne(optional = false)
     private UserData  sender;
@@ -36,11 +36,12 @@ public class Task implements Persistable<Long> {
         this.description = description;
         this.stringId = stringId;
         this.beginDate = beginDate;
-        this.endingDate = endDate;
+        this.endDate = endDate;
         this.sender = sender;
         this.receiver = receiver;
         this.important = false;
     }
+
 
     public String getDescription() {
         return description;
@@ -66,17 +67,6 @@ public class Task implements Persistable<Long> {
         this.receiver = receiver;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public boolean isNew() {
-        return getSender() == null;
-    }
-
-
 	public Date getBeginDate() {
 		return beginDate;
 	}
@@ -85,12 +75,12 @@ public class Task implements Persistable<Long> {
 		this.beginDate = beginDate;
 	}
 
-	public Date getEndingDate() {
-		return endingDate;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setEndingDate(Date endingDate) {
-		this.endingDate = endingDate;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getStringId() {
@@ -117,4 +107,54 @@ public class Task implements Persistable<Long> {
 		this.important = important;
 	}
 
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+
+    @Override
+    public boolean isNew() {
+        return getSender() == null;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Task)) {
+            return false;
+        }
+
+        Task other = (Task) obj;
+        if (this.beginDate.equals(other.beginDate) &&
+                this.description.equals(other.description) &&
+                this.endDate.equals(other.endDate) &&
+                this.important == other.important &&
+                this.receiver.equals(other.receiver) &&
+                this.sender.equals(other.sender) &&
+                this.stringId.equals(other.stringId) &&
+                this.styleClass.equals(other.styleClass)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Description: " + description + "\n" +
+                "BeginDate: " + beginDate + "\n" +
+                "EndDate: " + endDate + "\n" +
+                "Important: " + important + "\n" +
+                "Receiver: " + receiver + "\n" +
+                "Sender: " + sender + "\n" +
+                "StringId: " + stringId + "\n" +
+                "StyleClass: " + styleClass;
+    }
 }

@@ -73,14 +73,14 @@ public class ScheduleView implements Serializable {
 		for (Task t : tasks) {
 			DefaultScheduleEvent ev;
 			if (t.getImportant())
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "important");
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate(), "important");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate(), "employee");
 			else if(getAuthenticatedUser().getUserRole() == UserRole.PARENT && t.getSender().getUserRole() == UserRole.EMPLOYEE)
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate(), "employee");
 			else
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
+				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndDate(), "normal-event");
 
 
 			eventModel.addEvent(ev);
