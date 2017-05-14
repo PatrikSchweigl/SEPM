@@ -452,6 +452,7 @@
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    border: none
 }
 
 
@@ -724,6 +725,7 @@
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    border: none
 }
 
 .skin-yellow .main-header .navbar {
@@ -996,6 +998,7 @@
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    border: none
 }
 
 
