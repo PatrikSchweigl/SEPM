@@ -30,9 +30,7 @@ public class Parent extends UserData {
     private boolean status;
 
 
-
     public Parent(){}
-
 
     public Parent(String password, String username, String firstName, String lastName,
                   String location, String streetName, String postcode, UserRole userRole,
@@ -45,7 +43,6 @@ public class Parent extends UserData {
         this.familyStatus = familyStatus;
         this.status = status;
     }
-
 
 
     public String getImgName() {
@@ -71,7 +68,6 @@ public class Parent extends UserData {
     public void setListAssignments(Set<Assignment> listAssignments) {
         this.listAssignments = listAssignments;
     }
-
 
     public FamilyStatus getFamilyStatus() {
         return familyStatus;
@@ -113,5 +109,23 @@ public class Parent extends UserData {
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Username: " + getUsername() + "\n" +
+                "FirstName: " + getFirstName() + "\n" +
+                "LastName: " + getLastName() + "\n" +
+                "Birthday: " + getBirthday() + "\n" +
+                "FamilyStatus: " + familyStatus + "\n" +
+                "UserRole: " + getUserRole() + "\n" +
+                "Status: " + status + "\n" +
+                "Postcode: " + getPostcode() + "\n" +
+                "Location: " + getLocation() + "\n" +
+                "StreetName: " + getStreetName() + "\n" +
+                "Children: " + listChildren + "\n" +
+                "Assignments: " + listAssignments + "\n" +
+                "ImgName: " + imgName;
     }
 }
