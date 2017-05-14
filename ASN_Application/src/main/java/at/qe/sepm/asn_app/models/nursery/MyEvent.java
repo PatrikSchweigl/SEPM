@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 @Entity
 
@@ -60,5 +58,36 @@ public class MyEvent {
 
 	public void setEndingDate(Date endingDate) {
 		this.endingDate = endingDate;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		else if (!(obj instanceof MyEvent)) {
+			return false;
+		}
+
+		MyEvent other = (MyEvent) obj;
+		if (this.beginDate.equals(other.beginDate) &&
+				this.descript.equals(other.descript) &&
+				this.endingDate.equals(other.endingDate) &&
+				this.stringId.equals(other.stringId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+
+	@Override
+	public String toString() {
+		return "BeginDate: " + beginDate + "\n" +
+				"Descript: " + descript + "\n" +
+				"EndingDate: " + endingDate + "\n"+
+				"StringId: " + stringId;
 	}
 }

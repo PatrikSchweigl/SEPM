@@ -27,8 +27,8 @@ public class Message implements Persistable<Long> {
     @NotNull
 	private Date date;
 
-	public Message() {
 
+	public Message() {
 	}
 
 	public Message(String username, String message, Date date) {
@@ -36,6 +36,7 @@ public class Message implements Persistable<Long> {
 		this.message = message;
 		this.date = date;
 	}
+
 
 	public String getUsername() {
 		return username;
