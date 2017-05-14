@@ -58,13 +58,44 @@ public class Comment implements Persistable<Long>{
         this.publisher = publisher;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (comment.equals(""));
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Comment)) {
+            return false;
+        }
+
+        Comment other = (Comment) obj;
+        if (this.comment.equals(other.comment) &&
+                this.date.equals(other.date) &&
+                this.publisher.equals(other.publisher)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Comment: " + comment + "\n" +
+                "Date: " + date + "\n" +
+                "Publisher: " + publisher;
     }
 }
