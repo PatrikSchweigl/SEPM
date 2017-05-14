@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -93,9 +94,9 @@ public class ParentConstraintsTest {
      * Check for the violation of the constraint that a parent must not be younger than 14 years.
      * @throws BirthdayConstraintException
      */
-    @Test(expected = BirthdayConstraintException.class)
+    @Test
     public void checkBirthdayConstraintsTest2() throws BirthdayConstraintException {
-        ParentConstraints.checkBirthdayConstraints(parent2);
+        assertFalse(ParentConstraints.checkBirthdayConstraints(parent2));
     }
 
 
@@ -103,9 +104,9 @@ public class ParentConstraintsTest {
      * Check for the violation of the constraint that a parent must not be older than 99 years.
      * @throws BirthdayConstraintException
      */
-    @Test(expected = BirthdayConstraintException.class)
+    @Test
     public void checkBirthdayConstraintsTest3() throws BirthdayConstraintException {
-        ParentConstraints.checkBirthdayConstraints(parent3);
+        assertFalse(ParentConstraints.checkBirthdayConstraints(parent3));
     }
 
 
