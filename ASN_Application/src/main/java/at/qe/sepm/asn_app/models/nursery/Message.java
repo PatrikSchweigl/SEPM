@@ -11,9 +11,15 @@ import java.util.Date;
 
 /**
  * Created by zerus on 17.03.17.
+ *
+ * A Message contains the name of the sender, the message itself and a date on which it got sent.
+ * There is no receiver because all instance of Message are publicly displayed.
+ *
+ * @see PrivateMessage for a direct communication message with a sender and a receiver.
  */
 @Entity
 public class Message implements Persistable<Long> {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,8 +34,7 @@ public class Message implements Persistable<Long> {
 	private Date date;
 
 
-	public Message() {
-	}
+	public Message() {}
 
 	public Message(String username, String message, Date date) {
 		this.username = username;

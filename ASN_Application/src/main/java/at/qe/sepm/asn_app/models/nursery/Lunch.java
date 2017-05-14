@@ -10,6 +10,10 @@ import java.util.List;
 
 /**
  * Created by zerus on 17.03.17.
+ *
+ * Lunch holds information on which date a meal is available and how much it costs.
+ * @see Child
+ * @see Date
  */
 
 @Entity

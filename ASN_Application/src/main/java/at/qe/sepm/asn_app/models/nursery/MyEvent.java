@@ -17,7 +17,8 @@ public class MyEvent {
 	private String descript;
 	private Date beginDate;
 	private Date endingDate;
-	
+
+
 	public MyEvent(){}
 	
 	public MyEvent(String stringId, String description, Date beginDate, Date endingDate){
@@ -26,6 +27,7 @@ public class MyEvent {
 		this.beginDate = beginDate;
 		this.setDescript(description);
 	}
+
 
 	public Date getBeginDate() {
 		return beginDate;

@@ -12,7 +12,11 @@ import java.util.Date;
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 20.03.2017
+ *
+ * NurseryInformation stores the bring- and pick up times for children in the nursery.
+ * It also stores an integer which specifies the maximum occupancy of children of the nursery.
  */
+// TODO Change bring- and pick up time to PairTime
 @Entity
 public class NurseryInformation implements Persistable<Long> {
 
