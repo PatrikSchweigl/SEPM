@@ -14,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 public class PrivateMessage implements Persistable<Long> {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,15 +22,12 @@ public class PrivateMessage implements Persistable<Long> {
     private Long id;
 
     private String usernameSender;
-
     private String usernameReceiver;
-
     private String message;
-
 	private Date date;
 
-	public PrivateMessage() {
 
+	public PrivateMessage() {
 	}
 
 	public PrivateMessage(String usernameSender, String usernameReceiver, String message, Date date) {
@@ -38,6 +36,7 @@ public class PrivateMessage implements Persistable<Long> {
 		this.message = message;
 		this.date = date;
 	}
+
 
 	public String getUsernameReceiver() {
 		return usernameReceiver;
@@ -71,13 +70,43 @@ public class PrivateMessage implements Persistable<Long> {
         this.date = date;
     }
 
+
     @Override
     public Long getId() {
     	return  id;
     }
 
+
     @Override
     public boolean isNew() {
         return (null == usernameSender && null == message);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (!(obj instanceof PrivateMessage)) {
+            return false;
+        }
+
+        PrivateMessage other = (PrivateMessage) obj;
+        if (this.date.equals(other.date) &&
+                this.message.equals(other.message) &&
+                this.usernameReceiver.equals(other.usernameReceiver) &&
+                this.usernameSender.equals(other.usernameSender)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public String toString() {
+	    return "Date: " + date + "\n" +
+                "Message: " + message + "\n" +
+                "UsernameReceiver: " + usernameReceiver + "\n" +
+                "UnsernameSender: " + usernameSender;
     }
 }
