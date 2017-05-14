@@ -61,14 +61,44 @@ public class Message implements Persistable<Long> {
         this.date = date;
     }
 
+
     @Override
     public Long getId() {
     	return  id;
     }
+
 
     @Override
     public boolean isNew() {
         return (null == username && null == message);
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+        }
+        else if(!(obj instanceof Message)) {
+	        return false;
+        }
+
+        Message other = (Message) obj;
+	    if (this.date.equals(other.date) &&
+                this.message.equals(other.message) &&
+                this.username.equals(other.username)) {
+	        return true;
+        }
+        else {
+	        return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+	    return "Date: " + date + "\n" +
+                "Message: " + message + "\n" +
+                "Username: " + username;
+    }
 }
