@@ -216,6 +216,7 @@
 				<h3>Mitarbeiter</h3>
 				<div>
 					<ui:repeat var="employee" value="#{employeeController.employees}">
+					<ui:fragment rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
 						<h:panelGrid columns="2" style="width:50px;"
 							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
@@ -228,12 +229,13 @@
 							</p:commandLink>
 						</h:panelGrid>
 						<hr />
+						</ui:fragment>
 					</ui:repeat>
 				</div>
 				<div>
 					<h3>Eltern</h3>
 					<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-						<h:panelGrid columns="2" style="width:50px;"
+					<ui:fragment rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">						<h:panelGrid columns="2" style="width:50px;"
 							columnClasses="logo,detail">
 							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 							<p:commandLink value="#{parent.username}"
@@ -244,6 +246,7 @@
 							</p:commandLink>
 						</h:panelGrid>
 						<hr />
+						</ui:fragment>
 					</ui:repeat>
 				</div>
 			</p:dialog>
