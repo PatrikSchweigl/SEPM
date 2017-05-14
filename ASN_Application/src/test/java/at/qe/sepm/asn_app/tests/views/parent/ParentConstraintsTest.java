@@ -85,8 +85,7 @@ public class ParentConstraintsTest {
      */
     @Test
     public void checkBirthdayConstraintsTest1() throws BirthdayConstraintException {
-        parentConstraints = new ParentConstraints(parent1);
-        parentConstraints.checkBirthdayConstraints();
+        ParentConstraints.checkBirthdayConstraints(parent1);
     }
 
 
@@ -96,8 +95,7 @@ public class ParentConstraintsTest {
      */
     @Test(expected = BirthdayConstraintException.class)
     public void checkBirthdayConstraintsTest2() throws BirthdayConstraintException {
-        parentConstraints = new ParentConstraints(parent2);
-        parentConstraints.checkBirthdayConstraints();
+        ParentConstraints.checkBirthdayConstraints(parent2);
     }
 
 
@@ -107,8 +105,7 @@ public class ParentConstraintsTest {
      */
     @Test(expected = BirthdayConstraintException.class)
     public void checkBirthdayConstraintsTest3() throws BirthdayConstraintException {
-        parentConstraints = new ParentConstraints(parent3);
-        parentConstraints.checkBirthdayConstraints();
+        ParentConstraints.checkBirthdayConstraints(parent3);
     }
 
 
@@ -116,8 +113,7 @@ public class ParentConstraintsTest {
     @Test
     public void alreadyExistsTest() {
         parentService.saveParent(parent3);
-        parentConstraints= new ParentConstraints(parent4);
-        assertTrue(parentConstraints.alreadyExists());
+        assertTrue(ParentConstraints.alreadyExists(parent4));
     }
 
 

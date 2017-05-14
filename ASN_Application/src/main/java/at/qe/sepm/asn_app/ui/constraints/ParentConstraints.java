@@ -14,28 +14,18 @@ import java.util.Collection;
  */
 public class ParentConstraints {
 
-    private Parent parent;
-    private ParentService parentService;
-
-    public ParentConstraints(Parent parent) {
-        this.parent = parent;
-        parentService = new ParentService();
-    }
-
-
     /**
      *
      * @return true iff no constraints are violated.
      */
-    public void checkConstraints() throws BirthdayConstraintException {
-        if(!checkBirthdayConstraints()) {
+    public static void checkConstraints(Parent parent) throws BirthdayConstraintException {
+        if(!checkBirthdayConstraints(parent)) {
             throw new BirthdayConstraintException();
         }
     }
 
 
-
-    public boolean checkBirthdayConstraints()  {
+    public static boolean checkBirthdayConstraints(Parent parent)  {
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         long birthday = BirthdayParser.parseBirthdayToLong(parent.getBirthday());
         int ageDays = (int)((dateNow-birthday)/60/60/24);
@@ -62,8 +52,8 @@ public class ParentConstraints {
      * @return true if the parent already exists in the database; false otherwise
      */
     // TODO instead of getting all parents it suffices to get only the one with the same identifier
-    public boolean alreadyExists() {
-        Collection<Parent> parents = parentService.getAllParents();
+    public static boolean alreadyExists(Parent parent) {
+        Collection<Parent> parents = new ParentService().getAllParents();
         for (Parent p : parents) {
             if (p.equals(parent)) {
                 return true;
