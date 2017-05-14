@@ -21,7 +21,7 @@
 	width:250px;
   position:relative;
   margin:1em 0 1em;
-  border:3px solid #5a8f00;
+  border:3px solid #00a65a;
   color:#333;
   background:#fff;
   /* css3 */
@@ -34,7 +34,7 @@
     width: 250px;
     position: relative;
     margin: 1em 0px 1em;
-    border: 1px solid #5a8f00;
+    border: 1px solid #00a65a;
     color: #333;
     background: #fff;
     -webkit-border-radius: 10px;
@@ -325,6 +325,32 @@
     color: #fff;
 }
 
+.skin-red .triangle-border-new-left {
+	width:250px;
+  position:relative;
+  margin:1em 0 1em;
+  border:3px solid #dd4b39;
+  color:#333;
+  background:#fff;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+.skin-red .triangle-border-new-right {
+    width: 250px;
+    position: relative;
+    margin: 1em 0px 1em;
+    border: 1px solid #dd4b39;
+    color: #333;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-left: 118px;
+}
+
 .skin-red .rectangle-speech-border {
     position:relative;
     border:5px solid #dd4b39;
@@ -571,6 +597,31 @@
     background: #e08e0b;
     color: #fff;
 }
+.skin-yellow .triangle-border-new-left {
+	width:250px;
+  position:relative;
+  margin:1em 0 1em;
+  border:3px solid #f39c12;
+  color:#333;
+  background:#fff;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+.skin-yellow .triangle-border-new-right {
+    width: 250px;
+    position: relative;
+    margin: 1em 0px 1em;
+    border: 1px solid #f39c12;
+    color: #333;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-left: 118px;
+}
 
 .skin-yellow .rectangle-speech-border {
     position:relative;
@@ -816,6 +867,32 @@
     border: 2px solid #555299;
     background: #555299;
     color: #fff;
+}
+
+.skin-purple .triangle-border-new-left {
+	width:250px;
+  position:relative;
+  margin:1em 0 1em;
+  border:3px solid #605ca8;
+  color:#333;
+  background:#fff;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+.skin-purple .triangle-border-new-right {
+    width: 250px;
+    position: relative;
+    margin: 1em 0px 1em;
+    border: 1px solid #605ca8;
+    color: #333;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-left: 118px;
 }
 
 .skin-purple .rectangle-speech-border {
