@@ -41,9 +41,6 @@ public class Employee extends UserData {
     }
 
 
-    public void setAdmin(boolean admin) {
-    }
-
     public Religion getReligion() {
         return religion;
     }

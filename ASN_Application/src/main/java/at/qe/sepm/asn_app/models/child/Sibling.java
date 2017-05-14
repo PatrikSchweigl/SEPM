@@ -9,12 +9,14 @@ import javax.persistence.Id;
 
 /**
  * Created by zerus on 17.03.17.
+ *
+ * Sibling is a minimalistic version of Child. In contrast to Child it only holds the full name and birthday.
+ * @see Child
  */
 @Entity
 public class Sibling implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +24,7 @@ public class Sibling implements Persistable<Long> {
     private String firstName;
     private String lastName;
     private String birthday;
+
 
     public Sibling(String firstName, String lastName, String birthday) {
         this.firstName = firstName;
@@ -54,10 +57,12 @@ public class Sibling implements Persistable<Long> {
         this.birthday = birthday;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public boolean isNew() {
@@ -84,7 +89,6 @@ public class Sibling implements Persistable<Long> {
     }
 
 
-    // TODO getId() doesn't work yet
     @Override
     public String toString() {
         return "Name: " + firstName + "\n" +

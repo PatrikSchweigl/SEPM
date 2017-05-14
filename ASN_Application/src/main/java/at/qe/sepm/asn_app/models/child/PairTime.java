@@ -11,9 +11,16 @@ import java.util.Date;
 
 /**
  * Created by zerus on 17.03.17.
+ *
+ * PairTime holds two attributes, startTime and endTime, which specify a time range.
+ * In this project this time range is used to specify the bring- and pick up- times for children at the nursery.
+ *
+ * @see Child
+ * @see at.qe.sepm.asn_app.repositories.PairTimeRepository
  */
 @Entity
 public class PairTime implements Persistable<Long>{
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,10 +29,12 @@ public class PairTime implements Persistable<Long>{
     private Date startTime;
     private Date endTime;
 
+
     public PairTime(Date startTime, Date endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
 
     public Date getStartTime() {
         return startTime;
@@ -43,10 +52,12 @@ public class PairTime implements Persistable<Long>{
         this.endTime = endTime;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public boolean isNew() {

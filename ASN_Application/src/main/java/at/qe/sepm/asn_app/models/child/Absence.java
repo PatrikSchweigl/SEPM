@@ -23,11 +23,13 @@ public class Absence implements Persistable<Long> {
     private Child child;
     private Date date;
 
+
     public Absence(String reason, Child child, Date date) {
         this.reason = reason;
         this.child = child;
         this.date = date;
     }
+
 
     public String getReason() {
         return reason;
@@ -53,10 +55,12 @@ public class Absence implements Persistable<Long> {
         this.date = date;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
     @Override
     public boolean isNew() {
