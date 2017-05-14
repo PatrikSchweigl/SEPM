@@ -13,6 +13,7 @@ import org.springframework.data.domain.Persistable;
 public class UserData implements Persistable<String> {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     private String username;
     private String password;
@@ -25,6 +26,9 @@ public class UserData implements Persistable<String> {
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
+
+    public UserData(){}
 
     public UserData(String password, String username, String firstName,
                     String lastName, String location, String streetName,
@@ -40,9 +44,6 @@ public class UserData implements Persistable<String> {
         this.birthday = birthday;
     }
 
-    public UserData(){
-
-    }
 
     public String getLocation() {
         return location;
@@ -116,6 +117,7 @@ public class UserData implements Persistable<String> {
         this.birthday = birthday;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -123,34 +125,54 @@ public class UserData implements Persistable<String> {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof UserData)) {
-            return false;
-        }
-        final UserData other = (UserData) obj;
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "UserData[ id=" + username + " ]";
-    }
 
     @Override
     public String getId() {
     	return username;
     }
 
+
     @Override
     public boolean isNew() {
         return (username.equals(""));
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof UserData)) {
+            return false;
+        }
+
+        UserData other = (UserData) obj;
+        if (this.birthday.equals(other.birthday) &&
+                this.firstName.equals(other.firstName) &&
+                this.lastName.equals(other.lastName) &&
+                this.location.equals(other.location) &&
+                this.postcode.equals(other.postcode) &&
+                this.streetName.equals(other.streetName) &&
+                this.username.equals(other.username) &&
+                this.userRole.equals(other.userRole)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Username: " + username + "\n" +
+                "FirstName: " + firstName + "\n" +
+                "LastName: " + lastName + "\n" +
+                "Birthday: " + birthday + "\n" +
+                "UserRole: " + userRole + "\n" +
+                "Postcode: " + postcode + "\n" +
+                "Location: " + location + "\n" +
+                "StreetName: " + streetName;
+    }
 }
