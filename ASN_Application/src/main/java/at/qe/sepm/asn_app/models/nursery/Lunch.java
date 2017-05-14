@@ -67,14 +67,44 @@ public class Lunch implements Persistable<Long> {
         this.listChildren = listChildren;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (null == date && null == meal);
     }
-}
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (!(obj instanceof Lunch)) {
+            return false;
+        }
+
+        Lunch other = (Lunch) obj;
+        if (this.cost == other.cost &&
+                this.date.equals(other.date) &&
+                this.listChildren.equals(other.listChildren) &&
+                this.meal.equals(other.meal)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Cost: " + cost + "\n" +
+                "Date: " + date + "\n" +
+                "Children: " + listChildren + "\n" +
+                "Meal: " + meal;
+    }
+}
