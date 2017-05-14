@@ -24,6 +24,9 @@ public class Comment implements Persistable<Long>{
     @ManyToOne(optional = false)
     private UserData publisher;
 
+
+    public Comment() {}
+
     public Comment(int id, String comment, Date date, UserData publisher) {
         this.id = id;
         this.comment = comment;
@@ -31,8 +34,6 @@ public class Comment implements Persistable<Long>{
         this.publisher = publisher;
     }
 
-    public Comment() {
-    }
 
     public String getComment() {
         return comment;

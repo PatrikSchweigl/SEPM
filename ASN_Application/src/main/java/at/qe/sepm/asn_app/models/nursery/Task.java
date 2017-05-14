@@ -20,7 +20,7 @@ public class Task implements Persistable<Long> {
     private Long id;
 	private String stringId;
 	private Date beginDate;
-	private Date endDate;
+	private Date endingDate;
     private String description;
     @ManyToOne(optional = false)
     private UserData  sender;
@@ -32,11 +32,11 @@ public class Task implements Persistable<Long> {
 
     public Task(){}
 
-    public Task(String description, String stringId, UserData sender, UserData receiver, Date beginDate, Date endDate) {
+    public Task(String description, String stringId, UserData sender, UserData receiver, Date beginDate, Date endingDate) {
         this.description = description;
         this.stringId = stringId;
         this.beginDate = beginDate;
-        this.endDate = endDate;
+        this.endingDate = endingDate;
         this.sender = sender;
         this.receiver = receiver;
         this.important = false;
@@ -75,12 +75,12 @@ public class Task implements Persistable<Long> {
 		this.beginDate = beginDate;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public Date getEndingDate() {
+		return endingDate;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEndingDate(Date endingDate) {
+		this.endingDate = endingDate;
 	}
 
 	public String getStringId() {
@@ -132,7 +132,7 @@ public class Task implements Persistable<Long> {
         Task other = (Task) obj;
         if (this.beginDate.equals(other.beginDate) &&
                 this.description.equals(other.description) &&
-                this.endDate.equals(other.endDate) &&
+                this.endingDate.equals(other.endingDate) &&
                 this.important == other.important &&
                 this.receiver.equals(other.receiver) &&
                 this.sender.equals(other.sender) &&
@@ -150,7 +150,7 @@ public class Task implements Persistable<Long> {
     public String toString() {
         return "Description: " + description + "\n" +
                 "BeginDate: " + beginDate + "\n" +
-                "EndDate: " + endDate + "\n" +
+                "EndingDate: " + endingDate + "\n" +
                 "Important: " + important + "\n" +
                 "Receiver: " + receiver + "\n" +
                 "Sender: " + sender + "\n" +
