@@ -12,4 +12,5 @@ public class PasswordConstraintException extends Exception {
     public PasswordConstraintException(String message) {
         super(message);
     }
+
 }

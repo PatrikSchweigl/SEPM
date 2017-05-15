@@ -120,10 +120,10 @@
                                             </p:column>
                                         </p:dataTable>
 
-                                        <!-- Create Employee Dialog -->
+                                        <!-- Create Parent Dialog -->
                                         <p:dialog header="Elternteil anlegen" id="parentAddDialog"
                                                   widgetVar="parentAddDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:messages id="messages" autoUpdate="true"/>
                                             <p:outputPanel id="parentDataCreate">
                                                 <h:panelGrid columns="2">
@@ -139,13 +139,13 @@
                                                                 requiredMessage="Passwort erforderlich!"/>
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Save"
+                                                    <p:commandButton value="Speichern"
                                                                      action="#{parentController.doSaveParent()}"
                                                                      oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentAddDialog').hide()"
-                                                                     update=":parentForm"/>
+                                                                     update=":parentForm:parentTable"/>
 
-                                                    <p:commandButton value="Abort"
-                                                                     oncomplete="PF('parentAddDialog').hide()"/>
+                                                    <p:commandButton value="Abbruch"
+                                                                     oncomplete="PF('parentAddDialog').hide()" immediate="true"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </p:dialog>
@@ -153,7 +153,7 @@
                                         <!-- Edit Employee Dialog -->
                                         <p:dialog header="Elternteil ändern" id="parentEditDialog"
                                                   widgetVar="parentEditDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:outputPanel id="parentDataEdit"
                                                            rendered="#{not empty parentEditController.parent}">
                                                 <h:panelGrid columns="2">
