@@ -119,7 +119,7 @@
                                         <!--Edit Child Dialog -->
                                         <p:dialog header="Edit Child" id="childEditDialog"
                                                   widgetVar="childEditDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:outputPanel id="childDataEdit"
                                                            rendered="#{not empty childController.childEdit}">
                                                 <h:panelGrid columns="2">
@@ -141,14 +141,14 @@
                                                 </h:panelGrid>
                                                 <p:separator />
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Save"
+                                                    <p:commandButton value="Speichern"
                                                                      action="#{childController.doSaveChildEdit()}"
                                                                      oncomplete="PF('childEditDialog').hide()"
-                                                                     update=":childForm"/>
-                                                    <p:commandButton value="Reload"
-                                                                     action="#{childController.doReloadChild()}"
-                                                                     update=":childForm:childEditDialog" />
-                                                    <p:commandButton value="Abort"
+                                                                     update=":childForm" />
+                                                    <p:commandButton value="Neu laden" immediate="true"
+                                                                     action="#{childController.doReloadChildEdit()}"
+                                                                     update=":childForm:childDataEdit" />
+                                                    <p:commandButton value="Abbruch"
                                                                      onclick="PF('childEditDialog').hide()" />
                                                 </h:panelGrid>
                                             </p:outputPanel>
@@ -158,7 +158,7 @@
                                         <!--Add Child Dialog -->
                                         <p:dialog header="Kind hinzufügen" id="childAddDialog"
                                                   widgetVar="childAddDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:messages id="messages" autoUpdate="true"/>
                                             <p:outputPanel id="childDataAdd"
                                                            rendered="#{not empty childController.child}">
@@ -194,15 +194,12 @@
                                                 </h:panelGrid>
                                                 <p:separator />
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Save"
+                                                    <p:commandButton value="Speichern"
                                                                      action="#{childController.doSaveChild}"
                                                                      oncomplete="if (args &amp;&amp; !args.validationFailed) PF('childAddDialog').hide()"
                                                                      update=":childForm:childTable"/>
-                                                    <p:commandButton value="Reload"
-                                                                     action="#{childController.doReloadChild()}"
-                                                                     update=":childForm:childAddDialog" />
-                                                    <p:commandButton value="Abort"
-                                                                     onclick="PF('childAddDialog').hide()" />
+                                                    <p:commandButton value="Abbruch"
+                                                                     onclick="PF('childAddDialog').hide()" immediate="true"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </p:dialog>

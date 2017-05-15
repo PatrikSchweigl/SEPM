@@ -139,12 +139,32 @@
                                                                 required="true"
                                                                 requiredMessage="Passwort erforderlich!"/>
                                                 </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="firstName" value="Vorname: "/>
+                                                    <p:inputText id="firstname"
+                                                                 value="#{parentController.parent.firstName}"/>
+                                                    <p:outputLabel for="lastName" value="Nachname "/>
+                                                    <p:inputText id="lastname"
+                                                                 value="#{parentController.parent.lastName}"/>
+                                                </h:panelGrid>
+                                                <p:separator />
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="street" value="Straße: " />
+                                                    <p:inputText id="street"
+                                                                 value="#{parentController.parent.streetName}" />
+                                                    <p:outputLabel for="location" value="Ort: " />
+                                                    <p:inputText id="location"
+                                                                 value="#{parentController.parent.location}" />
+                                                    <p:outputLabel for="postcode" value="Postleitzahl: " />
+                                                    <p:inputText id="postcode"
+                                                                 value="#{parentController.parent.postcode}" />
+                                                </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Speichern"
                                                                      action="#{parentController.doSaveParent()}"
                                                                      oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentAddDialog').hide()"
                                                                      update=":parentForm:parentTable"/>
-
                                                     <p:commandButton value="Abbruch"
                                                                      oncomplete="PF('parentAddDialog').hide()" immediate="true"/>
                                                 </h:panelGrid>
