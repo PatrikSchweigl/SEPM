@@ -28,6 +28,7 @@ public class Parent extends UserData {
     private FamilyStatus familyStatus;
     private boolean status;
 
+
     public Parent(){}
 
     public Parent(String password, String username, String firstName, String lastName,
@@ -41,6 +42,7 @@ public class Parent extends UserData {
         this.familyStatus = familyStatus;
         this.status = status;
     }
+
 
     public String getImgName() {
         return imgName;
@@ -80,5 +82,49 @@ public class Parent extends UserData {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+
+    /**
+     * This method doesn't check for equality of every object because it is not needed.
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Parent)) {
+            return false;
+        }
+
+        Parent other = (Parent) obj;
+        if (this.getFirstName().equals(other.getFirstName()) &&
+                this.getLastName().equals(other.getLastName()) &&
+                this.getUserRole().equals(other.getUserRole()) &&
+                this.familyStatus.equals(other.familyStatus) &&
+                this.getBirthday().equals(other.getBirthday())) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Username: " + getUsername() + "\n" +
+                "FirstName: " + getFirstName() + "\n" +
+                "LastName: " + getLastName() + "\n" +
+                "Birthday: " + getBirthday() + "\n" +
+                "FamilyStatus: " + familyStatus + "\n" +
+                "UserRole: " + getUserRole() + "\n" +
+                "Status: " + status + "\n" +
+                "Postcode: " + getPostcode() + "\n" +
+                "Location: " + getLocation() + "\n" +
+                "StreetName: " + getStreetName() + "\n" +
+                "Children: " + children + "\n" +
+                "Assignments: " + assignments + "\n" +
+                "ImgName: " + imgName;
     }
 }

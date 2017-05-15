@@ -124,7 +124,7 @@
                                         <!-- Create Employee Dialog -->
                                         <p:dialog header="Angestellten anlegen" id="employeeAddDialog"
                                                   widgetVar="employeeAddDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:messages id="messages" autoUpdate="true"/>
                                             <p:outputPanel id="employeeDataCreate">
                                                 <h:panelGrid columns="2">
@@ -138,13 +138,13 @@
                                                                 requiredMessage="Passwort erforderlich!"/>
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Save"
+                                                    <p:commandButton value="Speichern"
                                                                      action="#{employeeController.doSaveEmployee()}"
                                                                      oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()"
                                                                      update=":employeeForm:employeeTable"/>
 
-                                                    <p:commandButton value="Abort"
-                                                                     oncomplete="PF('employeeAddDialog').hide()"/>
+                                                    <p:commandButton value="Abbruch"
+                                                                     oncomplete="PF('employeeAddDialog').hide()" immediate="true"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </p:dialog>
@@ -152,7 +152,7 @@
                                         <!-- Edit Employee Dialog -->
                                         <p:dialog header="Angestellten ändern" id="employeeEditDialog"
                                                   widgetVar="employeeEditDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:outputPanel id="employeeDataEdit"
                                                            rendered="#{not empty employeeController.employeeEdit}">
                                                 <h:panelGrid columns="2">
