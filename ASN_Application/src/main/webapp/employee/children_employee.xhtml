@@ -16,7 +16,7 @@
                                 <div class="box-body">
                                     <div align="right" style="margin-bottom: 10px;">
                                         <p:commandButton oncomplete="PF('childAddDialog').show()"
-                                                         value="+ Child" style="align-items:right;"></p:commandButton>
+                                                         value="Kind hinzufügen" style="align-items:right;"></p:commandButton>
                                     </div>
                                     <h:form id="childForm">
                                         <p:dataTable id="childTable" var="child"
@@ -27,10 +27,10 @@
 
                                             <f:facet name="header">
                                                 <p:outputPanel>
-                                                    <h:outputText value="Search all: "/>
+                                                    <h:outputText value="Suche: "/>
                                                     <p:inputText id="globalFilter"
                                                                  onkeyup="PF('childTable').filter()" style="width:150px"
-                                                                 placeholder="Enter keyword"/>
+                                                                 placeholder="Suchwort eingeben"/>
                                                 </p:outputPanel>
                                             </f:facet>
 
@@ -72,17 +72,17 @@
                                                 </div>
                                             </f:facet>
 
-                                            <p:column headerText="Firstname"
+                                            <p:column headerText="Vorname"
                                                       filterBy="#{child.firstName}"
                                                       sortBy="#{child.firstName}" filterStyle="display:none">
                                                 <h:outputText value="#{child.firstName}"/>
                                             </p:column>
-                                            <p:column headerText="Lastname"
+                                            <p:column headerText="Nachname"
                                                       filterBy="#{child.lastName}"
                                                       sortBy="#{child.lastName}" filterStyle="display:none">
                                                 <h:outputText value="#{child.lastName}"/>
                                             </p:column>
-                                            <p:column headerText="Birthday"
+                                            <p:column headerText="Geburtsdatum"
                                                       filterBy="#{child.birthday}"
                                                       sortBy="#{child.birthday}" filterStyle="display:none">
                                                 <h:outputText value="#{child.birthday}"/>
@@ -102,7 +102,7 @@
                                                     <f:setPropertyActionListener value="#{child}"
                                                                                  target="#{childController.childEdit}"/>
                                                     <p:confirm header="Confirmation"
-                                                               message="Are you sure that you want to delete this Child? You cannot undo this operation."
+                                                               message="Sind Sie sich sicher, dass Sie das Kind löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
                                                 </p:commandButton>
                                             </p:column>
@@ -156,15 +156,16 @@
 
 
                                         <!--Add Child Dialog -->
-                                        <p:dialog header="Edit Child" id="childAddDialog"
+                                        <p:dialog header="Kind hinzufügen" id="childAddDialog"
                                                   widgetVar="childAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
+                                            <p:messages id="messages" autoUpdate="true"/>
                                             <p:outputPanel id="childDataAdd"
                                                            rendered="#{not empty childController.child}">
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="parent" value="Primary Parent"/>
+                                                    <p:outputLabel for="parent" value="Elternteil"/>
                                                     <p:selectOneListbox id="parent" value="#{childController.parentUserName}" var="p" filter="true"
-                                                                        filterMatchMode="contains" required="true">
+                                                                        filterMatchMode="contains" required="true" requiredMessage="Kein Elternteil angegeben!">
                                                         <f:selectItems value="#{parentService.getAllParents()}"
                                                                        var="parent" itemLabel="#{parent.username}"
                                                                        itemValue="#{parent.username}" />
@@ -178,13 +179,13 @@
                                                             <h:outputText value="#{p}" />
                                                         </p:column>
                                                     </p:selectOneListbox>
-                                                    <p:outputLabel for="firstName" value="Firstname: " />
+                                                    <p:outputLabel for="firstName" value="Vorname: " />
                                                     <p:inputText id="firstName"
                                                                  value="#{childController.child.firstName}"/>
-                                                    <p:outputLabel for="lastName" value="Lastname: " />
+                                                    <p:outputLabel for="lastName" value="Nachname: " />
                                                     <p:inputText id="lastName"
                                                                  value="#{childController.child.lastName}"/>
-                                                    <p:outputLabel for="birthDay" value="Birthday: " />
+                                                    <p:outputLabel for="birthDay" value="Geburtsdatum: " />
                                                     <p:inputMask mask="99/99/9999" id="birthDay"
                                                                  value="#{childController.child.birthday}"/>
                                                     <p:outputLabel for="imgname" value="Bildname: " />
@@ -195,8 +196,8 @@
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
                                                                      action="#{childController.doSaveChild}"
-                                                                     oncomplete="PF('childAddDialog').hide()"
-                                                                     update=":childForm"/>
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('childAddDialog').hide()"
+                                                                     update=":childForm:childTable"/>
                                                     <p:commandButton value="Reload"
                                                                      action="#{childController.doReloadChild()}"
                                                                      update=":childForm:childAddDialog" />

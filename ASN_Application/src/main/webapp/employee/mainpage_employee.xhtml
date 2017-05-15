@@ -27,7 +27,7 @@
 													header="Passwort ändern" resizeable="false" modal="true">
 													<h:outputText
 														value="Sie müssen, um fortfahren zu können, Ihr Passwort wechseln." />
-													<p:messages id="messages" showDetail="false"
+													<p:messages id="messages"
 														autoUpdate="true" />
 
 													<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
@@ -46,7 +46,7 @@
 														<p:commandButton
 															action="#{employeeController.changePassword(employeeController.password)}"
 															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogTest').hide()"
-															value="Speichern" />
+															value="Speichern" update="@all" />
 													</h:panelGrid>
 												</p:dialog>
 											</h:form>
