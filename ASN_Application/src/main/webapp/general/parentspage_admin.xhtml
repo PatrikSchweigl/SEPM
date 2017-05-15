@@ -113,9 +113,9 @@
                                                         update=":parentForm">
                                                     <f:setPropertyActionListener value="#{parent}"
                                                                                  target="#{parentEditController.parent}"/>
-                                                    <!--<p:confirm header="Bestätigung"
+                                                    <p:confirm header="Bestätigung"
                                                                message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
-                                                               icon="ui-icon-alert"/>-->
+                                                               icon="ui-icon-alert"/>
                                                 </p:commandButton>
                                             </p:column>
                                         </p:dataTable>
@@ -141,7 +141,7 @@
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Save"
                                                                      action="#{parentController.doSaveParent()}"
-                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentAddDialog').hide()"
                                                                      update=":parentForm"/>
 
                                                     <p:commandButton value="Abort"

@@ -70,7 +70,7 @@ public class EmployeeController {
 
     public void doSaveEmployee(){
         employee = employeeService.saveEmployee(employee);
-        mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test", "Hallo,  ich bin es, das System!");
+        //mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test", "Hallo,  ich bin es, das System!");
         employee = null;
         initNewEmployee();
         initList();
