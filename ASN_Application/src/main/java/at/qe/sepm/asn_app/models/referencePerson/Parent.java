@@ -4,6 +4,7 @@ import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.nursery.Task;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class Parent extends UserData {
     private Set<Child> children;
     @OneToMany
     @ElementCollection
-    private Set<Assignment> assignments;
+    private Set<Task> tasks;
     @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
     private boolean status;
@@ -33,12 +34,12 @@ public class Parent extends UserData {
 
     public Parent(String password, String username, String firstName, String lastName,
                   String location, String streetName, String postcode, UserRole userRole,
-                   String imgName, Set<Child> children, Set<Assignment> assignments,
+                   String imgName, Set<Child> children, Set<Task> tasks,
                   FamilyStatus familyStatus, boolean status, String birthday) {
         super(password, username, firstName, lastName, location, streetName, postcode, userRole, birthday);
         this.imgName = imgName;
         this.children = children;
-        this.assignments = assignments;
+        this.tasks = tasks;
         this.familyStatus = familyStatus;
         this.status = status;
     }
@@ -60,12 +61,12 @@ public class Parent extends UserData {
         this.children = children;
     }
 
-    public Set<Assignment> getAssignments() {
-        return assignments;
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setAssignments(Set<Assignment> assignments) {
-        this.assignments = assignments;
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public FamilyStatus getFamilyStatus() {
@@ -124,7 +125,7 @@ public class Parent extends UserData {
                 "Location: " + getLocation() + "\n" +
                 "StreetName: " + getStreetName() + "\n" +
                 "Children: " + children + "\n" +
-                "Assignments: " + assignments + "\n" +
+                "Tasks: " + tasks + "\n" +
                 "ImgName: " + imgName;
     }
 }

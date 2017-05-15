@@ -60,7 +60,8 @@ public class PasswordConstraints {
 
 
     /**
-     *
+     * To add a tad more security to the password it is not allowed for a parent to have a password which contains
+     * the name of one of their children as a substring.
      * @param password The password to be validated.
      * @param parent The parent of which the names of their children get validated.
      * @return iff the name of a child of a parent is no substring of the password.
