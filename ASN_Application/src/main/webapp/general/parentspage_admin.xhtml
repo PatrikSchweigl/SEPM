@@ -101,7 +101,7 @@
                                             </p:column>
                                             <p:column style="width:100px;text-align: center"
                                                       exportable="false">
-                                                <p:commandButton update=":parentForm:parentTable"
+                                                <p:commandButton update=":parentForm"
                                                                  oncomplete="PF('parentEditDialog').show()"
                                                                  icon="ui-icon-note" title="Ändern"
                                                                  process="@this">
@@ -188,6 +188,10 @@
                                                     <p:commandButton value="Abbruch"
                                                                      onclick="PF('parentEditDialog').hide()"/>
                                                 </h:panelGrid>
+                                            </p:outputPanel>
+                                            <p:outputPanel id="parentDataEdits"
+                                                           rendered="#{empty parentEditController.parent}">
+                                                jaihgiahgoiafiasjf
                                             </p:outputPanel>
                                         </p:dialog>
 
