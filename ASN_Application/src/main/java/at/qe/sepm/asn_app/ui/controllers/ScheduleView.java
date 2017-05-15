@@ -135,6 +135,8 @@ public class ScheduleView implements Serializable {
 			FacesContext.getCurrentInstance().addMessage("scheduleForm", new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));	}
 
 	public void addEvent() {
+		if(event.getStartDate().compareTo(new Date()) < 0)
+			return;
 		
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
