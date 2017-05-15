@@ -50,12 +50,6 @@ public class UserDetailController {
     }
 
 
-    public UserData getCurrentData(){
-        System.out.println("hhhhhhhhhhhhhhhhereeeeeeeeee");
-        setUserData(sessionInfoBean.getCurrentUserData());
-        return userData;
-    }
-
     /**
      * Action to force a reload of the currently displayed userData.
      */

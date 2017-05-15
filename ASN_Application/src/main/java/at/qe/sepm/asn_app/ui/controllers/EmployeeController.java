@@ -39,15 +39,15 @@ public class EmployeeController {
 
 
 
-    public void setEmployee(Employee employeeEdit) {
-        this.employee = employeeEdit;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
         doReloadEmployee();
     }
     public void setEmployees(Collection<Employee> employees) {
         this.employees = employees;
     }
     public void doReloadEmployee() {
-        employee = employeeService.loadEmployee(employee.getId());
+        employee = employeeService.loadEmployee(employee.getUsername());
     }
 
     @PostConstruct
@@ -80,8 +80,8 @@ public class EmployeeController {
         return employeeEdit;
     }
 
-    public void setEmployeeEdit(Employee employee) {
-        this.employeeEdit = employee;
+    public void setEmployeeEdit(Employee employeeEdit) {
+        this.employeeEdit = employeeEdit;
         doReloadEmployeeEdit();
     }
     
@@ -100,7 +100,7 @@ public class EmployeeController {
 
 
     public void doReloadEmployeeEdit() {
-        employeeEdit = employeeService.loadEmployee(employeeEdit.getId());
+        employeeEdit = employeeService.loadEmployee(employeeEdit.getUsername());
     }
 
     public void doSaveEmployeeEdit(){
@@ -109,7 +109,6 @@ public class EmployeeController {
     }
 
     public void doDeleteEmployee() {
-        System.out.println(employeeEdit.getFirstName());
         employeeService.deleteEmployee(employeeEdit);
         employeeEdit = null;
         initList();

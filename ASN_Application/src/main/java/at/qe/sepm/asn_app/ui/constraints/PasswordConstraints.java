@@ -66,7 +66,7 @@ public class PasswordConstraints {
      * @return iff the name of a child of a parent is no substring of the password.
      */
     public static boolean checkPasswordChildName(String password, Parent parent) {
-        for (Child child : parent.getListChildren()) {
+        for (Child child : parent.getChildren()) {
             if (password.toLowerCase().contains(child.getFirstName().toLowerCase()) ||
                     password.toLowerCase().contains(child.getLastName().toLowerCase())) {
                 return false;

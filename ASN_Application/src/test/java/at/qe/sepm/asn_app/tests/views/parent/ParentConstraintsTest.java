@@ -64,7 +64,6 @@ public class ParentConstraintsTest {
         listParents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", ParentListChildren2, ParentListAssignments2, FamilyStatus.DIVORCED, true, "11/11/2003"));  // Too young
         listParents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Too old
         listParents.add(parent4 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListAssignments3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Same as parent3
-
         parentService = new ParentService();
 
         listChildren = new ArrayList<>();

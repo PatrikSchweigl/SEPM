@@ -12,7 +12,6 @@
                 <body class="theme-blue sidebar-mini sidebar-collapse">
 
                 <div class="wrapper">
-                    <!-- =============================================== -->
 
                     <div class="content-wrapper" style="min-height: 1126px;">
                         <section class="content">
@@ -21,15 +20,15 @@
                             <div class="box">
                                 <div class="box-body">
                                     <div align="right" style="margin-bottom: 10px;">
-                                        <p:commandButton oncomplete="PF('parentCreateDialog').show()"
-                                                         value="Elternteil hinzufügen" style="align-items:right;"></p:commandButton>
+                                        <p:commandButton oncomplete="PF('parentAddDialog').show()"
+                                                         value="Elternteil hinzufügen"
+                                                         style="align-items:right;"></p:commandButton>
                                     </div>
                                     <h:form id="parentForm">
                                         <p:dataTable id="parentTable" var="parent"
-                                                     widgetVar="parentTable" value="#{parentController.parents}"
-                                                     selectionMode="single" selection="#{parentController.parent}"
-                                                     rowKey="#{parent.getId()}"
-                                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                                     widgetVar="parentTable"
+                                                     value="#{parentController.parents}" rows="10"
+                                                     paginatorPosition="bottom" paginator="true"
                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                                      rowsPerPageTemplate="10,25,50">
 
@@ -38,8 +37,7 @@
                                                     <h:outputText value="Suche: "/>
                                                     <p:inputText id="globalFilter"
                                                                  onkeyup="PF('parentTable').filter()"
-                                                                 style="width:150px"
-                                                                 placeholder="Suchwort eingeben"/>
+                                                                 style="width:150px" placeholder="Suchwort eingeben"/>
                                                 </p:outputPanel>
                                             </f:facet>
 
@@ -81,12 +79,9 @@
                                                 </div>
                                             </f:facet>
 
-                                            <p:ajax event="rowSelect" update=":parentForm:infoDialog"
-                                                    oncomplete="PF('infoDialog').show()"/>
-
                                             <p:column headerText="Benutzername"
-                                                      filterBy="#{parent.username}" sortBy="#{parent.username}"
-                                                      filterStyle="display:none">
+                                                      filterBy="#{parent.username}"
+                                                      sortBy="#{parent.username}" filterStyle="display:none">
                                                 <h:outputText value="#{parent.username}"/>
                                             </p:column>
                                             <p:column headerText="Vorname"
@@ -95,188 +90,102 @@
                                                 <h:outputText value="#{parent.firstName}"/>
                                             </p:column>
                                             <p:column headerText="Nachname"
-                                                      filterBy="#{parent.lastName}" sortBy="#{parent.lastName}"
-                                                      filterStyle="display:none">
+                                                      filterBy="#{parent.lastName}"
+                                                      sortBy="#{parent.lastName}" filterStyle="display:none">
                                                 <h:outputText value="#{parent.lastName}"/>
                                             </p:column>
                                             <p:column headerText="Wohnort"
-                                                      filterBy="#{parent.location}" sortBy="#{parent.location}"
-                                                      filterStyle="display:none">
+                                                      filterBy="#{parent.location}"
+                                                      sortBy="#{parent.location}" filterStyle="display:none">
                                                 <h:outputText value="#{parent.location}"/>
-                                            </p:column>
-                                            <p:column headerText="Status" filterBy="#{parent.status}"
-                                                      filterMatchMode="equals">
-                                                <f:facet name="filter">
-                                                    <p:selectOneButton onchange="PF('parentTable').filter()">
-                                                        <f:converter converterId="javax.faces.Boolean"/>
-                                                        <f:selectItem itemLabel="Alle" itemValue=""/>
-                                                        <f:selectItem itemLabel="Activ" itemValue="true"/>
-                                                        <f:selectItem itemLabel="Inactiv" itemValue="false"/>
-                                                    </p:selectOneButton>
-                                                </f:facet>
-                                                <h:outputText
-                                                        value="#{parent.status ? 'active' : 'inactive'}"/>
                                             </p:column>
                                             <p:column style="width:100px;text-align: center"
                                                       exportable="false">
-                                                <p:commandButton update=":parentForm:parentEditDialog"
+                                                <p:commandButton update=":parentForm:parentTable"
                                                                  oncomplete="PF('parentEditDialog').show()"
-                                                                 icon="ui-icon-note" title="Edit">
+                                                                 icon="ui-icon-note" title="Ändern">
                                                     <f:setPropertyActionListener value="#{parent}"
-                                                                                 target="#{parentController.parentEdit}"/>
+                                                                                 target="#{parentEditController.parent}"/>
                                                 </p:commandButton>
                                                 <p:commandButton
-                                                        action="#{parentController.doDeleteParentEdit}"
-                                                        icon="ui-icon-trash" title="Delete"
-                                                        update=":parentForm:parentTable">
+                                                        action="#{parentEditController.doDeleteParent}"
+                                                        icon="ui-icon-trash" title="Löschen"
+                                                        update=":parentForm">
                                                     <f:setPropertyActionListener value="#{parent}"
-                                                                                 target="#{parentController.parentEdit}"/>
-                                                    <p:confirm header="Confirmation"
+                                                                                 target="#{parentEditController.parent}"/>
+                                                    <!--<p:confirm header="Bestätigung"
                                                                message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
-                                                               icon="ui-icon-alert"/>
+                                                               icon="ui-icon-alert"/>-->
                                                 </p:commandButton>
                                             </p:column>
                                         </p:dataTable>
 
-                                        <p:dialog header="#{parentController.parent.firstName} #{parentController.parent.lastName}" widgetVar="infoDialog" id="infoDialog"
-                                                  modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                                            <p:outputPanel id="infosheet" style="text-align:center;">
-                                                <p:panelGrid columns="2" columnClasses="label,value">
-                                                    <f:facet name="header">
-                                                        <p:graphicImage name="pictures/profilbild_patrik.jpg" class="picture"/>
-                                                    </f:facet>
-
-                                                    <h:outputText value="Id:"/>
-                                                    <h:outputText value="#{parentController.parent.id}"/>
-
-                                                    <h:outputText value="Straße:"/>
-                                                    <h:outputText value="#{parentController.parent.streetName}"/>
-
-                                                    <h:outputText value="PLZ:"/>
-                                                    <h:outputText value="#{parentController.parent.postcode}"/>
-
-                                                    <h:outputText value="Familienstatus:"/>
-                                                    <h:outputText value="#{parentController.parent.familyStatus}"/>
-                                                </p:panelGrid>
-                                            </p:outputPanel>
-                                        </p:dialog>
-
-
-                                        <!-- Edit Parent Dialog -->
-                                        <p:dialog header="Edit Parent" id="parentEditDialog"
-                                                  widgetVar="parentEditDialog" modal="true" showEffect="fade"
-                                                  hideEffect="fade" resizable="false">
-                                            <p:outputPanel id="parentData"
-                                                           rendered="#{not empty parentController.parentEdit}">
-                                                <h:panelGrid columns="2">
-                                                    <p:outputLabel for="userName" value="Benutzername: "/>
-                                                    <p:inputText id="userName"
-                                                                 value="#{parentController.parentEdit.username}"
-                                                                 disabled="true"/>
-                                                    <p:outputLabel for="passWord" value="Passwort: "/>
-                                                    <p:password id="passWord"
-                                                                value="#{parentController.parentEdit.password}"
-                                                                disabled="true"/>
-                                                </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="2">
-                                                    <p:outputLabel for="firstName" value="Vorname: "/>
-                                                    <p:inputText id="firstName"
-                                                                 value="#{parentController.parentEdit.firstName}"/>
-                                                    <p:outputLabel for="firstName" value="Nachname: "/>
-                                                    <p:inputText id="lastName"
-                                                                 value="#{parentController.parentEdit.lastName}"/>
-                                                    <p:outputLabel for="location" value="Wohnort: "/>
-                                                    <p:inputText id="location"
-                                                                 value="#{parentController.parentEdit.location}"/>
-                                                    <p:outputLabel for="street" value="Straßenname: "/>
-                                                    <p:inputText id="street"
-                                                                 value="#{parentController.parentEdit.streetName}"/>
-                                                    <p:outputLabel for="postcode" value="Postleitzahl: "/>
-                                                    <p:inputText id="postcode"
-                                                                 value="#{parentController.parentEdit.postcode}"/>
-                                                </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="6">
-                                                    <p:outputLabel for="familystatus" value="Familienstatus: "/>
-                                                    <p:selectOneMenu id="familystatus"
-                                                                     value="#{parentController.parentEdit.familyStatus}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Familienstatus wählen"
-                                                                      itemValue="" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{enumController.familyStatus}"/>
-                                                    </p:selectOneMenu>
-                                                    <h:outputLabel value="Status (activ/inactiv): "/>
-                                                    <p:selectBooleanCheckbox
-                                                            value="#{parentController.parentEdit.status}"/>
-                                                </h:panelGrid>
-                                                <h:panelGrid columns="3">
-                                                    <p:commandButton value="Speichern"
-                                                                     action="#{parentController.doSaveParentEdit}"
-                                                                     oncomplete="PF('parentEditDialog').hide()"
-                                                                     update=":parentForm"/>
-                                                    <p:commandButton value="Neu Laden"
-                                                                     action="#{parentController.doReloadParentEdit()}"
-                                                                     update=":parentForm:parentTable"/>
-                                                    <p:commandButton value="Abbruch"
-                                                                     onclick="PF('parentEditDialog').hide()"/>
-                                                </h:panelGrid>
-                                            </p:outputPanel>
-                                        </p:dialog>
-
-
-                                        <!-- Create Parent Dialog -->
-                                        <p:dialog header="Elternteil hinzufügen" id="parentCreateDialog"
-                                                  widgetVar="parentCreateDialog" modal="true"
+                                        <!-- Create Employee Dialog -->
+                                        <p:dialog header="Elternteil anlegen" id="parentAddDialog"
+                                                  widgetVar="parentAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false">
+                                            <p:messages id="messages" autoUpdate="true"/>
                                             <p:outputPanel id="parentDataCreate">
                                                 <h:panelGrid columns="2">
                                                     <p:outputLabel for="username" value="Benutzername: "/>
                                                     <p:inputText id="username"
-                                                                 value="#{parentController.parent.username}"/>
+                                                                 value="#{parentController.parent.username}"
+                                                                 required="true"
+                                                                 requiredMessage="Benutzername erforderlich!"/>
                                                     <p:outputLabel for="password" value="Passwort: "/>
                                                     <p:password id="password"
-                                                                value="#{parentController.parent.password}"/>
+                                                                value="#{parentController.parent.password}"
+                                                                required="true"
+                                                                requiredMessage="Passwort erforderlich!"/>
                                                 </h:panelGrid>
-                                                <p:separator/>
+                                                <h:panelGrid columns="3">
+                                                    <p:commandButton value="Save"
+                                                                     action="#{parentController.doSaveParent()}"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('employeeAddDialog').hide()"
+                                                                     update=":parentForm"/>
+
+                                                    <p:commandButton value="Abort"
+                                                                     oncomplete="PF('parentAddDialog').hide()"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </p:dialog>
+
+                                        <!-- Edit Employee Dialog -->
+                                        <p:dialog header="Elternteil ändern" id="parentEditDialog"
+                                                  widgetVar="parentEditDialog" modal="true"
+                                                  showEffect="fade" hideEffect="fade" resizable="false">
+                                            <p:outputPanel id="parentDataEdit"
+                                                           rendered="#{not empty parentEditController.parent}">
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="firstname" value="Vorname: "/>
-                                                    <p:inputText id="firstname"
-                                                                 value="#{parentController.parent.firstName}"/>
-                                                    <p:outputLabel for="lastname" value="Nachname: "/>
-                                                    <p:inputText id="lastname"
-                                                                 value="#{parentController.parent.lastName}"/>
-                                                    <p:outputLabel for="Location" value="Wohnort: "/>
-                                                    <p:inputText id="Location"
-                                                                 value="#{parentController.parent.location}"/>
-                                                    <p:outputLabel for="Street" value="Straßenname: "/>
-                                                    <p:inputText id="Street"
-                                                                 value="#{parentController.parent.streetName}"/>
-                                                    <p:outputLabel for="Postcode" value="Postleitzahl: "/>
-                                                    <p:inputText id="Postcode"
-                                                                 value="#{parentController.parent.postcode}"/>
+                                                    <p:outputLabel for="userName" value="Benutzername: "/>
+                                                    <p:inputText id="userName"
+                                                                 value="#{parentEditController.parent.username}"
+                                                                 disabled="true"/>
+                                                    <p:outputLabel for="passWord" value="Passwort: "/>
+                                                    <p:password id="passWord"
+                                                                value="#{parentEditController.parent.password}"
+                                                                disabled="true"/>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="6">
-                                                    <p:outputLabel for="famstat" value="Familienstatus: "/>
-                                                    <p:selectOneMenu id="famstat"
-                                                                     value="#{parentController.parent.familyStatus}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Familienstatus wählen"
-                                                                      itemValue="" noSelectionOption="true"/>
-                                                        <f:selectItems value="#{enumController.familyStatus}"/>
-                                                    </p:selectOneMenu>
-                                                    <h:outputLabel value="Status (activ/inactiv): "/>
-                                                    <p:selectBooleanCheckbox
-                                                            value="#{parentController.parent.status}"/>
+                                                    <p:outputLabel for="firstName" value="Vorname: "/>
+                                                    <p:inputText id="firstName"
+                                                                 value="#{parentEditController.parent.firstName}"/>
+                                                    <p:outputLabel for="lastName" value="Nachname "/>
+                                                    <p:inputText id="lastName"
+                                                                 value="#{parentEditController.parent.lastName}"/>
                                                 </h:panelGrid>
+                                                <p:separator/>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Speichern"
-                                                                     action="#{parentController.doReloadParent}"
-                                                                     oncomplete="PF('parentCreateDialog').hide()"
+                                                                     action="#{parentEditController.doSaveParent()}"
+                                                                     oncomplete="PF('parentEditDialog').hide()"
+                                                                     update=":parentForm"/>
+                                                    <p:commandButton value="Neu laden"
+                                                                     action="#{parentEditController.doReloadParent()}"
                                                                      update=":parentForm"/>
                                                     <p:commandButton value="Abbruch"
-                                                                     onclick="PF('parentCreateDialog').hide()"/>
+                                                                     onclick="PF('parentEditDialog').hide()"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </p:dialog>

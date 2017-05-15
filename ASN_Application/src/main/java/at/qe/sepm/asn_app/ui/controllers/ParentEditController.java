@@ -6,52 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Collection;
-
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
- * on 14.05.2017
+ * on 15.05.2017
  */
 @Component
 @Scope("view")
-public class ParentController {
+public class ParentEditController {
+
     @Autowired
     private ParentService parentService;
+    @Autowired
+    private ParentController parentController;
 
     private Parent parent;
-
-
-    private Collection<Parent> parents;
-
-    public Collection<Parent> getParents(){
-        return parents;
-    }
-    public void setParents(Collection<Parent> parents) {
-        this.parents = parents;
-    }
-
-    @PostConstruct
-    public void initList(){
-        setParents(parentService.getAllParents());
-    }
-
-    @PostConstruct
-    private void initNewParent(){
-        parent = new Parent();
-    }
-
-    public void doReloadParent(){
-        parent = parentService.loadParent(parent.getUsername());
-    }
-
-
-    public void doSaveParent(){
-        parent = parentService.saveParent(parent);
-        parent = null;
-        initNewParent();
-        initList();
-    }
 
     public Parent getParent() {
         return parent;
@@ -62,8 +30,21 @@ public class ParentController {
         doReloadParent();
     }
 
+    public void doReloadParent(){
+        parent = parentService.loadParent(parent.getUsername());
+    }
 
+    public void doSaveParent(){
+        parent = parentService.saveParent(parent);
+        parent = null;
+        parentController.initList();
+    }
 
-
+    public void doDeleteParent(){
+        System.out.println("------------------------ Delete person "+ parent.getLastName());
+        parentService.deleteParent(parent);
+        parent = null;
+        parentController.initList();
+    }
 
 }

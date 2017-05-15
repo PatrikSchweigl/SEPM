@@ -20,12 +20,12 @@ import java.util.Date;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
- * on 20.03.2017
+ * on 14.05.2017
  */
+
 @Component
 @Scope("application")
 public class ParentService {
-
     @Autowired
     private ParentRepository parentRepository;
     @Autowired
@@ -33,35 +33,37 @@ public class ParentService {
     @Autowired
     private UserRepository userRepository;
 
-    public Collection<Parent> getAllParents() {
-         return parentRepository.findAll();
+
+    public Collection<Parent> getAllParents(){
+        return parentRepository.findAll();
     }
 
 
-    public Parent saveParent(Parent parent) {
-        System.out.println(parent.getFirstName()+"-------------------------------------------saveParent()");
-
+    public Parent saveParent(Parent parent){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
         parent.setUserRole(UserRole.PARENT);
-
         return parentRepository.save(parent);
     }
 
-    public Parent loadParent(String username) {return parentRepository.findFirstByUsername(username);}
+
+    public Parent loadParent(String username){
+        return parentRepository.findFirstByUsername(username);
+    }
 
 
-    public void deleteParent(Parent parent) {
-        System.out.println(parent.getFirstName()+"-------------------------------------------deleteParent()");
+    public void deleteParent(Parent parent){
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
         auditLogRepository.save(log);
         parentRepository.delete(parent);
     }
 
-    private UserData getAuthenticatedUser() {
+    public UserData getAuthenticatedUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
+
 
 }

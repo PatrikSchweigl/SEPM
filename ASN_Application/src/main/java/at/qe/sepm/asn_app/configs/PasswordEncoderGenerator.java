@@ -7,7 +7,8 @@ package at.qe.sepm.asn_app.configs;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordEncoderGenerator {
-
+    //just to get a given password hashed+salted and to check whether
+    //the hashed+salted password is different after each encode() call
     public static void main(String[] args) {
 
         int i = 0;
