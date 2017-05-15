@@ -199,6 +199,70 @@ public class ScheduleView implements Serializable {
 		}
 		event = new DefaultScheduleEvent();
 	}
+	
+	public void addChangeEvent() {
+		if (editEvent.getStartDate().compareTo(new Date()) < 0)
+			return;
+
+		if (editEvent.getId() == null) {
+			eventModel.addEvent(editEvent);
+
+			Task task;
+			if (reciever == null || !visible) {
+				System.err.println(editEvent.getDescription());
+
+				task = new Task(editEvent.getDescription(), editEvent.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
+						editEvent.getStartDate(), editEvent.getEndDate());
+				AuditLog log = new AuditLog(task.getReceiver().getUsername(), "TASK CREATED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+						new Date());
+				auditLogRepository.save(log);
+			} else {
+
+				UserData user = userService.loadUser(reciever);
+				System.err.println(reciever);
+				if (user != null) {
+					task = new Task(editEvent.getDescription(), editEvent.getId(), getAuthenticatedUser(), user,
+							editEvent.getStartDate(), editEvent.getEndDate());
+				} else {
+					task = new Task(editEvent.getDescription(), editEvent.getId(), getAuthenticatedUser(),
+							getAuthenticatedUser(), editEvent.getStartDate(), editEvent.getEndDate());
+
+				}
+			}
+			task.setImportant(important);
+			taskService.deleteTaskById(editEvent.getId());
+			taskService.saveTask(task);
+
+		}
+
+		else {
+			Task task = taskService.getTaskByStringId(editEvent.getId());
+			if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
+				Task temp;
+				if (reciever == null) {
+					temp = new Task(editEvent.getDescription(), editEvent.getId(), getAuthenticatedUser(),
+							getAuthenticatedUser(), editEvent.getStartDate(), editEvent.getEndDate());
+				} else {
+					UserData user = userService.loadUser(reciever);
+					temp = new Task(editEvent.getDescription(), editEvent.getId(), getAuthenticatedUser(), user,
+							editEvent.getStartDate(), editEvent.getEndDate());
+
+				}
+				eventModel.updateEvent(editEvent);
+				event.setId(temp.getStringId());
+
+				taskService.deleteTask(task);
+				temp.setImportant(important);
+				taskService.saveTask(temp);
+				AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK CHANGED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+						new Date());
+				auditLogRepository.save(log);
+			}
+		}
+		editEvent = new DefaultScheduleEvent();
+	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
 		editEvent = (ScheduleEvent) selectEvent.getObject();
