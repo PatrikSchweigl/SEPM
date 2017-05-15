@@ -13,12 +13,10 @@
 				<div class="wrapper">
 
 					<header class="main-header">
-						<ui:fragment rendered="#{not sessionInfoBean.hasDefaultPasswd()}">
 							<a href="/nursery/nursery_info.xhtml" class="logo"> <span
 								class="logo-mini"> ASN </span> <span class="logo-lg">Kinderkrippe</span>
 
 							</a>
-						</ui:fragment>
 						<nav class="navbar navbar-static-top" role="navigation">
 							<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
 								role="button"> <span class="sr-only">Toggle
@@ -27,8 +25,6 @@
 							</a>
 							<div class="navbar-custom-menu">
 								<ul class="nav navbar-nav">
-									<ui:fragment
-										rendered="#{not sessionInfoBean.hasDefaultPasswd()}">
 										<li class="dropdown messages-menu"><a href="#"> <i
 												class="fa fa-envelope-o fa-4x"></i> <span
 												class="label label-danger">!</span>
@@ -64,7 +60,6 @@
 												class="fa fa-calendar fa-4x"></i> <span
 												class="label label-danger">!</span>
 										</a></li>
-									</ui:fragment>
 									<ui:fragment value="Logout" url="/logout">
 										<li class="dropdown tasks-menu"><a href="/logout"> <i
 												class="fa fa-sign-out fa-4x"></i>
