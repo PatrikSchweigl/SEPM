@@ -32,77 +32,31 @@ import java.util.HashSet;
 @Component
 @Scope("application")
 public class ChildConstraints {
-    @Autowired
-    private ChildRepository childRepository;
-    @Autowired
-    private AuditLogRepository auditLogRepository;
-    @Autowired
-    private UserRepository userRepository;
-
-    private Child child;
-
-    public void setChild(Child child) {
-        this.child = child;
-    }
-    public Child getChild() {
-        return this.child;
-    }
-
-
-    /*
-    public Child saveChild(Child child) {
-        this.child = child;
-        //this.child.setUsername(this.child.getFirstName() + this.child.getLastName() + this.child.getId());
-
-        // Check whether or not the constraints are violated.
-        try {
-            if(!checkConstraints()) {
-                return null;
-            }
-        } catch (BirthdayConstraintException | ParentConstraintException | SiblingConstraintException e) {
-            e.printStackTrace();
-        }
-        System.out.println("HHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEEEEEEEEE111111");
-
-        return childRepository.save(child);
-    }
-    */
-
 
     /**
      *
      * @return true iff no constraints are violated.
      */
-    /*
-    public boolean checkConstraints() throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
-        if(!checkBirthdayConstraints()) {
+    public boolean checkConstraints(Child child) throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
+        if(!checkBirthdayConstraints(child)) {
             return false;   // Returning false here makes no sense since we throw an exception in the method.
         }
-        else if(!checkParentsConstraints()) {
+        else if(!checkParentsConstraints(child)) {
             return false;
         }
-        else if(!checkSiblingsConstraints()) {
+        else if(!checkSiblingsConstraints(child)) {
             return false;
         }
         return true;
     }
-    */
-
 
 
     /**
      * A child may not be younger than 1/2 year and not older than 3 years.
-     * @return true iff a child is between the age of 1/2 and 3 years.
+     * @return <code>true</code> iff a child is between the age of 1/2 and 3 years.
      */
-    // TODO There is no need for this method to be a boolean if we throw errors anyways. I am not sure though what the best practice is.
-    public boolean checkBirthdayConstraints() throws BirthdayConstraintException {
-        /*
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime birthdayTmp = LocalDateTime.parse(this.child.getBirthday() + " 00:00", formatter);
-        System.out.println(birthdayTmp);
-        long birthday = birthdayTmp.toEpochSecond(ZoneOffset.UTC);
-        */
-        long birthday = BirthdayParser.parseBirthdayToLong(this.child.getBirthday());
+    public boolean checkBirthdayConstraints(Child child) throws BirthdayConstraintException {
+        long birthday = BirthdayParser.parseBirthdayToLong(child.getBirthday());
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         int ageDays = (int)((dateNow-birthday)/60/60/24);
         System.out.println("date now: " + dateNow);
@@ -111,53 +65,48 @@ public class ChildConstraints {
 
         // Check if the child is younger than 0.5 year.
         if (ageDays < 0.5*365) {
-            throw new BirthdayConstraintException("Too young");
+            return false;
         }
 
         // Check if the child is older than 3 years.
         if (ageDays > (3*365)) {
-            throw new BirthdayConstraintException("Too old");
+            return false;
         }
 
         return true;
     }
-
-
 
 
     /**
      * At least one parent must be registered in the nursery.
      * Parents may not be the same person.
-     * @return true iff no constraints regarding parents are violated.
+     * @return <code>true</code> iff no constraints regarding parents are violated.
      */
-    /*
-    public boolean checkParentsConstraints() throws ParentConstraintException {
-        Parent p1 = child.getParent1();
+    public boolean checkParentsConstraints(Child child) throws ParentConstraintException {
+        //Parent p1 = child.getParent1();
+        Parent p1 = child.getPrimaryParent();
         Parent p2 = child.getParent2();
 
         if (p1 == null && p2 == null) {
-            throw new ParentConstraintException ("It is not allowed that both parents are null!");
+            return false;
         }
 
         if (p1.equals(p2)) {
-            throw new ParentConstraintException("Parent1 and parent2 may not be equal!");
+            return false;
         }
 
         return true;
     }
-    */
-
 
 
     /**
      * Check whether or not one of the following constraints is violated:
      * A child may not be a sibling of itself.
      * A child can not have the same sibling twice or more.
-     * @return iff no constraints are violated.
+     * @return <code>true</code> iff no constraints are violated.
      */
-    /*
-    public boolean checkSiblingsConstraints() throws SiblingConstraintException {
-        HashSet<Sibling> setSiblings = (HashSet) this.child.getListSiblings();
+    public boolean checkSiblingsConstraints(Child child) throws SiblingConstraintException {
+        HashSet<Sibling> setSiblings = (HashSet) child.getSiblings();
 
         for(Sibling s : setSiblings) {
             System.out.println(s);
@@ -167,7 +116,7 @@ public class ChildConstraints {
         for (Sibling s : setSiblings) {
             System.out.println(s.getFirstName());
             if(s.equals(new Sibling(child.getFirstName(), child.getLastName(), child.getBirthday()))) {
-                throw new SiblingConstraintException("A child cannot be a sibling of itself.");
+                return false;
             }
         }
 
@@ -177,13 +126,12 @@ public class ChildConstraints {
 
             for (Sibling s2 : setSiblings) {
                 if (s.equals(s2)) {
-                    throw new SiblingConstraintException("A child cannot have the same sibling twice or more.");
+                    return false;
                 }
             }
         }
 
         return true;
     }
-    */
 
 }

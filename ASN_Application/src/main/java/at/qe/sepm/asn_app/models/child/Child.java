@@ -111,8 +111,20 @@ public class Child implements Persistable<Long>{
         return parent1.getFirstName() + " " + parent1.getLastName();
     }
 
+    public Parent getPrimaryParent() {
+        return parent1;
+    }
+
     public void setPrimaryParent(Parent p){
         parent1= p;
+    }
+
+    public Parent getParent2() {
+        return parent2;
+    }
+
+    public void setParent2(Parent parent2) {
+        this.parent2 = parent2;
     }
 
     public void addCaregiver(Caregiver c){

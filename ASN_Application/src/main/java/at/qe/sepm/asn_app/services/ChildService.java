@@ -43,14 +43,14 @@ public class ChildService {
 
     private Child child;
 
+
     public void setChild(Child child) {
         this.child = child;
     }
+
     public Child getChild() {
         return this.child;
     }
-
-
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Collection<Child> getAllChildren(){
@@ -58,16 +58,10 @@ public class ChildService {
     }
 
 
-
-
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Child saveChild(Child child) {
-        System.out.println("HHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEEEEEEEEEEEEE111111");
-
         return childRepository.save(child);
     }
-
-
 
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
@@ -75,13 +69,13 @@ public class ChildService {
         return childRepository.findOne(id);
     }
 
+
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public void deleteChild(Child child) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
         auditLogRepository.save(log);
         childRepository.delete(child);
     }
-
 
 
     private UserData getAuthenticatedUser() {
