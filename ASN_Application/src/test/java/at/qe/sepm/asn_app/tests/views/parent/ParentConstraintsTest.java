@@ -49,19 +49,19 @@ public class ParentConstraintsTest {
      */
     @Before
     public void initialize() {
-        Set<Child> ParentListChildren1 = new HashSet<>();
-        Set<Child> ParentListChildren2 = new HashSet<>();
-        Set<Child> ParentListChildren3 = new HashSet<>();
-        Set<Task> ParentListTasks1 = new HashSet<>();
-        Set<Task> ParentListTasks2 = new HashSet<>();
-        Set<Task> ParentListTasks3 = new HashSet<>();
+        Set<Child> parentListChildren1 = new HashSet<>();
+        Set<Child> parentListChildren2 = new HashSet<>();
+        Set<Child> parentListChildren3 = new HashSet<>();
+        Set<Task> parentListTasks1 = new HashSet<>();
+        Set<Task> parentListTasks2 = new HashSet<>();
+        Set<Task> parentListTasks3 = new HashSet<>();
 
         // Having a '0' in front of the month could maybe be a problem because usually a 0 in front of a number means oct-numbers
         listParents = new ArrayList<>();
-        listParents.add(parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", ParentListChildren1, ParentListTasks1, FamilyStatus.MARRIED, true, "24/05/1980"));
-        listParents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", ParentListChildren2, ParentListTasks2, FamilyStatus.DIVORCED, true, "11/11/2003"));  // Too young
-        listParents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListTasks3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Too old
-        listParents.add(parent4 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", ParentListChildren3, ParentListTasks3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Same as parent3
+        listParents.add(parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", parentListChildren1, parentListTasks1, FamilyStatus.MARRIED, true, "24/05/1980"));
+        listParents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", parentListChildren2, parentListTasks2, FamilyStatus.DIVORCED, true, "11/11/2003"));  // Too young
+        listParents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", parentListChildren3, parentListTasks3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Too old
+        listParents.add(parent4 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", parentListChildren3, parentListTasks3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Same as parent3
         parentService = new ParentService();
 
         listChildren = new ArrayList<>();
