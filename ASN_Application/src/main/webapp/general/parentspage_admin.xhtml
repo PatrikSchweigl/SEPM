@@ -103,14 +103,15 @@
                                                       exportable="false">
                                                 <p:commandButton update=":parentForm:parentTable"
                                                                  oncomplete="PF('parentEditDialog').show()"
-                                                                 icon="ui-icon-note" title="Ändern">
+                                                                 icon="ui-icon-note" title="Ändern"
+                                                                 process="@this">
                                                     <f:setPropertyActionListener value="#{parent}"
                                                                                  target="#{parentEditController.parent}"/>
                                                 </p:commandButton>
                                                 <p:commandButton
                                                         action="#{parentEditController.doDeleteParent}"
                                                         icon="ui-icon-trash" title="Löschen"
-                                                        update=":parentForm">
+                                                        update=":parentForm" process="@this">
                                                     <f:setPropertyActionListener value="#{parent}"
                                                                                  target="#{parentEditController.parent}"/>
                                                     <p:confirm header="Bestätigung"
