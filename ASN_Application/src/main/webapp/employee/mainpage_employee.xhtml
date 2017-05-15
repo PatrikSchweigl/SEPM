@@ -27,24 +27,26 @@
 													header="Passwort ändern" resizeable="false" modal="true">
 													<h:outputText
 														value="Sie müssen, um fortfahren zu können, Ihr Passwort wechseln." />
-													<p:messages id="messages" showDetail="true"
+													<p:messages id="messages" showDetail="false"
 														autoUpdate="true" />
 
 													<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
 														<h:outputLabel for="pwd1" value="Password 1: *" />
 														<p:password id="pwd1" value="#{employeeController.password}"
 															match="pwd2" label="Passwort:" required="true"
-															feedback="true"
-															requiredMessage="Kein Passwort eingegeben" />
+															feedback="true" validatorMessage="Passwörter stimmen nicht überein!"
+															requiredMessage="Kein Passwort eingegeben! (Feld 1)" />
 
 														<h:outputLabel for="pwd2" value="Password 2: *" />
 														<p:password id="pwd2" value="#{employeeController.password}"
-															label="Wiederholung: " required="true" />
+															label="Wiederholung: " required="true"
+																	requiredMessage="Kein Passwort eingegeben! (Feld 2)"/>
 													</h:panelGrid>
 													<h:panelGrid columns="3">
 														<p:commandButton
 															action="#{employeeController.changePassword(employeeController.password)}"
-															update="@all" value="Speichern" />
+															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogTest').hide()"
+															value="Speichern" />
 													</h:panelGrid>
 												</p:dialog>
 											</h:form>
