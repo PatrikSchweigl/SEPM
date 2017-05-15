@@ -104,14 +104,14 @@
                                                       exportable="false">
                                                 <p:commandButton update=":employeeForm:employeeEditDialog"
                                                                  oncomplete="PF('employeeEditDialog').show()"
-                                                                 icon="ui-icon-note" title="Ändern">
+                                                                 icon="ui-icon-note" title="Ändern" process="@this">
                                                     <f:setPropertyActionListener value="#{employee}"
                                                                                  target="#{employeeController.employeeEdit}"/>
                                                 </p:commandButton>
                                                 <p:commandButton
                                                         action="#{employeeController.doDeleteEmployee}"
                                                         icon="ui-icon-trash" title="Löschen"
-                                                        update=":employeeForm:employeeTable">
+                                                        update=":employeeForm:employeeTable" process="@this">
                                                     <f:setPropertyActionListener value="#{employee}"
                                                                                  target="#{employeeController.employeeEdit}"/>
                                                     <p:confirm header="Bestätigung"
