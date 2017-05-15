@@ -31,8 +31,7 @@ public class Picture implements Persistable<Long> {
     private String title;
 
 
-    public Picture() {
-    }
+    public Picture() {}
 
     public Picture(String url, UserData publisher, Date date, String title) {
         this.url = url;

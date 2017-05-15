@@ -120,4 +120,14 @@ public class NurseryInformation implements Persistable<Long> {
             return false;
         }
     }
+
+
+    @Override
+    public String toString() {
+        return "BringTimeStart: " + bringTimeStart + "\n" +
+                "BringTimeEnd: " + bringTimeEnd + "\n" +
+                "PickUpTimeStart: " + pickUpTimeStart + "\n" +
+                "PickUpTimeEnd: " + pickUpTimeEnd + "\n" +
+                "MaxOccupancy: " + maxOccupancy;
+    }
 }

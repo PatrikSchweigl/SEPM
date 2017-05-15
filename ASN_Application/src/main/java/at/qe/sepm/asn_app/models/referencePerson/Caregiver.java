@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Caregiver implements Persistable<Long>{
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,11 +23,10 @@ public class Caregiver implements Persistable<Long>{
     private String imgName;
     private String phoneNumber;
 
+
     public Caregiver(){}
 
-
     public Caregiver(String firstName, String lastName, Relationship relationship, String imgName, String phoneNumber) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.relationship = relationship;
@@ -35,6 +34,7 @@ public class Caregiver implements Persistable<Long>{
         this.phoneNumber = phoneNumber;
 
     }
+
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -84,10 +84,12 @@ public class Caregiver implements Persistable<Long>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (null == firstName && null == lastName);
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -109,6 +111,7 @@ public class Caregiver implements Persistable<Long>{
             return false;
         }
     }
+
 
     @Override
     public String toString() {
