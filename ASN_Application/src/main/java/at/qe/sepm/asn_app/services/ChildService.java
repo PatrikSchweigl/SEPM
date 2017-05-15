@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 //import java.util.Collection;
 //import java.util.Date;
@@ -76,7 +77,7 @@ public class ChildService {
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public void deleteChild(Child child) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), null);
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
         auditLogRepository.save(log);
         childRepository.delete(child);
     }

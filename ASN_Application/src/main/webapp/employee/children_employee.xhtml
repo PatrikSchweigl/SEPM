@@ -91,14 +91,14 @@
                                                       exportable="false">
                                                 <p:commandButton update=":childForm:childEditDialog"
                                                                  oncomplete="PF('childEditDialog').show()"
-                                                                 icon="ui-icon-note" title="Edit">
+                                                                 icon="ui-icon-note" title="Edit" process="@this">
                                                     <f:setPropertyActionListener value="#{child}"
                                                                                  target="#{childController.childEdit}" />
                                                 </p:commandButton>
                                                 <p:commandButton
                                                         action="#{childController.doDeleteChild}"
                                                         icon="ui-icon-trash" title="Delete"
-                                                        update=":childForm:childTable">
+                                                        update=":childForm:childTable" process="@this">
                                                     <f:setPropertyActionListener value="#{child}"
                                                                                  target="#{childController.childEdit}"/>
                                                     <p:confirm header="Confirmation"
