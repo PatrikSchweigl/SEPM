@@ -79,11 +79,12 @@ public class ScheduleView implements Serializable {
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.PARENT
-					&& t.getSender().getUserRole() == UserRole.EMPLOYEE)
+					&& t.getSender().getUserRole() == UserRole.EMPLOYEE && (t.getEndingDate().compareTo(new Date()) > 0))
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
-			else
+			else if( t.getEndingDate().compareTo(new Date()) > 0)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
-
+			else
+				break;
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
 			System.err.println(ev.getId());
