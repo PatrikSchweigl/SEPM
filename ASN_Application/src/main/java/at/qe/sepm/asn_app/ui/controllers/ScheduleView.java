@@ -46,6 +46,8 @@ public class ScheduleView implements Serializable {
 	private ScheduleModel eventModel;
 
 	private ScheduleEvent event = new DefaultScheduleEvent();
+	private ScheduleEvent editEvent = new DefaultScheduleEvent();
+	private ScheduleEvent editViewEvent = new DefaultScheduleEvent();
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -57,10 +59,9 @@ public class ScheduleView implements Serializable {
 	@Autowired
 	private UserRepository userRepository;
 	private String reciever;
+	private String sender;
 	private Collection<Task> tasks;
 
-	
-	
 	@PostConstruct
 	public void init() {
 		eventModel = new DefaultScheduleModel();
@@ -77,11 +78,11 @@ public class ScheduleView implements Serializable {
 			else if (getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
-			else if(getAuthenticatedUser().getUserRole() == UserRole.PARENT && t.getSender().getUserRole() == UserRole.EMPLOYEE)
+			else if (getAuthenticatedUser().getUserRole() == UserRole.PARENT
+					&& t.getSender().getUserRole() == UserRole.EMPLOYEE)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
 			else
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
-
 
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
@@ -125,19 +126,20 @@ public class ScheduleView implements Serializable {
 	public void setEvent(ScheduleEvent event) {
 		this.event = event;
 	}
-	
-	
-	public void deleteEvent(){
+
+	public void deleteEvent() {
 		Task task = taskService.getTaskByStringId(event.getId());
-		if(task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0)
+		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0)
 			taskService.deleteTaskById(event.getId());
 		else
-			FacesContext.getCurrentInstance().addMessage("scheduleForm", new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));	}
+			FacesContext.getCurrentInstance().addMessage("scheduleForm",
+					new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));
+	}
 
 	public void addEvent() {
-		if(event.getStartDate().compareTo(new Date()) < 0)
+		if (event.getStartDate().compareTo(new Date()) < 0)
 			return;
-		
+
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 
@@ -198,8 +200,11 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
-		event = (ScheduleEvent) selectEvent.getObject();
+		editEvent = (ScheduleEvent) selectEvent.getObject();
+		event = editEvent;
+		editViewEvent = event;
 		System.err.println(event.getId());
+		sender = taskService.getTaskByStringId(event.getId()).getSender().getUsername();
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
@@ -210,18 +215,18 @@ public class ScheduleView implements Serializable {
 		event = moveEvent.getScheduleEvent();
 		Task task = taskService.getTaskByStringId(event.getId());
 		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
-		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), task.getReceiver(),
-				event.getStartDate(), event.getEndDate());
-		temp.setImportant(task.getImportant());
-		temp.setStyleClass(task.getStyleClass());
-		eventModel.updateEvent(event);
-		event.setId(temp.getStringId());
-		taskService.deleteTask(task);
-		taskService.saveTask(temp);
-		AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK MOVED: "
-				+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
-				new Date());
-		auditLogRepository.save(log);
+			Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), task.getReceiver(),
+					event.getStartDate(), event.getEndDate());
+			temp.setImportant(task.getImportant());
+			temp.setStyleClass(task.getStyleClass());
+			eventModel.updateEvent(event);
+			event.setId(temp.getStringId());
+			taskService.deleteTask(task);
+			taskService.saveTask(temp);
+			AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK MOVED: "
+					+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+					new Date());
+			auditLogRepository.save(log);
 		}
 	}
 
@@ -230,18 +235,18 @@ public class ScheduleView implements Serializable {
 
 		Task task = taskService.getTaskByStringId(event.getId());
 		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
-		Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), task.getReceiver(),
-				event.getStartDate(), event.getEndDate());
-		temp.setImportant(task.getImportant());
-		eventModel.updateEvent(event);
-		event.setId(temp.getStringId());
+			Task temp = new Task(task.getDescription(), event.getId(), getAuthenticatedUser(), task.getReceiver(),
+					event.getStartDate(), event.getEndDate());
+			temp.setImportant(task.getImportant());
+			eventModel.updateEvent(event);
+			event.setId(temp.getStringId());
 
-		taskService.deleteTask(task);
-		taskService.saveTask(temp);
-		AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK RESIZED: "
-				+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
-				new Date());
-		auditLogRepository.save(log);
+			taskService.deleteTask(task);
+			taskService.saveTask(temp);
+			AuditLog log = new AuditLog(temp.getReceiver().getUsername(), "TASK RESIZED: "
+					+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+					new Date());
+			auditLogRepository.save(log);
 		}
 	}
 
@@ -273,5 +278,29 @@ public class ScheduleView implements Serializable {
 
 	public void setReciever(String reciever) {
 		this.reciever = reciever;
+	}
+
+	public ScheduleEvent getEditEvent() {
+		return editEvent;
+	}
+
+	public void setEditEvent(ScheduleEvent editEvent) {
+		this.editEvent = editEvent;
+	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public ScheduleEvent getEditViewEvent() {
+		return editViewEvent;
+	}
+
+	public void setEditViewEvent(ScheduleEvent editViewEvent) {
+		this.editViewEvent = editViewEvent;
 	}
 }

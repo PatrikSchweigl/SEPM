@@ -126,25 +126,41 @@
 												</h:panelGrid>
 											</p:dialog>
 
-
-
-
-
-
-
 											<p:dialog widgetVar="eventChangeDialog"
 												header="Termin ändern" showEffect="clip" hideEffect="clip">
 												<p:messages showDetail="false" />
-												<h:panelGrid id="eventChangeDetails" columns="2">
-													<p:outputLabel for="titleChange" value="Titel:" />
-													<p:inputText id="titleChange"
-														value="#{scheduleView.event.title}" />
-													
-													<p:commandButton id="deleteChangeButton" value="Löschen"
-														action="#{scheduleView.deleteEvent}"
-														oncomplete="PF('eventChangeDialog').hide()" />
+												<ui:fragment rendered="#{scheduleView.getSender() eq sessionInfoBean.getCurrentUserData().getUsername()}">
+													<h:panelGrid id="eventChangeDetails" columns="2">
+														<p:outputLabel for="titleChange" value="Titel:" />
+														<p:inputText id="titleChange"
+															value="#{scheduleView.editEvent.title}" />
+														<p:outputLabel for="fromChange" value="Beginn:" />
+														<p:calendar id="fromChange"
+															value="#{scheduleView.editEvent.startDate}"
+															timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
 
-												</h:panelGrid>
+														<p:outputLabel for="toChange" value="Ende:" />
+														<p:calendar id="toChange"
+															value="#{scheduleView.editEvent.endDate}"
+															timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+														<p:commandButton id="deleteChangeButton" value="Löschen"
+															action="#{scheduleView.deleteEvent}"
+															oncomplete="PF('eventChangeDialog').hide()" />
+
+													</h:panelGrid>
+</ui:fragment>
+												<ui:fragment
+													rendered="#{sessionInfoBean.getCurrentUserData().getUsername() ne scheduleView.getSender()}">
+													<h:panelGrid id="eventChangeDetailsLabel" columns="2">
+														<p:outputLabel for="titleChangeLabel" value="Titel:" />
+														<p:outputPanel id="titleChangeLabel" >#{scheduleView.editViewEvent.getTitle()}</p:outputPanel>
+														<p:outputLabel for="fromChangeLabel" value="Beginn:" />
+														<p:outputPanel id="fromChangeLabel">#{scheduleView.editViewEvent.startDate}</p:outputPanel>
+
+														<p:outputLabel for="toChangeLabel" value="Ende:" />
+														<p:outputPanel id="toChangeLabel">#{scheduleView.editViewEvent.endDate}</p:outputPanel>
+													</h:panelGrid>
+												</ui:fragment>
 											</p:dialog>
 										</h:form>
 
