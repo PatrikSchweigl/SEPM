@@ -54,6 +54,9 @@ public class ScheduleView implements Serializable {
 	private AuditLogRepository auditLogRepository;
 	private boolean visible;
 	private boolean important;
+	private boolean child;
+	private boolean meal;
+	private boolean info;
 	@Autowired
 	private TaskService taskService;
 	@Autowired
@@ -367,5 +370,29 @@ public class ScheduleView implements Serializable {
 
 	public void setEditViewEvent(ScheduleEvent editViewEvent) {
 		this.editViewEvent = editViewEvent;
+	}
+
+	public boolean getInfo() {
+		return info;
+	}
+
+	public void setInfo(boolean info) {
+		this.info = info;
+	}
+
+	public boolean getMeal() {
+		return meal;
+	}
+
+	public void setMeal(boolean meal) {
+		this.meal = meal;
+	}
+
+	public boolean getChild() {
+		return child;
+	}
+
+	public void setChild(boolean child) {
+		this.child = child;
 	}
 }
