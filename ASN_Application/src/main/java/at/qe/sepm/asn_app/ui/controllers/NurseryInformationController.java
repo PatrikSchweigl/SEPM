@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -20,6 +21,7 @@ public class NurseryInformationController {
     @Autowired
     private NurseryInformationService nurseryInformationService;
     private NurseryInformation nurseryInformation;
+    private Date current = new Date();
 
     private Collection<NurseryInformation> nurseryInformations;
 
@@ -39,6 +41,7 @@ public class NurseryInformationController {
     public void setNurseryInformations(Collection<NurseryInformation> nurseryInformations) {
         this.nurseryInformations = nurseryInformations;
     }
+
 
     @PostConstruct
     private void initNewNurseryInformation(){

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <body class="theme-blue sidebar-mini sidebar-collapse">
+            <div class="wrapper">
+                <div class="content-wrapper" style="min-height: 1126px;">
+                    <section class="content">
+                        <div class="box">
+                            <div class="box-body">
+                                <div align="right" style="margin-bottom: 10px;">
+                                    <p:commandButton oncomplete="PF('nurseryInformationDialog').show()"
+                                                     value="Information hinzufügen"
+                                                     style="align-items:right;"></p:commandButton>
+                                </div>
+
+                                <h:form id="infoForm">
+                                    <p:dataTable id="infoTable" var="info"
+                                                 widgetVar="infoTable"
+                                                 value="#{nurseryInformationController.nurseryInformations}"
+                                                 paginator="true" rows="10" paginatorPosition="bottom"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50" >
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <h:outputText value="Suche: "/>
+                                                <p:inputText id="globalFilter"
+                                                             onkeyup="PF('childTable').filter()" style="width:150px"
+                                                             placeholder="Suchwort eingeben"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+                                        <p:column headerText="Bring-Zeitraum">
+                                            <h:outputText value="#{info.bringDuration}"/>
+                                        </p:column>
+                                        <p:column headerText="Abhol-Zeitraum">
+                                            <h:outputText value="#{info.pickUpDuration}"/>
+                                        </p:column>
+                                        <p:column headerText="Max. Belegung">
+                                            <h:outputText value="#{info.maxOccupancy}"/>
+                                        </p:column>
+                                        <p:column headerText="Datum">
+                                            <h:outputText value="#{info.todaysDate}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+
+
+                                <p:dialog header="Allgemeine Information erstellen" id="nurseryInfo"
+                                          widgetVar="nurseryInformationDialog"
+                                          modal="true" showEffect="fade"
+                                          hideEffect="fade" resizable="false">
+                                    <h:form id="nurseryInformation">
+                                        <h:outputLabel id="information">
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel for="maxOcc" value="Max. Belegung:"/>
+                                                <h:inputText id="maxOcc"
+                                                             value="#{nurseryInformationController.nurseryInformation.maxOccupancy}"/>
+                                                <h:outputLabel for="originDate" value="Datum:"/>
+                                                <p:calendar id="originDate"
+                                                            value="#{nurseryInformationController.nurseryInformation.originDate}"
+                                                            timeZone="Europe/Vienna"/>
+                                            </h:panelGrid>
+                                            <p:separator/>
+                                            <h:panelGrid columns="1">
+                                                <h:outputLabel value="Bringzeitraum:"/>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="4">
+                                                <h:outputLabel for="bringFrom" value="von: "/>
+                                                <p:calendar id="bringFrom"
+                                                            value="#{nurseryInformationController.nurseryInformation.bringStart}"
+                                                            pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
+                                                            stepMinute="15"/>
+                                                <h:outputLabel for="bringTo" value="bis: "/>
+                                                <p:calendar id="bringTo"
+                                                            value="#{nurseryInformationController.nurseryInformation.bringEnd}"
+                                                            pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
+                                                            stepMinute="15"/>
+                                            </h:panelGrid>
+                                            <p:separator/>
+                                            <h:panelGrid columns="1">
+                                                <h:outputLabel value="Abholzeitraum:"/>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="4">
+                                                <h:outputLabel for="pickUpFrom" value="von: "/>
+                                                <p:calendar id="pickUpFrom"
+                                                            value="#{nurseryInformationController.nurseryInformation.pickUpStart}"
+                                                            pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
+                                                            stepMinute="15"/>
+                                                <h:outputLabel for="pickUpTo" value="bis: "/>
+                                                <p:calendar id="pickUpTo"
+                                                            value="#{nurseryInformationController.nurseryInformation.pickUpEnd}"
+                                                            pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
+                                                            stepMinute="15"/>
+                                            </h:panelGrid>
+                                            <p:separator/>
+                                            <h:panelGrid columns="3">
+                                                <p:commandButton value="Speichern"
+                                                                 oncomplete="PF('nurseryInformationDialog').hide()"
+                                                                 action="#{nurseryInformationController.doSaveNurseryInformation()}"
+                                                                 />
+                                                <p:commandButton value="Abbrechen"
+                                                                 onclick="PF('nurseryInformationDialog').hide()"/>
+                                            </h:panelGrid>
+                                        </h:outputLabel>
+                                    </h:form>
+                                </p:dialog>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            </body>
+        </h:body>
+    </ui:define>
+</ui:composition>
