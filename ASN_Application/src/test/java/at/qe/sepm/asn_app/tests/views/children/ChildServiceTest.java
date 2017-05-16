@@ -23,7 +23,9 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * Created by Bernd Menia on 20.04.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 20.04.17.
+ *
+ *
  */
 public class ChildServiceTest {
 
@@ -49,6 +51,11 @@ public class ChildServiceTest {
     // TODO Check if a parent exists in the nursery
     // TODO check naming constraints (e.g numbers etc. )
 
+    /**
+     * To make sure that every test works with the same starting values all generally
+     * needed attributes get initialized before each test. After each test all attributes
+     * get set to null again in {@link ChildServiceTest#cleanUp()}.
+     */
     @Before
     public void initialize() {
 

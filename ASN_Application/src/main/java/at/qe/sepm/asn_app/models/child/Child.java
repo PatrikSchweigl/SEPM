@@ -14,7 +14,7 @@ import java.util.Set;
 
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  */
 /** Edit by Stefan Mattersberger on 18.03.2017 */
 @Entity

@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  *
  * Sibling is a minimalistic version of Child. In contrast to Child it only holds the full name and birthday.
  * @see Child

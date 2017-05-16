@@ -18,7 +18,7 @@ import java.util.Set;
 import static org.junit.Assert.assertFalse;
 
 /**
- * Created by zerus on 13.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 13.05.17.
  *
  * This class checks various constraints made by the class PasswordConstraints. For a password to be valid the
  * following constraints must be true:

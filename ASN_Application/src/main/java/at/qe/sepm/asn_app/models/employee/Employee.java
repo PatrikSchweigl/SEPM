@@ -8,7 +8,7 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import javax.persistence.*;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  */
 @Entity
 public class Employee extends UserData {

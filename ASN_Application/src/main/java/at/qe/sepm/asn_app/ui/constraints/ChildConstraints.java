@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * Created by zerus on 08.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 08.05.17.
  */
 
 @Component

@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  *
  * Lunch holds information on which date a meal is available and how much it costs.
  * @see Child

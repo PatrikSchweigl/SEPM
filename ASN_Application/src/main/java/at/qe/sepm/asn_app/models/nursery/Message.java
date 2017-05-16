@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  *
  * A Message contains the name of the sender, the message itself and a date on which it got sent.
  * There is no receiver because all instance of Message are publicly displayed.

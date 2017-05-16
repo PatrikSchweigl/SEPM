@@ -5,7 +5,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.PasswordConstraintException;
 
 /**
- * Created by zerus on 13.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 13.05.17.
  *
  * All of the constraints contained in PaswordConstraints get checked in PasswordConstraintsTest.
  * Parent passwords are handled differently because for them there is also a constraint that

@@ -5,7 +5,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Created by zerus on 09.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 09.05.17.
  *
  * BirthdayParser holds a method in which a birthday represented as a String gets parsed to the amount of second from
  * the birthday to now.
