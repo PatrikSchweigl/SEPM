@@ -29,9 +29,10 @@
 
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
-									onclick="PF('nurseryInformationDialog').show()"> <i
-									class="fa fa-info-circle fa-3x " ></i> <span
-									style="padding-left: 40px; font-size: 25px">Kindergarten Information</span>
+								onclick="PF('nurseryInformationDialog').show()"> <i
+									class="fa fa-info-circle fa-3x "></i> <span
+									style="padding-left: 40px; font-size: 25px">Kindergarten
+										Information</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
@@ -64,10 +65,16 @@
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/calendar_employee.xhtml"> <i
+									class="fa fa-calendar fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Kalender</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
+							<li class="treeview"><a
+								href="/parent/calendar_parent.xhtml"> <i
 									class="fa fa-calendar fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kalender</span>
 							</a></li>
@@ -169,46 +176,46 @@
 
 			<p:dialog header="Eigene Daten" id="ownDataDialog"
 				widgetVar="ownDataDialog" modal="true" showEffect="fade"
-				hideEffect="fade" resizable="false">
+				hideEffect="fade" resizable="false" closeOnEscape="true">
 				<p:outputPanel id="parentDataCreate">
 					<h:panelGrid columns="2">
-						<p:outputLabel for="username" value="Username: " />
+						<p:outputLabel for="username" value="Benutzername: " />
 						<p:inputText id="username"
 							value="#{sessionInfoBean.currentUserData.username}"
 							disabled="true" />
-						<p:outputLabel for="password" value="Password: " />
+						<p:outputLabel for="password" value="Passwort: " />
 						<p:password id="password"
 							value="#{sessionInfoBean.currentUserData.password}"
 							disabled="true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2">
-						<p:outputLabel for="firstname" value="Firstname: " />
+						<p:outputLabel for="firstname" value="Vorname: " />
 						<p:inputText id="firstname"
 							value="#{sessionInfoBean.currentUserData.firstName}"
 							disabled="true" />
-						<p:outputLabel for="lastname" value="Lastname: " />
+						<p:outputLabel for="lastname" value="Nachname: " />
 						<p:inputText id="lastname"
 							value="#{sessionInfoBean.currentUserData.lastName}"
 							disabled="true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2">
-						<p:outputLabel for="street" value="Street: " />
+						<p:outputLabel for="street" value="Straße: " />
 						<p:inputText id="street"
 							value="#{sessionInfoBean.currentUserData.streetName}" />
-						<p:outputLabel for="location" value="Location: " />
+						<p:outputLabel for="location" value="Ort: " />
 						<p:inputText id="location"
 							value="#{sessionInfoBean.currentUserData.location}" />
-						<p:outputLabel for="postcode" value="Postcode: " />
+						<p:outputLabel for="postcode" value="Postleitzahl: " />
 						<p:inputText id="postcode"
 							value="#{sessionInfoBean.currentUserData.postcode}" />
 					</h:panelGrid>
 					<h:panelGrid columns="3">
-						<p:commandButton value="Save"
+						<p:commandButton value="Speichern"
 							action="#{sessionInfoBean.doSaveUser()}"
 							oncomplete="PF('ownDataDialog').hide()" />
-						<p:commandButton value="Abort"
+						<p:commandButton value="Abbruch"
 							onclick="PF('ownDataDialog').hide()" />
 					</h:panelGrid>
 				</p:outputPanel>
@@ -225,78 +232,90 @@
 				<h3>Mitarbeiter</h3>
 				<div>
 					<ui:repeat var="employee" value="#{employeeController.employees}">
-					<ui:fragment rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
-						<h:panelGrid columns="2" style="width:50px;"
-							columnClasses="logo,detail">
-							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+						<ui:fragment
+							rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
+							<h:panelGrid columns="2" style="width:50px;"
+								columnClasses="logo,detail">
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 
-							<p:commandLink value="#{employee.username}"
-								action="#{privateMessageController.setUsername(employee.username)}"
-								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
+								<p:commandLink value="#{employee.username}"
+									action="#{privateMessageController.setUsername(employee.username)}"
+									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-								<h:outputText value="#{employee.username}" />
-							</p:commandLink>
-						</h:panelGrid>
-						<hr />
+									<h:outputText value="#{employee.username}" />
+								</p:commandLink>
+							</h:panelGrid>
+							<hr />
 						</ui:fragment>
 					</ui:repeat>
 				</div>
 				<div>
 					<h3>Eltern</h3>
 					<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-					<ui:fragment rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">						<h:panelGrid columns="2" style="width:50px;"
-							columnClasses="logo,detail">
-							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
-							<p:commandLink value="#{parent.username}"
-								action="#{privateMessageController.setUsername(parent.username)}"
-								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
+						<ui:fragment
+							rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">
+							<h:panelGrid columns="2" style="width:50px;"
+								columnClasses="logo,detail">
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+								<p:commandLink value="#{parent.username}"
+									action="#{privateMessageController.setUsername(parent.username)}"
+									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-								<h:outputText value="#{parent.username}" />
-							</p:commandLink>
-						</h:panelGrid>
-						<hr />
+									<h:outputText value="#{parent.username}" />
+								</p:commandLink>
+							</h:panelGrid>
+							<hr />
 						</ui:fragment>
 					</ui:repeat>
 				</div>
 			</p:dialog>
 		</h:form>
 
-		<p:dialog header="Allgemeine Information (täglich)" id="nurseryInfo" widgetVar="nurseryInformationDialog"
-				  modal="true" showEffect="fade"
-				  hideEffect="fade" resizable="false">
+		<p:dialog header="Allgemeine Information (täglich)" id="nurseryInfo"
+			widgetVar="nurseryInformationDialog" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false">
 			<h:form id="nurseryInformation">
 				<h:outputLabel id="information">
 					<h:panelGrid columns="2">
-						<h:outputLabel for="maxOcc" value="Max. Belegung:"/>
-						<h:inputText id="maxOcc" value="#{nurseryInformationController.nurseryInformation.maxOccupancy}"/>
+						<h:outputLabel for="maxOcc" value="Max. Belegung:" />
+						<h:inputText id="maxOcc"
+							value="#{nurseryInformationController.nurseryInformation.maxOccupancy}" />
 					</h:panelGrid>
-					<p:separator/>
+					<p:separator />
 					<h:panelGrid columns="1">
-						<h:outputLabel value="Bringzeitraum:"/>
+						<h:outputLabel value="Bringzeitraum:" />
 					</h:panelGrid>
 					<h:panelGrid columns="4">
-						<h:outputLabel for="bringFrom" value="von: "/>
-						<p:calendar id="bringFrom" value="#{nurseryInformationController.nurseryInformation.bringDuration.startTime}" pattern="HH:mm" timeOnly="true"/>
-						<h:outputLabel for="bringTo" value="bis: "/>
-						<p:calendar id="bringTo" value="#{nurseryInformationController.nurseryInformation.bringDuration.endTime}" pattern="HH:mm" timeOnly="true"/>
+						<h:outputLabel for="bringFrom" value="von: " />
+						<p:calendar id="bringFrom"
+							value="#{nurseryInformationController.nurseryInformation.bringDuration.startTime}"
+							pattern="HH:mm" timeOnly="true" />
+						<h:outputLabel for="bringTo" value="bis: " />
+						<p:calendar id="bringTo"
+							value="#{nurseryInformationController.nurseryInformation.bringDuration.endTime}"
+							pattern="HH:mm" timeOnly="true" />
 					</h:panelGrid>
-					<p:separator/>
+					<p:separator />
 					<h:panelGrid columns="1">
-						<h:outputLabel value="Abholzeitraum:"/>
+						<h:outputLabel value="Abholzeitraum:" />
 					</h:panelGrid>
 					<h:panelGrid columns="4">
-						<h:outputLabel for="pickUpFrom" value="von: "/>
-						<p:calendar id="pickUpFrom" value="#{nurseryInformationController.nurseryInformation.pickUpDuration.startTime}" pattern="HH:mm" timeOnly="true"  />
-						<h:outputLabel for="pickUpTo" value="bis: "/>
-						<p:calendar id="pickUpTo" value="#{nurseryInformationController.nurseryInformation.pickUpDuration.endTime}" pattern="HH:mm" timeOnly="true"  />
+						<h:outputLabel for="pickUpFrom" value="von: " />
+						<p:calendar id="pickUpFrom"
+							value="#{nurseryInformationController.nurseryInformation.pickUpDuration.startTime}"
+							pattern="HH:mm" timeOnly="true" />
+						<h:outputLabel for="pickUpTo" value="bis: " />
+						<p:calendar id="pickUpTo"
+							value="#{nurseryInformationController.nurseryInformation.pickUpDuration.endTime}"
+							pattern="HH:mm" timeOnly="true" />
 					</h:panelGrid>
-					<p:separator/>
+					<p:separator />
 					<h:panelGrid columns="3">
 						<p:commandButton value="Speichern"
-										 oncomplete="PF('nurseryInformationDialog').hide()"
-							             action="#{nurseryInformationController.doSaveNurseryInformation()}"/>
+							oncomplete="PF('nurseryInformationDialog').hide()"
+							action="#{nurseryInformationController.doSaveNurseryInformation()}" />
 						<p:commandButton value="Abbrechen"
-										 onclick="PF('nurseryInformationDialog').hide()" />
+							onclick="PF('nurseryInformationDialog').hide()" />
 					</h:panelGrid>
 				</h:outputLabel>
 			</h:form>
