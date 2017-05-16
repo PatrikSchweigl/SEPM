@@ -144,7 +144,8 @@
                                                     <p:commandButton value="Speichern"
                                                                      action="#{childController.doSaveChildEdit()}"
                                                                      oncomplete="PF('childEditDialog').hide()"
-                                                                     update=":childForm" />
+                                                                     update=":childForm"
+                                                                     process="@widgetVar(childEditDialog)"/>
                                                     <p:commandButton value="Neu laden" immediate="true"
                                                                      action="#{childController.doReloadChildEdit()}"
                                                                      update=":childForm:childDataEdit" />
