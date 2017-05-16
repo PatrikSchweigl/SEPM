@@ -24,6 +24,7 @@ preload some data into the database.
 
 In `vagrant`, start MYSQL with `mysql -u root -pasnTeam1` and 
 execute following line: *source /vagrant/src/main/resources/data.sql*.
+Now the application is accessible via http://192.168.33.10:8080.
 
 Then you are able to login with all different types of User.
 

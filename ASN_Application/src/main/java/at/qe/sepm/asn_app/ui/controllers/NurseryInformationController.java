@@ -21,7 +21,6 @@ public class NurseryInformationController {
     @Autowired
     private NurseryInformationService nurseryInformationService;
     private NurseryInformation nurseryInformation;
-    private Date current = new Date();
 
     private Collection<NurseryInformation> nurseryInformations;
 
