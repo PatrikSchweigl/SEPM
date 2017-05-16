@@ -198,20 +198,17 @@
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Speichern"
-                                                                     action="#{parentEditController.doSaveParent()}"
+                                                    <p:commandButton value="Speicherrn"
+                                                                     action="#{parentEditController.doSaveParent}"
                                                                      oncomplete="PF('parentEditDialog').hide()"
-                                                                     update=":parentForm"/>
+                                                                     update=":parentForm"
+                                                                     process="@widgetVar(parentEditDialog)"/>
                                                     <p:commandButton value="Neu laden"
-                                                                     action="#{parentEditController.doReloadParent()}"
-                                                                     update=":parentForm"/>
+                                                                     action="#{parentEditController.doReloadParent}"
+                                                                     />
                                                     <p:commandButton value="Abbruch"
                                                                      onclick="PF('parentEditDialog').hide()"/>
                                                 </h:panelGrid>
-                                            </p:outputPanel>
-                                            <p:outputPanel id="parentDataEdits"
-                                                           rendered="#{empty parentEditController.parent}">
-                                                jaihgiahgoiafiasjf
                                             </p:outputPanel>
                                         </p:dialog>
 
