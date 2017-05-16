@@ -26,6 +26,14 @@
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
 						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a
+									onclick="PF('nurseryInformationDialog').show()"> <i
+									class="fa fa-info-circle fa-3x " ></i> <span
+									style="padding-left: 40px; font-size: 25px">Kindergarten Information</span>
+							</a></li>
+						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
@@ -78,6 +86,7 @@
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
+
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a onclick="PF('colorSettings').show()"
@@ -251,6 +260,48 @@
 				</div>
 			</p:dialog>
 		</h:form>
+
+		<p:dialog header="Allgemeine Information (täglich)" id="nurseryInfo" widgetVar="nurseryInformationDialog"
+				  modal="true" showEffect="fade"
+				  hideEffect="fade" resizable="false">
+			<h:form id="nurseryInformation">
+				<h:outputLabel id="information">
+					<h:panelGrid columns="2">
+						<h:outputLabel for="maxOcc" value="Max. Belegung:"/>
+						<h:inputText id="maxOcc" value="#{nurseryInformationController.nurseryInformation.maxOccupancy}"/>
+					</h:panelGrid>
+					<p:separator/>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="Bringzeitraum:"/>
+					</h:panelGrid>
+					<h:panelGrid columns="4">
+						<h:outputLabel for="bringFrom" value="von: "/>
+						<p:calendar id="bringFrom" value="#{nurseryInformationController.nurseryInformation.bringDuration.startTime}" pattern="HH:mm" timeOnly="true"/>
+						<h:outputLabel for="bringTo" value="bis: "/>
+						<p:calendar id="bringTo" value="#{nurseryInformationController.nurseryInformation.bringDuration.endTime}" pattern="HH:mm" timeOnly="true"/>
+					</h:panelGrid>
+					<p:separator/>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="Abholzeitraum:"/>
+					</h:panelGrid>
+					<h:panelGrid columns="4">
+						<h:outputLabel for="pickUpFrom" value="von: "/>
+						<p:calendar id="pickUpFrom" value="#{nurseryInformationController.nurseryInformation.pickUpDuration.startTime}" pattern="HH:mm" timeOnly="true"  />
+						<h:outputLabel for="pickUpTo" value="bis: "/>
+						<p:calendar id="pickUpTo" value="#{nurseryInformationController.nurseryInformation.pickUpDuration.endTime}" pattern="HH:mm" timeOnly="true"  />
+					</h:panelGrid>
+					<p:separator/>
+					<h:panelGrid columns="3">
+						<p:commandButton value="Speichern"
+										 oncomplete="PF('nurseryInformationDialog').hide()"
+							             action="#{nurseryInformationController.doSaveNurseryInformation()}"/>
+						<p:commandButton value="Abbrechen"
+										 onclick="PF('nurseryInformationDialog').hide()" />
+					</h:panelGrid>
+				</h:outputLabel>
+			</h:form>
+		</p:dialog>
+
 		<p:dialog header="Privatnachricht" id="privateMessageSend"
 			widgetVar="privateMessageSend" modal="false" showEffect="clip"
 			hideEffect="clip" resizable="true" position="right,bottom"

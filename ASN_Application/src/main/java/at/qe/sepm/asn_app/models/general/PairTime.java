@@ -1,6 +1,7 @@
-package at.qe.sepm.asn_app.models.child;
+package at.qe.sepm.asn_app.models.general;
 
 
+import at.qe.sepm.asn_app.models.child.Child;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class PairTime implements Persistable<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private Date startTime;
     private Date endTime;
 
@@ -55,7 +56,7 @@ public class PairTime implements Persistable<Long>{
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return id;
     }
 
 

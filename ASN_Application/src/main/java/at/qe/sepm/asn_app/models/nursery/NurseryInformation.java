@@ -1,11 +1,9 @@
 package at.qe.sepm.asn_app.models.nursery;
 
+import at.qe.sepm.asn_app.models.general.PairTime;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -16,7 +14,6 @@ import java.util.Date;
  * NurseryInformation stores the bring- and pick up times for children in the nursery.
  * It also stores an integer which specifies the maximum occupancy of children of the nursery.
  */
-// TODO Change bring- and pick up time to PairTime
 @Entity
 public class NurseryInformation implements Persistable<Long> {
 
@@ -24,58 +21,49 @@ public class NurseryInformation implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @NotNull
-    private Date bringTimeStart;
-    @NotNull
-    private Date bringTimeEnd;
-    @NotNull
-    private Date pickUpTimeStart;
-    @NotNull
-    private Date pickUpTimeEnd;
-    @NotNull
+    private Long id;
+
+    @ManyToOne(optional = false)
+    private PairTime bringDuration;
+
+    @ManyToOne(optional = false)
+    private PairTime pickUpDuration;
+
     private int maxOccupancy;
+    private Date currentDate;
 
 
-    public NurseryInformation(Date bringTimeStart, Date bringTimeEnd, Date pickUpTimeStart, Date pickUpTimeEnd, int maxOccupancy) {
-        this.bringTimeStart = bringTimeStart;
-        this.bringTimeEnd = bringTimeEnd;
-        this.pickUpTimeStart = pickUpTimeStart;
-        this.pickUpTimeEnd = pickUpTimeEnd;
+    public NurseryInformation(PairTime bringDuration, PairTime pickUpDuration, int maxOccupancy, Date currentDate) {
+        this.bringDuration = bringDuration;
+        this.pickUpDuration = pickUpDuration;
         this.maxOccupancy = maxOccupancy;
+        this.currentDate = currentDate;
     }
 
+    public NurseryInformation(){}
 
-    public Date getBringTimeStart() {
-        return bringTimeStart;
+    public PairTime getBringDuration() {
+        return bringDuration;
     }
 
-    public void setBringTimeStart(Date bringTimeStart) {
-        this.bringTimeStart = bringTimeStart;
+    public void setBringDuration(PairTime bringDuration) {
+        this.bringDuration = bringDuration;
     }
 
-    public Date getbringTimeEnd() {
-        return bringTimeEnd;
+    public PairTime getPickUpDuration() {
+        return pickUpDuration;
     }
 
-    public void setbringTimeEnd(Date bringTimeEnd) {
-        this.bringTimeEnd = bringTimeEnd;
+    public void setPickUpDuration(PairTime pickUpDuration) {
+        this.pickUpDuration = pickUpDuration;
     }
 
-    public Date getPickUpTimeStart() {
-        return pickUpTimeStart;
+    public Date getCurrentDate() {
+        return currentDate;
     }
 
-    public void setPickUpTimeStart(Date pickUpTimeStart) {
-        this.pickUpTimeStart = pickUpTimeStart;
-    }
-
-    public Date getPickUpTimeEnd() {
-        return pickUpTimeEnd;
-    }
-
-    public void setPickUpTimeEnd(Date pickUpTimeEnd) {
-        this.pickUpTimeEnd = pickUpTimeEnd;
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
     }
 
     public int getMaxOccupancy() {
@@ -89,13 +77,13 @@ public class NurseryInformation implements Persistable<Long> {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
 
     @Override
     public boolean isNew() {
-        return (null == bringTimeStart && null == pickUpTimeEnd);
+        return (null == bringDuration && null == pickUpDuration);
     }
 
 
@@ -109,15 +97,21 @@ public class NurseryInformation implements Persistable<Long> {
         }
 
         NurseryInformation other = (NurseryInformation) obj;
-        if (this.bringTimeStart.equals(other.bringTimeStart) &&
-                this.bringTimeEnd.equals(other.bringTimeEnd) &&
-                this.maxOccupancy == other.maxOccupancy &&
-                this.pickUpTimeStart.equals(other.pickUpTimeStart) &&
-                this.pickUpTimeEnd.equals(other.pickUpTimeEnd)) {
+        if (this.bringDuration.equals(other.bringDuration) &&
+                this.pickUpDuration.equals(other.pickUpDuration) &&
+                this.maxOccupancy == other.maxOccupancy) {
             return true;
         }
         else {
             return false;
         }
+    }
+
+
+    @Override
+    public String toString() {
+        return  "BringDuration: " + bringDuration + "\n" +
+                "PickUpDuration: " + pickUpDuration + "\n" +
+                "MaxOccupancy: " + maxOccupancy;
     }
 }
