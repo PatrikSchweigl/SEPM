@@ -108,12 +108,16 @@
 														<p:outputPanel id="toGet">12:15 bis 14:00</p:outputPanel>
 													</ui:fragment>
 
-													<ui:fragment
-														rendered="#{scheduleView.child}">
-														<p:selectOneListbox style="width: 100%;" id="advanced"
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:outputLabel for="advanced" value="Kinder:" />
+
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:selectOneListbox style="width: 210px;" id="advanced"
 															value="#{scheduleView.reciever}" var="p" filter="true"
 															filterMatchMode="contains">
-															<f:selectItems value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+															<f:selectItems
+																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
 																var="parent" itemLabel="#{parent.firstName}"
 																itemValue="#{parent.firstName}" />
 
@@ -127,8 +131,18 @@
 															</p:column>
 														</p:selectOneListbox>
 													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:outputLabel for="advanced" value="Anmerkungen:" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:inputTextarea placeholder="Anmerkung" id="messageInput"
+															value="#{privateMessageController.privateMessage}"
+															rows="5" cols="20" autoResize="false" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:commandButton id="addButton" value="Speichern"/>
 
-
+													</ui:fragment>
 												</h:panelGrid>
 											</p:dialog>
 										</h:form>
