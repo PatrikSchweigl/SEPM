@@ -10,36 +10,45 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ *
+ * A Message contains the name of the sender, the message itself and a date on which it got sent.
+ * There is no receiver because all instance of Message are publicly displayed.
+ *
+ * @see PrivateMessage for a direct communication message with a sender and a receiver.
  */
 @Entity
 public class Message implements Persistable<Long> {
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @NotNull
     private String username;
     @NotNull
     private String message;
     @NotNull
-    private Date date;
+	private Date date;
 
 
-    public Message(String username, String message, Date date) {
-        this.username = username;
-        this.message = message;
-        this.date = date;
-    }
+	public Message() {}
 
-    public String getUsername() {
-        return username;
-    }
+	public Message(String username, String message, Date date) {
+		this.username = username;
+		this.message = message;
+		this.date = date;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
     }
 
     public String getMessage() {
@@ -50,22 +59,52 @@ public class Message implements Persistable<Long> {
         this.message = message;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        return date.toString();
     }
 
     public void setDate(Date date) {
         this.date = date;
     }
 
+
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	return  id;
     }
+
 
     @Override
     public boolean isNew() {
         return (null == username && null == message);
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+        }
+        else if(!(obj instanceof Message)) {
+	        return false;
+        }
+
+        Message other = (Message) obj;
+	    if (this.date.equals(other.date) &&
+                this.message.equals(other.message) &&
+                this.username.equals(other.username)) {
+	        return true;
+        }
+        else {
+	        return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+	    return "Date: " + date + "\n" +
+                "Message: " + message + "\n" +
+                "Username: " + username;
+    }
 }

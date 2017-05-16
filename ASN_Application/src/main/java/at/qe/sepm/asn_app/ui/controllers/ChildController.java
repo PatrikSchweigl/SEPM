@@ -1,14 +1,17 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 
+import at.qe.sepm.asn_app.services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
+
 
 
 /**
@@ -20,20 +23,34 @@ public class ChildController {
 
     @Autowired
     private ChildService childService;
+    @Autowired
+    private ParentService parentService;
 
     private Child child;
+    private Child childEdit;
+    private Collection<Child> children;
 
-    public void setUser(Child childEdit) {
-        this.child = childEdit;
-        doReloadUser();
+    private String parentUserName;
+
+    public void setChildren(Collection<Child> children) {
+        this.children = children;
     }
 
-    public void doReloadUser() {
-        child = childService.loadUser(null);
+    public Collection<Child> getChildren(){
+        return children;
+    }
+
+    public Collection<Child> getChildrenByParentUsername(String usrn){return childService.getChildrenByParentUsername(usrn);}
+    /*
+    public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
+    */
+    @PostConstruct
+    public void initList(){
+        setChildren(childService.getAllChildren());
     }
 
     @PostConstruct
-    private void initNewChild(){
+    public void initNewChild(){
         child = new Child();
     }
 
@@ -41,23 +58,55 @@ public class ChildController {
         return child;
     }
 
-    public Collection<Child> getChildren(){
-        return childService.getAllChildren();
+    public void setChild(Child child) {
+        this.child = child;
+        doReloadChild();
+    }
+
+    public Child getChildEdit() {
+        return childEdit;
+    }
+
+    public void setChildEdit(Child childEdit) {
+        this.childEdit = childEdit;
+        doReloadChildEdit();
+    }
+
+    public void findParentByUsername(String usrn){
+        child.setPrimaryParent(parentService.loadParent(usrn));
+    }
+
+    public String getParentUserName() {
+        return parentUserName;
+    }
+
+    public void setParentUserName(String parentUserName) {
+        this.parentUserName = parentUserName;
     }
 
     public void doSaveChild(){
-        //System.out.println("Saving child: " + child.getFirstName() + " " + child.getLastName());
+        findParentByUsername(parentUserName);
         child = childService.saveChild(child);
         child = null;
         initNewChild();
+        initList();
+    }
+
+    public void doSaveChildEdit() {
+        childEdit = childService.saveChild(childEdit);
+        initList();
+    }
+
+    public void doDeleteChild() {
+        this.childService.deleteChild(childEdit);
+        childEdit = null;
+    }
+    public void doReloadChild(){
+        child = childService.loadChild(child.getId());
+    }
+    public void doReloadChildEdit(){
+        childEdit = childService.loadChild(childEdit.getId());
     }
 
 
-    /*
-    public void parseDate(String date) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd-MM-yyyy");
-        DateTime dateTime = dateTimeFormatter.parseDateTime(date);
-        child.setBirthday(dateTime);
-    }
-    */
 }

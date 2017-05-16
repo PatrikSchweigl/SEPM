@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.models.child;
 
 
+import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  */
 /** Edit by Stefan Mattersberger on 18.03.2017 */
 @Entity
@@ -22,25 +23,54 @@ public class Child implements Persistable<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String firstName;
+
+
+
     private String lastName;
-    //private DateTime birthday;
     private String birthday;
     private String imgName;
-    @ElementCollection(targetClass=String.class)
+    private Gender gender;
+
+
+    @ManyToOne(optional = false)
+    private Parent parent1;
+
+    @ManyToOne // only 1 parent required for child
+    private Parent parent2;
+
+    private String emergencyNumber;
+    @ElementCollection(targetClass = String.class)
+    private Set<String> allergies;
+    @ElementCollection(targetClass = String.class)
+    private Set<String> foodIntolerances;
+
+
+    @OneToMany
+    private Set<Sibling> siblings;
+
+    @Enumerated(EnumType.STRING)
+    private Custody custody;
+
+    @Enumerated(EnumType.STRING)
+    private Religion religion;
+
+    //@ElementCollection(targetClass = Caregiver.class)
+    @OneToMany
+    private Set<Caregiver> caregivers;
+
+    /*@ElementCollection(targetClass=String.class)
     private Set<String> furtherRemarks;
     @ManyToOne(optional = false)
     private Parent parent1;
-    //private String parent1;
     @ManyToOne(optional = false)
     private Parent parent2;
-   // private String parent2;
     private String emergencyNumber;
     @ElementCollection(targetClass=String.class)
-    private Set<String> listAllergies;
+    private Set<String> allergies;
     @ElementCollection(targetClass=String.class)
-    private Set<String> listFoodIntolerances;
+    private Set<String> foodIntolerances;
     @OneToMany
     private Set<Sibling> listSiblings;
     @OneToMany
@@ -50,37 +80,67 @@ public class Child implements Persistable<Long>{
     @Enumerated(EnumType.STRING)
     private Religion religion;
     @OneToMany
-    private Set<Caregiver> cargivers;
-
+    private Set<Caregiver> caregivers;
+    */
 
     /* CONSTRUCTORS */
     public Child() {}
 
-    public Child(String firstName, String lastName, String birthday, Religion religion) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.religion = religion;
-    }
-
-    public Child(String firstName, String lastName, String birthday, String imgName, Set<String> furtherRemarks,
-                 Parent parent1, Parent parent2, String emergencyNumber, Set<String> listAllergies, Set<String> listFoodIntolerances,
-                 Set<Sibling> listSiblings, Set<PairTime> pairTime, Custody custody, Religion religion, Set<Caregiver> cargivers) {
+    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent parent) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.imgName = imgName;
-        this.furtherRemarks = furtherRemarks;
-        this.parent1 = parent1;
-        this.parent2 = parent2;
+        this.gender = gender;
+        this.parent1 = parent;
+    }
+    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1, Parent par2, String emergencyNumber, Custody custody, Religion religion) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.imgName = imgName;
+        this.gender = gender;
+        this.parent1 = par1;
+        this.parent2 = par2;
         this.emergencyNumber = emergencyNumber;
-        this.listAllergies = listAllergies;
-        this.listFoodIntolerances = listFoodIntolerances;
-        this.listSiblings = listSiblings;
-        this.pairTime = pairTime;
         this.custody = custody;
         this.religion = religion;
-        this.cargivers = cargivers;
+    }
+
+    public String getPrimaryParentFullName(){
+        return parent1.getFirstName() + " " + parent1.getLastName();
+    }
+
+    public Parent getPrimaryParent() {
+        return parent1;
+    }
+
+    public void setPrimaryParent(Parent p){
+        parent1= p;
+    }
+
+    public Parent getParent2() {
+        return parent2;
+    }
+
+    public void setParent2(Parent parent2) {
+        this.parent2 = parent2;
+    }
+
+    public void addCaregiver(Caregiver c){
+        caregivers.add(c);
+    }
+
+    public void addAllergy(String s){
+        allergies.add(s);
+    }
+
+    public void addFoodIntolerance(String s){
+        foodIntolerances.add(s);
+    }
+
+    public void addSibling(Sibling s){
+        siblings.add(s);
     }
 
     public String getFirstName() {
@@ -115,54 +175,41 @@ public class Child implements Persistable<Long>{
         this.imgName = imgName;
     }
 
-    public Set<String> getFurtherRemarks() {
-        return furtherRemarks;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setFurtherRemarks(Set<String> furtherRemarks) {
-        this.furtherRemarks = furtherRemarks;
+    public String getEmergencyNumber() {
+        return emergencyNumber;
     }
 
-    public Parent getParent1() {
-        return parent1;
+    public void setEmergencyNumber(String emergencyNumber) {
+        this.emergencyNumber = emergencyNumber;
     }
 
-    public void setParent1(Parent parent1) {
-        this.parent1 = parent1;
+    public Set<String> getAllergies() {
+        return allergies;
     }
 
-    public Parent getParent2() {
-        return parent2;
+    public void setAllergies(Set<String> allergies) {
+        this.allergies = allergies;
     }
 
-    public void setParent2(Parent parent2) {
-        this.parent2 = parent2;
+    public Set<String> getFoodIntolerances() {
+        return foodIntolerances;
     }
 
-    public Set<String> getListAllergies() {
-        return listAllergies;
+    public void setFoodIntolerances(Set<String> foodIntolerances) {
+        this.foodIntolerances = foodIntolerances;
     }
 
-    public void setListAllergies(Set<String> listAllergies) {
-        this.listAllergies = listAllergies;
+    public Set<Sibling> getSiblings() {
+        return siblings;
     }
 
-    public Set<String> getListFoodIntolerances() {
-        return listFoodIntolerances;
+    public void setSiblings(Set<Sibling> siblings) {
+        this.siblings = siblings;
     }
-
-    public void setListFoodIntolerances(Set<String> listFoodIntolerances) {
-        this.listFoodIntolerances = listFoodIntolerances;
-    }
-
-    public Set<Sibling> getListSiblings() {
-        return listSiblings;
-    }
-
-    public void setListSiblings(Set<Sibling> listSiblings) {
-        this.listSiblings = listSiblings;
-    }
-
 
     public Custody getCustody() {
         return custody;
@@ -180,33 +227,17 @@ public class Child implements Persistable<Long>{
         this.religion = religion;
     }
 
-    public String getEmergencyNumber() {
-        return emergencyNumber;
+    public Set<Caregiver> getCaregivers() {
+        return caregivers;
     }
 
-    public void setEmergencyNumber(String emergencyNumber) {
-        this.emergencyNumber = emergencyNumber;
-    }
-
-    public Set<PairTime> getPairTime() {
-        return pairTime;
-    }
-
-    public void setPairTime(Set<PairTime> pairTime) {
-        this.pairTime = pairTime;
-    }
-
-    public Set<Caregiver> getCargivers() {
-        return this.cargivers;
-    }
-
-    public void setCargivers(Set<Caregiver> cargivers) {
-        this.cargivers = cargivers;
+    public void setCaregivers(Set<Caregiver> caregivers) {
+        this.caregivers = caregivers;
     }
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
     @Override

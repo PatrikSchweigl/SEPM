@@ -1,6 +1,6 @@
 package at.qe.sepm.asn_app.repositories;
 
-import at.qe.sepm.asn_app.models.child.PairTime;
+import at.qe.sepm.asn_app.models.general.PairTime;
 
 /**
  * Created by Emanuel Striednig <emanuel.striednig@student.uibk.ac.at>

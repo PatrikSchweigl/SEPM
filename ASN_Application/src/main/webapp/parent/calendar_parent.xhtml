@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
+					<div class="wrapper">
+						<!-- =============================================== -->
+
+						<div class="content-wrapper" style="min-height: 1126px;">
+							<section class="content">
+
+								<!-- Default box -->
+								<div class="box">
+									<div class="box-body">
+										<div align="right" style="margin-bottom: 10px;">
+										</div>
+
+										<h:form id="sheduleForm">
+											<p:growl id="growl" showDetail="true" sticky="true" />
+											<p:schedule locale="de" aspectRatio="1.5"
+												style="padding-left:200px; padding-right: 200px;"
+												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
+												centerHeaderTemplate="month, agendaWeek, agendaDay"
+												id="schedule" value="#{scheduleView.eventModel}"
+												widgetVar="myschedule" timeZone="GMT+1">
+
+												<p:ajax event="dateSelect" update="eventDetails"
+													oncomplete="PF('eventDateDialog').show();" />
+												<p:ajax event="eventSelect"
+													listener="#{scheduleView.onEventSelect}"
+													update="eventDetails"
+													oncomplete="PF('eventDialog').show();" />
+
+											</p:schedule>
+
+											<p:dialog widgetVar="eventDialog" header="Termine"
+												showEffect="clip" hideEffect="clip">
+												<p:messages showDetail="false" />
+												<h:panelGrid id="eventDetails" columns="2">
+													<p:outputLabel for="title" value="Titel:" />
+													<p:outputLabel id="title"
+														value="#{scheduleView.event.title}" />
+													<p:outputLabel for="from" value="Beginn:" />
+													<p:outputPanel id="from">#{scheduleView.event.startDate}</p:outputPanel>
+													<p:outputLabel for="to" value="Ende:" />
+													<p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
+
+												</h:panelGrid>
+											</p:dialog>
+
+											<p:dialog widgetVar="eventDateDialog" header="Termine"
+												showEffect="clip" hideEffect="clip">
+												<p:messages showDetail="false" />
+												<h:panelGrid id="eventDateDetails" columns="2">
+													<p:outputLabel for="info" value="Infobox:" />
+													<h:selectBooleanCheckbox id="info"
+														disabled="#{scheduleView.child or scheduleView.meal}"
+														value="#{scheduleView.info}">
+														<p:ajax update="eventDateDetails" />
+
+													</h:selectBooleanCheckbox>
+
+													<p:outputLabel for="child" value="Kinder anmelden:" />
+													<h:selectBooleanCheckbox id="child"
+														disabled="#{scheduleView.meal or scheduleView.info}"
+														value="#{scheduleView.child}">
+														<p:ajax update="eventDateDetails" />
+
+													</h:selectBooleanCheckbox>
+
+													<p:outputLabel for="info" value="Essen:" />
+													<h:selectBooleanCheckbox id="meal"
+														disabled="#{scheduleView.child or scheduleView.info}"
+														value="#{scheduleView.meal}">
+														<p:ajax update="eventDateDetails" />
+
+													</h:selectBooleanCheckbox>
+
+													<ui:fragment rendered="#{scheduleView.info}">
+														<p:outputLabel for="max" value="Maximalbelegung:" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.info}">
+														<p:outputPanel id="max">17/20</p:outputPanel>
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.info}">
+														<p:outputLabel for="fromGet" value="Bringzeit:" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.info}">
+														<p:outputPanel id="fromGet">7:00 bis 9:00</p:outputPanel>
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.info}">
+														<p:outputLabel for="toGet" value="Abholzeit:" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.info}">
+														<p:outputPanel id="toGet">12:15 bis 14:00</p:outputPanel>
+													</ui:fragment>
+
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:outputLabel for="advanced" value="Kinder:" />
+
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:selectOneListbox style="width: 210px;" id="advanced"
+															value="#{scheduleView.reciever}" var="p" filter="true"
+															filterMatchMode="contains">
+															<f:selectItems
+																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+																var="parent" itemLabel="#{parent.firstName}"
+																itemValue="#{parent.firstName}" />
+
+															<p:column>
+																<p:graphicImage name="pictures/tiger.jpg" width="32"
+																	height="32" />
+															</p:column>
+
+															<p:column>
+																<h:outputText value="#{p}" />
+															</p:column>
+														</p:selectOneListbox>
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:outputLabel for="advanced" value="Anmerkungen:" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:inputTextarea placeholder="Anmerkung" id="messageInput"
+															value="#{privateMessageController.privateMessage}"
+															rows="5" cols="20" autoResize="false" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+														<p:commandButton id="addButton" value="Speichern"/>
+
+													</ui:fragment>
+												</h:panelGrid>
+											</p:dialog>
+										</h:form>
+
+										<script type="text/javascript">
+											PrimeFaces.locales['de'] = {
+												closeText : 'Schliessen',
+												prevText : 'Letzte',
+												nextText : 'Nächste',
+												currentText : 'Heute',
+												monthNames : [ 'Januar',
+														'Februar', 'März',
+														'April', 'Mai', 'Juni',
+														'Juli', 'August',
+														'September', 'Oktober',
+														'November', 'Dezember' ],
+												monthNamesShort : [ 'Jan',
+														'Feb', 'Mar', 'Apr',
+														'Mai', 'Jun', 'Jul',
+														'Aug', 'Sep', 'Okt',
+														'Nov', 'Dez' ],
+												dayNames : [ 'Montag',
+														'Dienstag', 'Mittwoch',
+														'Donnerstag',
+														'Freitag', 'Samstag',
+														'Sonntag' ],
+												dayNamesShort : [ 'Mo', 'Di',
+														'Mi', 'Do', 'Fr', 'Sa',
+														'So' ],
+												dayNamesMin : [ 'Mo', 'Di',
+														'Mi', 'Do', 'Fr', 'Sa',
+														'So' ],
+												weekHeader : 'KW',
+												firstDay : 0,
+												isRTL : false,
+												showMonthAfterYear : false,
+												yearSuffix : '',
+												month : 'Monat',
+												week : 'Woche',
+												day : 'Tag',
+												allDayText : 'Ganzer Tag'
+											};
+										</script>
+									</div>
+								</div>
+								<!-- /.box -->
+
+							</section>
+							<!-- /.content -->
+						</div>
+					</div>
+
+				</body>
+
+
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+
+		</h:body>
+	</ui:define>
+</ui:composition>

@@ -10,7 +10,17 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ *
+ * AuditLog contains information about changes made to the database. This includes the following:
+ * - Create a person
+ * - Delete a person
+ * - Upload a picture
+ *
+ * @see Picture
+ * @see at.qe.sepm.asn_app.models.child.Child
+ * @see at.qe.sepm.asn_app.models.employee.Employee
+ * @see at.qe.sepm.asn_app.models.referencePerson.Parent
  */
 @Entity
 public class AuditLog implements Persistable<Long> {
@@ -27,15 +37,15 @@ public class AuditLog implements Persistable<Long> {
     @NotNull
     private Date date;
 
+
+    public AuditLog(){}
+
     public AuditLog(String userName, String log, Date date) {
         this.userName = userName;
         this.log = log;
         this.date = date;
     }
 
-    public AuditLog(){
-
-    }
 
     public String getUserName() {
         return userName;
@@ -61,14 +71,15 @@ public class AuditLog implements Persistable<Long> {
         this.date = date;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (null == userName);
     }
-
 }

@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+                <body class="theme-blue sidebar-mini sidebar-collapse">
+                <div class="wrapper">
+                    <div class="content-wrapper" style="min-height: 1126px;">
+                        <section class="content">
+                            <div class="box">
+                                <div class="box-body">
+                                    <div align="right" style="margin-bottom: 10px;">
+                                        <p:commandButton oncomplete="PF('childAddDialog').show()"
+                                                         value="Kind hinzufügen" style="align-items:right;"></p:commandButton>
+                                    </div>
+                                    <h:form id="childForm">
+                                        <p:dataTable id="childTable" var="child"
+                                                     widgetVar="childTable" value="#{childController.children}"
+                                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                     rowsPerPageTemplate="10,25,50">
+
+                                            <f:facet name="header">
+                                                <p:outputPanel>
+                                                    <h:outputText value="Suche: "/>
+                                                    <p:inputText id="globalFilter"
+                                                                 onkeyup="PF('childTable').filter()" style="width:150px"
+                                                                 placeholder="Suchwort eingeben"/>
+                                                </p:outputPanel>
+                                            </f:facet>
+
+                                            <f:facet name="{Exporters}"
+                                                     style="float: right; vertical-align: middle;">
+                                                <div style="float: right; vertical-align: middle;">
+                                                    <h:commandLink>
+                                                        <p:graphicImage id="print"
+                                                                        name="pictures/extractors/printer.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="print" value="drucken" position="top"/>
+                                                        <p:printer/>
+                                                    </h:commandLink>
+                                                    <h:commandLink>
+                                                        <p:graphicImage id="excel" name="pictures/extractors/excel.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="excel" value="export excel"
+                                                                   position="top"/>
+                                                        <p:dataExporter type="xls" target="usersTable"
+                                                                        fileName="Admins"/>
+                                                    </h:commandLink>
+                                                    <h:commandLink>
+                                                        <p:graphicImage id="pdf" name="pictures/extractors/pdf.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="pdf" value="export pdf" position="top"/>
+                                                        <p:dataExporter type="pdf" target="usersTable"
+                                                                        fileName="Admins"/>
+                                                    </h:commandLink>
+                                                    <h:commandLink>
+                                                        <p:graphicImage id="csv" name="pictures/extractors/csv.png"
+                                                                        width="32"/>
+                                                        <p:tooltip for="csv" value="export csv" position="top"/>
+                                                        <p:dataExporter type="csv" target="usersTable"
+                                                                        fileName="Admins"/>
+                                                    </h:commandLink>
+                                                </div>
+                                            </f:facet>
+
+                                            <p:column headerText="Vorname"
+                                                      filterBy="#{child.firstName}"
+                                                      sortBy="#{child.firstName}" filterStyle="display:none">
+                                                <h:outputText value="#{child.firstName}"/>
+                                            </p:column>
+                                            <p:column headerText="Nachname"
+                                                      filterBy="#{child.lastName}"
+                                                      sortBy="#{child.lastName}" filterStyle="display:none">
+                                                <h:outputText value="#{child.lastName}"/>
+                                            </p:column>
+                                            <p:column headerText="Geburtsdatum"
+                                                      filterBy="#{child.birthday}"
+                                                      sortBy="#{child.birthday}" filterStyle="display:none">
+                                                <h:outputText value="#{child.birthday}"/>
+                                            </p:column>
+                                            <p:column style="width:100px;text-align: center"
+                                                      exportable="false">
+                                                <p:commandButton update=":childForm:childEditDialog"
+                                                                 oncomplete="PF('childEditDialog').show()"
+                                                                 icon="ui-icon-note" title="Edit" process="@this">
+                                                    <f:setPropertyActionListener value="#{child}"
+                                                                                 target="#{childController.childEdit}" />
+                                                </p:commandButton>
+                                                <p:commandButton
+                                                        action="#{childController.doDeleteChild}"
+                                                        icon="ui-icon-trash" title="Delete"
+                                                        update=":childForm:childTable" process="@this">
+                                                    <f:setPropertyActionListener value="#{child}"
+                                                                                 target="#{childController.childEdit}"/>
+                                                    <p:confirm header="Confirmation"
+                                                               message="Sind Sie sich sicher, dass Sie das Kind löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
+                                                               icon="ui-icon-alert"/>
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        <p:confirmDialog global="true" showEffect="fade"
+                                                         hideEffect="fade" width="300">
+                                            <p:commandButton value="Yes" type="button"
+                                                             styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                            <p:commandButton value="No" type="button"
+                                                             styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                        </p:confirmDialog>
+
+                                        <!--Edit Child Dialog -->
+                                        <p:dialog header="Kind bearbeiten" id="childEditDialog"
+                                                  widgetVar="childEditDialog" modal="true"
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
+                                            <p:outputPanel id="childDataEdit"
+                                                           rendered="#{not empty childController.childEdit}">
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="pFirstName" value="Elternteil: "/>
+                                                    <p:inputText disabled="true" id="pFirstName" value="#{childController.childEdit.getPrimaryParentFullName()}"/>
+                                                    <p:outputLabel for="firstname" value="Vorname: " />
+                                                    <p:inputText id="firstname"
+                                                                 value="#{childController.childEdit.firstName}" />
+                                                    <p:outputLabel for="lastname" value="Nachname: " />
+                                                    <p:inputText id="lastname"
+                                                                 value="#{childController.childEdit.lastName}"/>
+                                                    <p:outputLabel for="birthday" value="Geburtsdatum: " />
+                                                    <p:inputMask mask="99/99/9999" id="birthday"
+                                                                 value="#{childController.childEdit.birthday}"/>
+                                                    <p:outputLabel for="imgName" value="Bildname: " />
+                                                    <p:inputText id="imgName"
+                                                                 value="#{childController.childEdit.imgName}"/>
+
+                                                </h:panelGrid>
+                                                <p:separator />
+                                                <h:panelGrid columns="3">
+                                                    <p:commandButton value="Speichern"
+                                                                     action="#{childController.doSaveChildEdit()}"
+                                                                     oncomplete="PF('childEditDialog').hide()"
+                                                                     update=":childForm"
+                                                                     process="@widgetVar(childEditDialog)"/>
+                                                    <p:commandButton value="Neu laden" immediate="true"
+                                                                     action="#{childController.doReloadChildEdit()}"
+                                                                     update=":childForm:childDataEdit" />
+                                                    <p:commandButton value="Abbruch"
+                                                                     onclick="PF('childEditDialog').hide()" />
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </p:dialog>
+
+
+                                        <!--Add Child Dialog -->
+                                        <p:dialog header="Kind hinzufügen" id="childAddDialog"
+                                                  widgetVar="childAddDialog" modal="true"
+                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
+                                            <p:messages id="messages" autoUpdate="true"/>
+                                            <p:outputPanel id="childDataAdd"
+                                                           rendered="#{not empty childController.child}">
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="parent" value="Elternteil"/>
+                                                    <p:selectOneListbox id="parent" value="#{childController.parentUserName}" var="p" filter="true"
+                                                                        filterMatchMode="contains" required="true" requiredMessage="Kein Elternteil angegeben!">
+                                                        <f:selectItems value="#{parentService.getAllParents()}"
+                                                                       var="parent" itemLabel="#{parent.username}"
+                                                                       itemValue="#{parent.username}" />
+
+                                                        <p:column>
+                                                            <p:graphicImage name="pictures/tiger.jpg" width="32"
+                                                                            height="32" />
+                                                        </p:column>
+
+                                                        <p:column>
+                                                            <h:outputText value="#{p}" />
+                                                        </p:column>
+                                                    </p:selectOneListbox>
+                                                    <p:outputLabel for="firstName" value="Vorname: " />
+                                                    <p:inputText id="firstName"
+                                                                 value="#{childController.child.firstName}"/>
+                                                    <p:outputLabel for="lastName" value="Nachname: " />
+                                                    <p:inputText id="lastName"
+                                                                 value="#{childController.child.lastName}"/>
+                                                    <p:outputLabel for="birthDay" value="Geburtsdatum: " />
+                                                    <p:inputMask mask="99/99/9999" id="birthDay"
+                                                                 value="#{childController.child.birthday}"/>
+                                                    <p:outputLabel for="imgname" value="Bildname: " />
+                                                    <p:inputText id="imgname"
+                                                                 value="#{childController.child.imgName}"/>
+                                                </h:panelGrid>
+                                                <p:separator />
+                                                <h:panelGrid columns="3">
+                                                    <p:commandButton value="Speichern"
+                                                                     action="#{childController.doSaveChild}"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('childAddDialog').hide()"
+                                                                     update=":childForm:childTable"/>
+                                                    <p:commandButton value="Abbruch"
+                                                                     onclick="PF('childAddDialog').hide()" immediate="true"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </p:dialog>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                </body>
+        </h:body>
+    </ui:define>
+</ui:composition>

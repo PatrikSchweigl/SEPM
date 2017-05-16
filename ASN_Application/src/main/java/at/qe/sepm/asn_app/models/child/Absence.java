@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  */
 @Entity
 public class Absence implements Persistable<Long> {
@@ -23,11 +23,13 @@ public class Absence implements Persistable<Long> {
     private Child child;
     private Date date;
 
+
     public Absence(String reason, Child child, Date date) {
         this.reason = reason;
         this.child = child;
         this.date = date;
     }
+
 
     public String getReason() {
         return reason;
@@ -53,13 +55,42 @@ public class Absence implements Persistable<Long> {
         this.date = date;
     }
 
+
     @Override
     public Long getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (null == child);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Absence)) {
+            return false;
+        }
+
+        Absence other = (Absence) obj;
+        if (child.equals(other.child) &&
+                date.equals(other.date) &&
+                reason.equals(other.reason)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n" +
+                "Child: " + child + "\n" +
+                "Reason: " + reason + "\n";
     }
 }

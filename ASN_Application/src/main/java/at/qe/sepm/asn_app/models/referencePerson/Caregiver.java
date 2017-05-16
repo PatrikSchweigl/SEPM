@@ -2,40 +2,47 @@ package at.qe.sepm.asn_app.models.referencePerson;
 
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  */
 @Entity
 public class Caregiver implements Persistable<Long>{
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
-    @NotNull
+    @Enumerated(EnumType.STRING)
     private Relationship relationship;
-    @NotNull
     private String imgName;
+    private String phoneNumber;
 
-    public Caregiver(String firstName, String lastName, Relationship relationship, String imgName) {
 
+    public Caregiver(){}
+
+    public Caregiver(String firstName, String lastName, Relationship relationship, String imgName, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.relationship = relationship;
         this.imgName = imgName;
+        this.phoneNumber = phoneNumber;
+
     }
 
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -52,6 +59,8 @@ public class Caregiver implements Persistable<Long>{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getFullName(){ return getLastName() + " " + getFirstName();}
 
     public Relationship getRelationship() {
         return relationship;
@@ -75,8 +84,40 @@ public class Caregiver implements Persistable<Long>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
     public boolean isNew() {
         return (null == firstName && null == lastName);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Caregiver)) {
+            return false;
+        }
+
+        Caregiver other = (Caregiver) obj;
+        if (this.firstName.equals(other.firstName) &&
+                this.lastName.equals(other.lastName) &&
+                this.relationship.equals(other.relationship) &&
+                this.getPhoneNumber().equals(other.phoneNumber)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "First name: " + firstName + "\n" +
+                "Last name: " + lastName + "\n" +
+                "Relationship: " + relationship + "\n" +
+                "Phone number: " + phoneNumber + "\n";
     }
 }

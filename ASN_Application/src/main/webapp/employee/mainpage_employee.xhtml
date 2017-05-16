@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
+					<div class="ui-fluid">
+						<div class="wrapper">
+							<!-- =============================================== -->
+
+							<div class="content-wrapper" style="min-height: 1126px;">
+								<section class="content">
+
+									<!-- Default box -->
+									<div class="box">
+										<div class="box-body">
+											<h:form id="dialogForm">
+												<p:dialog id="dialogTest"
+													visible="#{sessionInfoBean.hasDefaultPasswd()}"
+													width="400px" closable="true" widgetVar="dialogTest"
+													header="Passwort ändern" resizeable="false" modal="true" closeOnEscape="true">
+													<h:outputText
+														value="Aus Sicherheitsgründen empfehlen wir Ihnen, das Passwort zu ändern." />
+													<p:messages id="messages"
+														autoUpdate="true" />
+
+													<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+														<h:outputLabel for="pwd1" value="Password 1: *" />
+														<p:password id="pwd1" value="#{employeeController.password}"
+															match="pwd2" label="Passwort:" required="true"
+															feedback="true" validatorMessage="Passwörter stimmen nicht überein!"
+															requiredMessage="Kein Passwort eingegeben! (Feld 1)" />
+
+														<h:outputLabel for="pwd2" value="Password 2: *" />
+														<p:password id="pwd2" value="#{employeeController.password}"
+															label="Wiederholung: " required="true"
+																	requiredMessage="Kein Passwort eingegeben! (Feld 2)"/>
+													</h:panelGrid>
+													<h:panelGrid columns="3">
+														<p:commandButton
+															action="#{employeeController.changePassword(employeeController.password)}"
+															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogTest').hide()"
+															value="Speichern"/>
+													</h:panelGrid>
+												</p:dialog>
+											</h:form>
+											<h:form>
+												<p:accordionPanel multiple="true">
+													<p:tab title="Anwesende Kinder">
+														<p:dataTable id="childTable" var="child"
+															value="#{childController.children}">
+															<p:column headerText="First Name">
+																<h:outputText value="#{child.firstName}" />
+															</p:column>
+															<p:column headerText="Last Name">
+																<h:outputText value="#{child.lastName}" />
+															</p:column>
+
+
+														</p:dataTable>
+													</p:tab>
+													<p:tab title="Kinder, die heute zu Mittag essen">
+														<p:dataTable id="childTableEating" var="child"
+															value="#{childController.children}">
+															<p:column headerText="First Name">
+																<h:outputText value="#{child.firstName}" />
+															</p:column>
+															<p:column headerText="Last Name">
+																<h:outputText value="#{child.lastName}" />
+															</p:column>
+
+
+														</p:dataTable>
+													</p:tab>
+													<p:tab title="Sonstige Benachrichtigungen">
+														<h:panelGrid columns="2" cellpadding="10">
+														</h:panelGrid>
+													</p:tab>
+												</p:accordionPanel>
+											</h:form>
+										</div>
+									</div>
+									<!-- /.box -->
+
+								</section>
+								<!-- /.content -->
+							</div>
+						</div>
+					</div>
+				</body>
+
+
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+
+		</h:body>
+	</ui:define>
+</ui:composition>

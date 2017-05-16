@@ -4,6 +4,15 @@
           http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
+<filter>
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+    <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+</filter-mapping>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -29,28 +38,18 @@
     <param-name>primefaces.FONT_AWESOME</param-name>
     <param-value>true</param-value>
 </context-param>
+ <context-param>
+    <param-name>primefaces.UPLOADER</param-name>
+    <param-value>commons</param-value>
+  </context-param>
 
 
-    <mime-mapping>
-    <extension>eot</extension>
-    <mime-type>application/vnd.ms-fontobject</mime-type>
-</mime-mapping>
-<mime-mapping>  
-    <extension>otf</extension>  
-    <mime-type>font/opentype</mime-type>  
-</mime-mapping>      
-<mime-mapping>  
-    <extension>ttf</extension>  
-    <mime-type>application/x-font-ttf</mime-type>  
-</mime-mapping>      
-<mime-mapping>  
-    <extension>woff</extension>  
-    <mime-type>application/x-font-woff</mime-type>  
-</mime-mapping>
-<mime-mapping>  
-    <extension>svg</extension>  
-    <mime-type>image/svg+xml</mime-type>  
-</mime-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>

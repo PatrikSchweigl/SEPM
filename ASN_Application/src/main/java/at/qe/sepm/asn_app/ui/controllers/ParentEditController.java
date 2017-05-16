@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
- * on 24.03.2017
+ * on 15.05.2017
  */
 @Component
 @Scope("view")
@@ -16,6 +16,8 @@ public class ParentEditController {
 
     @Autowired
     private ParentService parentService;
+    @Autowired
+    private ParentController parentController;
 
     private Parent parent;
 
@@ -28,16 +30,21 @@ public class ParentEditController {
         doReloadParent();
     }
 
-    public void doReloadParent() {
-        parent = parentService.loadUser(parent.getUsername());
+    public void doReloadParent(){
+        parent = parentService.loadParent(parent.getUsername());
     }
 
     public void doSaveParent(){
         parent = parentService.saveParent(parent);
+        parent = null;
+        parentController.initList();
     }
 
-    public void doDeleteParent() {
-        this.parentService.deleteParent(parent);
+    public void doDeleteParent(){
+        System.out.println("------------------------ Delete person "+ parent.getLastName());
+        parentService.deleteParent(parent);
         parent = null;
+        parentController.initList();
     }
+
 }

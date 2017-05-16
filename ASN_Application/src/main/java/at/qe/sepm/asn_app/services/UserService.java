@@ -37,7 +37,6 @@ public class UserService {
      *
      * @return
      */
-    @PreAuthorize("hasAuthority('ADMIN')")
     public Collection<UserData> getAllUsers() {
         return userRepository.findAllAdmin();
     }
@@ -48,7 +47,6 @@ public class UserService {
      * @param username the username to search for
      * @return the user with the given username
      */
-    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
     public UserData loadUser(String username) {
         return userRepository.findFirstByUsername(username);
     }
@@ -61,9 +59,18 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public UserData saveUser(UserData userData) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"SAVED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
+        auditLogRepository.save(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userData.setPassword( passwordEncoder.encode(userData.getPassword()));
         userData.setUserRole(UserRole.ADMIN);
+        return userRepository.save(userData);
+    }
+
+
+    public UserData changeData(UserData userData) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"CHANGED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
+        auditLogRepository.save(log);
         return userRepository.save(userData);
     }
 
@@ -79,7 +86,7 @@ public class UserService {
         userRepository.delete(userData);
     }
 
-    private UserData getAuthenticatedUser() {
+    public UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }

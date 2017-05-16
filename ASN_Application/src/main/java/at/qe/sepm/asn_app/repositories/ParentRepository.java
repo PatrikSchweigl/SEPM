@@ -6,12 +6,9 @@ import javax.transaction.Transactional;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
- * on 20.03.2017
+ * on 14.05.2017
  */
 @Transactional
-public interface ParentRepository extends UserBaseRepository<Parent>, AbstractRepository<Parent,Long> {
-
-    //@Query("select u from Parent u")
-    //List<Parent> getAllParents();
+public interface ParentRepository extends UserBaseRepository<Parent>, AbstractRepository<Parent,Long>{
 
 }

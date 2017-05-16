@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	<ui:define name="content">
+		<h:body>
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+				<body class="theme-blue sidebar-mini sidebar-collapse">
+
+					<div class="wrapper">
+						<!-- =============================================== -->
+						<div class="content-wrapper" style="min-height: 1126px;">
+							<section class="content">
+								<div class="box">
+									<div class="box-body">
+									<h:form enctype="multipart/form-data">
+										<p:fileUpload
+											fileUploadListener="#{fileBean.handleFileUpload}" auto="true" />
+											</h:form>
+										<ui:repeat var="picture"
+											value="#{pictureController.getPictures()}">
+											<h:outputLink onclick="PF('comments').show()"
+												value="#{picture.url}">
+												<h:graphicImage class="picture"
+													name="pictures/#{picture.url}.jpg" id="tiger" />
+											</h:outputLink>
+										</ui:repeat>
+
+									</div>
+								</div>
+								<!-- /.box -->
+
+							</section>
+							<!-- /.content -->
+						</div>
+					</div>
+					<p:dialog header="Kommentare" id="comments" widgetVar="comments"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="parentData">
+
+							<ul>
+							</ul>
+						</p:outputPanel>
+					</p:dialog>
+				</body>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+			</ui:fragment>
+		</h:body>
+	</ui:define>
+</ui:composition>

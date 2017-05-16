@@ -20,12 +20,12 @@ import java.util.Date;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
- * on 20.03.2017
+ * on 14.05.2017
  */
+
 @Component
 @Scope("application")
 public class ParentService {
-
     @Autowired
     private ParentRepository parentRepository;
     @Autowired
@@ -33,36 +33,37 @@ public class ParentService {
     @Autowired
     private UserRepository userRepository;
 
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
-    public Collection<Parent> getAllParents() {
-         return parentRepository.findAll();
+
+    public Collection<Parent> getAllParents(){
+        return parentRepository.findAll();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public Parent saveParent(Parent parent) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    public Parent saveParent(Parent parent){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
         parent.setUserRole(UserRole.PARENT);
-
         return parentRepository.save(parent);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') or principal.username eq #username")
-    public Parent loadUser(String username) {
+
+    public Parent loadParent(String username){
         return parentRepository.findFirstByUsername(username);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteParent(Parent parent) {
+
+    public void deleteParent(Parent parent){
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
         auditLogRepository.save(log);
         parentRepository.delete(parent);
     }
 
-    private UserData getAuthenticatedUser() {
+    public UserData getAuthenticatedUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
+
 
 }

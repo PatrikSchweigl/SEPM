@@ -8,17 +8,13 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import javax.persistence.*;
 
 /**
- * Created by zerus on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
  */
 @Entity
 public class Employee extends UserData {
 
     private static final long serialVersionUID = 1L;
 
-    private String birthday;
-    private String location;
-    private String streetName;
-    private String postcode;
     @Enumerated(EnumType.STRING)
     private Religion religion;
     private String phoneNumber;
@@ -29,16 +25,14 @@ public class Employee extends UserData {
     @Enumerated(EnumType.STRING)
     private WorkRole workRole;
 
+
     public Employee(){//required for jpa repository
     }
-    public Employee(String password, String username, String firstName, String lastName,
-                    String birthday, String location, String streetName, String postcode, Religion religion,
-                    String phoneNumber, FamilyStatus familyStatus, Status workingState, WorkRole workRole) {
-        super(password, username, firstName, lastName, UserRole.EMPLOYEE);
-        this.birthday = birthday;
-        this.location = location;
-        this.streetName = streetName;
-        this.postcode = postcode;
+
+    public Employee(String password, String username, String firstName, String lastName, String location,
+                    String streetName, String postcode, UserRole userRole, Religion religion, String phoneNumber,
+                    FamilyStatus familyStatus, Status workingState, WorkRole workRole, String birthday, boolean isAdmin) {
+        super(password, username, firstName, lastName, location, streetName, postcode, userRole, birthday);
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
@@ -46,38 +40,6 @@ public class Employee extends UserData {
         this.workRole = workRole;
     }
 
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
 
     public Religion getReligion() {
         return religion;
@@ -117,5 +79,56 @@ public class Employee extends UserData {
 
     public void setWorkRole(WorkRole workRole) {
         this.workRole = workRole;
+    }
+
+
+    /**
+     * This method doesn't check for every attribute because some are unnecessary to check (e.g. username).
+     * @param obj the object to compare
+     * @return true iff the current instance of Employee and the parameter object are the same Employee.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Employee)) {
+            return false;
+        }
+
+        Employee other = (Employee) obj;
+        if (this.getFamilyStatus().equals(other.getFamilyStatus()) &&
+                this.getPhoneNumber().equals(other.getPhoneNumber()) &&
+                this.getReligion().equals(other.getReligion()) &&
+                this.getBirthday().equals(other.getBirthday()) &&
+                this.getFirstName().equals(other.getFirstName()) &&
+                this.getLastName().equals(other.getLastName()) &&
+                this.getLocation().equals(other.getLocation()) &&
+                this.getPostcode().equals(other.getPostcode()) &&
+                this.getStreetName().equals(other.getStreetName())) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Id: " + String.valueOf(getId()) + "\n" +
+                "Username: " + getUsername() + "\n" +
+                "First name: " + getFirstName() + "\n" +
+                "Last name: " + getLastName() + "\n" +
+                "Birthday: " + getBirthday() + "\n" +
+                "Religion: " + religion + "\n" +
+                "Phone number: " + getPhoneNumber() + "\n" +
+                "Location: " + getLocation() + "\n" +
+                "Postcode: " + getPostcode() + "\n" +
+                "Street name: " + getStreetName() + "\n" +
+                "Family status: " + getFamilyStatus() + "\n" +
+                "Working state: " + getWorkingState() + "\n" +
+                "Work role: " + getWorkRole() + "\n" +
+                "User role: " + getUserRole();
     }
 }
