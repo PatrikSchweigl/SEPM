@@ -87,9 +87,4 @@ public class ChildService {
         return userRepository.findFirstByUsername(auth.getName());
     }
 
-
-
-
-
-
 }
