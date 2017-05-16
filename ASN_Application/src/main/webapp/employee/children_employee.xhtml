@@ -117,21 +117,21 @@
                                         </p:confirmDialog>
 
                                         <!--Edit Child Dialog -->
-                                        <p:dialog header="Edit Child" id="childEditDialog"
+                                        <p:dialog header="Kind bearbeiten" id="childEditDialog"
                                                   widgetVar="childEditDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:outputPanel id="childDataEdit"
                                                            rendered="#{not empty childController.childEdit}">
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="pFirstName" value="Primary Parent: "/>
+                                                    <p:outputLabel for="pFirstName" value="Elternteil: "/>
                                                     <p:inputText disabled="true" id="pFirstName" value="#{childController.childEdit.getPrimaryParentFullName()}"/>
-                                                    <p:outputLabel for="firstname" value="Firstname: " />
+                                                    <p:outputLabel for="firstname" value="Vorname: " />
                                                     <p:inputText id="firstname"
                                                                  value="#{childController.childEdit.firstName}" />
-                                                    <p:outputLabel for="lastname" value="Lastname: " />
+                                                    <p:outputLabel for="lastname" value="Nachname: " />
                                                     <p:inputText id="lastname"
                                                                  value="#{childController.childEdit.lastName}"/>
-                                                    <p:outputLabel for="birthday" value="Birthday: " />
+                                                    <p:outputLabel for="birthday" value="Geburtsdatum: " />
                                                     <p:inputMask mask="99/99/9999" id="birthday"
                                                                  value="#{childController.childEdit.birthday}"/>
                                                     <p:outputLabel for="imgName" value="Bildname: " />
