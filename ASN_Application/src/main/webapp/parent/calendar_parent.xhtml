@@ -108,6 +108,27 @@
 														<p:outputPanel id="toGet">12:15 bis 14:00</p:outputPanel>
 													</ui:fragment>
 
+													<ui:fragment
+														rendered="#{scheduleView.child}">
+														<p:selectOneListbox style="width: 100%;" id="advanced"
+															value="#{scheduleView.reciever}" var="p" filter="true"
+															filterMatchMode="contains">
+															<f:selectItems value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+																var="parent" itemLabel="#{parent.firstName}"
+																itemValue="#{parent.firstName}" />
+
+															<p:column>
+																<p:graphicImage name="pictures/tiger.jpg" width="32"
+																	height="32" />
+															</p:column>
+
+															<p:column>
+																<h:outputText value="#{p}" />
+															</p:column>
+														</p:selectOneListbox>
+													</ui:fragment>
+
+
 												</h:panelGrid>
 											</p:dialog>
 										</h:form>

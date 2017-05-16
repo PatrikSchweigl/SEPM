@@ -52,36 +52,29 @@ public class ChildService {
         return this.child;
     }
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
+
     public Collection<Child> getAllChildren(){
         return childRepository.findAll();
     }
 
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Child saveChild(Child child) {
         return childRepository.save(child);
     }
 
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public Child loadChild(Long id) {
         return childRepository.findOne(id);
     }
 
-
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE')")
     public void deleteChild(Child child) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
         auditLogRepository.save(log);
         childRepository.delete(child);
     }
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE', 'PARENT')")
+
     public Collection<Child> getChildrenByParentUsername(String usrn){ return childRepository.getChildrenByParentUsername(usrn);}
-    /*
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'EMPLOYEE', 'PARENT')")
-    public Collection<Child> getChildrenByParent(Parent parent){ return childRepository.getChildrenByParent(parent);}
-    */
+
     private UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
