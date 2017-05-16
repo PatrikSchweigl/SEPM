@@ -168,13 +168,13 @@ public class ChildServiceTest {
     /**
      * Test the violation of the constraint that a child can't have the same sibling twice or more.
      */
-    @Test (expected = SiblingConstraintException.class)
+    @Test
     public void checkSiblingsConstraints3() throws SiblingConstraintException {
         Set<Sibling> siblingSet = new HashSet<>();
         siblingSet.add(sibling1);
         siblingSet.add(sibling3);
         child5.setSiblings(siblingSet);
-        ChildConstraints.checkSiblingsConstraints(child5);
+        assertFalse(ChildConstraints.checkSiblingsConstraints(child5));
     }
 
 
