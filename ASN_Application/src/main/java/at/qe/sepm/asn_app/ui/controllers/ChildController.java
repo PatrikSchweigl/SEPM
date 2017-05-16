@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.ParentService;
@@ -39,6 +40,10 @@ public class ChildController {
         return children;
     }
 
+    public Collection<Child> getChildrenByParentUsername(String usrn){return childService.getChildrenByParentUsername(usrn);}
+    /*
+    public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
+    */
     @PostConstruct
     public void initList(){
         setChildren(childService.getAllChildren());
@@ -102,4 +107,6 @@ public class ChildController {
     public void doReloadChildEdit(){
         childEdit = childService.loadChild(childEdit.getId());
     }
+
+
 }
