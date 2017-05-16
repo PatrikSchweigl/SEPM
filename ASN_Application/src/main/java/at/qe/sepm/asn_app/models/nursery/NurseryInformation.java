@@ -4,7 +4,6 @@ import at.qe.sepm.asn_app.models.general.PairTime;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -30,14 +29,14 @@ public class NurseryInformation implements Persistable<Long> {
     private PairTime pickUpDuration;
 
     private int maxOccupancy;
-    private Date currentDate;
+    private Date todayDate;
 
 
     public NurseryInformation(PairTime bringDuration, PairTime pickUpDuration, int maxOccupancy, Date currentDate) {
         this.bringDuration = bringDuration;
         this.pickUpDuration = pickUpDuration;
         this.maxOccupancy = maxOccupancy;
-        this.currentDate = currentDate;
+        this.todayDate = currentDate;
     }
 
     public NurseryInformation(){}
@@ -58,12 +57,12 @@ public class NurseryInformation implements Persistable<Long> {
         this.pickUpDuration = pickUpDuration;
     }
 
-    public Date getCurrentDate() {
-        return currentDate;
+    public Date getTodayDate() {
+        return todayDate;
     }
 
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
+    public void setTodayDate(Date todayDate) {
+        this.todayDate = todayDate;
     }
 
     public int getMaxOccupancy() {

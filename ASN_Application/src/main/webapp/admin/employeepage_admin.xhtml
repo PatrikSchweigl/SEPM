@@ -122,7 +122,7 @@
                                         </p:dataTable>
 
                                         <!-- Create Employee Dialog -->
-                                        <p:dialog header="Angestellten anlegen" id="employeeAddDialog"
+                                        <p:dialog header="Angestellten hinzufügen" id="employeeAddDialog"
                                                   widgetVar="employeeAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
                                             <p:messages id="messages" autoUpdate="true"/>
@@ -137,6 +137,58 @@
                                                                 value="#{employeeController.employee.password}" required="true"
                                                                 requiredMessage="Passwort erforderlich!"/>
                                                 </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="6">
+                                                    <p:outputLabel for="firstname" value="Vorname: "/>
+                                                    <p:inputText id="firstname"
+                                                                 value="#{employeeController.employee.firstName}"/>
+                                                    <p:outputLabel for="lastname" value="Nachname "/>
+                                                    <p:inputText id="lastname"
+                                                                 value="#{employeeController.employee.lastName}"/>
+                                                    <p:outputLabel for="birthday" value="Gerburtsdatum: "/>
+                                                    <p:inputMask mask="99/99/9999" id="birthday"
+                                                                 value="#{employeeController.employee.birthday}"/>
+                                                    <p:outputLabel for="location" value="Wohnort: "/>
+                                                    <p:inputText id="location"
+                                                                 value="#{employeeController.employee.location}"/>
+                                                    <p:outputLabel for="street" value="Straße: "/>
+                                                    <p:inputText id="street"
+                                                                 value="#{employeeController.employee.streetName}"/>
+                                                    <p:outputLabel for="postcode" value="Postleitzahl: "/>
+                                                    <p:inputText id="postcode"
+                                                                 value="#{employeeController.employee.postcode}"/>
+                                                    <p:outputLabel for="phonenumber" value="Telefonnummer: "/>
+                                                    <p:inputText id="phonenumber"
+                                                                 value="#{employeeController.employee.phoneNumber}"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="6">
+                                                    <p:outputLabel for="familystatus" value="Familienstatus: "/>
+                                                    <p:selectOneMenu id="familystatus"
+                                                                     value="#{employeeController.employee.familyStatus}"
+                                                                     style="width:150px">
+                                                        <f:selectItem itemLabel="Select Familystatus"
+                                                                      itemValue="#{employeeController.employee.familyStatus}"/>
+                                                        <f:selectItems value="#{enumController.familyStatus}"/>
+                                                    </p:selectOneMenu>
+                                                    <p:outputLabel for="religion" value="Religion: "/>
+                                                    <p:selectOneMenu id="religion"
+                                                                     value="#{employeeController.employee.religion}"
+                                                                     style="width:150px">
+                                                        <f:selectItem itemLabel="Select Religion"
+                                                                      itemValue="#{employeeController.employee.religion}"/>
+                                                        <f:selectItems value="#{enumController.religions}"/>
+                                                    </p:selectOneMenu>
+                                                    <p:outputLabel for="role" value="Rolle: "/>
+                                                    <p:selectOneMenu id="role"
+                                                                     value="#{employeeController.employee.workRole}"
+                                                                     style="width:150px">
+                                                        <f:selectItem itemLabel="Select Role"
+                                                                      itemValue="#{employeeController.employee.workRole}"/>
+                                                        <f:selectItems value="#{enumController.workRoles}"/>
+                                                    </p:selectOneMenu>
+                                                </h:panelGrid>
+                                                <p:separator/>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Speichern"
                                                                      action="#{employeeController.doSaveEmployee()}"
