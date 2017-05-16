@@ -19,6 +19,19 @@ import static org.junit.Assert.assertFalse;
 
 /**
  * Created by zerus on 13.05.17.
+ *
+ * This class checks various constraints made by the class PasswordConstraints. For a password to be valid the
+ * following constraints must be true:
+ * - a digit must occur at least once
+ * - a lower case letter must occur at least once
+ * - an upper case letter must occur at least once
+ * - a special character must occur at least once
+ * - no whitespace allowed in the entire string
+ * - at least 8 characters long
+ * - the name of a child of a parent must not be a substring of the password of a parent
+ * @see Child
+ * @see Parent
+ * @see PasswordConstraints
  */
 public class PasswordConstraintTest {
 
@@ -29,6 +42,11 @@ public class PasswordConstraintTest {
     Set<Task> parentListTasks;
 
 
+    /**
+     * To make sure that every test works with the same starting values all generally
+     * needed attributes get initialized before each test. After each test all attributes
+     * get set to null again in {@link PasswordConstraintTest#cleanUp()}.
+     */
     @Before
     public void initialize() {
         child = new Child();

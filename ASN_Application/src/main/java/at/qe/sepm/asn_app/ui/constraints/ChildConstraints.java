@@ -37,7 +37,7 @@ public class ChildConstraints {
      *
      * @return true iff no constraints are violated.
      */
-    public boolean checkConstraints(Child child) throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
+    public static boolean checkConstraints(Child child) throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
         if(!checkBirthdayConstraints(child)) {
             return false;   // Returning false here makes no sense since we throw an exception in the method.
         }
@@ -55,7 +55,7 @@ public class ChildConstraints {
      * A child may not be younger than 1/2 year and not older than 3 years.
      * @return <code>true</code> iff a child is between the age of 1/2 and 3 years.
      */
-    public boolean checkBirthdayConstraints(Child child) throws BirthdayConstraintException {
+    public static boolean checkBirthdayConstraints(Child child) throws BirthdayConstraintException {
         long birthday = BirthdayParser.parseBirthdayToLong(child.getBirthday());
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         int ageDays = (int)((dateNow-birthday)/60/60/24);
@@ -82,7 +82,7 @@ public class ChildConstraints {
      * Parents may not be the same person.
      * @return <code>true</code> iff no constraints regarding parents are violated.
      */
-    public boolean checkParentsConstraints(Child child) throws ParentConstraintException {
+    public static boolean checkParentsConstraints(Child child) throws ParentConstraintException {
         //Parent p1 = child.getParent1();
         Parent p1 = child.getPrimaryParent();
         Parent p2 = child.getParent2();
@@ -105,7 +105,7 @@ public class ChildConstraints {
      * A child can not have the same sibling twice or more.
      * @return <code>true</code> iff no constraints are violated.
      */
-    public boolean checkSiblingsConstraints(Child child) throws SiblingConstraintException {
+    public static boolean checkSiblingsConstraints(Child child) throws SiblingConstraintException {
         HashSet<Sibling> setSiblings = (HashSet) child.getSiblings();
 
         for(Sibling s : setSiblings) {
