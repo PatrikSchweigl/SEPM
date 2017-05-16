@@ -176,46 +176,46 @@
 
 			<p:dialog header="Eigene Daten" id="ownDataDialog"
 				widgetVar="ownDataDialog" modal="true" showEffect="fade"
-				hideEffect="fade" resizable="false">
+				hideEffect="fade" resizable="false" closeOnEscape="true">
 				<p:outputPanel id="parentDataCreate">
 					<h:panelGrid columns="2">
-						<p:outputLabel for="username" value="Username: " />
+						<p:outputLabel for="username" value="Benutzername: " />
 						<p:inputText id="username"
 							value="#{sessionInfoBean.currentUserData.username}"
 							disabled="true" />
-						<p:outputLabel for="password" value="Password: " />
+						<p:outputLabel for="password" value="Passwort: " />
 						<p:password id="password"
 							value="#{sessionInfoBean.currentUserData.password}"
 							disabled="true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2">
-						<p:outputLabel for="firstname" value="Firstname: " />
+						<p:outputLabel for="firstname" value="Vorname: " />
 						<p:inputText id="firstname"
 							value="#{sessionInfoBean.currentUserData.firstName}"
 							disabled="true" />
-						<p:outputLabel for="lastname" value="Lastname: " />
+						<p:outputLabel for="lastname" value="Nachname: " />
 						<p:inputText id="lastname"
 							value="#{sessionInfoBean.currentUserData.lastName}"
 							disabled="true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2">
-						<p:outputLabel for="street" value="Street: " />
+						<p:outputLabel for="street" value="Straße: " />
 						<p:inputText id="street"
 							value="#{sessionInfoBean.currentUserData.streetName}" />
-						<p:outputLabel for="location" value="Location: " />
+						<p:outputLabel for="location" value="Ort: " />
 						<p:inputText id="location"
 							value="#{sessionInfoBean.currentUserData.location}" />
-						<p:outputLabel for="postcode" value="Postcode: " />
+						<p:outputLabel for="postcode" value="Postleitzahl: " />
 						<p:inputText id="postcode"
 							value="#{sessionInfoBean.currentUserData.postcode}" />
 					</h:panelGrid>
 					<h:panelGrid columns="3">
-						<p:commandButton value="Save"
+						<p:commandButton value="Speichern"
 							action="#{sessionInfoBean.doSaveUser()}"
 							oncomplete="PF('ownDataDialog').hide()" />
-						<p:commandButton value="Abort"
+						<p:commandButton value="Abbruch"
 							onclick="PF('ownDataDialog').hide()" />
 					</h:panelGrid>
 				</p:outputPanel>
