@@ -33,7 +33,7 @@ import static org.junit.Assert.assertFalse;
  * @see Parent
  * @see PasswordConstraints
  */
-public class PasswordConstraintTest {
+public class PasswordConstraintsTest {
 
     private Child child;
     private String password;
@@ -45,7 +45,7 @@ public class PasswordConstraintTest {
     /**
      * To make sure that every test works with the same starting values all generally
      * needed attributes get initialized before each test. After each test all attributes
-     * get set to null again in {@link PasswordConstraintTest#cleanUp()}.
+     * get set to null again in {@link PasswordConstraintsTest#cleanUp()}.
      */
     @Before
     public void initialize() {
