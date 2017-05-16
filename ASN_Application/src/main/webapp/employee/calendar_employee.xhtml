@@ -52,8 +52,6 @@
 										<p:dialog widgetVar="eventDialog" header="Termine"
 											showEffect="clip" hideEffect="clip">
 											<p:messages showDetail="false" />
-											<ui:fragment
-												rendered="#{sessionInfoBean.getCurrentUserData().getUsername() eq scheduleView.getSender()}">
 												<h:panelGrid id="eventDetails" columns="2">
 													<p:outputLabel for="title" value="Titel:" />
 													<p:inputText id="title"
@@ -99,7 +97,7 @@
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 														<h:selectBooleanCheckbox id="reciever"
-															value="#{scheduleView.visible}">
+															value="#{scheduleView.visible}" disabled="#{scheduleView.important}">
 															<p:ajax update="eventDetails" />
 														</h:selectBooleanCheckbox>
 													</ui:fragment>
@@ -132,19 +130,6 @@
 														actionListener="#{scheduleView.addEvent}"
 														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide()" />
 												</h:panelGrid>
-											</ui:fragment>
-											<ui:fragment
-												rendered="#{sessionInfoBean.getCurrentUserData().getUsername() ne scheduleView.getSender()}">
-												<h:panelGrid id="eventChangeDetailsLabel" columns="2">
-													<p:outputLabel for="titleChangeLabel" value="Titel:" />
-													<p:outputPanel id="titleChangeLabel">#{scheduleView.editViewEvent.getTitle()}</p:outputPanel>
-													<p:outputLabel for="fromChangeLabel" value="Beginn:" />
-													<p:outputPanel id="fromChangeLabel">#{scheduleView.editViewEvent.startDate}</p:outputPanel>
-
-													<p:outputLabel for="toChangeLabel" value="Ende:" />
-													<p:outputPanel id="toChangeLabel">#{scheduleView.editViewEvent.endDate}</p:outputPanel>
-												</h:panelGrid>
-											</ui:fragment>
 										</p:dialog>
 									</h:form>
 
