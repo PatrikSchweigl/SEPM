@@ -273,7 +273,8 @@
                                                     <p:commandButton value="Speichern"
                                                                      action="#{employeeController.doSaveEmployeeEdit()}"
                                                                      oncomplete="PF('employeeEditDialog').hide()"
-                                                                     update=":employeeForm:employeeTable"/>
+                                                                     update=":employeeForm:employeeTable"
+                                                                     process="@widgetVar(employeeEditDialog)"/>
                                                     <p:commandButton value="Neu laden"
                                                                      action="#{employeeController.doReloadEmployee()}"
                                                                      update=":employeeForm:employeeDataEdit"/>
