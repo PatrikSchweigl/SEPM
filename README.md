@@ -15,9 +15,26 @@ and made the start easier.
 The project utilizes Spring Boot and is configured as maven web application project with:
 - all relevant Spring Framework features enabled
 - embedded Tomcat with support for JSF2
-- embedded H2 in-memory database (including H2 console)
+- mySQL database
 - support for PrimeFaces
 
 Just execute  `mvn spring-boot:run` to start the project and connect to
-http://localhost:8080/ to access the nurseries web application. You may login
-with *"admin"* and *"passwd"*.
+http://localhost:8080/ to access the nurseries web application. Further, you have to
+preload some data into the database. 
+
+In `vagrant`, start MYSQL with `mysql -u root -pasnTeam1` and 
+execute following line: *source /vagrant/src/main/resources/data.sql*.
+
+Then you are able to login with all different types of User.
+
+| username | password  | role     |
+| ---------|:---------:| --------:|
+| fatima   | passwd    | employee |
+| cheng    | passwd    | employee |
+| thorunn  | passwd    | employee |
+| ---------|:---------:| --------:|
+| ashley   | passwd    | parent   |
+| mohammed | passwd    | parent   |
+| bernd    | passwd    | parent   |
+| ---------|:---------:| --------:|
+| admin    | passwd    | admin    |
