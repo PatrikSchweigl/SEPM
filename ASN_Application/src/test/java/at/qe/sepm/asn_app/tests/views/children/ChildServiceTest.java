@@ -23,7 +23,8 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 20.04.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 20.04.17.
  *
  *
  */

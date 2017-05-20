@@ -10,7 +10,8 @@ import java.time.ZoneOffset;
 import java.util.Collection;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 08.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 08.05.17.
  */
 public class ParentConstraints {
 
