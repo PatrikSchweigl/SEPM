@@ -11,8 +11,11 @@ public class TaskConstraints {
 
     public static boolean checkTaskConstraints(Task task) {
         try {
-            if(!checkDateConstraints(task)) {
-                throw new TaskConstraintException();
+            if (!checkParentConstraints(task)) {
+                throw new TaskConstraintException("Task parent constraints are violated.");
+            }
+            else if(!checkDateConstraints(task)) {
+                throw new TaskConstraintException("Task date constraints are violated.");
             }
         }
         catch(TaskConstraintException e) {
@@ -20,6 +23,11 @@ public class TaskConstraints {
             return false;
         }
 
+        return true;
+    }
+
+
+    public static boolean checkParentConstraints(Task task) {
         return true;
     }
 
