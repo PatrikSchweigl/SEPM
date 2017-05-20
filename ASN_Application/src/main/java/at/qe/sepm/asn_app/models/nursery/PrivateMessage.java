@@ -11,6 +11,12 @@ import java.util.Date;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
+ *
+ * A PrivateMessage contains the name of the sender, the receiver, the message itself
+ * and a date on which the message got sent. The difference to a normal {@link Message}
+ * is that a PrivateMessage is not broadcasted, but has exactly one receiver.
+ *
+ * @see Message for a publicly displayed broadcast message with one sender and multiple receivers.
  */
 @Entity
 public class PrivateMessage implements Persistable<Long> {
@@ -106,6 +112,6 @@ public class PrivateMessage implements Persistable<Long> {
 	    return "Date: " + date + "\n" +
                 "Message: " + message + "\n" +
                 "UsernameReceiver: " + usernameReceiver + "\n" +
-                "UnsernameSender: " + usernameSender;
+                "UsernameSender: " + usernameSender;
     }
 }
