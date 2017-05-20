@@ -13,6 +13,7 @@ import java.util.List;
  * on 17.03.17.
  *
  * Lunch holds information on which date a meal is available and how much it costs.
+ * Additionally Lunch contains a list of all children who are signed up for it.
  * @see Child
  * @see Date
  */
