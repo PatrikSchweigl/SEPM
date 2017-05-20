@@ -11,6 +11,9 @@ import java.util.Set;
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 02.05.2017
+ *
+ * A picture is either displayed as a profile picture of a person or publicly displayed
+ * in the picture gallery. It holds a publisher, a publish date, a title and a set of comments.
  */
 
 @Entity
