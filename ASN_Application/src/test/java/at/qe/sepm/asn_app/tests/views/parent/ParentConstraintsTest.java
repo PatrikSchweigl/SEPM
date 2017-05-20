@@ -22,7 +22,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 08.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 08.05.17.
  */
 public class ParentConstraintsTest {
 

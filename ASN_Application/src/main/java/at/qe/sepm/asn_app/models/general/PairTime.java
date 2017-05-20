@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
  *
  * PairTime holds two attributes, startTime and endTime, which specify a time range.
  * In this project this time range is used to specify the bring- and pick up- times for children at the nursery.

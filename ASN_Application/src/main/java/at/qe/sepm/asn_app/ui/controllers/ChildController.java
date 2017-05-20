@@ -15,7 +15,8 @@ import java.util.Collection;
 
 
 /**
- * Created by root on 14.04.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 14.04.17.
  */
 @Component
 @Scope("view")
