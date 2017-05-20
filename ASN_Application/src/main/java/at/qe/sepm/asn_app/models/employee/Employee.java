@@ -10,6 +10,16 @@ import javax.persistence.*;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
+ *
+ * Employee inherits from UserData in which all basic information about a
+ * person is stored. The class Employee itself gives further information
+ * like religion, the phone number, the family status, if the employee is
+ * a pedagogue or a trainee and if the employee is currently active or not.
+ * @see FamilyStatus
+ * @see Religion
+ * @see Status
+ * @see UserData
+ * @see WorkRole
  */
 @Entity
 public class Employee extends UserData {
