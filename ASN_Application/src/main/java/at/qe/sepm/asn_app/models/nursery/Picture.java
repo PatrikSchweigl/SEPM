@@ -14,6 +14,7 @@ import java.util.Set;
  *
  * A picture is either displayed as a profile picture of a person or publicly displayed
  * in the picture gallery. It holds a publisher, a publish date, a title and a set of comments.
+ * @see Comment
  */
 
 @Entity

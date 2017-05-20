@@ -11,6 +11,10 @@ import java.util.Date;
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 02.05.2017
+ *
+ * A comment can be posted under a Picture. Similar to Picture a comment has a publish date and a publisher,
+ * but it also contains the content of the comment as a String.
+ * @see at.qe.sepm.asn_app.models.nursery.Picture
  */
 @Entity
 public class Comment implements Persistable<Long>{
