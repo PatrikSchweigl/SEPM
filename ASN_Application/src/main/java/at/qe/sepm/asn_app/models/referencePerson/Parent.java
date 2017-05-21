@@ -41,11 +41,11 @@ public class Parent extends UserData {
 
     public Parent(){}
 
-    public Parent(String password, String username, String firstName, String lastName,
-                  String location, String streetName, String postcode, UserRole userRole,
-                   String imgName, Set<Child> children, Set<Task> tasks,
-                  FamilyStatus familyStatus, boolean status, String birthday) {
-        super(password, username, firstName, lastName, location, streetName, postcode, userRole, birthday);
+    public Parent(String username, String password, String firstName, String lastName,
+                  String location, String streetName, String postcode, String birthday,
+                  String email, UserRole userRole, String imgName, Set<Child> children,
+                  Set<Task> tasks, FamilyStatus familyStatus, boolean status) {
+        super(username, password, firstName, lastName, location, streetName, postcode, birthday, email, userRole);
         this.imgName = imgName;
         this.children = children;
         this.tasks = tasks;
@@ -53,6 +53,8 @@ public class Parent extends UserData {
         this.status = status;
     }
 
+    public Parent(String s, String parentUserName1, String parentFirstName1, String parentLastName1, String parentLocation1, String parentStreetName1, String parentPostcode1, UserRole parent, String parentImgName1, Set<Child> parentListChildren1, Set<Task> parentListTasks1, FamilyStatus married, boolean b, String s1) {
+    }
 
     public String getImgName() {
         return imgName;

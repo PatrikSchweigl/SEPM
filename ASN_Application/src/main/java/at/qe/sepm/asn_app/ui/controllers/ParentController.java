@@ -3,6 +3,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,7 +25,7 @@ public class ParentController {
     @Autowired
     private ParentService parentService;
     @Autowired
-    private UserRepository userRepository;
+    private MailService mailService;
     private String password;
     private Parent parent;
     private Collection<Parent> parents;
@@ -64,6 +65,14 @@ public class ParentController {
 
     public void doSaveParent(){
         parent = parentService.saveParent(parent);
+        mailService.sendEmail(parent.getEmail(), "ASN-App Registrierung",
+                "Willkommen bei ASN-Application!\n\n" +
+                        "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                        "Ihr Benutzername: "+ parent.getUsername() + "\n" +
+                        "Ihr Passwort: passwd" +
+                        "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
+                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Viel Spaß wünschen das Kinderkrippen Team!");
         parent = null;
         initNewParent();
         initList();
@@ -82,11 +91,6 @@ public class ParentController {
        parentService.changePassword(password);
     }
 
-    public UserData getAuthenticatedUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        return userRepository.findFirstByUsername(auth.getName());
-    }
 
 
 
