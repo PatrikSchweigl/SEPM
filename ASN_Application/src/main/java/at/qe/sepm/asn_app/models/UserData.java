@@ -7,6 +7,16 @@ import org.springframework.data.domain.Persistable;
 
 /**
  * Entity representing users.
+ * UserData holds the most common basic attributes about a person: the username,
+ * a password, the full name, the place they live in, the birthday and a UserRole
+ * which specifies if a person is an admin, an employee or a parent.
+ * A lot of classes make use of UserData, among others Employee and Parent
+ * which both inherit from UserData.
+ * @see at.qe.sepm.asn_app.models.employee.Employee
+ * @see at.qe.sepm.asn_app.models.referencePerson.Parent
+ * @see at.qe.sepm.asn_app.models.nursery.Picture
+ * @see at.qe.sepm.asn_app.models.nursery.Task
+ * @see UserRole
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
