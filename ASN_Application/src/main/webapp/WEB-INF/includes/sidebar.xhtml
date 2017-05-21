@@ -29,10 +29,10 @@
 
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
-									href="/nursery/nursery_information.xhtml"><i
-									class="fa fa-info-circle fa-3x " ></i> <span
-									style="padding-left: 40px; font-size: 25px">Kindergarten Information</span>
-							</a></li>
+								href="/nursery/nursery_information.xhtml"><i
+									class="fa fa-info-circle fa-3x "></i> <span
+									style="padding-left: 40px; font-size: 25px">Kindergarten
+										Information</span> </a></li>
 						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
@@ -65,7 +65,15 @@
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
+							rendered="#{sessionInfoBean.hasRole('PARENT')}">
+							<li class="treeview"><a
+								href="/parent/calendar_parent.xhtml"> <i
+									class="fa fa-calendar fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Kalender</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/calendar_employee.xhtml"> <i
 									class="fa fa-calendar fa-3x"></i> <span
@@ -134,7 +142,8 @@
 		<h:form>
 			<p:dialog header="Farbeinstellung" id="colorSettings"
 				widgetVar="colorSettings" modal="true" showEffect="fade"
-				hideEffect="fade" resizable="false" closeOnEscape="true" width="350px">
+				hideEffect="fade" resizable="false" closeOnEscape="true"
+				width="350px">
 				<p:outputPanel id="parentData">
 
 					<ul class="list-unstyled clearfix" style="list-style: none;">
@@ -225,36 +234,39 @@
 				<h3>Mitarbeiter</h3>
 				<div>
 					<ui:repeat var="employee" value="#{employeeController.employees}">
-					<ui:fragment rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
-						<h:panelGrid columns="2" style="width:50px;"
-							columnClasses="logo,detail">
-							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+						<ui:fragment
+							rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
+							<h:panelGrid columns="2" style="width:50px;"
+								columnClasses="logo,detail">
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
 
-							<p:commandLink value="#{employee.username}"
-								action="#{privateMessageController.setUsername(employee.username)}"
-								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
+								<p:commandLink value="#{employee.username}"
+									action="#{privateMessageController.setUsername(employee.username)}"
+									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-								<h:outputText value="#{employee.username}" />
-							</p:commandLink>
-						</h:panelGrid>
-						<hr />
+									<h:outputText value="#{employee.username}" />
+								</p:commandLink>
+							</h:panelGrid>
+							<hr />
 						</ui:fragment>
 					</ui:repeat>
 				</div>
 				<div>
 					<h3>Eltern</h3>
 					<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-					<ui:fragment rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">						<h:panelGrid columns="2" style="width:50px;"
-							columnClasses="logo,detail">
-							<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
-							<p:commandLink value="#{parent.username}"
-								action="#{privateMessageController.setUsername(parent.username)}"
-								oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
+						<ui:fragment
+							rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">
+							<h:panelGrid columns="2" style="width:50px;"
+								columnClasses="logo,detail">
+								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+								<p:commandLink value="#{parent.username}"
+									action="#{privateMessageController.setUsername(parent.username)}"
+									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
 
-								<h:outputText value="#{parent.username}" />
-							</p:commandLink>
-						</h:panelGrid>
-						<hr />
+									<h:outputText value="#{parent.username}" />
+								</p:commandLink>
+							</h:panelGrid>
+							<hr />
 						</ui:fragment>
 					</ui:repeat>
 				</div>
