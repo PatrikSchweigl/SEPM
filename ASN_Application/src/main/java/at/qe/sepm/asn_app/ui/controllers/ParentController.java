@@ -78,11 +78,8 @@ public class ParentController {
         doReloadParent();
     }
 
-    public void changePassword(String password){
-        UserData user = getAuthenticatedUser();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(password));
-        userRepository.save(user);
+    public void doChangePassword(String password){
+       parentService.changePassword(password);
     }
 
     public UserData getAuthenticatedUser() {

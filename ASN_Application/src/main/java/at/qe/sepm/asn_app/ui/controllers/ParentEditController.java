@@ -41,7 +41,6 @@ public class ParentEditController {
     }
 
     public void doDeleteParent(){
-        System.out.println("------------------------ Delete person "+ parent.getLastName());
         parentService.deleteParent(parent);
         parent = null;
         parentController.initList();

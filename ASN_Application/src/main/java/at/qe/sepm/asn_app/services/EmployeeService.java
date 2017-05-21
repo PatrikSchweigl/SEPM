@@ -64,4 +64,11 @@ public class EmployeeService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
+
+    public void changePassword(String password){
+        UserData user = getAuthenticatedUser();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
 }

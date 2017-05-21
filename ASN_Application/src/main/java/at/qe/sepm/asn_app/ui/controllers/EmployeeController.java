@@ -85,11 +85,8 @@ public class EmployeeController {
         doReloadEmployeeEdit();
     }
     
-    public void changePassword(String password){
-    	UserData user = getAuthenticatedUser();
-    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(password));
-        userRepository.save(user);
+    public void doChangePassword(String password){
+    	employeeService.changePassword(password);
     }
 
 	public UserData getAuthenticatedUser() {
