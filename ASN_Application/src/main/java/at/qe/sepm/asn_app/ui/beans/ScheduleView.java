@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.ui.controllers;
+package at.qe.sepm.asn_app.ui.beans;
 
 import java.io.Serializable;
 import java.util.Calendar;
