@@ -33,6 +33,7 @@ public class UserData implements Persistable<String> {
     private String streetName;
     private String postcode;
     private String birthday;
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -40,20 +41,20 @@ public class UserData implements Persistable<String> {
 
     public UserData(){}
 
-    public UserData(String password, String username, String firstName,
-                    String lastName, String location, String streetName,
-                    String postcode, UserRole userRole, String birthday) {
-        this.password = password;
+    public UserData(String username, String password, String firstName, String lastName,
+                    String location, String streetName, String postcode, String birthday,
+                    String email, UserRole userRole) {
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;
         this.streetName = streetName;
         this.postcode = postcode;
-        this.userRole = userRole;
         this.birthday = birthday;
+        this.email = email;
+        this.userRole = userRole;
     }
-
 
     public String getLocation() {
         return location;
@@ -127,6 +128,13 @@ public class UserData implements Persistable<String> {
         this.birthday = birthday;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public int hashCode() {

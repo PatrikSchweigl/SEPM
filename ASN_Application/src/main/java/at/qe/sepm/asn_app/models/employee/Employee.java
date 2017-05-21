@@ -40,17 +40,18 @@ public class Employee extends UserData {
     public Employee(){//required for jpa repository
     }
 
-    public Employee(String password, String username, String firstName, String lastName, String location,
-                    String streetName, String postcode, UserRole userRole, Religion religion, String phoneNumber,
-                    FamilyStatus familyStatus, Status workingState, WorkRole workRole, String birthday, boolean isAdmin) {
-        super(password, username, firstName, lastName, location, streetName, postcode, userRole, birthday);
+    public Employee(String username, String password, String firstName,
+                    String lastName, String location, String streetName,
+                    String postcode, String birthday, String email, UserRole userRole,
+                    Religion religion, String phoneNumber, FamilyStatus familyStatus,
+                    Status workingState, WorkRole workRole) {
+        super(username, password, firstName, lastName, location, streetName, postcode, birthday, email, userRole);
         this.religion = religion;
         this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
         this.workingState = workingState;
         this.workRole = workRole;
     }
-
 
     public Religion getReligion() {
         return religion;
