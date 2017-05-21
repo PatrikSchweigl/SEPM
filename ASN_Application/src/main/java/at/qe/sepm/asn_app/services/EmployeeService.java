@@ -71,4 +71,12 @@ public class EmployeeService {
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
     }
+
+    public void resetPassword(Employee employee){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "RESET PASSWD: "+ employee.getUsername() + " [" + employee.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        employee.setPassword(passwordEncoder.encode("passwd"));
+        employeeRepository.save(employee);
+    }
 }

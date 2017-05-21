@@ -46,7 +46,8 @@
 													<h:panelGrid columns="3">
 														<p:commandButton
 															action="#{parentController.doChangePassword(parentController.password)}"
-															value="Speichern" />
+															value="Speichern"
+															oncomplete="PF('dialogTest').hide()"/>
 													</h:panelGrid>
 												</p:dialog>
 											</h:form>

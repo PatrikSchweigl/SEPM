@@ -73,6 +73,15 @@ public class ParentService {
     }
 
 
+    public void resetPassword(Parent parent){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "RESET PASSWD: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        parent.setPassword(passwordEncoder.encode("passwd"));
+        parentRepository.save(parent);
+    }
+
+
 
 
 }
