@@ -28,15 +28,28 @@ import java.util.HashSet;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 08.05.17.
+ *
+ * The main method of ChildConstraint checkConstraints(Child child) only returns true iff
+ * none of the following constraints is violated:
+ * - The child is between 1/2 and 3 years old.
+ * - At least one parent of the child is an active user in the nursery.
+ * - The parents of the child are not the same person.
+ * - The child is no sibling of itself.
+ * - The child does not have the same sibling twice or more.
+ * @see Parent
+ * @see Sibling
+ * @see BirthdayConstraintException
+ * @see ParentConstraintException
+ * @see SiblingConstraintException
  */
-
 @Component
 @Scope("application")
 public class ChildConstraints {
 
     /**
-     *
-     * @return true iff no constraints are violated.
+     * The main method of ChildConstraints. Starting from this method all
+     * constraints get validated.
+     * @return <code>true</code> iff no constraints are violated; <code>false</code> otherwise
      */
     public static boolean checkConstraints(Child child) throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
         if(!checkBirthdayConstraints(child)) {
@@ -53,7 +66,8 @@ public class ChildConstraints {
 
 
     /**
-     * A child may not be younger than 1/2 year and not older than 3 years.
+     * Checks for the following constraints:
+     * - A child may not be younger than 1/2 year and not older than 3 years.
      * @return <code>true</code> iff a child is between the age of 1/2 and 3 years.
      */
     public static boolean checkBirthdayConstraints(Child child) throws BirthdayConstraintException {
@@ -79,9 +93,10 @@ public class ChildConstraints {
 
 
     /**
-     * At least one parent must be registered in the nursery.
-     * Parents may not be the same person.
-     * @return <code>true</code> iff no constraints regarding parents are violated.
+     * Checks for the following constraints:
+     * - At least one parent must be registered in the nursery.
+     * - Parents may not be the same person.
+     * @return <code>true</code> iff no constraints regarding parents are violated; <code>false</code> otherwise
      */
     public static boolean checkParentsConstraints(Child child) throws ParentConstraintException {
         //Parent p1 = child.getParent1();
@@ -102,8 +117,8 @@ public class ChildConstraints {
 
     /**
      * Check whether or not one of the following constraints is violated:
-     * A child may not be a sibling of itself.
-     * A child can not have the same sibling twice or more.
+     * - A child may not be a sibling of itself.
+     * - A child can not have the same sibling twice or more.
      * @return <code>true</code> iff no constraints are violated.
      */
     public static boolean checkSiblingsConstraints(Child child) throws SiblingConstraintException {
