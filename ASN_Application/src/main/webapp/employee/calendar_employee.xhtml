@@ -124,10 +124,13 @@
                                                     </p:selectOneListbox>
                                                 </ui:fragment>
                                                 <p:commandButton id="deleteButton" value="Löschen"
-                                                                 action="#{scheduleView.deleteEvent}"/>
+                                                                 action="#{scheduleView.deleteEvent}"
+                                                                 oncomplete="PF('eventDialog').hide()"
+                                                                 update="@all"/>
                                                 <p:commandButton id="addButton" value="Speichern"
                                                                  actionListener="#{scheduleView.addEvent}"
-                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide()"
+                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()"
+                                                                 update="@all"
                                                                  />
                                             </h:panelGrid>
                                         </p:dialog>
