@@ -8,6 +8,12 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
+ *
+ * A caregiver takes responsibility for a child if their parent is not available.
+ * This class only has some attributes to reference a caregiver like the full name,
+ * a profile picture, a phone number and the relationship status to the child.
+ * In contrast to Parent and Employee Caregiver does not inherit from UserData.
+ * @see Relationship
  */
 @Entity
 public class Caregiver implements Persistable<Long>{
