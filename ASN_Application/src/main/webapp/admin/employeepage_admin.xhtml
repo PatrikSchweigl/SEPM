@@ -100,7 +100,7 @@
                                                       sortBy="#{employee.religion}" filterStyle="display:none">
                                                 <h:outputText value="#{employee.religion}"/>
                                             </p:column>
-                                            <p:column style="width:100px;text-align: center"
+                                            <p:column style="width:120px;text-align: center"
                                                       exportable="false">
                                                 <p:commandButton update=":employeeForm:employeeEditDialog"
                                                                  oncomplete="PF('employeeEditDialog').show()"
@@ -118,6 +118,17 @@
                                                                message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
                                                 </p:commandButton>
+                                                <p:commandButton
+                                                        action="#{employeeController.doResetPassword}"
+                                                        icon="ui-icon-refresh" title="Passwort zurücksetzen"
+                                                        update=":employeeForm:employeeTable" process="@this">
+                                                    <f:setPropertyActionListener value="#{employee}"
+                                                                                 target="#{employeeController.employeeEdit}"/>
+                                                    <p:confirm header="Bestätigung"
+                                                               message="Sind Sie sich sicher, dass Sie dieses Passwort zurücksetzen wollen? Dies lässt sich nicht mehr rückgängig machen."
+                                                               icon="ui-icon-alert"/>
+                                                </p:commandButton>
+
                                             </p:column>
                                         </p:dataTable>
 

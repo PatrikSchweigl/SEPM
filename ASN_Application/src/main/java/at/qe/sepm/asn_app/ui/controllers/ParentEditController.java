@@ -46,4 +46,8 @@ public class ParentEditController {
         parentController.initList();
     }
 
+    public void doResetPassword(){
+        parentService.resetPassword(parent);
+    }
+
 }

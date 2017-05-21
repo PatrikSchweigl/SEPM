@@ -10,43 +10,47 @@
       xmlns:p="http://primefaces.org/ui"
       template="/WEB-INF/templates/main.xhtml">
 <h:form>
-    <p:growl id="messages" showDetail="true" />
+    <p:growl id="messages" showDetail="true"/>
 
     <h:panelGrid columnClasses="value">
         <h3 style="margin-top: 0">Editable Schedule</h3>
-        <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+1" >
+        <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+1">
 
 
-            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
-            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
+            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails"
+                    oncomplete="PF('eventDialog').show();"/>
+            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails"
+                    oncomplete="PF('eventDialog').show();"/>
+            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages"/>
+            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages"/>
 
         </p:schedule>
         <h3>Locale Support ( Example: Turkish )</h3>
-        <p:schedule id="scheduleLocale" value="#{scheduleView.eventModel}" locale="tr" />
+        <p:schedule id="scheduleLocale" value="#{scheduleView.eventModel}" locale="tr"/>
 
         <h3>Lazy Schedule</h3>
-        <p:schedule value="#{scheduleView.lazyEventModel}" />
+        <p:schedule value="#{scheduleView.lazyEventModel}"/>
 
     </h:panelGrid>
 
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
         <h:panelGrid id="eventDetails" columns="2">
-            <p:outputLabel for="title" value="Titles:" />
-            <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
+            <p:outputLabel for="title" value="Titles:"/>
+            <p:inputText id="title" value="#{scheduleView.event.title}" required="true"/>
 
-            <p:outputLabel for="from" value="From:" />
+            <p:outputLabel for="from" value="From:"/>
             <p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+1" pattern="dd/MM/yyyy HH:mm"/>
 
-            <p:outputLabel for="to" value="To:" />
+            <p:outputLabel for="to" value="To:"/>
             <p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+1" pattern="dd/MM/yyyy HH:mm"/>
 
-            <p:outputLabel for="allDay" value="All Day:" />
-            <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
+            <p:outputLabel for="allDay" value="All Day:"/>
+            <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}"/>
 
-            <p:commandButton type="reset" value="Reset" />
-            <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+            <p:commandButton type="reset" value="Reset"/>
+            <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}"
+                             oncomplete="PF('myschedule').update();PF('eventDialog').hide();"
+                             update=":schedule"/>
         </h:panelGrid>
     </p:dialog>
 </h:form>
@@ -57,13 +61,13 @@
         prevText: 'Letzte',
         nextText: 'Naechste',
         currentText: 'Heute',
-        monthNames: ['Januar','Februar','Maerz','April','Mai','Juni',
-            'Juli','August','September','Oktober','November','Dezember'],
-        monthNamesShort: ['Jan','Feb','Mar','Apr','Mai','Jun',
-            'Jul','Aug','Sep','Okt','Nov','Dez'],
-        dayNames: ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'],
-        dayNamesShort: ['Mo','Di','Mi','Do','Fr','Sa','So'],
-        dayNamesMin: ['Mo','Di','Mi','Do','Fr','Sa','So'],
+        monthNames: ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni',
+            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        dayNames: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
+        dayNamesShort: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+        dayNamesMin: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
         weekHeader: 'KW',
         firstDay: 1,
         isRTL: false,
@@ -72,7 +76,7 @@
         month: 'Monat',
         week: 'Woche',
         day: 'Tag',
-        allDayText : 'Ganzer Tag'
+        allDayText: 'Ganzer Tag'
     };
 </script>
 <style type="text/css">

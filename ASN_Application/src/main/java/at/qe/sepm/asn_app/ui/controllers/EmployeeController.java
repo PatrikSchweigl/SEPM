@@ -110,6 +110,10 @@ public class EmployeeController {
         employeeEdit = null;
         initList();
     }
+
+    public void doResetPassword(){
+        employeeService.resetPassword(employeeEdit);
+    }
     
 	public void setPassword(String password){
 		this.password = password;

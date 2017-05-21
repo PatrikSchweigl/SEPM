@@ -99,7 +99,7 @@
                                                       sortBy="#{parent.location}" filterStyle="display:none">
                                                 <h:outputText value="#{parent.location}"/>
                                             </p:column>
-                                            <p:column style="width:100px;text-align: center"
+                                            <p:column style="width:120px;text-align: center"
                                                       exportable="false">
                                                 <p:commandButton update=":parentForm"
                                                                  oncomplete="PF('parentEditDialog').show()"
@@ -116,6 +116,16 @@
                                                                                  target="#{parentEditController.parent}"/>
                                                     <p:confirm header="Bestätigung"
                                                                message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
+                                                               icon="ui-icon-alert"/>
+                                                </p:commandButton>
+                                                <p:commandButton
+                                                        action="#{parentEditController.doResetPassword}"
+                                                        icon="ui-icon-refresh" title="Passwort zurücksetzen"
+                                                        update=":parentForm" process="@this">
+                                                    <f:setPropertyActionListener value="#{parent}"
+                                                                                 target="#{parentEditController.parent}"/>
+                                                    <p:confirm header="Bestätigung"
+                                                               message="Sind Sie sich sicher, dass Sie dieses Passwort zurücksetzen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
                                                 </p:commandButton>
                                             </p:column>
