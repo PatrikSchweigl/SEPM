@@ -1,8 +1,10 @@
 package at.qe.sepm.asn_app.repositories;
 
+import at.qe.sepm.asn_app.models.nursery.Lunch;
+
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 20.03.2017
  */
-public interface LunchRepository {
+public interface LunchRepository extends AbstractRepository<Lunch, Long>{
 }
