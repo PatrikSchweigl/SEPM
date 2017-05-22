@@ -6,14 +6,14 @@ import org.springframework.data.domain.Persistable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
  *
  * Lunch holds information on which date a meal is available and how much it costs.
- * Additionally Lunch contains a list of all children who are signed up for it.
+ * Additionally Lunch contains a list of all children (as ids) who are signed up for it.
  * @see Child
  * @see Date
  */
@@ -31,17 +31,31 @@ public class Lunch implements Persistable<Long> {
     @NotNull
     private String meal;
     private double cost;
-    @OneToMany
-    private List<Child> listChildren;
+    @ElementCollection(targetClass = Long.class)
+    private Set<Long> childrenIds;
 
 
-    public Lunch(Date date, String meal, double cost, List<Child> listChildren) {
+    public Lunch(Date date, String meal, double cost) {
         this.date = date;
         this.meal = meal;
         this.cost = cost;
-        this.listChildren = listChildren;
     }
 
+
+    public void addChild(Long id){
+        childrenIds.add(id);
+    }
+    public void addChild(Child c){
+        addChild(c.getId());
+    }
+
+    public void removeChild(Long id){
+        childrenIds.remove(id);
+    }
+
+    public void removeChild(Child c){
+        addChild(c.getId());
+    }
 
     public Date getDate() {
         return date;
@@ -66,15 +80,18 @@ public class Lunch implements Persistable<Long> {
     public void setCost(double cost) {
         this.cost = cost;
     }
-
+/*
     public List<Child> getListChildren() {
         return listChildren;
     }
 
     public void setListChildren(List<Child> listChildren) {
         this.listChildren = listChildren;
-    }
+    }*/
 
+    public int getNumChildren() {
+        return childrenIds.size();
+    }
 
     @Override
     public Long getId() {
@@ -99,7 +116,6 @@ public class Lunch implements Persistable<Long> {
         Lunch other = (Lunch) obj;
         if (this.cost == other.cost &&
                 this.date.equals(other.date) &&
-                this.listChildren.equals(other.listChildren) &&
                 this.meal.equals(other.meal)) {
             return true;
         } else {
@@ -112,7 +128,7 @@ public class Lunch implements Persistable<Long> {
     public String toString() {
         return "Cost: " + cost + "\n" +
                 "Date: " + date + "\n" +
-                "Children: " + listChildren + "\n" +
+                "Children: " + childrenIds + "\n" +
                 "Meal: " + meal;
     }
 }
