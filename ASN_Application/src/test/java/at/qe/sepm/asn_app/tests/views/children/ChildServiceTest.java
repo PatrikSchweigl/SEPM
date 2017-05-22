@@ -11,6 +11,7 @@ import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ui.constraints.ChildConstraints;
+import org.junit.Ignore;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +58,7 @@ public class ChildServiceTest {
      * needed attributes get initialized before each test. After each test all attributes
      * get set to null again in {@link ChildServiceTest#cleanUp()}.
      */
+    @Ignore
     @Before
     public void initialize() {
 
@@ -92,6 +94,7 @@ public class ChildServiceTest {
     /**
      * Test birthdayConstraints for no violations.
      */
+    @Ignore
     @Test
     public void checkBirthdayConstraints1() throws BirthdayConstraintException {
         assertTrue(ChildConstraints.checkBirthdayConstraints(child1));
@@ -101,6 +104,7 @@ public class ChildServiceTest {
     /**
      * Test the birthday constraints for a child that is too young.
      */
+    @Ignore
     @Test
     public void checkBirthdayConstraints2() throws BirthdayConstraintException {
         assertFalse(ChildConstraints.checkBirthdayConstraints(child4));
@@ -110,6 +114,7 @@ public class ChildServiceTest {
     /**
      * Test the birthday constraints for a child that is too old.
      */
+    @Ignore
     @Test
     public void checkBirthdayConstraints3() throws BirthdayConstraintException {
         assertFalse(ChildConstraints.checkBirthdayConstraints(child2));
@@ -119,6 +124,7 @@ public class ChildServiceTest {
     /**
      * Test parents constraints without any violation.
      */
+    @Ignore
     @Test
     public void checkParentsConstraints1() throws ParentConstraintException {
         //child1.setParent1(parent1);
@@ -131,6 +137,7 @@ public class ChildServiceTest {
     /**
      * It is not allowed to register children in the nursery if not at least one parent is registered beforehand.
      */
+    @Ignore
     @Test
     public void checkParentsConstraints2() throws ParentConstraintException {
         assertFalse(ChildConstraints.checkParentsConstraints(child1));
@@ -140,6 +147,7 @@ public class ChildServiceTest {
     /**
      * Check the violation of the constraint that a child may not have the same parent twice.
      */
+    @Ignore
     @Test
     public void checkParentsConstraints3() throws ParentConstraintException {
         //child1.setParent1(parent1);
@@ -152,6 +160,7 @@ public class ChildServiceTest {
     /**
      * Test siblingsConstraints for no violation
      */
+    @Ignore
     @Test
     public void checkSiblingsConstraints1() throws SiblingConstraintException {
         Set<Sibling> siblingSet = new HashSet<>();
@@ -164,6 +173,7 @@ public class ChildServiceTest {
     /**
      * Test the violation of the constraint that a child can't be a sibling of itself.
      */
+    @Ignore
     @Test
     public void checkSiblingsConstraints2() throws SiblingConstraintException {
         Set<Sibling> siblingSet = new HashSet<>();
@@ -176,6 +186,7 @@ public class ChildServiceTest {
     /**
      * Test the violation of the constraint that a child can't have the same sibling twice or more.
      */
+    @Ignore
     @Test
     public void checkSiblingsConstraints3() throws SiblingConstraintException {
         Set<Sibling> siblingSet = new HashSet<>();
@@ -185,7 +196,7 @@ public class ChildServiceTest {
         assertFalse(ChildConstraints.checkSiblingsConstraints(child5));
     }
 
-
+    @Ignore
     @After
     public void cleanUp() {
         for (Child child : children) {
