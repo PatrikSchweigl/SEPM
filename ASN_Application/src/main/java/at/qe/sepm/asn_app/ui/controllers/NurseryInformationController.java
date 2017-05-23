@@ -36,7 +36,10 @@ public class NurseryInformationController {
     public Collection<NurseryInformation> getNurseryInformations() {
         return nurseryInformations;
     }
-
+    
+    public NurseryInformation getNurseryInformationByOriginDate(Date date){
+    	return nurseryInformationService.nurseryInformationByOriginDate(date);
+    }
     public void setNurseryInformations(Collection<NurseryInformation> nurseryInformations) {
         this.nurseryInformations = nurseryInformations;
     }
