@@ -69,4 +69,8 @@ public class NurseryInformationService {
 
         return date;
     }
+
+	public NurseryInformation nurseryInformationByOriginDate(Date date) {
+		return nurseryInformationRepository.getInformationByOriginDate(date);
+	}
 }
