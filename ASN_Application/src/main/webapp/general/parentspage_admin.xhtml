@@ -170,8 +170,9 @@
                                                     <p:inputText id="postcode"
                                                                  value="#{parentController.parent.postcode}" />
                                                     <p:outputLabel for="email" value="Email: " />
-                                                    <p:inputText id="email"
-                                                                 value="#{parentController.parent.email}" />
+                                                    <p:inputText id="email" validatorMessage="Ungültiges Email-Format!" value="#{parentController.parent.email}">
+                                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    </p:inputText>
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Speichern"
