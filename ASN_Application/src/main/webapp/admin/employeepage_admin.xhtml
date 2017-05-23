@@ -156,7 +156,7 @@
                                                     <p:outputLabel for="lastname" value="Nachname: "/>
                                                     <p:inputText id="lastname"
                                                                  value="#{employeeController.employee.lastName}"/>
-                                                    <p:outputLabel for="birthday" value="Gerburtsdatum: "/>
+                                                    <p:outputLabel for="birthday" value="Geburtsdatum: "/>
                                                     <p:inputMask mask="99/99/9999" id="birthday"
                                                                  value="#{employeeController.employee.birthday}"/>
                                                     <p:outputLabel for="location" value="Wohnort: "/>
@@ -166,10 +166,12 @@
                                                     <p:inputText id="street"
                                                                  value="#{employeeController.employee.streetName}"/>
                                                     <p:outputLabel for="postcode" value="Postleitzahl: "/>
-                                                    <p:inputText id="postcode"
+                                                    <p:inputMask id="postcode"
+                                                                 mask="9999?9" slotChar=" "
                                                                  value="#{employeeController.employee.postcode}"/>
                                                     <p:outputLabel for="phonenumber" value="Telefonnummer: "/>
-                                                    <p:inputText id="phonenumber"
+                                                    <p:inputMask id="phonenumber"
+                                                                 mask="9?99999999999" slotChar=" " maxlength="12"
                                                                  value="#{employeeController.employee.phoneNumber}"/>
                                                 </h:panelGrid>
                                                 <p:separator/>
