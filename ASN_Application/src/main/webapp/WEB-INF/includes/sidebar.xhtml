@@ -285,7 +285,7 @@
 
 
 				<div>
-					<p:scrollPanel style="width:370px; height:350px">
+					<p:scrollPanel id="scroller" style="width:370px; height:350px">
 
 						<ui:repeat var="message"
 							value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}">
@@ -310,6 +310,7 @@
 								</div>
 							</div>
 						</ui:repeat>
+						<p:poll interval="1" listener="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}" update="scroller" />
 					</p:scrollPanel>
 
 				</div>
@@ -321,9 +322,6 @@
 					<p:separator />
 					<p:commandButton value="Senden"
 						action="#{privateMessageController.savePrivateMessage()}"
-						update=":form" />
-					<p:commandButton value="Laden"
-						action="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}"
 						update=":form" />
 				</div>
 			</h:form>
