@@ -167,8 +167,8 @@
                                                     <p:inputText id="location"
                                                                  value="#{parentController.parent.location}" />
                                                     <p:outputLabel for="postcode" value="Postleitzahl: " />
-                                                    <p:inputText id="postcode"
-                                                                 value="#{parentController.parent.postcode}" />
+                                                    <p:inputMask id="postcode" maxlength="5"
+                                                                 value="#{parentController.parent.postcode}"  mask="9999?9" slotChar=" "/>
                                                     <p:outputLabel for="email" value="Email: " />
                                                     <p:inputText id="email" validatorMessage="Ungültiges Email-Format!" value="#{parentController.parent.email}">
                                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
