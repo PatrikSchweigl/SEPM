@@ -173,6 +173,10 @@
                                                     <p:inputMask id="phonenumberCreate"
                                                                  mask="9?99999999999" slotChar=" " maxlength="12"
                                                                  value="#{employeeController.employee.phoneNumber}"/>
+                                                    <p:outputLabel for="emailCreate" value="Email: " />
+                                                    <p:inputText id="emailCreate" validatorMessage="Ungültiges Email-Format!" value="#{employeeController.employee.email}">
+                                                        <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    </p:inputText>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="6">
@@ -255,6 +259,10 @@
                                                     <p:inputMask id="phonenumberEdit"
                                                                  mask="9?99999999999" slotChar=" " maxlength="12"
                                                                  value="#{employeeController.employeeEdit.phoneNumber}"/>
+                                                    <p:outputLabel for="emailEdit" value="Email: " />
+                                                    <p:inputText id="emailEdit" validatorMessage="Ungültiges Email-Format!" value="#{employeeController.employeeEdit.email}">
+                                                        <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    </p:inputText>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="6">
