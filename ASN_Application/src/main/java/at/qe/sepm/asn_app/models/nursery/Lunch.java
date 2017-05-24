@@ -54,7 +54,7 @@ public class Lunch implements Persistable<Long> {
     }
 
     public void removeChild(Child c){
-        addChild(c.getId());
+        removeChild(c.getId());
     }
 
     public Date getDate() {
