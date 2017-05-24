@@ -135,43 +135,44 @@
                                         <p:dialog header="Elternteil anlegen" id="parentAddDialog"
                                                   widgetVar="parentAddDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
-                                            <p:messages id="messages" autoUpdate="true"/>
+                                            <p:messages id="messagesCreate" autoUpdate="true"/>
                                             <p:outputPanel id="parentDataCreate">
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="username" value="Benutzername: "/>
-                                                    <p:inputText id="username"
+                                                    <p:outputLabel for="usernameCreate" value="Benutzername: "/>
+                                                    <p:inputText id="usernameCreate"
                                                                  value="#{parentController.parent.username}"
                                                                  required="true"
                                                                  requiredMessage="Benutzername erforderlich!"/>
-                                                    <p:outputLabel for="password" value="Passwort: "/>
-                                                    <p:password id="password"
+                                                    <p:outputLabel for="passwordCreate" value="Passwort: "/>
+                                                    <p:password id="passwordCreate"
                                                                 value="#{parentController.parent.password}"
                                                                 required="true"
                                                                 requiredMessage="Passwort erforderlich!"/>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="firstName" value="Vorname: "/>
-                                                    <p:inputText id="firstname"
+                                                    <p:outputLabel for="firstnameCreate" value="Vorname: "/>
+                                                    <p:inputText id="firstnameCreate"
                                                                  value="#{parentController.parent.firstName}"/>
-                                                    <p:outputLabel for="lastName" value="Nachname: "/>
-                                                    <p:inputText id="lastname"
+                                                    <p:outputLabel for="lastnameCreate" value="Nachname: "/>
+                                                    <p:inputText id="lastnameCreate"
                                                                  value="#{parentController.parent.lastName}"/>
                                                 </h:panelGrid>
                                                 <p:separator />
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="street" value="Straße: " />
-                                                    <p:inputText id="street"
+                                                    <p:outputLabel for="streetCreate" value="Straße: " />
+                                                    <p:inputText id="streetCreate"
                                                                  value="#{parentController.parent.streetName}" />
-                                                    <p:outputLabel for="location" value="Ort: " />
-                                                    <p:inputText id="location"
+                                                    <p:outputLabel for="locationCreate" value="Ort: " />
+                                                    <p:inputText id="locationCreate"
                                                                  value="#{parentController.parent.location}" />
-                                                    <p:outputLabel for="postcode" value="Postleitzahl: " />
-                                                    <p:inputText id="postcode"
-                                                                 value="#{parentController.parent.postcode}" />
-                                                    <p:outputLabel for="email" value="Email: " />
-                                                    <p:inputText id="email"
-                                                                 value="#{parentController.parent.email}" />
+                                                    <p:outputLabel for="postcodeCreate" value="Postleitzahl: " />
+                                                    <p:inputMask id="postcodeCreate" maxlength="5"
+                                                                 value="#{parentController.parent.postcode}" mask="9999?9" slotChar=" "/>
+                                                    <p:outputLabel for="emailCreate" value="Email: " />
+                                                    <p:inputText id="emailCreate" validatorMessage="Ungültiges Email-Format!" value="#{parentController.parent.email}">
+                                                        <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    </p:inputText>
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="3">
                                                     <p:commandButton value="Speichern"
@@ -188,39 +189,56 @@
                                         <p:dialog header="Elternteil ändern" id="parentEditDialog"
                                                   widgetVar="parentEditDialog" modal="true"
                                                   showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
+                                            <p:messages id="messagesEdit" autoUpdate="true"/>
                                             <p:outputPanel id="parentDataEdit"
                                                            rendered="#{not empty parentEditController.parent}">
                                                 <h:panelGrid columns="2">
-                                                    <p:outputLabel for="userName" value="Benutzername: "/>
-                                                    <p:inputText id="userName"
+                                                    <p:outputLabel for="usernameEdit" value="Benutzername: "/>
+                                                    <p:inputText id="usernameEdit"
                                                                  value="#{parentEditController.parent.username}"
                                                                  disabled="true"/>
-                                                    <p:outputLabel for="passWord" value="Passwort: "/>
-                                                    <p:password id="passWord"
+                                                    <p:outputLabel for="passwordEdit" value="Passwort: "/>
+                                                    <p:password id="passwordEdit"
                                                                 value="#{parentEditController.parent.password}"
                                                                 disabled="true"/>
                                                 </h:panelGrid>
                                                 <p:separator/>
-                                                <h:panelGrid columns="6">
-                                                    <p:outputLabel for="firstName" value="Vorname: "/>
-                                                    <p:inputText id="firstName"
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="firstnameEdit" value="Vorname: "/>
+                                                    <p:inputText id="firstnameEdit"
                                                                  value="#{parentEditController.parent.firstName}"/>
-                                                    <p:outputLabel for="lastName" value="Nachname: "/>
-                                                    <p:inputText id="lastName"
+                                                    <p:outputLabel for="lastnameEdit" value="Nachname: "/>
+                                                    <p:inputText id="lastnameEdit"
                                                                  value="#{parentEditController.parent.lastName}"/>
+                                                </h:panelGrid>
+                                                <p:separator />
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="streetEdit" value="Straße: " />
+                                                    <p:inputText id="streetEdit"
+                                                                 value="#{parentEditController.parent.streetName}" />
+                                                    <p:outputLabel for="locationEdit" value="Ort: " />
+                                                    <p:inputText id="locationEdit"
+                                                                 value="#{parentEditController.parent.location}" />
+                                                    <p:outputLabel for="postcodeEdit" value="Postleitzahl: " />
+                                                    <p:inputMask id="postcodeEdit" maxlength="5"
+                                                                 value="#{parentEditController.parent.postcode}" mask="9999?9" slotChar=" "/>
+                                                    <p:outputLabel for="emailEdit" value="Email: " />
+                                                    <p:inputText id="emailEdit" validatorMessage="Ungültiges Email-Format!" value="#{parentEditController.parent.email}">
+                                                        <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    </p:inputText>
                                                 </h:panelGrid>
                                                 <p:separator/>
                                                 <h:panelGrid columns="3">
-                                                    <p:commandButton value="Speicherrn"
+                                                    <p:commandButton value="Speichern"
                                                                      action="#{parentEditController.doSaveParent}"
-                                                                     oncomplete="PF('parentEditDialog').hide()"
-                                                                     update=":parentForm"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentEditDialog').hide()"
+                                                                     update=":parentForm:parentTable"
                                                                      process="@widgetVar(parentEditDialog)"/>
                                                     <p:commandButton value="Neu laden"
                                                                      action="#{parentEditController.doReloadParent}"
                                                                      />
                                                     <p:commandButton value="Abbruch"
-                                                                     onclick="PF('parentEditDialog').hide()"/>
+                                                                     onclick="PF('parentEditDialog').hide()" immediate="true"/>
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </p:dialog>
