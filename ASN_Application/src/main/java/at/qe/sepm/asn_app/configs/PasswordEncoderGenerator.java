@@ -4,6 +4,7 @@ package at.qe.sepm.asn_app.configs;
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 22.03.2017
  */
+/*
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Calendar;
@@ -35,4 +36,4 @@ public class PasswordEncoderGenerator {
 
 
     }
-}
+}*/
