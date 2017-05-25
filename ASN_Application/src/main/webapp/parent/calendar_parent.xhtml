@@ -65,12 +65,12 @@
 										</div>
 										<h:form id="sheduleForm">
 											<p:growl id="growl" showDetail="true" sticky="true" />
-											<p:schedule locale="de" aspectRatio="1.5"
-												style="padding-left:200px; padding-right: 200px;"
-												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
-												centerHeaderTemplate="month, agendaWeek, agendaDay"
-												id="schedule" value="#{scheduleView.eventModel}"
-												widgetVar="myschedule" timeZone="GMT+1">
+                                        <p:schedule locale="de" aspectRatio="1.5"
+                                                    style="padding-left:200px; padding-right: 200px;"
+                                                    leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
+                                                    centerHeaderTemplate="month, agendaWeek, agendaDay"
+                                                    id="schedule" value="#{scheduleView.eventModel}"
+                                                    widgetVar="myschedule" timeZone="GMT+2">
 
 												<p:ajax event="dateSelect" update="eventDetails"
 													oncomplete="PF('eventDateDialog').show();" />
@@ -100,49 +100,22 @@
 												showEffect="clip" hideEffect="clip">
 												<p:messages showDetail="false" />
 												<h:panelGrid id="eventDateDetails" columns="2">
-													<p:outputLabel for="info" value="Infobox:" />
-													<h:selectBooleanCheckbox id="info"
-														disabled="#{scheduleView.child or scheduleView.meal}"
-														value="#{scheduleView.info}">
-														<p:ajax update="eventDateDetails" />
-
-													</h:selectBooleanCheckbox>
 
 													<p:outputLabel for="child" value="Kinder anmelden:" />
 													<h:selectBooleanCheckbox id="child"
-														disabled="#{scheduleView.meal or scheduleView.info}"
+														disabled="#{scheduleView.meal}"
 														value="#{scheduleView.child}">
 														<p:ajax update="eventDateDetails" />
 
 													</h:selectBooleanCheckbox>
 
-													<p:outputLabel for="info" value="Essen:" />
+													<p:outputLabel for="meal" value="Essen:" />
 													<h:selectBooleanCheckbox id="meal"
-														disabled="#{scheduleView.child or scheduleView.info}"
+														disabled="#{scheduleView.child}"
 														value="#{scheduleView.meal}">
 														<p:ajax update="eventDateDetails" />
 
 													</h:selectBooleanCheckbox>
-
-													<ui:fragment rendered="#{scheduleView.info}">
-														<p:outputLabel for="max" value="Maximalbelegung:" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.info}">
-														<p:outputPanel id="max">17/20</p:outputPanel>
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.info}">
-														<p:outputLabel for="fromGet" value="Bringzeit:" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.info}">
-														<p:outputPanel id="fromGet">7:00 bis 9:00</p:outputPanel>
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.info}">
-														<p:outputLabel for="toGet" value="Abholzeit:" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.info}">
-														<p:outputPanel id="toGet">12:15 bis 14:00</p:outputPanel>
-													</ui:fragment>
-
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:outputLabel for="advanced" value="Kinder:" />
 

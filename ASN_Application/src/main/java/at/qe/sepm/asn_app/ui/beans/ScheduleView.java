@@ -24,9 +24,11 @@ import org.springframework.stereotype.Component;
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
 
@@ -52,6 +54,8 @@ public class ScheduleView implements Serializable {
 	private UserService userService;
 	@Autowired
 	private AuditLogRepository auditLogRepository;
+	@Autowired
+	private NurseryInformationService nurseryInformationService;
 	private boolean visible;
 	private boolean important;
 	private boolean child;
@@ -64,6 +68,7 @@ public class ScheduleView implements Serializable {
 	private String reciever;
 	private String sender;
 	private Collection<Task> tasks;
+	private Collection<NurseryInformation> nurseryInfo;
 
 	@PostConstruct
 	public void init() {
@@ -82,9 +87,10 @@ public class ScheduleView implements Serializable {
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.PARENT
-					&& t.getSender().getUserRole() == UserRole.EMPLOYEE && (t.getEndingDate().compareTo(new Date()) > 0))
+					&& t.getSender().getUserRole() == UserRole.EMPLOYEE
+					&& (t.getEndingDate().compareTo(new Date()) > 0))
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
-			else if( t.getEndingDate().compareTo(new Date()) > 0)
+			else if (t.getEndingDate().compareTo(new Date()) > 0)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
 			else
 				break;
@@ -96,6 +102,30 @@ public class ScheduleView implements Serializable {
 			System.err.println(t.getStringId());
 			System.err.println(ev.getId());
 
+		}
+		if (getAuthenticatedUser().getUserRole() == UserRole.PARENT) {
+			nurseryInfo = nurseryInformationService.getAllInformation();
+			for (NurseryInformation n : nurseryInfo) {
+				/*DefaultScheduleEvent ev;
+				DefaultScheduleEvent ev1;
+				DefaultScheduleEvent ev2;
+				ev = new DefaultScheduleEvent("   " + n.getMaxOccupancy() + "  Plätze frei", n.getOriginDate(),
+						n.getOriginDate(), "info");
+				ev1 = new DefaultScheduleEvent("Bringzeit", n.getBringStart(), n.getBringEnd(), "info");
+				ev2 = new DefaultScheduleEvent("Holzeit", n.getPickUpStart(), n.getPickUpEnd(), "info");
+				eventModel.addEvent(ev);
+				eventModel.addEvent(ev1);
+				eventModel.addEvent(ev2);*/
+
+				DefaultScheduleEvent ev3;
+				ev3 = new DefaultScheduleEvent("   " + n.getMaxOccupancy() + "  Plätze frei.\n  Bringzeit: "
+						+ n.getBringDurationNew() + "\n" + 
+						"Holzeit: " + n.getPickUpDurationNew(), n.getOriginDate(), n.getOriginDate(),
+						"info");
+				
+				eventModel.addEvent(ev3);
+
+			}
 		}
 	}
 
