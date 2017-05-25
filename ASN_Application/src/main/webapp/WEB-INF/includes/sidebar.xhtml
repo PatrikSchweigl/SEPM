@@ -284,7 +284,7 @@
 							rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">
 							<h:panelGrid columns="2" style="width:50px;"
 								columnClasses="logo,detail">
-								<p:graphicImage name="pictures/tiger.jpg" width="32" height="32" />
+								<p:graphicImage name="pictures/profile_pictures/#{parentService.loadParent(parent.username).getImgName()}" width="32" height="32" />
 								<p:commandLink value="#{parent.username}"
 									action="#{privateMessageController.setUsername(parent.username)}"
 									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
