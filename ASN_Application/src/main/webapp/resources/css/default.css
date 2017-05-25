@@ -90,6 +90,9 @@ p {
 .employee{
    background: green;
  }
+.info{
+   background: brown;
+}
 
 .navbar {
   position: relative;
