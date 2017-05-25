@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.services;
+package at.qe.sepm.asn_app.ui.beans;
 
 import java.util.Date;
 
@@ -18,6 +18,8 @@ import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Picture;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.AuditLogService;
+import at.qe.sepm.asn_app.services.PictureService;
 
 @Component
 public class FileBean {
@@ -26,7 +28,7 @@ public class FileBean {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private AuditLogRepository auditLogRepository;
+    private AuditLogService auditLogService;
 	private Picture picture;
     private UploadedFile file;
 	public FileBean(){}
@@ -52,8 +54,10 @@ public class FileBean {
 	public void handleFileUpload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
-		System.out.println( file.getFileName());
+        auditLogService.saveAuditLog(log);
+       
+        
+        pictureService.savePicture(new Picture(file.getFileName(), getAuthenticatedUser(), new Date(), file.getFileName()));
 		
 	}
 	
