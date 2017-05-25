@@ -64,16 +64,13 @@
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a
-								href="/parent/calendar_parent.xhtml"> <i
-									class="fa fa-calendar fa-3x"></i> <span
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
+							<li class="treeview"><a href="/parent/calendar_parent.xhtml">
+									<i class="fa fa-calendar fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kalender</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/calendar_employee.xhtml"> <i
 									class="fa fa-calendar fa-3x"></i> <span
@@ -179,8 +176,29 @@
 			<p:dialog header="Eigene Daten" id="ownDataDialog"
 				widgetVar="ownDataDialog" modal="true" showEffect="fade"
 				hideEffect="fade" resizable="false" closeOnEscape="true">
-				<p:messages id="messages" autoUpdate="true"/>
+				<p:messages id="messages" autoUpdate="true" />
 				<p:outputPanel id="parentDataCreate">
+					<p:outputPanel rendered="#{sessionInfoBean.hasRole('PARENT')}">
+						<h:outputLabel for="fupload-edit" id="logo-section-edit">
+							<p:fileUpload id="fupload-edit" widgetVar="fupload-edit"
+								auto="true" mode="advanced" style="display:none;"
+								fileUploadListener="#{fileBean.handleFileUploadProfilePicture}"
+								dragDropSupport="true" update="logo-section-edit">
+							</p:fileUpload>
+							<div align="center" onclick="$('input[type=file]').click()">
+								<p:graphicImage id="out-image-edit"
+									style="max-height: 200px; max-width: 200px"
+									name="pictures/profile_pictures/#{parentService.loadParent(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}">
+								</p:graphicImage>
+								<p:outputPanel>
+									<p:graphicImage rendered="#{empty parentService.loadParent(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
+										name="pictures/profile_pictures/emptypicture.png"
+										value="Bild hochladen"></p:graphicImage>
+								</p:outputPanel>
+								<br />
+							</div>
+						</h:outputLabel>
+					</p:outputPanel>
 					<h:panelGrid columns="2">
 						<p:outputLabel for="username" value="Benutzername: " />
 						<p:inputText id="username"
@@ -211,20 +229,22 @@
 						<p:inputText id="location"
 							value="#{sessionInfoBean.currentUserData.location}" />
 						<p:outputLabel for="postcode" value="Postleitzahl: " />
-						<p:inputMask id="postcode"
-									 mask="9999?9" slotChar=" "
-									 value="#{sessionInfoBean.currentUserData.postcode}"/>
+						<p:inputMask id="postcode" mask="9999?9" slotChar=" "
+							value="#{sessionInfoBean.currentUserData.postcode}" />
 						<p:outputLabel for="email" value="Email: " />
-						<p:inputText id="email" validatorMessage="Ungültiges Email-Format!" value="#{sessionInfoBean.currentUserData.email}">
-							<f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						<p:inputText id="email"
+							validatorMessage="Ungültiges Email-Format!"
+							value="#{sessionInfoBean.currentUserData.email}">
+							<f:validateRegex
+								pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						</p:inputText>
 					</h:panelGrid>
 					<h:panelGrid columns="3">
 						<p:commandButton value="Speichern"
 							action="#{sessionInfoBean.doSaveUser()}"
-										 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('ownDataDialog').hide()" />
+							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('ownDataDialog').hide()" />
 						<p:commandButton value="Abbruch"
-							onclick="PF('ownDataDialog').hide()" immediate="true"/>
+							onclick="PF('ownDataDialog').hide()" immediate="true" />
 					</h:panelGrid>
 				</p:outputPanel>
 			</p:dialog>

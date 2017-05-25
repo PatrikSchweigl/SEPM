@@ -19,7 +19,7 @@ public class CustomServletContextInitializer implements ServletContextInitialize
     @Override
     public void onStartup(ServletContext sc) throws ServletException {
         sc.setInitParameter("javax.faces.DEFAULT_SUFFIX", ".xhtml");
-        sc.setInitParameter("javax.faces.PROJECT_STAGE", "Development");
+        sc.setInitParameter("javax.faces.PROJECT_STAGE", "Production");
     }
 
     @Bean

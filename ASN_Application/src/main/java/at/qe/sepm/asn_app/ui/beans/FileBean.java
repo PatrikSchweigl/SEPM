@@ -24,9 +24,11 @@ import org.springframework.stereotype.Component;
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Picture;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.AuditLogService;
+import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.PictureService;
 
 @Component
@@ -35,6 +37,8 @@ public class FileBean {
 	private PictureService pictureService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ParentService parentService;
     @Autowired
     private AuditLogService auditLogService;
 	private Picture picture;
@@ -73,6 +77,25 @@ public class FileBean {
         Path newFile = Files.createTempFile(folder, filename, "." + extension);
         pictureService.savePicture(new Picture(newFile.getFileName().toString(), getAuthenticatedUser(), new Date(), file.getFileName()));
 
+        InputStream input = file.getInputstream();
+        Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
+        System.out.println("Uploaded file successfully saved in " + newFile);
+        
+	}
+	
+	public void handleFileUploadProfilePicture(FileUploadEvent event) throws IOException {
+		UploadedFile file = event.getFile();
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PROFILE_PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+        auditLogService.saveAuditLog(log);
+
+        Path folder = Paths.get("src/main/webapp/resources/pictures/profile_pictures");
+        String filename = FilenameUtils.getBaseName(file.getFileName());
+        String extension = FilenameUtils.getExtension(file.getFileName());
+        Path newFile = Files.createTempFile(folder, filename, "." + extension);
+        pictureService.savePicture(new Picture(newFile.getFileName().toString(), getAuthenticatedUser(), new Date(), file.getFileName()));
+        Parent parent = parentService.loadParent(getAuthenticatedUser().getUsername());
+        parent.setImgName(newFile.getFileName().toString());
+        parentService.saveParent(parent);
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Uploaded file successfully saved in " + newFile);
