@@ -25,7 +25,7 @@
 										<ui:repeat var="picture"
 											value="#{pictureController.getPictures()}">
 											<h:outputLink onclick="PF('comments').show()"
-												value="#{picture.url}">
+												value="##{picture.url}">
 												<h:graphicImage class="picture"
 													name="pictures/gallery/#{picture.url}" id="tiger" />
 											</h:outputLink>
