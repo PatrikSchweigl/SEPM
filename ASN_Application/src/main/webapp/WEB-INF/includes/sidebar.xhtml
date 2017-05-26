@@ -65,6 +65,13 @@
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
+							<li class="treeview"><a
+								href="/parent/children_parent.xhtml"> <i
+									class="fa fa-child fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Kinder</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a href="/parent/calendar_parent.xhtml">
 									<i class="fa fa-calendar fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kalender</span>
@@ -191,7 +198,8 @@
 									name="pictures/profile_pictures/#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}">
 								</p:graphicImage>
 								<p:outputPanel>
-									<p:graphicImage rendered="#{empty userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
+									<p:graphicImage
+										rendered="#{empty userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
 										name="pictures/profile_pictures/emptypicture.png"
 										value="Bild hochladen"></p:graphicImage>
 								</p:outputPanel>
@@ -264,7 +272,9 @@
 							rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
 							<h:panelGrid columns="2" style="width:50px;"
 								columnClasses="logo,detail">
-								<p:graphicImage name="pictures/profile_pictures/#{userService.loadUser(employee.username).getImgName()}" width="32" height="32" />
+								<p:graphicImage
+									name="pictures/profile_pictures/#{userService.loadUser(employee.username).getImgName()}"
+									width="32" height="32" />
 
 								<p:commandLink value="#{employee.username}"
 									action="#{privateMessageController.setUsername(employee.username)}"
@@ -284,7 +294,9 @@
 							rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">
 							<h:panelGrid columns="2" style="width:50px;"
 								columnClasses="logo,detail">
-								<p:graphicImage name="pictures/profile_pictures/#{userService.loadUser(parent.username).getImgName()}" width="32" height="32" />
+								<p:graphicImage
+									name="pictures/profile_pictures/#{userService.loadUser(parent.username).getImgName()}"
+									width="32" height="32" />
 								<p:commandLink value="#{parent.username}"
 									action="#{privateMessageController.setUsername(parent.username)}"
 									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">

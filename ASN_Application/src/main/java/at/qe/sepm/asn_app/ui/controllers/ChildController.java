@@ -19,7 +19,7 @@ import java.util.Collection;
  * on 14.04.17.
  */
 @Component
-@Scope("view")
+@Scope("application")
 public class ChildController {
 
     @Autowired
