@@ -188,13 +188,13 @@ public class NurseryInformation implements Persistable<Long> {
     	String end = new SimpleDateFormat("H:mm").format(this.bringEnd);
 
 
-        return start + " Uhr - " + end + " Uhr";
+        return start + " - " + end + " Uhr";
     }
     public String getPickUpDurationNew(){
     	String start = new SimpleDateFormat("H:mm").format(this.pickUpStart);
     	String end = new SimpleDateFormat("H:mm").format(this.pickUpEnd);
 
 
-        return start + " Uhr - " + end + " Uhr";
+        return start + " - " + end + " Uhr";
     }
 }

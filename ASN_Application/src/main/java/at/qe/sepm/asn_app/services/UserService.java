@@ -51,13 +51,6 @@ public class UserService {
         return userRepository.findFirstByUsername(username);
     }
 
-    /**
-     * Saves the userData.
-     *
-     * @param userData the userData to save
-     * @return the updated userData
-     */
-    @PreAuthorize("hasAuthority('ADMIN')")
     public UserData saveUser(UserData userData) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"SAVED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
         auditLogService.saveAuditLog(log);

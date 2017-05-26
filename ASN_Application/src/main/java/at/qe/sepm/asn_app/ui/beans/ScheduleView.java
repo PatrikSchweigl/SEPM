@@ -122,7 +122,7 @@ public class ScheduleView implements Serializable {
 						+ n.getBringDurationNew() + "\n" + 
 						"Holzeit: " + n.getPickUpDurationNew(), n.getOriginDate(), n.getOriginDate(),
 						"info");
-				
+				ev3.setAllDay(true);
 				eventModel.addEvent(ev3);
 
 			}
