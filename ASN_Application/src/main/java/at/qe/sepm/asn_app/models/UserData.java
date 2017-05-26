@@ -34,6 +34,7 @@ public class UserData implements Persistable<String> {
     private String postcode;
     private String birthday;
     private String email;
+    private String imgName;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -135,6 +136,14 @@ public class UserData implements Persistable<String> {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
 
     @Override
     public int hashCode() {
@@ -193,4 +202,6 @@ public class UserData implements Persistable<String> {
                 "Location: " + location + "\n" +
                 "StreetName: " + streetName;
     }
+
+
 }

@@ -30,6 +30,7 @@ import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.AuditLogService;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.PictureService;
+import at.qe.sepm.asn_app.services.UserService;
 
 @Component
 public class FileBean {
@@ -38,7 +39,7 @@ public class FileBean {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private ParentService parentService;
+    private UserService userService;
     @Autowired
     private AuditLogService auditLogService;
 	private Picture picture;
@@ -92,10 +93,9 @@ public class FileBean {
         String filename = FilenameUtils.getBaseName(file.getFileName());
         String extension = FilenameUtils.getExtension(file.getFileName());
         Path newFile = Files.createTempFile(folder, filename, "." + extension);
-        pictureService.savePicture(new Picture(newFile.getFileName().toString(), getAuthenticatedUser(), new Date(), file.getFileName()));
-        Parent parent = parentService.loadParent(getAuthenticatedUser().getUsername());
-        parent.setImgName(newFile.getFileName().toString());
-        parentService.saveParent(parent);
+        UserData user = userService.loadUser(getAuthenticatedUser().getUsername());
+        user.setImgName(newFile.getFileName().toString());
+        userService.saveUser(user);
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Uploaded file successfully saved in " + newFile);
