@@ -25,7 +25,8 @@
 												<h:form>
 													<p:accordionPanel multiple="true"
 														style="padding-left:400px;padding-right:400px">
-														<p:tab title="Mittagsmenü für die aktuelle Woche (oder kommende Woche)">
+														<p:tab
+															title="Mittagsmenü für die aktuelle Woche (oder kommende Woche)">
 															<h:panelGrid columns="5" layout="grid">
 																<h:outputText value="Mo    22.05."
 																	style="padding-right:60px" />
@@ -47,15 +48,11 @@
 																<h:outputText value="Gemüselasagne"
 																	style="padding-right:60px" />
 																<h:outputText value="Fischstäbchen mit Knoblauchbrot" />
-																
-																<h:outputText value="4.50€"
-																	style="padding-right:60px" />
-																<h:outputText value="4.50€"
-																	style="padding-right:60px" />
-																<h:outputText value="4.50€"
-																	style="padding-right:60px" />
-																<h:outputText value="4.00€"
-																	style="padding-right:60px" />
+
+																<h:outputText value="4.50€" style="padding-right:60px" />
+																<h:outputText value="4.50€" style="padding-right:60px" />
+																<h:outputText value="4.50€" style="padding-right:60px" />
+																<h:outputText value="4.00€" style="padding-right:60px" />
 																<h:outputText value="3.50€" />
 															</h:panelGrid>
 														</p:tab>
@@ -65,14 +62,15 @@
 										</div>
 										<h:form id="sheduleForm">
 											<p:growl id="growl" showDetail="true" sticky="true" />
-                                        <p:schedule locale="de" aspectRatio="1.5"
-                                                    style="padding-left:200px; padding-right: 200px;"
-                                                    leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
-                                                    centerHeaderTemplate="month, agendaWeek, agendaDay"
-                                                    id="schedule" value="#{scheduleView.eventModel}"
-                                                    widgetVar="myschedule" timeZone="GMT+2">
+											<p:schedule locale="de" aspectRatio="1.5"
+												style="padding-left:200px; padding-right: 200px;"
+												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
+												centerHeaderTemplate="month, agendaWeek, agendaDay"
+												id="schedule" value="#{scheduleView.eventModel}"
+												widgetVar="myschedule" timeZone="GMT+2">
 
-												<p:ajax event="dateSelect" update="eventDetails"
+												<p:ajax event="dateSelect" update="eventDateDetails"
+													listener="#{scheduleView.onDateSelect}"
 													oncomplete="PF('eventDateDialog').show();" />
 												<p:ajax event="eventSelect"
 													listener="#{scheduleView.onEventSelect}"
@@ -122,12 +120,12 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:selectOneListbox style="width: 210px;" id="advanced"
-															value="#{scheduleView.reciever}" var="p" filter="true"
-															filterMatchMode="contains">
+															value="#{scheduleView.childFirstname}" var="p"
+															filter="true" filterMatchMode="contains">
 															<f:selectItems
 																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
-																var="parent" itemLabel="#{parent.firstName}"
-																itemValue="#{parent.firstName}" />
+																var="child" itemLabel="#{child.firstName}"
+																itemValue="#{child.firstName}" />
 
 															<p:column>
 																<p:graphicImage name="pictures/tiger.jpg" width="32"
@@ -140,15 +138,26 @@
 														</p:selectOneListbox>
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
+														<p:outputLabel for="too" value="Uhrzeit:" />
+
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
+
+														<p:calendar id="too"
+															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
+															pattern="dd/MM/yyyy HH:mm" />
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.child}">
 														<p:outputLabel for="advanced" value="Anmerkungen:" />
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:inputTextarea placeholder="Anmerkung" id="messageInput"
-															value="#{privateMessageController.privateMessage}"
-															rows="5" cols="20" autoResize="false" />
+															value="#{scheduleView.description}" rows="5" cols="20"
+															autoResize="false" />
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
-														<p:commandButton id="addButton" value="Speichern" />
+														<p:commandButton id="addButton" value="Speichern"
+															actionListener="#{scheduleView.addRegistration}" />
 
 													</ui:fragment>
 												</h:panelGrid>

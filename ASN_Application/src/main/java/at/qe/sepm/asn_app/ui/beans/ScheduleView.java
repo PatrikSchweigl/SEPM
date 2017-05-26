@@ -23,12 +23,16 @@ import org.springframework.stereotype.Component;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
+import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
 
@@ -51,6 +55,10 @@ public class ScheduleView implements Serializable {
 	private ScheduleEvent editEvent = new DefaultScheduleEvent();
 	private ScheduleEvent editViewEvent = new DefaultScheduleEvent();
 	@Autowired
+	private RegistrationService registrationService;
+	@Autowired
+	private ChildService childService;
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private AuditLogRepository auditLogRepository;
@@ -69,6 +77,10 @@ public class ScheduleView implements Serializable {
 	private String sender;
 	private Collection<Task> tasks;
 	private Collection<NurseryInformation> nurseryInfo;
+	private Child childReg;
+	private String description;
+	private String childFirstname;
+	private Date childBringDate;
 
 	@PostConstruct
 	public void init() {
@@ -170,6 +182,12 @@ public class ScheduleView implements Serializable {
 					new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));
 	}
 
+	public void addRegistration(){
+		childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(), childFirstname);
+		Registration reg = new Registration(description, childReg, event.getStartDate());
+		registrationService.saveRegistration(reg);
+	}
+	
 	public void addEvent() {
 		if (event.getStartDate().compareTo(new Date()) < 0)
 			return;
@@ -360,5 +378,37 @@ public class ScheduleView implements Serializable {
 
 	public void setChild(boolean child) {
 		this.child = child;
+	}
+
+	public Child getChildReg() {
+		return childReg;
+	}
+
+	public void setChildReg(Child childReg) {
+		this.childReg = childReg;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getChildFirstname() {
+		return childFirstname;
+	}
+
+	public void setChildFirstname(String childFirstname) {
+		this.childFirstname = childFirstname;
+	}
+
+	public Date getChildBringDate() {
+		return childBringDate;
+	}
+
+	public void setChildBringDate(Date childBringDate) {
+		this.childBringDate = childBringDate;
 	}
 }
