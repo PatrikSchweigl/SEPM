@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.imageio.spi.RegisterableService;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>

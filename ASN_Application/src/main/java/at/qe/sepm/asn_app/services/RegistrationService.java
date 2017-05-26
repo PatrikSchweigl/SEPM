@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -30,7 +31,17 @@ public class RegistrationService {
     }
 
     public Collection<Registration> getAllRegistrationsByDate(){
-        return registrationRepository.getRegistrationsByDate(new Date());   //new Date() just to achieve a successful building
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTime(new Date());
+    	cal.set(Calendar.HOUR_OF_DAY, 0);
+    	cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		Collection<Registration> reg = registrationRepository.findAll();
+		for(Registration r : reg){
+			System.err.println(r.getDate());
+		}
+    	System.err.println(cal.getTime());
+        return registrationRepository.getRegistrationsByDate(cal.getTime());
     }
 
     public Collection<Registration> getAllRegistrationsByParent(){

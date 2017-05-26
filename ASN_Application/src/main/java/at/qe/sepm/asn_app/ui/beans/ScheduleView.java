@@ -140,7 +140,7 @@ public class ScheduleView implements Serializable {
 
 			}
 			
-			registrations = registrationService.getAllRegistrations();
+			registrations = registrationService.getAllRegistrationsByParent();
 			for(Registration r : registrations){
 				DefaultScheduleEvent ev;
 				
@@ -194,7 +194,12 @@ public class ScheduleView implements Serializable {
 
 	public void addRegistration(){
 		childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(), childFirstname);
-		Registration reg = new Registration(description, childReg, event.getStartDate());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(event.getStartDate());
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		Registration reg = new Registration(description, childReg, cal.getTime(), event.getStartDate());
 		registrationService.saveRegistration(reg);
 	}
 	

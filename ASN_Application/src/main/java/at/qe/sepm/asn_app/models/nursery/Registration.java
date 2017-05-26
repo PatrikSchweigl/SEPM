@@ -22,16 +22,18 @@ public class Registration implements Persistable<Long> {
     @ManyToOne(optional = false)
     private Child child;
     private Date date;  //date should hold Year/Month/Day only - no timestamps -> easier to compare
+    private Date bringdate;
 
     public Registration(){
 
     }
 
 
-    public Registration(String note, Child child, Date date) {
+    public Registration(String note, Child child, Date date, Date bringDate) {
         this.note = note;
         this.child = child;
         this.date = date;
+        this.setBringdate(bringDate);
     }
 
     @Override
@@ -71,4 +73,14 @@ public class Registration implements Persistable<Long> {
     public void setDate(Date date) {
         this.date = date;
     }
+
+
+	public Date getBringdate() {
+		return bringdate;
+	}
+
+
+	public void setBringdate(Date bringdate) {
+		this.bringdate = bringdate;
+	}
 }
