@@ -24,29 +24,31 @@
 												<p:dialog id="dialogTest"
 													visible="#{sessionInfoBean.hasDefaultPasswd()}"
 													width="400px" closable="true" widgetVar="dialogTest"
-													header="Passwort ändern" resizeable="false" modal="true" closeOnEscape="true">
+													header="Passwort ändern" resizeable="false" modal="true"
+													closeOnEscape="true">
 													<h:outputText
 														value="Aus Sicherheitsgründen empfehlen wir Ihnen, das Passwort zu ändern." />
-													<p:messages id="messages"
-														autoUpdate="true" />
+													<p:messages id="messages" autoUpdate="true" />
 
 													<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
 														<h:outputLabel for="pwd1" value="Password 1: *" />
-														<p:password id="pwd1" value="#{employeeController.password}"
-															match="pwd2" label="Passwort:" required="true"
-															feedback="true" validatorMessage="Passwörter stimmen nicht überein!"
+														<p:password id="pwd1"
+															value="#{employeeController.password}" match="pwd2"
+															label="Passwort:" required="true" feedback="true"
+															validatorMessage="Passwörter stimmen nicht überein!"
 															requiredMessage="Kein Passwort eingegeben! (Feld 1)" />
 
 														<h:outputLabel for="pwd2" value="Password 2: *" />
-														<p:password id="pwd2" value="#{employeeController.password}"
+														<p:password id="pwd2"
+															value="#{employeeController.password}"
 															label="Wiederholung: " required="true"
-																	requiredMessage="Kein Passwort eingegeben! (Feld 2)"/>
+															requiredMessage="Kein Passwort eingegeben! (Feld 2)" />
 													</h:panelGrid>
 													<h:panelGrid columns="3">
 														<p:commandButton
 															action="#{employeeController.doChangePassword(employeeController.password)}"
 															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogTest').hide()"
-															value="Speichern"/>
+															value="Speichern" />
 													</h:panelGrid>
 												</p:dialog>
 											</h:form>
@@ -55,11 +57,14 @@
 													<p:tab title="Anwesende Kinder">
 														<p:dataTable id="childTable" var="reg"
 															value="#{registrationController.getRegistrationsByDate()}">
-															<p:column headerText="First Name">
+															<p:column headerText="Vorname">
 																<h:outputText value="#{reg.child.firstName}" />
 															</p:column>
-															<p:column headerText="Last Name">
+															<p:column headerText="Nachname">
 																<h:outputText value="#{reg.child.lastName}" />
+															</p:column>
+															<p:column headerText="Anmerkung">
+																<h:outputText value="#{reg.note}" />
 															</p:column>
 
 
@@ -67,6 +72,19 @@
 													</p:tab>
 													<p:tab title="Kinder, die heute zu Mittag essen">
 														<p:dataTable id="childTableEating" var="child"
+															value="#{childController.children}">
+															<p:column headerText="Vorname">
+																<h:outputText value="#{child.firstName}" />
+															</p:column>
+															<p:column headerText="Nachname">
+																<h:outputText value="#{child.lastName}" />
+															</p:column>
+
+
+														</p:dataTable>
+													</p:tab>
+													<p:tab title="Bestätigungen">
+														<p:dataTable id="childTableETC" var="child"
 															value="#{childController.children}">
 															<p:column headerText="First Name">
 																<h:outputText value="#{child.firstName}" />
@@ -77,10 +95,6 @@
 
 
 														</p:dataTable>
-													</p:tab>
-													<p:tab title="Sonstige Benachrichtigungen">
-														<h:panelGrid columns="2" cellpadding="10">
-														</h:panelGrid>
 													</p:tab>
 												</p:accordionPanel>
 											</h:form>
