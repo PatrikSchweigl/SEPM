@@ -80,4 +80,8 @@ public class ChildService {
         return userRepository.findFirstByUsername(auth.getName());
     }
 
+	public Child getChildrenByFirstnameAndParentUsername(String username, String childFirstname) {
+		return childRepository.getChildrenByFirstnameAndParentUsername(username, childFirstname);
+	}
+
 }
