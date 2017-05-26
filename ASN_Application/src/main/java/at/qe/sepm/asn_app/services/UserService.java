@@ -30,7 +30,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private AuditLogRepository auditLogRepository;
+    private AuditLogService auditLogService;
 
     /**
      * Returns a collection of all users.
@@ -60,7 +60,7 @@ public class UserService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public UserData saveUser(UserData userData) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"SAVED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+        auditLogService.saveAuditLog(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userData.setPassword( passwordEncoder.encode(userData.getPassword()));
         userData.setUserRole(UserRole.ADMIN);
@@ -70,7 +70,7 @@ public class UserService {
 
     public UserData changeData(UserData userData) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"CHANGED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+        auditLogService.saveAuditLog(log);
         return userRepository.save(userData);
     }
 
@@ -82,7 +82,7 @@ public class UserService {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(UserData userData) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ userData.getUsername() + " [" + userData.getUserRole() +"]", new Date());
-        auditLogRepository.save(log);
+        auditLogService.saveAuditLog(log);
         userRepository.delete(userData);
     }
 
