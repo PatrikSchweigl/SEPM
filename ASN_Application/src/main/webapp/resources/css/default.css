@@ -96,6 +96,9 @@ p {
 .registration{
    background: purple;
 }
+.meal{
+   background: blue;
+}
 .navbar {
   position: relative;
   min-height: 50px;

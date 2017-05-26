@@ -128,8 +128,9 @@
 																itemValue="#{child.firstName}" />
 
 															<p:column>
-																<p:graphicImage name="pictures/tiger.jpg" width="32"
-																	height="32" />
+																<p:graphicImage
+																	name="pictures/profil_pictures_children/#{child.imgName}"
+																	width="32" height="32" />
 															</p:column>
 
 															<p:column>
@@ -157,6 +158,36 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:commandButton id="addButton" value="Speichern"
+															actionListener="#{scheduleView.addRegistration}" />
+
+													</ui:fragment>
+
+													<ui:fragment rendered="#{scheduleView.meal}">
+														<p:outputLabel for="mealBox" value="Kinder:" />
+
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.meal}">
+														<p:selectOneListbox style="width: 210px;" id="mealBox"
+															value="#{scheduleView.childFirstname}" var="p"
+															filter="true" filterMatchMode="contains">
+															<f:selectItems
+																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+																var="child" itemLabel="#{child.firstName}"
+																itemValue="#{child.firstName}" />
+
+															<p:column>
+																<p:graphicImage
+																	name="pictures/profil_pictures_children/#{child.imgName}"
+																	width="32" height="32" />
+															</p:column>
+
+															<p:column>
+																<h:outputText value="#{p}" />
+															</p:column>
+														</p:selectOneListbox>
+													</ui:fragment>
+													<ui:fragment rendered="#{scheduleView.meal}">
+														<p:commandButton id="mealButton" value="Speichern"
 															actionListener="#{scheduleView.addRegistration}" />
 
 													</ui:fragment>
