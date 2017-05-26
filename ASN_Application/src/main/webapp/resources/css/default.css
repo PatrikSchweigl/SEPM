@@ -93,7 +93,9 @@ p {
 .info{
    background: brown;
 }
-
+.registration{
+   background: purple;
+}
 .navbar {
   position: relative;
   min-height: 50px;
