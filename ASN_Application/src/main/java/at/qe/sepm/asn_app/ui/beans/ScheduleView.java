@@ -77,6 +77,7 @@ public class ScheduleView implements Serializable {
 	private String sender;
 	private Collection<Task> tasks;
 	private Collection<NurseryInformation> nurseryInfo;
+	private Collection<Registration> registrations;
 	private Child childReg;
 	private String description;
 	private String childFirstname;
@@ -137,6 +138,15 @@ public class ScheduleView implements Serializable {
 				ev3.setAllDay(true);
 				eventModel.addEvent(ev3);
 
+			}
+			
+			registrations = registrationService.getAllRegistrations();
+			for(Registration r : registrations){
+				DefaultScheduleEvent ev;
+				
+				ev = new DefaultScheduleEvent(r.getChild().getFirstName() + " " + r.getChild().getLastName() + "\n" + 
+				r.getNote(), r.getDate(), r.getDate(), "registration");
+				eventModel.addEvent(ev);
 			}
 		}
 	}

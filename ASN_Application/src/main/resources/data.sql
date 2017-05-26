@@ -22,7 +22,3 @@ INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo2', 'cheng', 'cheng');
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo3', 'cheng', 'cheng');
 
-INSERT INTO registration (CHILD_ID, NOTE) VALUES (1, 'wird um 10:00 abgeholt - Arzttermin');
-INSERT INTO registration (CHILD_ID, NOTE) VALUES (2, 'wird von Opa Mahatma abgeholt');
-INSERT INTO registration (CHILD_ID, NOTE) VALUES (2, 'kommt erst um 09:00');
-
