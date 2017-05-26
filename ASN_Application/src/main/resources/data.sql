@@ -15,8 +15,14 @@ INSERT INTO user_data (FIRST_NAME, LAST_NAME, USERNAME, LOCATION, POSTCODE, STRE
 INSERT INTO employee (RELIGION, PHONE_NUMBER, USERNAME) VALUES ('ISLAM', '0660123456', 'fatima');
 
 INSERT INTO child (FIRST_NAME, LAST_NAME, PARENT1_USERNAME, BIRTHDAY) VALUES('Lena', 'Rädler', 'bernd', '11/11/2015');
+INSERT INTO child (FIRST_NAME, LAST_NAME, PARENT1_USERNAME, BIRTHDAY) VALUES('Sakura', 'Xiaping', 'mohammed', '03/05/2014');
+INSERT INTO child (FIRST_NAME, LAST_NAME, PARENT1_USERNAME, BIRTHDAY) VALUES('Fidel', 'Castro', 'ashley', '26/09/2014');
 
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo', 'cheng', 'cheng');
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo2', 'cheng', 'cheng');
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo3', 'cheng', 'cheng');
+
+INSERT INTO registration (CHILD_ID, NOTE) VALUES (1, 'wird um 10:00 abgeholt - Arzttermin');
+INSERT INTO registration (CHILD_ID, NOTE) VALUES (2, 'wird von Opa Mahatma abgeholt');
+INSERT INTO registration (CHILD_ID, NOTE) VALUES (2, 'kommt erst um 09:00');
 
