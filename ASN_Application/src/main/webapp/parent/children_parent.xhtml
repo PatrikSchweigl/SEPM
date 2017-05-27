@@ -19,7 +19,7 @@
 											widgetVar="childTable"
 											value="#{childController.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
 											paginator="true" rows="10" paginatorPosition="bottom"
-											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 											rowsPerPageTemplate="10,25,50">
 
 											<f:facet name="header">
@@ -31,41 +31,6 @@
 												</p:outputPanel>
 											</f:facet>
 
-											<f:facet name="{Exporters}"
-												style="float: right; vertical-align: middle;">
-												<div style="float: right; vertical-align: middle;">
-													<h:commandLink>
-														<p:graphicImage id="print"
-															name="pictures/extractors/printer.png" width="32" />
-														<p:spacer width="10" />
-														<p:tooltip for="print" value="drucken" position="top" />
-														<p:printer />
-													</h:commandLink>
-													<h:commandLink>
-														<p:graphicImage id="excel"
-															name="pictures/extractors/excel.png" width="32" />
-														<p:spacer width="10" />
-														<p:tooltip for="excel" value="export excel" position="top" />
-														<p:dataExporter type="xls" target="usersTable"
-															fileName="Admins" />
-													</h:commandLink>
-													<h:commandLink>
-														<p:graphicImage id="pdf"
-															name="pictures/extractors/pdf.png" width="32" />
-														<p:spacer width="10" />
-														<p:tooltip for="pdf" value="export pdf" position="top" />
-														<p:dataExporter type="pdf" target="usersTable"
-															fileName="Admins" />
-													</h:commandLink>
-													<h:commandLink>
-														<p:graphicImage id="csv"
-															name="pictures/extractors/csv.png" width="32" />
-														<p:tooltip for="csv" value="export csv" position="top" />
-														<p:dataExporter type="csv" target="usersTable"
-															fileName="Admins" />
-													</h:commandLink>
-												</div>
-											</f:facet>
 
 											<p:column headerText="Vorname" filterBy="#{child.firstName}"
 												sortBy="#{child.firstName}" filterStyle="display:none">
@@ -96,10 +61,10 @@
 												value="Bezugsperson hinzufügen"
 												style="align-items:right; margin-top:100px;"></p:commandButton>
 										</div>
-										<p:dataTable id="caregiverTable" var="custody"
-											widgetVar="caregiverTable" value="" paginator="true"
+										<p:dataTable id="caregiverTable" var="child"
+											widgetVar="caregiverTable" value="#{caregiverController.caregivers}" paginator="true"
 											rows="10" paginatorPosition="bottom"
-											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 											rowsPerPageTemplate="10,25,50">
 
 											<f:facet name="header">
@@ -111,41 +76,6 @@
 												</p:outputPanel>
 											</f:facet>
 
-											<f:facet name="{Exporters}"
-												style="float: right; vertical-align: middle;">
-												<div style="float: right; vertical-align: middle;">
-													<h:commandLink>
-														<p:graphicImage id="print"
-															name="pictures/extractors/printer.png" width="32" />
-														<p:spacer width="10" />
-														<p:tooltip for="print" value="drucken" position="top" />
-														<p:printer />
-													</h:commandLink>
-													<h:commandLink>
-														<p:graphicImage id="excel"
-															name="pictures/extractors/excel.png" width="32" />
-														<p:spacer width="10" />
-														<p:tooltip for="excel" value="export excel" position="top" />
-														<p:dataExporter type="xls" target="usersTable"
-															fileName="Admins" />
-													</h:commandLink>
-													<h:commandLink>
-														<p:graphicImage id="pdf"
-															name="pictures/extractors/pdf.png" width="32" />
-														<p:spacer width="10" />
-														<p:tooltip for="pdf" value="export pdf" position="top" />
-														<p:dataExporter type="pdf" target="usersTable"
-															fileName="Admins" />
-													</h:commandLink>
-													<h:commandLink>
-														<p:graphicImage id="csv"
-															name="pictures/extractors/csv.png" width="32" />
-														<p:tooltip for="csv" value="export csv" position="top" />
-														<p:dataExporter type="csv" target="usersTable"
-															fileName="Admins" />
-													</h:commandLink>
-												</div>
-											</f:facet>
 
 											<p:column headerText="Vorname" filterBy="#{child.firstName}"
 												sortBy="#{child.firstName}" filterStyle="display:none">
@@ -154,11 +84,6 @@
 											<p:column headerText="Nachname" filterBy="#{child.lastName}"
 												sortBy="#{child.lastName}" filterStyle="display:none">
 												<h:outputText value="#{child.lastName}" />
-											</p:column>
-											<p:column headerText="Geburtsdatum"
-												filterBy="#{child.birthday}" sortBy="#{child.birthday}"
-												filterStyle="display:none">
-												<h:outputText value="#{child.birthday}" />
 											</p:column>
 											<p:column style="width:100px;text-align: center"
 												exportable="false">
