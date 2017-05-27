@@ -224,12 +224,33 @@
 														value="Notfallnummer: " />
 													<p:inputText id="emergencyNumber"
 														value="#{childController.childEdit.emergencyNumber}" />
-													<p:outputLabel for="allergies" value="Allergien: " />
+													<p:outputLabel for="allergies"
+														value="Allergie hinzufügen: " />
 													<p:inputText id="allergies"
 														value="#{childController.allergy}" />
-													<p:outputLabel for="intolerance" value="Unverträglichkeiten: " />
+													<p:outputLabel for="intolerance"
+														value="Unverträglichkeit hinzufügen: " />
 													<p:inputText id="intolerance"
 														value="#{childController.intolerance}" />
+													<p:outputLabel for="detail" value="Detailansicht:" />
+													<h:selectBooleanCheckbox id="detail"
+														value="#{childController.detail}">
+														<p:ajax update="childDataEdit" />
+													</h:selectBooleanCheckbox>
+													<ui:fragment rendered="#{childController.detail}">
+														<p:outputLabel for="all" value="Allergieliste:" />
+													</ui:fragment>
+
+													<ui:fragment rendered="#{childController.detail}">
+														<p:outputPanel id="all">#{childController.childEdit.allergies.toString()}</p:outputPanel>
+													</ui:fragment>
+													<ui:fragment rendered="#{childController.detail}">
+														<p:outputLabel for="int" value="Unverträglichkeitsliste:" />
+													</ui:fragment>
+
+													<ui:fragment rendered="#{childController.detail}">
+														<p:outputPanel id="int">#{childController.childEdit.foodIntolerances.toString()}</p:outputPanel>
+													</ui:fragment>
 												</h:panelGrid>
 												<p:separator />
 												<h:panelGrid columns="3">

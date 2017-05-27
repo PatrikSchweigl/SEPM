@@ -34,6 +34,7 @@ public class ChildController {
     private Child childEdit;
     private Caregiver caregiver;
     private String allergy;
+    private boolean detail;
     private String intolerance;
     private boolean care;
     private Collection<Child> children;
@@ -150,6 +151,14 @@ public class ChildController {
 
 	public void setIntolerance(String intolerance) {
 		this.intolerance = intolerance;
+	}
+
+	public boolean isDetail() {
+		return detail;
+	}
+
+	public void setDetail(boolean detail) {
+		this.detail = detail;
 	}
 
 
