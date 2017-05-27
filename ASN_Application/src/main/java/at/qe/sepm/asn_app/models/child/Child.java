@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,6 +32,7 @@ import java.util.Set;
  * @see at.qe.sepm.asn_app.models.UserData
  */
 @Entity
+@Transactional
 public class Child implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +68,7 @@ public class Child implements Persistable<Long> {
     private Religion religion;
 
     //@ElementCollection(targetClass = Caregiver.class)
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Caregiver> caregivers;
 
 

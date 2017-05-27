@@ -1,7 +1,9 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.ParentService;
@@ -26,9 +28,12 @@ public class ChildController {
     private ChildService childService;
     @Autowired
     private ParentService parentService;
-
+    @Autowired
+    private CaregiverService caregiverService;
     private Child child;
     private Child childEdit;
+    private Caregiver caregiver;
+    private boolean care;
     private Collection<Child> children;
 
     private String parentUserName;
@@ -108,6 +113,22 @@ public class ChildController {
     public void doReloadChildEdit(){
         childEdit = childService.loadChild(childEdit.getId());
     }
+
+	public boolean getCare() {
+		return care;
+	}
+
+	public void setCare(boolean care) {
+		this.care = care;
+	}
+
+	public Caregiver getCaregiver() {
+		return caregiver;
+	}
+
+	public void setCaregiver(Caregiver caregiver) {
+		this.caregiver = caregiver;
+	}
 
 
 }

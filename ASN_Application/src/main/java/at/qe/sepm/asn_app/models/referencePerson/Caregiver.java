@@ -1,6 +1,12 @@
 package at.qe.sepm.asn_app.models.referencePerson;
 
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
+
+import at.qe.sepm.asn_app.models.child.Child;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +22,7 @@ import javax.validation.constraints.NotNull;
  * @see Relationship
  */
 @Entity
+@Transactional
 public class Caregiver implements Persistable<Long>{
 
     private static final long serialVersionUID = 1L;
@@ -29,6 +36,8 @@ public class Caregiver implements Persistable<Long>{
     private Relationship relationship;
     private String imgName;
     private String phoneNumber;
+    private boolean eligible;
+
 
 
     public Caregiver(){}
@@ -39,6 +48,7 @@ public class Caregiver implements Persistable<Long>{
         this.relationship = relationship;
         this.imgName = imgName;
         this.phoneNumber = phoneNumber;
+        eligible = false;
 
     }
 
@@ -127,4 +137,12 @@ public class Caregiver implements Persistable<Long>{
                 "Relationship: " + relationship + "\n" +
                 "Phone number: " + phoneNumber + "\n";
     }
+
+	public boolean getEligible() {
+		return eligible;
+	}
+
+	public void setEligible(boolean eligible) {
+		this.eligible = eligible;
+	}
 }
