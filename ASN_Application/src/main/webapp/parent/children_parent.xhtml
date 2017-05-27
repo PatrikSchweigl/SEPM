@@ -220,6 +220,16 @@
 													<p:outputLabel for="birthday" value="Geburtsdatum: " />
 													<p:inputMask mask="99/99/9999" id="birthday"
 														value="#{childController.childEdit.birthday}" />
+													<p:outputLabel for="emergencyNumber"
+														value="Notfallnummer: " />
+													<p:inputText id="emergencyNumber"
+														value="#{childController.childEdit.emergencyNumber}" />
+													<p:outputLabel for="allergies" value="Allergien: " />
+													<p:inputText id="allergies"
+														value="#{childController.allergy}" />
+													<p:outputLabel for="intolerance" value="Unverträglichkeiten: " />
+													<p:inputText id="intolerance"
+														value="#{childController.intolerance}" />
 												</h:panelGrid>
 												<p:separator />
 												<h:panelGrid columns="3">
@@ -246,10 +256,9 @@
 											<p:outputPanel id="caregiverDataAdd">
 												<h:panelGrid columns="2">
 													<p:outputLabel for="child" value="Kind" />
-													<p:selectOneListbox id="child"
-														value="#{childService.id}" var="p"
-														filter="true" filterMatchMode="contains" required="true"
-														requiredMessage="Kein Kind angegeben!">
+													<p:selectOneListbox id="child" value="#{childService.id}"
+														var="p" filter="true" filterMatchMode="contains"
+														required="true" requiredMessage="Kein Kind angegeben!">
 														<f:selectItems
 															value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserData().getUsername())}"
 															var="child" itemLabel="#{child.id}"

@@ -53,9 +53,9 @@ public class Child implements Persistable<Long> {
     private Parent parent2;
 
     private String emergencyNumber;
-    @ElementCollection(targetClass = String.class)
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> allergies;
-    @ElementCollection(targetClass = String.class)
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> foodIntolerances;
 
     @OneToMany

@@ -33,6 +33,8 @@ public class ChildController {
     private Child child;
     private Child childEdit;
     private Caregiver caregiver;
+    private String allergy;
+    private String intolerance;
     private boolean care;
     private Collection<Child> children;
 
@@ -99,6 +101,10 @@ public class ChildController {
     }
 
     public void doSaveChildEdit() {
+    	if(allergy.compareTo("") != 0)
+    		childEdit.addAllergy(allergy);
+    	if(intolerance.compareTo("") != 0)
+    		childEdit.addFoodIntolerance(intolerance);
         childEdit = childService.saveChild(childEdit);
         initList();
     }
@@ -128,6 +134,22 @@ public class ChildController {
 
 	public void setCaregiver(Caregiver caregiver) {
 		this.caregiver = caregiver;
+	}
+
+	public String getAllergy() {
+		return allergy;
+	}
+
+	public void setAllergy(String allergy) {
+		this.allergy = allergy;
+	}
+
+	public String getIntolerance() {
+		return intolerance;
+	}
+
+	public void setIntolerance(String intolerance) {
+		this.intolerance = intolerance;
 	}
 
 
