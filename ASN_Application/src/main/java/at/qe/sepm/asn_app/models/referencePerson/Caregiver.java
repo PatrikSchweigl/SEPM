@@ -37,6 +37,7 @@ public class Caregiver implements Persistable<Long>{
     private String imgName;
     private String phoneNumber;
     private boolean eligible;
+    private String childname;
 
 
 
@@ -144,5 +145,13 @@ public class Caregiver implements Persistable<Long>{
 
 	public void setEligible(boolean eligible) {
 		this.eligible = eligible;
+	}
+
+	public String getChildname() {
+		return childname;
+	}
+
+	public void setChildname(String childname) {
+		this.childname = childname;
 	}
 }

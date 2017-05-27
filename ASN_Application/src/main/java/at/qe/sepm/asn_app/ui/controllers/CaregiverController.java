@@ -71,7 +71,9 @@ public class CaregiverController {
 
     public void doSaveCaregiver(){
         caregiver = caregiverService.saveCaregiver(caregiver);
-        childService.addCaregiver(caregiver);
+        String name = childService.addCaregiver(caregiver);
+        caregiver.setChildname(name);
+        caregiverService.saveCaregiver(caregiver);
         caregiver = null;
         initNewCaregiver();
     }
