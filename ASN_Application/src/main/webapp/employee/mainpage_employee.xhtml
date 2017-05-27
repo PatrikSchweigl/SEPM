@@ -85,12 +85,18 @@
 													</p:tab>
 													<p:tab title="Bestätigungen">
 														<p:dataTable id="anouncement" var="child"
-															value="#{childController.children}">
-															<p:column headerText="First Name">
+															value="#{caregiverController.caregivers}">
+															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>
-															<p:column headerText="Last Name">
+															<p:column headerText="Nachname">
 																<h:outputText value="#{child.lastName}" />
+															</p:column>
+															<p:column headerText="Telefonnummer">
+																<h:outputText value="#{child.phoneNumber}" />
+															</p:column>
+															<p:column headerText="Kind">
+																<h:outputText value="#{child.childname}" />
 															</p:column>
 
 

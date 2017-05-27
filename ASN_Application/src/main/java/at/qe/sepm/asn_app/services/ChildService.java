@@ -63,13 +63,14 @@ public class ChildService {
         return childRepository.save(child);
     }
     
-    public void addCaregiver(Caregiver c){
+    public String addCaregiver(Caregiver c){
     	System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
     	System.err.println(id);
     	Child child = childRepository.findOne(this.id);
     	child.addCaregiver(c);
     	childRepository.save(child);
+    	return child.getFirstName() + " " + child.getLastName();
     }
 
 
