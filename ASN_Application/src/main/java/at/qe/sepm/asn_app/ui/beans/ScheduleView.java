@@ -199,8 +199,14 @@ public class ScheduleView implements Serializable {
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.HOUR_OF_DAY, 0);
+		if(event.getStartDate().compareTo(new Date()) <= 0)
+			return;
 		Registration reg = new Registration(description, childReg, cal.getTime(), event.getStartDate());
 		registrationService.saveRegistration(reg);
+		AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(), "REGISTRATION CREATED: "
+				+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+				reg.getBringdate());
+		auditLogRepository.save(log);
 	}
 	
 	public void addEvent() {
