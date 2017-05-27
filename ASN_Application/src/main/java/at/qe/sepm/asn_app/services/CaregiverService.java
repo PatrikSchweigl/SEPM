@@ -29,7 +29,6 @@ public class CaregiverService {
     @Autowired CaregiverRepository caregiverRepository;
     @Autowired AuditLogRepository auditLogRepository;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     public Caregiver saveCaregiver(Caregiver caregiver) {
         AuditLog log = new AuditLog(getAuthenticatedUserName(),"SAVED CARE: " + caregiver.getFullName(), new Date());
         auditLogRepository.save(log);
@@ -44,7 +43,7 @@ public class CaregiverService {
     public Caregiver loadCaregiver(Long id) {
         return caregiverRepository.findOne(id);
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public Collection<Caregiver> getAllCaregivers() {
         return caregiverRepository.findAll();
     }
@@ -53,4 +52,8 @@ public class CaregiverService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
     }
+
+	public Collection<Caregiver> getAllCaregiversByChildId(Long id) {
+		return caregiverRepository.getAllCaregiversByChildId(id);
+	}
 }

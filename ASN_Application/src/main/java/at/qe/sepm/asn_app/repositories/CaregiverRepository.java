@@ -1,5 +1,11 @@
 package at.qe.sepm.asn_app.repositories;
 
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 
 /**
@@ -7,6 +13,9 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
  * on 20.03.2017
  */
 public interface CaregiverRepository extends AbstractRepository <Caregiver, Long>{
+
+	@Query("SELECT c FROM Caregiver c WHERE c.id = :id")
+	Collection<Caregiver> getAllCaregiversByChildId(@Param("id")Long id);
     /*
     List<Caregiver> findByUsernameContaining(String username);
 

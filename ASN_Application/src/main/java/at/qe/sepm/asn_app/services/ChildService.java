@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.ChildRepository;
@@ -40,7 +41,7 @@ public class ChildService {
     private AuditLogRepository auditLogRepository;
     @Autowired
     private UserRepository userRepository;
-
+    private Long id;
     private Child child;
 
 
@@ -60,6 +61,15 @@ public class ChildService {
 
     public Child saveChild(Child child) {
         return childRepository.save(child);
+    }
+    
+    public void addCaregiver(Caregiver c){
+    	System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+    	System.err.println(id);
+    	Child child = childRepository.findOne(this.id);
+    	child.addCaregiver(c);
+    	childRepository.save(child);
     }
 
 
@@ -82,6 +92,14 @@ public class ChildService {
 
 	public Child getChildrenByFirstnameAndParentUsername(String username, String childFirstname) {
 		return childRepository.getChildrenByFirstnameAndParentUsername(username, childFirstname);
+	}
+	
+	public Long getId(){
+		return id;
+	}
+	
+	public void setId(Long id){
+		this.id = id;
 	}
 
 }

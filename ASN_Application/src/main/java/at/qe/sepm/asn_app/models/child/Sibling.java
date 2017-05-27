@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.models.child;
 
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
  * @see Child
  */
 @Entity
+@Transactional
 public class Sibling implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
