@@ -64,9 +64,7 @@ public class ChildService {
     }
     
     public String addCaregiver(Caregiver c){
-    	System.err.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
-    	System.err.println(id);
     	Child child = childRepository.findOne(this.id);
     	child.addCaregiver(c);
     	childRepository.save(child);
