@@ -30,8 +30,6 @@ public class LunchController {
 
     public List<Lunch> getCurrentWeek(){
         String[] dates = DateUtils.getWeekToString(0);
-        System.err.println("foglet");
-        System.out.println("n");
         List<Lunch> ret = null;
         for(String s : dates){
             if(ret == null){
