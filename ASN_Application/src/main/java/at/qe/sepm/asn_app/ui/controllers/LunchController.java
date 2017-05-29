@@ -38,8 +38,6 @@ public class LunchController {
             else {
                 ret.addAll(lunchService.getLunchByDate(s));
             }
-            System.err.println(s);
-            System.err.println("ugg");
         }
         return ret;
     }
