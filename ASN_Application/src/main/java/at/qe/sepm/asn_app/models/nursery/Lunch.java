@@ -27,7 +27,7 @@ public class Lunch implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    private Date date;
+    private String date;
     @NotNull
     private String meal;
     private double cost;
@@ -35,12 +35,12 @@ public class Lunch implements Persistable<Long> {
     private Set<Long> childrenIds;
 
 
-    public Lunch(Date date, String meal, double cost) {
+    public Lunch(String date, String meal, double cost) {
         this.date = date;
         this.meal = meal;
         this.cost = cost;
     }
-
+    public Lunch(){}
 
     public void addChild(Long id){
         childrenIds.add(id);
@@ -57,11 +57,11 @@ public class Lunch implements Persistable<Long> {
         removeChild(c.getId());
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -80,14 +80,6 @@ public class Lunch implements Persistable<Long> {
     public void setCost(double cost) {
         this.cost = cost;
     }
-/*
-    public List<Child> getListChildren() {
-        return listChildren;
-    }
-
-    public void setListChildren(List<Child> listChildren) {
-        this.listChildren = listChildren;
-    }*/
 
     public int getNumChildren() {
         return childrenIds.size();
