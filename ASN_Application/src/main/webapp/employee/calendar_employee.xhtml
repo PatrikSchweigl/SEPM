@@ -132,6 +132,21 @@
                                                                  oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()"
                                                                  update="@all"
                                                                  />
+                                                <p:separator/>
+                                                <p:separator/>
+                                                        <p:outputLabel for="meal" value="Gericsht: "/>
+                                                        <p:inputText id="meal" value="#{lunchController.lunch.meal}"/>
+                                                        <p:outputLabel for="mealDate" value="Datum: "/>
+                                                        <p:calendar id="mealDate"
+                                                                value="#{lunchController.lunch.date}" timeZone="GMT+2"
+                                                                pattern="dd/MM/yyyy">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                                        </p:calendar>
+                                                        <p:commandButton id="lunchButton" value="Essen"
+                                                                     action="#{lunchController.doSaveLunch}"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()"/>
+
+
                                             </h:panelGrid>
                                         </p:dialog>
                                     </h:form>
