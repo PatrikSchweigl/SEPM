@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+                <body class="theme-blue sidebar-mini sidebar-collapse">
+                <div class="ui-fluid">
+                    <div class="wrapper">
+                        <!-- =============================================== -->
+
+                        <div class="content-wrapper" style="min-height: 1126px;">
+                            <section class="content">
+
+                                <!-- Default box -->
+                                <div class="box">
+                                    <div class="box-body">
+                                        <h:form id ="lunchForm">
+                                            <p:commandButton oncomplete="PF('lunchAddDialog').show()"
+                                                             value="Essen hinzufügen" style="align-items:right;"></p:commandButton>
+                                            <p:dataTable id="lunchTable"
+                                                         var="lunch"
+                                                         widgetVar="lunchTable"
+                                                         value="#{lunchController.findAll()}">
+                                                <p:column headerText="Essn">
+                                                    <h:outputText value="#{lunch.meal}"/>
+                                                </p:column>
+                                                <p:column headerText="Essn">
+                                                    <h:outputText value="#{lunch.date}"/>
+                                                </p:column>
+
+                                            </p:dataTable>
+                                            <!-- ADD LUNCH -->
+                                            <p:dialog header="Essen hinzufügen" id="lunchAddDialog"
+                                                      widgetVar="lunchAddDialog" modal="true"
+                                                      showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
+                                                <p:messages id="messages" autoUpdate="true"/>
+                                                <p:outputPanel id="lunchDataAdd"
+                                                               rendered="#{not empty lunchController.lunch}">
+                                                    <h:panelGrid columns="2">
+                                                        <p:outputLabel for="meal" value="Gericht"/>
+                                                        <p:inputText id="meal"
+                                                                     value="#{lunchController.lunch.meal}"/>
+                                                        <p:outputLabel for="date" value="Datum: " />
+                                                        <p:inputMask mask="99/99/9999" id="date"
+                                                                     value="#{lunchController.lunch.date}"/>
+
+                                                    </h:panelGrid>
+                                                    <p:separator />
+                                                    <h:panelGrid columns="3">
+                                                        <p:commandButton value="Speichern"
+                                                                         action="#{lunchController.doSaveLunch}"
+                                                                         oncomplete="if (args &amp;&amp; !args.validationFailed) PF('lunchAddDialog').hide()"
+                                                                         update=":lunchForm:lunchTable"/>
+                                                        <p:commandButton value="Abbruch"
+                                                                         onclick="PF('lunchAddDialog').hide()" immediate="true"/>
+                                                    </h:panelGrid>
+                                                </p:outputPanel>
+                                            </p:dialog>
+                                        </h:form>
+                                    </div>
+                                </div>
+                                <!-- /.box -->
+
+                            </section>
+                            <!-- /.content -->
+                        </div>
+                    </div>
+                </div>
+                </body>
+
+
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+            </ui:fragment>
+
+        </h:body>
+    </ui:define>
+</ui:composition>
