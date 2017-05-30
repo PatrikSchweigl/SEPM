@@ -94,6 +94,11 @@ public class CaregiverController {
         //child = childService.loadUser(child.getUsername());
         caregiverEdit = caregiverService.loadCaregiver(caregiverEdit.getId());
     }
+    
+    public void setEligibleToTrue(){
+    	caregiverEdit.setEligible(true);
+    	caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
+    }
 
     public void doSaveCaregiverEdit(){
         caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
