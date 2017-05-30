@@ -46,7 +46,8 @@
 												<h:outputText value="#{child.birthday}" />
 											</p:column>
 											<p:column headerText="Elternteil"
-												filterBy="#{child.getPrimaryParentFullName()}" sortBy="#{child.getPrimaryParentFullName()}"
+												filterBy="#{child.getPrimaryParentFullName()}"
+												sortBy="#{child.getPrimaryParentFullName()}"
 												filterStyle="display:none">
 												<h:outputText value="#{child.getPrimaryParentFullName()}" />
 											</p:column>
@@ -77,8 +78,8 @@
 												<p:outputPanel>
 													<h:outputText value="Suche: " />
 													<p:inputText id="globalFilter"
-														onkeyup="PF('childTable').filter()" style="width:150px"
-														placeholder="Suchwort eingeben" />
+														onkeyup="PF('caregiverTable').filter()"
+														style="width:150px" placeholder="Suchwort eingeben" />
 												</p:outputPanel>
 											</f:facet>
 
@@ -102,11 +103,11 @@
 											</p:column>
 											<p:column style="width:100px;text-align: center"
 												exportable="false">
-												<p:commandButton update=":childForm:childEditDialog"
-													oncomplete="PF('childEditDialog').show()"
+												<p:commandButton update=":childForm:caregiverEditDialog"
+													oncomplete="PF('caregiverEditDialog').show()"
 													icon="ui-icon-note" title="Edit" process="@this">
 													<f:setPropertyActionListener value="#{child}"
-														target="#{childController.childEdit}" />
+														target="#{caregiverController.caregiverEdit}" />
 												</p:commandButton>
 											</p:column>
 										</p:dataTable>
@@ -231,7 +232,8 @@
 														</p:column>
 
 														<p:column>
-															<h:outputText value="#{childService.loadChild(p).firstName} #{childService.loadChild(p).lastName}" />
+															<h:outputText
+																value="#{childService.loadChild(p).firstName} #{childService.loadChild(p).lastName}" />
 														</p:column>
 													</p:selectOneListbox>
 													<p:outputLabel for="firstName" value="Vorname: " />
@@ -251,6 +253,74 @@
 														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('caregiverAddDialog').hide()" />
 													<p:commandButton value="Abbruch"
 														onclick="PF('childAddDialog').hide()" immediate="true" />
+												</h:panelGrid>
+											</p:outputPanel>
+										</p:dialog>
+
+										<!--Edit Caregiver Dialog -->
+										<p:dialog header="Bezugsperson bearbeiten"
+											id="caregiverEditDialog" widgetVar="caregiverEditDialog"
+											modal="true" showEffect="fade" hideEffect="fade"
+											resizable="false" closeOnEscape="true">
+											<p:outputPanel id="caregiverDataEdit"
+												rendered="#{not empty caregiverController.caregiverEdit}">
+												<p:outputPanel>
+													<h:outputLabel for="fupload-edit-care"
+														id="logo-section-edit-care">
+														<p:fileUpload id="fupload-edit-care"
+															widgetVar="fupload-edit-care" auto="true" mode="advanced"
+															style="display:none;"
+															fileUploadListener="#{fileBean.handleFileUploadProfilePictureCaregiver}"
+															dragDropSupport="true" update="logo-section-edit-care">
+															<f:attribute name="caregiverId"
+																value="#{caregiverController.caregiverEdit.id}" />
+														</p:fileUpload>
+														<div align="center"
+															onclick="$('input[type=file]').click()">
+															<p:graphicImage id="out-image-edit-care"
+																style="max-height: 200px; max-width: 200px"
+																name="pictures/profile_pictures_caregiver/#{caregiverController.caregiverEdit.getImgName()}">
+															</p:graphicImage>
+															<p:outputPanel>
+																<p:graphicImage
+																	rendered="#{empty caregiverController.caregiverEdit.getImgName()}"
+																	name="pictures/profile_pictures/emptypicture.png"
+																	value="Bild hochladen"></p:graphicImage>
+															</p:outputPanel>
+															<br />
+														</div>
+													</h:outputLabel>
+												</p:outputPanel>
+												<h:panelGrid columns="2">
+													<p:outputLabel for="pFirstNameCare" value="Vorname: " />
+													<p:inputText id="pFirstNameCare"
+														value="#{caregiverController.caregiverEdit.firstName}" />
+													<p:outputLabel for="pLastNameCare" value="Nachname: " />
+													<p:inputText id="pLastNameCare"
+														value="#{caregiverController.caregiverEdit.lastName}" />
+													<p:outputLabel for="pPhoneNumberCare"
+														value="Telefonnummer: " />
+													<p:inputText id="pPhoneNumberCare"
+														value="#{caregiverController.caregiverEdit.phoneNumber}" />
+													<p:outputLabel for="pChildCare" value="Kind: " />
+													<p:inputText disabled="true" id="pChildCare"
+														value="#{caregiverController.caregiverEdit.childname}" />
+													<p:outputLabel for="pEligibleCare" value="Bestätigt: " />
+													<p:inputText disabled="true" id="pEligibleCare"
+														value="#{caregiverController.caregiverEdit.eligible}" />
+												</h:panelGrid>
+												<p:separator />
+												<h:panelGrid columns="3">
+													<p:commandButton value="Speichern"
+														action="#{caregiverController.doSaveCaregiverEdit()}"
+														oncomplete="PF('caregiverEditDialog').hide()"
+														update=":childForm"
+														process="@widgetVar(caregiverEditDialog)" />
+													<p:commandButton value="Neu laden" immediate="true"
+														action="#{caregiverController.doReloadCaregiverEdit()}"
+														update=":childForm:caregiverDataEdit" />
+													<p:commandButton value="Abbruch"
+														onclick="PF('caregiverEditDialog').hide()" />
 												</h:panelGrid>
 											</p:outputPanel>
 										</p:dialog>
