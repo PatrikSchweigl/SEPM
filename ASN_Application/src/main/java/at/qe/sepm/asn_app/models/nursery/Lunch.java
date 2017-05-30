@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.models.nursery;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.utils.DateUtils;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -62,7 +63,7 @@ public class Lunch implements Persistable<Long> {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date = DateUtils.primefaceCalendarToStr(date);
     }
 
     public String getMeal() {
