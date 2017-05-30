@@ -55,10 +55,76 @@ public class DateUtils {
         for(int i = 0; i < 5; i++){
             //TODO remove holidays
             ret[i] = now.plusDays(x + i).toString();
-            System.err.println(ret[i]);
         }
 
         return ret;
     }
 
+    /** primefaceCalendarToStr
+     *
+     * util function to convert the pattern obtained via primefaces calendar into our pattern
+     *
+     * @param pfs
+     *      primefaces string to convert
+     *      a typical string looks like this
+     *      WEEKDAY MONTH DAY TIME TIMEZONE YEAR
+     * @return
+     *      formatted string YYYY/MM/DD
+     */
+    public static String primefaceCalendarToStr(String pfs){
+        String d = "ERROR", m ="ERROR", y = "ERROR";
+        String[] strings = pfs.split(" ");
+        String s = strings[0].toLowerCase();
+        if(!(s.equals("mon") || (s.equals("tue")) || (s.equals("wed"))||s.equals("thu")||s.equals("fri"))){
+            return pfs;
+        }
+        switch(strings[1].toLowerCase()){
+            case "jan" :
+                m = "01";
+                break;
+            case "feb" :
+                m = "02";
+                break;
+            case "mar" :
+                m = "03";
+                break;
+            case "apr" :
+                m = "04";
+                break;
+            case "may" :
+                m = "05";
+                break;
+            case "jun" :
+                m = "06";
+                break;
+            case "jul" :
+                m = "07";
+                break;
+            case "aug" :
+                m = "08";
+                break;
+            case "sep" :
+                m = "09";
+                break;
+            case "oct" :
+                m = "10";
+                break;
+            case "nov" :
+                m = "11";
+                break;
+            case "dec" :
+                m = "12";
+                break;
+            default:
+                m ="ERROR";
+                break;
+        }
+        if (strings.length > 2) {
+            d = strings[2];
+        }
+        if (strings.length > 5) {
+            y = strings[5];
+        }
+        return y + "/" + m + "/" + d;
+    }
 }
