@@ -38,16 +38,16 @@
                                         </f:facet>
 
                                         <p:column headerText="Bring-Zeitraum">
-                                            <h:outputText value="#{info.bringDuration}"/>
+                                            <h:outputText value="#{info.bringDurationNew}"/>
                                         </p:column>
                                         <p:column headerText="Abhol-Zeitraum">
-                                            <h:outputText value="#{info.pickUpDuration}"/>
+                                            <h:outputText value="#{info.pickUpDurationNew}"/>
                                         </p:column>
                                         <p:column headerText="Max. Belegung">
                                             <h:outputText value="#{info.maxOccupancy}"/>
                                         </p:column>
                                         <p:column headerText="Datum">
-                                            <h:outputText value="#{info.originDate}"/>
+                                            <h:outputText value="#{info.getFormattedOriginDate()}"/>
                                         </p:column>
                                     </p:dataTable>
 

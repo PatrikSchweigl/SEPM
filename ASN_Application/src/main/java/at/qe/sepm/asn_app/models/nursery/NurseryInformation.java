@@ -111,6 +111,10 @@ public class NurseryInformation implements Persistable<Long> {
     public Date getOriginDate() {
         return originDate;
     }
+    
+    public String getFormattedOriginDate(){
+    	return new SimpleDateFormat("dd-MM-yyyy").format(originDate);
+    }
 
     public void setOriginDate(Date originDate) {
         this.originDate = originDate;
