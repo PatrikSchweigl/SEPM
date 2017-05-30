@@ -22,8 +22,8 @@ public class NurseryInformationController {
     @Autowired
     private NurseryInformationService nurseryInformationService;
     private NurseryInformation nurseryInformation;
-
-    private NurseryConstraints nurseryConstraints = new NurseryConstraints();
+@Autowired
+    private NurseryConstraints nurseryConstraints;
 
     private Collection<NurseryInformation> nurseryInformations;
 
@@ -61,7 +61,7 @@ public class NurseryInformationController {
     public void doSaveNurseryInformation(){
         System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEERE I AM --------------------------------");
         if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
-            System.out.println("YEAAAAAAAAAH-------------it works");
+            return;
         }
         nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
         nurseryInformation = null;
