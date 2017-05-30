@@ -29,7 +29,7 @@ public class Caregiver implements Persistable<Long>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     @Enumerated(EnumType.STRING)
@@ -99,7 +99,7 @@ public class Caregiver implements Persistable<Long>{
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
 

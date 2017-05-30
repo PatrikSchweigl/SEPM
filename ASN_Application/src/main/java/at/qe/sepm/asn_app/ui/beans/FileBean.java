@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
+import java.util.Map;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -25,10 +26,12 @@ import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Picture;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.AuditLogService;
+import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.PictureService;
@@ -51,6 +54,8 @@ public class FileBean {
     private AuditLogService auditLogService;
 	private Picture picture;
     private UploadedFile file;
+    @Autowired
+	private CaregiverService caregiverService;
 	public FileBean(){}
 	
 	
@@ -121,6 +126,26 @@ public class FileBean {
         Child child = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(), childController.getChildEdit().getFirstName());
         child.setImgName(newFile.getFileName().toString());
         childService.saveChild(child);
+        InputStream input = file.getInputstream();
+        Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
+        System.out.println("Uploaded file successfully saved in " + newFile);
+        
+	}
+	
+	public void handleFileUploadProfilePictureCaregiver(FileUploadEvent event) throws IOException {
+		UploadedFile file = event.getFile();
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PROFILE_PICTURE_CAREGIVER UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+        auditLogService.saveAuditLog(log);
+
+        Path folder = Paths.get("src/main/webapp/resources/pictures/profile_pictures_caregiver");
+        String filename = FilenameUtils.getBaseName(file.getFileName());
+        String extension = FilenameUtils.getExtension(file.getFileName());
+        Path newFile = Files.createTempFile(folder, filename, "." + extension);
+        Map<String, Object> requestAttributes = event.getComponent().getAttributes();
+        Long personId = (Long)requestAttributes.get("caregiverId");
+        Caregiver caregiver = caregiverService.loadCaregiver(personId);
+        caregiver.setImgName(newFile.getFileName().toString());
+        caregiverService.saveCaregiver(caregiver);
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
         System.out.println("Uploaded file successfully saved in " + newFile);
