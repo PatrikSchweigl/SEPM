@@ -45,6 +45,10 @@ public class CaregiverController {
     public Collection<Caregiver> getCaregiverByChildId(Long id){
     	return caregiverService.getAllCaregiversByChildId(id);
     }
+    
+    public Collection<Caregiver> getAllCaregiversByEligibleFalse(){
+    	return caregiverService.getAllCaregiversByEligibleFalse();
+    }
 
     public void doReloadCaregiver() {
         caregiver = caregiverService.loadCaregiver(caregiver.getId());
