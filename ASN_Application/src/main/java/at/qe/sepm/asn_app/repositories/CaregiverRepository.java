@@ -16,6 +16,9 @@ public interface CaregiverRepository extends AbstractRepository <Caregiver, Long
 
 	@Query("SELECT c FROM Caregiver c WHERE c.id = :id")
 	Collection<Caregiver> getAllCaregiversByChildId(@Param("id")Long id);
+	
+	@Query("SELECT c FROM Caregiver c WHERE c.eligible = FALSE")
+	Collection<Caregiver> getCaregiversByEligibleFalse();
     /*
     List<Caregiver> findByUsernameContaining(String username);
 

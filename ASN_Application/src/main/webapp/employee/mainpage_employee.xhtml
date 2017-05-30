@@ -84,7 +84,7 @@
 													</p:tab>
 													<p:tab title="Bestätigungen">
 														<p:dataTable id="anouncement" var="child"
-															value="#{caregiverController.caregivers}">
+															value="#{caregiverController.getAllCaregiversByEligibleFalse()}">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>

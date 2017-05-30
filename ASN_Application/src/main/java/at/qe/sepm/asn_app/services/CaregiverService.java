@@ -34,6 +34,10 @@ public class CaregiverService {
         auditLogRepository.save(log);
         return caregiverRepository.save(caregiver);
     }
+    
+    public Collection<Caregiver> getAllCaregiversByEligibleFalse(){
+    	return caregiverRepository.getCaregiversByEligibleFalse();
+    }
 
     public void deleteCaregiver(Caregiver caregiver){
         AuditLog log = new AuditLog(getAuthenticatedUserName(),"DELETED CARE: " + caregiver.getFullName(), new Date());
