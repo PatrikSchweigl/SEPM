@@ -45,6 +45,11 @@
 												filterStyle="display:none">
 												<h:outputText value="#{child.birthday}" />
 											</p:column>
+											<p:column headerText="Elternteil"
+												filterBy="#{child.getPrimaryParentFullName()}" sortBy="#{child.getPrimaryParentFullName()}"
+												filterStyle="display:none">
+												<h:outputText value="#{child.getPrimaryParentFullName()}" />
+											</p:column>
 											<p:column style="width:100px;text-align: center"
 												exportable="false">
 												<p:commandButton update=":childForm:childEditDialog"
@@ -62,7 +67,8 @@
 												style="align-items:right; margin-top:100px;"></p:commandButton>
 										</div>
 										<p:dataTable id="caregiverTable" var="child"
-											widgetVar="caregiverTable" value="#{caregiverController.caregivers}" paginator="true"
+											widgetVar="caregiverTable"
+											value="#{caregiverController.caregivers}" paginator="true"
 											rows="10" paginatorPosition="bottom"
 											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 											rowsPerPageTemplate="10,25,50">
@@ -84,6 +90,15 @@
 											<p:column headerText="Nachname" filterBy="#{child.lastName}"
 												sortBy="#{child.lastName}" filterStyle="display:none">
 												<h:outputText value="#{child.lastName}" />
+											</p:column>
+											<p:column headerText="Telefonnummer"
+												filterBy="#{child.phoneNumber}"
+												sortBy="#{child.phoneNumber}" filterStyle="display:none">
+												<h:outputText value="#{child.phoneNumber}" />
+											</p:column>
+											<p:column headerText="Kind" filterBy="#{child.childname}"
+												sortBy="#{child.childname}" filterStyle="display:none">
+												<h:outputText value="#{child.childname}" />
 											</p:column>
 											<p:column style="width:100px;text-align: center"
 												exportable="false">
@@ -216,7 +231,7 @@
 														</p:column>
 
 														<p:column>
-															<h:outputText value="#{p}" />
+															<h:outputText value="#{childService.loadChild(p).firstName} #{childService.loadChild(p).lastName}" />
 														</p:column>
 													</p:selectOneListbox>
 													<p:outputLabel for="firstName" value="Vorname: " />
