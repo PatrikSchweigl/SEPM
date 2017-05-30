@@ -25,7 +25,9 @@ public class NurseryConstraints {
         Iterator<NurseryInformation> iterator = list.iterator();
 
         while(iterator.hasNext()) {
-            if (iterator.next().getOriginDate() == nurseryInformation.getOriginDate()) {
+        	Date date = iterator.next().getOriginDate();
+        	System.out.println(date + "  vergleich mit  " + nurseryInformation.getOriginDate());
+            if (date.compareTo(nurseryInformation.getOriginDate()) == 0) {
                 return true;
             }
         }
