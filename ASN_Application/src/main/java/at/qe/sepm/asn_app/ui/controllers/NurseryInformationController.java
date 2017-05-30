@@ -59,7 +59,6 @@ public class NurseryInformationController {
     }
 
     public void doSaveNurseryInformation(){
-        System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEERE I AM --------------------------------");
         if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
             return;
         }
