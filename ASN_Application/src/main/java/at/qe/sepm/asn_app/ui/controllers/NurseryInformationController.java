@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
+import at.qe.sepm.asn_app.ui.constraints.NurseryConstraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class NurseryInformationController {
     @Autowired
     private NurseryInformationService nurseryInformationService;
     private NurseryInformation nurseryInformation;
+
+    private NurseryConstraints nurseryConstraints = new NurseryConstraints();
 
     private Collection<NurseryInformation> nurseryInformations;
 
@@ -56,6 +59,10 @@ public class NurseryInformationController {
     }
 
     public void doSaveNurseryInformation(){
+        System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEERE I AM --------------------------------");
+        if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
+            System.out.println("YEAAAAAAAAAH-------------it works");
+        }
         nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
         nurseryInformation = null;
         initNewNurseryInformation();
