@@ -55,7 +55,7 @@ public class ChildController {
     */
     @PostConstruct
     public void initList(){
-        setChildren(childService.getAllChildren());
+        children = childService.getAllChildren();
     }
 
     @PostConstruct
@@ -113,6 +113,7 @@ public class ChildController {
     public void doDeleteChild() {
         this.childService.deleteChild(childEdit);
         childEdit = null;
+        children = childService.getAllChildren();
     }
     public void doReloadChild(){
         child = childService.loadChild(child.getId());
