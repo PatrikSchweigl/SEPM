@@ -55,13 +55,20 @@
                                                         icon="ui-icon-trash" title="Delete"
                                                         update=":lunchForm:lunchTable" process="@this">
                                                         <f:setPropertyActionListener value="#{lunch}"
-                                                                                 target="#{childController.lunchEdit}"/>
+                                                                                 target="#{lunchController.lunchEdit}"/>
                                                         <p:confirm header="Confirmation"
                                                                message="Sind Sie sich sicher, dass Sie das Essen löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
                                                     </p:commandButton>
                                                 </p:column>
                                             </p:dataTable>
+                                            <p:confirmDialog global="true" showEffect="fade"
+                                                             hideEffect="fade" width="300">
+                                                <p:commandButton value="Yes" type="button"
+                                                                 styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                                <p:commandButton value="No" type="button"
+                                                                 styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                            </p:confirmDialog>
                                             <!-- ADD LUNCH -->
                                             <p:dialog header="Essen hinzufügen" id="lunchAddDialog"
                                                       widgetVar="lunchAddDialog" modal="true"
