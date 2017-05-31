@@ -22,6 +22,8 @@ public class LunchController {
 
 
     private Lunch lunch;
+    private Lunch lunchEdit;
+
     private Lunch monday;
     private Lunch tuesday;
     private Lunch wednesday;
@@ -65,13 +67,44 @@ public class LunchController {
         lunch = null;
         initNewLunch();
     }
+    public void doSaveLunchEdit(){
+        lunchEdit = lunchService.saveLunch(lunchEdit);
+        //mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test", "Hallo,  ich bin es, das System!");
+        lunchEdit = null;
+        initNewLunchEdit();
+    }
+
 
     @PostConstruct
     private void initNewLunch(){
         lunch = new Lunch();
     }
+    @PostConstruct
+    private void initNewLunchEdit(){
+        lunch = new Lunch();
+    }
+
+    public void doDeleteLunch() {
+        this.lunchService.deleteLunch(lunchEdit);
+        lunchEdit = null;
+    }
+    public void doReloadLunch(){
+        lunch = lunchService.loadLunch(lunch.getId());
+    }
+    public void doReloadLunchEdit(){
+        lunchEdit = lunchService.loadLunch(lunchEdit.getId());
+    }
 
     //getters, setters -------------------------------------------------------------------------------------------
+
+    public Lunch getLunchEdit() {
+        return lunchEdit;
+    }
+
+    public void setLunchEdit(Lunch lunchEdit) {
+        this.lunchEdit = lunchEdit;
+    }
+
     public Lunch getLunch() {
         return lunch;
     }
