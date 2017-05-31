@@ -26,14 +26,41 @@
                                             <p:dataTable id="lunchTable"
                                                          var="lunch"
                                                          widgetVar="lunchTable"
-                                                         value="#{lunchController.findAll()}">
+                                                         value="#{lunchController.getCurrentWeek()}">
                                                 <p:column headerText="Gericht">
                                                     <h:outputText value="#{lunch.meal}"/>
                                                 </p:column>
                                                 <p:column headerText="Datum">
                                                     <h:outputText value="#{lunch.date}"/>
                                                 </p:column>
-
+                                                <p:column headerText="Preis">
+                                                    <h:outputText value="#{lunch.cost}"/>
+                                                </p:column>
+                                                <p:column headerText="#Angemeldet">
+                                                    <h:outputText value="#{lunch.getNumChildren()}"/>
+                                                </p:column>
+                                                <p:column style="width:100px;text-align: center"
+                                                          exportable="false">
+                                                    <p:commandButton update=":lunchForm:lunchEditDialog"
+                                                                 oncomplete="PF('lunchEditDialog').show()"
+                                                                 icon="ui-icon-note" title="Edit" process="@this">
+                                                        <f:setPropertyActionListener value="#{lunch}"
+                                                                                 target="#{lunchController.lunchEdit}" />
+                                                    </p:commandButton>
+                                                </p:column>
+                                                <p:column style="width:100px;text-align: center"
+                                                          exportable="false">
+                                                    <p:commandButton
+                                                        action="#{lunchController.doDeleteLunch}"
+                                                        icon="ui-icon-trash" title="Delete"
+                                                        update=":lunchForm:lunchTable" process="@this">
+                                                        <f:setPropertyActionListener value="#{lunch}"
+                                                                                 target="#{childController.lunchEdit}"/>
+                                                        <p:confirm header="Confirmation"
+                                                               message="Sind Sie sich sicher, dass Sie das Essen löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
+                                                               icon="ui-icon-alert"/>
+                                                    </p:commandButton>
+                                                </p:column>
                                             </p:dataTable>
                                             <!-- ADD LUNCH -->
                                             <p:dialog header="Essen hinzufügen" id="lunchAddDialog"
@@ -59,6 +86,39 @@
                                                                          update=":lunchForm:lunchTable"/>
                                                         <p:commandButton value="Abbruch"
                                                                          onclick="PF('lunchAddDialog').hide()" immediate="true"/>
+                                                    </h:panelGrid>
+                                                </p:outputPanel>
+                                            </p:dialog>
+                                            <!-- EDIT LUNCH -->
+                                            <p:dialog header="Essen bearbeiten" id="lunchEditDialog"
+                                                      widgetVar="lunchEditDialog" modal="true"
+                                                      showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
+                                                <p:outputPanel id="lunchDataEdit"
+                                                               rendered="#{not empty lunchController.lunchEdit}">
+                                                    <h:panelGrid columns="2">
+                                                        <p:outputLabel for="mealEdit" value="Gericht: " />
+                                                        <p:inputText id="mealEdit"
+                                                                     value="#{lunchController.lunchEdit.meal}" />
+                                                        <p:outputLabel for="costEdit" value="Preis: " />
+                                                        <p:inputText id="costEdit"
+                                                                     value="#{lunchController.lunchEdit.cost}"/>
+                                                        <p:outputLabel for="dateEdit" value="Datum: " />
+                                                        <p:inputMask mask="99/99/9999" id="dateEdit"
+                                                                     value="#{lunchController.lunchEdit.date}"/>
+
+                                                    </h:panelGrid>
+                                                    <p:separator />
+                                                    <h:panelGrid columns="3">
+                                                        <p:commandButton value="Speichern"
+                                                                         action="#{lunchController.doSaveLunchEdit()}"
+                                                                         oncomplete="PF('lunchEditDialog').hide()"
+                                                                         update=":lunchForm"
+                                                                         process="@widgetVar(lunchEditDialog)"/>
+                                                        <p:commandButton value="Neu laden" immediate="true"
+                                                                         action="#{lunchController.doReloadLunchEdit()}"
+                                                                         update=":lunchForm:lunchDataEdit" />
+                                                        <p:commandButton value="Abbruch"
+                                                                         onclick="PF('lunchEditDialog').hide()" />
                                                     </h:panelGrid>
                                                 </p:outputPanel>
                                             </p:dialog>

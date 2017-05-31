@@ -32,7 +32,7 @@ public class Lunch implements Persistable<Long> {
     @NotNull
     private String meal;
     private double cost;
-    @ElementCollection(targetClass = Long.class)
+    @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)
     private Set<Long> childrenIds;
 
 
@@ -88,7 +88,7 @@ public class Lunch implements Persistable<Long> {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Long(id);
     }
 
 
