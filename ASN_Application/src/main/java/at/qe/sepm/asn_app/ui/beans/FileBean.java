@@ -17,6 +17,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -39,6 +40,7 @@ import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 
 @Component
+@Scope("request")
 public class FileBean {
 	@Autowired
 	private PictureService pictureService;
