@@ -21,7 +21,6 @@ public class NurseryConstraints {
 
     public  boolean nurseryInfoExists(NurseryInformation nurseryInformation){
         Collection<NurseryInformation> list = nurseryInformationService.getAllInformation();    //throws null pointer exception
-        System.out.println("HEEEEEEEEEEEEEEEEEEEEERE I AAAAAAAAAAAAAAAM ---------------------------------");
         Iterator<NurseryInformation> iterator = list.iterator();
 
         while(iterator.hasNext()) {

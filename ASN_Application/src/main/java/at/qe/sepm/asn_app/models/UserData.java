@@ -3,6 +3,7 @@ package at.qe.sepm.asn_app.models;
 import java.util.Objects;
 import javax.persistence.*;
 
+import at.qe.sepm.asn_app.models.general.Religion;
 import org.springframework.data.domain.Persistable;
 
 /**
@@ -39,6 +40,10 @@ public class UserData implements Persistable<String> {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
+    @Enumerated(EnumType.STRING)
+    private Religion religion;
+    private String phoneNumber;
+
 
     public UserData(){}
 
@@ -55,6 +60,22 @@ public class UserData implements Persistable<String> {
         this.birthday = birthday;
         this.email = email;
         this.userRole = userRole;
+    }
+
+    public Religion getReligion() {
+        return religion;
+    }
+
+    public void setReligion(Religion religion) {
+        this.religion = religion;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLocation() {

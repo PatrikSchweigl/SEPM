@@ -10,6 +10,6 @@ package at.qe.sepm.asn_app.models.employee;
  * @see at.qe.sepm.asn_app.ui.controllers.EnumController
  */
 public enum WorkRole {
-    PEDAGOGUE,
-    TRAINEE
+    PAEDAGOGE,
+    PRAKTIKANT
 }

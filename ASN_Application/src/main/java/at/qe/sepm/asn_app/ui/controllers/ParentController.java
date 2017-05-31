@@ -1,8 +1,10 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class ParentController {
     private ParentService parentService;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private ChildService childService;
     private String password;
     private Parent parent;
     private Collection<Parent> parents;
@@ -47,6 +51,9 @@ public class ParentController {
         return password;
     }
 
+    public Collection<Child> getChildren(String username){
+        return childService.getChildrenByParentUsername(username);
+    }
 
     @PostConstruct
     public void initList(){

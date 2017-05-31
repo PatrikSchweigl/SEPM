@@ -9,7 +9,7 @@ package at.qe.sepm.asn_app.models.child;
  * @see at.qe.sepm.asn_app.models.referencePerson.Parent
  */
 public enum Custody {
-    FATHER,
-    MOTHER,
+    VATER,
+    MUTTER,
     BOTH
 }

@@ -5,9 +5,9 @@ package at.qe.sepm.asn_app.models.general;
  * on 19.03.2017
  */
 public enum FamilyStatus {
-    MARRIED,
-    NOT_MARRIED,
-    DIVORCED,
-    WIDOWED,
-    REGISTERED_PARTNERSHIP
+    VERHEIRATET,
+    LEDIG,
+    GESCHIEDEN,
+    VERWITTWED,
+    EINGETRAGENE_PARTNERSCHAFT
 }

@@ -57,7 +57,7 @@ public class PasswordConstraintsTest {
         parentListTasks = new HashSet<>();
         parent = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1",
                 "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT,
-                "ParentImgName1", parentListChildren, parentListTasks, FamilyStatus.MARRIED, true, "24/05/1980");
+                "ParentImgName1", parentListChildren, parentListTasks, FamilyStatus.VERHEIRATET, true, "24/05/1980");
     }
 
 

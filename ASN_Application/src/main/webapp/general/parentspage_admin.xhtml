@@ -28,7 +28,7 @@
 												widgetVar="parentTable" value="#{parentController.parents}"
 												rows="10" paginatorPosition="bottom" paginator="true"
 												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-												rowsPerPageTemplate="10,25,50">
+												rowsPerPageTemplate="10,25,50" selectionMode="single" selection="#{parentController.parent}" rowKey="#{parent.username}">
 
 												<f:facet name="header">
 													<p:outputPanel>
@@ -38,6 +38,9 @@
 															placeholder="Suchwort eingeben" />
 													</p:outputPanel>
 												</f:facet>
+
+												<p:ajax event="rowSelect" update=":parentForm:infoDialog" oncomplete="PF('infoDialog').show()"/>
+
 
 												<f:facet name="{Exporters}"
 													style="float: right; vertical-align: middle;">
@@ -124,6 +127,36 @@
 													</p:commandButton>
 												</p:column>
 											</p:dataTable>
+
+											<!-- More Info Dialog -->
+											<p:dialog header="#{parentController.parent.firstName} #{parentController.parent.lastName}" widgetVar="infoDialog" id="infoDialog"
+													  modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+												<p:outputPanel id="infosheet" style="text-align:center;">
+													<p:panelGrid columns="2" columnClasses="label,value">
+														<f:facet name="header">
+															<p:graphicImage name="pictures/profile_pictures/#{parentController.parent.imgName}" class="picture"/>
+														</f:facet>
+
+														<h:outputText value="Straße:"/>
+														<h:outputText value="#{parentController.parent.streetName}"/>
+
+														<h:outputText value="PLZ:"/>
+														<h:outputText value="#{parentController.parent.postcode}"/>
+
+														<h:outputText value="Familienstatus:"/>
+														<h:outputText value="#{parentController.parent.familyStatus}"/>
+													</p:panelGrid>
+													<p:panelGrid columns="2" style="width:100%;">
+														<p:dataList value="#{parentController.getChildren(parentController.parent.username)}" var="child" type="ordered">
+															<f:facet name="header">
+																Kinder
+															</f:facet>
+															#{child.firstName} #{child.lastName} - (#{child.birthday})
+														</p:dataList>
+													</p:panelGrid>
+												</p:outputPanel>
+											</p:dialog>
+
 
 											<!-- Create Parent Dialog -->
 											<p:dialog header="Elternteil anlegen" id="parentAddDialog"
