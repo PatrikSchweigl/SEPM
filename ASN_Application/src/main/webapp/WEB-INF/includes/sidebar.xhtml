@@ -34,6 +34,34 @@
 									style="padding-left: 40px; font-size: 25px">Kindergarten
 										Information</span> </a></li>
 						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
+								<i class="fa fa-male fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup
+								rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a
+									href="/general/parentspage_admin.xhtml"> <i
+									class="fa fa-users fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Elternteile</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a
+									href="/employee/children_employee.xhtml"> <i
+									class="fa fa-child fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Kinder</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
+							<li class="treeview"><a
+									href="/parent/children_parent.xhtml"> <i
+									class="fa fa-child fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Kinder</span>
+							</a></li>
+						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
@@ -42,48 +70,7 @@
 									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
-							<li><a href="/employee/messageboard_employee.xhtml"> <i
-									class="fa fa-sticky-note-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Messageboard</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a
-								onclick="PF('privateMessage').show()"> <i
-									class="fa fa-envelope-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Privatnachricht</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a
-								href="/employee/children_employee.xhtml"> <i
-									class="fa fa-child fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kinder</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a
-								href="/parent/children_parent.xhtml"> <i
-									class="fa fa-child fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kinder</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a href="/parent/calendar_parent.xhtml">
-									<i class="fa fa-calendar fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kalender</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a
-								href="/employee/calendar_employee.xhtml"> <i
-									class="fa fa-calendar fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kalender</span>
-							</a></li>
-						</h:panelGroup>
+
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a onclick="PF('ownDataDialog').show()">
@@ -91,35 +78,8 @@
 									style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a
-								href="/employee/logpage_employee.xhtml"> <i
-									class="fa fa-file-archive-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Logdatei</span>
-							</a></li>
-						</h:panelGroup>
 
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a onclick="PF('colorSettings').show()"
-								href="#"> <i class="fa fa-edit fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
-									<i class="fa fa-male fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a
-								href="/general/parentspage_admin.xhtml"> <i
-									class="fa fa-users fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Elternteile</span>
-							</a></li>
-						</h:panelGroup>
+
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 							<li class="treeview"><a
 								href="/admin/employeepage_admin.xhtml"> <i
@@ -127,16 +87,17 @@
 									style="padding-left: 40px; font-size: 25px">Angestellte</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
-							<li class="treeview"><a href="/admin/logpage_admin.xhtml">
-									<i class="fa fa-file-archive-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Logdatei</span>
-							</a></li>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
+
+						<h:panelGroup>
 							<li class="treeview"><a onclick="PF('colorSettings').show()"
 								href="#"> <i class="fa fa-edit fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a href="/admin/logpage_admin.xhtml">
+								<i class="fa fa-file-archive-o fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
 					</ul>
@@ -255,111 +216,7 @@
 
 
 		</h:form>
-		<h:form>
-			<p:dialog header="Privatnachricht" id="privateMessage"
-				widgetVar="privateMessage" modal="false" showEffect="clip"
-				hideEffect="clip" resizable="true" position="right,bottom"
-				responsive="true" width="300" height="400" minimizable="true"
-				minWidth="270">
-				<h3>Mitarbeiter</h3>
-				<div>
-					<ui:repeat var="employee" value="#{employeeController.employees}">
-						<ui:fragment
-							rendered="#{employee.username ne sessionInfoBean.getCurrentUserData().username}">
-							<h:panelGrid columns="2" style="width:50px;"
-								columnClasses="logo,detail">
-								<p:graphicImage
-									name="pictures/profile_pictures/#{userService.loadUser(employee.username).getImgName()}"
-									width="32" height="32" />
 
-								<p:commandLink value="#{employee.username}"
-									action="#{privateMessageController.setUsername(employee.username)}"
-									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
-
-									<h:outputText value="#{employee.username}" />
-								</p:commandLink>
-							</h:panelGrid>
-							<hr />
-						</ui:fragment>
-					</ui:repeat>
-				</div>
-				<div>
-					<h3>Eltern</h3>
-					<ui:repeat var="parent" value="#{parentService.getAllParents()}">
-						<ui:fragment
-							rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">
-							<h:panelGrid columns="2" style="width:50px;"
-								columnClasses="logo,detail">
-								<p:graphicImage
-									name="pictures/profile_pictures/#{userService.loadUser(parent.username).getImgName()}"
-									width="32" height="32" />
-								<p:commandLink value="#{parent.username}"
-									action="#{privateMessageController.setUsername(parent.username)}"
-									oncomplete="PF('privateMessageSend').show();PF('privateMessage').hide()">
-
-									<h:outputText value="#{parent.username}" />
-								</p:commandLink>
-							</h:panelGrid>
-							<hr />
-						</ui:fragment>
-					</ui:repeat>
-				</div>
-			</p:dialog>
-		</h:form>
-
-
-
-		<p:dialog header="Privatnachricht" id="privateMessageSend"
-			widgetVar="privateMessageSend" modal="false" showEffect="clip"
-			hideEffect="clip" resizable="true" position="right,bottom"
-			responsive="true" width="400" height="500" minimizable="true"
-			minWidth="350">
-
-			<h:form id="form">
-
-
-				<div>
-					<p:scrollPanel id="scroller" style="width:370px; height:350px">
-
-						<ui:repeat var="message"
-							value="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}">
-							<div class="messageboard-item">
-								<div class="messageboard-body">
-									<ui:fragment
-										rendered="#{message.usernameSender eq sessionInfoBean.currentUserData.username}">
-										<blockquote class="triangle-border-new-left">
-											<div>
-												<p>#{message.message}</p>
-											</div>
-										</blockquote>
-									</ui:fragment>
-									<ui:fragment
-										rendered="#{message.usernameSender ne sessionInfoBean.currentUserData.username}">
-										<blockquote class="triangle-border-new-right">
-											<div>
-												<p>#{message.message}</p>
-											</div>
-										</blockquote>
-									</ui:fragment>
-								</div>
-							</div>
-						</ui:repeat>
-					</p:scrollPanel>
-
-				</div>
-
-				<div>
-					<p:inputTextarea placeholder="Nachricht" id="messageInput"
-						value="#{privateMessageController.privateMessage}" rows="5"
-						cols="37" autoResize="false" />
-					<p:separator />
-					<p:commandButton value="Senden"
-						action="#{privateMessageController.savePrivateMessage()}"
-						update=":form" />
-				</div>
-			</h:form>
-
-		</p:dialog>
 
 	</ui:composition>
 </h:body>

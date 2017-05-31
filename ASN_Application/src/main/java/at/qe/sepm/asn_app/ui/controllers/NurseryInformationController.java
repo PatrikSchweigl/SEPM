@@ -22,7 +22,7 @@ public class NurseryInformationController {
     @Autowired
     private NurseryInformationService nurseryInformationService;
     private NurseryInformation nurseryInformation;
-@Autowired
+    @Autowired
     private NurseryConstraints nurseryConstraints;
 
     private Collection<NurseryInformation> nurseryInformations;

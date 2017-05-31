@@ -4,6 +4,7 @@ import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Parent extends UserData {
 
     private static final long serialVersionUID = 1L;
 
+
     private String imgName;
     @OneToMany
     @ElementCollection
@@ -41,11 +43,13 @@ public class Parent extends UserData {
 
     public Parent(){}
 
-    public Parent(String username, String password, String firstName, String lastName,
-                  String location, String streetName, String postcode, String birthday,
-                  String email, UserRole userRole, Set<Child> children,
+    public Parent(String username, String password, String firstName,
+                  String lastName, String location, String streetName,
+                  String postcode, String birthday, String email,
+                  UserRole userRole, String imgName, Set<Child> children,
                   Set<Task> tasks, FamilyStatus familyStatus, boolean status) {
         super(username, password, firstName, lastName, location, streetName, postcode, birthday, email, userRole);
+        this.imgName = imgName;
         this.children = children;
         this.tasks = tasks;
         this.familyStatus = familyStatus;

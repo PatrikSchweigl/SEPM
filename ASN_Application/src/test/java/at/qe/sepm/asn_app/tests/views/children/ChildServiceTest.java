@@ -84,10 +84,10 @@ public class ChildServiceTest {
         Set<Task> parentTasks3 = new HashSet<>();
 
         parents = new HashSet<>();
-        parents.add(parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", children1, parentTasks1, FamilyStatus.MARRIED, true, "24/05/1980"));
-        parents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", children2, parentTasks2, FamilyStatus.DIVORCED, true, "11/11/2003"));  // Too young
-        parents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", children3, parentTasks3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Too old
-        parents.add(parent4 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", children3, parentTasks3, FamilyStatus.NOT_MARRIED, true, "30/04/1918"));   // Same as parent3
+        parents.add(parent1 = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1", "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT, "ParentImgName1", children1, parentTasks1, FamilyStatus.VERHEIRATET, true, "24/05/1980"));
+        parents.add(parent2 = new Parent("", "ParentUserName2", "ParentFirstName2", "ParentLastName2", "ParentLocation2", "ParentStreetName2", "ParentPostcode2", UserRole.PARENT, "ParentImgName2", children2, parentTasks2, FamilyStatus.GESCHIEDEN, true, "11/11/2003"));  // Too young
+        parents.add(parent3 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", children3, parentTasks3, FamilyStatus.LEDIG, true, "30/04/1918"));   // Too old
+        parents.add(parent4 = new Parent("", "ParentUserName3", "ParentFirstName3", "ParentLastName3", "ParentLocation3", "ParentStreetName3", "ParentPostcode3", UserRole.PARENT, "ParentImgName3", children3, parentTasks3, FamilyStatus.LEDIG, true, "30/04/1918"));   // Same as parent3
     }
 
 

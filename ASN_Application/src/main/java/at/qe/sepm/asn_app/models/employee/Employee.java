@@ -26,9 +26,7 @@ public class Employee extends UserData {
 
     private static final long serialVersionUID = 1L;
 
-    @Enumerated(EnumType.STRING)
-    private Religion religion;
-    private String phoneNumber;
+
     @Enumerated(EnumType.STRING)
     private FamilyStatus familyStatus;
     @Enumerated(EnumType.STRING)
@@ -40,34 +38,17 @@ public class Employee extends UserData {
     public Employee(){//required for jpa repository
     }
 
-    public Employee(String username, String password, String firstName,
-                    String lastName, String location, String streetName,
-                    String postcode, String birthday, String email, UserRole userRole,
-                    Religion religion, String phoneNumber, FamilyStatus familyStatus,
-                    Status workingState, WorkRole workRole) {
+    public Employee(String username, String password, String firstName, String lastName,
+                    String location, String streetName, String postcode, String birthday,
+                    String email, UserRole userRole, FamilyStatus familyStatus, Status workingState,
+                    WorkRole workRole) {
         super(username, password, firstName, lastName, location, streetName, postcode, birthday, email, userRole);
-        this.religion = religion;
-        this.phoneNumber = phoneNumber;
         this.familyStatus = familyStatus;
         this.workingState = workingState;
         this.workRole = workRole;
     }
 
-    public Religion getReligion() {
-        return religion;
-    }
 
-    public void setReligion(Religion religion) {
-        this.religion = religion;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public FamilyStatus getFamilyStatus() {
         return familyStatus;
@@ -94,6 +75,8 @@ public class Employee extends UserData {
     }
 
 
+
+
     /**
      * This method doesn't check for every attribute because some are unnecessary to check (e.g. username).
      * @param obj the object to compare
@@ -110,8 +93,6 @@ public class Employee extends UserData {
 
         Employee other = (Employee) obj;
         if (this.getFamilyStatus().equals(other.getFamilyStatus()) &&
-                this.getPhoneNumber().equals(other.getPhoneNumber()) &&
-                this.getReligion().equals(other.getReligion()) &&
                 this.getBirthday().equals(other.getBirthday()) &&
                 this.getFirstName().equals(other.getFirstName()) &&
                 this.getLastName().equals(other.getLastName()) &&
@@ -133,8 +114,6 @@ public class Employee extends UserData {
                 "First name: " + getFirstName() + "\n" +
                 "Last name: " + getLastName() + "\n" +
                 "Birthday: " + getBirthday() + "\n" +
-                "Religion: " + religion + "\n" +
-                "Phone number: " + getPhoneNumber() + "\n" +
                 "Location: " + getLocation() + "\n" +
                 "Postcode: " + getPostcode() + "\n" +
                 "Street name: " + getStreetName() + "\n" +
