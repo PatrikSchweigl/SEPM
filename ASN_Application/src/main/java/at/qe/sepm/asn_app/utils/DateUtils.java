@@ -54,7 +54,8 @@ public class DateUtils {
         String[] ret = new String[5];
         for(int i = 0; i < 5; i++){
             //TODO remove holidays
-            ret[i] = now.plusDays(x + i).toString();
+            String temp[] = now.plusDays(x + i).toString().split("-");
+            ret[i] = temp[2] + "/" + temp[1] + "/" + temp[0];
         }
 
         return ret;
