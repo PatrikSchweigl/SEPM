@@ -206,7 +206,8 @@
 														<p:commandButton value="Speichern"
 															action="#{parentController.doSaveParent()}"
 															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentAddDialog').hide()"
-															update=":parentForm:parentTable" />
+															update=":parentForm:parentTable"
+																		 process="@widgetVar(parentAddDialog)"/>
 														<p:commandButton value="Abbruch"
 															oncomplete="PF('parentAddDialog').hide()"
 															immediate="true" />
