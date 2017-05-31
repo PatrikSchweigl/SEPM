@@ -85,7 +85,9 @@ public class Lunch implements Persistable<Long> {
     public int getNumChildren() {
         return childrenIds.size();
     }
-
+    public Set<Long> getChildrenIds(){
+        return childrenIds;
+    }
     @Override
     public Long getId() {
         return new Long(id);

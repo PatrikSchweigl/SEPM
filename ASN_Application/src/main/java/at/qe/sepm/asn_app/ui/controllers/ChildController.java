@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.CaregiverService;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -53,6 +55,14 @@ public class ChildController {
     /*
     public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
     */
+
+    public Collection<Child> getChildrenByLunch(Lunch lunch){
+        Set<Child> ret = new HashSet<Child>();
+        for(Long id : lunch.getChildrenIds()){
+                ret.add(childService.loadChild(id));
+        }
+        return ret;
+    }
     @PostConstruct
     public void initList(){
         children = childService.getAllChildren();
@@ -80,6 +90,7 @@ public class ChildController {
         this.childEdit = childEdit;
         doReloadChildEdit();
     }
+
 
     public void findParentByUsername(String usrn){
         child.setPrimaryParent(parentService.loadParent(usrn));
