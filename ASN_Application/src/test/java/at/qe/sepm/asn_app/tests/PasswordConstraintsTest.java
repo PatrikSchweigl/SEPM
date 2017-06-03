@@ -55,6 +55,8 @@ public class PasswordConstraintsTest {
         child.setLastName("Dole");
         parentListChildren = new HashSet<>(Arrays.asList(child));
         parentListTasks = new HashSet<>();
+
+        // TODO The parent constructor is useless --> it is empty
         parent = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1",
                 "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT,
                 "ParentImgName1", parentListChildren, parentListTasks, FamilyStatus.VERHEIRATET, true, "24/05/1980");
