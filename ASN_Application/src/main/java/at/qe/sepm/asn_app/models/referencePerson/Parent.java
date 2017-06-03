@@ -118,7 +118,7 @@ public class Parent extends UserData {
         if (this.getFirstName().equals(other.getFirstName()) &&
                 this.getLastName().equals(other.getLastName()) &&
                 this.getUserRole().equals(other.getUserRole()) &&
-                this.familyStatus.equals(other.familyStatus) &&
+                familyStatus.equals(other.familyStatus) &&
                 this.getBirthday().equals(other.getBirthday())) {
             return true;
         }

@@ -2,8 +2,11 @@ package at.qe.sepm.asn_app.models;
 
 import java.util.Objects;
 import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import at.qe.sepm.asn_app.models.general.Religion;
+import org.springframework.data.annotation.*;
 import org.springframework.data.domain.Persistable;
 
 /**
@@ -44,13 +47,16 @@ public class UserData implements Persistable<String> {
     private Religion religion;
     private String phoneNumber;
 
+    //@Transient
+    private static int usernameCounter = 1;
 
     public UserData(){}
 
+    // TODO The username gets still set ont he views. It should be auto generated though.
     public UserData(String username, String password, String firstName, String lastName,
                     String location, String streetName, String postcode, String birthday,
                     String email, UserRole userRole) {
-        this.username = username;
+        this.username = firstName + usernameCounter++;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -166,6 +172,7 @@ public class UserData implements Persistable<String> {
 		this.imgName = imgName;
 	}
 
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -196,14 +203,14 @@ public class UserData implements Persistable<String> {
         }
 
         UserData other = (UserData) obj;
-        if (this.birthday.equals(other.birthday) &&
-                this.firstName.equals(other.firstName) &&
-                this.lastName.equals(other.lastName) &&
-                this.location.equals(other.location) &&
-                this.postcode.equals(other.postcode) &&
-                this.streetName.equals(other.streetName) &&
-                this.username.equals(other.username) &&
-                this.userRole.equals(other.userRole)) {
+        if (birthday.equals(other.birthday) &&
+                firstName.equals(other.firstName) &&
+                lastName.equals(other.lastName) &&
+                location.equals(other.location) &&
+                postcode.equals(other.postcode) &&
+                streetName.equals(other.streetName) &&
+                username.equals(other.username) &&
+                userRole.equals(other.userRole)) {
             return true;
         }
         else {
