@@ -119,16 +119,6 @@ public class ScheduleView implements Serializable {
 		if (getAuthenticatedUser().getUserRole() == UserRole.PARENT) {
 			nurseryInfo = nurseryInformationService.getAllInformation();
 			for (NurseryInformation n : nurseryInfo) {
-				/*DefaultScheduleEvent ev;
-				DefaultScheduleEvent ev1;
-				DefaultScheduleEvent ev2;
-				ev = new DefaultScheduleEvent("   " + n.getMaxOccupancy() + "  Plätze frei", n.getOriginDate(),
-						n.getOriginDate(), "info");
-				ev1 = new DefaultScheduleEvent("Bringzeit", n.getBringStart(), n.getBringEnd(), "info");
-				ev2 = new DefaultScheduleEvent("Holzeit", n.getPickUpStart(), n.getPickUpEnd(), "info");
-				eventModel.addEvent(ev);
-				eventModel.addEvent(ev1);
-				eventModel.addEvent(ev2);*/
 
 				DefaultScheduleEvent ev3;
 				ev3 = new DefaultScheduleEvent("   " + n.getMaxOccupancy() + "  Plätze frei.\n  Bringzeit: "
