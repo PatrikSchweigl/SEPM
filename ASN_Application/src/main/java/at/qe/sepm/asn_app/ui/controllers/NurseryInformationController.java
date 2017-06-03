@@ -59,7 +59,7 @@ public class NurseryInformationController {
     }
 
     public void doSaveNurseryInformation(){
-        if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
+      if(nurseryConstraints.nurseryInfoExists(nurseryInformation) || nurseryInformation.getOriginDate().compareTo(new Date()) <= 0){
             return;
         }
         nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
