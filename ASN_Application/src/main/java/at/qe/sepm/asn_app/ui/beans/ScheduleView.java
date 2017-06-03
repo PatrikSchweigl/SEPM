@@ -141,23 +141,6 @@ public class ScheduleView implements Serializable {
 		}
 	}
 
-	public Date getRandomDate(Date base) {
-		Calendar date = Calendar.getInstance();
-		date.setTime(base);
-		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
-																	// day of
-																	// month
-
-		return date.getTime();
-	}
-
-	public Date getInitialDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
-
-		return calendar.getTime();
-	}
-
 	public ScheduleModel getEventModel() {
 		if (eventModel == null) {
 		} else {
