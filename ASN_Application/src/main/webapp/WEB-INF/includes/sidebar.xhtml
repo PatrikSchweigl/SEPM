@@ -36,29 +36,28 @@
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
-								<i class="fa fa-male fa-3x"></i> <span
+									<i class="fa fa-male fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Adminstratoren</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
-								rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
+							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
-									href="/general/parentspage_admin.xhtml"> <i
+								href="/general/parentspage_admin.xhtml"> <i
 									class="fa fa-users fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Elternteile</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
-									href="/employee/children_employee.xhtml"> <i
+								href="/employee/children_employee.xhtml"> <i
 									class="fa fa-child fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a
-									href="/parent/children_parent.xhtml"> <i
-									class="fa fa-child fa-3x"></i> <span
+							<li class="treeview"><a href="/parent/children_parent.xhtml">
+									<i class="fa fa-child fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
@@ -94,9 +93,17 @@
 									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a href="/general/logpage_admin.xhtml">
-								<i class="fa fa-file-archive-o fa-3x"></i> <span
+									<i class="fa fa-file-archive-o fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Logdatei</span>
+							</a></li>
+						</h:panelGroup>
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a href="/employee/lunch_emplyee.xhtml">
+									<i class="fa fa-cutlery fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
