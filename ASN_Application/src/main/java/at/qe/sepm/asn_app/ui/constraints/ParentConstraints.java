@@ -4,6 +4,9 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.parser.BirthdayParser;
 import at.qe.sepm.asn_app.services.ParentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -13,7 +16,12 @@ import java.util.Collection;
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 08.05.17.
  */
+@Component
+@Scope("application")
 public class ParentConstraints {
+
+    @Autowired
+    private ParentService parentService;
 
     /**
      *
@@ -53,8 +61,10 @@ public class ParentConstraints {
      * @return true if the parent already exists in the database; false otherwise
      */
     // TODO instead of getting all parents it suffices to get only the one with the same identifier
-    public static boolean alreadyExists(Parent parent) {
-        Collection<Parent> parents = new ParentService().getAllParents();
+    //public static boolean alreadyExists(Parent parent) {
+    public boolean alreadyExists(Parent parent) {
+        //Collection<Parent> parents = new ParentService().getAllParents();
+        Collection<Parent> parents = parentService.getAllParents();
         for (Parent p : parents) {
             if (p.equals(parent)) {
                 return true;
