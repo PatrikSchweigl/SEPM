@@ -33,5 +33,17 @@ public class NurseryConstraints {
 
         return false;
     }
+    
+    public boolean checkTimeConstraints(NurseryInformation nurseryInformation){
+    	if(nurseryInformation.getBringStart().compareTo(nurseryInformation.getBringEnd()) >= 0)
+    		return false;
+    	if(nurseryInformation.getPickUpStart().compareTo(nurseryInformation.getPickUpEnd()) >= 0)
+    		return false;
+    	if(nurseryInformation.getBringEnd().compareTo(nurseryInformation.getPickUpStart()) >= 0)
+    		return false;
+    	
+    	return true;
+    	
+    }
 
 }
