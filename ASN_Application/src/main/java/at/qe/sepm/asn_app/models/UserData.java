@@ -70,6 +70,29 @@ public class UserData implements Persistable<String> {
         this.userRole = userRole;
     }
 
+    /**
+     * Full constructor
+     */
+    public UserData(String username, String password, String firstName, String lastName,
+                    String location, String streetName, String postcode, String birthday,
+                    String email, String imgName, UserRole userRole, Religion religion, String phoneNumber) {
+        this.username = firstName + usernameCounter;
+        usernameCounter++;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.location = location;
+        this.streetName = streetName;
+        this.postcode = postcode;
+        this.birthday = birthday;
+        this.email = email;
+        this.imgName = imgName;
+        this.userRole = userRole;
+        this.religion = religion;
+        this.phoneNumber = phoneNumber;
+    }
+
+
     public Religion getReligion() {
         return religion;
     }

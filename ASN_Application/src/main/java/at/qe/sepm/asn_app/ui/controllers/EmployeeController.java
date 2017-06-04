@@ -23,7 +23,8 @@ import java.util.Map;
  * on 24.03.2017
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class EmployeeController {
 
     @Autowired
@@ -43,6 +44,15 @@ public class EmployeeController {
         this.employee = employee;
         doReloadEmployee();
     }
+
+    /**
+     * Needed for JUNit tests
+     * @param employee
+     */
+    public void setEmployee2(Employee employee) {
+        this.employee = employee;
+    }
+
     public void setEmployees(Collection<Employee> employees) {
         this.employees = employees;
     }
@@ -83,6 +93,14 @@ public class EmployeeController {
     public void setEmployeeEdit(Employee employeeEdit) {
         this.employeeEdit = employeeEdit;
         doReloadEmployeeEdit();
+    }
+
+    /**
+     * Needed for JUnit tests
+     * @param employeeEdit
+     */
+    public void setEmployeeEdit2(Employee employeeEdit) {
+        this.employeeEdit = employeeEdit;
     }
     
     public void doChangePassword(String password){

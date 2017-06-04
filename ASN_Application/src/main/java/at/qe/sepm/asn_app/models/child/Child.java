@@ -96,6 +96,28 @@ public class Child implements Persistable<Long> {
         this.religion = religion;
     }
 
+    /**
+     * Full constructor
+     */
+    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1,
+                 Parent par2, String emergencyNumber, Set<String> allergies, Set<String> foodIntolerances,
+                 Set<Sibling> siblings, Custody custody, Religion religion, Set<Caregiver> caregivers) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.imgName = imgName;
+        this.gender = gender;
+        this.parent1 = par1;
+        this.parent2 = par2;
+        this.emergencyNumber = emergencyNumber;
+        this.allergies = allergies;
+        this.foodIntolerances = foodIntolerances;
+        this.siblings = siblings;
+        this.custody = custody;
+        this.religion = religion;
+        this.caregivers = caregivers;
+    }
+
 
     public String getPrimaryParentFullName(){
         return parent1.getFirstName() + " " + parent1.getLastName();
