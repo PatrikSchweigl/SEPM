@@ -47,6 +47,7 @@ public class UserData implements Persistable<String> {
     private Religion religion;
     private String phoneNumber;
 
+    // TODO doesn't work, write method which gives the number of same usernames instead of a global counter.
     //@Transient
     private static int usernameCounter = 1;
 
@@ -56,7 +57,8 @@ public class UserData implements Persistable<String> {
     public UserData(String username, String password, String firstName, String lastName,
                     String location, String streetName, String postcode, String birthday,
                     String email, UserRole userRole) {
-        this.username = firstName + usernameCounter++;
+        this.username = firstName + usernameCounter;
+        usernameCounter++;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
