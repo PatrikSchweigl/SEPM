@@ -5,17 +5,15 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.repositories.ParentRepository;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
+import at.qe.sepm.asn_app.ui.controllers.ParentEditController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,37 +21,33 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 03.06.17 16:49 CEST.
  */
 @Component
-//@Scope("application")
 @Scope("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-//@Configuration
 public class ParentDBTest {
 
     @Autowired
-    ParentRepository parentRepository;
-    @Autowired
     ParentController parentController;
+    @Autowired
+    ParentEditController parentEditController;
     @Autowired
     private ParentService parentService;
 
-    private Parent parent1;
+    private Parent parent;
 
 
     @Before
     public void initialize() {
         Set<Child> parentListChildren1 = new HashSet<>();
         Set<Task> parentListTasks1 = new HashSet<>();
-        parent1 = new Parent("", "passwd", "ParentFirstName1", "ParentLastName1", "ParentLocation1",
+        parent = new Parent("", "passwd", "ParentFirstName1", "ParentLastName1", "ParentLocation1",
                 "ParentStreetName1", "ParentPostcode1", "24/05/1980","ParentEmail1@google.com",
                 UserRole.PARENT, "ParentImageName1", parentListChildren1, parentListTasks1,
                 FamilyStatus.VERHEIRATET, true);
@@ -63,30 +57,24 @@ public class ParentDBTest {
     @Test
     public void test1() {
         // Save a parent in the database
-        //parentRepository.save(parent1);
-        parentService.saveParent(parent1);
+        parentController.setParent2(parent);
+        parentController.doSaveParent();
 
         // Check if the values have changed since the parent was saved.
-        Parent other = parentRepository.findFirstByUsername(parent1.getUsername());
-        assertTrue(parent1.equals(other));
+        Parent other = parentService.loadParent(parent.getUsername());
+        assertTrue(parent.equals(other));
 
         // Delete the parent again
-        parentRepository.delete(parent1);
-        other = parentRepository.findFirstByUsername(parent1.getUsername());
-        assertFalse(parent1.equals(other));
+        parentEditController.setParent2(parent);
+        parentEditController.doDeleteParent();
+        other = parentService.loadParent(parent.getUsername());
+        assertFalse(parent.equals(other));
         assertNull(other);
-    }
-
-
-    @Test
-    public void test2() {
-        parentController.setParent2(parent1);
-        parentController.doSaveParent();
     }
 
 
     @After
     public void cleanUp() {
-        parent1 = null;
+        parent = null;
     }
 }

@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
  * on 15.05.2017
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class ParentEditController {
 
     @Autowired
@@ -31,6 +32,9 @@ public class ParentEditController {
     public void setParent(Parent parent) {
         this.parent = parent;
         doReloadParent();
+    }
+    public void setParent2(Parent parent) {
+        this.parent = parent;
     }
 
     public void doReloadParent(){

@@ -60,8 +60,12 @@ public class ParentService {
 
 
     public void deleteParent(Parent parent){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
         parentRepository.delete(parent);
     }
 
