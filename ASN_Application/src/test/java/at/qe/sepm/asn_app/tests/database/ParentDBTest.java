@@ -7,12 +7,15 @@ import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.ParentRepository;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.ui.controllers.ParentController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,13 +32,20 @@ import static org.junit.Assert.assertTrue;
  * on 03.06.17 16:49 CEST.
  */
 @Component
+//@Scope("application")
 @Scope("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+//@Configuration
 public class ParentDBTest {
 
     @Autowired
     ParentRepository parentRepository;
+    @Autowired
+    ParentController parentController;
+    @Autowired
+    private ParentService parentService;
+
     private Parent parent1;
 
 
@@ -53,7 +63,8 @@ public class ParentDBTest {
     @Test
     public void test1() {
         // Save a parent in the database
-        parentRepository.save(parent1);
+        //parentRepository.save(parent1);
+        parentService.saveParent(parent1);
 
         // Check if the values have changed since the parent was saved.
         Parent other = parentRepository.findFirstByUsername(parent1.getUsername());
@@ -64,6 +75,13 @@ public class ParentDBTest {
         other = parentRepository.findFirstByUsername(parent1.getUsername());
         assertFalse(parent1.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void test2() {
+        parentController.setParent2(parent1);
+        parentController.doSaveParent();
     }
 
 

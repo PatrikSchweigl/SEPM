@@ -22,7 +22,8 @@ import java.util.Collection;
  * on 14.05.2017
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class ParentController {
     @Autowired
     private ParentService parentService;
@@ -92,6 +93,9 @@ public class ParentController {
     public void setParent(Parent parent) {
         this.parent = parent;
         doReloadParent();
+    }
+    public void setParent2(Parent parent) {
+        this.parent = parent;
     }
 
     public void doChangePassword(String password){
