@@ -40,8 +40,13 @@ public class ParentService {
 
 
     public Parent saveParent(Parent parent){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
         parent.setUserRole(UserRole.PARENT);
