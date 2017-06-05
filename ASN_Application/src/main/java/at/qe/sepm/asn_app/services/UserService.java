@@ -38,7 +38,7 @@ public class UserService {
      * @return
      */
     public Collection<UserData> getAllUsers() {
-        return userRepository.findAllAdmin();
+        return userRepository.findAll();
     }
 
 
