@@ -26,112 +26,121 @@ import java.util.Set;
 @Scope("application")
 public class ChildController {
 
-    @Autowired
-    private ChildService childService;
-    @Autowired
-    private ParentService parentService;
-    @Autowired
-    private CaregiverService caregiverService;
-    private Child child;
-    private Child childEdit;
-    private Caregiver caregiver;
-    private String allergy;
-    private boolean detail;
-    private String intolerance;
-    private boolean care;
-    private Collection<Child> children;
+	@Autowired
+	private ChildService childService;
+	@Autowired
+	private ParentService parentService;
+	@Autowired
+	private CaregiverService caregiverService;
+	private Child child;
+	private Child childEdit;
+	private Caregiver caregiver;
+	private String allergy;
+	private boolean detail;
+	private String intolerance;
+	private boolean care;
+	private Collection<Child> children;
 
-    private String parentUserName;
+	private String parentUserName;
 
-    public void setChildren(Collection<Child> children) {
-        this.children = children;
-    }
+	public void setChildren(Collection<Child> children) {
+		this.children = children;
+	}
 
-    public Collection<Child> getChildren(){
-        return children;
-    }
+	public Collection<Child> getChildren(){
+		return children;
+	}
 
-    public Collection<Child> getChildrenByParentUsername(String usrn){return childService.getChildrenByParentUsername(usrn);}
+	public Collection<Child> getChildrenByParentUsername(String usrn){return childService.getChildrenByParentUsername(usrn);}
     /*
     public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
     */
 
-    public Collection<Child> getChildrenByLunch(Lunch lunch){
-        Set<Child> ret = new HashSet<Child>();
-        for(Long id : lunch.getChildrenIds()){
-                ret.add(childService.loadChild(id));
-        }
-        return ret;
-    }
-    @PostConstruct
-    public void initList(){
-        children = childService.getAllChildren();
-    }
+	public Collection<Child> getChildrenByLunch(Lunch lunch){
+		Set<Child> ret = new HashSet<Child>();
+		for(Long id : lunch.getChildrenIds()){
+			ret.add(childService.loadChild(id));
+		}
+		return ret;
+	}
+	@PostConstruct
+	public void initList(){
+		children = childService.getAllChildren();
+	}
 
-    @PostConstruct
-    public void initNewChild(){
-        child = new Child();
-    }
+	@PostConstruct
+	public void initNewChild(){
+		child = new Child();
+	}
 
-    public Child getChild() {
-        return child;
-    }
+	public Child getChild() {
+		return child;
+	}
 
-    public void setChild(Child child) {
-        this.child = child;
-        doReloadChild();
-    }
+	public void setChild(Child child) {
+		this.child = child;
+		doReloadChild();
+	}
 
-    public Child getChildEdit() {
-        return childEdit;
-    }
+	public Child getChildEdit() {
+		return childEdit;
+	}
 
-    public void setChildEdit(Child childEdit) {
-        this.childEdit = childEdit;
-        doReloadChildEdit();
-    }
+	public void setChildEdit(Child childEdit) {
+		this.childEdit = childEdit;
+		doReloadChildEdit();
+	}
 
 
-    public void findParentByUsername(String usrn){
-        child.setPrimaryParent(parentService.loadParent(usrn));
-    }
+	public void findParentByUsername(String usrn){
+		child.setPrimaryParent(parentService.loadParent(usrn));
+	}
 
-    public String getParentUserName() {
-        return parentUserName;
-    }
+	public String getParentUserName() {
+		return parentUserName;
+	}
 
-    public void setParentUserName(String parentUserName) {
-        this.parentUserName = parentUserName;
-    }
+	public void setParentUserName(String parentUserName) {
+		this.parentUserName = parentUserName;
+	}
 
-    public void doSaveChild(){
-        findParentByUsername(parentUserName);
-        child = childService.saveChild(child);
-        child = null;
-        initNewChild();
-        initList();
-    }
+	public void doSaveChild(){
+		findParentByUsername(parentUserName);
+		Parent parent = parentService.loadParent(parentUserName);
+		parent.setStatus(true);	// set parent status to active when child is added
+		parentService.saveParent(parent);
+		child = childService.saveChild(child);
+		child = null;
+		initNewChild();
+		initList();
+	}
 
-    public void doSaveChildEdit() {
-    	if(allergy.compareTo("") != 0)
-    		childEdit.addAllergy(allergy);
-    	if(intolerance.compareTo("") != 0)
-    		childEdit.addFoodIntolerance(intolerance);
-        childEdit = childService.saveChild(childEdit);
-        initList();
-    }
+	public void doSaveChildEdit() {
+		if(allergy.compareTo("") != 0)
+			childEdit.addAllergy(allergy);
+		if(intolerance.compareTo("") != 0)
+			childEdit.addFoodIntolerance(intolerance);
+		childEdit = childService.saveChild(childEdit);
+		initList();
+	}
 
-    public void doDeleteChild() {
-        this.childService.deleteChild(childEdit);
-        childEdit = null;
-        children = childService.getAllChildren();
-    }
-    public void doReloadChild(){
-        child = childService.loadChild(child.getId());
-    }
-    public void doReloadChildEdit(){
-        childEdit = childService.loadChild(childEdit.getId());
-    }
+	public void doDeleteChild() {
+		Parent parent = childEdit.getPrimaryParent();
+		if(childService.getChildrenByParentUsername(parent.getUsername()).size() <= 1){
+			parent.setStatus(false);	// set parent status to inactive when last child is deleted
+			parentService.saveParent(parent);
+		}
+		this.childService.deleteChild(childEdit);
+
+		childEdit = null;
+		children = childService.getAllChildren();
+	}
+	public void doReloadChild(){
+		child = childService.loadChild(child.getId());
+	}
+	public void doReloadChildEdit(){
+		childEdit = childService.loadChild(childEdit.getId());
+	}
 
 	public boolean getCare() {
 		return care;
