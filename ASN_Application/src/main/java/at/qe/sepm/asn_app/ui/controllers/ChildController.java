@@ -31,6 +31,8 @@ public class ChildController {
 	@Autowired
 	private ParentService parentService;
 	@Autowired
+	private ParentController parentController;
+	@Autowired
 	private CaregiverService caregiverService;
 	private Child child;
 	private Child childEdit;
@@ -113,6 +115,7 @@ public class ChildController {
 		child = null;
 		initNewChild();
 		initList();
+		parentController.initList();
 	}
 
 	public void doSaveChildEdit() {
@@ -131,9 +134,9 @@ public class ChildController {
 			parentService.saveParent(parent);
 		}
 		this.childService.deleteChild(childEdit);
-
 		childEdit = null;
 		children = childService.getAllChildren();
+		parentController.initList();
 	}
 	public void doReloadChild(){
 		child = childService.loadChild(child.getId());
