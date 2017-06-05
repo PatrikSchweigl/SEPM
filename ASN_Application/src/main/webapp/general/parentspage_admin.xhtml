@@ -97,6 +97,17 @@
 													sortBy="#{parent.location}" filterStyle="display:none">
 													<h:outputText value="#{parent.location}" />
 												</p:column>
+												<p:column headerText="Status" filterBy="#{parent.status}" filterMatchMode="equals">
+													<f:facet name="filter">
+														<p:selectOneButton onchange="PF('parentTable').filter()">
+															<f:converter converterId="javax.faces.Boolean" />
+															<f:selectItem itemLabel="alle" itemValue="" />
+															<f:selectItem itemLabel="aktiv" itemValue="true" />
+															<f:selectItem itemLabel="inaktiv" itemValue="false" />
+														</p:selectOneButton>
+													</f:facet>
+													<h:outputText value="#{parent.status ? 'aktiv' : 'inaktiv'}"/>
+												</p:column>
 												<p:column style="width:120px;text-align: center"
 													exportable="false">
 													<p:commandButton update=":parentForm"
