@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 
 @Component
 @Scope("view")
-public class MessageController {
+public class MessageController extends Thread{
 
     @Autowired
     private MessageService messageService;
@@ -61,7 +61,16 @@ public class MessageController {
 
     public void doSaveMessage(){
         message = messageService.saveMessage(message);
-        Iterator<UserData> iterator = userService.getAllUsers().iterator();
+        Thread t = new Thread();
+        t.start();
+
+        init();
+        initList();
+    }
+
+    @Override
+    public void run(){
+        Iterator<UserData> iterator = userService.getParentsByNotification().iterator();
         while(iterator.hasNext()){
             UserData user = iterator.next();
             UserData sender = userService.loadUser(message.getUsername());
@@ -70,11 +79,7 @@ public class MessageController {
                   "Schönen Tag wünscht das Kinderkrippen-Team!");
 
         }
-
-        init();
-        initList();
     }
-
 
     public Collection<Message> getMessages(){
         return messages;
