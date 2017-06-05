@@ -36,7 +36,7 @@ public class NotificationConfig {
     @Scheduled(fixedDelay=345600000)    //60000 for one day
     public void taskReminder() {
         Collection<UserData> list = userService.getParentsByNotification();
-        String footer = "Das Kinderkrippen Team bedankt sich für Ihre Mitarbeit!";
+        String footer = "Das Kinderkrippen-Team bedankt sich für Ihre Mitarbeit!";
 
         Date today = new Date();
         Date dateToCompare = new Date();
@@ -67,7 +67,6 @@ public class NotificationConfig {
 
                     dateToCompare.setTime(t.getBeginDate().getTime()-(min*60*1000)-(hrs*60*60*1000));
 
-                    System.out.println(dateToCompare.getTime()-today.getTime()+"--------------------------------"+dateToCompare.getTime()+"-------"+today.getTime()+"--------"+dateToCompare+"-------"+today);
                     if((dateToCompare.getTime()-today.getTime()) == 345600000){ //4 days before the task
                         taskMsg += t.getDescription() + "\t|\t"+ t.getFormattedDate(t.getBeginDate())+"\t|\t"+ t.getFormattedDate(t.getEndingDate())+"\n";
                     }
