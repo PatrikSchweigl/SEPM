@@ -1,6 +1,10 @@
 package at.qe.sepm.asn_app.utils;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Lukas Aukenthaler on 22.05.2017.
@@ -10,6 +14,7 @@ public class DateUtils {
      *
      * @return array containing LocalDates for the next week (mon-fri)
      */
+    @Deprecated
     public static LocalDate[] getNextWeek(){
         LocalDate now = LocalDate.now();
 
@@ -27,6 +32,7 @@ public class DateUtils {
      *
      * @return array containing LocalDates for the current week (mon-fri)
      */
+    @Deprecated
     public static LocalDate[] getCurrentWeek(){
         LocalDate now = LocalDate.now();
 
@@ -46,16 +52,26 @@ public class DateUtils {
      *  determines the week you want to retrieve, 0 is the current, 1 is the next one, etc.
      * @return array containing string represantations of LocalDates for the selected week (mon-fri)
      */
-    public static String[] getWeekToString(int j){
+    public static Date[] getWeek(int j){
         LocalDate now = LocalDate.now();
 
         int x = now.getDayOfWeek().getValue();
         x = 1 + j*7 - x;
-        String[] ret = new String[5];
+        Date[] ret = new Date[5];
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         for(int i = 0; i < 5; i++){
             //TODO remove holidays
-            String temp[] = now.plusDays(x + i).toString().split("-");
-            ret[i] = temp[2] + "/" + temp[1] + "/" + temp[0];
+            ret[i] = Date.from(now.plusDays(x + i).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            //System.err.println(ret[i]);
+
+            cal.setTime(ret[i]);
+
+            int hrs = cal.get(Calendar.HOUR_OF_DAY);
+            int min = cal.get(Calendar.MINUTE);
+            int sec = cal.get(Calendar.SECOND);
+            int milli = cal.get(Calendar.MILLISECOND);
+
+            ret[i].setTime(ret[i].getTime()-(min*60*1000)-(hrs*60*60*1000)-(sec*1000)-milli);
         }
 
         return ret;

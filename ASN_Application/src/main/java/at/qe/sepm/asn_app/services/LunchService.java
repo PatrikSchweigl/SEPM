@@ -30,7 +30,11 @@ public class LunchService {
     @Autowired AuditLogRepository auditLogRepository;
     @Autowired UserRepository userRepository;
 
+    /*
     public List<Lunch> getLunchByDate(String date){
+        return lunchRepository.getLunchByDate(date);
+    } */
+    public List<Lunch> getLunchByDate(Date date){
         return lunchRepository.getLunchByDate(date);
     }
 

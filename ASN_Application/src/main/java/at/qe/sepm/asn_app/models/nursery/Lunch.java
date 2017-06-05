@@ -6,6 +6,7 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -28,15 +29,17 @@ public class Lunch implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotNull
-    private String date;
+    private Date date;
     @NotNull
     private String meal;
     private double cost;
     @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)
     private Set<Long> childrenIds;
 
+    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Lunch(String date, String meal, double cost) {
+
+    public Lunch(Date date, String meal, double cost) {
         this.date = date;
         this.meal = meal;
         this.cost = cost;
@@ -58,12 +61,16 @@ public class Lunch implements Persistable<Long> {
         removeChild(c.getId());
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = DateUtils.primefaceCalendarToStr(date);
+    public String getDateDatatable(){
+        return format.format(date);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getMeal() {
