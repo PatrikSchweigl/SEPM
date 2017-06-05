@@ -23,7 +23,7 @@ INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo2', 'cheng', 'cheng');
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo3', 'cheng', 'cheng');
 
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('05/06/2017', '%d/%m/%Y'), 'Lasagne', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('06/06/2017', '%d/%m/%Y'), 'Dürüm', 3.0);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('07/06/2017', '%d/%m/%Y'), 'Spaghetti', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('05/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('06/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Dürüm', 3.0);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('07/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
 
