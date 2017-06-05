@@ -61,7 +61,7 @@ public class ParentEditController {
                         "Ihr Passwort: passwd" +
                         "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
                         "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                        "Viel Spaß wünschen das Kinderkrippen Team!");
+                        "Viel Spaß wünschen das Kinderkrippen-Team!");
         parentService.resetPassword(parent);
     }
 

@@ -27,12 +27,12 @@ import java.io.Serializable;
  */
 
 @Component
-@ViewScoped
-public class MessageService implements Serializable {
+@Scope("application")
+public class MessageService {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	@Autowired
     private MessageRepository messageRepository;
     @Autowired
@@ -49,10 +49,11 @@ public class MessageService implements Serializable {
     }
     
     
-    public Message saveMessage(String text){
+    public Message saveMessage(Message message){
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
-    	Message message = new Message(getAuthenticatedUser().getUsername(), text, new Date());
+        message.setDate(new Date());
+        message.setUsername(getAuthenticatedUser().getUsername());
     	return messageRepository.save(message);
     }
     
