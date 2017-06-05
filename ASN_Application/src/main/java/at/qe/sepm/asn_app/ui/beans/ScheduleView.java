@@ -31,6 +31,7 @@ import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
@@ -54,6 +55,8 @@ public class ScheduleView implements Serializable {
 	private ScheduleEvent event = new DefaultScheduleEvent();
 	private ScheduleEvent editEvent = new DefaultScheduleEvent();
 	private ScheduleEvent editViewEvent = new DefaultScheduleEvent();
+    @Autowired
+    private MailService mailService;
 	@Autowired
 	private RegistrationService registrationService;
 	@Autowired
@@ -82,6 +85,7 @@ public class ScheduleView implements Serializable {
 	private String description;
 	private String childFirstname;
 	private Date childBringDate;
+    String footer = "Das Kinderkrippen Team bedankt sich für Ihre Mitarbeit!";
 
 	@PostConstruct
 	public void init() {
@@ -204,6 +208,8 @@ public class ScheduleView implements Serializable {
 				UserData user = userService.loadUser(reciever);
 				System.err.println(reciever);
 				if (user != null) {
+	                mailService.sendEmail(user.getEmail(), "Ihnen wurde eine neue Aufgabe zugeteilt", "Guten Tag "+user.getFirstName() + " " + user.getLastName()
+                    +"!\n\nIhnen wurde soeben von der/dem Krippenmitarbeiter/in " + getAuthenticatedUser().getUsername() +" eine neue Augabe zugeteilt:\n\n" + event.getDescription() +"\n\n" +footer);
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
 							event.getStartDate(), event.getEndDate());
 				} else {
