@@ -36,7 +36,6 @@ public class Lunch implements Persistable<Long> {
     @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)
     private Set<Long> childrenIds;
 
-    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 
     public Lunch(Date date, String meal, double cost) {
@@ -67,7 +66,9 @@ public class Lunch implements Persistable<Long> {
 
 
     public void setDate(Date date) {
+        date.setHours(12);
         this.date = date;
+
     }
 
     public String getMeal() {
