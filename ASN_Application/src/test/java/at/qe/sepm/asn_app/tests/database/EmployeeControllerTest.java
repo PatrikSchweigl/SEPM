@@ -27,6 +27,7 @@ import org.springframework.security.web.context.HttpRequestResponseHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -87,11 +88,11 @@ public class EmployeeControllerTest {
     public void initialize() throws InterruptedException {
         admin = userService.loadUser("admin");
 
-        mvc = MockMvcBuilders
+        /*mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .addFilters(springSecurityFilterChain)
-                .build();
+                .build();*/
 
         employee = new Employee("", "passwd", "EmployeeFirstName1", "EmployeeLastName1", "EmployeeLocation1",
                                 "EmployeeStreetName1", "6020", "23/11/1990", "EmployeeEmail1@google.com",
@@ -137,7 +138,9 @@ public class EmployeeControllerTest {
     }
 
 
+    @DirtiesContext
     @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void test1() {
         // Save the employee in the database.
         employeeController.setEmployee2(employee);
@@ -148,6 +151,7 @@ public class EmployeeControllerTest {
         assertTrue(employee.equals(other));
 
         // Delete the parent again
+        employeeController.setEmployeeEdit2(employee);
         employeeController.doDeleteEmployee();
         other = employeeService.loadEmployee(employee.getUsername());
         assertFalse(employee.equals(other));
