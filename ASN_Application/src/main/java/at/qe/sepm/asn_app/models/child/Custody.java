@@ -6,9 +6,10 @@ package at.qe.sepm.asn_app.models.child;
  *
  * Custody specifies which Parent is responsible for a child.
  * @see Child
+ * @see at.qe.sepm.asn_app.models.referencePerson.Parent
  */
 public enum Custody {
-    FATHER,
-    MOTHER,
+    VATER,
+    MUTTER,
     BOTH
 }

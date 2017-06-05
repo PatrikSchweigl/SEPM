@@ -4,6 +4,11 @@
     color: #fff;
 }
 
+.skin-green .ui-selectbooleanbutton.ui-button.ui-state-active, .skin-green .ui-selectonebutton .ui-button.ui-state-active,.skin-green .ui-selectmanybutton .ui-button.ui-state-active{
+	    background: #008d4c;
+}
+
+
 
 .triangle-border {
   text-align: center;
@@ -324,6 +329,9 @@
     background: #d73925;
     color: #fff;
 }
+.skin-red .ui-selectbooleanbutton.ui-button.ui-state-active, .skin-red .ui-selectonebutton .ui-button.ui-state-active,.skin-red .ui-selectmanybutton .ui-button.ui-state-active{
+	    background: #d73925;
+}
 
 .skin-red .triangle-border-new-left {
 	width:250px;
@@ -598,6 +606,10 @@
     background: #e08e0b;
     color: #fff;
 }
+.skin-yellow .ui-selectbooleanbutton.ui-button.ui-state-active, .skin-yellow .ui-selectonebutton .ui-button.ui-state-active,.skin-yellow .ui-selectmanybutton .ui-button.ui-state-active{
+	    background: #e08e0b;
+}
+
 .skin-yellow .triangle-border-new-left {
 	width:250px;
   position:relative;
@@ -869,6 +881,10 @@
     border: 2px solid #555299;
     background: #555299;
     color: #fff;
+}
+
+.skin-purple .ui-selectbooleanbutton.ui-button.ui-state-active, .skin-purple .ui-selectonebutton .ui-button.ui-state-active,.skin-purple .ui-selectmanybutton .ui-button.ui-state-active{
+	    background: #555299;
 }
 
 .skin-purple .triangle-border-new-left {

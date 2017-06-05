@@ -41,6 +41,12 @@ public class EmployeeService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public Employee saveEmployee(Employee employee) {
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employee.setUserRole(UserRole.EMPLOYEE);
@@ -54,8 +60,12 @@ public class EmployeeService {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteEmployee(Employee employee) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ employee.getUsername() + " [" + employee.getUserRole() +"]", new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
         employeeRepository.delete(employee);
 
     }
@@ -63,5 +73,24 @@ public class EmployeeService {
     private UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
+    }
+
+    public void changePassword(String password){
+        UserData user = getAuthenticatedUser();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    public void resetPassword(Employee employee){
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "RESET PASSWD: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        employee.setPassword(passwordEncoder.encode("passwd"));
+        employeeRepository.save(employee);
     }
 }

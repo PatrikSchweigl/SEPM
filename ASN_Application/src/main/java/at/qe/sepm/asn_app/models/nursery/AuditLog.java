@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
  *
  * AuditLog contains information about changes made to the database. This includes the following:
  * - Create a person

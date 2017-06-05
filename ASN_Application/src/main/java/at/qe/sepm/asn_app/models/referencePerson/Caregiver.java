@@ -1,27 +1,44 @@
 package at.qe.sepm.asn_app.models.referencePerson;
 
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
+
+import at.qe.sepm.asn_app.models.child.Child;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
+ *
+ * A caregiver takes responsibility for a child if their parent is not available.
+ * This class only has some attributes to reference a caregiver like the full name,
+ * a profile picture, a phone number and the relationship status to the child.
+ * In contrast to Parent and Employee Caregiver does not inherit from UserData.
+ * @see Relationship
  */
 @Entity
+@Transactional
 public class Caregiver implements Persistable<Long>{
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Relationship relationship;
     private String imgName;
     private String phoneNumber;
+    private boolean eligible;
+    private String childname;
+
 
 
     public Caregiver(){}
@@ -32,6 +49,7 @@ public class Caregiver implements Persistable<Long>{
         this.relationship = relationship;
         this.imgName = imgName;
         this.phoneNumber = phoneNumber;
+        eligible = false;
 
     }
 
@@ -81,7 +99,7 @@ public class Caregiver implements Persistable<Long>{
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
 
@@ -120,4 +138,21 @@ public class Caregiver implements Persistable<Long>{
                 "Relationship: " + relationship + "\n" +
                 "Phone number: " + phoneNumber + "\n";
     }
+
+	public boolean getEligible() {
+		return eligible;
+	}
+
+	public void setEligible(boolean eligible) {
+		this.eligible = eligible;
+	}
+	
+
+	public String getChildname() {
+		return childname;
+	}
+
+	public void setChildname(String childname) {
+		this.childname = childname;
+	}
 }

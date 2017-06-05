@@ -7,10 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
  *
  * A Message contains the name of the sender, the message itself and a date on which it got sent.
  * There is no receiver because all instance of Message are publicly displayed.
@@ -65,6 +68,10 @@ public class Message implements Persistable<Long> {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public String getFormattedDate(){
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
     }
 
 

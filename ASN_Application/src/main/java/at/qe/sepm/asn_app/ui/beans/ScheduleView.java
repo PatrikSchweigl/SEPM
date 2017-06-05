@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.ui.controllers;
+package at.qe.sepm.asn_app.ui.beans;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -23,10 +23,17 @@ import org.springframework.stereotype.Component;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
+import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.MailService;
+import at.qe.sepm.asn_app.services.NurseryInformationService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
 
@@ -49,9 +56,17 @@ public class ScheduleView implements Serializable {
 	private ScheduleEvent editEvent = new DefaultScheduleEvent();
 	private ScheduleEvent editViewEvent = new DefaultScheduleEvent();
 	@Autowired
+	private MailService mailService;
+	@Autowired
+	private RegistrationService registrationService;
+	@Autowired
+	private ChildService childService;
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private AuditLogRepository auditLogRepository;
+	@Autowired
+	private NurseryInformationService nurseryInformationService;
 	private boolean visible;
 	private boolean important;
 	private boolean child;
@@ -64,6 +79,13 @@ public class ScheduleView implements Serializable {
 	private String reciever;
 	private String sender;
 	private Collection<Task> tasks;
+	private Collection<NurseryInformation> nurseryInfo;
+	private Collection<Registration> registrations;
+	private Child childReg;
+	private String description;
+	private String childFirstname;
+	private Date childBringDate;
+	String footer = "Das Kinderkrippen Team bedankt sich für Ihre Mitarbeit!";
 
 	@PostConstruct
 	public void init() {
@@ -82,9 +104,10 @@ public class ScheduleView implements Serializable {
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.PARENT
-					&& t.getSender().getUserRole() == UserRole.EMPLOYEE && (t.getEndingDate().compareTo(new Date()) > 0))
+					&& t.getSender().getUserRole() == UserRole.EMPLOYEE
+					&& (t.getEndingDate().compareTo(new Date()) > 0))
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
-			else if( t.getEndingDate().compareTo(new Date()) > 0)
+			else if (t.getEndingDate().compareTo(new Date()) > 0)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
 			else
 				break;
@@ -97,23 +120,29 @@ public class ScheduleView implements Serializable {
 			System.err.println(ev.getId());
 
 		}
-	}
+		if (getAuthenticatedUser().getUserRole() == UserRole.PARENT) {
+			nurseryInfo = nurseryInformationService.getAllInformation();
+			for (NurseryInformation n : nurseryInfo) {
 
-	public Date getRandomDate(Date base) {
-		Calendar date = Calendar.getInstance();
-		date.setTime(base);
-		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
-																	// day of
-																	// month
+				DefaultScheduleEvent ev3;
+				ev3 = new DefaultScheduleEvent("   " + n.getMaxOccupancy() + "  Plätze frei.\n  Bringzeit: "
+						+ n.getBringDurationNew() + "\n" + "Holzeit: " + n.getPickUpDurationNew(), n.getOriginDate(),
+						n.getOriginDate(), "info");
+				ev3.setAllDay(true);
+				eventModel.addEvent(ev3);
 
-		return date.getTime();
-	}
+			}
 
-	public Date getInitialDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
+			registrations = registrationService.getAllRegistrationsByParent();
+			for (Registration r : registrations) {
+				DefaultScheduleEvent ev;
 
-		return calendar.getTime();
+				ev = new DefaultScheduleEvent(
+						r.getChild().getFirstName() + " " + r.getChild().getLastName() + "\n" + r.getNote(),
+						r.getDate(), r.getDate(), "registration");
+				eventModel.addEvent(ev);
+			}
+		}
 	}
 
 	public ScheduleModel getEventModel() {
@@ -140,6 +169,25 @@ public class ScheduleView implements Serializable {
 					new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));
 	}
 
+	public void addRegistration() {
+		childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
+				childFirstname);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(event.getStartDate());
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		if (event.getStartDate().compareTo(new Date()) <= 0)
+			return;
+		Registration reg = new Registration(description, childReg, cal.getTime(), event.getStartDate());
+		registrationService.saveRegistration(reg);
+		AuditLog log = new AuditLog(
+				reg.getChild().getFirstName() + " " + reg.getChild().getLastName(), "REGISTRATION CREATED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+				reg.getBringdate());
+		auditLogRepository.save(log);
+	}
+
 	public void addEvent() {
 		if (event.getStartDate().compareTo(new Date()) < 0)
 			return;
@@ -162,8 +210,11 @@ public class ScheduleView implements Serializable {
 				UserData user = userService.loadUser(reciever);
 				System.err.println(reciever);
 				if (user != null) {
+	                
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
 							event.getStartDate(), event.getEndDate());
+					mailService.sendEmail(user.getEmail(), "Ihnen wurde eine neue Aufgabe zugeteilt", "Guten Tag "+user.getFirstName() + " " + user.getLastName()
+                    +"!\n\nIhnen wurde soeben von der/dem Krippenmitarbeiter/in " + getAuthenticatedUser().getUsername() +" eine neue Augabe zugeteilt:\n\n" + event.getDescription() +"\t " + task.getFormattedDate(task.getBeginDate()) + " bis "+ task.getFormattedDate(task.getEndingDate()) +"\n\n" +footer);
 				} else {
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(),
 							getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
@@ -330,5 +381,37 @@ public class ScheduleView implements Serializable {
 
 	public void setChild(boolean child) {
 		this.child = child;
+	}
+
+	public Child getChildReg() {
+		return childReg;
+	}
+
+	public void setChildReg(Child childReg) {
+		this.childReg = childReg;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getChildFirstname() {
+		return childFirstname;
+	}
+
+	public void setChildFirstname(String childFirstname) {
+		this.childFirstname = childFirstname;
+	}
+
+	public Date getChildBringDate() {
+		return childBringDate;
+	}
+
+	public void setChildBringDate(Date childBringDate) {
+		this.childBringDate = childBringDate;
 	}
 }

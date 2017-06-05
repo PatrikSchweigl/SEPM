@@ -1,8 +1,11 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,12 +22,15 @@ import java.util.Collection;
  * on 14.05.2017
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class ParentController {
     @Autowired
     private ParentService parentService;
     @Autowired
-    private UserRepository userRepository;
+    private MailService mailService;
+    @Autowired
+    private ChildService childService;
     private String password;
     private Parent parent;
     private Collection<Parent> parents;
@@ -46,6 +52,9 @@ public class ParentController {
         return password;
     }
 
+    public Collection<Child> getChildren(String username){
+        return childService.getChildrenByParentUsername(username);
+    }
 
     @PostConstruct
     public void initList(){
@@ -64,6 +73,14 @@ public class ParentController {
 
     public void doSaveParent(){
         parent = parentService.saveParent(parent);
+        mailService.sendEmail(parent.getEmail(), "ASN-App Registrierung",
+                "Willkommen bei ASN-Application!\n\n" +
+                        "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                        "Ihr Benutzername: "+ parent.getUsername() + "\n" +
+                        "Ihr Passwort: passwd" +
+                        "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
+                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Viel Spaß wünschen das Kinderkrippen-Team!");
         parent = null;
         initNewParent();
         initList();
@@ -77,19 +94,14 @@ public class ParentController {
         this.parent = parent;
         doReloadParent();
     }
-
-    public void changePassword(String password){
-        UserData user = getAuthenticatedUser();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(password));
-        userRepository.save(user);
+    public void setParent2(Parent parent) {
+        this.parent = parent;
     }
 
-    public UserData getAuthenticatedUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        return userRepository.findFirstByUsername(auth.getName());
+    public void doChangePassword(String password){
+       parentService.changePassword(password);
     }
+
 
 
 

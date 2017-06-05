@@ -18,6 +18,8 @@ p {
 }
 
 
+
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -88,7 +90,15 @@ p {
 .employee{
    background: green;
  }
-
+.info{
+   background: brown;
+}
+.registration{
+   background: purple;
+}
+.meal{
+   background: blue;
+}
 .navbar {
   position: relative;
   min-height: 50px;

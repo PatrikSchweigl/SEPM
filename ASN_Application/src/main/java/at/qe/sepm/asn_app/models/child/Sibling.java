@@ -1,6 +1,7 @@
 package at.qe.sepm.asn_app.models.child;
 
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
  *
  * Sibling is a minimalistic version of Child. In contrast to Child it only holds the full name and birthday.
  * @see Child
  */
 @Entity
+@Transactional
 public class Sibling implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;

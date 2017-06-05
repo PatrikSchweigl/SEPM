@@ -4,6 +4,8 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -109,6 +111,10 @@ public class NurseryInformation implements Persistable<Long> {
     public Date getOriginDate() {
         return originDate;
     }
+    
+    public String getFormattedOriginDate(){
+    	return new SimpleDateFormat("dd-MM-yyyy").format(originDate);
+    }
 
     public void setOriginDate(Date originDate) {
         this.originDate = originDate;
@@ -179,5 +185,20 @@ public class NurseryInformation implements Persistable<Long> {
         int mine = calp.get(Calendar.MINUTE);
 
         return hb +":" +minb + " Uhr - " + he +":" + mine +" Uhr";
+    }
+    
+    public String getBringDurationNew(){
+    	String start = new SimpleDateFormat("H:mm").format(this.bringStart);
+    	String end = new SimpleDateFormat("H:mm").format(this.bringEnd);
+
+
+        return start + " - " + end + " Uhr";
+    }
+    public String getPickUpDurationNew(){
+    	String start = new SimpleDateFormat("H:mm").format(this.pickUpStart);
+    	String end = new SimpleDateFormat("H:mm").format(this.pickUpEnd);
+
+
+        return start + " - " + end + " Uhr";
     }
 }

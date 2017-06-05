@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -30,15 +30,12 @@
                                         <div class="col-md-12">
                                             <h:form id="messages">
                                                 <ul class="messageboard">
-
-
                                                     <ui:repeat var="message"
-                                                               value="#{messageService.getAllMessages()}">
+                                                               value="#{messageController.messages}">
                                                         <li>
-
                                                             <div class="messageboard-item">
 																	<span class="time"> <i class="fa fa-clock-o"></i>
-                                                                        #{message.date}
+                                                                        #{message.formattedDate}
 																	</span>
                                                                 <div class="messageboard-body">
                                                                     <blockquote class="rectangle-speech-border">
@@ -50,7 +47,7 @@
                                                                                     rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
                                                                                 <div align="right">
                                                                                     <p:commandLink
-                                                                                            action="#{messageService.deleteMessage(message)}"
+                                                                                            action="#{messageController.doDeleteMessage(message)}"
                                                                                             icon="ui-icon-trash"
                                                                                             title="Nachricht löschen"
                                                                                             update=":messages"
@@ -79,14 +76,14 @@
                                                           widgetVar="createMessage" modal="true" showEffect="fade"
                                                           hideEffect="fade" resizable="false">
                                                     <p:inputTextarea id="messageInput"
-                                                                     value="#{messageService.text}" rows="5" cols="30"
+                                                                     value="#{messageController.message.message}" rows="5" cols="30"
                                                                      counter="display" maxlength="500"
                                                                      counterTemplate="{0} Zeichen übrig." autoResize="false"/>
                                                     <p:separator/>
                                                     <h:outputText id="display"/>
                                                     <p:separator/>
                                                     <p:commandButton id="button" value="Senden"
-                                                                     action="#{messageService.saveMessage(messageService.text)}"
+                                                                     action="#{messageController.doSaveMessage}"
                                                                      oncomplete="PF('createMessage').hide()"
                                                                      update=":messages" />
                                                 </p:dialog>

@@ -23,7 +23,8 @@ import java.util.Map;
  * on 24.03.2017
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class EmployeeController {
 
     @Autowired
@@ -43,6 +44,15 @@ public class EmployeeController {
         this.employee = employee;
         doReloadEmployee();
     }
+
+    /**
+     * Needed for JUNit tests
+     * @param employee
+     */
+    public void setEmployee2(Employee employee) {
+        this.employee = employee;
+    }
+
     public void setEmployees(Collection<Employee> employees) {
         this.employees = employees;
     }
@@ -84,12 +94,17 @@ public class EmployeeController {
         this.employeeEdit = employeeEdit;
         doReloadEmployeeEdit();
     }
+
+    /**
+     * Needed for JUnit tests
+     * @param employeeEdit
+     */
+    public void setEmployeeEdit2(Employee employeeEdit) {
+        this.employeeEdit = employeeEdit;
+    }
     
-    public void changePassword(String password){
-    	UserData user = getAuthenticatedUser();
-    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(password));
-        userRepository.save(user);
+    public void doChangePassword(String password){
+    	employeeService.changePassword(password);
     }
 
 	public UserData getAuthenticatedUser() {
@@ -112,6 +127,10 @@ public class EmployeeController {
         employeeService.deleteEmployee(employeeEdit);
         employeeEdit = null;
         initList();
+    }
+
+    public void doResetPassword(){
+        employeeService.resetPassword(employeeEdit);
     }
     
 	public void setPassword(String password){

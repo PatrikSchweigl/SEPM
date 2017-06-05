@@ -18,7 +18,8 @@ import java.util.Set;
 import static org.junit.Assert.assertFalse;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 13.05.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 13.05.17.
  *
  * This class checks various constraints made by the class PasswordConstraints. For a password to be valid the
  * following constraints must be true:
@@ -54,9 +55,11 @@ public class PasswordConstraintsTest {
         child.setLastName("Dole");
         parentListChildren = new HashSet<>(Arrays.asList(child));
         parentListTasks = new HashSet<>();
+
+        // TODO The parent constructor is useless --> it is empty
         parent = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1",
                 "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT,
-                "ParentImgName1", parentListChildren, parentListTasks, FamilyStatus.MARRIED, true, "24/05/1980");
+                "ParentImgName1", parentListChildren, parentListTasks, FamilyStatus.VERHEIRATET, true, "24/05/1980");
     }
 
 

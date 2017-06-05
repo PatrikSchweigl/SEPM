@@ -40,13 +40,20 @@ public class ParentService {
 
 
     public Parent saveParent(Parent parent){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
         parent.setUserRole(UserRole.PARENT);
         return parentRepository.save(parent);
     }
+
+
 
 
     public Parent loadParent(String username){
@@ -55,15 +62,37 @@ public class ParentService {
 
 
     public void deleteParent(Parent parent){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
+            auditLogRepository.save(log);
+        }
         parentRepository.delete(parent);
     }
 
-    public UserData getAuthenticatedUser(){
+    private UserData getAuthenticatedUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
+
+    public void changePassword(String password){
+        UserData user = getAuthenticatedUser();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+
+    public void resetPassword(Parent parent){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "RESET PASSWD: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
+        auditLogRepository.save(log);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        parent.setPassword(passwordEncoder.encode("passwd"));
+        parentRepository.save(parent);
+    }
+
+
 
 
 }

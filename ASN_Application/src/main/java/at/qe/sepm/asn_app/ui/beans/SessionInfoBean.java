@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.beans;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +23,8 @@ public class SessionInfoBean {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ParentService parentService;
 
 	/**
 	 * Attribute to cache the current user.
@@ -118,13 +121,21 @@ public class SessionInfoBean {
 		return false;
 	}
 	
-	public boolean hasDefaultPasswd(){
+	public boolean hasDefaultPasswd() {
 		UserData user = getCurrentUserData();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if(passwordEncoder.matches("passwd", user.getPassword()))
         	return true;
         else
         	return false;
+	}
+
+	public boolean isInactiveParent() {
+		if(parentService.loadParent(getCurrentUserName()) != null) {
+			return parentService.loadParent(getCurrentUserName()).isStatus() == false;
+		} else {
+			return false;
+		}
 	}
 
 }

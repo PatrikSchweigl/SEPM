@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -107,6 +108,9 @@ public class Task implements Persistable<Long> {
 		this.important = important;
 	}
 
+    public String getFormattedDate(Date date){
+        return new SimpleDateFormat("HH:mm dd-MM-yyyy").format(date);
+    }
 
     @Override
     public Long getId() {
@@ -148,7 +152,7 @@ public class Task implements Persistable<Long> {
 
     @Override
     public String toString() {
-        return "Description: " + description + "\n" +
+        return  "Description: " + description + "\n" +
                 "BeginDate: " + beginDate + "\n" +
                 "EndingDate: " + endingDate + "\n" +
                 "Important: " + important + "\n" +

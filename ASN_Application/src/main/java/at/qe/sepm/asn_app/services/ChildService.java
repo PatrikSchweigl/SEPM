@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.ChildRepository;
@@ -40,7 +41,7 @@ public class ChildService {
     private AuditLogRepository auditLogRepository;
     @Autowired
     private UserRepository userRepository;
-
+    private Long id;
     private Child child;
 
 
@@ -61,6 +62,14 @@ public class ChildService {
     public Child saveChild(Child child) {
         return childRepository.save(child);
     }
+    
+    public String addCaregiver(Caregiver c){
+
+    	Child child = childRepository.findOne(this.id);
+    	child.addCaregiver(c);
+    	childRepository.save(child);
+    	return child.getFirstName() + " " + child.getLastName();
+    }
 
 
     public Child loadChild(Long id) {
@@ -79,5 +88,17 @@ public class ChildService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
+
+	public Child getChildrenByFirstnameAndParentUsername(String username, String childFirstname) {
+		return childRepository.getChildrenByFirstnameAndParentUsername(username, childFirstname);
+	}
+	
+	public Long getId(){
+		return id;
+	}
+	
+	public void setId(Long id){
+		this.id = id;
+	}
 
 }

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -24,42 +24,46 @@
 												<p:dialog id="dialogTest"
 													visible="#{sessionInfoBean.hasDefaultPasswd()}"
 													width="400px" closable="true" widgetVar="dialogTest"
-													header="Passwort ändern" resizeable="false" modal="true" closeOnEscape="true">
+													header="Passwort ändern" resizeable="false" modal="true"
+													closeOnEscape="true">
 													<h:outputText
 														value="Aus Sicherheitsgründen empfehlen wir Ihnen, das Passwort zu ändern." />
-													<p:messages id="messages"
-														autoUpdate="true" />
+													<p:messages id="messages" autoUpdate="true" />
 
 													<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
 														<h:outputLabel for="pwd1" value="Password 1: *" />
-														<p:password id="pwd1" value="#{employeeController.password}"
-															match="pwd2" label="Passwort:" required="true"
-															feedback="true" validatorMessage="Passwörter stimmen nicht überein!"
+														<p:password id="pwd1"
+															value="#{employeeController.password}" match="pwd2"
+															label="Passwort:" required="true" feedback="true"
+															validatorMessage="Passwörter stimmen nicht überein!"
 															requiredMessage="Kein Passwort eingegeben! (Feld 1)" />
 
 														<h:outputLabel for="pwd2" value="Password 2: *" />
-														<p:password id="pwd2" value="#{employeeController.password}"
+														<p:password id="pwd2"
+															value="#{employeeController.password}"
 															label="Wiederholung: " required="true"
-																	requiredMessage="Kein Passwort eingegeben! (Feld 2)"/>
+															requiredMessage="Kein Passwort eingegeben! (Feld 2)" />
 													</h:panelGrid>
 													<h:panelGrid columns="3">
 														<p:commandButton
-															action="#{employeeController.changePassword(employeeController.password)}"
+															action="#{employeeController.doChangePassword(employeeController.password)}"
 															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dialogTest').hide()"
-															value="Speichern"/>
+															value="Speichern" />
 													</h:panelGrid>
 												</p:dialog>
-											</h:form>
-											<h:form>
+
 												<p:accordionPanel multiple="true">
 													<p:tab title="Anwesende Kinder">
-														<p:dataTable id="childTable" var="child"
-															value="#{childController.children}">
-															<p:column headerText="First Name">
-																<h:outputText value="#{child.firstName}" />
+														<p:dataTable id="childTable" var="reg"
+															value="#{registrationController.getRegistrationsByDate()}">
+															<p:column headerText="Vorname">
+																<h:outputText value="#{reg.child.firstName}" />
 															</p:column>
-															<p:column headerText="Last Name">
-																<h:outputText value="#{child.lastName}" />
+															<p:column headerText="Nachname">
+																<h:outputText value="#{reg.child.lastName}" />
+															</p:column>
+															<p:column headerText="Anmerkung">
+																<h:outputText value="#{reg.note}" />
 															</p:column>
 
 
@@ -68,21 +72,111 @@
 													<p:tab title="Kinder, die heute zu Mittag essen">
 														<p:dataTable id="childTableEating" var="child"
 															value="#{childController.children}">
-															<p:column headerText="First Name">
+															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>
-															<p:column headerText="Last Name">
+															<p:column headerText="Nachname">
 																<h:outputText value="#{child.lastName}" />
 															</p:column>
 
 
 														</p:dataTable>
 													</p:tab>
-													<p:tab title="Sonstige Benachrichtigungen">
-														<h:panelGrid columns="2" cellpadding="10">
-														</h:panelGrid>
+													<p:tab title="Bestätigungen">
+														<p:dataTable id="anouncement" var="child"
+															value="#{caregiverController.getAllCaregiversByEligibleFalse()}">
+															<p:column headerText="Vorname">
+																<h:outputText value="#{child.firstName}" />
+															</p:column>
+															<p:column headerText="Nachname">
+																<h:outputText value="#{child.lastName}" />
+															</p:column>
+															<p:column headerText="Telefonnummer">
+																<h:outputText value="#{child.phoneNumber}" />
+															</p:column>
+															<p:column headerText="Kind">
+																<h:outputText value="#{child.childname}" />
+															</p:column>
+															<p:column style="width:100px;text-align: center"
+																exportable="false">
+																<p:commandButton update=":dialogForm:caregiverEditDialog"
+																	oncomplete="PF('caregiverEditDialog').show()"
+																	icon="ui-icon-note" title="Edit" process="@this">
+																	<f:setPropertyActionListener value="#{child}"
+																		target="#{caregiverController.caregiverEdit}" />
+																</p:commandButton>
+															</p:column>
+
+														</p:dataTable>
 													</p:tab>
 												</p:accordionPanel>
+
+												<!--Edit Caregiver Dialog -->
+												<p:dialog header="Bezugsperson bearbeiten"
+													id="caregiverEditDialog" widgetVar="caregiverEditDialog"
+													modal="true" showEffect="fade" hideEffect="fade"
+													resizable="false" closeOnEscape="true">
+													<p:outputPanel id="caregiverDataEdit"
+														rendered="#{not empty caregiverController.caregiverEdit}">
+														<p:outputPanel>
+															<h:outputLabel for="fupload-edit-care"
+																id="logo-section-edit-care">
+																<p:fileUpload id="fupload-edit-care"
+																	widgetVar="fupload-edit-care" auto="true"
+																	mode="advanced" style="display:none;"
+																	fileUploadListener="#{fileBean.handleFileUploadProfilePictureCaregiver}"
+																	dragDropSupport="true" update="logo-section-edit-care">
+																	<f:attribute name="caregiverId"
+																		value="#{caregiverController.caregiverEdit.id}" />
+																</p:fileUpload>
+																<div align="center"
+																	onclick="$('input[type=file]').click()">
+																	<p:graphicImage id="out-image-edit-care"
+																		style="max-height: 200px; max-width: 200px"
+																		name="pictures/profile_pictures_caregiver/#{caregiverController.caregiverEdit.getImgName()}">
+																	</p:graphicImage>
+																	<p:outputPanel>
+																		<p:graphicImage
+																			rendered="#{empty caregiverController.caregiverEdit.getImgName()}"
+																			name="pictures/profile_pictures/emptypicture.png"
+																			value="Bild hochladen"></p:graphicImage>
+																	</p:outputPanel>
+																	<br />
+																</div>
+															</h:outputLabel>
+														</p:outputPanel>
+														<h:panelGrid columns="2">
+															<p:outputLabel for="pFirstNameCare" value="Vorname: " />
+															<p:inputText id="pFirstNameCare"
+																value="#{caregiverController.caregiverEdit.firstName}" />
+															<p:outputLabel for="pLastNameCare" value="Nachname: " />
+															<p:inputText id="pLastNameCare"
+																value="#{caregiverController.caregiverEdit.lastName}" />
+															<p:outputLabel for="pPhoneNumberCare"
+																value="Telefonnummer: " />
+															<p:inputText id="pPhoneNumberCare"
+																value="#{caregiverController.caregiverEdit.phoneNumber}" />
+															<p:outputLabel for="pChildCare" value="Kind: " />
+															<p:inputText disabled="true" id="pChildCare"
+																value="#{caregiverController.caregiverEdit.childname}" />
+															<p:outputLabel for="pEligibleCare" value="Bestätigt: " />
+															<p:inputText disabled="true" id="pEligibleCare"
+																value="#{caregiverController.caregiverEdit.eligible}" />
+														</h:panelGrid>
+														<p:separator />
+														<h:panelGrid columns="3">
+															<p:commandButton value="Bestätigen"
+																action="#{caregiverController.setEligibleToTrue()}"
+																oncomplete="PF('caregiverEditDialog').hide()"
+																update=":dialogForm"
+																process="@widgetVar(caregiverEditDialog)" />
+															<p:commandButton value="Ablehnen"
+																onclick="PF('caregiverEditDialog').hide()" />
+															<p:commandButton value="Abbruch"
+																onclick="PF('caregiverEditDialog').hide()" />
+														</h:panelGrid>
+													</p:outputPanel>
+												</p:dialog>
 											</h:form>
 										</div>
 									</div>

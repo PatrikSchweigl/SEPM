@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -25,7 +25,7 @@
 
                                             <f:facet name="header">
                                                 <p:outputPanel>
-                                                    <h:outputText value="Suche: "/>
+                                                    <h:outputText value="Suche "/>
                                                     <p:inputText id="globalFilter"
                                                                  onkeyup="PF('usersTable').filter()" style="width:150px"
                                                                  placeholder="Suchwort eingeben"/>
@@ -35,15 +35,15 @@
                                             <f:facet name="{Exporters}"
                                                      style="float: right; vertical-align: middle;">
                                                 <div style="float: right; vertical-align: middle;">
-                                                    <h:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
                                                         <p:graphicImage id="print"
                                                                         name="pictures/extractors/printer.png"
                                                                         width="32"/>
                                                         <p:spacer width="10"/>
                                                         <p:tooltip for="print" value="Drucken" position="top"/>
                                                         <p:printer/>
-                                                    </h:commandLink>
-                                                    <h:commandLink>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
                                                         <p:graphicImage id="excel" name="pictures/extractors/excel.png"
                                                                         width="32"/>
                                                         <p:spacer width="10"/>
@@ -51,22 +51,22 @@
                                                                    position="top"/>
                                                         <p:dataExporter type="xls" target="usersTable"
                                                                         fileName="Admins"/>
-                                                    </h:commandLink>
-                                                    <h:commandLink>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
                                                         <p:graphicImage id="pdf" name="pictures/extractors/pdf.png"
                                                                         width="32"/>
                                                         <p:spacer width="10"/>
                                                         <p:tooltip for="pdf" value="PDF" position="top"/>
                                                         <p:dataExporter type="pdf" target="usersTable"
                                                                         fileName="Admins"/>
-                                                    </h:commandLink>
-                                                    <h:commandLink>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
                                                         <p:graphicImage id="csv" name="pictures/extractors/csv.png"
                                                                         width="32"/>
                                                         <p:tooltip for="csv" value="CSV" position="top"/>
                                                         <p:dataExporter type="csv" target="usersTable"
                                                                         fileName="Admins"/>
-                                                    </h:commandLink>
+                                                    </p:commandLink>
                                                 </div>
                                             </f:facet>
 

@@ -9,7 +9,12 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
+ *
+ * Every time the nursery is open and a child is absent from it the absence has
+ * to be noted with the child, the date on which the child was absent and a reason why.
+ * @see Child
  */
 @Entity
 public class Absence implements Persistable<Long> {

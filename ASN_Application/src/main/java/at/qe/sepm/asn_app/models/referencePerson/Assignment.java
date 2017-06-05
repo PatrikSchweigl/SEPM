@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by Bernd Menia <bernd.menia@student.uibk.ac.at> on 17.03.17.
+ * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
+ * on 17.03.17.
  */
 @Entity
 public class Assignment implements Persistable<Long>{
