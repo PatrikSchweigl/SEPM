@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import at.qe.sepm.asn_app.models.general.Religion;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.*;
 import org.springframework.data.domain.Persistable;
 
@@ -40,6 +41,7 @@ public class UserData implements Persistable<String> {
     private String email;
     private String imgName;
 
+
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
@@ -47,11 +49,35 @@ public class UserData implements Persistable<String> {
     private Religion religion;
     private String phoneNumber;
 
+    @ColumnDefault("false")
+    private boolean notification;
+
     // TODO doesn't work, write method which gives the number of same usernames instead of a global counter.
     //@Transient
     private static int usernameCounter = 1;
 
     public UserData(){}
+
+
+    public UserData(String username, String password, String firstName, String lastName,
+                    String location, String streetName, String postcode, String birthday,
+                    String email, String imgName, UserRole userRole, Religion religion,
+                    String phoneNumber, boolean notification) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.location = location;
+        this.streetName = streetName;
+        this.postcode = postcode;
+        this.birthday = birthday;
+        this.email = email;
+        this.imgName = imgName;
+        this.userRole = userRole;
+        this.religion = religion;
+        this.phoneNumber = phoneNumber;
+        this.notification = notification;
+    }
 
     // TODO The username gets still set ont he views. It should be auto generated though.
     public UserData(String username, String password, String firstName, String lastName,
@@ -196,6 +222,15 @@ public class UserData implements Persistable<String> {
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
 	}
+
+    public boolean isNotification() {
+        return notification;
+    }
+
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
+    }
 
 
     @Override

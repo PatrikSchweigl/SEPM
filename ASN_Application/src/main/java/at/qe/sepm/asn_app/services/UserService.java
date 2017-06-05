@@ -41,6 +41,15 @@ public class UserService {
         return userRepository.findAllAdmin();
     }
 
+
+    public Collection<UserData> getParentsByNotification(){
+        try {
+            return userRepository.findParentsByNotification();
+        }catch(NullPointerException ex){
+            return null;
+        }
+    }
+
     /**
      * Loads a single user identified by its username.
      *

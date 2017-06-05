@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +23,7 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
-    
+
     private Message message;
     
     public Message getMessage() {
