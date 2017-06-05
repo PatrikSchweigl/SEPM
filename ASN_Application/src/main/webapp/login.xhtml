@@ -13,11 +13,6 @@
             	<p:panel id="basic" style="margin-bottom:20px">
 					<div class="login-page">
   						<div class="form">
-    						<form class="register-form">
-                 				<p:inputText id="e-mail" type="text" required="true" placeholder="E-Mailadresse"/>
-      							<button class="login-button">Passwort senden</button>
-      							<p class="message"><a href="#">Anmelden</a></p>
-    						</form>
     						<form class="login-form" action="#{request.contextPath}/login" method="post">
              
                  				<p:inputText id="username" type="text" required="true" placeholder="Benutzername"/>                 
@@ -25,7 +20,6 @@
                  				<p:inputText id="password" type="password" required="true" placeholder="Passwort"/>
                  				
       							<button class="login-button" type="submit">Anmelden</button>
-      							<p class="message"><a href="#">Passwort vergessen?</a></p>
     						</form>
   						</div>
 					</div>
