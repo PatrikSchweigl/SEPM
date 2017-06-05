@@ -47,10 +47,13 @@ public class Parent extends UserData {
     public Parent(String username, String password, String firstName, String lastName,
                   String location, String streetName, String postcode, String birthday,
                   String email, String imgName, UserRole userRole, Religion religion,
-                  String phoneNumber, boolean notification, String imgName1, Set<Child> children,
+                  String phoneNumber, boolean notification, Set<Child> children,
                   Set<Task> tasks, FamilyStatus familyStatus, boolean status) {
-        super(username, password, firstName, lastName, location, streetName, postcode, birthday, email, imgName, userRole, religion, phoneNumber, notification);
-        this.imgName = imgName1;
+
+        super(username, password, firstName, lastName, location, streetName, postcode,
+                birthday, email, imgName, userRole, religion, phoneNumber, notification);
+
+        this.imgName = imgName;
         this.children = children;
         this.tasks = tasks;
         this.familyStatus = familyStatus;
