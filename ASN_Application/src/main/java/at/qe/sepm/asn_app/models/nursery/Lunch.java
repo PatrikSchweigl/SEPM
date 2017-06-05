@@ -65,9 +65,6 @@ public class Lunch implements Persistable<Long> {
         return date;
     }
 
-    public String getDateDatatable(){
-        return format.format(date);
-    }
 
     public void setDate(Date date) {
         this.date = date;

@@ -33,7 +33,6 @@ public class LunchController {
     private Lunch friday;
 
     public List<Lunch> getCurrentWeek(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date[] dates = DateUtils.getWeek(0);
         List<Lunch> ret = null;
         for(Date s : dates){
