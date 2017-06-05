@@ -31,7 +31,9 @@
 														<h:outputText value="#{lunch.meal}" />
 													</p:column>
 													<p:column headerText="Datum">
-														<h:outputText value="#{lunch.date}" />
+														<h:outputText value="#{lunch.date}" >
+																<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+														</h:outputText>
 													</p:column>
 													<p:column headerText="Preis">
 														<h:outputText value="#{lunch.cost}" />
@@ -79,7 +81,7 @@
 															<p:inputText id="cost"
 																value="#{lunchController.lunch.cost}" />
 															<p:outputLabel for="date" value="Datum: " />
-															<p:inputMask mask="99/99/9999" id="date"
+															<p:calendar id="date" pattern="dd/MM/yyyy"
 																value="#{lunchController.lunch.date}" />
 
 														</h:panelGrid>

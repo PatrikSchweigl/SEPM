@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,9 +33,10 @@ public class LunchController {
     private Lunch friday;
 
     public List<Lunch> getCurrentWeek(){
-        String[] dates = DateUtils.getWeekToString(0);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date[] dates = DateUtils.getWeek(0);
         List<Lunch> ret = null;
-        for(String s : dates){
+        for(Date s : dates){
             if(ret == null){
                 ret = lunchService.getLunchByDate(s);
             }
@@ -45,9 +48,9 @@ public class LunchController {
     }
 
     public List<Lunch> getNextWeek(){
-        String[] dates = DateUtils.getWeekToString(1);
+        Date[] dates = DateUtils.getWeek(1);
         List<Lunch> ret = null;
-        for(String s : dates){
+        for(Date s : dates){
             if(ret == null){
                 ret = lunchService.getLunchByDate(s);
             }
