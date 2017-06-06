@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.spi.RegisterableService;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -34,8 +37,19 @@ public class RegistrationController {
         return registrationService.getAllRegistrationsByParent();
     }
 
-    public Collection<Registration> getRegistrationsByDate(){
-        return registrationService.getAllRegistrationsByDate();
+    public Collection<Registration> getRegistrationsByDate(String date){
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
+    	Date d = new Date();
+		try {
+			d = formatter.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        return registrationService.getAllRegistrationsByDate(d);
+    }
+    
+    public Collection<Registration> getRegistrationsByDateToday(){
+        return registrationService.getAllRegistrationsByDate(new Date());
     }
 
     public Registration getRegistration() {

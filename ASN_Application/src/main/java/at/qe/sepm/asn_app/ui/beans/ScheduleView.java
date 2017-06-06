@@ -89,6 +89,7 @@ public class ScheduleView implements Serializable {
 	private String description;
 	private String childFirstname;
 	private Date childBringDate;
+	private String selectedDay;
 	String footer = "Das Kinderkrippen Team bedankt sich für Ihre Mitarbeit!";
 
 	@PostConstruct
@@ -429,5 +430,13 @@ public class ScheduleView implements Serializable {
 			e.printStackTrace();
 		}
 		return "";
+	}
+
+	public String getSelectedDay() {
+		return selectedDay;
+	}
+
+	public void setSelectedDay(String selectedDay) {
+		this.selectedDay = selectedDay;
 	}
 }
