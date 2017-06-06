@@ -36,6 +36,14 @@ public class RegistrationController {
     public Collection<Registration> getAllRegistrationsYear(){
     	return registrationService.getAllRegistrations();
     }
+    
+    public Collection<Registration> getAllRegistrationsMonth(){
+    	return registrationService.getAllRegistrations();
+    }
+    
+    public Collection<Registration> getAllRegistrationsWeek(){
+    	return registrationService.getAllRegistrations();
+    }
 
     public Collection<Registration> getRegistrationsByParent(){
         return registrationService.getAllRegistrationsByParent();
