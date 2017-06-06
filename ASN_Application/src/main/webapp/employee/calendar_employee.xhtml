@@ -156,9 +156,10 @@
 													<p:commandButton id="lunchButton" value="Essen"
 														action="#{lunchController.doSaveLunch}"
 														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()" />
-												<p:button outcome="/employee/calendarDetailDaily_employee.xhtml"
-													value="Tagesplaner" style="align-items:right;">
-												</p:button>
+													<p:button
+														outcome="/employee/calendarDetailDaily_employee.xhtml"
+														value="Tagesplaner" style="align-items:right;"><f:param name="day" value="#{scheduleView.event.endDate}" />
+													</p:button>
 												</h:panelGrid>
 
 											</p:dialog>
