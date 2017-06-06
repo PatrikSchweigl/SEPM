@@ -28,7 +28,7 @@
 										</div>
 										<h:form>
 											<p:accordionPanel multiple="true">
-												<p:tab title="Anwesende Kinder in diesem Kalenderjahr">
+												<p:tab title="Anwesende Kinder in diesem Monat">
 													<p:dataTable id="childTable" var="reg"
 														value="#{registrationController.getAllRegistrationsMonth()}"
 														paginator="true" paginatorPosition="bottom"
@@ -84,7 +84,7 @@
 
 												</p:tab>
 												<p:tab
-													title="Kinder die in diesem Kalenderjahr Essen konsumiert haben">
+													title="Kinder die diesen Monat Essen konsumiert haben">
 													<p:dataTable id="childTableEating" var="child"
 														value="#{childController.children}" paginator="true"
 														paginatorPosition="bottom"
