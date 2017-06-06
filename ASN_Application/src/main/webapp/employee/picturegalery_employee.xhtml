@@ -20,7 +20,7 @@
 									<div class="box-body">
 									<h:form enctype="multipart/form-data">
 										<p:fileUpload
-											fileUploadListener="#{fileBean.handleFileUpload}" auto="true" process="@this"/>
+											fileUploadListener="#{fileBean.handleFileUpload}" auto="true" process="@this" label="Durchsuchen"/>
 											</h:form>
 										<ui:repeat var="picture"
 											value="#{pictureController.getPictures()}">

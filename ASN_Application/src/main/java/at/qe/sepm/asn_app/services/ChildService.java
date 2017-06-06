@@ -60,11 +60,16 @@ public class ChildService {
 
 
     public Child saveChild(Child child) {
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + child.getFirstName() + " " + child.getLastName(), new Date());
+            auditLogRepository.save(log);
+        }
         return childRepository.save(child);
     }
     
     public String addCaregiver(Caregiver c){
-
     	Child child = childRepository.findOne(this.id);
     	child.addCaregiver(c);
     	childRepository.save(child);
@@ -77,8 +82,12 @@ public class ChildService {
     }
 
     public void deleteChild(Child child) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
+            auditLogRepository.save(log);
+        }
         childRepository.delete(child);
     }
 

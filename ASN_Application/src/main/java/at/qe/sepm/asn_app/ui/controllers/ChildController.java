@@ -84,14 +84,30 @@ public class ChildController {
 		doReloadChild();
 	}
 
-	public Child getChildEdit() {
-		return childEdit;
-	}
+    /**
+     * Needed for JUnit tests
+     * @param child The child to be saved in the database.
+     */
+    public void setChild2(Child child) {
+        this.child = child;
+    }
+
+    public Child getChildEdit() {
+        return childEdit;
+    }
 
 	public void setChildEdit(Child childEdit) {
 		this.childEdit = childEdit;
 		doReloadChildEdit();
 	}
+
+    /**
+     * Needed for JUnit tests
+     * @param childEdit The child to be saved in the database.
+     */
+    public void setChildEdit2(Child childEdit) {
+        this.childEdit = childEdit;
+    }
 
 
 	public void findParentByUsername(String usrn){

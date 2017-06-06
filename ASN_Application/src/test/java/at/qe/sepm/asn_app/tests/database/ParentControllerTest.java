@@ -3,6 +3,7 @@ package at.qe.sepm.asn_app.tests.database;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ParentService;
@@ -31,7 +32,7 @@ import static org.junit.Assert.*;
 @Scope("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class ParentDBTest {
+public class ParentControllerTest {
 
     @Autowired
     ParentController parentController;
@@ -39,17 +40,22 @@ public class ParentDBTest {
     ParentEditController parentEditController;
     @Autowired
     private ParentService parentService;
-
     private Parent parent;
 
 
+    /*
+    (String username, String password, String firstName, String lastName, String location,
+                  String streetName, String postcode, String birthday, String email, String imgName,
+                  UserRole userRole, Religion religion, String phoneNumber, boolean notification,
+                  Set<Child> children, Set<Task> tasks, FamilyStatus familyStatus, boolean status
+     */
     @Before
     public void initialize() {
         Set<Child> parentListChildren1 = new HashSet<>();
         Set<Task> parentListTasks1 = new HashSet<>();
         parent = new Parent("", "passwd", "ParentFirstName1", "ParentLastName1", "ParentLocation1",
-                "ParentStreetName1", "ParentPostcode1", "24/05/1980","ParentEmail1@google.com",
-                UserRole.PARENT, "ParentImageName1", parentListChildren1, parentListTasks1,
+                "ParentStreetName1", "ParentPostcode1", "24/05/1980","ParentEmail1@google.com", "ParentImageName1",
+                UserRole.PARENT, Religion.CHRISTENTUM, "0123456789", true, parentListChildren1, parentListTasks1,
                 FamilyStatus.VERHEIRATET, true);
     }
 

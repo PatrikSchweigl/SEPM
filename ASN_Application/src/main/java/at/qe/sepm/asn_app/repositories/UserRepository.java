@@ -30,7 +30,7 @@ public interface UserRepository extends UserBaseRepository<UserData>, AbstractRe
     @Query("SELECT u FROM UserData u WHERE u.userRole = 'ADMIN'")
     List<UserData> findAllAdmin();
 
-    @Query("SELECT u FROM UserData u WHERE u.notification = TRUE")
+    @Query("SELECT u FROM UserData u WHERE u.notification = TRUE and u.userRole <> 'ADMIN'")
     List<UserData> findParentsByNotification();
 
 }
