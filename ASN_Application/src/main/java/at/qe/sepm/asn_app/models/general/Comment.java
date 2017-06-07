@@ -1,11 +1,12 @@
 package at.qe.sepm.asn_app.models.general;
 
-import at.qe.sepm.asn_app.models.UserData;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -23,19 +24,22 @@ public class Comment implements Persistable<Long>{
 
     @Id
     private int id;
+    @NotNull
     private String comment;
+    @NotNull
     private Date date;
-    @ManyToOne(optional = false)
-    private UserData publisher;
+    @NotNull
+    private String username;
+    private String pictureName;
 
 
     public Comment() {}
 
-    public Comment(int id, String comment, Date date, UserData publisher) {
+    public Comment(int id, String comment, Date date, String username) {
         this.id = id;
         this.comment = comment;
         this.date = date;
-        this.publisher = publisher;
+        this.username = username;
     }
 
 
@@ -55,12 +59,16 @@ public class Comment implements Persistable<Long>{
         this.date = date;
     }
 
-    public UserData getPublisher() {
-        return publisher;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPublisher(UserData publisher) {
-        this.publisher = publisher;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getFormattedDate(){
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
     }
 
 
@@ -88,7 +96,7 @@ public class Comment implements Persistable<Long>{
         Comment other = (Comment) obj;
         if (this.comment.equals(other.comment) &&
                 this.date.equals(other.date) &&
-                this.publisher.equals(other.publisher)) {
+                this.username.equals(other.username)) {
             return true;
         }
         else {
@@ -101,6 +109,14 @@ public class Comment implements Persistable<Long>{
     public String toString() {
         return "Comment: " + comment + "\n" +
                 "Date: " + date + "\n" +
-                "Publisher: " + publisher;
+                "Publisher: " + username;
     }
+
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
 }
