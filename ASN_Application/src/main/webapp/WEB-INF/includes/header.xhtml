@@ -162,7 +162,7 @@
                 <div>
                     <p:inputTextarea placeholder="Nachricht" id="messageInput"
                                      value="#{privateMessageController.privateMessage}" rows="5"
-                                     cols="37" autoResize="false" />
+                                     cols="37" autoResize="false" required="true" />
                     <p:separator />
                     <p:commandButton value="Senden"
                                      action="#{privateMessageController.savePrivateMessage()}"

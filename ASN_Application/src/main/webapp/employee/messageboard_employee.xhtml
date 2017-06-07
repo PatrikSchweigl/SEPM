@@ -78,13 +78,13 @@
                                                     <p:inputTextarea id="messageInput"
                                                                      value="#{messageController.message.message}" rows="5" cols="30"
                                                                      counter="display" maxlength="500"
-                                                                     counterTemplate="{0} Zeichen übrig." autoResize="false"/>
+                                                                     counterTemplate="{0} Zeichen übrig." autoResize="false" required="true"/>
                                                     <p:separator/>
                                                     <h:outputText id="display"/>
                                                     <p:separator/>
                                                     <p:commandButton id="button" value="Senden"
                                                                      action="#{messageController.doSaveMessage}"
-                                                                     oncomplete="PF('createMessage').hide()"
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createMessage').hide()"
                                                                      update=":messages" />
                                                 </p:dialog>
 
