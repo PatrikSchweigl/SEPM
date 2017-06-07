@@ -18,16 +18,20 @@
 							<section class="content">
 								<div class="box">
 									<div class="box-body">
-									<h:form enctype="multipart/form-data">
-										<p:fileUpload
-											fileUploadListener="#{fileBean.handleFileUpload}" auto="true" process="@this" label="Durchsuchen"/>
+										<ui:fragment rendered="{!sessionInfoBean.inactiveParent}">
+											<h:form enctype="multipart/form-data">
+												<p:fileUpload
+													fileUploadListener="#{fileBean.handleFileUpload}"
+													auto="true" process="@this" label="Durchsuchen" />
 											</h:form>
+										</ui:fragment>
 										<ui:repeat var="picture"
 											value="#{pictureController.getPictures()}">
 											<h:outputLink onclick="PF('comments').show()"
 												value="employee/pictureDetail_employee.xhtml">
 												<h:graphicImage class="picture"
-													name="pictures/gallery/#{picture.url}" id="tiger" /><f:param name="picture" value="#{fileBean.selectedPicture}" />
+													name="pictures/gallery/#{picture.url}" id="tiger" />
+												<f:param name="picture" value="#{fileBean.selectedPicture}" />
 											</h:outputLink>
 										</ui:repeat>
 
