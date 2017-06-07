@@ -26,35 +26,88 @@
 													<p:accordionPanel multiple="true"
 														style="padding-left:400px;padding-right:400px">
 														<p:tab
-															title="Mittagsmenü für die aktuelle Woche (oder kommende Woche)">
+															title="Mittagsmenü für die aktuelle Woche">
 															<h:panelGrid columns="5" layout="grid">
-																<h:outputText value="Mo    22.05."
-																	style="padding-right:60px" />
-																<h:outputText value="Di    23.05."
-																	style="padding-right:60px" />
-																<h:outputText value="Mi    24.05."
-																	style="padding-right:60px" />
-																<h:outputText value="Do    25.05"
-																	style="padding-right:60px" />
-																<h:outputText value="Fr    26.05." />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(0).date}"
+																	style="padding-right:60px" >
+																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																</h:outputText>
+																<h:outputText value="#{lunchController.getCurrentWeek().get(1).date}"
+																			  style="padding-right:60px" >
+																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																</h:outputText>
+																<h:outputText value="#{lunchController.getCurrentWeek().get(2).date}"
+																			  style="padding-right:60px" >
+																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																</h:outputText>
+																<h:outputText value="#{lunchController.getCurrentWeek().get(3).date}"
+																			  style="padding-right:60px" >
+																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																</h:outputText>
+																<h:outputText value="#{lunchController.getCurrentWeek().get(4).date}"
+																			  style="padding-right:60px" >
+																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																</h:outputText>
 
 
-																<h:outputText value="Wienerschnitzel mit Pommes"
+																<h:outputText value="#{lunchController.getCurrentWeek().get(0).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="Wiener Würstel mit Brot"
+																<h:outputText value="#{lunchController.getCurrentWeek().get(1).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="Chicken Nuggets mit Salat"
+																<h:outputText value="#{lunchController.getCurrentWeek().get(2).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="Gemüselasagne"
+																<h:outputText value="#{lunchController.getCurrentWeek().get(3).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="Fischstäbchen mit Knoblauchbrot" />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(4).meal}" />
 
-																<h:outputText value="4.50€" style="padding-right:60px" />
-																<h:outputText value="4.50€" style="padding-right:60px" />
-																<h:outputText value="4.50€" style="padding-right:60px" />
-																<h:outputText value="4.00€" style="padding-right:60px" />
-																<h:outputText value="3.50€" />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(0).cost}€" style="padding-right:60px" />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(1).cost}€" style="padding-right:60px" />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(2).cost}€" style="padding-right:60px" />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(3).cost}€" style="padding-right:60px" />
+																<h:outputText value="#{lunchController.getCurrentWeek().get(4).cost}€" />
 															</h:panelGrid>
+														</p:tab>
+														<p:tab
+																title="Mittagsmenü für die kommende Woche">
+														<h:panelGrid columns="5" layout="grid">
+															<h:outputText value="#{lunchController.getNextWeek().get(0).date}"
+																		  style="padding-right:60px" >
+																<f:convertDateTime type="date" pattern="dd.MM."/>
+															</h:outputText>
+															<h:outputText value="#{lunchController.getNextWeek().get(1).date}"
+																		  style="padding-right:60px" >
+																<f:convertDateTime type="date" pattern="dd.MM."/>
+															</h:outputText>
+															<h:outputText value="#{lunchController.getNextWeek().get(2).date}"
+																		  style="padding-right:60px" >
+																<f:convertDateTime type="date" pattern="dd.MM."/>
+															</h:outputText>
+															<h:outputText value="#{lunchController.getNextWeek().get(3).date}"
+																		  style="padding-right:60px" >
+																<f:convertDateTime type="date" pattern="dd.MM."/>
+															</h:outputText>
+															<h:outputText value="#{lunchController.getNextWeek().get(4).date}"
+																		  style="padding-right:60px" >
+																<f:convertDateTime type="date" pattern="dd.MM."/>
+															</h:outputText>
+
+
+															<h:outputText value="#{lunchController.getNextWeek().get(0).meal}"
+																		  style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(1).meal}"
+																		  style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(2).meal}"
+																		  style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(3).meal}"
+																		  style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(4).meal}" />
+
+															<h:outputText value="#{lunchController.getNextWeek().get(0).cost}€" style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(1).cost}€" style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(2).cost}€" style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(3).cost}€" style="padding-right:60px" />
+															<h:outputText value="#{lunchController.getNextWeek().get(4).cost}€" />
+														</h:panelGrid>
 														</p:tab>
 													</p:accordionPanel>
 												</h:form>
