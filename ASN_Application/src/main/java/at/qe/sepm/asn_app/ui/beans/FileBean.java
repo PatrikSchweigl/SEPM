@@ -55,6 +55,7 @@ public class FileBean {
     @Autowired
     private AuditLogService auditLogService;
 	private Picture picture;
+	private String selectedPicture;
     private UploadedFile file;
     @Autowired
 	private CaregiverService caregiverService;
@@ -158,6 +159,16 @@ public class FileBean {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.findFirstByUsername(auth.getName());
     }
+
+
+	public String getSelectedPicture() {
+		return selectedPicture;
+	}
+
+
+	public void setSelectedPicture(String selectedPicture) {
+		this.selectedPicture = selectedPicture;
+	}
 
 
 }

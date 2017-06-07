@@ -1,9 +1,13 @@
 package at.qe.sepm.asn_app.ui.beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.TimeZone;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
@@ -85,6 +89,7 @@ public class ScheduleView implements Serializable {
 	private String description;
 	private String childFirstname;
 	private Date childBringDate;
+	private String selectedDay;
 	String footer = "Das Kinderkrippen Team bedankt sich für Ihre Mitarbeit!";
 
 	@PostConstruct
@@ -413,5 +418,25 @@ public class ScheduleView implements Serializable {
 
 	public void setChildBringDate(Date childBringDate) {
 		this.childBringDate = childBringDate;
+	}
+	
+	public String getFormattedDate(Date date){
+		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+		form.setTimeZone(TimeZone.getTimeZone("GMT+2"));
+		try {
+			Date temp = form.parse(date.toString());
+			return temp.toString();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public String getSelectedDay() {
+		return selectedDay;
+	}
+
+	public void setSelectedDay(String selectedDay) {
+		this.selectedDay = selectedDay;
 	}
 }

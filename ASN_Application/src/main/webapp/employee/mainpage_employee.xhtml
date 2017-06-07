@@ -55,7 +55,7 @@
 												<p:accordionPanel multiple="true">
 													<p:tab title="Anwesende Kinder">
 														<p:dataTable id="childTable" var="reg"
-															value="#{registrationController.getRegistrationsByDate()}">
+															value="#{registrationController.getRegistrationsByDateToday()}">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{reg.child.firstName}" />
 															</p:column>
