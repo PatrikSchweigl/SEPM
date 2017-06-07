@@ -56,6 +56,7 @@ public class NotificationConfig {
             while(itL.hasNext()){
                 Parent p = parentService.loadParent(itL.next().getUsername());
                 String taskMsg = "";
+                boolean send = false;
                 Collection<Task> tasks = taskService.getAllTasksByReceiver(p.getUsername());
 
                 Iterator<Task> itT = tasks.iterator();
@@ -68,11 +69,15 @@ public class NotificationConfig {
                     dateToCompare.setTime(t.getBeginDate().getTime()-(min*60*1000)-(hrs*60*60*1000));
 
                     if((dateToCompare.getTime()-today.getTime()) == 345600000){ //4 days before the task
+                        send = true;
                         taskMsg += t.getDescription() + "\t|\t"+ t.getFormattedDate(t.getBeginDate())+"\t|\t"+ t.getFormattedDate(t.getEndingDate())+"\n";
                     }
                 }
-                mailService.sendEmail(p.getEmail(), "Erinnerung - Anstehende Aufgaben", "Guten Tag "+p.getFirstName() + " " + p.getLastName()
-                        +"!\n\nSie haben noch 4 Tage zeit, um folgende Aufgabe(n) zu erledigen:\n\n" +taskMsg +"\n\n" +footer);
+                if(send){
+                    mailService.sendEmail(p.getEmail(), "Erinnerung - Anstehende Aufgaben", "Guten Tag "+p.getFirstName() + " " + p.getLastName()
+                            +"!\n\nSie haben noch 4 Tage zeit, um folgende Aufgabe(n) zu erledigen:\n\n" +taskMsg +"\n\n" +footer);
+                }
+
 
             }
         }
