@@ -25,9 +25,9 @@
 										<ui:repeat var="picture"
 											value="#{pictureController.getPictures()}">
 											<h:outputLink onclick="PF('comments').show()"
-												value="##{picture.url}">
+												value="employee/pictureDetail_employee.xhtml">
 												<h:graphicImage class="picture"
-													name="pictures/gallery/#{picture.url}" id="tiger" />
+													name="pictures/gallery/#{picture.url}" id="tiger" /><f:param name="picture" value="#{fileBean.selectedPicture}" />
 											</h:outputLink>
 										</ui:repeat>
 
@@ -39,14 +39,6 @@
 							<!-- /.content -->
 						</div>
 					</div>
-					<p:dialog header="Kommentare" id="comments" widgetVar="comments"
-						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-						<p:outputPanel id="parentData">
-
-							<ul>
-							</ul>
-						</p:outputPanel>
-					</p:dialog>
 				</body>
 				<link rel="stylesheet"
 					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />

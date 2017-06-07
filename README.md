@@ -24,7 +24,7 @@ the virtual machine with `vagrant ssh` and change the directory with `cd /vagran
 with `mvn spring-boot:run`. Make sure that line 8 and 11 from the `application.properties` are enabled 
 before the build-process (Hint: disable line 8 and 11 before further boots to make sure the DB is persistent). After that 
 it is necessary to load data into the DB. To do so, just execute `loadData.sh` on vagrant from ubuntu bash or import `data.sql` 
-via mysql shell with `mysql -u root -pasnTeam1` and execute following line: *source /vagrant/src/main/resources/data.sql*.
+via mysql shell with `mysql -u root -pasnTeam1` | `use asndb;` and execute following line: *source /vagrant/src/main/resources/data.sql*.
 
 Now the application is accessible via http://192.168.33.10:8080 and you are able to login with all different 
 types of Users below.
