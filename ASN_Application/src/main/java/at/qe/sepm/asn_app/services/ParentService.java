@@ -53,7 +53,10 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-
+    public Parent changeStatus(Parent parent, Boolean status){
+        parent.setStatus(status);
+        return parentRepository.save(parent);
+    }
 
 
     public Parent loadParent(String username){
