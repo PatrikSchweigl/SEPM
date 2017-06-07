@@ -33,7 +33,7 @@ public class NotificationConfig {
     @Autowired
     private TaskService taskService;
 
-    @Scheduled(fixedDelay=345600000)    //60000 for one minute
+    @Scheduled(cron="0 0 10 * * *")    //60000 for one minute - "0 0 10 * * *" 10 AM everyday
     public void taskReminder() {
         Collection<UserData> list = userService.getParentsByNotification();
         String footer = "Das Kinderkrippen-Team bedankt sich für Ihre Mitarbeit!";
