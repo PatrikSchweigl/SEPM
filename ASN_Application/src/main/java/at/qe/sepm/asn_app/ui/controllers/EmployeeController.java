@@ -87,17 +87,13 @@ public class EmployeeController {
     }
 
     public void doSaveEmployee(){
-
-        if(!userConstraints.checkUsername(employee.getUsername())){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
-        }else{
             employee = employeeService.saveEmployee(employee);
             employee = null;
             initNewEmployee();
             initList();
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('employeeAddDialog').hide()");
-        }
+
     }
 
     public Employee getEmployeeEdit() {
