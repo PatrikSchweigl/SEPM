@@ -86,7 +86,7 @@ public class MessageController extends Thread{
     }
     
     public void doDeleteMessage(Message message) {
-        this.messageService.deleteMessage(message);
+        messageService.deleteMessage(message);
         initList();
     }
 }
