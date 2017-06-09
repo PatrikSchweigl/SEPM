@@ -80,14 +80,9 @@
 													<p:calendar id="to" value="#{scheduleView.event.endDate}"
 														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
 
-													<p:outputLabel for="allDay" value="Ganztägig:" />
-													<h:selectBooleanCheckbox id="allDay"
-														value="#{scheduleView.event.allDay}" />
-
-
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-														<p:outputLabel for="important" value="wichtiges Ereignis:" />
+														<p:outputLabel for="important" value="Feier/Ferientag:" />
 													</ui:fragment>
 
 													<ui:fragment
@@ -142,7 +137,7 @@
 														actionListener="#{scheduleView.addEvent}"
 														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()"
 														update="@all" />
-													<p:separator />
+													<!--  <p:separator />
 													<p:separator />
 													<p:outputLabel for="meal" value="Gericht: " />
 													<p:inputText id="meal"
@@ -154,8 +149,10 @@
 														<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
 													</p:calendar>
 													<p:commandButton id="lunchButton" value="Essen"
-														action="#{lunchController.doSaveLunch}"
+														action=""
 														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()" />
+													
+													-->
 													<p:button
 														outcome="/employee/calendarDetailDaily_employee.xhtml"
 														value="Tagesplaner" style="align-items:right;"><f:param name="day" value="#{scheduleView.event.endDate}" />
