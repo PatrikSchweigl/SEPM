@@ -303,7 +303,6 @@
 													<h:panelGrid columns="3">
 														<p:commandButton value="Speichern"
 															action="#{parentEditController.doSaveParent}"
-															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentEditDialog').hide()"
 															update=":parentForm:parentTable"
 															process="@widgetVar(parentEditDialog)" />
 														<p:commandButton value="Neu laden"

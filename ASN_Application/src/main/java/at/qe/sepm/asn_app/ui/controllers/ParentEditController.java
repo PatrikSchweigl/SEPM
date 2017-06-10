@@ -29,8 +29,6 @@ public class ParentEditController {
     private ParentController parentController;
     @Autowired
     private MailService mailService;
-    @Autowired
-    private UserConstraints userConstraints;
 
     private Parent parent;
 
@@ -57,8 +55,6 @@ public class ParentEditController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
         } else if (parent.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
-        } else if (userConstraints.checkIfUsernameExists(parent.getUsername())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
         } else {
             try {
                 parent = parentService.saveParent(parent);
@@ -69,11 +65,10 @@ public class ParentEditController {
                                 "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
                                 "Viel Spaß wünschen das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('parentAddDialog').hide()");
+                context.execute("PF('parentEditDialog').hide()");
             } catch (TransactionSystemException ex) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
             }
-            parent = parentService.saveParent(parent);
             parent = null;
             parentController.initList();
         }
