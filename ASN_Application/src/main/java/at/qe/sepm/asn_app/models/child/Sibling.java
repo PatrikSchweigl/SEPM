@@ -28,6 +28,7 @@ public class Sibling implements Persistable<Long> {
     private String lastName;
     private String birthday;
 
+    public Sibling() {}
 
     public Sibling(String firstName, String lastName, String birthday) {
         this.firstName = firstName;
