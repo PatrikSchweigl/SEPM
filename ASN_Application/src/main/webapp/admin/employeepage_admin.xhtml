@@ -31,7 +31,8 @@
                                                      value="#{employeeController.employees}" rows="10"
                                                      paginatorPosition="bottom" paginator="true"
                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                                     rowsPerPageTemplate="10,25,50">
+                                                     rowsPerPageTemplate="10,25,50"
+                                                     emptyMessage="Es wurden keine Angestellten gefunden!">
 
                                             <f:facet name="header">
                                                 <p:outputPanel>
@@ -144,10 +145,6 @@
                                                         <p:inputText id="usernameCreate"
                                                                      value="#{employeeController.employee.username}" required="true"
                                                                      requiredMessage="Benutzername erforderlich!"/>
-                                                        <p:outputLabel for="passwordCreate" value="Passwort: "/>
-                                                        <p:password id="passwordCreate"
-                                                                    value="#{employeeController.employee.password}" required="true"
-                                                                    requiredMessage="Passwort erforderlich!"/>
                                                     </h:panelGrid>
                                                     <p:separator/>
                                                     <h:panelGrid columns="6">

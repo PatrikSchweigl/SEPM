@@ -22,8 +22,8 @@ public class UserListController {
 
     @Autowired
     private UserService userService;
-    
-    private Collection<UserData> admins;
+
+    private Collection<UserData> users;
     
     
     @PostConstruct
@@ -37,10 +37,10 @@ public class UserListController {
      * @return
      */
     public Collection<UserData> getUsers() {
-        return admins;
+        return users;
     }
     
     public void setUsers(Collection<UserData> users) {
-        this.admins = users;
+        this.users = users;
     }
 }

@@ -48,6 +48,7 @@ public class Child implements Persistable<Long> {
     private String birthday;
     private String imgName;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @NotNull

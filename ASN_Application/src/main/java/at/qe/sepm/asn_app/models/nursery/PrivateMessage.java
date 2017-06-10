@@ -33,7 +33,6 @@ public class PrivateMessage implements Persistable<Long> {
     private String usernameReceiver;
     @NotNull
     private String message;
-    @NotNull
 	private Date date;
 
 

@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.employee.WorkRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
@@ -45,5 +46,16 @@ public class EnumController {
             roles.put(r.name(),r.name());
         }
         return roles;
+    }
+
+    public Map<String,String> getGender(){
+        Map<String,String> gender = new HashMap<String, String>();
+
+        for(Gender g: Gender.values()){
+            gender.put(g.name(),g.name());
+        }
+
+        return gender;
+
     }
 }

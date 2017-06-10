@@ -235,6 +235,17 @@
 													<p:outputLabel for="imgname" value="Bildname: " />
 													<p:inputText id="imgname"
 														value="#{childController.child.imgName}" />
+													<p:outputLabel for="emgNum" value="Notfallkontakt: " />
+													<p:inputText id="emgNum"
+																 value="#{childController.child.emergencyNumber}" />
+													<p:outputLabel for="genderCreate" value="Geschlecht: "/>
+													<p:selectOneMenu id="genderCreate"
+																	 value="#{childController.child.gender}"
+																	 style="width:150px">
+														<f:selectItem itemLabel="Select Familystatus"
+																	  itemValue="#{childController.child.gender}"/>
+														<f:selectItems value="#{enumController.gender}"/>
+													</p:selectOneMenu>
 												</h:panelGrid>
 												<p:separator />
 												<h:panelGrid columns="3">
