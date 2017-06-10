@@ -4,8 +4,6 @@ import at.qe.sepm.asn_app.models.employee.WorkRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.ui.controllers.EnumController;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

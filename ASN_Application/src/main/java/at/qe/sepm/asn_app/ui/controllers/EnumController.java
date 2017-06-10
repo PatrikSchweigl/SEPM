@@ -17,7 +17,8 @@ import java.util.Map;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class EnumController {
 
     public Map<String,String> getFamilyStatus(){
