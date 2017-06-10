@@ -224,11 +224,11 @@
 																	 required="true" requiredMessage="Telefonnummer erforderlich!"/>
 														<p:outputLabel for="emailCreate" value="Email: " />
 														<p:inputText id="emailCreate"
-															validatorMessage="Ungültiges Email-Format!"
-															value="#{parentController.parent.email}"
-																	 required="true"
-																	 requiredMessage="Email-Adresse erforderlich!">
-
+																	 validatorMessage="Ungültiges Email-Format!"
+																	 value="#{parentController.parent.email}"
+																	 required="true" requiredMessage="Email erforderlich!">
+															<f:validateRegex
+																	pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 														</p:inputText>
 													</h:panelGrid>
 													<h:panelGrid columns="3">
