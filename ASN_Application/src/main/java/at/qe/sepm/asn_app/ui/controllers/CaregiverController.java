@@ -20,7 +20,8 @@ import java.util.Collection;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class CaregiverController {
 
     @Autowired
@@ -40,6 +41,13 @@ public class CaregiverController {
     public void setCaregiver(Caregiver caregiverEdit) {
         this.caregiver = caregiverEdit;
         doReloadCaregiver();
+    }
+
+    /**
+     * Needed for JUnit tests.
+     */
+    public void setCaregiver2(Caregiver caregiverEdit) {
+        this.caregiver = caregiverEdit;
     }
     
     public Collection<Caregiver> getCaregiverByChildId(Long id){
@@ -73,13 +81,15 @@ public class CaregiverController {
     }
 
 
-    public void doSaveCaregiver(){
+    //public void doSaveCaregiver(){
+    public Caregiver doSaveCaregiver(){
         caregiver = caregiverService.saveCaregiver(caregiver);
         String name = childService.addCaregiver(caregiver);
         caregiver.setChildname(name);
-        caregiverService.saveCaregiver(caregiver);
+        Caregiver caregiverReturn = caregiverService.saveCaregiver(caregiver);
         caregiver = null;
         initNewCaregiver();
+        return caregiverReturn;
     }
 
 
@@ -90,9 +100,16 @@ public class CaregiverController {
     }
 
     public void setCaregiverEdit(Caregiver caregiver) {
-        this.caregiverEdit = caregiver;
+        caregiverEdit = caregiver;
         doReloadCaregiverEdit();
     }
+
+    /**
+     * Neede for JUnit tests
+     */
+    public void setCaregiverEdit2(Caregiver caregiver) {
+        this.caregiverEdit = caregiver;
+     }
 
     public void doReloadCaregiverEdit() {
         //child = childService.loadUser(child.getUsername());
@@ -109,7 +126,7 @@ public class CaregiverController {
     }
 
     public void doDeleteCaregiverEdit() {
-        this.caregiverService.deleteCaregiver(caregiverEdit);
+        caregiverService.deleteCaregiver(caregiverEdit);
         caregiverEdit = null;
     }
 
