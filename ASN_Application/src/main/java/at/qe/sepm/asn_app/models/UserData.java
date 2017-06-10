@@ -4,6 +4,7 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import at.qe.sepm.asn_app.models.general.Religion;
 import org.hibernate.annotations.ColumnDefault;
@@ -30,14 +31,22 @@ public class UserData implements Persistable<String> {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String location;
+    @NotNull
     private String streetName;
+    @NotNull
     private String postcode;
     private String birthday;
+    @NotNull
     private String email;
     private String imgName;
 

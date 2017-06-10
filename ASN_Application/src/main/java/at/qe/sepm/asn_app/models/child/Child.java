@@ -40,18 +40,24 @@ public class Child implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String birthday;
     private String imgName;
+    @NotNull
     private Gender gender;
 
+    @NotNull
     @ManyToOne(optional = false)
     private Parent parent1;
 
     @ManyToOne // only 1 parent required for child
     private Parent parent2;
 
+    @NotNull
     private String emergencyNumber;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> allergies;

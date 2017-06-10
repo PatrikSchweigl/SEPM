@@ -30,14 +30,17 @@ public class Caregiver implements Persistable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Relationship relationship;
     private String imgName;
+    @NotNull
     private String phoneNumber;
     private boolean eligible;
-    private String childname;
+    private String childname;       //should be a child object
 
 
 

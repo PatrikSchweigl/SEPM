@@ -32,6 +32,7 @@ public class Lunch implements Persistable<Long> {
     private Date date;
     @NotNull
     private String meal;
+    @NotNull
     private double cost;
     @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)
     private Set<Long> childrenIds;

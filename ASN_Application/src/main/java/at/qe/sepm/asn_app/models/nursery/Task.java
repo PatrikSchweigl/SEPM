@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,11 +21,16 @@ public class Task implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	private String stringId;
+    @NotNull
 	private Date beginDate;
+    @NotNull
 	private Date endingDate;
+    @NotNull
     private String description;
+    @NotNull
     @ManyToOne(optional = false)
     private UserData  sender;
+    @NotNull
     @ManyToOne(optional = false)
     private UserData receiver;
     private boolean important;
