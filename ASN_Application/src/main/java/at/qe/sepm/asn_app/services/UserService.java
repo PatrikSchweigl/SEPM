@@ -69,7 +69,6 @@ public class UserService {
         auditLogService.saveAuditLog(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userData.setPassword( passwordEncoder.encode("passwd"));
-        userData.setUserRole(UserRole.ADMIN);
         return userRepository.save(userData);
     }
 
