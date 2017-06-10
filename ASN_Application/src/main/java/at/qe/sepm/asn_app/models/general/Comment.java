@@ -40,11 +40,14 @@ public class Comment implements Persistable<Long>{
 
     public Comment() {}
 
-    public Comment(Long id, String comment, Date date, String username) {
-        //this.id = id;
+    /**
+     * Full constructor
+     */
+    public Comment(String comment, Date date, String username, String pictureName) {
         this.comment = comment;
         this.date = date;
         this.username = username;
+        this.pictureName = pictureName;
     }
 
 
@@ -80,7 +83,6 @@ public class Comment implements Persistable<Long>{
     @Override
     public Long getId() {
         return id;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -117,7 +119,8 @@ public class Comment implements Persistable<Long>{
     public String toString() {
         return "Comment: " + comment + "\n" +
                 "Date: " + date + "\n" +
-                "Publisher: " + username;
+                "Publisher: " + username + "\n" +
+                "Picture name: " + pictureName;
     }
 
 	public String getPictureName() {
