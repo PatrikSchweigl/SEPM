@@ -77,11 +77,23 @@ public class ChildControllerTest {
         Set<String> allergies = new HashSet<>();
         Set<String> foodIntolerances = new HashSet<>();
         Set<Sibling> siblings = new HashSet<>();
-
         Set<Caregiver> caregivers = new HashSet<>();
-        child = new Child("ChildFirstName", "ChildLastName", "22/05/2015", "ChildImgName1", Gender.MALE,
-                            parent1, parent2, "0123456789", allergies, foodIntolerances, siblings,
-                            Custody.BOTH, Religion.CHRISTENTUM, caregivers);
+        
+        child = new Child();
+        child.setFirstName("ChildFirstName");
+        child.setLastName("ChildLastName");
+        child.setBirthday("22/05/2015");
+        child.setImgName("ChildImgName");
+        child.setGender(Gender.MALE);
+        child.setPrimaryParent(parent1);
+        child.setParent2(parent2);
+        child.setEmergencyNumber("01234456789");
+        child.setAllergies(allergies);
+        child.setFoodIntolerances(foodIntolerances);
+        child.setSiblings(siblings);
+        child.setCustody(Custody.BOTH);
+        child.setReligion(Religion.CHRISTENTUM);
+        child.setCaregivers(caregivers);
     }
 
 
