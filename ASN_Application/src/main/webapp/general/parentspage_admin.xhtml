@@ -211,20 +211,23 @@
 															slotChar=" "
 																	 required="true"
 																	 requiredMessage="Postleitzahl erforderlich!"/>
+														<p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
+														<p:inputMask id="phonenumberCreate"
+																	 mask="9?99999999999" slotChar=" " maxlength="12"
+																	 value="#{parentController.parent.phoneNumber}"
+																	 required="true" requiredMessage="Telefonnummer erforderlich!"/>
 														<p:outputLabel for="emailCreate" value="Email: " />
 														<p:inputText id="emailCreate"
 															validatorMessage="Ungültiges Email-Format!"
 															value="#{parentController.parent.email}"
 																	 required="true"
 																	 requiredMessage="Email-Adresse erforderlich!">
-															<f:validateRegex
-																pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
 														</p:inputText>
 													</h:panelGrid>
 													<h:panelGrid columns="3">
 														<p:commandButton value="Speichern"
 															action="#{parentController.doSaveParent()}"
-															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentAddDialog').hide()"
 															update=":parentForm:parentTable"
 																		 process="@widgetVar(parentAddDialog)"/>
 														<p:commandButton value="Abbruch"

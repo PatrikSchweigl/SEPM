@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.ui.constraints;
 
+import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,12 +18,15 @@ public class UserConstraints {
     @Autowired
     private UserService userService;
 
-    public boolean checkUsername(String username){
+    public boolean checkIfUsernameExists(String username){
         try{
-            userService.loadUser(username);
-        }catch (NullPointerException ex){
+            UserData userData = userService.loadUser(username);
+            System.out.println(userData.getFirstName()+" "+userData.getLastName()+"-----------------------------------");
+        }catch (Exception ex){
             return true;
+        }finally {
+            return false;
         }
-        return false;
+
     }
 }
