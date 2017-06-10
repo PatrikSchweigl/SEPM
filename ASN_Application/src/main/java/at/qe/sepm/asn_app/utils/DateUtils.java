@@ -66,7 +66,7 @@ public class DateUtils {
 
             cal.setTime(ret[i]);
 
-            int hrs = cal.get(Calendar.HOUR_OF_DAY);
+            int hrs = cal.get(Calendar.HOUR_OF_DAY) - 6;
             int min = cal.get(Calendar.MINUTE);
             int sec = cal.get(Calendar.SECOND);
             int milli = cal.get(Calendar.MILLISECOND);

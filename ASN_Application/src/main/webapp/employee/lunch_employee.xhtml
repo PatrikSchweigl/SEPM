@@ -26,7 +26,7 @@
 											<h:form id="lunchForm">
 												<p:dataTable id="lunchTable" var="lunch"
 													widgetVar="lunchTable"
-													value="#{lunchController.getCurrentWeek()}">
+													value="#{lunchController.findAll()}">
 													<p:column headerText="Gericht">
 														<h:outputText value="#{lunch.meal}" />
 													</p:column>
@@ -35,12 +35,13 @@
 																<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 														</h:outputText>
 													</p:column>
-													<p:column headerText="Preis">
-														<h:outputText value="#{lunch.cost}" />
-													</p:column>
 													<p:column headerText="#Angemeldet">
 														<h:outputText value="#{lunch.getNumChildren()}" />
 													</p:column>
+													<p:column headerText="Preis">
+														<h:outputText value="#{lunch.cost}" />
+													</p:column>
+
 													<p:column style="width:100px;text-align: center;">
 														<p:commandButton update=":lunchForm:lunchEditDialog"
 															oncomplete="PF('lunchEditDialog').show()"

@@ -64,7 +64,7 @@ public class Child implements Persistable<Long> {
     private Set<String> allergies;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> foodIntolerances;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Sibling> siblings;
 
     @Enumerated(EnumType.STRING)
