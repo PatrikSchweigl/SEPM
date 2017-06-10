@@ -19,14 +19,7 @@ public class UserConstraints {
     private UserService userService;
 
     public boolean checkIfUsernameExists(String username){
-        try{
-            UserData userData = userService.loadUser(username);
-            System.out.println(userData.getFirstName()+" "+userData.getLastName()+"-----------------------------------");
-        }catch (Exception ex){
-            return true;
-        }finally {
-            return false;
-        }
-
+        UserData userData = userService.loadUser(username);
+        return userData != null;
     }
 }
