@@ -35,28 +35,38 @@ import static org.junit.Assert.*;
 public class ParentControllerTest {
 
     @Autowired
-    ParentController parentController;
+    private ParentController parentController;
     @Autowired
-    ParentEditController parentEditController;
+    private ParentEditController parentEditController;
     @Autowired
     private ParentService parentService;
     private Parent parent;
 
 
-    /*
-    (String username, String password, String firstName, String lastName, String location,
-                  String streetName, String postcode, String birthday, String email, String imgName,
-                  UserRole userRole, Religion religion, String phoneNumber, boolean notification,
-                  Set<Child> children, Set<Task> tasks, FamilyStatus familyStatus, boolean status
-     */
     @Before
     public void initialize() {
-        Set<Child> parentListChildren1 = new HashSet<>();
-        Set<Task> parentListTasks1 = new HashSet<>();
-        parent = new Parent("", "passwd", "ParentFirstName1", "ParentLastName1", "ParentLocation1",
-                "ParentStreetName1", "ParentPostcode1", "24/05/1980","ParentEmail1@google.com", "ParentImageName1",
-                UserRole.PARENT, Religion.CHRISTENTUM, "0123456789", true, parentListChildren1, parentListTasks1,
-                FamilyStatus.VERHEIRATET, true);
+        Set<Child> parentChildren1 = new HashSet<>();
+        Set<Task> parentTasks1 = new HashSet<>();
+
+        parent = new Parent();
+        parent.setUsername("");
+        parent.setPassword("passwd");
+        parent.setFirstName("ParentFirstName1");
+        parent.setLastName("ParentLastName1");
+        parent.setLocation("ParentLocation1");
+        parent.setStreetName("ParentStreetName1");
+        parent.setPostcode("6020");
+        parent.setBirthday("24/05/1980");
+        parent.setEmail("ParentEmail1@google.com");
+        parent.setImgName("ParentImgName1");
+        parent.setUserRole(UserRole.PARENT);
+        parent.setReligion(Religion.CHRISTENTUM);
+        parent.setPhoneNumber("0123456789");
+        parent.setNotification(true);
+        parent.setChildren(parentChildren1);
+        parent.setTasks(parentTasks1);
+        parent.setFamilyStatus(FamilyStatus.VERHEIRATET);
+        parent.setStatus(true);
     }
 
 
