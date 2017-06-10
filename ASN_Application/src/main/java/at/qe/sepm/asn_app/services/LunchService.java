@@ -24,7 +24,8 @@ import java.util.List;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class LunchService {
     @Autowired LunchRepository lunchRepository;
     @Autowired AuditLogRepository auditLogRepository;
@@ -44,7 +45,9 @@ public class LunchService {
 
     public Lunch saveLunch(Lunch lunch) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CHANGED/CREATED Lunch: " + lunch.getMeal() + " " + lunch.getDate(), new Date());
-        return lunchRepository.save(lunch);
+        auditLogRepository.save(log);
+        lunch = lunchRepository.save(lunch);
+        return lunch;
     }
 
     public Lunch loadLunch(Long id){

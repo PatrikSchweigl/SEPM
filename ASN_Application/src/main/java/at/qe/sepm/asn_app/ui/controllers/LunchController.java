@@ -17,7 +17,8 @@ import java.util.List;
  * Created by Lukas Aukenthaler on 22.05.2017.
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class LunchController {
     @Autowired
     private LunchService lunchService;
@@ -63,11 +64,13 @@ public class LunchController {
     public List<Lunch> findAll(){
         return lunchService.findAll();
     }
-    public void doSaveLunch(){
-        lunch = lunchService.saveLunch(lunch);
+    //public void doSaveLunch(){
+    public Lunch doSaveLunch(){
+        Lunch lunchReturn = lunchService.saveLunch(lunch);
         //mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test", "Hallo,  ich bin es, das System!");
         lunch = null;
         initNewLunch();
+        return lunchReturn;
     }
     public void doSaveLunchEdit(){
         lunchEdit = lunchService.saveLunch(lunchEdit);
@@ -105,6 +108,10 @@ public class LunchController {
 
     public void setLunchEdit(Lunch lunchEdit) {
         this.lunchEdit = lunchEdit;
+        //doReloadLunch();
+    }
+    public void setLunchEdit2(Lunch lunchEdit) {
+        this.lunchEdit = lunchEdit;
     }
 
     public Lunch getLunch() {
@@ -112,6 +119,10 @@ public class LunchController {
     }
 
     public void setLunch(Lunch lunch) {
+        this.lunch = lunch;
+        //doReloadLunch();
+    }
+    public void setLunch2(Lunch lunch) {
         this.lunch = lunch;
     }
 

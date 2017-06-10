@@ -27,7 +27,7 @@ public class Lunch implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @NotNull
     private Date date;
     @NotNull
@@ -94,11 +94,16 @@ public class Lunch implements Persistable<Long> {
     public Set<Long> getChildrenIds(){
         return childrenIds;
     }
+
     @Override
     public Long getId() {
-        return new Long(id);
+        return id;
+        //return new Long(id);
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public boolean isNew() {
@@ -116,7 +121,9 @@ public class Lunch implements Persistable<Long> {
 
         Lunch other = (Lunch) obj;
         if (this.cost == other.cost &&
-                this.date.equals(other.date) &&
+                this.date.getYear() == other.date.getYear() &&
+                this.date.getMonth() == other.date.getMonth() &&
+                this.date.getDay() == other.date.getDay() &&
                 this.meal.equals(other.meal)) {
             return true;
         } else {
