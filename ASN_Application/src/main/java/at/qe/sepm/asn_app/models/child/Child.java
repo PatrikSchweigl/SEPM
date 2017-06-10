@@ -191,6 +191,10 @@ public class Child implements Persistable<Long> {
         return gender;
     }
 
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     public String getEmergencyNumber() {
         return emergencyNumber;
     }
