@@ -98,7 +98,7 @@ public class CaregiverControllerTest {
         child.setLastName("ChildLastName");
         child.setBirthday("22/05/2015");
         child.setImgName("ChildImgName");
-        child.setGender(Gender.MALE);
+        child.setGender(Gender.MAENNLICH);
         child.setPrimaryParent(parent1);
         child.setParent2(parent2);
         child.setEmergencyNumber("01234456789");

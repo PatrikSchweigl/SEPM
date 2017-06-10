@@ -100,11 +100,11 @@ public class ParentConstraintsTest {
         //parentService = new ParentService();
 
         listChildren = new ArrayList<>();
-        listChildren.add(child1 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName1", Gender.MALE, parent1));
-        listChildren.add(child2 = new Child("FirstName2", "LastName2", "04/04/2014", "ImageName2", Gender.FEMALE, parent1));     // Too old
-        listChildren.add(child3 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName3", Gender.MALE, parent2));
-        listChildren.add(child4 = new Child("FirstName4", "LastName4", "21/02/2017", "ImageName4", Gender.FEMALE, parent2));    // Too young
-        listChildren.add(child5 = new Child("FirstName5", "LastName5", "03/05/2015", "ImageName5", Gender.MALE, parent3));
+        listChildren.add(child1 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName1", Gender.MAENNLICH, parent1));
+        listChildren.add(child2 = new Child("FirstName2", "LastName2", "04/04/2014", "ImageName2", Gender.WEIBLICH, parent1));     // Too old
+        listChildren.add(child3 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName3", Gender.MAENNLICH, parent2));
+        listChildren.add(child4 = new Child("FirstName4", "LastName4", "21/02/2017", "ImageName4", Gender.WEIBLICH, parent2));    // Too young
+        listChildren.add(child5 = new Child("FirstName5", "LastName5", "03/05/2015", "ImageName5", Gender.MAENNLICH, parent3));
 
         listSiblings = new ArrayList<>();
         listSiblings.add(sibling1 = new Sibling(child1.getFirstName(), child1.getLastName(), child1.getBirthday()));

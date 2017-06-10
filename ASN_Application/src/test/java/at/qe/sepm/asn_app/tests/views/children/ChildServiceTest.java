@@ -65,11 +65,11 @@ public class ChildServiceTest {
 
         // Having a '0' in front of the month could maybe be a problem because usually a 0 in front of a number means oct-numbers
         children = new HashSet<>();
-        children.add(child1 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName1", Gender.MALE, parent1));
-        children.add(child2 = new Child("FirstName2", "LastName2", "04/04/2014", "ImageName2", Gender.FEMALE, parent1));     // Too old
-        children.add(child3 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName3", Gender.MALE, parent2));
-        children.add(child4 = new Child("FirstName4", "LastName4", "21/02/2017", "ImageName4", Gender.FEMALE, parent2));    // Too young
-        children.add(child5 = new Child("FirstName5", "LastName5", "03/05/2015", "ImageName5", Gender.MALE, parent3));
+        children.add(child1 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName1", Gender.MAENNLICH, parent1));
+        children.add(child2 = new Child("FirstName2", "LastName2", "04/04/2014", "ImageName2", Gender.WEIBLICH, parent1));     // Too old
+        children.add(child3 = new Child("FirstName1", "LastName1", "03/05/2015", "ImageName3", Gender.MAENNLICH, parent2));
+        children.add(child4 = new Child("FirstName4", "LastName4", "21/02/2017", "ImageName4", Gender.WEIBLICH, parent2));    // Too young
+        children.add(child5 = new Child("FirstName5", "LastName5", "03/05/2015", "ImageName5", Gender.MAENNLICH, parent3));
 
         siblings = new HashSet<>();
         sibling1 = new Sibling(child1.getFirstName(), child1.getLastName(), child1.getBirthday());
