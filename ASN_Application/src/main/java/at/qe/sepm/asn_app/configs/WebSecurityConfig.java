@@ -55,7 +55,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**")
                 .hasAnyAuthority("ADMIN")
                 //Permit access only for some roles
-                .antMatchers("/secured/**")
+                .antMatchers("/employee/**")
+                .hasAnyAuthority("ADMIN", "EMPLOYEE")
+                .antMatchers("/parent/**")
+                .hasAnyAuthority("PARENT")
+                .antMatchers("/nursery/**")
+                .hasAnyAuthority("EMPLOYEE")
+                .antMatchers("/general/**")
                 .hasAnyAuthority("ADMIN", "EMPLOYEE", "PARENT")
                 //If user doesn't have permission, forward him to login page
                 .and()
@@ -67,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling().accessDeniedPage("/error/denied.xhtml");
 
-        http.sessionManagement().invalidSessionUrl("/error/invalid_session.xhtml");
+        http.sessionManagement().invalidSessionUrl("/login.xhtml");
 
     }
 
