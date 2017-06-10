@@ -10,7 +10,6 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
-import at.qe.sepm.asn_app.services.SiblingService;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
 import at.qe.sepm.asn_app.ui.controllers.ParentEditController;
@@ -49,8 +48,6 @@ public class ChildControllerTest {
     private ParentController parentController;
     @Autowired
     private ParentEditController parentEditController;
-    @Autowired
-    private SiblingService siblingService;
     private Child child;
     private Parent parent1;
     private Parent parent2;
@@ -81,12 +78,6 @@ public class ChildControllerTest {
         Set<String> foodIntolerances = new HashSet<>();
         Set<Sibling> siblings = new HashSet<>();
 
-        /*sibling1 = new Sibling();
-        sibling1.setBirthday("27/06/2015");
-        sibling1.setFirstName("SiblingFirstName1");
-        sibling1.setLastName("SiblingLastname1");
-        siblings.add(sibling1);*/
-
         Set<Caregiver> caregivers = new HashSet<>();
         child = new Child("ChildFirstName", "ChildLastName", "22/05/2015", "ChildImgName1", Gender.MALE,
                             parent1, parent2, "0123456789", allergies, foodIntolerances, siblings,
@@ -102,9 +93,6 @@ public class ChildControllerTest {
         parentController.setParent2(parent2);
         parentController.doSaveParent();
 
-        // Save the sibling in the database.
-        //siblingService.saveSibling(sibling1);
-
         // Save the child in the database.
         childController.setChild2(child);
         childController.setParentUserName(parent1.getUsername());
@@ -115,14 +103,14 @@ public class ChildControllerTest {
         Child other = childService.loadChild(child.getId());
         assertTrue(child.equals(other));
 
-        // childController.setChild2(child);
+        // Delete the child again.
         childController.setChildEdit2(child);
         childController.doDeleteChild();
         other = childService.loadChild(child.getId());
         assertFalse(child.equals(other));
         assertNull(other);
 
-        // Delete the parent again
+        // Delete the parent again.
         parentEditController.setParent2(parent1);
         parentEditController.doDeleteParent();
         parentEditController.setParent2(parent2);

@@ -67,10 +67,6 @@ public class ChildService {
             auditLogRepository.save(log);
         }
         child = childRepository.save(child);
-        //child.setIdPersistent(child.getId());
-        //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: " + child.getIdPersistent());
-        //child = childRepository.updateChild(child.getId());
-        //child = childRepository.save(child);
         return child;
     }
     
