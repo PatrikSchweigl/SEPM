@@ -30,7 +30,7 @@ public class Parent extends UserData {
     private static final long serialVersionUID = 1L;
 
     private String imgName;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parent1", cascade = CascadeType.ALL, orphanRemoval = true)
     @ElementCollection
     private Set<Child> children;
     @OneToMany(fetch = FetchType.EAGER)
