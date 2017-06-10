@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.services.EmployeeService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -87,13 +89,26 @@ public class EmployeeController {
     }
 
     public void doSaveEmployee(){
-            employee = employeeService.saveEmployee(employee);
+        if (!StringUtils.isNumeric(employee.getPostcode())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
+        } else if (!StringUtils.isNumeric(employee.getPhoneNumber())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
+        } else if (!employee.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
+        } else if (userConstraints.checkIfUsernameExists(employee.getUsername())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
+        } else {
+            try {
+                employee = employeeService.saveEmployee(employee);
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.execute("PF('employeeAddDialog').hide()");
+            } catch (TransactionSystemException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+            }
             employee = null;
             initNewEmployee();
             initList();
-            RequestContext context = RequestContext.getCurrentInstance();
-            context.execute("PF('employeeAddDialog').hide()");
-
+        }
     }
 
     public Employee getEmployeeEdit() {
@@ -112,7 +127,7 @@ public class EmployeeController {
     public void setEmployeeEdit2(Employee employeeEdit) {
         this.employeeEdit = employeeEdit;
     }
-    
+
     public void doChangePassword(String password){
     	employeeService.changePassword(password);
     }
@@ -129,8 +144,25 @@ public class EmployeeController {
     }
 
     public void doSaveEmployeeEdit(){
-        employeeEdit = employeeService.saveEmployee(employeeEdit);
-        initList();
+        if (!StringUtils.isNumeric(employeeEdit.getPostcode())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
+        } else if (!StringUtils.isNumeric(employeeEdit.getPhoneNumber())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
+        } else if (!employeeEdit.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
+        } else {
+            try {
+                System.err.println(employeeEdit.toString());
+                employeeEdit = employeeService.saveEmployee(employeeEdit);
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.execute("PF('employeeEditDialog').hide()");
+            } catch (TransactionSystemException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+            }
+            employeeEdit = null;
+            initNewEmployee();
+            initList();
+        }
     }
 
     public void doDeleteEmployee() {
