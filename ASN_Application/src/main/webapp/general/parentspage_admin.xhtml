@@ -182,7 +182,9 @@
 															value="#{parentController.parent.username}"
 															required="true"
 															requiredMessage="Benutzername erforderlich!" />
-
+													</h:panelGrid>
+													<p:separator />
+													<h:panelGrid columns="2">
 														<p:outputLabel for="firstnameCreate" value="Vorname: " />
 														<p:inputText id="firstnameCreate"
 															value="#{parentController.parent.firstName}"
@@ -193,8 +195,9 @@
 															value="#{parentController.parent.lastName}"
 																	 required="true"
 																	 requiredMessage="Nachname erforderlich!"/>
-
-
+													</h:panelGrid>
+													<p:separator />
+													<h:panelGrid columns="2">
 														<p:outputLabel for="streetCreate" value="Straße: " />
 														<p:inputText id="streetCreate"
 															value="#{parentController.parent.streetName}"
@@ -211,6 +214,9 @@
 															slotChar=" "
 																	 required="true"
 																	 requiredMessage="Postleitzahl erforderlich!"/>
+													</h:panelGrid>
+													<p:separator />
+													<h:panelGrid columns="2">
 														<p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
 														<p:inputMask id="phonenumberCreate"
 																	 mask="9?99999999999" slotChar=" " maxlength="12"
@@ -237,7 +243,7 @@
 												</p:outputPanel>
 											</p:dialog>
 
-											<!-- Edit Employee Dialog -->
+											<!-- Edit Parent Dialog -->
 											<p:dialog header="Elternteil ändern" id="parentEditDialog"
 												widgetVar="parentEditDialog" modal="true" showEffect="fade"
 												hideEffect="fade" resizable="false" closeOnEscape="true">
@@ -254,27 +260,41 @@
 													<h:panelGrid columns="2">
 														<p:outputLabel for="firstnameEdit" value="Vorname: " />
 														<p:inputText id="firstnameEdit"
-															value="#{parentEditController.parent.firstName}" />
+															value="#{parentEditController.parent.firstName}"
+															required="true" requiredMessage="Vorname erforderlich!" />
 														<p:outputLabel for="lastnameEdit" value="Nachname: " />
 														<p:inputText id="lastnameEdit"
-															value="#{parentEditController.parent.lastName}" />
+															value="#{parentEditController.parent.lastName}"
+															required="true" requiredMessage="Nachname erforderlich!"/>
 													</h:panelGrid>
 													<p:separator />
 													<h:panelGrid columns="2">
 														<p:outputLabel for="streetEdit" value="Straße: " />
 														<p:inputText id="streetEdit"
-															value="#{parentEditController.parent.streetName}" />
+															value="#{parentEditController.parent.streetName}"
+															required="true" requiredMessage="Straßenname erforderlich!"/>
 														<p:outputLabel for="locationEdit" value="Ort: " />
 														<p:inputText id="locationEdit"
-															value="#{parentEditController.parent.location}" />
+															value="#{parentEditController.parent.location}"
+															required="true" requiredMessage="Ort erforderlich!"/>
 														<p:outputLabel for="postcodeEdit" value="Postleitzahl: " />
 														<p:inputMask id="postcodeEdit" maxlength="5"
 															value="#{parentEditController.parent.postcode}"
-															mask="9999?9" slotChar=" " />
+															mask="9999?9" slotChar=" "
+															required="true" requiredMessage="Postleitzahl erforderlich!"/>
+													</h:panelGrid>
+													<p:separator />
+													<h:panelGrid columns="2">
+														<p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
+														<p:inputMask id="phonenumberEdit"
+																	 mask="9?99999999999" slotChar=" " maxlength="12"
+																	 value="#{parentEditController.parent.phoneNumber}"
+																	 required="true" requiredMessage="Telefonnummer erforderlich!"/>
 														<p:outputLabel for="emailEdit" value="Email: " />
 														<p:inputText id="emailEdit"
 															validatorMessage="Ungültiges Email-Format!"
-															value="#{parentEditController.parent.email}">
+															value="#{parentEditController.parent.email}"
+															required="true" requiredMessage="Email erforderlich!">
 															<f:validateRegex
 																pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 														</p:inputText>
