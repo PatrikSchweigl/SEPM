@@ -143,7 +143,7 @@ public class ScheduleView implements Serializable {
 				DefaultScheduleEvent ev;
 
 				ev = new DefaultScheduleEvent(
-						r.getChild().getFirstName() + " " + r.getChild().getLastName() + "\n" + r.getNote(),
+						r.getChild().getFirstName() + " " + r.getChild().getLastName() + " " + r.getFormattedBringDate() + " " + "Uhr" + "\n" + r.getNote(),
 						r.getDate(), r.getDate(), "registration");
 				eventModel.addEvent(ev);
 			}
@@ -182,6 +182,7 @@ public class ScheduleView implements Serializable {
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.setTimeZone(TimeZone.getTimeZone("Europe/Vienna"));
 		if (event.getStartDate().compareTo(new Date()) <= 0)
 			return;
 		Registration reg = new Registration(description, childReg, cal.getTime(), event.getStartDate());
