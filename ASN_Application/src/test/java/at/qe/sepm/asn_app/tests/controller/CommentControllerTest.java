@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.tests.database;
+package at.qe.sepm.asn_app.tests.controller;
 
 import at.qe.sepm.asn_app.models.general.Comment;
 import at.qe.sepm.asn_app.services.CommentService;

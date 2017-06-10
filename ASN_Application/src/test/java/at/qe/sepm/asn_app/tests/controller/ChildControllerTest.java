@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.tests.database;
+package at.qe.sepm.asn_app.tests.controller;
 
 import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.UserRole;
@@ -9,10 +9,7 @@ import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.models.referencePerson.Relationship;
-import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
-import at.qe.sepm.asn_app.ui.controllers.CaregiverController;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
 import at.qe.sepm.asn_app.ui.controllers.ParentEditController;
@@ -35,41 +32,30 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
- * on 04.06.17 19:25 CEST.
+ * on 04.06.17 12:09 CEST.
  */
 @Component
 @Scope("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class CaregiverControllerTest {
+public class ChildControllerTest {
 
-    @Autowired
-    private CaregiverController caregiverController;
-    @Autowired
-    private CaregiverService caregiverService;
-    @Autowired
-    private ParentController parentController;
-    @Autowired
-    private ParentEditController parentEditController;
     @Autowired
     private ChildController childController;
     @Autowired
     private ChildService childService;
-    private Caregiver caregiver;
+    @Autowired
+    private ParentController parentController;
+    @Autowired
+    private ParentEditController parentEditController;
+    private Child child;
     private Parent parent1;
     private Parent parent2;
-    private Child child;
+    private Sibling sibling1;
 
 
     @Before
     public void initialize() {
-        caregiver = new Caregiver();
-        caregiver.setFirstName("CaregiverFirstName1");
-        caregiver.setLastName("CaregiverLastName1");
-        caregiver.setRelationship(Relationship.AUNT_UNCLE);
-        caregiver.setImgName("CaregiverImgName1");
-        caregiver.setPhoneNumber("0123456789");
-
         parent1 = new Parent();
         parent1.setFirstName("ParentFirstName1");
         parent1.setLastName("ParentLastName1");
@@ -124,39 +110,31 @@ public class CaregiverControllerTest {
         childController.setParentUserName(parent1.getUsername());
         child = childController.doSaveChild();
 
-        // Save a caregiver in the database
-        caregiverController.setCaregiver2(caregiver);
-        childService.setId(child.getId());
-        caregiver = caregiverController.doSaveCaregiver();
 
-        // Check if the values have changed since the caregiver was saved.
-        Caregiver other = caregiverService.loadCaregiver(caregiver.getId());
-        assertTrue(caregiver.equals(other));
+        // Check if the values have changed since the child was saved.
+        Child other = childService.loadChild(child.getId());
+        assertTrue(child.equals(other));
+
+        // Delete the child again.
+        childController.setChildEdit2(child);
+        childController.doDeleteChild();
+        other = childService.loadChild(child.getId());
+        assertFalse(child.equals(other));
+        assertNull(other);
 
         // Delete the parent again.
         parentEditController.setParent2(parent1);
         parentEditController.doDeleteParent();
         parentEditController.setParent2(parent2);
         parentEditController.doDeleteParent();
-
-        // Delete the caregiver again
-        caregiverController.setCaregiverEdit2(caregiver);
-        caregiverController.doDeleteCaregiverEdit();
-        other = caregiverService.loadCaregiver(caregiver.getId());
-        assertFalse(caregiver.equals(other));
-        assertNull(other);
-
-        // Delete the child again.
-        childController.setChildEdit2(child);
-        childController.doDeleteChild();
     }
 
 
     @After
     public void cleanUp() {
-        caregiver = null;
+        child = null;
         parent1 = null;
         parent2 = null;
-        child = null;
+        sibling1 = null;
     }
 }
