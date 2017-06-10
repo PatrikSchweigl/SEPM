@@ -28,6 +28,7 @@ public class LunchController {
     private Lunch lunchEdit;
 
     private Child child;
+    private Date date;
 
     private List<Lunch> thisWeekLunch;
     private boolean thisWeekFlag;
@@ -117,9 +118,21 @@ public class LunchController {
         }
         return nextWeekLunch;
     }
-
-    public void loadNextWeek(){
-        thisWeekLunch = getNextWeek();
+    public void signUp(Date d){
+        if(d == null){
+            System.err.println("WAT");
+            return;
+        }
+        System.err.println("OY WAT IS DES");
+        List<Lunch> lunchs = lunchService.getLunchByDate(d);
+        if(lunchs == null || child == null){
+            System.err.println("LUNCH" + lunchs + "CHILD" + child);
+            return;
+        }
+        lunchs.get(0).addChild(child);
+        System.err.println(child);
+        lunchService.saveLunch(lunchs.get(0));
+        System.err.println(lunchs);
     }
     public List<Lunch> findAll(){
         return lunchService.findAll();
@@ -146,6 +159,8 @@ public class LunchController {
     private void initNewLunchEdit(){
         lunch = new Lunch();
     }
+    @PostConstruct
+    private void initNewChild() {child = new Child();}
 
     public void doDeleteLunch() {
         this.lunchService.deleteLunch(lunchEdit);
