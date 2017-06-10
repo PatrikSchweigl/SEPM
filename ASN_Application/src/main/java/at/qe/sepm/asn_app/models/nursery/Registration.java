@@ -5,6 +5,8 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -76,6 +78,10 @@ public class Registration implements Persistable<Long> {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public String getFormattedBringDate(){
+    	return new SimpleDateFormat("dd-MM-yyyy").format(bringdate);
     }
 
 

@@ -2,7 +2,9 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
+import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.LunchService;
+import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import at.qe.sepm.asn_app.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,12 +25,17 @@ import java.util.List;
 public class LunchController {
     @Autowired
     private LunchService lunchService;
+    @Autowired
+    private ChildService childService;
+    @Autowired
+    private SessionInfoBean session;
 
 
     private Lunch lunch;
     private Lunch lunchEdit;
 
     private Child child;
+    private String childFirstname;
     private Date date;
 
     private List<Lunch> thisWeekLunch;
@@ -126,14 +133,11 @@ public class LunchController {
         }
         System.err.println("OY WAT IS DES");
         List<Lunch> lunchs = lunchService.getLunchByDate(d);
-        if(lunchs == null || child == null){
-            System.err.println("LUNCH" + lunchs + "CHILD" + child);
-            return;
-        }
-        lunchs.get(0).addChild(child);
+            System.err.println("LUNCH" + lunchs + "CHILD" + childFirstname);
+        lunchs.get(0).addChild(childService.getChildrenByFirstnameAndParentUsername(childFirstname, session.getCurrentUserName()));
         System.err.println(child);
         lunchService.saveLunch(lunchs.get(0));
-        System.err.println(lunchs);
+        System.err.println("ALLES KLAR HERR KOMMISSAR");
     }
     public List<Lunch> findAll(){
         return lunchService.findAll();
@@ -226,4 +230,10 @@ public class LunchController {
     public void setThisWeekLunch(List<Lunch> thisWeekLunch) {
         this.thisWeekLunch = thisWeekLunch;
     }
+	public String getChildFirstname() {
+		return childFirstname;
+	}
+	public void setChildFirstname(String childFirstname) {
+		this.childFirstname = childFirstname;
+	}
 }

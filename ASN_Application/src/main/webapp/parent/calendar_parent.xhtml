@@ -221,7 +221,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:selectOneListbox style="width: 210px;" id="mealBox"
-															value="#{lunchController.child}" var="p"
+															value="#{lunchController.childFirstname}" var="p"
 															filter="true" filterMatchMode="contains">
 															<f:selectItems
 																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
@@ -241,10 +241,8 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
-															action="#{lunchController.signUp(scheduleView.event.startDate)}"
-																		 process="@this, mealBox"
-															oncomplete="PF('eventDateDialog').hide()"
-														immediate="true"/>
+															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}"
+															oncomplete="PF('eventDateDialog').hide()"/>
 
 													</ui:fragment>
 												</h:panelGrid>
