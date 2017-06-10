@@ -66,7 +66,12 @@ public class ChildService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + child.getFirstName() + " " + child.getLastName(), new Date());
             auditLogRepository.save(log);
         }
-        return childRepository.save(child);
+        child = childRepository.save(child);
+        //child.setIdPersistent(child.getId());
+        //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: " + child.getIdPersistent());
+        //child = childRepository.updateChild(child.getId());
+        //child = childRepository.save(child);
+        return child;
     }
     
     public String addCaregiver(Caregiver c){

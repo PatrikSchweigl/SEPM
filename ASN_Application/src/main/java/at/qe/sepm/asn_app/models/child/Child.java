@@ -284,8 +284,8 @@ public class Child implements Persistable<Long> {
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
                 this.parent1.equals(other.parent1) &&
-                this.parent2.equals(other.parent2) &&
-                this.siblings.equals(other.siblings)) {
+                this.parent2.equals(other.parent2)) {
+                //this.siblings.equals(other.siblings)) {
             return true;
         }
         else {

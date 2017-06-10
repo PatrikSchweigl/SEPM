@@ -122,15 +122,18 @@ public class ChildController {
 		this.parentUserName = parentUserName;
 	}
 
-	public void doSaveChild(){
+	//public void doSaveChild(){
+	public Child doSaveChild(){
 		findParentByUsername(parentUserName);
 		Parent parent = parentService.loadParent(parentUserName);
 		parentService.changeStatus(parent, true);	// set parent status to active when child is added
-		child = childService.saveChild(child);
+		Child childReturn = childService.saveChild(child);
+		//child = childService.saveChild(child);
 		child = null;
 		initNewChild();
 		initList();
 		parentController.initList();
+		return childReturn;
 	}
 
 	public void doSaveChildEdit() {

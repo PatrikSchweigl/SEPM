@@ -1,13 +1,16 @@
 package at.qe.sepm.asn_app.tests.database;
 
 import at.qe.sepm.asn_app.models.Gender;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Custody;
 import at.qe.sepm.asn_app.models.child.Sibling;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.SiblingService;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
 import at.qe.sepm.asn_app.ui.controllers.ParentEditController;
@@ -46,24 +49,44 @@ public class ChildControllerTest {
     private ParentController parentController;
     @Autowired
     private ParentEditController parentEditController;
+    @Autowired
+    private SiblingService siblingService;
     private Child child;
     private Parent parent1;
     private Parent parent2;
+    private Sibling sibling1;
 
 
     @Before
     public void initialize() {
         parent1 = new Parent();
+        parent1.setFirstName("ParentFirstName1");
+        parent1.setLastName("ParentLastName1");
         parent1.setUsername("ParentUsername1");
         parent1.setPassword("passwd");
+        parent1.setUserRole(UserRole.PARENT);
+        parent1.setFamilyStatus(FamilyStatus.VERHEIRATET);
+        parent1.setBirthday("22/05/1990");
 
         parent2 = new Parent();
+        parent2.setFirstName("ParentFirstName2");
+        parent2.setLastName("ParentLastName2");
         parent2.setUsername("ParentUsername2");
         parent2.setPassword("passwd");
+        parent2.setUserRole(UserRole.PARENT);
+        parent2.setFamilyStatus(FamilyStatus.VERHEIRATET);
+        parent2.setBirthday("07/11/1978");
 
         Set<String> allergies = new HashSet<>();
         Set<String> foodIntolerances = new HashSet<>();
         Set<Sibling> siblings = new HashSet<>();
+
+        /*sibling1 = new Sibling();
+        sibling1.setBirthday("27/06/2015");
+        sibling1.setFirstName("SiblingFirstName1");
+        sibling1.setLastName("SiblingLastname1");
+        siblings.add(sibling1);*/
+
         Set<Caregiver> caregivers = new HashSet<>();
         child = new Child("ChildFirstName", "ChildLastName", "22/05/2015", "ChildImgName1", Gender.MALE,
                             parent1, parent2, "0123456789", allergies, foodIntolerances, siblings,
@@ -79,17 +102,21 @@ public class ChildControllerTest {
         parentController.setParent2(parent2);
         parentController.doSaveParent();
 
+        // Save the sibling in the database.
+        //siblingService.saveSibling(sibling1);
+
         // Save the child in the database.
         childController.setChild2(child);
         childController.setParentUserName(parent1.getUsername());
-        childController.doSaveChild();
+        child = childController.doSaveChild();
+
 
         // Check if the values have changed since the child was saved.
-        System.out.println("Id: " + child.getId());
         Child other = childService.loadChild(child.getId());
         assertTrue(child.equals(other));
 
-        //childController.setChild2(child);
+        // childController.setChild2(child);
+        childController.setChildEdit2(child);
         childController.doDeleteChild();
         other = childService.loadChild(child.getId());
         assertFalse(child.equals(other));
@@ -106,5 +133,8 @@ public class ChildControllerTest {
     @After
     public void cleanUp() {
         child = null;
+        parent1 = null;
+        parent2 = null;
+        sibling1 = null;
     }
 }
