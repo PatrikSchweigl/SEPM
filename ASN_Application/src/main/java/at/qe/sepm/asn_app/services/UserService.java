@@ -41,6 +41,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Collection<UserData> getAllAdmin() {
+        return userRepository.findAllAdmin();
+    }
+
 
     public Collection<UserData> getParentsByNotification(){
         try {

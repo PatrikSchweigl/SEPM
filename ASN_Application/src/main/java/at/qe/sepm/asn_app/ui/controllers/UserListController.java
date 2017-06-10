@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Controller for the user list view.
  *
@@ -20,6 +22,14 @@ public class UserListController {
 
     @Autowired
     private UserService userService;
+    
+    private Collection<UserData> admins;
+    
+    
+    @PostConstruct
+    public void initList(){
+        setUsers(userService.getAllAdmin());
+    }
 
     /**
      * Returns a list of all users.
@@ -27,8 +37,10 @@ public class UserListController {
      * @return
      */
     public Collection<UserData> getUsers() {
-
-        return userService.getAllUsers();
+        return admins;
     }
-
+    
+    public void setUsers(Collection<UserData> users) {
+        this.admins = users;
+    }
 }
