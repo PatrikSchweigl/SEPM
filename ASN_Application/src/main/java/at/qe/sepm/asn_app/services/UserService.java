@@ -41,6 +41,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Collection<UserData> getAllAdmin() {
+        return userRepository.findAllAdmin();
+    }
+
 
     public Collection<UserData> getParentsByNotification(){
         try {
@@ -64,7 +68,7 @@ public class UserService {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"SAVED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
         auditLogService.saveAuditLog(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        userData.setPassword( passwordEncoder.encode(userData.getPassword()));
+        userData.setPassword( passwordEncoder.encode("passwd"));
         userData.setUserRole(UserRole.ADMIN);
         return userRepository.save(userData);
     }

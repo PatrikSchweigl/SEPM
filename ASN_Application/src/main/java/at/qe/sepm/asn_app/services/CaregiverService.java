@@ -29,9 +29,14 @@ public class CaregiverService {
     @Autowired CaregiverRepository caregiverRepository;
     @Autowired AuditLogRepository auditLogRepository;
 
+
     public Caregiver saveCaregiver(Caregiver caregiver) {
-        AuditLog log = new AuditLog(getAuthenticatedUserName(),"SAVED CARE: " + caregiver.getFullName(), new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUserName(), "SAVED CARE: " + caregiver.getFullName(), new Date());
+            auditLogRepository.save(log);
+        }
         return caregiverRepository.save(caregiver);
     }
     
@@ -40,8 +45,12 @@ public class CaregiverService {
     }
 
     public void deleteCaregiver(Caregiver caregiver){
-        AuditLog log = new AuditLog(getAuthenticatedUserName(),"DELETED CARE: " + caregiver.getFullName(), new Date());
-        auditLogRepository.save(log);
+        // Needed for JUnit because in that case no user is logged in.
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUserName(), "DELETED CARE: " + caregiver.getFullName(), new Date());
+            auditLogRepository.save(log);
+        }
         caregiverRepository.delete(caregiver);
     }
     public Caregiver loadCaregiver(Long id) {

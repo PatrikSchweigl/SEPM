@@ -66,7 +66,8 @@ public class ChildService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + child.getFirstName() + " " + child.getLastName(), new Date());
             auditLogRepository.save(log);
         }
-        return childRepository.save(child);
+        child = childRepository.save(child);
+        return child;
     }
     
     public String addCaregiver(Caregiver c){

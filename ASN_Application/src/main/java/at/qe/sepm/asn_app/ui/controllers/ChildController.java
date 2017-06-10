@@ -122,16 +122,16 @@ public class ChildController {
 		this.parentUserName = parentUserName;
 	}
 
-	public void doSaveChild(){
+	public Child doSaveChild(){
 		findParentByUsername(parentUserName);
 		Parent parent = parentService.loadParent(parentUserName);
-		parent.setStatus(true);	// set parent status to active when child is added
-		parentService.saveParent(parent);
-		child = childService.saveChild(child);
+		parentService.changeStatus(parent, true);	// set parent status to active when child is added
+		Child childReturn = childService.saveChild(child);
 		child = null;
 		initNewChild();
 		initList();
 		parentController.initList();
+		return childReturn;
 	}
 
 	public void doSaveChildEdit() {
@@ -146,8 +146,7 @@ public class ChildController {
 	public void doDeleteChild() {
 		Parent parent = childEdit.getPrimaryParent();
 		if(childService.getChildrenByParentUsername(parent.getUsername()).size() <= 1){
-			parent.setStatus(false);	// set parent status to inactive when last child is deleted
-			parentService.saveParent(parent);
+			parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
 		}
 		this.childService.deleteChild(childEdit);
 		childEdit = null;

@@ -1,9 +1,9 @@
 package at.qe.sepm.asn_app.services;
 import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.general.Comment;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
-import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
-import at.qe.sepm.asn_app.repositories.MessageRepository;
+import at.qe.sepm.asn_app.repositories.CommentRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +17,16 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
-import java.io.Serializable;
-
-
-/**
- * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
- * on 20.03.2017
- */
 
 @Component
 @Scope("application")
-public class MessageService {
+public class CommentService {
     /**
 	 * 
 	 */
 
 	@Autowired
-    private MessageRepository messageRepository;
+    private CommentRepository commentRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -42,27 +34,31 @@ public class MessageService {
     
     private String text;
 
-    public Collection<Message> getAllMessages(){
-    	Collection<Message> temp = messageRepository.findAll();
+    public Collection<Comment> getAllMessages(){
+    	Collection<Comment> temp = commentRepository.findAll();
+        Collections.reverse( (List<?>) temp );
+        return temp;
+    }
+    
+    public Collection<Comment> getAllCommentsByPicture(String pictureName){
+    	Collection<Comment> temp = commentRepository.getAllCommentsByPicture(pictureName);
         Collections.reverse( (List<?>) temp );
         return temp;
     }
     
     
-    public Message saveMessage(Message message){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+    public Comment saveMessage(Comment message){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"COMMENT POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
         message.setDate(new Date());
         message.setUsername(getAuthenticatedUser().getUsername());
-    	return messageRepository.save(message);
+    	return commentRepository.save(message);
     }
     
-    public void deleteMessage(Message message){
-    	System.err.println("WOHOOOOOOO");
-    	System.err.println(message.toString());
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+    public void deleteMessage(Comment message){
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"COMMENT DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
-        messageRepository.delete(message);
+        commentRepository.delete(message);
     }
     
     public UserData getAuthenticatedUser() {
@@ -81,8 +77,8 @@ public class MessageService {
 	}
 
 
-	public Message loadMessage(long id) {
-        return messageRepository.findOne(id);
+	public Comment loadMessage(long id) {
+        return commentRepository.findOne(id);
 	}
 
 }

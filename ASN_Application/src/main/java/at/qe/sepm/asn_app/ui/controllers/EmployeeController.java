@@ -5,6 +5,8 @@ import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.EmployeeService;
 import at.qe.sepm.asn_app.services.MailService;
+import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
+import com.google.gson.Gson;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +16,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +43,8 @@ public class EmployeeController {
     private String password;
     @Autowired
 	private UserRepository userRepository;
+    @Autowired
+    private UserConstraints userConstraints;
 
 
 
@@ -79,11 +87,13 @@ public class EmployeeController {
     }
 
     public void doSaveEmployee(){
-        employee = employeeService.saveEmployee(employee);
-        //mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test", "Hallo,  ich bin es, das System!");
-        employee = null;
-        initNewEmployee();
-        initList();
+            employee = employeeService.saveEmployee(employee);
+            employee = null;
+            initNewEmployee();
+            initList();
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('employeeAddDialog').hide()");
+
     }
 
     public Employee getEmployeeEdit() {

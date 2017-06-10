@@ -32,9 +32,6 @@ public class EmployeeService {
     @Autowired
     private UserRepository userRepository;
 
-
-
-
     public Collection<Employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
@@ -48,7 +45,7 @@ public class EmployeeService {
             auditLogRepository.save(log);
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        employee.setPassword(passwordEncoder.encode("passwd"));
         employee.setUserRole(UserRole.EMPLOYEE);
 
         return employeeRepository.save(employee);

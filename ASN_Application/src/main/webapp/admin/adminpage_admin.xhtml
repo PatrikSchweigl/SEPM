@@ -21,7 +21,8 @@
                                                      widgetVar="usersTable" value="#{userListController.users}"
                                                      paginator="true" rows="10" paginatorPosition="bottom"
                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                                     rowsPerPageTemplate="10,25,50">
+                                                     rowsPerPageTemplate="10,25,50"
+                                                     emptyMessage="Es wurden keine Administratoren gefunden!">
 
                                             <f:facet name="header">
                                                 <p:outputPanel>

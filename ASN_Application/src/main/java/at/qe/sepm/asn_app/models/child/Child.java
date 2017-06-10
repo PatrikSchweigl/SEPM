@@ -40,18 +40,25 @@ public class Child implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String birthday;
     private String imgName;
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @NotNull
     @ManyToOne(optional = false)
     private Parent parent1;
 
     @ManyToOne // only 1 parent required for child
     private Parent parent2;
 
+    @NotNull
     private String emergencyNumber;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> allergies;
@@ -191,6 +198,10 @@ public class Child implements Persistable<Long> {
         return gender;
     }
 
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     public String getEmergencyNumber() {
         return emergencyNumber;
     }
@@ -284,8 +295,8 @@ public class Child implements Persistable<Long> {
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
                 this.parent1.equals(other.parent1) &&
-                this.parent2.equals(other.parent2) &&
-                this.siblings.equals(other.siblings)) {
+                this.parent2.equals(other.parent2)) {
+                //this.siblings.equals(other.siblings)) {
             return true;
         }
         else {

@@ -25,16 +25,19 @@ public class NurseryInformation implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotNull
     private Date bringStart;
+    @NotNull
     private Date bringEnd;
-
+    @NotNull
     private Date pickUpStart;
+    @NotNull
     private Date pickUpEnd;
-
+    @NotNull
     private int maxOccupancy;
+    @NotNull
     private Date todaysDate;
-
+    @NotNull
     private Date originDate;
 
 

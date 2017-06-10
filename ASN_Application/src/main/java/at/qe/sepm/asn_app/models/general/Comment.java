@@ -1,11 +1,15 @@
 package at.qe.sepm.asn_app.models.general;
 
-import at.qe.sepm.asn_app.models.UserData;
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,25 +21,33 @@ import java.util.Date;
  * @see at.qe.sepm.asn_app.models.nursery.Picture
  */
 @Entity
+@Transactional
 public class Comment implements Persistable<Long>{
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
     private String comment;
+    @NotNull
     private Date date;
-    @ManyToOne(optional = false)
-    private UserData publisher;
+    @NotNull
+    private String username;
+    private String pictureName;
 
 
     public Comment() {}
 
-    public Comment(int id, String comment, Date date, UserData publisher) {
-        this.id = id;
+    /**
+     * Full constructor
+     */
+    public Comment(String comment, Date date, String username, String pictureName) {
         this.comment = comment;
         this.date = date;
-        this.publisher = publisher;
+        this.username = username;
+        this.pictureName = pictureName;
     }
 
 
@@ -55,18 +67,22 @@ public class Comment implements Persistable<Long>{
         this.date = date;
     }
 
-    public UserData getPublisher() {
-        return publisher;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPublisher(UserData publisher) {
-        this.publisher = publisher;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getFormattedDate(){
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
     }
 
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
 
@@ -87,8 +103,10 @@ public class Comment implements Persistable<Long>{
 
         Comment other = (Comment) obj;
         if (this.comment.equals(other.comment) &&
-                this.date.equals(other.date) &&
-                this.publisher.equals(other.publisher)) {
+                this.date.getYear() == other.date.getYear() &&
+                this.date.getMonth() == other.date.getMonth() &&
+                this.date.getDay() == other.date.getDay() &&
+                this.username.equals(other.username)) {
             return true;
         }
         else {
@@ -101,6 +119,15 @@ public class Comment implements Persistable<Long>{
     public String toString() {
         return "Comment: " + comment + "\n" +
                 "Date: " + date + "\n" +
-                "Publisher: " + publisher;
+                "Publisher: " + username + "\n" +
+                "Picture name: " + pictureName;
     }
+
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
 }

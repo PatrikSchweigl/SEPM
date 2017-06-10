@@ -21,7 +21,8 @@ import javax.annotation.PostConstruct;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class MessageController extends Thread{
 
     @Autowired
@@ -54,18 +55,23 @@ public class MessageController extends Thread{
         this.message = message;
         doReloadMessage();
     }
+    public void setMessage2(Message message) {
+        this.message = message;
+    }
 
     public void doReloadMessage() {
         message = messageService.loadMessage(message.getId());
     }
 
-    public void doSaveMessage(){
+    public Message doSaveMessage(){
         message = messageService.saveMessage(message);
+        Message messageReturn = message;
         Thread t = new Thread();
         t.start();
 
         init();
         initList();
+        return messageReturn;
     }
 
     @Override
@@ -86,7 +92,7 @@ public class MessageController extends Thread{
     }
     
     public void doDeleteMessage(Message message) {
-        this.messageService.deleteMessage(message);
+        messageService.deleteMessage(message);
         initList();
     }
 }

@@ -28,7 +28,8 @@
 												widgetVar="parentTable" value="#{parentController.parents}"
 												rows="10" paginatorPosition="bottom" paginator="true"
 												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-												rowsPerPageTemplate="10,25,50" selectionMode="single" selection="#{parentController.parent}" rowKey="#{parent.username}">
+												rowsPerPageTemplate="10,25,50" selectionMode="single" selection="#{parentController.parent}" rowKey="#{parent.username}"
+											emptyMessage="Es wurden keine Eltern gefunden!">
 
 												<f:facet name="header">
 													<p:outputPanel>
@@ -122,8 +123,8 @@
 														process="@this">
 														<f:setPropertyActionListener value="#{parent}"
 															target="#{parentEditController.parent}" />
-														<p:confirm header="Bestätigung"
-															message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
+														<p:confirm header="ACHTUNG!"
+															message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Es werden auch alle Abhängigkeiten, wie Kinder, etc. gelöscht. Dies lässt sich nicht mehr rückgängig machen."
 															icon="ui-icon-alert" />
 													</p:commandButton>
 													<p:commandButton
@@ -181,42 +182,52 @@
 															value="#{parentController.parent.username}"
 															required="true"
 															requiredMessage="Benutzername erforderlich!" />
-														<p:outputLabel for="passwordCreate" value="Passwort: " />
-														<p:password id="passwordCreate"
-															value="#{parentController.parent.password}"
-															required="true" requiredMessage="Passwort erforderlich!" />
-
 
 														<p:outputLabel for="firstnameCreate" value="Vorname: " />
 														<p:inputText id="firstnameCreate"
-															value="#{parentController.parent.firstName}" />
+															value="#{parentController.parent.firstName}"
+																	 required="true"
+																	 requiredMessage="Vorname erforderlich!"/>
 														<p:outputLabel for="lastnameCreate" value="Nachname: " />
 														<p:inputText id="lastnameCreate"
-															value="#{parentController.parent.lastName}" />
+															value="#{parentController.parent.lastName}"
+																	 required="true"
+																	 requiredMessage="Nachname erforderlich!"/>
 
 
 														<p:outputLabel for="streetCreate" value="Straße: " />
 														<p:inputText id="streetCreate"
-															value="#{parentController.parent.streetName}" />
+															value="#{parentController.parent.streetName}"
+																	 required="true"
+																	 requiredMessage="Straßenname erforderlich!"/>
 														<p:outputLabel for="locationCreate" value="Ort: " />
 														<p:inputText id="locationCreate"
-															value="#{parentController.parent.location}" />
+															value="#{parentController.parent.location}"
+																	 required="true"
+																	 requiredMessage="Ortsangabe erforderlich!"/>
 														<p:outputLabel for="postcodeCreate" value="Postleitzahl: " />
 														<p:inputMask id="postcodeCreate" maxlength="5"
 															value="#{parentController.parent.postcode}" mask="9999?9"
-															slotChar=" " />
+															slotChar=" "
+																	 required="true"
+																	 requiredMessage="Postleitzahl erforderlich!"/>
+														<p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
+														<p:inputMask id="phonenumberCreate"
+																	 mask="9?99999999999" slotChar=" " maxlength="12"
+																	 value="#{parentController.parent.phoneNumber}"
+																	 required="true" requiredMessage="Telefonnummer erforderlich!"/>
 														<p:outputLabel for="emailCreate" value="Email: " />
 														<p:inputText id="emailCreate"
 															validatorMessage="Ungültiges Email-Format!"
-															value="#{parentController.parent.email}">
-															<f:validateRegex
-																pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+															value="#{parentController.parent.email}"
+																	 required="true"
+																	 requiredMessage="Email-Adresse erforderlich!">
+
 														</p:inputText>
 													</h:panelGrid>
 													<h:panelGrid columns="3">
 														<p:commandButton value="Speichern"
 															action="#{parentController.doSaveParent()}"
-															oncomplete="if (args &amp;&amp; !args.validationFailed) PF('parentAddDialog').hide()"
 															update=":parentForm:parentTable"
 																		 process="@widgetVar(parentAddDialog)"/>
 														<p:commandButton value="Abbruch"

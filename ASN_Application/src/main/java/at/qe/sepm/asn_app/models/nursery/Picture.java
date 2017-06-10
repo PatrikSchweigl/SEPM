@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.general.Comment;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,13 +26,17 @@ public class Picture implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
     private String url;
+    @NotNull
     @ManyToOne(optional = false)
     private UserData publisher;
     @OneToMany
     @ElementCollection
     private Set<Comment> comment;
+    @NotNull
     private Date date;
+    @NotNull
     private String title;
 
 

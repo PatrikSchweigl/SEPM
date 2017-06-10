@@ -48,12 +48,15 @@ public class ParentService {
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        parent.setPassword(passwordEncoder.encode(parent.getPassword()));
+        parent.setPassword(passwordEncoder.encode("passwd"));
         parent.setUserRole(UserRole.PARENT);
         return parentRepository.save(parent);
     }
 
-
+    public Parent changeStatus(Parent parent, Boolean status){
+        parent.setStatus(status);
+        return parentRepository.save(parent);
+    }
 
 
     public Parent loadParent(String username){
