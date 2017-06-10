@@ -1,8 +1,11 @@
 package at.qe.sepm.asn_app.models.general;
 
 import org.springframework.data.domain.Persistable;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -18,12 +21,14 @@ import java.util.Date;
  * @see at.qe.sepm.asn_app.models.nursery.Picture
  */
 @Entity
+@Transactional
 public class Comment implements Persistable<Long>{
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @NotNull
     private String comment;
     @NotNull
@@ -35,8 +40,8 @@ public class Comment implements Persistable<Long>{
 
     public Comment() {}
 
-    public Comment(int id, String comment, Date date, String username) {
-        this.id = id;
+    public Comment(Long id, String comment, Date date, String username) {
+        //this.id = id;
         this.comment = comment;
         this.date = date;
         this.username = username;
@@ -74,7 +79,8 @@ public class Comment implements Persistable<Long>{
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -95,7 +101,9 @@ public class Comment implements Persistable<Long>{
 
         Comment other = (Comment) obj;
         if (this.comment.equals(other.comment) &&
-                this.date.equals(other.date) &&
+                this.date.getYear() == other.date.getYear() &&
+                this.date.getMonth() == other.date.getMonth() &&
+                this.date.getDay() == other.date.getDay() &&
                 this.username.equals(other.username)) {
             return true;
         }
