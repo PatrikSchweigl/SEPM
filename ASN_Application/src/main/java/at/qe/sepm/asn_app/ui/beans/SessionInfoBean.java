@@ -30,6 +30,13 @@ public class SessionInfoBean {
 	 * Attribute to cache the current user.
 	 */
 	private UserData currentUserData;
+	
+	private String phoneNumber;
+	private String streetName;
+	private String location;
+	private boolean notification;
+	private String email;
+	private String postcode;
 
 	/**
 	 * Returns the currently logged on user, null if no user is authenticated
@@ -43,10 +50,22 @@ public class SessionInfoBean {
 			return null;
 		}
 		currentUserData = userService.loadUser(currentUserName);
+		phoneNumber = currentUserData.getPhoneNumber();
+		streetName = currentUserData.getStreetName();
+		location = currentUserData.getLocation();
+		notification = currentUserData.isNotification();
+		email = currentUserData.getEmail();
+		postcode = currentUserData.getPostcode();
 		return currentUserData;
 	}
 
 	public void doSaveUser() {
+		currentUserData.setEmail(email);
+		currentUserData.setLocation(location);
+		currentUserData.setNotification(notification);
+		currentUserData.setPhoneNumber(phoneNumber);
+		currentUserData.setStreetName(streetName);
+		currentUserData.setPostcode(postcode);
 		currentUserData = this.userService.changeData(currentUserData);
 	}
 
@@ -136,6 +155,54 @@ public class SessionInfoBean {
 		} else {
 			return false;
 		}
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean getNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
 }

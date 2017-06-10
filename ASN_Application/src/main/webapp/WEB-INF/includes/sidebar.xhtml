@@ -19,7 +19,8 @@
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
 							<li class="treeview"><a
 								href="/employee/mainpage_employee.xhtml"> <i
 									class="fa fa-home fa-3x"></i> <span
@@ -54,7 +55,8 @@
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
+						<h:panelGroup
+							rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
 							<li class="treeview"><a href="/parent/children_parent.xhtml">
 									<i class="fa fa-child fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
@@ -99,10 +101,10 @@
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a href="/employee/lunch_employee.xhtml">
-									<i class="fa fa-cutlery fa-3x"></i> <span
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a
+								href="/employee/lunch_employee.xhtml"> <i
+									class="fa fa-cutlery fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Essen</span>
 							</a></li>
 						</h:panelGroup>
@@ -194,23 +196,25 @@
 					<p:separator />
 					<h:panelGrid columns="2">
 						<p:outputLabel for="street" value="Straße: " />
-						<p:inputText id="street"
-							value="#{sessionInfoBean.currentUserData.streetName}" />
+						<p:inputText id="street" value="#{sessionInfoBean.streetName}" placeholder="#{sessionInfoBean.currentUserData.streetName}" />
 						<p:outputLabel for="location" value="Ort: " />
-						<p:inputText id="location"
-							value="#{sessionInfoBean.currentUserData.location}" />
+						<p:inputText id="location" value="#{sessionInfoBean.location}" placeholder="#{sessionInfoBean.currentUserData.location}" />
 						<p:outputLabel for="postcode" value="Postleitzahl: " />
 						<p:inputMask id="postcode" mask="9999?9" slotChar=" "
-							value="#{sessionInfoBean.currentUserData.postcode}" />
+							value="#{sessionInfoBean.postcode}" placeholder="#{sessionInfoBean.currentUserData.postcode}" />
 						<p:outputLabel for="email" value="Email: " />
-						<p:inputText id="email"
+						<p:inputText id="email" placeholder="#{sessionInfoBean.currentUserData.email}"
 							validatorMessage="Ungültiges Email-Format!"
-							value="#{sessionInfoBean.currentUserData.email}">
+							value="#{sessionInfoBean.email}">
 							<f:validateRegex
 								pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						</p:inputText>
-						<p:outputLabel for="notifier" value="Email Benachrichtigung: "/>
-						<p:selectBooleanButton id="notifier" value="#{sessionInfoBean.currentUserData.notification}" onLabel="Ja" offLabel="Nein" style="width:60px" />
+						<p:outputLabel for="phone" value="Telefonnummer: " />
+						<p:inputText id="phone" value="#{sessionInfoBean.phoneNumber}" placeholder="#{sessionInfoBean.currentUserData.phoneNumber}" />
+						<p:outputLabel for="notifier" value="Email Benachrichtigung: " />
+						<p:selectBooleanButton id="notifier"
+							value="#{sessionInfoBean.notification}" onLabel="Ja"
+							offLabel="Nein" style="width:60px" />
 					</h:panelGrid>
 					<h:panelGrid columns="3">
 						<p:commandButton value="Speichern"
