@@ -221,12 +221,12 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:selectOneListbox style="width: 210px;" id="mealBox"
-															value="#{lunchController.childFirstname}" var="p"
+															value="#{lunchController.childId}" var="p"
 															filter="true" filterMatchMode="contains">
 															<f:selectItems
 																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
 																var="child" itemLabel="#{child.firstName}"
-																itemValue="#{child.firstName}" />
+																itemValue="#{child.id}" />
 
 															<p:column>
 																<p:graphicImage

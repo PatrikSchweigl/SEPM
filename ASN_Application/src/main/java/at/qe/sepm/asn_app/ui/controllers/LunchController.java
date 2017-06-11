@@ -27,6 +27,7 @@ public class LunchController {
     private LunchService lunchService;
     @Autowired
     private ChildService childService;
+
     @Autowired
     private SessionInfoBean session;
 
@@ -36,6 +37,7 @@ public class LunchController {
 
     private Child child;
     private String childFirstname;
+    private Long childId;
     private Date date;
 
     private List<Lunch> thisWeekLunch;
@@ -133,9 +135,15 @@ public class LunchController {
         }
         System.err.println("OY WAT IS DES");
         List<Lunch> lunchs = lunchService.getLunchByDate(d);
-            System.err.println("LUNCH" + lunchs + "CHILD" + childFirstname);
-        lunchs.get(0).addChild(childService.getChildrenByFirstnameAndParentUsername(childFirstname, session.getCurrentUserName()));
-        System.err.println(child);
+        System.err.println("LUNCH" + lunchs + "CHILD" + childId);
+        if(lunchs == null || lunchs.size() < 1){
+            System.err.println("Lunch is NULL or LunchSIZE");
+            return;
+        }
+
+        //Child c = childService.getChildrenByFirstnameAndParentUsername(childFirstname, session.getCurrentUserName()).get(0);
+        //System.err.println("CHILD -" + c);
+        lunchs.get(0).addChild(childId);
         lunchService.saveLunch(lunchs.get(0));
         System.err.println("ALLES KLAR HERR KOMMISSAR");
     }
@@ -181,6 +189,13 @@ public class LunchController {
     }
 
     //getters, setters -------------------------------------------------------------------------------------------
+    public Long getChildId() {
+        return childId;
+    }
+
+    public void setChildId(Long childId) {
+        this.childId = childId;
+    }
 
     public Lunch getLunchEdit() {
         return lunchEdit;
