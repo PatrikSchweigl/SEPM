@@ -158,30 +158,33 @@
 												<h:panelGrid columns="2">
 													<p:outputLabel for="pFirstName" value="Elternteil: " />
 													<p:inputText disabled="true" id="pFirstName"
-														value="#{childController.childEdit.getPrimaryParentFullName()}" />
+																 value="#{childController.childEdit.getPrimaryParentFullName()}"/>
 													<p:outputLabel for="firstname" value="Vorname: " />
 													<p:inputText id="firstname"
-														value="#{childController.childEdit.firstName}" />
+																 value="#{childController.childEdit.firstName}"
+																 required="true" requiredMessage="Vorname erforderlich!"/>
 													<p:outputLabel for="lastname" value="Nachname: " />
 													<p:inputText id="lastname"
-														value="#{childController.childEdit.lastName}" />
+																 value="#{childController.childEdit.lastName}"
+																 required="true" requiredMessage="Nachname erforderlich!"/>
 													<p:outputLabel for="birthday" value="Geburtsdatum: " />
 													<p:inputMask mask="99/99/9999" id="birthday"
-																 validatorMessage="Ungültiges Datum für Geburtstag!"
-																 value="#{childController.childEdit.birthday}">
-														<f:validateRegex
-																pattern="^$|(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
-													</p:inputMask>
-													<p:outputLabel for="imgName" value="Bildname: " />
-													<p:inputText id="imgName"
-														value="#{childController.childEdit.imgName}" />
+																 value="#{childController.childEdit.birthday}"
+																 required="true" requiredMessage="Geburtsdatum erforderlich!"/>
+													<p:outputLabel for="emergencyNumber"
+																   value="Notfallkontakt: " />
+													<p:inputMask id="emergencyNumber"
+																 mask="9?99999999999" slotChar=" " maxlength="12"
+																 value="#{childController.childEdit.emergencyNumber}"
+																 required="true" requiredMessage="Notfallkontaktnummer erforderlich!"/>
+													<p:outputLabel for="genderEdit" value="Geschlecht: "/>
+													<p:inputText id="genderEdit" value="#{childController.childEdit.gender}" disabled="true"/>
 
 												</h:panelGrid>
 												<p:separator />
 												<h:panelGrid columns="3">
 													<p:commandButton value="Speichern"
 														action="#{childController.doSaveChildEdit()}"
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('childEditDialog').hide()"
 														update=":childForm:childTable" process="@widgetVar(childEditDialog)" />
 													<p:commandButton value="Neu laden" immediate="true"
 														action="#{childController.doReloadChildEdit()}"
@@ -221,27 +224,33 @@
 													</p:selectOneListbox>
 													<p:outputLabel for="firstName" value="Vorname: " />
 													<p:inputText id="firstName"
-														value="#{childController.child.firstName}" />
+														value="#{childController.child.firstName}"
+																 required="true" requiredMessage="Vorname erforderlich!"/>
 													<p:outputLabel for="lastName" value="Nachname: " />
 													<p:inputText id="lastName"
-														value="#{childController.child.lastName}" />
+														value="#{childController.child.lastName}"
+																 required="true" requiredMessage="Nachname erforderlich!"/>
 													<p:outputLabel for="birthDay" value="Geburtsdatum: " />
 													<p:inputMask mask="99/99/9999" id="birthDay"
 																 validatorMessage="Ungültiges Datum für Geburtstag!"
-																 value="#{childController.child.birthday}">
+																 value="#{childController.child.birthday}"
+																 required="true" requiredMessage="Geburtsdatum erforderlich!">
 														<f:validateRegex
 																pattern="^$|(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)" />
 													</p:inputMask>
 													<p:outputLabel for="imgname" value="Bildname: " />
 													<p:inputText id="imgname"
-														value="#{childController.child.imgName}" />
+														value="#{childController.child.imgName}"/>
 													<p:outputLabel for="emgNum" value="Notfallkontakt: " />
-													<p:inputText id="emgNum"
-																 value="#{childController.child.emergencyNumber}" />
+													<p:inputMask id="emgNum"
+																 mask="9?99999999999" slotChar=" " maxlength="12"
+																 value="#{childController.child.emergencyNumber}"
+																 required="true" requiredMessage="Notfallkontaktnummer erforderlich!"/>
 													<p:outputLabel for="genderCreate" value="Geschlecht: "/>
 													<p:selectOneMenu id="genderCreate"
 																	 value="#{childController.child.gender}"
-																	 style="width:150px">
+																	 style="width:150px"
+																	 required="true" requiredMessage="Geschlecht erforderlich!">
 														<f:selectItem itemLabel="Wähle Geschlecht"
 																	  itemValue="#{childController.child.gender}"/>
 														<f:selectItems value="#{enumController.gender}"/>
@@ -251,7 +260,6 @@
 												<h:panelGrid columns="3">
 													<p:commandButton value="Speichern"
 														action="#{childController.doSaveChild}"
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('childAddDialog').hide()"
 														update=":childForm:childTable" />
 													<p:commandButton value="Abbruch"
 														onclick="PF('childAddDialog').hide()" immediate="true" />

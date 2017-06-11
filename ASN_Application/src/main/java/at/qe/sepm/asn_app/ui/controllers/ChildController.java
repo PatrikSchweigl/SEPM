@@ -8,14 +8,20 @@ import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.ParentService;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.transaction.TransactionSystemException;
 
 
 /**
@@ -122,16 +128,26 @@ public class ChildController {
 		this.parentUserName = parentUserName;
 	}
 
-	public Child doSaveChild(){
-		findParentByUsername(parentUserName);
-		Parent parent = parentService.loadParent(parentUserName);
-		parentService.changeStatus(parent, true);	// set parent status to active when child is added
-		Child childReturn = childService.saveChild(child);
-		child = null;
-		initNewChild();
-		initList();
-		parentController.initList();
-		return childReturn;
+	public void doSaveChild(){
+		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
+		}else{
+			try{
+				findParentByUsername(parentUserName);
+				Parent parent = parentService.loadParent(parentUserName);
+				parentService.changeStatus(parent, true);	// set parent status to active when child is added
+				child = childService.saveChild(child);
+				child = null;
+				initNewChild();
+				initList();
+				parentController.initList();
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('childAddDialog').hide()");
+			} catch(TransactionSystemException ex){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+			}
+		}
+
 	}
 
 	public void doSaveChildEdit() {
@@ -139,8 +155,19 @@ public class ChildController {
 			childEdit.addAllergy(allergy);
 		if(intolerance.compareTo("") != 0)
 			childEdit.addFoodIntolerance(intolerance);
-		childEdit = childService.saveChild(childEdit);
-		initList();
+		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
+		}else {
+			try {
+				childEdit = childService.saveChild(childEdit);
+				initList();
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('childEditDialog').hide()");
+			} catch (TransactionSystemException ex) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+			}
+		}
+
 	}
 
 	public void doDeleteChild() {

@@ -100,6 +100,14 @@ public class EmployeeController {
         } else {
             try {
                 employee = employeeService.saveEmployee(employee);
+                mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Registrierung",
+                        "Willkommen bei Care4Fun-Application!\n\n" +
+                                "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                                "Ihr Benutzername: " + employee.getUsername() + "\n" +
+                                "Ihr Passwort: passwd" +
+                                "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
+                                "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                                "Viel Spaß wünschen das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('employeeAddDialog').hide()");
             } catch (TransactionSystemException ex) {
@@ -150,18 +158,24 @@ public class EmployeeController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
         } else if (!employeeEdit.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
-        } else {
-            try {
-                System.err.println(employeeEdit.toString());
-                employeeEdit = employeeService.saveEmployee(employeeEdit);
-                RequestContext context = RequestContext.getCurrentInstance();
-                context.execute("PF('employeeEditDialog').hide()");
-            } catch (TransactionSystemException ex) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
-            }
-            employeeEdit = null;
-            initNewEmployee();
-            initList();
+        } else{
+                try {
+                    System.err.println(employeeEdit.toString());
+                    employeeEdit = employeeService.saveEmployee(employeeEdit);
+                    mailService.sendEmail(employeeEdit.getEmail(), "Care4Fun-App - Änderung Benutzerdaten",
+                            "Guten Tag " + employeeEdit.getFirstName() + " " + employeeEdit.getLastName() + "!\n\n" +
+                                    "Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
+                                    "Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
+                                    "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                                    "Viel Spaß wünschen das Kinderkrippen-Team!");
+                    RequestContext context = RequestContext.getCurrentInstance();
+                    context.execute("PF('employeeEditDialog').hide()");
+                } catch (TransactionSystemException ex) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+                }
+                employeeEdit = null;
+                initNewEmployee();
+                initList();
         }
     }
 

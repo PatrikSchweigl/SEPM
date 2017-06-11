@@ -122,7 +122,7 @@ public class CaregiverControllerTest {
         // Save the child in the database.
         childController.setChild2(child);
         childController.setParentUserName(parent1.getUsername());
-        child = childController.doSaveChild();
+        childController.doSaveChild();
 
         // Save a caregiver in the database
         caregiverController.setCaregiver2(caregiver);

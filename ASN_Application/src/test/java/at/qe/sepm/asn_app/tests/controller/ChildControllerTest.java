@@ -108,7 +108,7 @@ public class ChildControllerTest {
         // Save the child in the database.
         childController.setChild2(child);
         childController.setParentUserName(parent1.getUsername());
-        child = childController.doSaveChild();
+        childController.doSaveChild();
 
 
         // Check if the values have changed since the child was saved.
