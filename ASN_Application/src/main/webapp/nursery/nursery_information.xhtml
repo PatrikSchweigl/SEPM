@@ -43,10 +43,16 @@
                                         <p:column headerText="Abhol-Zeitraum">
                                             <h:outputText value="#{info.pickUpDurationNew}"/>
                                         </p:column>
-                                        <p:column headerText="Max. Belegung">
+                                        <p:column headerText="Max. Belegung"
+                                        filterBy="#{info.maxOccupancy}"
+                                        filterStyle="display: none;"
+                                        sortBy="#{info.maxOccupancy}">
                                             <h:outputText value="#{info.maxOccupancy}"/>
                                         </p:column>
-                                        <p:column headerText="Datum">
+                                        <p:column headerText="Datum"
+                                                  filterBy="#{info.originDate}"
+                                                  filterStyle="display: none;"
+                                                  sortBy="#{info.originDate}">
                                             <h:outputText value="#{info.getFormattedOriginDate()}"/>
                                         </p:column>
                                     </p:dataTable>
@@ -57,16 +63,19 @@
                                           widgetVar="nurseryInformationDialog"
                                           modal="true" showEffect="fade"
                                           hideEffect="fade" resizable="false">
-                                          <p:messages></p:messages>
+                                    <p:messages id="messagesInfo" autoUpdate="true"/>
+
                                         <h:outputLabel id="information">
                                             <h:panelGrid columns="2">
                                                 <h:outputLabel for="maxOcc" value="Max. Belegung:"/>
                                                 <p:inputText id="maxOcc" required="true"
-                                                                 requiredMessage="Benutzername erforderlich!"
+                                                                 requiredMessage="Max. Belegung erforderlich!"
                                                              value="#{nurseryInformationController.nurseryInformation.maxOccupancy}"/>
                                                 <h:outputLabel for="originDate" value="Datum:"/>
                                                 <p:calendar id="originDate"
                                                             value="#{nurseryInformationController.nurseryInformation.originDate}"
+                                                            required="true"
+                                                            requiredMessage="Datum erforderlich!"
                                                             timeZone="Europe/Vienna"/>
                                             </h:panelGrid>
                                             <p:separator/>
@@ -78,12 +87,16 @@
                                                 <p:calendar id="bringFrom"
                                                             value="#{nurseryInformationController.nurseryInformation.bringStart}"
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
-                                                            stepMinute="15"/>
+                                                            stepMinute="15"
+                                                            required="true"
+                                                            requiredMessage="Bring-Von-Zeitpunkt erforderlich!"/>
                                                 <h:outputLabel for="bringTo" value="bis: "/>
                                                 <p:calendar id="bringTo"
                                                             value="#{nurseryInformationController.nurseryInformation.bringEnd}"
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
-                                                            stepMinute="15"/>
+                                                            stepMinute="15"
+                                                            required="true"
+                                                            requiredMessage="Bring-Bis-Zeitpunkt erforderlich!"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="1">
@@ -94,19 +107,21 @@
                                                 <p:calendar id="pickUpFrom"
                                                             value="#{nurseryInformationController.nurseryInformation.pickUpStart}"
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
-                                                            stepMinute="15"/>
+                                                            stepMinute="15"
+                                                            required="true"
+                                                            requiredMessage="Abhol-Von-Zeitpunkt erforderlich!"/>
                                                 <h:outputLabel for="pickUpTo" value="bis: "/>
                                                 <p:calendar id="pickUpTo"
                                                             value="#{nurseryInformationController.nurseryInformation.pickUpEnd}"
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
-                                                            stepMinute="15"/>
+                                                            stepMinute="15"
+                                                            required="true"
+                                                            requiredMessage="Abhol-Bis-Zeitpunkt erforderlich!"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
-                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('nurseryInformationDialog').hide()"
-                                                                 action="#{nurseryInformationController.doSaveNurseryInformation()}"
-                                                                 />
+                                                                 action="#{nurseryInformationController.doSaveNurseryInformation()}"/>
                                                 <p:commandButton value="Abbrechen"
                                                                  onclick="PF('nurseryInformationDialog').hide()"/>
                                             </h:panelGrid>

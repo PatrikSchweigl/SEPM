@@ -3,11 +3,15 @@ package at.qe.sepm.asn_app.ui.controllers;
 import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.ui.constraints.NurseryConstraints;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Collection;
 import java.util.Date;
 
@@ -59,14 +63,27 @@ public class NurseryInformationController {
 	}
 
 	public void doSaveNurseryInformation() {
-		if (nurseryConstraints.nurseryInfoExists(nurseryInformation)
-				|| nurseryInformation.getOriginDate().compareTo(new Date()) <= 0
-				|| nurseryConstraints.checkTimeConstraints(nurseryInformation) == false) {
-			return;
+		if (nurseryInformation.getMaxOccupancy() < 0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Max. Belegung muss größer gleich 0 sein!", null));
+		} else if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An diesem Tag existiert bereits ein Eintrag!", null));
+
+		} else if(nurseryInformation.getOriginDate().compareTo(new Date()) <= 0) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Datum liegt in der Vergangenheit!", null));
+		} else if(nurseryConstraints.checkTimeConstraints(nurseryInformation) == false){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Von-Angaben müssen vor Bis-Angaben sein!", null));
+		} else {
+			try {
+				nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
+				nurseryInformation = null;
+				initNewNurseryInformation();
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('nurseryInformationDialog').hide()");
+			}catch(TransactionSystemException ex){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+			}
 		}
-		nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
-		nurseryInformation = null;
-		initNewNurseryInformation();
+
 	}
 
 	public void doDeleteNurseryInformation() {
