@@ -20,7 +20,8 @@ import java.util.Date;
  * 15.05.2017
  */
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class NurseryInformationController {
 
 	@Autowired
@@ -38,6 +39,9 @@ public class NurseryInformationController {
 	public void setNurseryInformation(NurseryInformation nurseryInformation) {
 		this.nurseryInformation = nurseryInformation;
 		doReloadNurseryInformation();
+	}
+	public void setNurseryInformation2(NurseryInformation nurseryInformation) {
+		this.nurseryInformation = nurseryInformation;
 	}
 
 	public Collection<NurseryInformation> getNurseryInformations() {
@@ -62,7 +66,8 @@ public class NurseryInformationController {
 		setNurseryInformations(nurseryInformationService.getAllInformation());
 	}
 
-	public void doSaveNurseryInformation() {
+	public NurseryInformation doSaveNurseryInformation() {
+		NurseryInformation nurseryInformationReturn = null;
 		if (nurseryInformation.getMaxOccupancy() < 0){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Max. Belegung muss größer gleich 0 sein!", null));
 		} else if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
@@ -75,6 +80,7 @@ public class NurseryInformationController {
 		} else {
 			try {
 				nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
+				nurseryInformationReturn = nurseryInformation;
 				nurseryInformation = null;
 				initNewNurseryInformation();
 				RequestContext context = RequestContext.getCurrentInstance();
@@ -83,7 +89,7 @@ public class NurseryInformationController {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
 			}
 		}
-
+		return nurseryInformationReturn;
 	}
 
 	public void doDeleteNurseryInformation() {

@@ -145,10 +145,26 @@ public class NurseryInformation implements Persistable<Long> {
         }
 
         NurseryInformation other = (NurseryInformation) obj;
-        if (this.bringStart.equals(other.bringStart) &&
-                this.pickUpStart.equals(other.pickUpStart) &&
-                this.bringEnd.equals(other.bringEnd) &&
-                this.pickUpEnd.equals(other.pickUpEnd) &&
+        if (originDate.getYear() == other.originDate.getYear() &&
+                originDate.getMonth() == other.originDate.getMonth() &&
+                originDate.getDay() == other.originDate.getDay() &&
+
+                todaysDate.getYear() == other.todaysDate.getYear() &&
+                todaysDate.getMonth() == other.todaysDate.getMonth() &&
+                todaysDate.getDay() == other.todaysDate.getDay() &&
+
+                bringStart.getHours() == other.bringStart.getHours() &&
+                bringStart.getMinutes() == other.bringStart.getMinutes() &&
+
+                pickUpStart.getHours() == other.pickUpStart.getHours() &&
+                pickUpStart.getMinutes() == other.pickUpStart.getMinutes() &&
+
+                bringEnd.getHours() == other.bringEnd.getHours() &&
+                bringEnd.getMinutes() == other.bringEnd.getMinutes() &&
+
+                pickUpEnd.getHours() == other.pickUpEnd.getHours() &&
+                pickUpEnd.getMinutes() == other.pickUpEnd.getMinutes() &&
+
                 this.maxOccupancy == other.maxOccupancy) {
             return true;
         }
@@ -160,7 +176,9 @@ public class NurseryInformation implements Persistable<Long> {
 
     @Override
     public String toString() {
-        return  "BringStart: " + bringStart + "\n" +
+        return  "OriginDate: " + originDate + "\n" +
+                "TodaysDate: " + todaysDate + "\n" +
+                "BringStart: " + bringStart + "\n" +
                 "BringEnd: " + bringEnd + "\n" +
                 "PickUpStart: " + pickUpStart + "\n" +
                 "PickUpEnd: " + pickUpEnd + "\n" +
