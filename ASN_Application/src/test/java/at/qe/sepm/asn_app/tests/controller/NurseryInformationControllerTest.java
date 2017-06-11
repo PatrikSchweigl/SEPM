@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -49,16 +48,10 @@ public class NurseryInformationControllerTest {
         calendar.clear();
         calendar.set(2017, 6, 11, 0, 0);
         Date todaysDate = calendar.getTime();
-        //todaysDate.setYear(2017);
-        //todaysDate.setMonth(6);
-        //todaysDate.setDate(11);
 
         calendar.clear();
         calendar.set(originDateYear, originDateMonth, originDateDay, 0, 0);
         Date originDate = calendar.getTime();
-        //originDate.setYear(2017);
-        //originDate.setMonth(5);
-        //originDate.setDate(27);
 
         calendar.clear();
         calendar.set(originDateYear, originDateMonth, originDateDay, 7, 30);
@@ -76,24 +69,6 @@ public class NurseryInformationControllerTest {
         calendar.set(originDateYear, originDateMonth, originDateDay, 16, 30);
         Date pickUpEnd = calendar.getTime();
 
-        /*
-        Date bringStart = new Date();
-        bringStart.setHours(7);
-        bringStart.setMinutes(30);
-
-        Date bringEnd = new Date();
-        bringEnd.setHours(10);
-        bringEnd.setMinutes(0);
-
-        Date pickUpStart = new Date();
-        pickUpStart.setHours(14);
-        pickUpStart.setMinutes(00);
-
-        Date pickUpEnd = new Date();
-        pickUpEnd.setHours(16);
-        pickUpEnd.setMinutes(30);
-        */
-
         nurseryInformation = new NurseryInformation();
         nurseryInformation.setBringStart(bringStart);
         nurseryInformation.setBringEnd(bringEnd);
@@ -102,8 +77,6 @@ public class NurseryInformationControllerTest {
         nurseryInformation.setMaxOccupancy(21);
         nurseryInformation.setTodaysDate(todaysDate);
         nurseryInformation.setOriginDate(originDate);
-
-        //LocalDateTime date2 = LocalDateTime.of(2017, 5, 27, 7, 30);
     }
 
 
