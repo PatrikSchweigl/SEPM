@@ -20,12 +20,21 @@ public class PictureService {
     @Autowired
     private PictureRepository pictureRepository;
 
+
+    public Picture loadPicture(Long id) {
+        return pictureRepository.findOne(id);
+    }
+
     public Collection<Picture> getAllPictures(){
         return pictureRepository.findAll();
     }
     
     public Picture savePicture(Picture picture){
     	return pictureRepository.save(picture);
+    }
+
+    public void deletePicture(Picture picture) {
+        pictureRepository.delete(picture);
     }
 
 
