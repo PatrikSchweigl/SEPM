@@ -30,6 +30,7 @@ public class Sibling implements Persistable<Long> {
     @NotNull
     private String lastName;
     private String birthday;
+    private Child child;
 
     public Sibling() {}
 
@@ -39,6 +40,13 @@ public class Sibling implements Persistable<Long> {
         this.birthday = birthday;
     }
 
+    public Child getChild() {
+        return child;
+    }
+
+    public void setChild(Child child) {
+        this.child = child;
+    }
 
     public String getFirstName() {
         return firstName;

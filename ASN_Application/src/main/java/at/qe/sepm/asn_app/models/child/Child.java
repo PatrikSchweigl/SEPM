@@ -64,7 +64,7 @@ public class Child implements Persistable<Long> {
     private Set<String> allergies;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> foodIntolerances;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Sibling> siblings;
 
     @Enumerated(EnumType.STRING)
@@ -74,7 +74,7 @@ public class Child implements Persistable<Long> {
     private Religion religion;
 
     //@ElementCollection(targetClass = Caregiver.class)
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "childname", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Caregiver> caregivers;
 
 
