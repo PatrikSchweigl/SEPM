@@ -55,6 +55,10 @@ public class ChildController {
 		this.children = children;
 	}
 
+	public Child findOne(Long id){
+		return childService.loadChild(id);
+	}
+
 	public Collection<Child> getChildren(){
 		return children;
 	}
