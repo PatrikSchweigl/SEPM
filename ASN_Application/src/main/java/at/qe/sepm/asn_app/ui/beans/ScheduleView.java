@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionSystemException;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
@@ -40,6 +42,7 @@ import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
+import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
 
 /**
  * Created by Auki on 02.05.2017.
@@ -61,6 +64,8 @@ public class ScheduleView implements Serializable {
 	private ScheduleEvent editViewEvent = new DefaultScheduleEvent();
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private RegistrationConstraints registrationConstraints;
 	@Autowired
 	private RegistrationService registrationService;
 	@Autowired
@@ -180,23 +185,40 @@ public class ScheduleView implements Serializable {
 	}
 
 	public void addRegistration() {
-		childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
-				childFirstname);
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(event.getStartDate());
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.setTimeZone(TimeZone.getTimeZone("Europe/Vienna"));
-		if (event.getStartDate().compareTo(new Date()) <= 0)
-			return;
-		Registration reg = new Registration(description, childReg, cal.getTime(), event.getStartDate());
-		registrationService.saveRegistration(reg);
-		AuditLog log = new AuditLog(
-				reg.getChild().getFirstName() + " " + reg.getChild().getLastName(), "REGISTRATION CREATED: "
-						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
-				reg.getBringdate());
-		auditLogRepository.save(log);
+		try {
+			childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
+					childFirstname);
+			Calendar cal = Calendar.getInstance();
+			Calendar cal2 = Calendar.getInstance();
+			cal.setTime(event.getStartDate());
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
+			cal.add(Calendar.HOUR_OF_DAY, 4);
+			cal2.setTime(event.getStartDate());
+			cal2.add(Calendar.HOUR_OF_DAY, 2);
+			Registration reg = new Registration(description, childReg, cal.getTime(), cal2.getTime());
+
+			if (event.getStartDate().compareTo(new Date()) <= 0) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Keine Anmeldung in der Vergangenheit möglich", null));
+			} else if (registrationConstraints.registationExists(reg)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Sie haben für heute schon ein Kind angemeldet", null));
+			} else {
+				registrationService.saveRegistration(reg);
+				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
+						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
+								+ getAuthenticatedUser().getUserRole() + "] ",
+						reg.getBringdate());
+				auditLogRepository.save(log);
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('eventDateDialog').hide()");
+			}
+		} catch (Exception ex) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+		}
 	}
 
 	public void addEvent() {
