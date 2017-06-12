@@ -142,12 +142,15 @@ public class ScheduleView implements Serializable {
 
 			registrations = registrationService.getAllRegistrationsByParent();
 			for (Registration r : registrations) {
-				DefaultScheduleEvent ev;
+				if (r.getBringdate().compareTo(new Date()) > 0) {
+					DefaultScheduleEvent ev;
 
-				ev = new DefaultScheduleEvent(r.getChild().getFirstName() + " " + r.getChild().getLastName() + " "
-						+ r.getFormattedBringDate() + " " + "Uhr" + "\n" + r.getNote(), r.getDate(), r.getDate(),
-						"registration");
-				eventModel.addEvent(ev);
+					ev = new DefaultScheduleEvent(
+							r.getChild().getFirstName() + " " + r.getChild().getLastName() + " "
+									+ r.getFormattedBringDate() + " " + "Uhr" + "\n" + r.getNote(),
+							r.getDate(), r.getDate(), "registration");
+					eventModel.addEvent(ev);
+				}
 			}
 		}
 	}
