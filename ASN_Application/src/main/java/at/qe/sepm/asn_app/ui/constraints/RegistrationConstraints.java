@@ -49,4 +49,15 @@ public class RegistrationConstraints {
 		}
 		return false;
 	}
+	
+	public boolean checkTimeConstraints(Registration reg){
+		NurseryInformation nurse = nurseryService.nurseryInformationByOriginDate(reg.getDate());
+			Date dateStart = nurse.getBringStart();
+			Date dateEnd = nurse.getBringEnd();
+			System.err.println(dateStart + "  " +  dateEnd +  "  vergleich mit!!!!!!!!!!!!!  " + reg.getDate());
+			if (dateStart.compareTo(reg.getBringdate()) > 0 || dateEnd.compareTo(reg.getBringdate()) < 0) {
+				return true;
+			}
+		return false;
+	}
 }

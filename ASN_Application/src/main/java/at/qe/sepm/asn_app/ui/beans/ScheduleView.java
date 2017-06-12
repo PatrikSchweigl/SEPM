@@ -194,7 +194,6 @@ public class ScheduleView implements Serializable {
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 0);
 			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.add(Calendar.HOUR_OF_DAY, 4);
 			cal2.setTime(event.getStartDate());
 			cal2.add(Calendar.HOUR_OF_DAY, 2);
 			Registration reg = new Registration(description, childReg, cal.getTime(), cal2.getTime());
@@ -208,9 +207,10 @@ public class ScheduleView implements Serializable {
 			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie können kein Kind eintragen", null));
-			}
-			
-			else {
+			} else if (registrationConstraints.checkTimeConstraints(reg)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Sie können kein Kind um diese Uhrzeit eintragen", null));
+			} else {
 				registrationService.saveRegistration(reg);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
