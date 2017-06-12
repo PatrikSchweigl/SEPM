@@ -105,7 +105,7 @@ public class CaregiverControllerTest {
         child.setAllergies(allergies);
         child.setFoodIntolerances(foodIntolerances);
         child.setSiblings(siblings);
-        child.setCustody(Custody.BOTH);
+        child.setCustody(Custody.BEIDE);
         child.setReligion(Religion.CHRISTENTUM);
         child.setCaregivers(caregivers);
     }

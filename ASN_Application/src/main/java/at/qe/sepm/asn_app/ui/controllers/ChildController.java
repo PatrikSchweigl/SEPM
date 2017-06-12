@@ -155,11 +155,17 @@ public class ChildController {
 			childEdit.addAllergy(allergy);
 		if(intolerance.compareTo("") != 0)
 			childEdit.addFoodIntolerance(intolerance);
-		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
+		System.err.println("WOOOOOOOOOOOOOOOOOHOOOOOOOOOOOOO");
+		System.err.println(allergy);
+		System.err.println("WOOOOOOOOOOOOOOOOOHOOOOOOOOOOOOO");
+
+		if(StringUtils.isNumeric(child.getEmergencyNumber())){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
 		}else {
 			try {
 				childEdit = childService.saveChild(childEdit);
+				System.err.println("WOOOOOOOOOOOOOOOOOHOOOOOOOOOOOOO");
+				System.err.println("WOOOOOOOOOOOOOOOOOHOOOOOOOOOOOOO");
 				initList();
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('childEditDialog').hide()");

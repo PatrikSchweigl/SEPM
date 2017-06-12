@@ -96,7 +96,7 @@
                 </div>
                 <div>
                     <h3>Eltern</h3>
-                    <ui:repeat var="parent" value="#{parentService.getAllParents()}">
+                    <ui:repeat var="parent" value="#{parentController.parents}">
                         <ui:fragment
                                 rendered="#{parent.username ne sessionInfoBean.getCurrentUserData().username}">
                             <h:panelGrid columns="2" style="width:50px;"
