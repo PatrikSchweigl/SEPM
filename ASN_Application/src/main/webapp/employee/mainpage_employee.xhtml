@@ -72,7 +72,7 @@
 													</p:tab>
 													<p:tab title="Kinder, die heute zu Mittag essen">
 														<p:dataTable id="childTableEating" var="child"
-															value="#{childController.children}"
+															value="#{childController.getChildrenByLunchToday()}">
 														emptyMessage="Es sind heute keine Kinder für das Essen angemeldet.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />

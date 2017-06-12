@@ -312,8 +312,8 @@ public class Child implements Persistable<Long> {
                 "Birthday: " + birthday + "\n" +
                 "Gender: " + gender + "\n" +
                 "Religion: " + religion + "\n" +
-                "Parent1: " + parent1 + "\n" +
-                "Parent2: " + parent2 + "\n" +
+                "Parent1: " + parent1.getFirstName() + " " + parent1.getLastName() + "\n" +
+                "Parent2: " + parent2.getFirstName() + " " + parent2.getLastName() + "\n" +
                 "Custody: " + custody + "\n" +
                 "Siblings: " + siblings + "\n" +
                 "Allergies: " + allergies + "\n" +
