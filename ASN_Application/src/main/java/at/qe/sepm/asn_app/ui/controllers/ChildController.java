@@ -145,7 +145,7 @@ public class ChildController {
 	}
 
 	public void doSaveChild(){
-		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
+		if(StringUtils.isNumeric(child.getEmergencyNumber())){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
 		}else{
 			try{
