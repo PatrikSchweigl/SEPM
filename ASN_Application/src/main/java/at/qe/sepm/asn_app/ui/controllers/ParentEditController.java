@@ -63,7 +63,7 @@ public class ParentEditController {
                                 "Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
                                 "Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
                                 "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                                "Viel Spaß wünschen das Kinderkrippen-Team!");
+                                "Viel Spaß wünscht das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('parentEditDialog').hide()");
             } catch (TransactionSystemException ex) {
@@ -88,7 +88,7 @@ public class ParentEditController {
                         "Ihr Passwort: passwd" +
                         "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
                         "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                        "Viel Spaß wünschen das Kinderkrippen-Team!");
+                        "Viel Spaß wünscht das Kinderkrippen-Team!");
         parentService.resetPassword(parent);
     }
 
