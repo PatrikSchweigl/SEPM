@@ -41,7 +41,6 @@ public class EmployeeController {
     private MailService mailService;
     private Collection<Employee> employees;
     private Employee employee;
-    private Employee employeeEdit;
     private String password;
     @Autowired
 	private UserRepository userRepository;
@@ -76,7 +75,7 @@ public class EmployeeController {
     }
 
     @PostConstruct
-    private void initList(){
+    public void initList(){
         setEmployees(employeeService.getAllEmployees());
     }
 
@@ -107,7 +106,7 @@ public class EmployeeController {
                                 "Ihr Passwort: passwd" +
                                 "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
                                 "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                                "Viel Spaß wünschen das Kinderkrippen-Team!");
+                                "Viel Spaß wünscht das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('employeeAddDialog').hide()");
             } catch (TransactionSystemException ex) {
@@ -119,76 +118,6 @@ public class EmployeeController {
         }
     }
 
-    public Employee getEmployeeEdit() {
-        return employeeEdit;
-    }
-
-    public void setEmployeeEdit(Employee employeeEdit) {
-        this.employeeEdit = employeeEdit;
-        doReloadEmployeeEdit();
-    }
-
-    /**
-     * Needed for JUnit tests
-     * @param employeeEdit
-     */
-    public void setEmployeeEdit2(Employee employeeEdit) {
-        this.employeeEdit = employeeEdit;
-    }
-
-    public void doChangePassword(String password){
-    	employeeService.changePassword(password);
-    }
-
-	public UserData getAuthenticatedUser() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		return userRepository.findFirstByUsername(auth.getName());
-	}
-
-
-    public void doReloadEmployeeEdit() {
-        employeeEdit = employeeService.loadEmployee(employeeEdit.getUsername());
-    }
-
-    public void doSaveEmployeeEdit(){
-        if (!StringUtils.isNumeric(employeeEdit.getPostcode())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
-        } else if (!StringUtils.isNumeric(employeeEdit.getPhoneNumber())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
-        } else if (!employeeEdit.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
-        } else{
-                try {
-                    System.err.println(employeeEdit.toString());
-                    employeeEdit = employeeService.saveEmployee(employeeEdit);
-                    mailService.sendEmail(employeeEdit.getEmail(), "Care4Fun-App - Änderung Benutzerdaten",
-                            "Guten Tag " + employeeEdit.getFirstName() + " " + employeeEdit.getLastName() + "!\n\n" +
-                                    "Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
-                                    "Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
-                                    "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                                    "Viel Spaß wünschen das Kinderkrippen-Team!");
-                    RequestContext context = RequestContext.getCurrentInstance();
-                    context.execute("PF('employeeEditDialog').hide()");
-                } catch (TransactionSystemException ex) {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
-                }
-                employeeEdit = null;
-                initNewEmployee();
-                initList();
-        }
-    }
-
-    public void doDeleteEmployee() {
-        employeeService.deleteEmployee(employeeEdit);
-        employeeEdit = null;
-        initList();
-    }
-
-    public void doResetPassword(){
-        employeeService.resetPassword(employeeEdit);
-    }
-    
 	public void setPassword(String password){
 		this.password = password;
 	}

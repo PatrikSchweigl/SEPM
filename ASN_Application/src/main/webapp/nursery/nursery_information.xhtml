@@ -59,7 +59,7 @@
 
 
 
-                                <p:dialog header="Allgemeine Information erstellen" id="nurseryInfo"
+                                <p:dialog header="Allgemeine Information erstellen" id="nurseryInfo" closeOnEscape="true"
                                           widgetVar="nurseryInformationDialog"
                                           modal="true" showEffect="fade"
                                           hideEffect="fade" resizable="false">
@@ -76,7 +76,8 @@
                                                             value="#{nurseryInformationController.nurseryInformation.originDate}"
                                                             required="true"
                                                             requiredMessage="Datum erforderlich!"
-                                                            timeZone="Europe/Vienna"/>
+                                                            timeZone="Europe/Vienna"
+                                                locale="de"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="1">
@@ -89,14 +90,16 @@
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
                                                             stepMinute="15"
                                                             required="true"
-                                                            requiredMessage="Bring-Von-Zeitpunkt erforderlich!"/>
+                                                            requiredMessage="Bring-Von-Zeitpunkt erforderlich!"
+                                                            locale="de"/>
                                                 <h:outputLabel for="bringTo" value="bis: "/>
                                                 <p:calendar id="bringTo"
                                                             value="#{nurseryInformationController.nurseryInformation.bringEnd}"
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
                                                             stepMinute="15"
                                                             required="true"
-                                                            requiredMessage="Bring-Bis-Zeitpunkt erforderlich!"/>
+                                                            requiredMessage="Bring-Bis-Zeitpunkt erforderlich!"
+                                                            locale="de"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="1">
@@ -109,14 +112,16 @@
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
                                                             stepMinute="15"
                                                             required="true"
-                                                            requiredMessage="Abhol-Von-Zeitpunkt erforderlich!"/>
+                                                            requiredMessage="Abhol-Von-Zeitpunkt erforderlich!"
+                                                            locale="de"/>
                                                 <h:outputLabel for="pickUpTo" value="bis: "/>
                                                 <p:calendar id="pickUpTo"
                                                             value="#{nurseryInformationController.nurseryInformation.pickUpEnd}"
                                                             pattern="HH:mm" timeOnly="true" timeZone="Europe/Vienna"
                                                             stepMinute="15"
                                                             required="true"
-                                                            requiredMessage="Abhol-Bis-Zeitpunkt erforderlich!"/>
+                                                            requiredMessage="Abhol-Bis-Zeitpunkt erforderlich!"
+                                                            locale="de"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="3">

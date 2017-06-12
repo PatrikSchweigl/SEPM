@@ -85,6 +85,8 @@ public class ChildController {
 		}
 		return ret;
 	}
+
+
 	@PostConstruct
 	public void initList(){
 		children = childService.getAllChildren();
@@ -169,7 +171,7 @@ public class ChildController {
 			childEdit.addAllergy(allergy);
 		if(intolerance.compareTo("") != 0)
 			childEdit.addFoodIntolerance(intolerance);
-		if(StringUtils.isNumeric(child.getEmergencyNumber())){
+		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
 		}else {
 			try {
@@ -186,12 +188,12 @@ public class ChildController {
 
 	public void doDeleteChild() {
 		Parent parent = childEdit.getPrimaryParent();
-		if(childService.getChildrenByParentUsername(parent.getUsername()).size() <= 1){
-			parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
-		}
 		this.childService.deleteChild(childEdit);
 		childEdit = null;
 		children = childService.getAllChildren();
+		if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
+			parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
+		}
 		parentController.initList();
 	}
 	public void doReloadChild(){

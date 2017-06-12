@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.models.referencePerson;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +40,12 @@ public class Caregiver implements Persistable<Long>{
     private String imgName;
     @NotNull
     private String phoneNumber;
+    @NotNull
+    @ColumnDefault("false")
     private boolean eligible;
-    private String childname;       //should be a child object
+    @NotNull
+    @ManyToOne(optional = false)
+    private Child child;
 
 
 
@@ -53,7 +58,6 @@ public class Caregiver implements Persistable<Long>{
         this.imgName = imgName;
         this.phoneNumber = phoneNumber;
         eligible = false;
-
     }
 
 
@@ -149,13 +153,17 @@ public class Caregiver implements Persistable<Long>{
 	public void setEligible(boolean eligible) {
 		this.eligible = eligible;
 	}
-	
 
-	public String getChildname() {
-		return childname;
-	}
 
-	public void setChildname(String childname) {
-		this.childname = childname;
-	}
+    public boolean isEligible() {
+        return eligible;
+    }
+
+    public Child getChild() {
+        return child;
+    }
+
+    public void setChild(Child child) {
+        this.child = child;
+    }
 }

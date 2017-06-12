@@ -26,15 +26,19 @@ import java.util.Date;
 @Component
 @Scope("application")
 public class CaregiverService {
-    @Autowired CaregiverRepository caregiverRepository;
-    @Autowired AuditLogRepository auditLogRepository;
+
+    @Autowired
+    private CaregiverRepository caregiverRepository;
+
+    @Autowired
+    private AuditLogRepository auditLogRepository;
 
 
     public Caregiver saveCaregiver(Caregiver caregiver) {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUserName(), "SAVED CARE: " + caregiver.getFullName(), new Date());
+            AuditLog log = new AuditLog(getAuthenticatedUserName(), "SAVED CAREGIVER: " + caregiver.getFullName(), new Date());
             auditLogRepository.save(log);
         }
         return caregiverRepository.save(caregiver);
@@ -48,7 +52,7 @@ public class CaregiverService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUserName(), "DELETED CARE: " + caregiver.getFullName(), new Date());
+            AuditLog log = new AuditLog(getAuthenticatedUserName(), "DELETED CAREGIVER: " + caregiver.getFullName(), new Date());
             auditLogRepository.save(log);
         }
         caregiverRepository.delete(caregiver);

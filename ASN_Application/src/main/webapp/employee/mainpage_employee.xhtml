@@ -55,7 +55,8 @@
 												<p:accordionPanel multiple="true">
 													<p:tab title="Anwesende Kinder">
 														<p:dataTable id="childTable" var="reg"
-															value="#{registrationController.getRegistrationsByDateToday()}">
+															value="#{registrationController.getRegistrationsByDateToday()}"
+														emptyMessage="Es sind heute keine Kinder anwesend.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{reg.child.firstName}" />
 															</p:column>
@@ -72,6 +73,7 @@
 													<p:tab title="Kinder, die heute zu Mittag essen">
 														<p:dataTable id="childTableEating" var="child"
 															value="#{childController.getChildrenByLunchToday()}">
+														emptyMessage="Es sind heute keine Kinder für das Essen angemeldet.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>
@@ -84,7 +86,8 @@
 													</p:tab>
 													<p:tab title="Bestätigungen">
 														<p:dataTable id="anouncement" var="child"
-															value="#{caregiverController.getAllCaregiversByEligibleFalse()}">
+															value="#{caregiverController.getAllCaregiversByEligibleFalse()}"
+														emptyMessage="Es sind keine Anfragen vorhanden.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>

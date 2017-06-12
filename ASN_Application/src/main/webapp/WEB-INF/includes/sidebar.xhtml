@@ -22,7 +22,7 @@
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
 							<li class="treeview"><a
-								href="/employee/mainpage_employee.xhtml"> <i
+								href="/parent/mainpage_active_parent.xhtml"> <i
 									class="fa fa-home fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
@@ -65,7 +65,7 @@
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a
-								href="/general/picturegalery_employee.xhtml"> <i
+								href="/general/picturegalery.xhtml"> <i
 									class="fa fa-picture-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
 							</a></li>
@@ -95,7 +95,7 @@
 						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
-							<li class="treeview"><a href="/admin/logpage_admin.xhtml">
+							<li class="treeview"><a href="/general/logpage_admin.xhtml">
 									<i class="fa fa-file-archive-o fa-3x"></i> <span
 									style="padding-left: 40px; font-size: 25px">Logdatei</span>
 							</a></li>

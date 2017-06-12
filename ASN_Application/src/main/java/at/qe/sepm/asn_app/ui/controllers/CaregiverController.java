@@ -30,7 +30,7 @@ public class CaregiverController {
     private ChildService childService;
     private Caregiver caregiver;
     private Caregiver caregiverEdit;
-    private Long childId;
+    private String childId;
 
     private Collection<Caregiver> caregivers;
 
@@ -82,14 +82,10 @@ public class CaregiverController {
 
 
     //public void doSaveCaregiver(){
-    public Caregiver doSaveCaregiver(){
+    public void doSaveCaregiver(){
         caregiver = caregiverService.saveCaregiver(caregiver);
-        String name = childService.addCaregiver(caregiver);
-        caregiver.setChildname(name);
-        Caregiver caregiverReturn = caregiverService.saveCaregiver(caregiver);
-        caregiver = null;
+        initList();
         initNewCaregiver();
-        return caregiverReturn;
     }
 
 
@@ -130,13 +126,11 @@ public class CaregiverController {
         caregiverEdit = null;
     }
 
-	public Long getChildId() {
-		return childId;
-	}
+    public String getChildId() {
+        return childId;
+    }
 
-	public void setChildId(Long childId) {
-		this.childId = childId;
-	}
-
-
+    public void setChildId(String childId) {
+        this.childId = childId;
+    }
 }

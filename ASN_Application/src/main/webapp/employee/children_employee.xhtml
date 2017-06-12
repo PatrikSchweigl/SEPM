@@ -19,7 +19,7 @@
 											value="Kind hinzufügen" style="align-items:right;"></p:commandButton>
 									</div>
 									<h:form id="childForm">
-								
+
 										<p:dataTable id="childTable" var="child"
 											widgetVar="childTable" value="#{childController.children}"
 											paginator="true" rows="10" paginatorPosition="bottom"
@@ -29,7 +29,7 @@
 											<f:facet name="header">
 												<p:outputPanel>
 													<h:outputText value="Suche " />
-													<p:inputText id="globalFilterChildren"
+													<p:inputText id="globalFilter"
 														onkeyup="PF('childTable').filter()" style="width:150px"
 														placeholder="Suchwort eingeben" />
 												</p:outputPanel>
@@ -114,7 +114,7 @@
 											<f:facet name="header">
 												<p:outputPanel>
 													<h:outputText value="Suche " />
-													<p:inputText id="globalFilterCaregivers"
+													<p:inputText id="globalFilter"
 														onkeyup="PF('caregiverTable').filter()"
 														style="width:150px" placeholder="Suchwort eingeben" />
 												</p:outputPanel>
@@ -149,7 +149,7 @@
 										</p:confirmDialog>
 
 										<!--Edit Child Dialog -->
-										<p:dialog header="Kind bearbeiten" id="childEditDialog"
+										<p:dialog header="Kind bearbeiten" id="childEditDialog" 
 											widgetVar="childEditDialog" modal="true" showEffect="fade"
 											hideEffect="fade" resizable="false" closeOnEscape="true">
 											<p:messages id="messagesEdit" autoUpdate="true" />

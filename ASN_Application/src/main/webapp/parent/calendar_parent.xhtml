@@ -169,7 +169,7 @@
 
 											</p:schedule>
 
-											<p:dialog widgetVar="eventDialog" header="Termine"
+											<p:dialog widgetVar="eventDialog" header="Termine" closeOnEscape="true"
 												showEffect="clip" hideEffect="clip">
 												<p:messages showDetail="false" />
 												<h:panelGrid id="eventDetails" columns="2">
@@ -184,7 +184,7 @@
 												</h:panelGrid>
 											</p:dialog>
 
-											<p:dialog widgetVar="eventDateDialog" header="Termine"
+											<p:dialog widgetVar="eventDateDialog" header="Termine" closeOnEscape="true"
 												showEffect="clip" hideEffect="clip">
 												<p:messages showDetail="false" />
 												<h:panelGrid id="eventDateDetails" columns="2">
@@ -236,7 +236,8 @@
 
 														<p:calendar id="too" locale="de"
 															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-															pattern="dd/MM/yyyy HH:mm" />
+															pattern="dd/MM/yyyy HH:mm"
+																	locale="de"/>
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:outputLabel for="advanced" value="Anmerkungen:" />

@@ -127,7 +127,7 @@ public class CaregiverControllerTest {
         // Save a caregiver in the database
         caregiverController.setCaregiver2(caregiver);
         childService.setId(child.getId());
-        caregiver = caregiverController.doSaveCaregiver();
+        caregiverController.doSaveCaregiver();
 
         // Check if the values have changed since the caregiver was saved.
         Caregiver other = caregiverService.loadCaregiver(caregiver.getId());
