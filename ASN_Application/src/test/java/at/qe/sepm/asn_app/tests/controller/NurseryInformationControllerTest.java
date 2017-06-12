@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -43,14 +44,14 @@ public class NurseryInformationControllerTest {
         int originDateMonth = 5;
         int originDateDay = 27;
 
-        Calendar calendar = GregorianCalendar.getInstance();
+        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
 
         calendar.clear();
         calendar.set(2017, 6, 11, 0, 0);
         Date todaysDate = calendar.getTime();
 
         calendar.clear();
-        calendar.set(originDateYear, originDateMonth, originDateDay, 0, 0);
+        calendar.set(originDateYear, originDateMonth, originDateDay);
         Date originDate = calendar.getTime();
 
         calendar.clear();

@@ -66,7 +66,6 @@ public class CommentController{
         message = commentService.loadMessage(message.getId());
     }
 
-    //public void doSaveMessage(){
     public Comment doSaveMessage(){
         if (fileBean.getSelectedPicture() != null) {
             message.setPictureName(fileBean.getSelectedPicture());

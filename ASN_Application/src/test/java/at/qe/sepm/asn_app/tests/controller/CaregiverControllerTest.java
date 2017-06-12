@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.child.Custody;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.models.referencePerson.Relationship;
@@ -20,12 +21,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.faces.context.FacesContext;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -70,23 +73,47 @@ public class CaregiverControllerTest {
         caregiver.setImgName("CaregiverImgName1");
         caregiver.setPhoneNumber("0123456789");
 
+        Set<Task> parentTasks1 = new HashSet<>();
+        Set<Task> parentTasks2 = new HashSet<>();
+
         parent1 = new Parent();
-        parent1.setFirstName("ParentFirstName1");
-        parent1.setLastName("ParentLastName1");
-        parent1.setUsername("ParentUsername1");
-        parent1.setPassword("passwd");
-        parent1.setUserRole(UserRole.PARENT);
-        parent1.setFamilyStatus(FamilyStatus.VERHEIRATET);
         parent1.setBirthday("22/05/1990");
+        parent1.setEmail("ParentEmail1@google.com");
+        parent1.setFamilyStatus(FamilyStatus.VERHEIRATET);
+        parent1.setFirstName("ParentFirstName1");
+        parent1.setImgName("ParentImgName1");
+        parent1.setLastName("ParentLastName1");
+        parent1.setLocation("ParentLocation1");
+        parent1.setNotification(true);
+        parent1.setPassword("passwd");
+        parent1.setPhoneNumber("0123456789");
+        parent1.setPostcode("6020");
+        parent1.setReligion(Religion.CHRISTENTUM);
+        parent1.setStatus(true);
+        parent1.setStreetName("ParentStreetName1");
+        parent1.setTasks(parentTasks1);
+        parent1.setUsername("ParentUsername1");
+        parent1.setUserRole(UserRole.PARENT);
+
 
         parent2 = new Parent();
-        parent2.setFirstName("ParentFirstName2");
-        parent2.setLastName("ParentLastName2");
-        parent2.setUsername("ParentUsername2");
-        parent2.setPassword("passwd");
-        parent2.setUserRole(UserRole.PARENT);
-        parent2.setFamilyStatus(FamilyStatus.VERHEIRATET);
         parent2.setBirthday("07/11/1978");
+        parent2.setEmail("ParentEmail2@google.com");
+        parent2.setFamilyStatus(FamilyStatus.VERHEIRATET);
+        parent2.setFirstName("ParentFirstName2");
+        parent2.setImgName("ParentImgName2");
+        parent2.setLastName("ParentLastName2");
+        parent2.setLocation("ParentLocation2");
+        parent2.setNotification(true);
+        parent2.setPassword("passwd");
+        parent2.setPhoneNumber("0123456789");
+        parent2.setPostcode("6020");
+        parent2.setReligion(Religion.CHRISTENTUM);
+        parent2.setStatus(true);
+        parent2.setStreetName("ParentStreetName2");
+        parent2.setTasks(parentTasks2);
+        parent2.setUsername("ParentUsername2");
+        parent2.setUserRole(UserRole.PARENT);
 
         Set<String> allergies = new HashSet<>();
         Set<String> foodIntolerances = new HashSet<>();
@@ -113,42 +140,51 @@ public class CaregiverControllerTest {
 
     @Test
     public void test1() {
-        // Save the parents in the database.
-        parentController.setParent2(parent1);
-        parentController.doSaveParent();
-        parentController.setParent2(parent2);
-        parentController.doSaveParent();
+        FacesContext context = ContextMocker.mockFacesContext();
+        RequestContext requestContext = ContextMocker.mockRequestContext();
 
-        // Save the child in the database.
-        childController.setChild2(child);
-        childController.setParentUserName(parent1.getUsername());
-        childController.doSaveChild();
+        try {
+            // Save the parents in the database.
+            parentController.setParent2(parent1);
+            parentController.doSaveParent();
+            parentController.setParent2(parent2);
+            parentController.doSaveParent();
 
-        // Save a caregiver in the database
-        caregiverController.setCaregiver2(caregiver);
-        childService.setId(child.getId());
-        caregiverController.doSaveCaregiver();
+            // Save the child in the database.
+            childController.setChild2(child);
+            childController.setParentUserName(parent1.getUsername());
+            child = childController.doSaveChild();
 
-        // Check if the values have changed since the caregiver was saved.
-        Caregiver other = caregiverService.loadCaregiver(caregiver.getId());
-        assertTrue(caregiver.equals(other));
+            // Save a caregiver in the database
+            caregiverController.setCaregiver2(caregiver);
+            childService.setId(child.getId());
+            caregiver = caregiverController.doSaveCaregiver();
 
-        // Delete the parent again.
-        parentEditController.setParent2(parent1);
-        parentEditController.doDeleteParent();
-        parentEditController.setParent2(parent2);
-        parentEditController.doDeleteParent();
+            // Check if the values have changed since the caregiver was saved.
+            Caregiver other = caregiverService.loadCaregiver(caregiver.getId());
+            assertTrue(caregiver.equals(other));
 
-        // Delete the caregiver again
-        caregiverController.setCaregiverEdit2(caregiver);
-        caregiverController.doDeleteCaregiverEdit();
-        other = caregiverService.loadCaregiver(caregiver.getId());
-        assertFalse(caregiver.equals(other));
-        assertNull(other);
+            // Delete the parent again.
+            parentEditController.setParent2(parent1);
+            parentEditController.doDeleteParent();
+            parentEditController.setParent2(parent2);
+            parentEditController.doDeleteParent();
 
-        // Delete the child again.
-        childController.setChildEdit2(child);
-        childController.doDeleteChild();
+            // Delete the caregiver again
+            caregiverController.setCaregiverEdit2(caregiver);
+            caregiverController.doDeleteCaregiverEdit();
+            other = caregiverService.loadCaregiver(caregiver.getId());
+            assertFalse(caregiver.equals(other));
+            assertNull(other);
+
+            // Delete the child again.
+            childController.setChildEdit2(child);
+            childController.doDeleteChild();
+        }
+        finally {
+            context.release();
+            requestContext.release();
+        }
     }
 
 

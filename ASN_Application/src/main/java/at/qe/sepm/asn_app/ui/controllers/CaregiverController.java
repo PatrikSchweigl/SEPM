@@ -30,7 +30,7 @@ public class CaregiverController {
     private ChildService childService;
     private Caregiver caregiver;
     private Caregiver caregiverEdit;
-    private String childId;
+    private Long childId;
 
     private Collection<Caregiver> caregivers;
 
@@ -83,12 +83,11 @@ public class CaregiverController {
 
     //public void doSaveCaregiver(){
     public void doSaveCaregiver(){
+    public Caregiver doSaveCaregiver(){
         caregiver = caregiverService.saveCaregiver(caregiver);
         initList();
         initNewCaregiver();
     }
-
-
 
 
     public Caregiver getCaregiverEdit() {
@@ -101,7 +100,7 @@ public class CaregiverController {
     }
 
     /**
-     * Neede for JUnit tests
+     * Needed for JUnit tests
      */
     public void setCaregiverEdit2(Caregiver caregiver) {
         this.caregiverEdit = caregiver;
@@ -126,11 +125,13 @@ public class CaregiverController {
         caregiverEdit = null;
     }
 
-    public String getChildId() {
-        return childId;
-    }
+	public Long getChildId() {
+		return childId;
+	}
 
-    public void setChildId(String childId) {
-        this.childId = childId;
-    }
+	public void setChildId(Long childId) {
+		this.childId = childId;
+	}
+
+
 }

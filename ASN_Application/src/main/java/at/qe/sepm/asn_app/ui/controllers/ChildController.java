@@ -130,7 +130,9 @@ public class ChildController {
 		this.parentUserName = parentUserName;
 	}
 
-	public void doSaveChild(){
+	public Child doSaveChild(){
+		Child childReturn = null; 	// Needed for JUnit tests
+
 		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
 		}else{
@@ -139,6 +141,7 @@ public class ChildController {
 				Parent parent = parentService.loadParent(parentUserName);
 				parentService.changeStatus(parent, true);	// set parent status to active when child is added
 				child = childService.saveChild(child);
+				childReturn = child;
 				child = null;
 				initNewChild();
 				initList();
@@ -149,7 +152,7 @@ public class ChildController {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
 			}
 		}
-
+		return childReturn;
 	}
 
 	public void doSaveChildEdit() {

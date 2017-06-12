@@ -147,7 +147,7 @@ public class Parent extends UserData {
                 "Postcode: " + getPostcode() + "\n" +
                 "Location: " + getLocation() + "\n" +
                 "StreetName: " + getStreetName() + "\n" +
-                "Children: " + children + "\n" +
+                //"Children: " + children + "\n" +
                 "Tasks: " + tasks + "\n" +
                 "ImgName: " + imgName;
     }
