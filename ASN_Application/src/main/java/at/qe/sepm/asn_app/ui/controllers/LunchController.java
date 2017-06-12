@@ -130,14 +130,10 @@ public class LunchController {
     }
     public void signUp(Date d){
         if(d == null){
-            System.err.println("WAT");
             return;
         }
-        System.err.println("OY WAT IS DES");
         List<Lunch> lunchs = lunchService.getLunchByDate(d);
-        System.err.println("LUNCH" + lunchs + "CHILD" + childId);
         if(lunchs == null || lunchs.size() < 1){
-            System.err.println("Lunch is NULL or LunchSIZE");
             return;
         }
 
@@ -145,7 +141,6 @@ public class LunchController {
         //System.err.println("CHILD -" + c);
         lunchs.get(0).addChild(childId);
         lunchService.saveLunch(lunchs.get(0));
-        System.err.println("ALLES KLAR HERR KOMMISSAR");
     }
     public List<Lunch> findAll(){
         return lunchService.findAll();

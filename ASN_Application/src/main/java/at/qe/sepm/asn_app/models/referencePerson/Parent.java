@@ -134,6 +134,14 @@ public class Parent extends UserData {
         return false;
     }
 
+    public String getChildrenNames(){
+        String s = "";
+        for(Child c: children){
+            s += c.getFirstName() + " " + c.getLastName() + ", ";
+        }
+        return s;
+    }
+
 
     @Override
     public String toString() {
@@ -147,7 +155,7 @@ public class Parent extends UserData {
                 "Postcode: " + getPostcode() + "\n" +
                 "Location: " + getLocation() + "\n" +
                 "StreetName: " + getStreetName() + "\n" +
-                //"Children: " + children + "\n" +
+                "Children: " + getChildrenNames() + "\n" +
                 "Tasks: " + tasks + "\n" +
                 "ImgName: " + imgName;
     }
