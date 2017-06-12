@@ -8,7 +8,7 @@
 	template="/WEB-INF/templates/main.xhtml">
 	<ui:define name="content">
 		<h:body>
-			<ui:fragment rendered="#{sessionInfoBean.loggedIn and !sessionInfoBean.hasRole('PARENT')}">
+			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
 				<body class="theme-blue sidebar-mini sidebar-collapse">
 					<div class="ui-fluid">
 						<div class="wrapper">
