@@ -204,8 +204,13 @@ public class ScheduleView implements Serializable {
 						"Keine Anmeldung in der Vergangenheit möglich", null));
 			} else if (registrationConstraints.registationExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Sie haben für heute schon ein Kind angemeldet", null));
-			} else {
+						"Sie haben für heute ihr Kind schon angemeldet", null));
+			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Sie können kein Kind eintragen", null));
+			}
+			
+			else {
 				registrationService.saveRegistration(reg);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["

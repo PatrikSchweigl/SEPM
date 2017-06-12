@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.models.nursery.Registration;
+import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.services.RegistrationService;
 
 @Component
@@ -17,6 +19,8 @@ public class RegistrationConstraints {
 
 	@Autowired
 	private RegistrationService registrationService;
+	@Autowired
+	private NurseryInformationService nurseryService;
 
 	public boolean registationExists(Registration reg) {
 		Collection<Registration> register = registrationService.getAllRegistrations();
@@ -26,6 +30,20 @@ public class RegistrationConstraints {
 			Date date = r.getDate();
 			System.err.println(date + "  vergleich mit  " + reg.getDate());
 			if (date.compareTo(reg.getDate()) == 0 && reg.getChild().getId() == r.getChild().getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkIfNurseryExists(Registration reg){
+		Collection<NurseryInformation> nurse = nurseryService.getAllInformation();
+		Iterator<NurseryInformation> iterator = nurse.iterator();
+		while (iterator.hasNext()) {
+			NurseryInformation n = iterator.next();
+			Date date = n.getOriginDate();
+			System.err.println(date + "  vergleich mit  " + reg.getDate());
+			if (date.compareTo(reg.getDate()) == 0) {
 				return true;
 			}
 		}
