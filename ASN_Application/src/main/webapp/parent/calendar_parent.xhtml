@@ -200,7 +200,8 @@
 													<p:outputLabel for="meal" value="Essen:" />
 													<h:selectBooleanCheckbox id="meal"
 														disabled="#{scheduleView.child}"
-														value="#{scheduleView.meal}">
+														value="#{scheduleView.meal}"
+														rendered="#{lunchController.hasLunchToday()}">
 														<p:ajax update="eventDateDetails" />
 
 													</h:selectBooleanCheckbox>
@@ -234,7 +235,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 
-														<p:calendar id="too" locale="de"
+														<p:calendar id="too"
 															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
 															pattern="dd/MM/yyyy HH:mm"
 																	locale="de"/>
