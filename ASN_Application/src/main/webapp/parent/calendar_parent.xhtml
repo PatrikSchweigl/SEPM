@@ -25,89 +25,125 @@
 												<h:form>
 													<p:accordionPanel multiple="true"
 														style="padding-left:400px;padding-right:400px">
-														<p:tab
-															title="Mittagsmenü für die aktuelle Woche">
+														<p:tab title="Mittagsmenü für die aktuelle Woche">
 															<h:panelGrid columns="5" layout="grid">
-																<h:outputText value="#{lunchController.getCurrentWeek().get(0).date}"
-																	style="padding-right:60px" >
-																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(0).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
 																</h:outputText>
-																<h:outputText value="#{lunchController.getCurrentWeek().get(1).date}"
-																			  style="padding-right:60px" >
-																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(1).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
 																</h:outputText>
-																<h:outputText value="#{lunchController.getCurrentWeek().get(2).date}"
-																			  style="padding-right:60px" >
-																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(2).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
 																</h:outputText>
-																<h:outputText value="#{lunchController.getCurrentWeek().get(3).date}"
-																			  style="padding-right:60px" >
-																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(3).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
 																</h:outputText>
-																<h:outputText value="#{lunchController.getCurrentWeek().get(4).date}"
-																			  style="padding-right:60px" >
-																	<f:convertDateTime type="date" pattern="dd.MM."/>
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(4).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
 																</h:outputText>
 
 
-																<h:outputText value="#{lunchController.getCurrentWeek().get(0).meal}"
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(0).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(1).meal}"
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(1).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(2).meal}"
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(2).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(3).meal}"
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(3).meal}"
 																	style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(4).meal}" />
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(4).meal}" />
 
-																<h:outputText value="#{lunchController.getCurrentWeek().get(0).cost}€" style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(1).cost}€" style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(2).cost}€" style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(3).cost}€" style="padding-right:60px" />
-																<h:outputText value="#{lunchController.getCurrentWeek().get(4).cost}€" />
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(0).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(1).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(2).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(3).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getCurrentWeek().get(4).cost}€" />
 															</h:panelGrid>
 														</p:tab>
-														<p:tab
-																title="Mittagsmenü für die kommende Woche">
-														<h:panelGrid columns="5" layout="grid">
-															<h:outputText value="#{lunchController.getNextWeek().get(0).date}"
-																		  style="padding-right:60px" >
-																<f:convertDateTime type="date" pattern="dd.MM."/>
-															</h:outputText>
-															<h:outputText value="#{lunchController.getNextWeek().get(1).date}"
-																		  style="padding-right:60px" >
-																<f:convertDateTime type="date" pattern="dd.MM."/>
-															</h:outputText>
-															<h:outputText value="#{lunchController.getNextWeek().get(2).date}"
-																		  style="padding-right:60px" >
-																<f:convertDateTime type="date" pattern="dd.MM."/>
-															</h:outputText>
-															<h:outputText value="#{lunchController.getNextWeek().get(3).date}"
-																		  style="padding-right:60px" >
-																<f:convertDateTime type="date" pattern="dd.MM."/>
-															</h:outputText>
-															<h:outputText value="#{lunchController.getNextWeek().get(4).date}"
-																		  style="padding-right:60px" >
-																<f:convertDateTime type="date" pattern="dd.MM."/>
-															</h:outputText>
+														<p:tab title="Mittagsmenü für die kommende Woche">
+															<h:panelGrid columns="5" layout="grid">
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(0).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
+																</h:outputText>
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(1).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
+																</h:outputText>
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(2).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
+																</h:outputText>
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(3).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
+																</h:outputText>
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(4).date}"
+																	style="padding-right:60px">
+																	<f:convertDateTime type="date" pattern="dd.MM." />
+																</h:outputText>
 
 
-															<h:outputText value="#{lunchController.getNextWeek().get(0).meal}"
-																		  style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(1).meal}"
-																		  style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(2).meal}"
-																		  style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(3).meal}"
-																		  style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(4).meal}" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(0).meal}"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(1).meal}"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(2).meal}"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(3).meal}"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(4).meal}" />
 
-															<h:outputText value="#{lunchController.getNextWeek().get(0).cost}€" style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(1).cost}€" style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(2).cost}€" style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(3).cost}€" style="padding-right:60px" />
-															<h:outputText value="#{lunchController.getNextWeek().get(4).cost}€" />
-														</h:panelGrid>
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(0).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(1).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(2).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(3).cost}€"
+																	style="padding-right:60px" />
+																<h:outputText
+																	value="#{lunchController.getNextWeek().get(4).cost}€" />
+															</h:panelGrid>
 														</p:tab>
 													</p:accordionPanel>
 												</h:form>
@@ -118,9 +154,10 @@
 											<p:schedule locale="de" aspectRatio="1.5"
 												style="padding-left:200px; padding-right: 200px;"
 												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
-												centerHeaderTemplate="month, agendaWeek, agendaDay" showWeekends="false"
-												id="schedule" value="#{scheduleView.eventModel}"
-												widgetVar="myschedule" timeZone="GMT+2">
+												centerHeaderTemplate="month, agendaWeek, agendaDay"
+												showWeekends="false" id="schedule"
+												value="#{scheduleView.eventModel}" widgetVar="myschedule"
+												timeZone="GMT+2">
 
 												<p:ajax event="dateSelect" update="eventDateDetails"
 													listener="#{scheduleView.onDateSelect}"
@@ -197,7 +234,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 
-														<p:calendar id="too"
+														<p:calendar id="too" locale="de"
 															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
 															pattern="dd/MM/yyyy HH:mm" />
 													</ui:fragment>
@@ -221,8 +258,8 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:selectOneListbox style="width: 210px;" id="mealBox"
-															value="#{lunchController.childId}" var="p"
-															filter="true" filterMatchMode="contains">
+															value="#{lunchController.childId}" var="p" filter="true"
+															filterMatchMode="contains">
 															<f:selectItems
 																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
 																var="child" itemLabel="#{child.firstName}"
@@ -242,52 +279,12 @@
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
 															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}"
-															oncomplete="PF('eventDateDialog').hide()"/>
+															oncomplete="PF('eventDateDialog').hide()" />
 
 													</ui:fragment>
 												</h:panelGrid>
 											</p:dialog>
 										</h:form>
-
-                                    <script type="text/javascript">
-                                        PrimeFaces.locales['de'] = {
-                                            closeText: 'Schliessen',
-                                            prevText: 'Letzte',
-                                            nextText: 'Nächste',
-                                            currentText: 'Heute',
-                                            monthNames: ['Januar',
-                                                'Februar', 'März',
-                                                'April', 'Mai', 'Juni',
-                                                'Juli', 'August',
-                                                'September', 'Oktober',
-                                                'November', 'Dezember'],
-                                            monthNamesShort: ['Jan',
-                                                'Feb', 'Mar', 'Apr',
-                                                'Mai', 'Jun', 'Jul',
-                                                'Aug', 'Sep', 'Okt',
-                                                'Nov', 'Dez'],
-                                            dayNames: ['Sonntag','Montag',
-                                                'Dienstag', 'Mittwoch',
-                                                'Donnerstag',
-                                                'Freitag', 'Samstag'
-                                                ],
-                                            dayNamesShort: ['So','Mo', 'Di',
-                                                'Mi', 'Do', 'Fr', 'Sa'
-                                                ],
-                                            dayNamesMin: ['So','Mo', 'Di',
-                                                'Mi', 'Do', 'Fr', 'Sa'
-                                                ],
-                                            firstDay: 1,
-                                            weekHeader: 'KW',
-                                            isRTL: false,
-                                            showMonthAfterYear: false,
-                                            yearSuffix: '',
-                                            month: 'Monat',
-                                            week: 'Woche',
-                                            day: 'Tag',
-                                            allDayText: 'Ganzer Tag'
-                                        };
-                                    </script>
 									</div>
 								</div>
 								<!-- /.box -->
