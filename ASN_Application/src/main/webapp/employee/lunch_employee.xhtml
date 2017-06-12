@@ -83,7 +83,7 @@
 																value="#{lunchController.lunch.cost}" />
 															<p:outputLabel for="date" value="Datum: " />
 															<p:calendar id="date" pattern="dd/MM/yyyy"
-																value="#{lunchController.lunch.date}"
+																value="#{lunchController.lunch.date}" beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
 																		locale="de"/>
 
 														</h:panelGrid>
@@ -112,7 +112,7 @@
 															<p:inputText id="costEdit"
 																value="#{lunchController.lunchEdit.cost}" />
 															<p:outputLabel for="dateEdit" value="Datum: " />
-															<p:calendar pattern="dd/MM/yyyy" id="dateEdit"
+															<p:calendar pattern="dd/MM/yyyy" id="dateEdit"  beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
 																value="#{lunchController.lunchEdit.date}"
 																		locale="de"/>
 

@@ -19,7 +19,8 @@
 								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
-										<div align="right" style="margin-bottom: 10px; margin-right:200px">
+										<div align="right"
+											style="margin-bottom: 10px; margin-right: 200px">
 											<h:form>
 												<p:button
 													outcome="/employee/calendarDetailWeek_employee.xhtml"
@@ -44,9 +45,10 @@
 											<p:schedule locale="de" aspectRatio="1.5"
 												style="padding-left:200px; padding-right: 200px;"
 												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
-												centerHeaderTemplate="month, agendaWeek, agendaDay" showWeekends="false"
-												id="schedule" value="#{scheduleView.eventModel}"
-												widgetVar="myschedule" timeZone="GMT+2">
+												centerHeaderTemplate="month, agendaWeek, agendaDay"
+												showWeekends="false" id="schedule"
+												value="#{scheduleView.eventModel}" widgetVar="myschedule"
+												timeZone="GMT+2">
 
 												<p:ajax event="dateSelect"
 													listener="#{scheduleView.onDateSelect}"
@@ -63,8 +65,8 @@
 
 											</p:schedule>
 
-											<p:dialog widgetVar="eventDialog" header="Termine" closeOnEscape="true"
-												showEffect="clip" hideEffect="clip">
+											<p:dialog widgetVar="eventDialog" header="Termine"
+												closeOnEscape="true" showEffect="clip" hideEffect="clip">
 												<p:messages showDetail="false" />
 												<h:panelGrid id="eventDetails" columns="2">
 													<p:outputLabel for="title" value="Titel:" />
@@ -72,14 +74,15 @@
 														value="#{scheduleView.event.description}" />
 
 													<p:outputLabel for="from" value="Beginn:" />
-													<p:calendar id="from"
+													<p:calendar id="from" beforeShowDay="noWeekend"
+														mindate="#{scheduleView.today}"
 														value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy HH:mm" locale="de"/>
+														pattern="dd/MM/yyyy HH:mm" locale="de" />
 
 													<p:outputLabel for="to" value="Ende:" />
 													<p:calendar id="to" value="#{scheduleView.event.endDate}"
-														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"
-																locale="de"/>
+														beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
+														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" locale="de" />
 
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
@@ -155,7 +158,8 @@
 													-->
 													<p:button
 														outcome="/employee/calendarDetailDaily_employee.xhtml"
-														value="Tagesplaner" style="align-items:right;"><f:param name="day" value="#{scheduleView.event.endDate}" />
+														value="Tagesplaner" style="align-items:right;">
+														<f:param name="day" value="#{scheduleView.event.endDate}" />
 													</p:button>
 												</h:panelGrid>
 

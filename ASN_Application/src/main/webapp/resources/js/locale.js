@@ -27,3 +27,9 @@ PrimeFaces.locales['de'] = {
 	day : 'Tag',
 	allDayText : 'Ganzer Tag'
 };
+
+function noWeekend(date)
+{
+  var day = date.getDay();
+  return [day != 0 && day != 6, '']
+}

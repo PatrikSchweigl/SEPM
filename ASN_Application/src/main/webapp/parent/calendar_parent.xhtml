@@ -235,7 +235,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 
-														<p:calendar id="too"
+														<p:calendar id="too" beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
 															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
 															pattern="dd/MM/yyyy HH:mm"
 																	locale="de"/>
