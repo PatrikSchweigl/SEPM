@@ -45,6 +45,7 @@ public class NurseryInformationController {
 	}
 
 	public Collection<NurseryInformation> getNurseryInformations() {
+		initList();
 		return nurseryInformations;
 	}
 
