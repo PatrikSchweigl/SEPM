@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 
+import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.ParentService;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.TransactionSystemException;
@@ -40,6 +39,8 @@ public class ChildController {
 	private ParentController parentController;
 	@Autowired
 	private CaregiverService caregiverService;
+    @Autowired
+    private LunchService lunchService;
 	private Child child;
 	private Child childEdit;
 	private Caregiver caregiver;
@@ -68,6 +69,15 @@ public class ChildController {
     public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
     */
 
+    public Collection<Child> getChildrenByLunchToday(){
+        Date today = new Date();
+        List<Lunch> lunchs = lunchService.getLunchByDate(today);
+        if(lunchs.size() < 1){
+            return null;
+        }
+        Lunch lunch = lunchs.get(0);
+        return getChildrenByLunch(lunch);
+    }
 	public Collection<Child> getChildrenByLunch(Lunch lunch){
 		Set<Child> ret = new HashSet<Child>();
 		for(Long id : lunch.getChildrenIds()){

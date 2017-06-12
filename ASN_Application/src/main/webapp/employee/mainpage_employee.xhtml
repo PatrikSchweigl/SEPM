@@ -71,7 +71,7 @@
 													</p:tab>
 													<p:tab title="Kinder, die heute zu Mittag essen">
 														<p:dataTable id="childTableEating" var="child"
-															value="#{childController.children}">
+															value="#{childController.getChildrenByLunchToday()}">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>
