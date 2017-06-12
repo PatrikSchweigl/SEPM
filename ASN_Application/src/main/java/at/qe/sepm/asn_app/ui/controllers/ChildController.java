@@ -172,12 +172,12 @@ public class ChildController {
 
 	public void doDeleteChild() {
 		Parent parent = childEdit.getPrimaryParent();
-		if(childService.getChildrenByParentUsername(parent.getUsername()).size() <= 1){
-			parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
-		}
 		this.childService.deleteChild(childEdit);
 		childEdit = null;
 		children = childService.getAllChildren();
+		if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
+			parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
+		}
 		parentController.initList();
 	}
 	public void doReloadChild(){
