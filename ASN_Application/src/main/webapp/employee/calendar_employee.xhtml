@@ -67,7 +67,7 @@
 
 											<p:dialog widgetVar="eventDialog" header="Termine"
 												closeOnEscape="true" showEffect="clip" hideEffect="clip">
-												<p:messages showDetail="false" />
+												<p:messages id="messagesInfo" autoUpdate="true" />
 												<h:panelGrid id="eventDetails" columns="2">
 													<p:outputLabel for="title" value="Titel:" />
 													<p:inputText id="title"
@@ -134,28 +134,10 @@
 														</p:selectOneListbox>
 													</ui:fragment>
 													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEvent}"
-														oncomplete="PF('eventDialog').hide()" update="@all" />
+														action="#{scheduleView.deleteEvent}"/>
 													<p:commandButton id="addButton" value="Speichern"
 														actionListener="#{scheduleView.addEvent}"
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()"
-														update="@all" />
-													<!--  <p:separator />
-													<p:separator />
-													<p:outputLabel for="meal" value="Gericht: " />
-													<p:inputText id="meal"
-														value="#{lunchController.lunch.meal}" />
-													<p:outputLabel for="mealDate" value="Datum: " />
-													<p:calendar id="mealDate"
-														value="#{lunchController.lunch.date}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy" locale="de">
-														<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-													</p:calendar>
-													<p:commandButton id="lunchButton" value="Essen"
-														action=""
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()" />
-													
-													-->
+														/>
 													<p:button
 														outcome="/employee/calendarDetailDaily_employee.xhtml"
 														value="Tagesplaner" style="align-items:right;">

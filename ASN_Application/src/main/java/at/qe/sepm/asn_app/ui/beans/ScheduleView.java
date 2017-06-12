@@ -113,11 +113,15 @@ public class ScheduleView implements Serializable {
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "important");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+				ev = new DefaultScheduleEvent("Aufgabe für: " + t.getReceiver().getFirstName() + " "
+						+ t.getReceiver().getLastName() + "\n" + t.getDescription(), t.getBeginDate(),
+						t.getEndingDate(), "employee");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.PARENT
 					&& t.getSender().getUserRole() == UserRole.EMPLOYEE
 					&& (t.getEndingDate().compareTo(new Date()) > 0))
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+				ev = new DefaultScheduleEvent("Aufgabe von: " + t.getSender().getFirstName() + " "
+						+ t.getSender().getLastName() + "\n" + t.getDescription(), t.getBeginDate(), t.getEndingDate(),
+						"employee");
 			else if (t.getEndingDate().compareTo(new Date()) > 0)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
 			else
@@ -177,11 +181,16 @@ public class ScheduleView implements Serializable {
 
 	public void deleteEvent() {
 		Task task = taskService.getTaskByStringId(event.getId());
-		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0)
+		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0){
 			taskService.deleteTaskById(event.getId());
-		else
-			FacesContext.getCurrentInstance().addMessage("scheduleForm",
-					new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));
+			RequestContext context = RequestContext.getCurrentInstance();
+			context.execute("PF('eventDialog').hide()");
+		}
+		
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
+		}
 	}
 
 	public void addRegistration() {
@@ -205,8 +214,8 @@ public class ScheduleView implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie haben für heute ihr Kind schon angemeldet", null));
 			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Sie können kein Kind eintragen", null));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
 			} else if (registrationConstraints.checkTimeConstraints(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie können kein Kind um diese Uhrzeit eintragen", null));
