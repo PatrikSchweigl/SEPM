@@ -15,7 +15,7 @@ PrimeFaces.locales['de'] = {
 	isRTL : false,
 	showMonthAfterYear : false,
 	yearSuffix : '',
-	timeOnlyTitle : 'Nur Zeit',
+	timeOnlyTitle : 'Wähle Zeit',
 	timeText : 'Zeit',
 	hourText : 'Stunde',
 	minuteText : 'Minute',

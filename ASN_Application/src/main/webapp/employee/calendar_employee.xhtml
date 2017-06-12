@@ -74,11 +74,12 @@
 													<p:outputLabel for="from" value="Beginn:" />
 													<p:calendar id="from"
 														value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy HH:mm" />
+														pattern="dd/MM/yyyy HH:mm" locale="de"/>
 
 													<p:outputLabel for="to" value="Ende:" />
 													<p:calendar id="to" value="#{scheduleView.event.endDate}"
-														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"
+																locale="de"/>
 
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
@@ -144,7 +145,7 @@
 													<p:outputLabel for="mealDate" value="Datum: " />
 													<p:calendar id="mealDate"
 														value="#{lunchController.lunch.date}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy">
+														pattern="dd/MM/yyyy" locale="de">
 														<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
 													</p:calendar>
 													<p:commandButton id="lunchButton" value="Essen"
@@ -161,45 +162,7 @@
 											</p:dialog>
 										</h:form>
 
-										<script type="text/javascript">
-											PrimeFaces.locales['de'] = {
-												closeText : 'Schliessen',
-												prevText : 'Letzte',
-												nextText : 'Nächste',
-												currentText : 'Heute',
-												monthNames : [ 'Januar',
-														'Februar', 'März',
-														'April', 'Mai', 'Juni',
-														'Juli', 'August',
-														'September', 'Oktober',
-														'November', 'Dezember' ],
-												monthNamesShort : [ 'Jan',
-														'Feb', 'Mar', 'Apr',
-														'Mai', 'Jun', 'Jul',
-														'Aug', 'Sep', 'Okt',
-														'Nov', 'Dez' ],
-												dayNames : [ 'Sonntag',
-														'Montag', 'Dienstag',
-														'Mittwoch',
-														'Donnerstag',
-														'Freitag', 'Samstag' ],
-												dayNamesShort : [ 'So', 'Mo',
-														'Di', 'Mi', 'Do', 'Fr',
-														'Sa' ],
-												dayNamesMin : [ 'So', 'Mo',
-														'Di', 'Mi', 'Do', 'Fr',
-														'Sa' ],
-												firstDay : 1,
-												weekHeader : 'KW',
-												isRTL : false,
-												showMonthAfterYear : false,
-												yearSuffix : '',
-												month : 'Monat',
-												week : 'Woche',
-												day : 'Tag',
-												allDayText : 'Ganzer Tag'
-											};
-										</script>
+
 									</div>
 								</div>
 								<!-- /.box -->

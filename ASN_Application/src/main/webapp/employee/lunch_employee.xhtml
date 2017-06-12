@@ -83,7 +83,8 @@
 																value="#{lunchController.lunch.cost}" />
 															<p:outputLabel for="date" value="Datum: " />
 															<p:calendar id="date" pattern="dd/MM/yyyy"
-																value="#{lunchController.lunch.date}" />
+																value="#{lunchController.lunch.date}"
+																		locale="de"/>
 
 														</h:panelGrid>
 														<p:separator />
@@ -112,7 +113,8 @@
 																value="#{lunchController.lunchEdit.cost}" />
 															<p:outputLabel for="dateEdit" value="Datum: " />
 															<p:calendar pattern="dd/MM/yyyy" id="dateEdit"
-																value="#{lunchController.lunchEdit.date}" />
+																value="#{lunchController.lunchEdit.date}"
+																		locale="de"/>
 
 														</h:panelGrid>
 														<p:separator />

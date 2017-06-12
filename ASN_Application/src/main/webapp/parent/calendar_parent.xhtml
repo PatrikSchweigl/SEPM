@@ -236,7 +236,8 @@
 
 														<p:calendar id="too" locale="de"
 															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-															pattern="dd/MM/yyyy HH:mm" />
+															pattern="dd/MM/yyyy HH:mm"
+																	locale="de"/>
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:outputLabel for="advanced" value="Anmerkungen:" />

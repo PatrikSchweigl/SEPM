@@ -71,6 +71,8 @@ public class ChildController {
 		}
 		return ret;
 	}
+
+
 	@PostConstruct
 	public void initList(){
 		children = childService.getAllChildren();
@@ -155,7 +157,7 @@ public class ChildController {
 			childEdit.addAllergy(allergy);
 		if(intolerance.compareTo("") != 0)
 			childEdit.addFoodIntolerance(intolerance);
-		if(StringUtils.isNumeric(child.getEmergencyNumber())){
+		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
 		}else {
 			try {

@@ -25,7 +25,7 @@
                                         <f:facet name="header">
                                             <p:outputPanel>
                                                 <h:outputText value="Suche "/>
-                                                <p:inputText id="globalFilter"
+                                                <p:inputText id="globalFilterChild"
                                                              onkeyup="PF('childTable').filter()" style="width:150px"
                                                              placeholder="Suchwort eingeben"/>
                                             </p:outputPanel>
@@ -226,24 +226,17 @@
                                         <p:messages id="messages" autoUpdate="true"/>
                                         <p:outputPanel id="caregiverDataAdd">
                                             <h:panelGrid columns="2">
-                                                <p:outputLabel for="child" value="Kind"/>
-                                                <p:selectOneListbox id="child" value="#{childService.id}"
-                                                                    var="p" filter="true" filterMatchMode="contains"
-                                                                    required="true"
-                                                                    requiredMessage="Kein Kind angegeben!">
-                                                    <f:selectItems
-                                                            value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserData().getUsername())}"
-                                                            var="child" itemLabel="#{child.id}"
-                                                            itemValue="#{child.id}"/>
+                                                <p:outputLabel for="childList" value="Kind: "/>
+                                                <p:selectOneListbox id="childList" value="#{caregiverController.caregiver.child}" converter="childConverter"  var="t" filter="true" filterMatchMode="contains">
+                                                    <f:selectItems value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserData.username)}" var="child" itemLabel="#{child.firstName}" itemValue="#{child}" />
 
                                                     <p:column>
                                                         <p:graphicImage name="pictures/tiger.jpg" width="32"
-                                                                        height="32"/>
+                                                                        height="32" />
                                                     </p:column>
 
                                                     <p:column>
-                                                        <h:outputText
-                                                                value="#{childService.loadChild(p).firstName} #{childService.loadChild(p).lastName}"/>
+                                                        <h:outputText value="#{t.firstName}" />
                                                     </p:column>
                                                 </p:selectOneListbox>
                                                 <p:outputLabel for="firstName" value="Vorname: "/>
