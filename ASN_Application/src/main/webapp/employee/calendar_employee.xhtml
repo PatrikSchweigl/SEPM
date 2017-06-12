@@ -134,9 +134,9 @@
 														</p:selectOneListbox>
 													</ui:fragment>
 													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEvent}"/>
+														action="#{scheduleView.deleteEvent}" update=":sheduleForm"/>
 													<p:commandButton id="addButton" value="Speichern"
-														actionListener="#{scheduleView.addEvent}"
+														actionListener="#{scheduleView.addEvent}" update=":sheduleForm"
 														/>
 													<p:button
 														outcome="/employee/calendarDetailDaily_employee.xhtml"

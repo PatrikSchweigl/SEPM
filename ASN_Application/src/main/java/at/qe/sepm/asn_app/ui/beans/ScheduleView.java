@@ -239,12 +239,12 @@ public class ScheduleView implements Serializable {
 		if (event.getStartDate().compareTo(new Date()) < 0)
 			return;
 
+		//if the Event is Select on Date event
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 
 			Task task;
 			if (reciever == null || !visible) {
-				System.err.println(event.getDescription());
 
 				task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
 						event.getStartDate(), event.getEndDate());
@@ -260,6 +260,7 @@ public class ScheduleView implements Serializable {
 
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
 							event.getStartDate(), event.getEndDate());
+					
 					mailService.sendEmail(user.getEmail(), "Ihnen wurde eine neue Aufgabe zugeteilt",
 							"Guten Tag " + user.getFirstName() + " " + user.getLastName()
 									+ "!\n\nIhnen wurde soeben von der/dem Krippenmitarbeiter/in "
@@ -276,6 +277,8 @@ public class ScheduleView implements Serializable {
 			taskService.saveTask(task);
 
 		}
+
+		//if the Event is Select on Event event
 
 		else {
 			Task task = taskService.getTaskByStringId(event.getId());
@@ -303,6 +306,8 @@ public class ScheduleView implements Serializable {
 			}
 		}
 		event = new DefaultScheduleEvent();
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("PF('eventDialog').hide()");
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
