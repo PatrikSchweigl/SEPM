@@ -142,6 +142,18 @@ public class LunchController {
         lunchs.get(0).addChild(childId);
         lunchService.saveLunch(lunchs.get(0));
     }
+
+
+    public boolean hasLunchToday(){
+        return hasLunch(new Date());
+    }
+    public boolean hasLunch(Date d){
+        if(d == null){
+            return false;
+        }
+        List<Lunch> lunchs = lunchService.getLunchByDate(d);
+        return !(lunchs == null || lunchs.size() < 1);
+    }
     public List<Lunch> findAll(){
         return lunchService.findAll();
     }
