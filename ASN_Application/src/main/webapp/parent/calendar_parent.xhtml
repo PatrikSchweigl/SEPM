@@ -201,7 +201,7 @@
 													<h:selectBooleanCheckbox id="meal"
 														disabled="#{scheduleView.child}"
 														value="#{scheduleView.meal}"
-														>
+														rendered="#{lunchController.hasLunch(scheduleView.event.startDate)}">
 														<p:ajax update="eventDateDetails" />
 
 													</h:selectBooleanCheckbox>
