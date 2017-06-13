@@ -24,22 +24,24 @@
 											<div class="ui-g-12 ui-md-12 ui-lg-12">
 												<div align="right" style="margin-bottom: 10px;">
 													<h:form>
-														<p:commandButton
+													<div style="float:right;">
+														<p:commandButton style="width:250px"
 														action="#{scheduleView.registerFullWeek()}"
 															value="Wochenanmeldung Mittagessen"
-															style="align-items:right;">
+															>
 															<p:confirm header="Wochenanmeldung Mittagessen"
 																message="Sind Sie sich sicher, dass Sie Ihre Kinder für die Folgewoche zum Mittagessen anmelden wollen?"
 																icon="ui-icon-alert" />
-														</p:commandButton>
-														<p:commandButton
+														</p:commandButton> <br></br>
+														<p:commandButton style="width:250px"
 														action="#{scheduleView.registerFullWeekLunch()}"
 															value="Wochenanmeldung Kindergarten"
-															style="align-items:right;">
-															<p:confirm header="Wochenanmeldung Kindergarten"
+															>
+															<p:confirm header="Wochenanmeldung Kinderkrippe"
 																message="Sind Sie sich sicher, dass Sie Ihre Kinder für die Folgewoche im Kindergarten anmelden wollen?"
 																icon="ui-icon-alert" />
 														</p:commandButton>
+														</div>
 													</h:form>
 												</div>
 												<h:form>
