@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+
+	<ui:define name="content">
+		<body class="theme-blue">
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-3 center-login">
+					<p:panel id="basic" style="margin-bottom:20px">
+						<div class="login-page">
+							<div class="form">
+								<form class="login-form" action="#{request.contextPath}/login"
+									method="post">
+									<div>
+										<i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"
+											style="float: left;"></i>
+											<h:outputText style="font-size:20px; margin-left:30px; color:#dd4b39;" value="Benutzername oder Passwort falsch"/>
+											</div>
+									<p:inputText id="username" type="text" required="true"
+										placeholder="Benutzername" />
+
+									<p:inputText id="password" type="password" required="true"
+										placeholder="Passwort" />
+
+									<button class="login-button" type="submit">Anmelden</button>
+								</form>
+							</div>
+						</div>
+					</p:panel>
+				</div>
+			</div>
+		</body>
+	</ui:define>
+
+</ui:composition>
