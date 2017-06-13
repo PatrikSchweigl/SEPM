@@ -66,13 +66,6 @@ public class CaregiverControllerTest {
 
     @Before
     public void initialize() {
-        caregiver = new Caregiver();
-        caregiver.setFirstName("CaregiverFirstName1");
-        caregiver.setLastName("CaregiverLastName1");
-        caregiver.setRelationship(Relationship.AUNT_UNCLE);
-        caregiver.setImgName("CaregiverImgName1");
-        caregiver.setPhoneNumber("0123456789");
-
         Set<Task> parentTasks1 = new HashSet<>();
         Set<Task> parentTasks2 = new HashSet<>();
 
@@ -94,7 +87,6 @@ public class CaregiverControllerTest {
         parent1.setTasks(parentTasks1);
         parent1.setUsername("ParentUsername1");
         parent1.setUserRole(UserRole.PARENT);
-
 
         parent2 = new Parent();
         parent2.setBirthday("07/11/1978");
@@ -135,6 +127,14 @@ public class CaregiverControllerTest {
         child.setCustody(Custody.BEIDE);
         child.setReligion(Religion.CHRISTENTUM);
         child.setCaregivers(caregivers);
+
+        caregiver = new Caregiver();
+        caregiver.setFirstName("CaregiverFirstName1");
+        caregiver.setLastName("CaregiverLastName1");
+        caregiver.setRelationship(Relationship.AUNT_UNCLE);
+        caregiver.setImgName("CaregiverImgName1");
+        caregiver.setPhoneNumber("0123456789");
+        //caregiver.setChild(child);
     }
 
 
@@ -155,6 +155,8 @@ public class CaregiverControllerTest {
             childController.setParentUserName(parent1.getUsername());
             child = childController.doSaveChild();
 
+            caregiver.setChild(child);
+
             // Save a caregiver in the database
             caregiverController.setCaregiver2(caregiver);
             childService.setId(child.getId());
@@ -163,12 +165,6 @@ public class CaregiverControllerTest {
             // Check if the values have changed since the caregiver was saved.
             Caregiver other = caregiverService.loadCaregiver(caregiver.getId());
             assertTrue(caregiver.equals(other));
-
-            // Delete the parent again.
-            parentEditController.setParent2(parent1);
-            parentEditController.doDeleteParent();
-            parentEditController.setParent2(parent2);
-            parentEditController.doDeleteParent();
 
             // Delete the caregiver again
             caregiverController.setCaregiverEdit2(caregiver);
@@ -180,6 +176,12 @@ public class CaregiverControllerTest {
             // Delete the child again.
             childController.setChildEdit2(child);
             childController.doDeleteChild();
+
+            // Delete the parent again.
+            parentEditController.setParent2(parent1);
+            parentEditController.doDeleteParent();
+            parentEditController.setParent2(parent2);
+            parentEditController.doDeleteParent();
         }
         finally {
             context.release();

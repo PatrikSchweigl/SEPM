@@ -81,12 +81,12 @@ public class CaregiverController {
     }
 
 
-    //public void doSaveCaregiver(){
-    public void doSaveCaregiver(){
     public Caregiver doSaveCaregiver(){
         caregiver = caregiverService.saveCaregiver(caregiver);
+        Caregiver caregiverReturn = caregiver;
         initList();
         initNewCaregiver();
+        return caregiverReturn;
     }
 
 
