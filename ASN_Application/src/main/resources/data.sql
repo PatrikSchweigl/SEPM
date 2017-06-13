@@ -24,23 +24,23 @@ INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES
 INSERT INTO private_message (MESSAGE, USERNAME_RECEIVER, USERNAME_SENDER) VALUES('Hallo3', 'cheng', 'cheng');
 
 
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('07/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('08/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Gemüselasagne', 3.0);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('09/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('12/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('13/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('14/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('16/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('19/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('20/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('21/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('22/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Gemüselasagne', 3.0);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('23/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('26/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('27/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('28/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('29/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Gemüselasagne', 3.0);
-INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('30/06/2017:06:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('07/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('08/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Gemüselasagne', 3.0);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('09/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('12/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('13/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('14/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('16/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('19/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('20/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('21/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('22/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Gemüselasagne', 3.0);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('23/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('26/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Lasagne', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('27/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Spaghetti', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('28/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Wiener Schnitzel', 3.5);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('29/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Gemüselasagne', 3.0);
+INSERT INTO lunch (DATE, MEAL, COST) VALUES(STR_TO_DATE('30/06/2017:02:00:00', '%d/%m/%Y:%h:%i:%s'), 'Blätterteigtaschen', 3.5);
 
 INSERT INTO nursery_information (BRING_START, BRING_END, PICK_UP_START, PICK_UP_END, MAX_OCCUPANCY, ORIGIN_DATE, TODAYS_DATE) VALUES ('2017-06-01 09:00:00', '2017-06-01 10:15:00', '2017-06-01 14:00:00', '2017-06-01 15:45:00', 20, '2017-06-01 02:00:00', '2017-06-01 02:00:00');
 INSERT INTO nursery_information (BRING_START, BRING_END, PICK_UP_START, PICK_UP_END, MAX_OCCUPANCY, ORIGIN_DATE, TODAYS_DATE) VALUES ('2017-06-02 09:00:00', '2017-06-02 10:15:00', '2017-06-02 14:00:00', '2017-06-02 15:45:00', 20, '2017-06-02 02:00:00', '2017-06-02 02:00:00');

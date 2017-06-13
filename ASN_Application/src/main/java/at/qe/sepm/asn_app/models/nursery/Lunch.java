@@ -67,7 +67,6 @@ public class Lunch implements Persistable<Long> {
 
 
     public void setDate(Date date) {
-        date.setHours(12);
         this.date = date;
 
     }
