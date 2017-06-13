@@ -43,6 +43,7 @@ import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
+import at.qe.sepm.asn_app.ui.constraints.ScheduleConstraints;
 
 /**
  * Created by Auki on 02.05.2017.
@@ -66,6 +67,8 @@ public class ScheduleView implements Serializable {
 	private MailService mailService;
 	@Autowired
 	private RegistrationConstraints registrationConstraints;
+	@Autowired
+	private ScheduleConstraints scheduleConstraints;
 	@Autowired
 	private RegistrationService registrationService;
 	@Autowired
@@ -238,8 +241,19 @@ public class ScheduleView implements Serializable {
 	public void addEvent() {
 		if (event.getStartDate().compareTo(new Date()) < 0)
 			return;
-
+		System.err.println(event.getStartDate());
+		System.err.println(event.getEndDate());
 		//if the Event is Select on Date event
+		if(event.getEndDate().compareTo(event.getStartDate()) < 0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Endzeit muss nach der Startzeit liegen", null));
+			return;
+		}
+		if(event.getDescription().compareTo("") == 0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Sie müssen einen Titel angeben", null));
+			return;
+		}
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 
@@ -260,7 +274,11 @@ public class ScheduleView implements Serializable {
 
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
 							event.getStartDate(), event.getEndDate());
-					
+					if(scheduleConstraints.checkIfTaskExistsForParent(task)){
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Dieser Elternteil hat in diesem Zeitraum schon eine Aufgabe", null));
+						return;
+					}
 					mailService.sendEmail(user.getEmail(), "Ihnen wurde eine neue Aufgabe zugeteilt",
 							"Guten Tag " + user.getFirstName() + " " + user.getLastName()
 									+ "!\n\nIhnen wurde soeben von der/dem Krippenmitarbeiter/in "
