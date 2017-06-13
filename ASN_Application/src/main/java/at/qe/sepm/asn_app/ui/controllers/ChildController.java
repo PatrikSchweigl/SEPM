@@ -28,7 +28,7 @@ import org.springframework.transaction.TransactionSystemException;
  * on 14.04.17.
  */
 @Component
-@Scope("application")
+@Scope("request")
 public class ChildController {
 
 	@Autowired

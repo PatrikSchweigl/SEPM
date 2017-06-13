@@ -32,7 +32,7 @@ import java.util.Map;
  */
 @Component
 //@Scope("view")
-@Scope("application")
+@Scope("request")
 public class EmployeeController {
 
     @Autowired

@@ -26,7 +26,7 @@ import java.util.Collection;
 @Component
 //@Scope("view")
 //@Scope("application")
-@Scope("session")
+@Scope("request")
 public class ParentController {
     @Autowired
     private ParentService parentService;

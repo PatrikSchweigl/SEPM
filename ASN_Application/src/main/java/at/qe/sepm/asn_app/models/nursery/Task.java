@@ -3,6 +3,7 @@ package at.qe.sepm.asn_app.models.nursery;
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class Task implements Persistable<Long> {
     private UserData receiver;
     private boolean important;
     private String styleClass;
+    @ColumnDefault("false")
     private boolean taskStatus;
 
 
