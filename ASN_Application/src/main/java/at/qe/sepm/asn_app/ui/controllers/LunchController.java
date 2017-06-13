@@ -138,6 +138,9 @@ public class LunchController {
 		if (lunchs == null || lunchs.size() < 1) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Es ist kein Mittagessen für diesen Tag eingetragen", null));
+		} else if(!lunchConstraints.checkTimeConstraints(lunchs.get(0))){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Sie haben den Anmeldezeitpunkt für diesen Termin überschritten", null));
 		} else {
 
 			// Child c =

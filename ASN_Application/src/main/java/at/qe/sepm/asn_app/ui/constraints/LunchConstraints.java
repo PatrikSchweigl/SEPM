@@ -1,6 +1,8 @@
 package at.qe.sepm.asn_app.ui.constraints;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,6 @@ public class LunchConstraints {
 		Iterator<Lunch> iterator = l.iterator();
 		while (iterator.hasNext()) {
 			Lunch temp = iterator.next();
-			System.out.println(temp.getDate() + "  vergleich mit easymmmmmeasy  " + lunch.getDate());
 			if (temp.getDate().compareTo(lunch.getDate()) == 0)
 				return true;
 		}
@@ -46,6 +47,28 @@ public class LunchConstraints {
 			}
 		}
 		return false;
+	}
+	
+	public boolean checkTimeConstraints(Lunch lunch){
+		Calendar fridayConstraint = Calendar.getInstance();
+		fridayConstraint.setTime(new Date());
+		fridayConstraint.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+		fridayConstraint.set(Calendar.HOUR_OF_DAY, 12);
+		fridayConstraint.set(Calendar.MINUTE, 0);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(lunch.getDate());
+		System.err.println("JEEEEEEEEEEEEEEEEEEEEEEEETZT");
+		System.err.println(fridayConstraint.getTime());
+		System.err.println(cal.getTime());
+		if(new Date().compareTo(fridayConstraint.getTime()) > 0)
+			return false;
+		System.err.println("JEEEEEEEEEEEEEEEEEEEEEEEETZT ABBBBER");
+		System.err.println(cal.get(Calendar.WEEK_OF_YEAR) + " vergleichen mit " + fridayConstraint.get(Calendar.WEEK_OF_YEAR));
+		if(cal.get(Calendar.WEEK_OF_YEAR) <= fridayConstraint.get(Calendar.WEEK_OF_YEAR)){
+			return false;
+		}
+		return true;
+			
 	}
 
 }
