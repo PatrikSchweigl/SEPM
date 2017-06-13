@@ -181,6 +181,10 @@ public class Child implements Persistable<Long> {
     public String getBirthday() {
         return birthday;
     }
+    
+    public String getFullname(){
+    	return firstName + " " + lastName;
+    }
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
