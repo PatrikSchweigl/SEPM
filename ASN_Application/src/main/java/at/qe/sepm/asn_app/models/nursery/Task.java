@@ -35,6 +35,7 @@ public class Task implements Persistable<Long> {
     private UserData receiver;
     private boolean important;
     private String styleClass;
+    private boolean taskStatus;
 
 
     public Task(){}
@@ -47,6 +48,7 @@ public class Task implements Persistable<Long> {
         this.sender = sender;
         this.receiver = receiver;
         this.important = false;
+        this.setTaskStatus(false);
     }
 
 
@@ -167,4 +169,12 @@ public class Task implements Persistable<Long> {
                 "StringId: " + stringId + "\n" +
                 "StyleClass: " + styleClass;
     }
+
+	public boolean isTaskStatus() {
+		return taskStatus;
+	}
+
+	public void setTaskStatus(boolean taskStatus) {
+		this.taskStatus = taskStatus;
+	}
 }

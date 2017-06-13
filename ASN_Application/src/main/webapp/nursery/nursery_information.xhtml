@@ -126,7 +126,8 @@
                                             <p:separator/>
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
-                                                                 action="#{nurseryInformationController.doSaveNurseryInformation()}"/>
+                                                                 action="#{nurseryInformationController.doSaveNurseryInformation()}"
+                                                update=":infoForm:infoTable"/>
                                                 <p:commandButton value="Abbrechen"
                                                                  onclick="PF('nurseryInformationDialog').hide()"/>
                                             </h:panelGrid>

@@ -21,7 +21,7 @@ import java.util.Date;
  */
 @Component
 //@Scope("view")
-@Scope("application")
+@Scope("request")
 public class NurseryInformationController {
 
 	@Autowired
@@ -38,14 +38,12 @@ public class NurseryInformationController {
 
 	public void setNurseryInformation(NurseryInformation nurseryInformation) {
 		this.nurseryInformation = nurseryInformation;
-		doReloadNurseryInformation();
 	}
 	public void setNurseryInformation2(NurseryInformation nurseryInformation) {
 		this.nurseryInformation = nurseryInformation;
 	}
 
 	public Collection<NurseryInformation> getNurseryInformations() {
-		initList();
 		return nurseryInformations;
 	}
 
@@ -84,6 +82,7 @@ public class NurseryInformationController {
 				nurseryInformationReturn = nurseryInformation;
 				nurseryInformation = null;
 				initNewNurseryInformation();
+				initList();
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('nurseryInformationDialog').hide()");
 			}catch(TransactionSystemException ex){

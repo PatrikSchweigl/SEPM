@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("session")
+//@Scope("application")
 public class SessionInfoBean {
 
 	@Autowired

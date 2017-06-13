@@ -24,18 +24,19 @@
 											<h:form>
 												<p:button
 													outcome="/employee/calendarDetailWeek_employee.xhtml"
-													value="Tagesplaner Wochenansicht"
-													style="align-items:right; margin-right:214px;">
+													value="Tagesplaner Wochenansicht">
 												</p:button>
 												<p:button
 													outcome="/employee/calendarDetailMonth_employee.xhtml"
-													value="Tagesplaner Monatsansicht"
-													style="align-items:right;margin-right:214px;">
+													value="Tagesplaner Monatsansicht">
 												</p:button>
 												<p:button
 													outcome="/employee/calendarDetailYear_employee.xhtml"
-													value="Tagesplaner Jahresansicht"
-													style="align-items:right;">
+													value="Tagesplaner Jahresansicht">
+												</p:button>
+												<p:button
+													outcome="/employee/calendarDetailYear_employee.xhtml"
+													value="Aufgabentabelle">
 												</p:button>
 											</h:form>
 										</div>
@@ -124,7 +125,7 @@
 																itemValue="#{parent.username}" />
 
 															<p:column>
-																<p:graphicImage name="pictures/tiger.jpg" width="32"
+																<p:graphicImage name="pictures/profile_pictures/#{userService.loadUser(p).getImgName()}" width="32"
 																	height="32" />
 															</p:column>
 
@@ -134,10 +135,9 @@
 														</p:selectOneListbox>
 													</ui:fragment>
 													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEvent}"/>
+														action="#{scheduleView.deleteEvent}" />
 													<p:commandButton id="addButton" value="Speichern"
-														actionListener="#{scheduleView.addEvent}"
-														/>
+														actionListener="#{scheduleView.addEvent}" />
 													<p:button
 														outcome="/employee/calendarDetailDaily_employee.xhtml"
 														value="Tagesplaner" style="align-items:right;">
