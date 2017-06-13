@@ -26,7 +26,7 @@
 													<h:form>
 													<div style="float:right;">
 														<p:commandButton style="width:250px"
-														action="#{scheduleView.registerFullWeek()}"
+														action="#{scheduleView.registerFullWeekLunch()}"
 															value="Wochenanmeldung Mittagessen"
 															>
 															<p:confirm header="Wochenanmeldung Mittagessen"
@@ -34,7 +34,7 @@
 																icon="ui-icon-alert" />
 														</p:commandButton> <br></br>
 														<p:commandButton style="width:250px"
-														action="#{scheduleView.registerFullWeekLunch()}"
+														action="#{scheduleView.registerFullWeek()}"
 															value="Wochenanmeldung Kindergarten"
 															>
 															<p:confirm header="Wochenanmeldung Kinderkrippe"
@@ -191,7 +191,7 @@
 
 											</p:schedule>
 
-											<p:dialog widgetVar="eventDialog" header="Termine"
+											<p:dialog widgetVar="eventDialog" header="Termine" position="center center"
 												closeOnEscape="true" showEffect="clip" hideEffect="clip">
 												<p:messages showDetail="false" />
 												<h:panelGrid id="eventDetails" columns="2">
@@ -206,7 +206,7 @@
 												</h:panelGrid>
 											</p:dialog>
 
-											<p:dialog widgetVar="eventDateDialog" header="Termine"
+											<p:dialog widgetVar="eventDateDialog" header="Termine" position="center center"
 												closeOnEscape="true" showEffect="clip" hideEffect="clip">
 												<p:messages id="messagesInfo" autoUpdate="true" />
 
@@ -309,7 +309,7 @@
 												</h:panelGrid>
 											</p:dialog>
 
-											<p:confirmDialog global="true" showEffect="fade"
+											<p:confirmDialog global="true" showEffect="fade" 
 												hideEffect="fade" width="400">
 												<p:commandButton value="Anmelden" type="button"
 													styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
