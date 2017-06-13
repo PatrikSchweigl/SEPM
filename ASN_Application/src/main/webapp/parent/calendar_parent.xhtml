@@ -25,6 +25,7 @@
 												<div align="right" style="margin-bottom: 10px;">
 													<h:form>
 														<p:commandButton
+														action="#{scheduleView.registerFullWeek()}"
 															value="Wochenanmeldung Mittagessen"
 															style="align-items:right;">
 															<p:confirm header="Wochenanmeldung Mittagessen"
@@ -32,6 +33,7 @@
 																icon="ui-icon-alert" />
 														</p:commandButton>
 														<p:commandButton
+														action="#{scheduleView.registerFullWeekLunch()}"
 															value="Wochenanmeldung Kindergarten"
 															style="align-items:right;">
 															<p:confirm header="Wochenanmeldung Kindergarten"

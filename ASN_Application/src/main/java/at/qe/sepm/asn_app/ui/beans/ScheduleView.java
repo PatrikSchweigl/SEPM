@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -151,8 +152,7 @@ public class ScheduleView implements Serializable {
 				if (n.getBringEnd().compareTo(new Date()) > 0) {
 					DefaultScheduleEvent ev3;
 					ev3 = new DefaultScheduleEvent(
-							"   Bringzeit: " + n.getBringDurationNew()
-									+ "\n" + "Holzeit: " + n.getPickUpDurationNew(),
+							"   Bringzeit: " + n.getBringDurationNew() + "\n" + "Holzeit: " + n.getPickUpDurationNew(),
 							n.getOriginDate(), n.getOriginDate(), "info");
 					ev3.setAllDay(true);
 					eventModel.addEvent(ev3);
@@ -171,18 +171,17 @@ public class ScheduleView implements Serializable {
 					eventModel.addEvent(ev);
 				}
 			}
-			
+
 			lunchs = lunchService.findAll();
 			Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
 			Set<Child> arr = p.getChildren();
-			for(Lunch l : lunchs){
-				for(Child c : arr){
-					if(l.getChildrenIds().contains(c.getId())){
+			for (Lunch l : lunchs) {
+				for (Child c : arr) {
+					if (l.getChildrenIds().contains(c.getId())) {
 						DefaultScheduleEvent ev;
 						l.getDate().setHours(2);
 						ev = new DefaultScheduleEvent(
-								c.getFirstName() + " " + c.getLastName() + " "
-										+ "ist zum Essen angemeldet",
+								c.getFirstName() + " " + c.getLastName() + " " + "ist zum Essen angemeldet",
 								l.getDate(), l.getDate(), "meal");
 						eventModel.addEvent(ev);
 					}
@@ -217,6 +216,72 @@ public class ScheduleView implements Serializable {
 		else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
+		}
+	}
+
+	public void registerFullWeek() {
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		cal.add(Calendar.WEEK_OF_YEAR, 1);
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		cal2.add(Calendar.WEEK_OF_YEAR, 1);
+		cal2.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		cal2.set(Calendar.HOUR_OF_DAY, 8);
+		cal2.set(Calendar.MINUTE, 0);
+		cal2.set(Calendar.SECOND, 0);
+		cal2.set(Calendar.MILLISECOND, 0);
+		Collection<Child> childs = childService.getChildrenByParentUsername(getAuthenticatedUser().getUsername());
+		for (int i = 0; i < 5; ++i) {
+			for (Child c : childs) {
+				Registration reg = new Registration("", c, cal.getTime(), cal2.getTime());
+				if (registrationConstraints.registationExists(reg))
+					continue;
+				if (!registrationConstraints.checkIfNurseryExists(reg))
+					continue;
+				registrationService.saveRegistration(reg);
+				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
+						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
+								+ getAuthenticatedUser().getUserRole() + "] ",
+						reg.getBringdate());
+				auditLogRepository.save(log);
+			}
+			cal.add(Calendar.DAY_OF_WEEK, 1);
+			cal2.add(Calendar.DAY_OF_WEEK, 1);
+		}
+	}
+
+	public void registerFullWeekLunch() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.WEEK_OF_YEAR, 1);
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		cal.set(Calendar.HOUR_OF_DAY, 2);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		System.err.println("WOOOOOOOOOOOOOOOOO");
+		Collection<Child> childs = childService.getChildrenByParentUsername(getAuthenticatedUser().getUsername());
+		for (int i = 0; i < 5; ++i) {
+			for (Child c : childs) {
+				List<Lunch> lunchs = lunchService.getLunchByDate(cal.getTime());
+				System.err.println(cal.getTime());
+				System.err.println("WOOOOOOOOOOOOOOOOO");
+				if (lunchs == null || lunchs.size() < 1){
+					System.err.println("WHAAAAAAAAAAAAAAAAAAAAAT");
+					continue;
+				}
+				if (lunchs.get(0).getChildrenIds().contains(c.getId()))
+					continue;
+				lunchs.get(0).addChild(c);
+				lunchService.saveLunch(lunchs.get(0));
+				AuditLog log = new AuditLog( c.getFullname(), "REGISTRATION MEAL CREATED: " + getAuthenticatedUser().getUsername() + " ["
+						+ getAuthenticatedUser().getUserRole() + "] ", cal.getTime());
+				auditLogRepository.save(log);
+			}
+			cal.add(Calendar.DAY_OF_WEEK, 1);
 		}
 	}
 

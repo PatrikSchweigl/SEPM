@@ -60,6 +60,7 @@ public class RegistrationController {
         return registrationService.getAllRegistrationsByDate(d);
     }
     
+    
     public Collection<Registration> getRegistrationsByDateToday(){
         return registrationService.getAllRegistrationsByDate(new Date());
     }
