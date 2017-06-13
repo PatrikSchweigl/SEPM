@@ -135,15 +135,24 @@ public class LunchController {
 		}
 		List<Lunch> lunchs = lunchService.getLunchByDate(d);
 		if (lunchs == null || lunchs.size() < 1) {
-			return;
-		}
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Es ist kein Mittagessen für diesen Tag eingetragen", null));
+		} else {
 
-		// Child c =
-		// childService.getChildrenByFirstnameAndParentUsername(childFirstname,
-		// session.getCurrentUserName()).get(0);
-		// System.err.println("CHILD -" + c);
-		lunchs.get(0).addChild(childId);
-		lunchService.saveLunch(lunchs.get(0));
+			// Child c =
+			// childService.getChildrenByFirstnameAndParentUsername(childFirstname,
+			// session.getCurrentUserName()).get(0);
+			// System.err.println("CHILD -" + c);
+			if (lunchs.get(0).getChildrenIds().contains(childId)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Sie haben Ihr Kind schon zum Mitagessen eingetragen", null));
+			} else {
+				lunchs.get(0).addChild(childId);
+				lunchService.saveLunch(lunchs.get(0));
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('eventDateDialog').hide()");
+			}
+		}
 	}
 
 	public boolean hasLunchToday() {
@@ -168,20 +177,20 @@ public class LunchController {
 		if (lunchConstraints.checkIfLunchExists(lunch)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"An diesem Tag existiert bereits ein Mittagessen", null));
-		}  else if (!lunchConstraints.checkIfNurseryInformationExists(lunch)) {
+		} else if (!lunchConstraints.checkIfNurseryInformationExists(lunch)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"An diesem Tag hat die Kinderkrippe geschlossen", null));
-		}else if(lunch.getCost() < 0.5){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Bitte geben sie einen adäquaten Preis an", null));
-		} else if(lunch.getMeal().compareTo("") == 0){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Bitte ein Mittagessen angeben", null));
-		} else if(lunch.getCost() > 10.0){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Bitte geben sie einen adäquaten Preis an", null));
+		} else if (lunch.getCost() < 0.5) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben sie einen adäquaten Preis an", null));
+		} else if (lunch.getMeal().compareTo("") == 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte ein Mittagessen angeben", null));
+		} else if (lunch.getCost() > 10.0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben sie einen adäquaten Preis an", null));
 		}
-		
+
 		else {
 			lunchReturn = lunchService.saveLunch(lunch);
 			lunch = null;
