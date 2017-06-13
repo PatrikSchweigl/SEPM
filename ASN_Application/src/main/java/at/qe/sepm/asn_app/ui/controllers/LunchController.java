@@ -149,7 +149,7 @@ public class LunchController {
 			// System.err.println("CHILD -" + c);
 			if (lunchs.get(0).getChildrenIds().contains(childId)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Sie haben Ihr Kind schon zum Mitagessen eingetragen", null));
+						"Sie haben Ihr Kind schon zum Mittagessen eingetragen", null));
 			} else {
 				lunchs.get(0).addChild(childId);
 				lunchService.saveLunch(lunchs.get(0));
