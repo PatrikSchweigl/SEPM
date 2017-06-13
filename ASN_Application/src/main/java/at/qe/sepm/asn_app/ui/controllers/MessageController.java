@@ -71,7 +71,6 @@ public class MessageController extends Thread{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Leere Nachrichten können nicht gesendet werden!", null));
         } else {
             message = messageService.saveMessage(message);
-            //Message messageReturn = message;
             Thread t = new Thread();
             t.start();
 

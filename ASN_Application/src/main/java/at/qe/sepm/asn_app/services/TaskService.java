@@ -51,9 +51,18 @@ public class TaskService {
     public Collection<Task> getAllTasksByReceiverAndImportance(String id){
         return taskRepository.getTasksByReceiverAndImportance(id);
     }
-    
+
+    public Collection<Task> getTasksByImportance(Boolean imp){
+        return taskRepository.getTasksByImportance(imp);
+    }
+
     public Task getTaskByStringId(String id){
         return taskRepository.getTaskByStringId(id);
+    }
+
+    public Task changeTaskStatus(Task task, Boolean status){
+        task.setTaskStatus(status);
+        return taskRepository.save(task);
     }
 
 }
