@@ -81,7 +81,7 @@ public class Registration implements Persistable<Long> {
     }
     
     public String getFormattedBringDate(){
-    	return new SimpleDateFormat("dd-MM-yyyy").format(bringdate);
+    	return new SimpleDateFormat("hh:mm").format(bringdate);
     }
 
 

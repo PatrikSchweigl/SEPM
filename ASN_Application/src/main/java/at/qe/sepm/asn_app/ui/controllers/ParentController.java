@@ -42,6 +42,7 @@ public class ParentController {
 
 
     public Collection<Parent> getParents() {
+    	initList();
         return parents;
     }
 

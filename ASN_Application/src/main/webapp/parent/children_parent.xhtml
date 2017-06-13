@@ -227,7 +227,7 @@
                                         <p:outputPanel id="caregiverDataAdd">
                                             <h:panelGrid columns="2">
                                                 <p:outputLabel for="childList" value="Kind: "/>
-                                                <p:selectOneListbox id="childList" value="#{caregiverController.caregiver.child}" converter="childConverter"  var="t" filter="true" filterMatchMode="contains">
+                                                <p:selectOneListbox id="childList" value="#{caregiverController.caregiver.child}"   var="t" filter="true" filterMatchMode="contains">
                                                     <f:selectItems value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserData.username)}" var="child" itemLabel="#{child.firstName}" itemValue="#{child}" />
 
                                                     <p:column>
