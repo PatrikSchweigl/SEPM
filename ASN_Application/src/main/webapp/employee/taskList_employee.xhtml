@@ -84,12 +84,12 @@
                                             <p:column headerText="Anfang"
                                                       filterBy="#{task.beginDate}"
                                                       sortBy="#{task.beginDate}" filterStyle="display:none">
-                                                <h:outputText value="#{task.beginDate}"/>
+                                                <h:outputText value="#{task.getFormattedDate(task.beginDate)}"/>
                                             </p:column>
                                             <p:column headerText="Ende"
                                                       filterBy="#{task.endingDate}"
                                                       sortBy="#{task.endingDate}" filterStyle="display:none">
-                                                <h:outputText value="#{task.endingDate}"/>
+                                                <h:outputText value="#{task.getFormattedDate(task.endingDate)}"/>
                                             </p:column>
                                             <p:column headerText="zugeteilt an"
                                                       filterBy="#{task.receiver.username}"

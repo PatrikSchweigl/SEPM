@@ -121,6 +121,7 @@ public class Task implements Persistable<Long> {
     public String getFormattedDate(Date date){
         return new SimpleDateFormat("HH:mm dd-MM-yyyy").format(date);
     }
+   
 
     @Override
     public Long getId() {
