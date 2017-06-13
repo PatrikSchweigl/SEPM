@@ -22,13 +22,22 @@
 										<div align="right" style="margin-bottom: 10px;"></div>
 										<div class="ui-g">
 											<div class="ui-g-12 ui-md-12 ui-lg-12">
-												<div align="right"
-													style="margin-bottom: 10px;">
+												<div align="right" style="margin-bottom: 10px;">
 													<h:form>
-														<p:button style="float:right;"
-															outcome="/employee/calendarDetailWeek_employee.xhtml"
-															value="Alle Kinder fürs Essen anmelden">
-														</p:button>
+														<p:commandButton
+															value="Wochenanmeldung Mittagessen"
+															style="align-items:right;">
+															<p:confirm header="Wochenanmeldung Mittagessen"
+																message="Sind Sie sich sicher, dass Sie Ihre Kinder für die Folgewoche zum Mittagessen anmelden wollen?"
+																icon="ui-icon-alert" />
+														</p:commandButton>
+														<p:commandButton
+															value="Wochenanmeldung Kindergarten"
+															style="align-items:right;">
+															<p:confirm header="Wochenanmeldung Kindergarten"
+																message="Sind Sie sich sicher, dass Sie Ihre Kinder für die Folgewoche im Kindergarten anmelden wollen?"
+																icon="ui-icon-alert" />
+														</p:commandButton>
 													</h:form>
 												</div>
 												<h:form>
@@ -295,6 +304,14 @@
 													</ui:fragment>
 												</h:panelGrid>
 											</p:dialog>
+
+											<p:confirmDialog global="true" showEffect="fade"
+												hideEffect="fade" width="400">
+												<p:commandButton value="Anmelden" type="button"
+													styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+												<p:commandButton value="Abbruch" type="button"
+													styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+											</p:confirmDialog>
 										</h:form>
 									</div>
 								</div>
