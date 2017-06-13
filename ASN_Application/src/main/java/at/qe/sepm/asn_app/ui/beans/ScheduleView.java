@@ -243,7 +243,6 @@ public class ScheduleView implements Serializable {
 			return;
 		System.err.println(event.getStartDate());
 		System.err.println(event.getEndDate());
-		//if the Event is Select on Date event
 		if(event.getEndDate().compareTo(event.getStartDate()) < 0){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Endzeit muss nach der Startzeit liegen", null));
@@ -254,6 +253,7 @@ public class ScheduleView implements Serializable {
 					"Sie müssen einen Titel angeben", null));
 			return;
 		}
+		//if the Event is Select on Date event
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 
