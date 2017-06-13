@@ -237,9 +237,13 @@ public class ScheduleView implements Serializable {
 
 				if (child.getId() == r.getChild().getId()) {
 					registrationService.deleteRegistration(r);
+					RequestContext context = RequestContext.getCurrentInstance();
+					context.execute("PF('eventDialog').hide()");
 				}
 			}
 		} else if (desc.contains("Mittagessen:")) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
 			Child child = null;
 			for (Child ch : c) {
 				if (desc.contains(ch.getFullname())) {
@@ -248,14 +252,20 @@ public class ScheduleView implements Serializable {
 			}
 			Collection<Lunch> lun = lunchService.getLunchByDate(event.getStartDate());
 			for (Lunch r : lun) {
-				if(r.getChildrenIds().contains(child.getId())){
-					r.removeChild(child.getId());
-					lunchService.saveLunch(r);
+				if (r.getChildrenIds().contains(child.getId())) {
+					if (r.getDate().compareTo(cal.getTime()) <= 0) {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Die Abmeldefrist für das Essen ist verstrichen", null));
+					} else {
+						r.removeChild(child.getId());
+						lunchService.saveLunch(r);
+						RequestContext context = RequestContext.getCurrentInstance();
+						context.execute("PF('eventDialog').hide()");
+					}
 				}
 
 			}
 		} else {
-			System.err.println("NOOOOOPE");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
 		}
