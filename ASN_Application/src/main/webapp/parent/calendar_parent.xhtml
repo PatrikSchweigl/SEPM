@@ -202,7 +202,8 @@
 													<p:outputPanel id="from">#{scheduleView.event.startDate}</p:outputPanel>
 													<p:outputLabel for="to" value="Ende:" />
 													<p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
-
+														<p:commandButton id="deleteButton" value="Löschen"
+															action="#{scheduleView.deleteEventParent()}" />
 												</h:panelGrid>
 											</p:dialog>
 

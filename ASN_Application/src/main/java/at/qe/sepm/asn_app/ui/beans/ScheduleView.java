@@ -165,9 +165,10 @@ public class ScheduleView implements Serializable {
 					DefaultScheduleEvent ev;
 
 					ev = new DefaultScheduleEvent(
-							r.getChild().getFirstName() + " " + r.getChild().getLastName() + " "
+							"Anmeldung: " + r.getChild().getFirstName() + " " + r.getChild().getLastName() + " "
 									+ r.getFormattedBringDate() + " " + "Uhr" + "\n" + r.getNote(),
 							r.getDate(), r.getDate(), "registration");
+					System.err.println(ev.getId());
 					eventModel.addEvent(ev);
 				}
 			}
@@ -180,8 +181,7 @@ public class ScheduleView implements Serializable {
 					if (l.getChildrenIds().contains(c.getId())) {
 						DefaultScheduleEvent ev;
 						l.getDate().setHours(2);
-						ev = new DefaultScheduleEvent(
-								c.getFirstName() + " " + c.getLastName() + " " + "ist zum Essen angemeldet",
+						ev = new DefaultScheduleEvent("Mittagessen: " + c.getFirstName() + " " + c.getLastName(),
 								l.getDate(), l.getDate(), "meal");
 						eventModel.addEvent(ev);
 					}
@@ -216,6 +216,46 @@ public class ScheduleView implements Serializable {
 		else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
+		}
+	}
+
+	public void deleteEventParent() {
+		String desc = event.getTitle();
+		Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
+		Set<Child> c = p.getChildren();
+		System.err.println(desc);
+		if (desc.contains("Anmeldung:")) {
+			Child child = null;
+			for (Child ch : c) {
+				if (desc.contains(ch.getFullname())) {
+					child = ch;
+				}
+			}
+			Collection<Registration> reg = registrationService.getAllRegistrationsByDate(event.getStartDate());
+			for (Registration r : reg) {
+				System.err.println(r.getChild().getFirstName() + " " + child.getFirstName());
+
+				if (child.getId() == r.getChild().getId()) {
+					registrationService.deleteRegistration(r);
+				}
+			}
+		}
+		
+		if (desc.contains("Mittagessen:")) {
+			Child child = null;
+			for (Child ch : c) {
+				if (desc.contains(ch.getFullname())) {
+					child = ch;
+				}
+			}
+			Collection<Lunch> lun = lunchService.getLunchByDate(event.getStartDate());
+			for (Lunch r : lun) {
+				if(r.getChildrenIds().contains(child.getId())){
+					r.removeChild(child.getId());
+					lunchService.saveLunch(r);
+				}
+
+			}
 		}
 	}
 
@@ -269,7 +309,7 @@ public class ScheduleView implements Serializable {
 				List<Lunch> lunchs = lunchService.getLunchByDate(cal.getTime());
 				System.err.println(cal.getTime());
 				System.err.println("WOOOOOOOOOOOOOOOOO");
-				if (lunchs == null || lunchs.size() < 1){
+				if (lunchs == null || lunchs.size() < 1) {
 					System.err.println("WHAAAAAAAAAAAAAAAAAAAAAT");
 					continue;
 				}
@@ -277,8 +317,9 @@ public class ScheduleView implements Serializable {
 					continue;
 				lunchs.get(0).addChild(c);
 				lunchService.saveLunch(lunchs.get(0));
-				AuditLog log = new AuditLog( c.getFullname(), "REGISTRATION MEAL CREATED: " + getAuthenticatedUser().getUsername() + " ["
-						+ getAuthenticatedUser().getUserRole() + "] ", cal.getTime());
+				AuditLog log = new AuditLog(c.getFullname(), "REGISTRATION MEAL CREATED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+						cal.getTime());
 				auditLogRepository.save(log);
 			}
 			cal.add(Calendar.DAY_OF_WEEK, 1);
