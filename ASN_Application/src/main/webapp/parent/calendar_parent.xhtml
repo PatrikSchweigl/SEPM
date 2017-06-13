@@ -22,6 +22,15 @@
 										<div align="right" style="margin-bottom: 10px;"></div>
 										<div class="ui-g">
 											<div class="ui-g-12 ui-md-12 ui-lg-12">
+												<div align="right"
+													style="margin-bottom: 10px;">
+													<h:form>
+														<p:button style="float:right;"
+															outcome="/employee/calendarDetailWeek_employee.xhtml"
+															value="Alle Kinder fürs Essen anmelden">
+														</p:button>
+													</h:form>
+												</div>
 												<h:form>
 													<p:accordionPanel multiple="true"
 														style="padding-left:400px;padding-right:400px">
@@ -152,7 +161,7 @@
 										<h:form id="sheduleForm">
 											<p:growl id="growl" showDetail="true" sticky="true" />
 											<p:schedule locale="de" aspectRatio="1.5"
-												style="padding-left:200px; padding-right: 200px;"
+												style="padding-left:50px; padding-right: 50px;"
 												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
 												centerHeaderTemplate="month, agendaWeek, agendaDay"
 												showWeekends="false" id="schedule"
@@ -201,8 +210,7 @@
 													<p:outputLabel for="meal" value="Essen:" />
 													<h:selectBooleanCheckbox id="meal"
 														disabled="#{scheduleView.child}"
-														value="#{scheduleView.meal}"
-														>
+														value="#{scheduleView.meal}">
 														<p:ajax update="eventDateDetails" />
 
 													</h:selectBooleanCheckbox>
@@ -282,8 +290,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
-															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}"
-															/>
+															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}" />
 
 													</ui:fragment>
 												</h:panelGrid>
