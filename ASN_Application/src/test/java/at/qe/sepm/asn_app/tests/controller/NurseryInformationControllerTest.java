@@ -7,15 +7,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.faces.context.FacesContext;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -39,18 +42,18 @@ public class NurseryInformationControllerTest {
 
     @Before
     public void initialize() {
-        int originDateYear = 2017;
-        int originDateMonth = 5;
+        int originDateYear = 2018;
+        int originDateMonth = 4;
         int originDateDay = 27;
 
-        Calendar calendar = GregorianCalendar.getInstance();
+        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
 
         calendar.clear();
         calendar.set(2017, 6, 11, 0, 0);
         Date todaysDate = calendar.getTime();
 
         calendar.clear();
-        calendar.set(originDateYear, originDateMonth, originDateDay, 0, 0);
+        calendar.set(originDateYear, originDateMonth, originDateDay);
         Date originDate = calendar.getTime();
 
         calendar.clear();
@@ -84,19 +87,30 @@ public class NurseryInformationControllerTest {
     public void test() {
         // Save the nursery information in the database.
         //nurseryInformationController.setNurseryInformation2(nurseryInformation);
-        //nurseryInformation = nurseryInformationController.doSaveNurseryInformation();
-        nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
+        FacesContext context = ContextMocker.mockFacesContext();
+        RequestContext requestContext = ContextMocker.mockRequestContext();
+        try{
+            nurseryInformationController.setNurseryInformation(nurseryInformation);
+            nurseryInformation = nurseryInformationController.doSaveNurseryInformation();
+            //nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
 
-        // Check if the values have changed since the nurseryInformation was saved.
-        NurseryInformation other = nurseryInformationService.loadNurseryInformation(nurseryInformation.getId());
-        assertTrue(nurseryInformation.equals(other));
+            // Check if the values have changed since the nurseryInformation was saved.
+            NurseryInformation other = nurseryInformationService.loadNurseryInformation(nurseryInformation.getId());
+            assertTrue(nurseryInformation.equals(other));
 
-        // Delete the nurseryInformation again.
-        //nurseryInformationController.doDeleteNurseryInformation();
-        nurseryInformationService.deleteNurseryInformation(nurseryInformation);
-        other = nurseryInformationService.loadNurseryInformation(nurseryInformation.getId());
-        assertFalse(nurseryInformation.equals(other));
-        assertNull(other);
+            // Delete the nurseryInformation again.
+            //nurseryInformationController.doDeleteNurseryInformation();
+            nurseryInformationService.deleteNurseryInformation(nurseryInformation);
+            other = nurseryInformationService.loadNurseryInformation(nurseryInformation.getId());
+            assertFalse(nurseryInformation.equals(other));
+            assertNull(other);
+        }finally {
+            context.release();
+            requestContext.release();
+        }
+
+
+
     }
 
 

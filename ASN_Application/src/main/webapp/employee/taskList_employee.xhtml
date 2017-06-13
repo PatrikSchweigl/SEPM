@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+                <body class="theme-blue sidebar-mini sidebar-collapse">
+
+                <div class="wrapper">
+                    <!-- =============================================== -->
+
+                    <div class="content-wrapper" style="min-height: 1126px;">
+                        <section class="content">
+
+                            <!-- Default box -->
+                            <div class="box">
+                                <div class="box-body">
+                                    <h:form id="taskForm">
+                                        <p:dataTable id="taskTable" var="task"
+                                                     widgetVar="taskTable"
+                                                     value="#{taskController.nonImportantTasks}" rows="10"
+                                                     paginatorPosition="bottom" paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                     rowsPerPageTemplate="10,25,50"
+                                                     emptyMessage="Es wurden keine Aufgaben gefunden!">
+
+                                            <f:facet name="header">
+                                                <p:outputPanel>
+                                                    <h:outputText value="Suche "/>
+                                                    <p:inputText id="globalFilter"
+                                                                 onkeyup="PF('taskTable').filter()"
+                                                                 style="width:150px" placeholder="Suchwort eingeben"/>
+                                                </p:outputPanel>
+                                            </f:facet>
+
+                                            <f:facet name="{Exporters}"
+                                                     style="float: right; vertical-align: middle;">
+                                                <div style="float: right; vertical-align: middle;">
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="print"
+                                                                        name="pictures/extractors/printer.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="print" value="Drucken" position="top"/>
+                                                        <p:printer/>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="excel" name="pictures/extractors/excel.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="excel" value="Excel"
+                                                                   position="top"/>
+                                                        <p:dataExporter type="xls" target="taskTable"
+                                                                        fileName="Angestellte"/>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="pdf" name="pictures/extractors/pdf.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="pdf" value="PDF" position="top"/>
+                                                        <p:dataExporter type="pdf" target="taskTable"
+                                                                        fileName="Angestellte"/>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="csv" name="pictures/extractors/csv.png"
+                                                                        width="32"/>
+                                                        <p:tooltip for="csv" value="CSV" position="top"/>
+                                                        <p:dataExporter type="csv" target="taskTable"
+                                                                        fileName="Angestellte"/>
+                                                    </p:commandLink>
+                                                </div>
+                                            </f:facet>
+
+                                            <p:column headerText="Beschreibung"
+                                                      filterBy="#{task.description}"
+                                                      sortBy="#{task.description}" filterStyle="display:none">
+                                                <h:outputText value="#{task.description}"/>
+                                            </p:column>
+                                            <p:column headerText="Anfang"
+                                                      filterBy="#{task.beginDate}"
+                                                      sortBy="#{task.beginDate}" filterStyle="display:none">
+                                                <h:outputText value="#{task.getFormattedDate(task.beginDate)}"/>
+                                            </p:column>
+                                            <p:column headerText="Ende"
+                                                      filterBy="#{task.endingDate}"
+                                                      sortBy="#{task.endingDate}" filterStyle="display:none">
+                                                <h:outputText value="#{task.getFormattedDate(task.endingDate)}"/>
+                                            </p:column>
+                                            <p:column headerText="zugeteilt an"
+                                                      filterBy="#{task.receiver.username}"
+                                                      sortBy="#{task.receiver.username}" filterStyle="display:none">
+                                                <h:outputText value="#{task.receiver.username}"/>
+                                            </p:column>
+                                            <p:column headerText="Status"
+                                                      filterBy="#{task.taskStatus}"
+                                                      sortBy="#{task.taskStatus}" filterStyle="display:none">
+                                                <p:selectBooleanButton id="taskStatus" value="#{task.taskStatus}"
+                                                                       onLabel="Erledigt" offLabel="Nicht erledigt"
+                                                                       onIcon="ui-icon-check" offIcon="ui-icon-close"
+                                                                       style="width:150px">
+                                                    <p:ajax update="taskTable" listener="#{taskService.changeTaskStatus(task, !task.taskStatus)}" />
+                                                </p:selectBooleanButton>
+                                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+                    </div>
+                </div>
+
+                </body>
+
+
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            </ui:fragment>
+
+        </h:body>
+    </ui:define>
+</ui:composition>

@@ -202,7 +202,7 @@
 													<h:selectBooleanCheckbox id="meal"
 														disabled="#{scheduleView.child}"
 														value="#{scheduleView.meal}"
-														rendered="#{lunchController.hasLunch(scheduleView.event.startDate)}">
+														>
 														<p:ajax update="eventDateDetails" />
 
 													</h:selectBooleanCheckbox>
@@ -283,7 +283,7 @@
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
 															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}"
-															oncomplete="PF('eventDateDialog').hide()" />
+															/>
 
 													</ui:fragment>
 												</h:panelGrid>

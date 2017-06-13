@@ -67,7 +67,6 @@ public class Lunch implements Persistable<Long> {
 
 
     public void setDate(Date date) {
-        date.setHours(12);
         this.date = date;
 
     }
@@ -121,9 +120,7 @@ public class Lunch implements Persistable<Long> {
 
         Lunch other = (Lunch) obj;
         if (this.cost == other.cost &&
-                this.date.getYear() == other.date.getYear() &&
-                this.date.getMonth() == other.date.getMonth() &&
-                this.date.getDay() == other.date.getDay() &&
+                (date.compareTo(other.date) == 0) &&
                 this.meal.equals(other.meal)) {
             return true;
         } else {

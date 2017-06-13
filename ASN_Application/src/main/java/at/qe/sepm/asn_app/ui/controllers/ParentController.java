@@ -25,7 +25,8 @@ import java.util.Collection;
  */
 @Component
 //@Scope("view")
-@Scope("application")
+//@Scope("application")
+@Scope("request")
 public class ParentController {
     @Autowired
     private ParentService parentService;
@@ -78,6 +79,7 @@ public class ParentController {
 
     public void doSaveParent() {
         if (!StringUtils.isNumeric(parent.getPostcode())) {
+            FacesContext context = FacesContext.getCurrentInstance();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
         } else if (!StringUtils.isNumeric(parent.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));

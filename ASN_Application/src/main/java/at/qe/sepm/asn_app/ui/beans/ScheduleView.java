@@ -3,9 +3,11 @@ package at.qe.sepm.asn_app.ui.beans;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.annotation.PostConstruct;
@@ -31,14 +33,18 @@ import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.nursery.Task;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
+import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
@@ -74,7 +80,11 @@ public class ScheduleView implements Serializable {
 	@Autowired
 	private ChildService childService;
 	@Autowired
+	private ParentService parentService;
+	@Autowired
 	private UserService userService;
+	@Autowired
+	private LunchService lunchService;
 	@Autowired
 	private AuditLogRepository auditLogRepository;
 	@Autowired
@@ -93,6 +103,8 @@ public class ScheduleView implements Serializable {
 	private Collection<Task> tasks;
 	private Collection<NurseryInformation> nurseryInfo;
 	private Collection<Registration> registrations;
+	private Collection<Lunch> lunchs;
+
 	private Child childReg;
 	private String description;
 	private String childFirstname;
@@ -139,7 +151,7 @@ public class ScheduleView implements Serializable {
 				if (n.getBringEnd().compareTo(new Date()) > 0) {
 					DefaultScheduleEvent ev3;
 					ev3 = new DefaultScheduleEvent(
-							"   " + n.getMaxOccupancy() + "  Plätze frei.\n  Bringzeit: " + n.getBringDurationNew()
+							"   Bringzeit: " + n.getBringDurationNew()
 									+ "\n" + "Holzeit: " + n.getPickUpDurationNew(),
 							n.getOriginDate(), n.getOriginDate(), "info");
 					ev3.setAllDay(true);
@@ -157,6 +169,23 @@ public class ScheduleView implements Serializable {
 									+ r.getFormattedBringDate() + " " + "Uhr" + "\n" + r.getNote(),
 							r.getDate(), r.getDate(), "registration");
 					eventModel.addEvent(ev);
+				}
+			}
+			
+			lunchs = lunchService.findAll();
+			Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
+			Set<Child> arr = p.getChildren();
+			for(Lunch l : lunchs){
+				for(Child c : arr){
+					if(l.getChildrenIds().contains(c.getId())){
+						DefaultScheduleEvent ev;
+						l.getDate().setHours(2);
+						ev = new DefaultScheduleEvent(
+								c.getFirstName() + " " + c.getLastName() + " "
+										+ "ist zum Essen angemeldet",
+								l.getDate(), l.getDate(), "meal");
+						eventModel.addEvent(ev);
+					}
 				}
 			}
 		}
@@ -179,13 +208,13 @@ public class ScheduleView implements Serializable {
 
 	public void deleteEvent() {
 		Task task = taskService.getTaskByStringId(event.getId());
-		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0){
+		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
 			taskService.deleteTaskById(event.getId());
 			RequestContext context = RequestContext.getCurrentInstance();
 			context.execute("PF('eventDialog').hide()");
 		}
-		
-		else{
+
+		else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
 		}
@@ -238,17 +267,17 @@ public class ScheduleView implements Serializable {
 			return;
 		System.err.println(event.getStartDate());
 		System.err.println(event.getEndDate());
-		if(event.getEndDate().compareTo(event.getStartDate()) < 0){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Endzeit muss nach der Startzeit liegen", null));
+		if (event.getEndDate().compareTo(event.getStartDate()) < 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Endzeit muss nach der Startzeit liegen", null));
 			return;
 		}
-		if(event.getDescription().compareTo("") == 0){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Sie müssen einen Titel angeben", null));
+		if (event.getDescription().compareTo("") == 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie müssen einen Titel angeben", null));
 			return;
 		}
-		//if the Event is Select on Date event
+		// if the Event is Select on Date event
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 
@@ -269,7 +298,7 @@ public class ScheduleView implements Serializable {
 
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
 							event.getStartDate(), event.getEndDate());
-					if(scheduleConstraints.checkIfTaskExistsForParent(task)){
+					if (scheduleConstraints.checkIfTaskExistsForParent(task)) {
 						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Dieser Elternteil hat in diesem Zeitraum schon eine Aufgabe", null));
 						return;
@@ -291,7 +320,7 @@ public class ScheduleView implements Serializable {
 
 		}
 
-		//if the Event is Select on Event event
+		// if the Event is Select on Event event
 
 		else {
 			Task task = taskService.getTaskByStringId(event.getId());

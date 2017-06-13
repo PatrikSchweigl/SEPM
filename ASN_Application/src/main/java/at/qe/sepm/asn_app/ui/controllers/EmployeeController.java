@@ -32,7 +32,7 @@ import java.util.Map;
  */
 @Component
 //@Scope("view")
-@Scope("application")
+@Scope("request")
 public class EmployeeController {
 
     @Autowired
@@ -88,6 +88,10 @@ public class EmployeeController {
         return employees;
     }
 
+    public void doChangePassword(String password){
+    	employeeService.changePassword(password);
+    }
+    
     public void doSaveEmployee(){
         if (!StringUtils.isNumeric(employee.getPostcode())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));

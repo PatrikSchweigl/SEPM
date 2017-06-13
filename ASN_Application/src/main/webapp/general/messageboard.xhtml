@@ -44,7 +44,7 @@
                                                                         <div class="text">
                                                                             <p>#{message.message}</p>
                                                                             <ui:fragment
-                                                                                    rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
+                                                                                    rendered="#{(message.username eq sessionInfoBean.currentUserData.username) or sessionInfoBean.hasRole('ADMIN')}">
                                                                                 <div align="right">
                                                                                     <p:commandLink
                                                                                             action="#{messageController.doDeleteMessage(message)}"
@@ -52,7 +52,7 @@
                                                                                             title="Nachricht löschen"
                                                                                             update=":messages"
                                                                                             immediate="true"
-                                                                                            >
+                                                                                    >
 																							<span class="time"> <i
                                                                                                     class="fa fa-trash-o bg-gray"></i>
 																							</span>
@@ -76,17 +76,18 @@
                                                 <p:dialog header="Nachricht schreiben" id="createMessage"
                                                           widgetVar="createMessage" modal="true" showEffect="fade"
                                                           hideEffect="fade" resizable="false">
+                                                    <p:messages id="messagesMessageBoard" autoUpdate="true"/>
                                                     <p:inputTextarea id="messageInput"
                                                                      value="#{messageController.message.message}" rows="5" cols="30"
                                                                      counter="display" maxlength="500"
-                                                                     counterTemplate="{0} Zeichen übrig." autoResize="false" required="true"/>
+                                                                     counterTemplate="{0} Zeichen übrig." autoResize="false"
+                                                                     required="true" requiredMessage="Nachricht darf nicht leer sein!"/>
                                                     <p:separator/>
                                                     <h:outputText id="display"/>
                                                     <p:separator/>
                                                     <p:commandButton id="button" value="Senden"
                                                                      action="#{messageController.doSaveMessage}"
-                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('createMessage').hide()"
-                                                                     update=":messages" />
+                                                    />
                                                 </p:dialog>
 
                                                 <p:confirmDialog global="true" showEffect="fade"

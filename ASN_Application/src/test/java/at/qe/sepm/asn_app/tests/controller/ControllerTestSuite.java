@@ -10,8 +10,16 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
+        CaregiverControllerTest.class,
+        ChildControllerTest.class,
+        CommentControllerTest.class,
+        EmployeeControllerTest.class,
+        EnumControllerTest.class,
+        LunchControllerTest.class,
+        MessageControllerTest.class,
         NurseryInformationControllerTest.class,
-        PictureControllerTest.class })
+        ParentControllerTest.class,
+        PictureControllerTest.class})
 
 public class ControllerTestSuite {
 

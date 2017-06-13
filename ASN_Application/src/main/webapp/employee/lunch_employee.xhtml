@@ -91,7 +91,6 @@
 														<h:panelGrid columns="3">
 															<p:commandButton value="Speichern"
 																action="#{lunchController.doSaveLunch}"
-																oncomplete="if (args &amp;&amp; !args.validationFailed) PF('lunchAddDialog').hide()"
 																update=":lunchForm:lunchTable" />
 															<p:commandButton value="Abbruch"
 																onclick="PF('lunchAddDialog').hide()" immediate="true" />
