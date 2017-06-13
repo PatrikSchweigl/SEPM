@@ -195,6 +195,12 @@ public class LunchController {
         lunchEdit = lunchService.loadLunch(lunchEdit.getId());
     }
 
+    public List<Lunch> getLunchReportInTimeWindow(Date start, Date end){
+        List<Lunch> tmp = lunchService.getLunchInTimeWindow(start, end);
+        System.err.println(tmp);
+        return tmp;
+    }
+
     //getters, setters -------------------------------------------------------------------------------------------
     public Long getChildId() {
         return childId;

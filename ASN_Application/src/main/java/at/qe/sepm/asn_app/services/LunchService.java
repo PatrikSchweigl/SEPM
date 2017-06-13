@@ -27,9 +27,9 @@ import java.util.List;
 //@Scope("view")
 @Scope("application")
 public class LunchService {
-    @Autowired LunchRepository lunchRepository;
-    @Autowired AuditLogRepository auditLogRepository;
-    @Autowired UserRepository userRepository;
+    @Autowired private LunchRepository lunchRepository;
+    @Autowired private AuditLogRepository auditLogRepository;
+    @Autowired private UserRepository userRepository;
 
     /*
     public List<Lunch> getLunchByDate(String date){
@@ -52,6 +52,10 @@ public class LunchService {
 
     public Lunch loadLunch(Long id){
         return lunchRepository.findOne(id);
+    }
+
+    public List<Lunch> getLunchInTimeWindow(Date start, Date end){
+        return lunchRepository.getLunchInTimeWindow(start, end);
     }
 
     public void deleteLunch(Lunch lunch) {

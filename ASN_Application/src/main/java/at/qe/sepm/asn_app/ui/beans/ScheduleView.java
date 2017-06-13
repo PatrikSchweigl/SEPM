@@ -131,11 +131,6 @@ public class ScheduleView implements Serializable {
 				break;
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
-			System.err.println(ev.getId());
-			System.err.println(t.getDescription());
-
-			System.err.println(t.getStringId());
-			System.err.println(ev.getId());
 
 		}
 		if (getAuthenticatedUser().getUserRole() == UserRole.PARENT) {

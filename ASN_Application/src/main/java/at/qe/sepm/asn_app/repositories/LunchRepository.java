@@ -14,4 +14,7 @@ import java.util.List;
 public interface LunchRepository extends AbstractRepository<Lunch, Long>{
     @Query("SELECT u from Lunch u WHERE DATE(u.date) = DATE(:date)")
     List<Lunch> getLunchByDate(@Param("date") Date date);
+
+    @Query("SELECT l from Lunch l WHERE ((DATE(l.date) <= DATE(:end)) AND (DATE(l.date) >= DATE(:start)))")
+    List<Lunch> getLunchInTimeWindow(@Param("start") Date start, @Param("end") Date end);
 }

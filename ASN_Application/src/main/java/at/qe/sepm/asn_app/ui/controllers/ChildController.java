@@ -79,11 +79,7 @@ public class ChildController {
         return getChildrenByLunch(lunch);
     }
 	public Collection<Child> getChildrenByLunch(Lunch lunch){
-		Set<Child> ret = new HashSet<Child>();
-		for(Long id : lunch.getChildrenIds()){
-			ret.add(childService.loadChild(id));
-		}
-		return ret;
+		return childService.getChildrenByLunch(lunch);
 	}
 
 
