@@ -239,9 +239,7 @@ public class ScheduleView implements Serializable {
 					registrationService.deleteRegistration(r);
 				}
 			}
-		}
-		
-		if (desc.contains("Mittagessen:")) {
+		} else if (desc.contains("Mittagessen:")) {
 			Child child = null;
 			for (Child ch : c) {
 				if (desc.contains(ch.getFullname())) {
@@ -256,6 +254,10 @@ public class ScheduleView implements Serializable {
 				}
 
 			}
+		} else {
+			System.err.println("NOOOOOPE");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
 		}
 	}
 
