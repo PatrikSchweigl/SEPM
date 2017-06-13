@@ -6,7 +6,6 @@ import at.qe.sepm.asn_app.models.nursery.LunchReport;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.utils.DateUtils;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

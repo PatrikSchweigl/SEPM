@@ -39,17 +39,12 @@ public class LunchConstraints {
 		Iterator<NurseryInformation> iterator = n.iterator();
 		while (iterator.hasNext()) {
 			NurseryInformation nursery = iterator.next();
-			System.err.println("What WHATTTTTTTTTTT");
-			System.out.println(lunch.getDate() + "  vergleich mit easymmmmmeasy  " + nursery.getOriginDate());
 			if (lunch.getDate().compareTo(nursery.getOriginDate()) == 0) {
-				System.err.println("What WHATTTTTTTTTTT");
-				System.out.println("ICH BIN HIER UND TRINKE EINEN");
+
 
 				return true;
 			}
 		}
-		System.out.println("ODER DOCHNICHT");
-
 		return false;
 	}
 
