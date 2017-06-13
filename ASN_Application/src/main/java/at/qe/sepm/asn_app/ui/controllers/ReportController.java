@@ -27,6 +27,7 @@ public class ReportController {
 
 
     public List<LunchReport> getLunchReportThisMonth(){
+
         Date start = new Date();
         start.setDate(1);
         Date end = new Date();
