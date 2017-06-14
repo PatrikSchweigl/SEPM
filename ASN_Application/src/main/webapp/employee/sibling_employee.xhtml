@@ -20,7 +20,8 @@
                                 </div>
 
                                 <h:form id="siblingForm">
-                                    <p:dataTable id="siblingTable" var="sibling" value="#{siblingController.siblings}">
+                                    <p:dataTable id="siblingTable" var="sibling" value="#{siblingController.siblings}"
+                                                 emptyMessage="Es wurden keine Geschwister gefunden!">
                                         <p:column headerText="Vorname">
                                             <h:outputText value="#{sibling.firstName}"/>
                                         </p:column>
