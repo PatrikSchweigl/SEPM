@@ -84,7 +84,7 @@
                                             <p:panelGrid columns="2" rendered="#{not empty siblingController.sibling}"
                                                          columnClasses="label,value">
                                                 <p:outputLabel for="child" value="Kind: "/>
-                                                <p:selectOneListbox id="child" value="siblingController.sibling.child" rendered="true" var="child">
+                                                <p:selectOneListbox id="child" value="#{siblingController.sibling.child}" rendered="true" var="child">
                                                     <f:selectItems value="#{childController.children}" var="child" itemLabel="#{child.fullname}" itemValue="#{child}" />
                                                     <p:column>
                                                         <p:graphicImage
