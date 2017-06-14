@@ -120,13 +120,13 @@ a:focus {
 	outline-offset:-2px
 }
 
-@media all and (max-width: 1200px) {
+@media all and (max-width: 1300px) {
 
     .shrinker{float:left;}
 
 }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 1020px) {
 
     .shrinker{display:none;}
 
