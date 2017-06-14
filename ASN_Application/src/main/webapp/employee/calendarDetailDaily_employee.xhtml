@@ -35,7 +35,8 @@
 													<p:dataTable id="childTable" var="reg"
 														value="#{registrationController.getRegistrationsByDate(scheduleView.selectedDay)}"
 														paginator="true" paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														 emptyMessage="Es wurden keine Kinder gefunden!">
 														<f:facet name="{Exporters}"
 															style="float: right; vertical-align: middle;">
 															<div style="float: right; vertical-align: middle;">
@@ -90,8 +91,8 @@
 													<p:dataTable id="childTableEating" var="rep"
 														value="#{reportController.getLunchReportByDate(scheduleView.selectedDay)}"
 														paginator="true" paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
-														>
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														 emptyMessage="Es wurden keine Kinder gefunden, die heute zu Mittag essen!">
 
 														<f:facet name="{Exporters}"
 															style="float: right; vertical-align: middle;">
