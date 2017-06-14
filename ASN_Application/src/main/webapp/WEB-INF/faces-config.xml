@@ -14,7 +14,7 @@
 
     <converter>
         <converter-id>childConverter</converter-id>
-        <converter-class>at.qe.sepm.asn_app.ui.converter.ChildConverter</converter-class>
+        <converter-class>at.qe.sepm.asn_app.ui.controllers.ChildConverter</converter-class>
     </converter>
     
 

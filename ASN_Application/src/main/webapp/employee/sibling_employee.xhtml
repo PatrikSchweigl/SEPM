@@ -83,17 +83,9 @@
                                             <p:panelGrid columns="2" rendered="#{not empty siblingController.sibling}"
                                                          columnClasses="label,value">
                                                 <p:outputLabel for="child" value="Kind: "/>
-                                                <p:selectOneListbox id="child" value="#{siblingController.sibling.child.id}" converter="childConverter" var="chi" filter="true" filterMatchMode="contains">
-                                                    <f:selectItems value="#{childController.children}" var="child" itemLabel="#{child.firstName}" itemValue="#{child}" />
-
-                                                    <p:column>
-                                                        <h:outputText value ="#{chi.firstName}" />
-                                                    </p:column>
-
-                                                    <p:column>
-                                                        <h:outputText value="#{chi.lastName}" />
-                                                    </p:column>
-                                                </p:selectOneListbox>
+                                                <p:selectOneMenu converter="#{childConverter}" id="child" value="#{siblingController.sibling.child}" required="true">
+                                                    <f:selectItems value="#{childController.children}" var="child" itemLabel="#{child.firstName} #{child.lastName}" itemValue="#{child}" />
+                                                </p:selectOneMenu>
                                                 <p:outputLabel id="firstname" value="Vorname:"/>
                                                 <p:inputText for="firstname"
                                                              value="#{siblingController.sibling.firstName}"/>
