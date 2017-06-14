@@ -77,14 +77,6 @@
 									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
-							<li class="treeview"><a onclick="PF('ownDataDialog').show()">
-									<i class="fa fa-database fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Eigene Daten</span>
-							</a></li>
-						</h:panelGroup>
-
 
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 							<li class="treeview"><a
