@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.ui.converter;
+package at.qe.sepm.asn_app.ui.controllers;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -15,7 +15,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-@Scope("application")
+@FacesConverter("childConverter")
 public class ChildConverter implements Converter {
     @Autowired
     private ChildService childService;
@@ -38,6 +39,7 @@ public class ChildConverter implements Converter {
             return null;
         }
         Child child = childService.loadChild(Long.parseLong(value));
+        System.out.println(child.toString());
         return child;
     }
 
