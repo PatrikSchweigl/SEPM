@@ -33,3 +33,17 @@ function noWeekend(date)
   var day = date.getDay();
   return [day != 0 && day != 6, '']
 }
+
+var initalDateSelect = true;
+
+function onDateSelect() {
+
+   if(initalDateSelect) {
+       myDate = cal.getDate();
+       myDate.setHours(7);
+       myDate.setMinutes(15);   
+       cal.setDate(myDate);
+       initalDateSelect = false;
+   }
+
+ }
