@@ -48,13 +48,7 @@ public class ChildEditController {
     }
 
     public Child doSaveChildParent() {
-        Child childReturn = null;
-        if (allergy.compareTo("") != 0){
-            childEdit.addAllergy(allergy);
-        }
-        if (intolerance.compareTo("") != 0){
-            childEdit.addFoodIntolerance(intolerance);
-        }
+        Child childReturn;
         childReturn = doSaveChildEmployee();
         return childReturn;
     }

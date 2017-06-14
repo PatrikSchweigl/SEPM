@@ -14,7 +14,7 @@
                     <section class="content">
                         <div class="box">
                             <div class="box-body">
-                                <div align="right" style="margin-bottom: 10px;">
+                                <div align="left" style="margin-bottom: 10px;">
                                     <p:commandButton oncomplete="PF('childAddDialog').show()"
                                                      value="Kind hinzufügen"
                                                      style="align-items:right;"></p:commandButton>
@@ -26,15 +26,17 @@
                                                  paginator="true" rows="10" paginatorPosition="bottom"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                                  rowsPerPageTemplate="10,25,50"
-                                                 emptyMessage="Es wurden keine Kinder gefunden!">
+                                                 emptyMessage="Es wurden keine Kinder gefunden!" >
 
-                                        <f:facet name="header">
-                                            <p:outputPanel>
-                                                <h:outputText value="Suche "/>
-                                                <p:inputText id="globalFilter"
-                                                             onkeyup="PF('childTable').filter()" style="width:150px"
-                                                             placeholder="Suchwort eingeben"/>
-                                            </p:outputPanel>
+                                        <f:facet name="header" >
+                                                <p:outputPanel>
+                                                    <h:outputText value="Suche "/>
+                                                    <p:inputText id="globalFilterx"
+                                                                 onkeyup="PF('childTable').filter()" style="width:150px"
+                                                                 placeholder="Suchwort eingeben"/>
+                                                </p:outputPanel>
+
+
                                         </f:facet>
 
                                         <f:facet name="{Exporters}"

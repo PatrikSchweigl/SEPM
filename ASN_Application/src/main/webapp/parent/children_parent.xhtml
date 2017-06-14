@@ -174,33 +174,12 @@
                                                              required="true" requiredMessage="Notfallkontaktnummer erforderlich!"/>
                                                 <p:outputLabel for="allergies"
                                                                value="Allergie hinzufügen: "/>
-                                                <p:inputText id="allergies"
-                                                             value="#{childEditController.allergy}"/>
+                                                <p:inputTextarea id="allergies"
+                                                             value="#{childEditController.childEdit.allergies}"/>
                                                 <p:outputLabel for="intolerance"
                                                                value="Unverträglichkeit hinzufügen: "/>
-                                                <p:inputText id="intolerance"
-                                                             value="#{childEditController.intolerance}"/>
-                                                <p:outputLabel for="detail" value="Detailansicht:"/>
-                                                <h:selectBooleanCheckbox id="detail"
-                                                                         value="#{childEditController.detail}">
-                                                    <p:ajax update="childDataEdit"/>
-                                                </h:selectBooleanCheckbox>
-                                                <ui:fragment rendered="#{childEditController.detail}">
-                                                    <p:outputLabel for="all" value="Allergieliste:"/>
-                                                </ui:fragment>
-
-                                                <ui:fragment rendered="#{childEditController.detail}">
-                                                    <p:outputPanel
-                                                            id="all">#{childEditController.childEdit.allergies.toString()}</p:outputPanel>
-                                                </ui:fragment>
-                                                <ui:fragment rendered="#{childEditController.detail}">
-                                                    <p:outputLabel for="int" value="Unverträglichkeitsliste:"/>
-                                                </ui:fragment>
-
-                                                <ui:fragment rendered="#{childEditController.detail}">
-                                                    <p:outputPanel
-                                                            id="int">#{childEditController.childEdit.foodIntolerances.toString()}</p:outputPanel>
-                                                </ui:fragment>
+                                                <p:inputTextarea id="intolerance"
+                                                             value="#{childEditController.childEdit.foodIntolerances}"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="3">

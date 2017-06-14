@@ -60,10 +60,8 @@ public class Child implements Persistable<Long> {
 
     @NotNull
     private String emergencyNumber;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    private Set<String> allergies;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    private Set<String> foodIntolerances;
+    private String allergies;
+    private String foodIntolerances;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Sibling> siblings;
 
@@ -107,8 +105,8 @@ public class Child implements Persistable<Long> {
      * Full constructor
      */
     public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1,
-                 Parent par2, String emergencyNumber, Set<String> allergies, Set<String> foodIntolerances,
-                 Set<Sibling> siblings, Custody custody, Religion religion, Set<Caregiver> caregivers) {
+                 Parent par2, String emergencyNumber, Set<Sibling> siblings, Custody custody, Religion religion,
+                 Set<Caregiver> caregivers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -117,8 +115,6 @@ public class Child implements Persistable<Long> {
         this.parent1 = par1;
         this.parent2 = par2;
         this.emergencyNumber = emergencyNumber;
-        this.allergies = allergies;
-        this.foodIntolerances = foodIntolerances;
         this.siblings = siblings;
         this.custody = custody;
         this.religion = religion;
@@ -148,14 +144,6 @@ public class Child implements Persistable<Long> {
 
     public void addCaregiver(Caregiver c){
         caregivers.add(c);
-    }
-
-    public void addAllergy(String s){
-        allergies.add(s);
-    }
-
-    public void addFoodIntolerance(String s){
-        foodIntolerances.add(s);
     }
 
     public void addSibling(Sibling s){
@@ -214,22 +202,6 @@ public class Child implements Persistable<Long> {
         this.emergencyNumber = emergencyNumber;
     }
 
-    public Set<String> getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(Set<String> allergies) {
-        this.allergies = allergies;
-    }
-
-    public Set<String> getFoodIntolerances() {
-        return foodIntolerances;
-    }
-
-    public void setFoodIntolerances(Set<String> foodIntolerances) {
-        this.foodIntolerances = foodIntolerances;
-    }
-
     public Set<Sibling> getSiblings() {
         return siblings;
     }
@@ -260,6 +232,22 @@ public class Child implements Persistable<Long> {
 
     public void setCaregivers(Set<Caregiver> caregivers) {
         this.caregivers = caregivers;
+    }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
+    public String getFoodIntolerances() {
+        return foodIntolerances;
+    }
+
+    public void setFoodIntolerances(String foodIntolerances) {
+        this.foodIntolerances = foodIntolerances;
     }
 
     @Override
@@ -316,7 +304,8 @@ public class Child implements Persistable<Long> {
 
     @Override
     public String toString() {
-        return "FirstName: " + firstName + "\n" +
+        return "ID: " + id + "\n" +
+                "FirstName: " + firstName + "\n" +
                 "LastName: " + lastName + "\n" +
                 "Birthday: " + birthday + "\n" +
                 "Gender: " + gender + "\n" +
