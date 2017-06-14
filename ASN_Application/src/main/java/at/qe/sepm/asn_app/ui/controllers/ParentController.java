@@ -1,20 +1,22 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
-import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.validation.constraints.Null;
 import java.util.Collection;
 
 /**
@@ -23,7 +25,8 @@ import java.util.Collection;
  */
 @Component
 //@Scope("view")
-@Scope("application")
+//@Scope("application")
+@Scope("view")
 public class ParentController {
     @Autowired
     private ParentService parentService;
@@ -31,12 +34,14 @@ public class ParentController {
     private MailService mailService;
     @Autowired
     private ChildService childService;
+    @Autowired
+    private UserConstraints userConstraints;
     private String password;
     private Parent parent;
     private Collection<Parent> parents;
 
 
-    public Collection<Parent> getParents(){
+    public Collection<Parent> getParents() {
         return parents;
     }
 
@@ -44,46 +49,64 @@ public class ParentController {
         this.parents = parents;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public Collection<Child> getChildren(String username){
+    public Collection<Child> getChildren(String username) {
         return childService.getChildrenByParentUsername(username);
     }
 
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setParents(parentService.getAllParents());
     }
 
     @PostConstruct
-    private void initNewParent(){
+    private void initNewParent() {
         parent = new Parent();
     }
 
-    public void doReloadParent(){
+    public void doReloadParent() {
         parent = parentService.loadParent(parent.getUsername());
     }
 
 
-    public void doSaveParent(){
-        parent = parentService.saveParent(parent);
-        mailService.sendEmail(parent.getEmail(), "ASN-App Registrierung",
-                "Willkommen bei ASN-Application!\n\n" +
-                        "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
-                        "Ihr Benutzername: "+ parent.getUsername() + "\n" +
-                        "Ihr Passwort: passwd" +
-                        "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
-                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                        "Viel Spaß wünschen das Kinderkrippen-Team!");
-        parent = null;
-        initNewParent();
-        initList();
+    public void doSaveParent() {
+        if (!StringUtils.isNumeric(parent.getPostcode())) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
+        } else if (!StringUtils.isNumeric(parent.getPhoneNumber())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
+        } else if (!parent.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
+        } else if (userConstraints.checkIfUsernameExists(parent.getUsername())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
+        } else {
+            try {
+                parent = parentService.saveParent(parent);
+                mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Registrierung",
+                        "Willkommen bei Care4Fun-Application!\n\n" +
+                                "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                                "Ihr Benutzername: " + parent.getUsername() + "\n" +
+                                "Ihr Passwort: passwd" +
+                                "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
+                                "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                                "Viel Spaß wünschen das Kinderkrippen-Team!");
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.execute("PF('parentAddDialog').hide()");
+            } catch (TransactionSystemException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+            }
+            parent = null;
+            initNewParent();
+            initList();
+
+        }
     }
 
     public Parent getParent() {
@@ -94,15 +117,14 @@ public class ParentController {
         this.parent = parent;
         doReloadParent();
     }
+
     public void setParent2(Parent parent) {
         this.parent = parent;
     }
 
-    public void doChangePassword(String password){
-       parentService.changePassword(password);
+    public void doChangePassword(String password) {
+        parentService.changePassword(password);
     }
-
-
 
 
 }

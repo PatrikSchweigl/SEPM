@@ -22,11 +22,13 @@ public class NurseryConstraints {
     public  boolean nurseryInfoExists(NurseryInformation nurseryInformation){
         Collection<NurseryInformation> list = nurseryInformationService.getAllInformation();    //throws null pointer exception
         Iterator<NurseryInformation> iterator = list.iterator();
-
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(nurseryInformation.getOriginDate());
+        cal.add(Calendar.HOUR_OF_DAY, 2);
         while(iterator.hasNext()) {
         	Date date = iterator.next().getOriginDate();
-        	System.out.println(date + "  vergleich mit  " + nurseryInformation.getOriginDate());
-            if (date.compareTo(nurseryInformation.getOriginDate()) == 0) {
+        	System.out.println(date + "  vergleich mit  " + cal.getTime());
+            if (date.compareTo(cal.getTime()) == 0) {
                 return true;
             }
         }

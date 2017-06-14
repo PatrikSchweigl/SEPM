@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.services.TaskService;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,11 @@ public class TaskController {
 
     public Collection<Task> getTasks(){
         return tasks;
+    }
+
+    public Collection<Task> getNonImportantTasks(){
+        Collection<Task> nonImpTasks = taskService.getTasksByImportance(false);
+        return nonImpTasks;
     }
 
     public Collection<Task> getTasksBySender(String id){

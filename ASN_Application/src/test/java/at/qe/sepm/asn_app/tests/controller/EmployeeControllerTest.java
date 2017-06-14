@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.tests.database;
+package at.qe.sepm.asn_app.tests.controller;
 
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.employee.Employee;
@@ -8,6 +8,7 @@ import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.services.EmployeeService;
 import at.qe.sepm.asn_app.ui.controllers.EmployeeController;
+import at.qe.sepm.asn_app.ui.controllers.EmployeeEditController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,8 @@ public class EmployeeControllerTest {
     @Autowired
     private EmployeeController employeeController;
     @Autowired
+    private EmployeeEditController employeeEditController;
+    @Autowired
     private EmployeeService employeeService;
     private Employee employee;
 
@@ -65,8 +68,8 @@ public class EmployeeControllerTest {
         assertTrue(employee.equals(other));
 
         // Delete the parent again
-        employeeController.setEmployeeEdit2(employee);
-        employeeController.doDeleteEmployee();
+        employeeEditController.setEmployee2(employee);
+        employeeEditController.doDeleteEmployee();
         other = employeeService.loadEmployee(employee.getUsername());
         assertFalse(employee.equals(other));
         assertNull(other);

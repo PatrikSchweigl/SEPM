@@ -3,11 +3,16 @@ package at.qe.sepm.asn_app.ui.controllers;
 import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.ui.constraints.NurseryConstraints;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,6 +21,7 @@ import java.util.Date;
  * 15.05.2017
  */
 @Component
+//@Scope("view")
 @Scope("view")
 public class NurseryInformationController {
 
@@ -33,7 +39,10 @@ public class NurseryInformationController {
 
 	public void setNurseryInformation(NurseryInformation nurseryInformation) {
 		this.nurseryInformation = nurseryInformation;
-		doReloadNurseryInformation();
+	}
+
+	public void setNurseryInformation2(NurseryInformation nurseryInformation) {
+		this.nurseryInformation = nurseryInformation;
 	}
 
 	public Collection<NurseryInformation> getNurseryInformations() {
@@ -58,15 +67,31 @@ public class NurseryInformationController {
 		setNurseryInformations(nurseryInformationService.getAllInformation());
 	}
 
-	public void doSaveNurseryInformation() {
-		if (nurseryConstraints.nurseryInfoExists(nurseryInformation)
-				|| nurseryInformation.getOriginDate().compareTo(new Date()) <= 0
-				|| nurseryConstraints.checkTimeConstraints(nurseryInformation) == false) {
-			return;
+	public NurseryInformation doSaveNurseryInformation() {
+		NurseryInformation nurseryInformationReturn = null;
+		if (nurseryInformation.getMaxOccupancy() < 0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Max. Belegung muss größer gleich 0 sein!", null));
+		} else if(nurseryConstraints.nurseryInfoExists(nurseryInformation)){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "An diesem Tag existiert bereits ein Eintrag!", null));
+
+		} else if(nurseryInformation.getOriginDate().compareTo(new Date()) <= 0) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Datum liegt in der Vergangenheit!", null));
+		} else if(nurseryConstraints.checkTimeConstraints(nurseryInformation) == false){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Von-Angaben müssen vor Bis-Angaben sein!", null));
+		} else {
+			try {
+				nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
+				nurseryInformationReturn = nurseryInformation;
+				nurseryInformation = null;
+				initNewNurseryInformation();
+				initList();
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('nurseryInformationDialog').hide()");
+			}catch(TransactionSystemException ex){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+			}
 		}
-		nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
-		nurseryInformation = null;
-		initNewNurseryInformation();
+		return nurseryInformationReturn;
 	}
 
 	public void doDeleteNurseryInformation() {

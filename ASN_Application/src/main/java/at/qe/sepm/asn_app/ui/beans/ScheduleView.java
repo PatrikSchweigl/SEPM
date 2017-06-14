@@ -3,9 +3,12 @@ package at.qe.sepm.asn_app.ui.beans;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -24,22 +28,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionSystemException;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.nursery.Task;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.NurseryInformationService;
+import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.services.TaskService;
 import at.qe.sepm.asn_app.services.UserService;
+import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
+import at.qe.sepm.asn_app.ui.constraints.ScheduleConstraints;
 
 /**
  * Created by Auki on 02.05.2017.
@@ -62,11 +73,19 @@ public class ScheduleView implements Serializable {
 	@Autowired
 	private MailService mailService;
 	@Autowired
+	private RegistrationConstraints registrationConstraints;
+	@Autowired
+	private ScheduleConstraints scheduleConstraints;
+	@Autowired
 	private RegistrationService registrationService;
 	@Autowired
 	private ChildService childService;
 	@Autowired
+	private ParentService parentService;
+	@Autowired
 	private UserService userService;
+	@Autowired
+	private LunchService lunchService;
 	@Autowired
 	private AuditLogRepository auditLogRepository;
 	@Autowired
@@ -85,11 +104,14 @@ public class ScheduleView implements Serializable {
 	private Collection<Task> tasks;
 	private Collection<NurseryInformation> nurseryInfo;
 	private Collection<Registration> registrations;
+	private Collection<Lunch> lunchs;
+
 	private Child childReg;
 	private String description;
 	private String childFirstname;
 	private Date childBringDate;
 	private String selectedDay;
+	private Date today;
 	String footer = "Das Kinderkrippen Team bedankt sich für Ihre Mitarbeit!";
 
 	@PostConstruct
@@ -107,45 +129,63 @@ public class ScheduleView implements Serializable {
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "important");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.EMPLOYEE
 					&& t.getReceiver().getUserRole() == UserRole.PARENT)
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+				ev = new DefaultScheduleEvent("Aufgabe für: " + t.getReceiver().getFirstName() + " "
+						+ t.getReceiver().getLastName() + "\n" + t.getDescription(), t.getBeginDate(),
+						t.getEndingDate(), "employee");
 			else if (getAuthenticatedUser().getUserRole() == UserRole.PARENT
 					&& t.getSender().getUserRole() == UserRole.EMPLOYEE
 					&& (t.getEndingDate().compareTo(new Date()) > 0))
-				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "employee");
+				ev = new DefaultScheduleEvent("Aufgabe von: " + t.getSender().getFirstName() + " "
+						+ t.getSender().getLastName() + "\n" + t.getDescription(), t.getBeginDate(), t.getEndingDate(),
+						"employee");
 			else if (t.getEndingDate().compareTo(new Date()) > 0)
 				ev = new DefaultScheduleEvent(t.getDescription(), t.getBeginDate(), t.getEndingDate(), "normal-event");
 			else
 				break;
 			eventModel.addEvent(ev);
 			ev.setId(t.getStringId());
-			System.err.println(ev.getId());
-			System.err.println(t.getDescription());
-
-			System.err.println(t.getStringId());
-			System.err.println(ev.getId());
 
 		}
 		if (getAuthenticatedUser().getUserRole() == UserRole.PARENT) {
 			nurseryInfo = nurseryInformationService.getAllInformation();
 			for (NurseryInformation n : nurseryInfo) {
-
-				DefaultScheduleEvent ev3;
-				ev3 = new DefaultScheduleEvent("   " + n.getMaxOccupancy() + "  Plätze frei.\n  Bringzeit: "
-						+ n.getBringDurationNew() + "\n" + "Holzeit: " + n.getPickUpDurationNew(), n.getOriginDate(),
-						n.getOriginDate(), "info");
-				ev3.setAllDay(true);
-				eventModel.addEvent(ev3);
-
+				if (n.getBringEnd().compareTo(new Date()) > 0) {
+					DefaultScheduleEvent ev3;
+					ev3 = new DefaultScheduleEvent(
+							"   Bringzeit: " + n.getBringDurationNew() + "\n" + "Holzeit: " + n.getPickUpDurationNew(),
+							n.getOriginDate(), n.getOriginDate(), "info");
+					ev3.setAllDay(true);
+					eventModel.addEvent(ev3);
+				}
 			}
 
 			registrations = registrationService.getAllRegistrationsByParent();
 			for (Registration r : registrations) {
-				DefaultScheduleEvent ev;
+				if (r.getBringdate().compareTo(new Date()) > 0) {
+					DefaultScheduleEvent ev;
 
-				ev = new DefaultScheduleEvent(
-						r.getChild().getFirstName() + " " + r.getChild().getLastName() + "\n" + r.getNote(),
-						r.getDate(), r.getDate(), "registration");
-				eventModel.addEvent(ev);
+					ev = new DefaultScheduleEvent(
+							"Anmeldung: " + r.getChild().getFirstName() + " " + r.getChild().getLastName() + " "
+									+ r.getFormattedBringDate() + " " + "Uhr" + "\n" + r.getNote(),
+							r.getDate(), r.getDate(), "registration");
+					System.err.println(ev.getId());
+					eventModel.addEvent(ev);
+				}
+			}
+
+			lunchs = lunchService.findAll();
+			Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
+			Set<Child> arr = p.getChildren();
+			for (Lunch l : lunchs) {
+				for (Child c : arr) {
+					if (l.getChildrenIds().contains(c.getId())) {
+						DefaultScheduleEvent ev;
+						l.getDate().setHours(2);
+						ev = new DefaultScheduleEvent("Mittagessen: " + c.getFirstName() + " " + c.getLastName(),
+								l.getDate(), l.getDate(), "meal");
+						eventModel.addEvent(ev);
+					}
+				}
 			}
 		}
 	}
@@ -167,42 +207,200 @@ public class ScheduleView implements Serializable {
 
 	public void deleteEvent() {
 		Task task = taskService.getTaskByStringId(event.getId());
-		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0)
+		if (task.getSender().getUsername().compareTo(getAuthenticatedUser().getUsername()) == 0) {
 			taskService.deleteTaskById(event.getId());
-		else
-			FacesContext.getCurrentInstance().addMessage("scheduleForm",
-					new FacesMessage("Sie sind nicht berechtigt, den Eintrag zu löschen."));
+			RequestContext context = RequestContext.getCurrentInstance();
+			context.execute("PF('eventDialog').hide()");
+		}
+
+		else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
+		}
+	}
+
+	public void deleteEventParent() {
+		String desc = event.getTitle();
+		Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
+		Set<Child> c = p.getChildren();
+		System.err.println(desc);
+		if (desc.contains("Anmeldung:")) {
+			Child child = null;
+			for (Child ch : c) {
+				if (desc.contains(ch.getFullname())) {
+					child = ch;
+				}
+			}
+			Collection<Registration> reg = registrationService.getAllRegistrationsByDate(event.getStartDate());
+			for (Registration r : reg) {
+				System.err.println(r.getChild().getFirstName() + " " + child.getFirstName());
+
+				if (child.getId() == r.getChild().getId()) {
+					registrationService.deleteRegistration(r);
+					RequestContext context = RequestContext.getCurrentInstance();
+					context.execute("PF('eventDialog').hide()");
+				}
+			}
+		} else if (desc.contains("Mittagessen:")) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
+			Child child = null;
+			for (Child ch : c) {
+				if (desc.contains(ch.getFullname())) {
+					child = ch;
+				}
+			}
+			Collection<Lunch> lun = lunchService.getLunchByDate(event.getStartDate());
+			for (Lunch r : lun) {
+				if (r.getChildrenIds().contains(child.getId())) {
+					if (r.getDate().compareTo(cal.getTime()) <= 0) {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Die Abmeldefrist für das Essen ist verstrichen", null));
+					} else {
+						r.removeChild(child.getId());
+						lunchService.saveLunch(r);
+						RequestContext context = RequestContext.getCurrentInstance();
+						context.execute("PF('eventDialog').hide()");
+					}
+				}
+
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Sie sind nicht berrechtigt, diesen Eintrag zu löschen", null));
+		}
+	}
+
+	public void registerFullWeek() {
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		cal.add(Calendar.WEEK_OF_YEAR, 1);
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		cal2.add(Calendar.WEEK_OF_YEAR, 1);
+		cal2.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		cal2.set(Calendar.HOUR_OF_DAY, 8);
+		cal2.set(Calendar.MINUTE, 0);
+		cal2.set(Calendar.SECOND, 0);
+		cal2.set(Calendar.MILLISECOND, 0);
+		Collection<Child> childs = childService.getChildrenByParentUsername(getAuthenticatedUser().getUsername());
+		for (int i = 0; i < 5; ++i) {
+			for (Child c : childs) {
+				Registration reg = new Registration("", c, cal.getTime(), cal2.getTime());
+				if (registrationConstraints.registationExists(reg))
+					continue;
+				if (!registrationConstraints.checkIfNurseryExists(reg))
+					continue;
+				registrationService.saveRegistration(reg);
+				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
+						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
+								+ getAuthenticatedUser().getUserRole() + "] ",
+						reg.getBringdate());
+				auditLogRepository.save(log);
+			}
+			cal.add(Calendar.DAY_OF_WEEK, 1);
+			cal2.add(Calendar.DAY_OF_WEEK, 1);
+		}
+	}
+
+	public void registerFullWeekLunch() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.WEEK_OF_YEAR, 1);
+		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		cal.set(Calendar.HOUR_OF_DAY, 2);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		System.err.println("WOOOOOOOOOOOOOOOOO");
+		Collection<Child> childs = childService.getChildrenByParentUsername(getAuthenticatedUser().getUsername());
+		for (int i = 0; i < 5; ++i) {
+			for (Child c : childs) {
+				List<Lunch> lunchs = lunchService.getLunchByDate(cal.getTime());
+				System.err.println(cal.getTime());
+				System.err.println("WOOOOOOOOOOOOOOOOO");
+				if (lunchs == null || lunchs.size() < 1) {
+					System.err.println("WHAAAAAAAAAAAAAAAAAAAAAT");
+					continue;
+				}
+				if (lunchs.get(0).getChildrenIds().contains(c.getId()))
+					continue;
+				lunchs.get(0).addChild(c);
+				lunchService.saveLunch(lunchs.get(0));
+				AuditLog log = new AuditLog(c.getFullname(), "REGISTRATION MEAL CREATED: "
+						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
+						cal.getTime());
+				auditLogRepository.save(log);
+			}
+			cal.add(Calendar.DAY_OF_WEEK, 1);
+		}
 	}
 
 	public void addRegistration() {
-		childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
-				childFirstname);
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(event.getStartDate());
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		if (event.getStartDate().compareTo(new Date()) <= 0)
-			return;
-		Registration reg = new Registration(description, childReg, cal.getTime(), event.getStartDate());
-		registrationService.saveRegistration(reg);
-		AuditLog log = new AuditLog(
-				reg.getChild().getFirstName() + " " + reg.getChild().getLastName(), "REGISTRATION CREATED: "
-						+ getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ",
-				reg.getBringdate());
-		auditLogRepository.save(log);
+		try {
+			childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
+					childFirstname);
+			Calendar cal = Calendar.getInstance();
+			Calendar cal2 = Calendar.getInstance();
+			cal.setTime(event.getStartDate());
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
+			cal2.setTime(event.getStartDate());
+			cal2.add(Calendar.HOUR_OF_DAY, 2);
+			Registration reg = new Registration(description, childReg, cal.getTime(), cal2.getTime());
+
+			if (event.getStartDate().compareTo(new Date()) <= 0) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Keine Anmeldung in der Vergangenheit möglich", null));
+			} else if (registrationConstraints.registationExists(reg)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Sie haben für heute ihr Kind schon angemeldet", null));
+			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
+			} else if (registrationConstraints.checkTimeConstraints(reg)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Sie können kein Kind um diese Uhrzeit eintragen", null));
+			} else {
+				registrationService.saveRegistration(reg);
+				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
+						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
+								+ getAuthenticatedUser().getUserRole() + "] ",
+						reg.getBringdate());
+				auditLogRepository.save(log);
+				RequestContext context = RequestContext.getCurrentInstance();
+				context.execute("PF('eventDateDialog').hide()");
+			}
+		} catch (Exception ex) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+		}
 	}
 
 	public void addEvent() {
 		if (event.getStartDate().compareTo(new Date()) < 0)
 			return;
-
+		System.err.println(event.getStartDate());
+		System.err.println(event.getEndDate());
+		if (event.getEndDate().compareTo(event.getStartDate()) < 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Endzeit muss nach der Startzeit liegen", null));
+			return;
+		}
+		if (event.getDescription().compareTo("") == 0) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie müssen einen Titel angeben", null));
+			return;
+		}
+		// if the Event is Select on Date event
 		if (event.getId() == null) {
 			eventModel.addEvent(event);
 
 			Task task;
 			if (reciever == null || !visible) {
-				System.err.println(event.getDescription());
 
 				task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), getAuthenticatedUser(),
 						event.getStartDate(), event.getEndDate());
@@ -215,11 +413,20 @@ public class ScheduleView implements Serializable {
 				UserData user = userService.loadUser(reciever);
 				System.err.println(reciever);
 				if (user != null) {
-	                
+
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(), user,
 							event.getStartDate(), event.getEndDate());
-					mailService.sendEmail(user.getEmail(), "Ihnen wurde eine neue Aufgabe zugeteilt", "Guten Tag "+user.getFirstName() + " " + user.getLastName()
-                    +"!\n\nIhnen wurde soeben von der/dem Krippenmitarbeiter/in " + getAuthenticatedUser().getUsername() +" eine neue Augabe zugeteilt:\n\n" + event.getDescription() +"\t " + task.getFormattedDate(task.getBeginDate()) + " bis "+ task.getFormattedDate(task.getEndingDate()) +"\n\n" +footer);
+					if (scheduleConstraints.checkIfTaskExistsForParent(task)) {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Dieser Elternteil hat in diesem Zeitraum schon eine Aufgabe", null));
+						return;
+					}
+					mailService.sendEmail(user.getEmail(), "Ihnen wurde eine neue Aufgabe zugeteilt",
+							"Guten Tag " + user.getFirstName() + " " + user.getLastName()
+									+ "!\n\nIhnen wurde soeben von der/dem Krippenmitarbeiter/in "
+									+ getAuthenticatedUser().getUsername() + " eine neue Augabe zugeteilt:\n\n"
+									+ event.getDescription() + "\t " + task.getFormattedDate(task.getBeginDate())
+									+ " bis " + task.getFormattedDate(task.getEndingDate()) + "\n\n" + footer);
 				} else {
 					task = new Task(event.getDescription(), event.getId(), getAuthenticatedUser(),
 							getAuthenticatedUser(), event.getStartDate(), event.getEndDate());
@@ -230,6 +437,8 @@ public class ScheduleView implements Serializable {
 			taskService.saveTask(task);
 
 		}
+
+		// if the Event is Select on Event event
 
 		else {
 			Task task = taskService.getTaskByStringId(event.getId());
@@ -257,6 +466,8 @@ public class ScheduleView implements Serializable {
 			}
 		}
 		event = new DefaultScheduleEvent();
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("PF('eventDialog').hide()");
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
@@ -419,8 +630,8 @@ public class ScheduleView implements Serializable {
 	public void setChildBringDate(Date childBringDate) {
 		this.childBringDate = childBringDate;
 	}
-	
-	public String getFormattedDate(Date date){
+
+	public String getFormattedDate(Date date) {
 		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
 		form.setTimeZone(TimeZone.getTimeZone("GMT+2"));
 		try {
@@ -438,5 +649,14 @@ public class ScheduleView implements Serializable {
 
 	public void setSelectedDay(String selectedDay) {
 		this.selectedDay = selectedDay;
+	}
+
+	public Date getToday() {
+		today = new Date();
+		return today;
+	}
+
+	public void setToday(Date today) {
+		this.today = today;
 	}
 }

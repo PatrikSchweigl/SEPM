@@ -4,6 +4,9 @@ import at.qe.sepm.asn_app.models.child.Child;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,9 +22,12 @@ public class Registration implements Persistable<Long> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String note;
+    @NotNull
     @ManyToOne(optional = false)
     private Child child;
+    @NotNull
     private Date date;  //date should hold Year/Month/Day only - no timestamps -> easier to compare
+    @NotNull
     private Date bringdate;
 
     public Registration(){
@@ -72,6 +78,14 @@ public class Registration implements Persistable<Long> {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public String getFormattedBringDate(){
+    	return new SimpleDateFormat("hh:mm").format(bringdate);
+    }
+    
+    public String getFormattedBringDateFull(){
+    	return new SimpleDateFormat("dd-MM-yyyy hh:mm").format(bringdate);
     }
 
 

@@ -31,7 +31,8 @@
                                                      value="#{employeeController.employees}" rows="10"
                                                      paginatorPosition="bottom" paginator="true"
                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                                     rowsPerPageTemplate="10,25,50">
+                                                     rowsPerPageTemplate="10,25,50"
+                                                     emptyMessage="Es wurden keine Angestellten gefunden!">
 
                                             <f:facet name="header">
                                                 <p:outputPanel>
@@ -106,24 +107,24 @@
                                                                  oncomplete="PF('employeeEditDialog').show()"
                                                                  icon="ui-icon-note" title="Ändern" process="@this">
                                                     <f:setPropertyActionListener value="#{employee}"
-                                                                                 target="#{employeeController.employeeEdit}"/>
+                                                                                 target="#{employeeEditController.employee}"/>
                                                 </p:commandButton>
                                                 <p:commandButton
-                                                        action="#{employeeController.doDeleteEmployee}"
+                                                        action="#{employeeEditController.doDeleteEmployee}"
                                                         icon="ui-icon-trash" title="Löschen"
                                                         update=":employeeForm:employeeTable" process="@this">
                                                     <f:setPropertyActionListener value="#{employee}"
-                                                                                 target="#{employeeController.employeeEdit}"/>
+                                                                                 target="#{employeeEditController.employee}"/>
                                                     <p:confirm header="Bestätigung"
                                                                message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
                                                 </p:commandButton>
                                                 <p:commandButton
-                                                        action="#{employeeController.doResetPassword}"
+                                                        action="#{employeeEditController.doResetPassword}"
                                                         icon="ui-icon-refresh" title="Passwort zurücksetzen"
                                                         update=":employeeForm:employeeTable" process="@this">
                                                     <f:setPropertyActionListener value="#{employee}"
-                                                                                 target="#{employeeController.employeeEdit}"/>
+                                                                                 target="#{employeeEditController.employee}"/>
                                                     <p:confirm header="Bestätigung"
                                                                message="Sind Sie sich sicher, dass Sie dieses Passwort zurücksetzen wollen? Dies lässt sich nicht mehr rückgängig machen."
                                                                icon="ui-icon-alert"/>
@@ -133,59 +134,77 @@
                                         </p:dataTable>
 
                                         <!-- Create Employee Dialog -->
-                                        <h:form id="createEmployeeForm">
+
                                             <p:dialog header="Angestellten hinzufügen" id="employeeAddDialog"
                                                       widgetVar="employeeAddDialog" modal="true"
-                                                      showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
-                                                <p:messages id="messages" autoUpdate="true"/>
+                                                      showEffect="fade" hideEffect="fade" resizable="false"
+                                                      closeOnEscape="true">
+                                                <p:messages id="messagesCreate" autoUpdate="true"/>
                                                 <p:outputPanel id="employeeDataCreate">
                                                     <h:panelGrid columns="2">
                                                         <p:outputLabel for="usernameCreate" value="Benutzername: "/>
                                                         <p:inputText id="usernameCreate"
-                                                                     value="#{employeeController.employee.username}" required="true"
+                                                                     value="#{employeeController.employee.username}"
+                                                                     required="true"
                                                                      requiredMessage="Benutzername erforderlich!"/>
-                                                        <p:outputLabel for="passwordCreate" value="Passwort: "/>
-                                                        <p:password id="passwordCreate"
-                                                                    value="#{employeeController.employee.password}" required="true"
-                                                                    requiredMessage="Passwort erforderlich!"/>
                                                     </h:panelGrid>
                                                     <p:separator/>
                                                     <h:panelGrid columns="6">
                                                         <p:outputLabel for="firstnameCreate" value="Vorname: "/>
                                                         <p:inputText id="firstnameCreate"
-                                                                     value="#{employeeController.employee.firstName}"/>
+                                                                     value="#{employeeController.employee.firstName}"
+                                                                     required="true"
+                                                                     requiredMessage="Vorname erforderlich!"/>
                                                         <p:outputLabel for="lastnameCreate" value="Nachname: "/>
                                                         <p:inputText id="lastnameCreate"
-                                                                     value="#{employeeController.employee.lastName}"/>
+                                                                     value="#{employeeController.employee.lastName}"
+                                                                     required="true"
+                                                                     requiredMessage="Nachname erforderlich!"/>
                                                         <p:outputLabel for="birthdayCreate" value="Geburtsdatum: "/>
                                                         <p:inputMask mask="99/99/9999" id="birthdayCreate"
-                                                                     value="#{employeeController.employee.birthday}"/>
+                                                                     value="#{employeeController.employee.birthday}"
+                                                                     required="true"
+                                                                     requiredMessage="Geburtsdatum erforderlich!"/>
                                                         <p:outputLabel for="locationCreate" value="Wohnort: "/>
                                                         <p:inputText id="locationCreate"
-                                                                     value="#{employeeController.employee.location}"/>
+                                                                     value="#{employeeController.employee.location}"
+                                                                     required="true"
+                                                                     requiredMessage="Wohnort erforderlich!"/>
                                                         <p:outputLabel for="streetCreate" value="Straße: "/>
                                                         <p:inputText id="streetCreate"
-                                                                     value="#{employeeController.employee.streetName}"/>
+                                                                     value="#{employeeController.employee.streetName}"
+                                                                     required="true"
+                                                                     requiredMessage="Straßenname erforderlich!"/>
                                                         <p:outputLabel for="postcodeCreate" value="Postleitzahl: "/>
                                                         <p:inputMask id="postcodeCreate"
                                                                      mask="9999?9" slotChar=" "
-                                                                     value="#{employeeController.employee.postcode}"/>
+                                                                     value="#{employeeController.employee.postcode}"
+                                                                     required="true"
+                                                                     requiredMessage="Postleitzahl erforderlich!"/>
                                                         <p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
                                                         <p:inputMask id="phonenumberCreate"
                                                                      mask="9?99999999999" slotChar=" " maxlength="12"
-                                                                     value="#{employeeController.employee.phoneNumber}"/>
-                                                        <p:outputLabel for="emailCreate" value="Email: " />
-                                                        <p:inputText id="emailCreate" validatorMessage="Ungültiges Email-Format!" value="#{employeeController.employee.email}">
-                                                            <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                                     value="#{employeeController.employee.phoneNumber}"
+                                                                     required="true"
+                                                                     requiredMessage="Telefonnummer erforderlich!"/>
+                                                        <p:outputLabel for="emailCreate" value="Email: "/>
+                                                        <p:inputText id="emailCreate"
+                                                                     validatorMessage="Ungültiges Email-Format!"
+                                                                     value="#{employeeController.employee.email}"
+                                                                     required="true"
+                                                                     requiredMessage="Email erforderlich!">
+                                                            <f:validateRegex
+                                                                    pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                                                         </p:inputText>
                                                     </h:panelGrid>
                                                     <p:separator/>
                                                     <h:panelGrid columns="6">
-                                                        <p:outputLabel for="familystatusCreate" value="Familienstatus: "/>
+                                                        <p:outputLabel for="familystatusCreate"
+                                                                       value="Familienstatus: "/>
                                                         <p:selectOneMenu id="familystatusCreate"
                                                                          value="#{employeeController.employee.familyStatus}"
                                                                          style="width:150px">
-                                                            <f:selectItem itemLabel="Select Familystatus"
+                                                            <f:selectItem itemLabel="Wähle Familienstatus"
                                                                           itemValue="#{employeeController.employee.familyStatus}"/>
                                                             <f:selectItems value="#{enumController.familyStatus}"/>
                                                         </p:selectOneMenu>
@@ -193,7 +212,7 @@
                                                         <p:selectOneMenu id="religionCreate"
                                                                          value="#{employeeController.employee.religion}"
                                                                          style="width:150px">
-                                                            <f:selectItem itemLabel="Select Religion"
+                                                            <f:selectItem itemLabel="Wähle Religion"
                                                                           itemValue="#{employeeController.employee.religion}"/>
                                                             <f:selectItems value="#{enumController.religions}"/>
                                                         </p:selectOneMenu>
@@ -201,7 +220,7 @@
                                                         <p:selectOneMenu id="roleCreate"
                                                                          value="#{employeeController.employee.workRole}"
                                                                          style="width:150px">
-                                                            <f:selectItem itemLabel="Select Role"
+                                                            <f:selectItem itemLabel="Wähle Arbeitsrolle"
                                                                           itemValue="#{employeeController.employee.workRole}"/>
                                                             <f:selectItems value="#{enumController.workRoles}"/>
                                                         </p:selectOneMenu>
@@ -210,100 +229,130 @@
                                                     <h:panelGrid columns="3">
                                                         <p:commandButton value="Speichern"
                                                                          action="#{employeeController.doSaveEmployee()}"
-                                                                         update=":employeeForm:employeeTable"/>
+                                                                         update=":employeeForm:employeeTable"
 
+                                                                         />
                                                         <p:commandButton value="Abbruch"
-                                                                         oncomplete="PF('employeeAddDialog').hide()" immediate="true"/>
+                                                                         oncomplete="PF('employeeAddDialog').hide()"
+                                                                         immediate="true"/>
                                                     </h:panelGrid>
                                                 </p:outputPanel>
                                             </p:dialog>
-                                        </h:form>
 
 
                                         <!-- Edit Employee Dialog -->
-                                        <p:dialog header="Angestellten ändern" id="employeeEditDialog"
-                                                  widgetVar="employeeEditDialog" modal="true"
-                                                  showEffect="fade" hideEffect="fade" resizable="false" closeOnEscape="true">
-                                            <p:outputPanel id="employeeDataEdit"
-                                                           rendered="#{not empty employeeController.employeeEdit}">
-                                                <h:panelGrid columns="2">
-                                                    <p:outputLabel for="usernameEdit" value="Benutzername: "/>
-                                                    <p:inputText id="usernameEdit"
-                                                                 value="#{employeeController.employeeEdit.username}"
-                                                                 disabled="true"/>
-                                                </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="6">
-                                                    <p:outputLabel for="firstnameEdit" value="Vorname: "/>
-                                                    <p:inputText id="firstnameEdit"
-                                                                 value="#{employeeController.employeeEdit.firstName}"/>
-                                                    <p:outputLabel for="lastnameEdit" value="Nachname: "/>
-                                                    <p:inputText id="lastnameEdit"
-                                                                 value="#{employeeController.employeeEdit.lastName}"/>
-                                                    <p:outputLabel for="birthdayEdit" value="Gerburtsdatum: "/>
-                                                    <p:inputMask mask="99/99/9999" id="birthdayEdit"
-                                                                 value="#{employeeController.employeeEdit.birthday}"/>
-                                                    <p:outputLabel for="locationEdit" value="Wohnort: "/>
-                                                    <p:inputText id="locationEdit"
-                                                                 value="#{employeeController.employeeEdit.location}"/>
-                                                    <p:outputLabel for="streetEdit" value="Straße: "/>
-                                                    <p:inputText id="streetEdit"
-                                                                 value="#{employeeController.employeeEdit.streetName}"/>
-                                                    <p:outputLabel for="postcodeEdit" value="Postleitzahl: "/>
-                                                    <p:inputMask id="postcodeEdit"
-                                                                 mask="9999?9" slotChar=" "
-                                                                 value="#{employeeController.employeeEdit.postcode}"/>
-                                                    <p:outputLabel for="phonenumberEdit" value="Telefonnummer: "/>
-                                                    <p:inputMask id="phonenumberEdit"
-                                                                 mask="9?99999999999" slotChar=" " maxlength="12"
-                                                                 value="#{employeeController.employeeEdit.phoneNumber}"/>
-                                                    <p:outputLabel for="emailEdit" value="Email: " />
-                                                    <p:inputText id="emailEdit" validatorMessage="Ungültiges Email-Format!" value="#{employeeController.employeeEdit.email}">
-                                                        <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                                    </p:inputText>
-                                                </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="6">
-                                                    <p:outputLabel for="familyStatus" value="Familienstatus: "/>
-                                                    <p:selectOneMenu id="familyStatus"
-                                                                     value="#{employeeController.employeeEdit.familyStatus}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Select Familystatus"
-                                                                      itemValue="#{employeeController.employeeEdit.familyStatus}"/>
-                                                        <f:selectItems value="#{enumController.familyStatus}"/>
-                                                    </p:selectOneMenu>
-                                                    <p:outputLabel for="Religion" value="Religion: "/>
-                                                    <p:selectOneMenu id="Religion"
-                                                                     value="#{employeeController.employeeEdit.religion}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Select Religion"
-                                                                      itemValue="#{employeeController.employeeEdit.religion}"/>
-                                                        <f:selectItems value="#{enumController.religions}"/>
-                                                    </p:selectOneMenu>
-                                                    <p:outputLabel for="Role" value="Rolle: "/>
-                                                    <p:selectOneMenu id="Role"
-                                                                     value="#{employeeController.employeeEdit.workRole}"
-                                                                     style="width:150px">
-                                                        <f:selectItem itemLabel="Select Role"
-                                                                      itemValue="#{employeeController.employeeEdit.workRole}"/>
-                                                        <f:selectItems value="#{enumController.workRoles}"/>
-                                                    </p:selectOneMenu>
-                                                </h:panelGrid>
-                                                <p:separator/>
-                                                <h:panelGrid columns="3">
-                                                    <p:commandButton value="Speichern"
-                                                                     action="#{employeeController.doSaveEmployeeEdit()}"
-                                                                     oncomplete="PF('employeeEditDialog').hide()"
-                                                                     update=":employeeForm:employeeTable"
-                                                                     process="@widgetVar(employeeEditDialog)"/>
-                                                    <p:commandButton value="Neu laden"
-                                                                     action="#{employeeController.doReloadEmployee()}"
-                                                                     update=":employeeForm:employeeDataEdit"/>
-                                                    <p:commandButton value="Abbruch"
-                                                                     onclick="PF('employeeEditDialog').hide()"/>
-                                                </h:panelGrid>
-                                            </p:outputPanel>
-                                        </p:dialog>
+
+
+
+                                            <p:dialog header="Angestellten ändern" id="employeeEditDialog"
+                                                      widgetVar="employeeEditDialog" modal="true"
+                                                      showEffect="fade" hideEffect="fade" resizable="false"
+                                                      closeOnEscape="true">
+                                            <p:messages/>
+                                                <p:outputPanel id="employeeDataEdit"
+                                                               rendered="#{not empty employeeEditController.employee}">
+                                                    <h:panelGrid columns="2">
+                                                        <p:outputLabel for="usernameEdit" value="Benutzername: "/>
+                                                        <p:inputText id="usernameEdit"
+                                                                     value="#{employeeEditController.employee.username}"
+                                                                     disabled="true"/>
+                                                    </h:panelGrid>
+                                                    <p:separator/>
+                                                    <h:panelGrid columns="6">
+                                                        <p:outputLabel for="firstnameEdit" value="Vorname: "/>
+                                                        <p:inputText id="firstnameEdit"
+                                                                     value="#{employeeEditController.employee.firstName}"
+                                                                     required="true"
+                                                                     requiredMessage="Vorname erforderlich!"
+                                                        />
+                                                        <p:outputLabel for="lastnameEdit" value="Nachname: "/>
+                                                        <p:inputText id="lastnameEdit"
+                                                                     value="#{employeeEditController.employee.lastName}"
+                                                                     required="true"
+                                                                     requiredMessage="Nachname erforderlich!"
+                                                        />
+                                                        <p:outputLabel for="birthdayEdit" value="Geburtsdatum: "/>
+                                                        <p:inputMask mask="99/99/9999" id="birthdayEdit"
+                                                                     value="#{employeeEditController.employee.birthday}"
+                                                                     required="true"
+                                                                     requiredMessage="Geburtsdatum erforderlich!"
+                                                        />
+                                                        <p:outputLabel for="locationEdit" value="Wohnort: "/>
+                                                        <p:inputText id="locationEdit"
+                                                                     value="#{employeeEditController.employee.location}"
+                                                                     required="true"
+                                                                     requiredMessage="Wohnort erforderlich!"
+                                                        />
+                                                        <p:outputLabel for="streetEdit" value="Straße: "/>
+                                                        <p:inputText id="streetEdit"
+                                                                     value="#{employeeEditController.employee.streetName}"
+                                                                     required="true"
+                                                                     requiredMessage="Straßenname erforderlich!"
+                                                        />
+                                                        <p:outputLabel for="postcodeEdit" value="Postleitzahl: "/>
+                                                        <p:inputMask id="postcodeEdit"
+                                                                     mask="9999?9" slotChar=" "
+                                                                     value="#{employeeEditController.employee.postcode}"
+                                                                     required="true"
+                                                                     requiredMessage="Postleitzahl erforderlich!"
+                                                        />
+                                                        <p:outputLabel for="phonenumberEdit" value="Telefonnummer: "/>
+                                                        <p:inputMask id="phonenumberEdit"
+                                                                     mask="9?99999999999" slotChar=" " maxlength="12"
+                                                                     value="#{employeeEditController.employee.phoneNumber}"
+                                                                     required="true"
+                                                                     requiredMessage="Telefonnummer erforderlich!"/>
+                                                        <p:outputLabel for="emailEdit" value="Email: "/>
+                                                        <p:inputText id="emailEdit"
+                                                                     validatorMessage="Ungültiges Email-Format!"
+                                                                     value="#{employeeEditController.employee.email}"
+                                                                     required="true"
+                                                                     requiredMessage="Email erforderlich!">
+                                                            <f:validateRegex
+                                                                    pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                        </p:inputText>
+                                                    </h:panelGrid>
+                                                    <p:separator/>
+                                                    <h:panelGrid columns="6">
+                                                        <p:outputLabel for="familyStatus" value="Familienstatus: "/>
+                                                        <p:selectOneMenu id="familyStatus"
+                                                                         value="#{employeeEditController.employee.familyStatus}"
+                                                                         style="width:150px">
+                                                            <f:selectItem itemLabel="Wähle Familienstatus"
+                                                                          itemValue="#{employeeEditController.employee.familyStatus}"/>
+                                                            <f:selectItems value="#{enumController.familyStatus}"/>
+                                                        </p:selectOneMenu>
+                                                        <p:outputLabel for="Religion" value="Religion: "/>
+                                                        <p:selectOneMenu id="Religion"
+                                                                         value="#{employeeEditController.employee.religion}"
+                                                                         style="width:150px">
+                                                            <f:selectItem itemLabel="Wähle Religion"
+                                                                          itemValue="#{employeeEditController.employee.religion}"/>
+                                                            <f:selectItems value="#{enumController.religions}"/>
+                                                        </p:selectOneMenu>
+                                                        <p:outputLabel for="Role" value="Rolle: "/>
+                                                        <p:selectOneMenu id="Role"
+                                                                         value="#{employeeEditController.employee.workRole}"
+                                                                         style="width:150px">
+                                                            <f:selectItem itemLabel="Wähle Arbeitsrolle"
+                                                                          itemValue="#{employeeEditController.employee.workRole}"/>
+                                                            <f:selectItems value="#{enumController.workRoles}"/>
+                                                        </p:selectOneMenu>
+                                                    </h:panelGrid>
+                                                    <p:separator/>
+                                                    <h:panelGrid columns="3">
+                                                        <p:commandButton value="Speichern"
+                                                                         action="#{employeeEditController.doSaveEmployeeEdit}"
+                                                                         update=":employeeForm:employeeTable"
+                                                                         process="@widgetVar(employeeEditDialog)" />
+                                                        <p:commandButton value="Neu laden"
+                                                                         action="#{employeeEditController.doReloadEmployee}" />
+                                                        <p:commandButton value="Abbruch"
+                                                                         onclick="PF('employeeEditDialog').hide()" immediate="true" />
+                                                    </h:panelGrid>
+                                                </p:outputPanel>
+                                            </p:dialog>
+
 
                                         <p:confirmDialog global="true" showEffect="fade"
                                                          hideEffect="fade" width="300">
@@ -313,6 +362,7 @@
                                                              styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                                         </p:confirmDialog>
                                     </h:form>
+
                                 </div>
                             </div>
 

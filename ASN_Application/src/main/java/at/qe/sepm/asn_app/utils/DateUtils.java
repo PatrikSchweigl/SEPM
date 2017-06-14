@@ -5,7 +5,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
+import java.util.GregorianCalendar;
 /**
  * Created by Lukas Aukenthaler on 22.05.2017.
  */
@@ -66,7 +66,7 @@ public class DateUtils {
 
             cal.setTime(ret[i]);
 
-            int hrs = cal.get(Calendar.HOUR_OF_DAY);
+            int hrs = cal.get(Calendar.HOUR_OF_DAY) - 6;
             int min = cal.get(Calendar.MINUTE);
             int sec = cal.get(Calendar.SECOND);
             int milli = cal.get(Calendar.MILLISECOND);
@@ -88,6 +88,21 @@ public class DateUtils {
      * @return
      *      formatted string YYYY/MM/DD
      */
+
+    public static int getLastDay(int month, int year){
+        GregorianCalendar cal = new GregorianCalendar();
+        switch(month){
+            case 0:
+            case 2:
+            case 4:
+            case 6:
+            case 7:
+            case 9:
+            case 11: return 31;
+            case 1: return cal.isLeapYear(year) ? 29 : 28;
+            default: return 30;
+        }
+    }
     public static String primefaceCalendarToStr(String pfs){
         String d = "ERROR", m ="ERROR", y = "ERROR";
         String[] strings = pfs.split(" ");

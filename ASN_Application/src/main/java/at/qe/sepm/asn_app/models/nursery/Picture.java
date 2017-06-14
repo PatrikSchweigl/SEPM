@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.general.Comment;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -24,14 +25,18 @@ public class Picture implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
+    @NotNull
     private String url;
+    @NotNull
     @ManyToOne(optional = false)
     private UserData publisher;
     @OneToMany
     @ElementCollection
     private Set<Comment> comment;
+    @NotNull
     private Date date;
+    @NotNull
     private String title;
 
 
@@ -45,7 +50,7 @@ public class Picture implements Persistable<Long> {
     }
 
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,7 +97,8 @@ public class Picture implements Persistable<Long> {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -111,7 +117,7 @@ public class Picture implements Persistable<Long> {
         }
 
         Picture other = (Picture) obj;
-        if (this.comment.equals(other.comment) &&
+        if (//this.comment.equals(other.comment) &&
                 this.date.equals(other.date) &&
                 this.publisher.equals(other.publisher) &&
                 this.title.equals(other.title) &&

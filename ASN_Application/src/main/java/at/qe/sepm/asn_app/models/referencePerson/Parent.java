@@ -30,7 +30,7 @@ public class Parent extends UserData {
     private static final long serialVersionUID = 1L;
 
     private String imgName;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parent1", cascade = CascadeType.ALL, orphanRemoval = true)
     @ElementCollection
     private Set<Child> children;
     @OneToMany(fetch = FetchType.EAGER)
@@ -111,11 +111,16 @@ public class Parent extends UserData {
 
     /**
      * This method doesn't check for equality of every object because it is not needed.
-     * @param obj The object to be compared. If obj is not an instance of Parent then false is returned immediately.
+     * @param other The object to be compared. If obj is not an instance of Parent then false is returned immediately.
      * @return <code>true</code> iff the current instance of Parent and the parameter are the same; <code>false</code> otherwise.
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object other) {
+        return (other instanceof Parent) && (getId() != null)
+                ? getId().equals(((Parent) other).getId())
+                : (other == this);
+    }
+    /*public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -132,6 +137,21 @@ public class Parent extends UserData {
             return true;
         }
         return false;
+    }*/
+
+    @Override
+    public int hashCode() {
+        return (getId() != null)
+                ? (getClass().hashCode() + getId().hashCode())
+                : super.hashCode();
+    }
+
+    public String getChildrenNames(){
+        String s = "";
+        for(Child c: children){
+            s += c.getFirstName() + " " + c.getLastName() + ", ";
+        }
+        return s;
     }
 
 
@@ -147,7 +167,7 @@ public class Parent extends UserData {
                 "Postcode: " + getPostcode() + "\n" +
                 "Location: " + getLocation() + "\n" +
                 "StreetName: " + getStreetName() + "\n" +
-                "Children: " + children + "\n" +
+                "Children: " + getChildrenNames() + "\n" +
                 "Tasks: " + tasks + "\n" +
                 "ImgName: " + imgName;
     }

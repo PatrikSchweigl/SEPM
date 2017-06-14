@@ -22,14 +22,15 @@ import javax.annotation.PostConstruct;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class CommentController{
 
     @Autowired
     private CommentService commentService;
     @Autowired
     private FileBean fileBean;
-    private Comment message;
+    private Comment message;    // TODO change the attribute name from message to comment. It's unnecessarily confusing.
     private Collection<Comment> messages;
     
     public Comment getMessage() {
@@ -57,16 +58,23 @@ public class CommentController{
         this.message = message;
         doReloadMessage();
     }
+    public void setMessage2(Comment message) {
+        this.message = message;
+    }
 
     public void doReloadMessage() {
         message = commentService.loadMessage(message.getId());
     }
 
-    public void doSaveMessage(){
-    	message.setPictureName(fileBean.getSelectedPicture());
+    public Comment doSaveMessage(){
+        if (fileBean.getSelectedPicture() != null) {
+            message.setPictureName(fileBean.getSelectedPicture());
+        }
         message = commentService.saveMessage(message);
+        Comment messageReturn = message;
         init();
         initList();
+        return messageReturn;
     }
 
     public Collection<Comment> getMessages(){

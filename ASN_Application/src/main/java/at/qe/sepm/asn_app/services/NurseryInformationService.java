@@ -37,7 +37,11 @@ public class NurseryInformationService {
         nurseryInformation.setPickUpStart(date);
         date = calculateFromToTimes(nurseryInformation.getPickUpEnd(), nurseryInformation.getOriginDate());
         nurseryInformation.setPickUpEnd(date);
-
+        Date origin = nurseryInformation.getOriginDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(origin);
+        cal.add(Calendar.HOUR_OF_DAY, 2);
+        nurseryInformation.setOriginDate(cal.getTime());
         return nurseryInformationRepository.save(nurseryInformation);
     }
 
@@ -56,6 +60,7 @@ public class NurseryInformationService {
 
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         cal.setTime(timestamp);
+        cal.add(Calendar.HOUR_OF_DAY, 2);
         hours = cal.get(Calendar.HOUR_OF_DAY);
         mins = cal.get(Calendar.MINUTE);
 

@@ -26,7 +26,7 @@
 											<h:form id="lunchForm">
 												<p:dataTable id="lunchTable" var="lunch"
 													widgetVar="lunchTable"
-													value="#{lunchController.getCurrentWeek()}">
+													value="#{lunchController.findAll()}">
 													<p:column headerText="Gericht">
 														<h:outputText value="#{lunch.meal}" />
 													</p:column>
@@ -35,12 +35,13 @@
 																<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 														</h:outputText>
 													</p:column>
-													<p:column headerText="Preis">
-														<h:outputText value="#{lunch.cost}" />
-													</p:column>
 													<p:column headerText="#Angemeldet">
 														<h:outputText value="#{lunch.getNumChildren()}" />
 													</p:column>
+													<p:column headerText="Preis">
+														<h:outputText value="#{lunch.cost}" />
+													</p:column>
+
 													<p:column style="width:100px;text-align: center;">
 														<p:commandButton update=":lunchForm:lunchEditDialog"
 															oncomplete="PF('lunchEditDialog').show()"
@@ -82,14 +83,14 @@
 																value="#{lunchController.lunch.cost}" />
 															<p:outputLabel for="date" value="Datum: " />
 															<p:calendar id="date" pattern="dd/MM/yyyy"
-																value="#{lunchController.lunch.date}" />
+																value="#{lunchController.lunch.date}" beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
+																		locale="de"/>
 
 														</h:panelGrid>
 														<p:separator />
 														<h:panelGrid columns="3">
 															<p:commandButton value="Speichern"
 																action="#{lunchController.doSaveLunch}"
-																oncomplete="if (args &amp;&amp; !args.validationFailed) PF('lunchAddDialog').hide()"
 																update=":lunchForm:lunchTable" />
 															<p:commandButton value="Abbruch"
 																onclick="PF('lunchAddDialog').hide()" immediate="true" />
@@ -110,8 +111,9 @@
 															<p:inputText id="costEdit"
 																value="#{lunchController.lunchEdit.cost}" />
 															<p:outputLabel for="dateEdit" value="Datum: " />
-															<p:calendar pattern="dd/MM/yyyy" id="dateEdit"
-																value="#{lunchController.lunchEdit.date}" />
+															<p:calendar pattern="dd/MM/yyyy" id="dateEdit"  beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
+																value="#{lunchController.lunchEdit.date}"
+																		locale="de"/>
 
 														</h:panelGrid>
 														<p:separator />

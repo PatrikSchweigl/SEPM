@@ -133,7 +133,7 @@ public class Employee extends UserData {
                 "Street name: " + getStreetName() + "\n" +
                 "Family status: " + getFamilyStatus() + "\n" +
                 "Working state: " + getWorkingState() + "\n" +
-                "Work role: " + getWorkRole() + "\n" +
+                "Religion: " + getReligion() + "\n" +
                 "User role: " + getUserRole();
     }
 }

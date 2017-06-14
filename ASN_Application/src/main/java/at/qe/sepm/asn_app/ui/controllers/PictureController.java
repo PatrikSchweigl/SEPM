@@ -14,7 +14,8 @@ import java.util.Collection;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class PictureController {
 
     @Autowired

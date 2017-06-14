@@ -11,5 +11,5 @@ package at.qe.sepm.asn_app.models.child;
 public enum Custody {
     VATER,
     MUTTER,
-    BOTH
+    BEIDE
 }

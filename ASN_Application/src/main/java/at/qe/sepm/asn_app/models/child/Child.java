@@ -40,24 +40,31 @@ public class Child implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String birthday;
     private String imgName;
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @NotNull
     @ManyToOne(optional = false)
     private Parent parent1;
 
     @ManyToOne // only 1 parent required for child
     private Parent parent2;
 
+    @NotNull
     private String emergencyNumber;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> allergies;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Set<String> foodIntolerances;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Sibling> siblings;
 
     @Enumerated(EnumType.STRING)
@@ -67,7 +74,7 @@ public class Child implements Persistable<Long> {
     private Religion religion;
 
     //@ElementCollection(targetClass = Caregiver.class)
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Caregiver> caregivers;
 
 
@@ -174,6 +181,10 @@ public class Child implements Persistable<Long> {
     public String getBirthday() {
         return birthday;
     }
+    
+    public String getFullname(){
+    	return firstName + " " + lastName;
+    }
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
@@ -189,6 +200,10 @@ public class Child implements Persistable<Long> {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getEmergencyNumber() {
@@ -263,14 +278,19 @@ public class Child implements Persistable<Long> {
      * even though some attributes like religion may be different the child
      * could still be the "same" person. We focus only on the main attributes
      * to determine equality.
-     * @param obj The object to be compared. If it's not an instance of Child then <code>false</code> gets returned immediately.
+     * @param other The object to be compared. If it's not an instance of Child then <code>false</code> gets returned immediately.
      * @return <code>true</code> iff the main attributes are equal of the current child and the parameter; <code>false</code> in any other case.
      * @see Gender
      * @see Parent
      * @see Sibling
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object other) {
+        return (other instanceof Child) && (id != null)
+                ? id.equals(((Child) other).id)
+                : (other == this);
+    }
+    /*public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -291,7 +311,7 @@ public class Child implements Persistable<Long> {
         else {
             return false;
         }
-    }
+    }*/
 
 
     @Override
@@ -301,8 +321,8 @@ public class Child implements Persistable<Long> {
                 "Birthday: " + birthday + "\n" +
                 "Gender: " + gender + "\n" +
                 "Religion: " + religion + "\n" +
-                "Parent1: " + parent1 + "\n" +
-                "Parent2: " + parent2 + "\n" +
+//                "Parent1: " + parent1.getFirstName() + " " + parent1.getLastName() + "\n" +
+//                "Parent2: " + parent2.getFirstName() + " " + parent2.getLastName() + "\n" +
                 "Custody: " + custody + "\n" +
                 "Siblings: " + siblings + "\n" +
                 "Allergies: " + allergies + "\n" +

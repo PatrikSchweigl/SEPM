@@ -10,7 +10,6 @@ import java.util.List;
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 14.05.2017
  */
-@Transactional
 public interface ParentRepository extends UserBaseRepository<Parent>, AbstractRepository<Parent,Long>{
 
 

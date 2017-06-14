@@ -4,6 +4,7 @@ import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
@@ -25,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 //import java.util.Collection;
 //import java.util.Date;
 
@@ -66,7 +68,8 @@ public class ChildService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + child.getFirstName() + " " + child.getLastName(), new Date());
             auditLogRepository.save(log);
         }
-        return childRepository.save(child);
+        child = childRepository.save(child);
+        return child;
     }
     
     public String addCaregiver(Caregiver c){
@@ -76,6 +79,13 @@ public class ChildService {
     	return child.getFirstName() + " " + child.getLastName();
     }
 
+    public Collection<Child> getChildrenByLunch(Lunch lunch){
+        Set<Child> ret = new HashSet<Child>();
+        for(Long id : lunch.getChildrenIds()){
+            ret.add(loadChild(id));
+        }
+        return ret;
+    }
 
     public Child loadChild(Long id) {
         return childRepository.findOne(id);
@@ -88,6 +98,7 @@ public class ChildService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
             auditLogRepository.save(log);
         }
+        System.out.println(child.toString());
         childRepository.delete(child);
     }
 

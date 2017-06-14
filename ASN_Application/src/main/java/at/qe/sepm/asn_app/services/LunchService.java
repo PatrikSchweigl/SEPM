@@ -2,10 +2,8 @@ package at.qe.sepm.asn_app.services;
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
-import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.LunchRepository;
-import at.qe.sepm.asn_app.repositories.MessageRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,11 +22,12 @@ import java.util.List;
  */
 
 @Component
-@Scope("view")
+//@Scope("view")
+@Scope("application")
 public class LunchService {
-    @Autowired LunchRepository lunchRepository;
-    @Autowired AuditLogRepository auditLogRepository;
-    @Autowired UserRepository userRepository;
+    @Autowired private LunchRepository lunchRepository;
+    @Autowired private AuditLogRepository auditLogRepository;
+    @Autowired private UserRepository userRepository;
 
     /*
     public List<Lunch> getLunchByDate(String date){
@@ -44,11 +43,20 @@ public class LunchService {
 
     public Lunch saveLunch(Lunch lunch) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CHANGED/CREATED Lunch: " + lunch.getMeal() + " " + lunch.getDate(), new Date());
-        return lunchRepository.save(lunch);
+        auditLogRepository.save(log);
+        lunch = lunchRepository.save(lunch);
+        return lunch;
     }
 
     public Lunch loadLunch(Long id){
         return lunchRepository.findOne(id);
+    }
+
+    public List<Lunch> getLunchInTimeWindowIE(Date start, Date end){
+        return lunchRepository.getLunchInTimeWindowIE(start, end);
+    }
+    public List<Lunch> getLunchInTimeWindowII(Date start, Date end){
+        return lunchRepository.getLunchInTimeWindowII(start, end);
     }
 
     public void deleteLunch(Lunch lunch) {

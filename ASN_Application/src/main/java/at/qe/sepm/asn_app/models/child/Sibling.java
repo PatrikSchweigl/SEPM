@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -24,10 +25,14 @@ public class Sibling implements Persistable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
     private String birthday;
+    private Child child;
 
+    public Sibling() {}
 
     public Sibling(String firstName, String lastName, String birthday) {
         this.firstName = firstName;
@@ -35,6 +40,13 @@ public class Sibling implements Persistable<Long> {
         this.birthday = birthday;
     }
 
+    public Child getChild() {
+        return child;
+    }
+
+    public void setChild(Child child) {
+        this.child = child;
+    }
 
     public String getFirstName() {
         return firstName;

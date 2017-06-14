@@ -19,22 +19,19 @@
 								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
-										<div align="right" style="margin-bottom: 10px; margin-right:200px">
+										<div align="right" style="margin-bottom: 10px;">
 											<h:form>
 												<p:button
 													outcome="/employee/calendarDetailWeek_employee.xhtml"
-													value="Tagesplaner Wochenansicht"
-													style="align-items:right; margin-right:214px;">
+													value="Planer Wochenansicht">
 												</p:button>
 												<p:button
 													outcome="/employee/calendarDetailMonth_employee.xhtml"
-													value="Tagesplaner Monatsansicht"
-													style="align-items:right;margin-right:214px;">
+													value="Planer Monatsansicht">
 												</p:button>
 												<p:button
 													outcome="/employee/calendarDetailYear_employee.xhtml"
-													value="Tagesplaner Jahresansicht"
-													style="align-items:right;">
+													value="Planer Jahresansicht">
 												</p:button>
 											</h:form>
 										</div>
@@ -42,11 +39,12 @@
 										<h:form id="sheduleForm">
 											<p:growl id="growl" showDetail="true" sticky="true" />
 											<p:schedule locale="de" aspectRatio="1.5"
-												style="padding-left:200px; padding-right: 200px;"
+												style="padding-left:50px; padding-right: 50px;"
 												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
 												centerHeaderTemplate="month, agendaWeek, agendaDay"
-												id="schedule" value="#{scheduleView.eventModel}"
-												widgetVar="myschedule" timeZone="GMT+2">
+												showWeekends="false" id="schedule"
+												value="#{scheduleView.eventModel}" widgetVar="myschedule"
+												timeZone="GMT+2">
 
 												<p:ajax event="dateSelect"
 													listener="#{scheduleView.onDateSelect}"
@@ -64,30 +62,28 @@
 											</p:schedule>
 
 											<p:dialog widgetVar="eventDialog" header="Termine"
+												position="center center" closeOnEscape="true"
 												showEffect="clip" hideEffect="clip">
-												<p:messages showDetail="false" />
+												<p:messages id="messagesInfo" autoUpdate="true" />
 												<h:panelGrid id="eventDetails" columns="2">
 													<p:outputLabel for="title" value="Titel:" />
 													<p:inputText id="title"
 														value="#{scheduleView.event.description}" />
 
 													<p:outputLabel for="from" value="Beginn:" />
-													<p:calendar id="from"
+													<p:calendar id="from" beforeShowDay="noWeekend"
+														mindate="#{scheduleView.today}"
 														value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy HH:mm" />
+														pattern="dd/MM/yyyy HH:mm" locale="de" />
 
 													<p:outputLabel for="to" value="Ende:" />
 													<p:calendar id="to" value="#{scheduleView.event.endDate}"
-														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
-
-													<p:outputLabel for="allDay" value="Ganztägig:" />
-													<h:selectBooleanCheckbox id="allDay"
-														value="#{scheduleView.event.allDay}" />
-
+														beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
+														timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" locale="de" />
 
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
-														<p:outputLabel for="important" value="wichtiges Ereignis:" />
+														<p:outputLabel for="important" value="Feier/Ferientag:" />
 													</ui:fragment>
 
 													<ui:fragment
@@ -97,7 +93,6 @@
 															<p:ajax update="eventDetails" />
 														</h:selectBooleanCheckbox>
 													</ui:fragment>
-
 
 													<ui:fragment
 														rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
@@ -126,8 +121,9 @@
 																itemValue="#{parent.username}" />
 
 															<p:column>
-																<p:graphicImage name="pictures/tiger.jpg" width="32"
-																	height="32" />
+																<p:graphicImage
+																	name="pictures/profile_pictures/#{userService.loadUser(p).getImgName()}"
+																	width="32" height="32" />
 															</p:column>
 
 															<p:column>
@@ -136,74 +132,20 @@
 														</p:selectOneListbox>
 													</ui:fragment>
 													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEvent}"
-														oncomplete="PF('eventDialog').hide()" update="@all" />
+														action="#{scheduleView.deleteEvent}" />
 													<p:commandButton id="addButton" value="Speichern"
-														actionListener="#{scheduleView.addEvent}"
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()"
-														update="@all" />
-													<p:separator />
-													<p:separator />
-													<p:outputLabel for="meal" value="Gericht: " />
-													<p:inputText id="meal"
-														value="#{lunchController.lunch.meal}" />
-													<p:outputLabel for="mealDate" value="Datum: " />
-													<p:calendar id="mealDate"
-														value="#{lunchController.lunch.date}" timeZone="GMT+2"
-														pattern="dd/MM/yyyy">
-														<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-													</p:calendar>
-													<p:commandButton id="lunchButton" value="Essen"
-														action="#{lunchController.doSaveLunch}"
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('eventDialog').hide();PF('myschedule').update()" />
+														actionListener="#{scheduleView.addEvent}" />
 													<p:button
 														outcome="/employee/calendarDetailDaily_employee.xhtml"
-														value="Tagesplaner" style="align-items:right;"><f:param name="day" value="#{scheduleView.event.endDate}" />
+														value="Tagesplaner" style="align-items:right;">
+														<f:param name="day" value="#{scheduleView.event.endDate}" />
 													</p:button>
 												</h:panelGrid>
 
 											</p:dialog>
 										</h:form>
 
-										<script type="text/javascript">
-											PrimeFaces.locales['de'] = {
-												closeText : 'Schliessen',
-												prevText : 'Letzte',
-												nextText : 'Nächste',
-												currentText : 'Heute',
-												monthNames : [ 'Januar',
-														'Februar', 'März',
-														'April', 'Mai', 'Juni',
-														'Juli', 'August',
-														'September', 'Oktober',
-														'November', 'Dezember' ],
-												monthNamesShort : [ 'Jan',
-														'Feb', 'Mar', 'Apr',
-														'Mai', 'Jun', 'Jul',
-														'Aug', 'Sep', 'Okt',
-														'Nov', 'Dez' ],
-												dayNames : [ 'Sonntag',
-														'Montag', 'Dienstag',
-														'Mittwoch',
-														'Donnerstag',
-														'Freitag', 'Samstag' ],
-												dayNamesShort : [ 'So', 'Mo',
-														'Di', 'Mi', 'Do', 'Fr',
-														'Sa' ],
-												dayNamesMin : [ 'So', 'Mo',
-														'Di', 'Mi', 'Do', 'Fr',
-														'Sa' ],
-												firstDay : 1,
-												weekHeader : 'KW',
-												isRTL : false,
-												showMonthAfterYear : false,
-												yearSuffix : '',
-												month : 'Monat',
-												week : 'Woche',
-												day : 'Tag',
-												allDayText : 'Ganzer Tag'
-											};
-										</script>
+
 									</div>
 								</div>
 								<!-- /.box -->

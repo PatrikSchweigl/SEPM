@@ -75,13 +75,13 @@
 													<p:inputTextarea id="messageInput"
 														value="#{commentController.message.comment}" rows="5"
 														cols="30" counter="display" maxlength="200"
-														counterTemplate="{0} Zeichen übrig." autoResize="false" />
+														counterTemplate="{0} Zeichen übrig." autoResize="false" required="true" requiredMessage="Nachricht fehlt" />
 													<p:separator />
 													<h:outputText id="display" />
 													<p:separator />
 													<p:commandButton id="button" value="Senden"
 														action="#{commentController.doSaveMessage}"
-														oncomplete="PF('commentAddDialog').hide()" update=":messages" />
+														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('commentAddDialog').hide()" update=":messages" />
 												</p:dialog>
 											</h:form>
 									</div>

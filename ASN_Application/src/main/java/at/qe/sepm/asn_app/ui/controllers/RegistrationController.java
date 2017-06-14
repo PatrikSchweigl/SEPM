@@ -11,6 +11,7 @@ import javax.imageio.spi.RegisterableService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -50,15 +51,24 @@ public class RegistrationController {
     }
 
     public Collection<Registration> getRegistrationsByDate(String date){
-    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
+    	SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd k:mm:ss z yyyy"); 
     	Date d = new Date();
 		try {
+			System.err.println("HEEEEERE I AM");
+			System.err.println(date);
+
 			d = formatter.parse(date);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(d);
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			System.err.println(d);
+			d = cal.getTime();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
         return registrationService.getAllRegistrationsByDate(d);
     }
+    
     
     public Collection<Registration> getRegistrationsByDateToday(){
         return registrationService.getAllRegistrationsByDate(new Date());

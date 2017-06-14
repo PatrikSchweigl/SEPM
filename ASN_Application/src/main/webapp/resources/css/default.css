@@ -19,7 +19,6 @@ p {
 
 
 
-
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -121,6 +120,17 @@ a:focus {
 	outline-offset:-2px
 }
 
+@media all and (max-width: 1300px) {
+
+    .shrinker{float:left;}
+
+}
+
+@media all and (max-width: 1020px) {
+
+    .shrinker{display:none;}
+
+}
 
 @media (min-width: 768px) {
   .navbar-nav {
