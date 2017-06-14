@@ -36,7 +36,9 @@
 															value="#{employeeController.password}" match="pwd2"
 															label="Passwort:" required="true" feedback="true"
 															validatorMessage="Passwörter stimmen nicht überein!"
-															requiredMessage="Kein Passwort eingegeben! (Feld 1)" />
+															requiredMessage="Kein Passwort eingegeben! (Feld 1)"
+																	promptLabel="Bitte Passwort eingeben!" weakLabel="Schwach"
+																	goodLabel="Mittelmäßig" strongLabel="Sicher"/>
 
 														<h:outputLabel for="pwd2" value="Password 2: *" />
 														<p:password id="pwd2"
