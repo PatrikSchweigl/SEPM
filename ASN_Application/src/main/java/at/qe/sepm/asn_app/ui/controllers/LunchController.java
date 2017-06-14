@@ -242,7 +242,7 @@ public class LunchController {
 	}
 
     public List<Lunch> getLunchReportInTimeWindow(Date start, Date end){
-        List<Lunch> tmp = lunchService.getLunchInTimeWindow(start, end);
+        List<Lunch> tmp = lunchService.getLunchInTimeWindowIE(start, end);
         System.err.println(tmp);
         return tmp;
     }

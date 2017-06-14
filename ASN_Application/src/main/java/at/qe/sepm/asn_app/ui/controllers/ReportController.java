@@ -25,17 +25,91 @@ public class ReportController {
     private ChildService childService;
 
 
+    public List<LunchReport> getLunchReportLastMonth(){
+        return getLunchReportForMonth(-1);
+    }
     public List<LunchReport> getLunchReportThisMonth(){
 
+        return getLunchReportForMonth(0);
+    }
+    /** getLunchReportForWeek
+     *  returns LR for week relative to current
+     * @param i int specifying which week to get (0 = current, -1 = previous, etc)
+     * @return LunchReport for specified week
+     */
+    public List<LunchReport> getLunchReportForWeek(int i){
+        Date[] dates = DateUtils.getWeek(i);
+        if(dates.length < 1){
+            return null;
+        }
+        Date start = dates[0];
+        Date end = dates[dates.length-1];
+        return getLunchReportInTimeWindowII(start, end);
+
+    }
+
+    /** getLunchReportForYear
+     *  returns LR for year relative to current
+     * @param i int specifying which year to get (0 = current, -1 = previous, etc)
+     * @return LunchReport for specified year
+     */
+    public List<LunchReport> getLunchReportForYear(int i){
         Date start = new Date();
         start.setDate(1);
+        start.setMonth(0);
+        start.setYear(start.getYear() + i);
         Date end = new Date();
-        end.setDate(DateUtils.getLastDay(end.getMonth(), end.getYear()));
-        return getLunchReportInTimeWindow(start, end);
+        end.setDate(1);
+        end.setMonth(0);
+        end.setYear(end.getYear() + i + 1);
+        return getLunchReportInTimeWindowIE(start, end);
     }
-    public List<LunchReport> getLunchReportInTimeWindow(Date start, Date end){
+
+    /** getLunchReportForMonth
+     *  returns LR for month relative to current
+     * @param i int specifying which month to get (0 = current, -1 = previous, etc)
+     * @return LunchReport for specified month
+     */
+    public List<LunchReport> getLunchReportForMonth(int i){
+        Date start = new Date();
+        start.setDate(1);
+        start.setMonth((start.getMonth() + i)%12);
+        Date end = new Date();
+        end.setDate(1);
+        end.setMonth((end.getMonth() + i + 1)%12);
+        if(end.getMonth() == 0){
+            end.setYear(end.getYear() + 1);
+        }
+        return getLunchReportInTimeWindowIE(start, end);
+    }
+
+    /** getLunchReportInTimeWindowIE
+     *  IE stands for including excluding
+     * @param start including
+     * @param end excluding
+     * @return list of lunchs
+     */
+    public List<LunchReport> getLunchReportInTimeWindowIE(Date start, Date end){
         List<LunchReport> lunchReports = new LinkedList<>();
-        List<Lunch> lunchs = lunchService.getLunchInTimeWindow(start, end);
+        List<Lunch> lunchs = lunchService.getLunchInTimeWindowIE(start, end);
+        for(Lunch l : lunchs){
+            Collection<Child> childs = childService.getChildrenByLunch(l);
+            for(Child c : childs){
+                lunchReports.add(new LunchReport(l, c));
+            }
+        }
+        return lunchReports;
+    }
+
+    /** getLunchReportInTimeWindowII
+     *  IE stands for including including
+     * @param start including
+     * @param end including
+     * @return list of lunchs
+     */
+    public List<LunchReport> getLunchReportInTimeWindowII(Date start, Date end){
+        List<LunchReport> lunchReports = new LinkedList<>();
+        List<Lunch> lunchs = lunchService.getLunchInTimeWindowII(start, end);
         for(Lunch l : lunchs){
             Collection<Child> childs = childService.getChildrenByLunch(l);
             for(Child c : childs){

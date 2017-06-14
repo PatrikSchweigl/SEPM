@@ -2,10 +2,8 @@ package at.qe.sepm.asn_app.services;
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
-import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.LunchRepository;
-import at.qe.sepm.asn_app.repositories.MessageRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -54,8 +52,11 @@ public class LunchService {
         return lunchRepository.findOne(id);
     }
 
-    public List<Lunch> getLunchInTimeWindow(Date start, Date end){
-        return lunchRepository.getLunchInTimeWindow(start, end);
+    public List<Lunch> getLunchInTimeWindowIE(Date start, Date end){
+        return lunchRepository.getLunchInTimeWindowIE(start, end);
+    }
+    public List<Lunch> getLunchInTimeWindowII(Date start, Date end){
+        return lunchRepository.getLunchInTimeWindowII(start, end);
     }
 
     public void deleteLunch(Lunch lunch) {

@@ -19,22 +19,44 @@
                             <!-- Default box -->
                             <div class="box">
                                 <h:form>
-                                    <p:dataTable id="lunchReport" var="report" widgetVar="lunchReport" value="#{reportController.getLunchReportThisMonth()}">
-                                        <p:column>
-                                            <h:outputText value="#{report.lunch.meal}"/>
-                                        </p:column>
+                                    <p:accordionPanel multiple="true">
+                                        <p:tab title="Dieser Monat">
+                                            <p:dataTable id="lunchReport" var="report" widgetVar="lunchReport" value="#{reportController.getLunchReportThisMonth()}">
+                                                <p:column>
+                                                    <h:outputText value="#{report.lunch.meal}"/>
+                                                </p:column>
 
-                                        <p:column>
-                                            <h:outputText value="#{report.lunch.date}"/>
-                                        </p:column>
+                                                <p:column>
+                                                    <h:outputText value="#{report.lunch.date}"/>
+                                                </p:column>
 
-                                        <p:column>
-                                            <h:outputText value="#{report.child.firstName}"/>
-                                        </p:column>
-                                        <p:column>
-                                            <h:outputText value="#{report.child.lastName}"/>
-                                        </p:column>
-                                    </p:dataTable>
+                                                <p:column>
+                                                    <h:outputText value="#{report.child.firstName}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="#{report.child.lastName}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:tab>
+                                        <p:tab title="Diese Woche">
+                                            <p:dataTable id="lunchReportWeek" var="report" widgetVar="lunchReportWeek" value="#{reportController.getLunchReportForWeek(0)}">
+                                            <p:column>
+                                                <h:outputText value="#{report.lunch.meal}"/>
+                                            </p:column>
+
+                                            <p:column>
+                                                <h:outputText value="#{report.lunch.date}"/>
+                                            </p:column>
+
+                                            <p:column>
+                                                <h:outputText value="#{report.child.firstName}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <h:outputText value="#{report.child.lastName}"/>
+                                            </p:column>
+                                            </p:dataTable>
+                                        </p:tab>
+                                    </p:accordionPanel>
                                 </h:form>
                             </div>
                             <!-- /.box -->
