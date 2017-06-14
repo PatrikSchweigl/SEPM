@@ -31,32 +31,11 @@
 												class="fa fa-envelope-o fa-4x" title="Privatnachrichten"></i>
 										</a></li>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{!sessionInfoBean.inactiveParent}">
-										<li class="dropdown notifications-menu"><a
-											onclick="#{scheduleView.test()}"
-											href="/general/messageboard.xhtml"> <i
-												class="fa fa-sticky-note-o fa-4x" title="Messageboard"></i>
-										</a></li>
-									</h:panelGroup>
-									<h:panelGroup
-										rendered="#{(sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('ADMIN')) and !sessionInfoBean.inactiveParent}">
-										<li class="dropdown tasks-menu"><a
-											href="/employee/calendar_employee.xhtml"> <i
-												class="fa fa-calendar fa-4x" title="Kalender"></i>
-										</a></li>
-									</h:panelGroup>
-									<h:panelGroup
-										rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
-										<li class="dropdown tasks-menu"><a
-											href="/parent/calendar_parent.xhtml"> <i
-												class="fa fa-calendar fa-4x" title="Kalender"></i>
-										</a></li>
-									</h:panelGroup>
 									<h:panelGroup
 										rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 										<li class="treeview"><a
 											onclick="PF('ownDataDialog').show()"> <i
-												class="fa fa-cog fa-4x"></i>
+												class="fa fa-cog fa-4x" title="Eigene Dateien"></i>
 										</a></li>
 									</h:panelGroup>
 									<ui:fragment value="Logout" url="/logout">
