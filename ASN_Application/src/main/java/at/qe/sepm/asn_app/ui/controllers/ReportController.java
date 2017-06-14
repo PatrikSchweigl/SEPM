@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.annotation.PostConstruct;
@@ -163,5 +165,26 @@ public class ReportController {
             }
         }
         return sum;
+    }
+    public List<LunchReport> getLunchReportByDate(String date){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        LinkedList<LunchReport> lunchReports = new LinkedList<>();
+        Date d = new Date();
+        try {
+            d = formatter.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        List<Lunch> tmp = lunchService.getLunchByDate(d);
+        if(tmp == null || tmp.size() < 1){
+            return null;
+        }
+        Lunch lunch = tmp.get(0);
+        Collection<Child> childs = childService.getChildrenByLunch(lunch);
+        for(Child c : childs){
+            lunchReports.add(new LunchReport(lunch, c));
+        }
+        return lunchReports;
     }
 }
