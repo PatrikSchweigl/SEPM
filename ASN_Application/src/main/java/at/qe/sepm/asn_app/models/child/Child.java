@@ -278,14 +278,19 @@ public class Child implements Persistable<Long> {
      * even though some attributes like religion may be different the child
      * could still be the "same" person. We focus only on the main attributes
      * to determine equality.
-     * @param obj The object to be compared. If it's not an instance of Child then <code>false</code> gets returned immediately.
+     * @param other The object to be compared. If it's not an instance of Child then <code>false</code> gets returned immediately.
      * @return <code>true</code> iff the main attributes are equal of the current child and the parameter; <code>false</code> in any other case.
      * @see Gender
      * @see Parent
      * @see Sibling
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object other) {
+        return (other instanceof Child) && (id != null)
+                ? id.equals(((Child) other).id)
+                : (other == this);
+    }
+    /*public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -299,14 +304,14 @@ public class Child implements Persistable<Long> {
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
                 this.parent1.equals(other.parent1) &&
-                this.parent2.equals(other.parent2)) {
-                //this.siblings.equals(other.siblings)) {
+                this.parent2.equals(other.parent2) &&
+                this.siblings.equals(other.siblings)) {
             return true;
         }
         else {
             return false;
         }
-    }
+    }*/
 
 
     @Override

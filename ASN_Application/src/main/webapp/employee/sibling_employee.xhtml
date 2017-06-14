@@ -83,22 +83,15 @@
                                             <p:panelGrid columns="2" rendered="#{not empty siblingController.sibling}"
                                                          columnClasses="label,value">
                                                 <p:outputLabel for="child" value="Kind: "/>
-                                                <p:selectOneListbox id="child"
-                                                                    value="#{childController.child.id}" var="chi"
-                                                                    filter="true" filterMatchMode="contains"
-                                                                    required="true"
-                                                                    requiredMessage="Kein Kind angegeben!">
-                                                    <f:selectItems value="#{childController.children}"
-                                                                   var="child" itemLabel=""
-                                                                   itemValue="#{child.firstName} #{child.lastName}"/>
+                                                <p:selectOneListbox id="child" value="#{siblingController.sibling.child.id}" converter="childConverter" var="chi" filter="true" filterMatchMode="contains">
+                                                    <f:selectItems value="#{childController.children}" var="child" itemLabel="#{child.firstName}" itemValue="#{child}" />
 
                                                     <p:column>
-                                                        <p:graphicImage name="pictures/tiger.jpg" width="32"
-                                                                        height="32"/>
+                                                        <h:outputText value ="#{chi.firstName}" />
                                                     </p:column>
 
                                                     <p:column>
-                                                        <h:outputText value="#{chi}"/>
+                                                        <h:outputText value="#{chi.lastName}" />
                                                     </p:column>
                                                 </p:selectOneListbox>
                                                 <p:outputLabel id="firstname" value="Vorname:"/>
