@@ -60,4 +60,14 @@ public class ReportController {
 	public void setMonthlyReport(Collection<LunchReport> monthlyReport) {
 		this.monthlyReport = monthlyReport;
 	}
+
+	public double getLunchCostByChild(Child child){
+        double sum = 0.0;
+        for(LunchReport lr : monthlyReport){
+            if(lr.getChild().getId() == child.getId()){
+                sum += lr.getLunch().getCost();
+            }
+        }
+        return sum;
+    }
 }
