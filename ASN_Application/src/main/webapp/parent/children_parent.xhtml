@@ -136,11 +136,11 @@
                                                          onclick="$('input[type=file]').click()">
                                                         <p:graphicImage id="out-image-edit"
                                                                         style="max-height: 200px; max-width: 200px"
-                                                                        name="pictures/profile_pictures_children/#{childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserData().getUsername(), childController.childEdit.firstName).getImgName()}">
+                                                                        name="pictures/profile_pictures_children/#{childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserData().getUsername(), childEditController.childEdit.firstName).getImgName()}">
                                                         </p:graphicImage>
                                                         <p:outputPanel>
                                                             <p:graphicImage
-                                                                    rendered="#{empty childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserData().getUsername(), childController.childEdit.firstName).getImgName()}"
+                                                                    rendered="#{empty childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserData().getUsername(), childEditController.childEdit.firstName).getImgName()}"
                                                                     name="pictures/profile_pictures/emptypicture.png"
                                                                     value="Bild hochladen"></p:graphicImage>
                                                         </p:outputPanel>
