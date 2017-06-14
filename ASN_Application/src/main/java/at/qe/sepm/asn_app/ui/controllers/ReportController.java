@@ -158,7 +158,7 @@ public class ReportController {
 	public double getLunchCostByChild(Child child){
         double sum = 0.0;
         for(LunchReport lr : monthlyReport){
-            if(lr.getChild().getId() == child.getId()){
+            if(lr.getChild().getId().equals(child.getId())){
                 sum += lr.getLunch().getCost();
             }
         }
