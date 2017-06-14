@@ -29,7 +29,7 @@ public class ReportController {
     private Collection<LunchReport> monthlyReport;
     private Collection<LunchReport> weeklyReport;
     private Collection<LunchReport> annualReport;
-    
+
     
     @PostConstruct
     public void initList(){
@@ -153,5 +153,15 @@ public class ReportController {
 
     public void setAnnualReport(Collection<LunchReport> annualReport) {
         this.annualReport = annualReport;
+    }
+
+	public double getLunchCostByChild(Child child){
+        double sum = 0.0;
+        for(LunchReport lr : monthlyReport){
+            if(lr.getChild().getId().equals(child.getId())){
+                sum += lr.getLunch().getCost();
+            }
+        }
+        return sum;
     }
 }
