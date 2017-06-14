@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Created by Auki on 13.06.2017.
  */
@@ -23,6 +25,14 @@ public class ReportController {
     private LunchService lunchService;
     @Autowired
     private ChildService childService;
+    
+    private Collection<LunchReport> monthlyReport;
+    
+    
+    @PostConstruct
+    public void initList(){
+        monthlyReport = getLunchReportThisMonth();
+    }
 
 
     public List<LunchReport> getLunchReportThisMonth(){
@@ -44,4 +54,10 @@ public class ReportController {
         }
         return lunchReports;
     }
+	public Collection<LunchReport> getMonthlyReport() {
+		return monthlyReport;
+	}
+	public void setMonthlyReport(Collection<LunchReport> monthlyReport) {
+		this.monthlyReport = monthlyReport;
+	}
 }
