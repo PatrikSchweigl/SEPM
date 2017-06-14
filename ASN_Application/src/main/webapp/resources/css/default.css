@@ -145,3 +145,7 @@ a:focus {
     padding-bottom: 15px;
   }
 }
+
+.ui-datatable .ui-datatable-header{
+	text-align:right;
+}
