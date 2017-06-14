@@ -88,7 +88,7 @@ public class ChildService {
     }
 
     public Child loadChild(Long id) {
-        return childRepository.findOne(id);
+		return childRepository.findOne(id);
     }
 
     public void deleteChild(Child child) {

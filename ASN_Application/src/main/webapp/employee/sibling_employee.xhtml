@@ -67,7 +67,7 @@
                                                     <p:commandButton value="Speichern"
                                                                      action="#{siblingController.doSaveSiblingEdit}"
                                                                      update=":siblingForm:siblingTable"
-                                                                     oncomplete="PF('siblingEditDialog').hide()"/>
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('siblingEditDialog').hide()" />
                                                     <p:commandButton value="Abbruch"
                                                                      onclick="PF('siblingEditDialog').hide()" immediate="true" />
                                                 </h:panelGrid>
@@ -84,9 +84,17 @@
                                             <p:panelGrid columns="2" rendered="#{not empty siblingController.sibling}"
                                                          columnClasses="label,value">
                                                 <p:outputLabel for="child" value="Kind: "/>
-                                                <p:selectOneMenu converter="#{childConverter}" id="child" value="#{siblingController.sibling.child}" required="true">
-                                                    <f:selectItems value="#{childController.children}" var="child" itemLabel="#{child.firstName} #{child.lastName}" itemValue="#{child}" />
-                                                </p:selectOneMenu>
+                                                <p:selectOneListbox id="child" value="siblingController.sibling.child" rendered="true" var="child">
+                                                    <f:selectItems value="#{childController.children}" var="child" itemLabel="#{child.fullname}" itemValue="#{child}" />
+                                                    <p:column>
+                                                        <p:graphicImage
+                                                                name="pictures/profile_pictures_children/#{childController.findOne(child.id).imgName}"
+                                                                width="32" height="32" cache="false"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <h:outputText value="#{child.fullname}"></h:outputText>
+                                                    </p:column>
+                                                </p:selectOneListbox>
                                                 <p:outputLabel id="firstname" value="Vorname:"/>
                                                 <p:inputText for="firstname"
                                                              value="#{siblingController.sibling.firstName}"/>
@@ -98,7 +106,7 @@
                                                     <p:commandButton value="Speichern"
                                                                      action="#{siblingController.doSaveSibling}"
                                                                      update=":siblingForm:siblingTable"
-                                                                     oncomplete="PF('siblingAddDialog').hide()"/>
+                                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('siblingAddDialog').hide()" />
                                                     <p:commandButton value="Abbruch"
                                                                      onclick="PF('siblingAddDialog').hide()" immediate="true" />
                                                 </h:panelGrid>
