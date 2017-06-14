@@ -27,11 +27,15 @@ public class ReportController {
     private ChildService childService;
     
     private Collection<LunchReport> monthlyReport;
+    private Collection<LunchReport> weeklyReport;
+    private Collection<LunchReport> annualReport;
     
     
     @PostConstruct
     public void initList(){
         monthlyReport = getLunchReportThisMonth();
+        weeklyReport = getLunchReportForWeek(0);
+        annualReport = getLunchReportForYear(0);
     }
 
 
@@ -134,4 +138,20 @@ public class ReportController {
 	public void setMonthlyReport(Collection<LunchReport> monthlyReport) {
 		this.monthlyReport = monthlyReport;
 	}
+
+    public Collection<LunchReport> getWeeklyReport() {
+        return weeklyReport;
+    }
+
+    public void setWeeklyReport(Collection<LunchReport> weeklyReport) {
+        this.weeklyReport = weeklyReport;
+    }
+
+    public Collection<LunchReport> getAnnualReport() {
+        return annualReport;
+    }
+
+    public void setAnnualReport(Collection<LunchReport> annualReport) {
+        this.annualReport = annualReport;
+    }
 }
