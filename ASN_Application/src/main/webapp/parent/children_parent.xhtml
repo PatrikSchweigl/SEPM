@@ -62,62 +62,7 @@
                                         </p:column>
                                     </p:dataTable>
 
-                                    <div align="left" style="margin-bottom: 10px;">
-                                        <p:commandButton oncomplete="PF('caregiverAddDialog').show()"
-                                                         value="Bezugsperson hinzufügen"
-                                                         style="align-items:right; margin-top:100px;"></p:commandButton>
-                                    </div>
-                                    <p:dataTable id="caregiverTable" var="child"
-                                                 widgetVar="caregiverTable"
-                                                 value="#{caregiverController.caregivers}" paginator="true"
-                                                 rows="10" paginatorPosition="bottom"
-                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate="10,25,50">
 
-                                        <f:facet name="header">
-                                            <p:outputPanel>
-                                                <h:outputText value="Suche "/>
-                                                <p:inputText id="globalFilter"
-                                                             onkeyup="PF('caregiverTable').filter()"
-                                                             style="width:150px" placeholder="Suchwort eingeben"/>
-                                            </p:outputPanel>
-                                        </f:facet>
-
-
-                                        <p:column headerText="Vorname" filterBy="#{child.firstName}"
-                                                  sortBy="#{child.firstName}" filterStyle="display:none">
-                                            <h:outputText value="#{child.firstName}"/>
-                                        </p:column>
-                                        <p:column headerText="Nachname" filterBy="#{child.lastName}"
-                                                  sortBy="#{child.lastName}" filterStyle="display:none">
-                                            <h:outputText value="#{child.lastName}"/>
-                                        </p:column>
-                                        <p:column headerText="Telefonnummer"
-                                                  filterBy="#{child.phoneNumber}"
-                                                  sortBy="#{child.phoneNumber}" filterStyle="display:none">
-                                            <h:outputText value="#{child.phoneNumber}"/>
-                                        </p:column>
-                                        <p:column headerText="Kind" filterBy="#{child.childname}"
-                                                  sortBy="#{child.childname}" filterStyle="display:none">
-                                            <h:outputText value="#{child.childname}"/>
-                                        </p:column>
-                                        <p:column style="width:100px;text-align: center"
-                                                  exportable="false">
-                                            <p:commandButton update=":childForm:caregiverEditDialog"
-                                                             oncomplete="PF('caregiverEditDialog').show()"
-                                                             icon="ui-icon-note" title="Edit" process="@this">
-                                                <f:setPropertyActionListener value="#{child}"
-                                                                             target="#{caregiverController.caregiverEdit}"/>
-                                            </p:commandButton>
-                                        </p:column>
-                                    </p:dataTable>
-                                    <p:confirmDialog global="true" showEffect="fade"
-                                                     hideEffect="fade" width="300">
-                                        <p:commandButton value="Yes" type="button"
-                                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                                        <p:commandButton value="No" type="button"
-                                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-                                    </p:confirmDialog>
 
                                     <!--Edit Child Dialog -->
                                     <p:dialog header="Kind bearbeiten" id="childEditDialog" closeOnEscape="true"
@@ -182,7 +127,7 @@
                                                              value="#{childEditController.childEdit.foodIntolerances}"/>
                                             </h:panelGrid>
                                             <p:separator/>
-                                            <h:panelGrid columns="3">
+                                            <h:panelGrid columns="4">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{childEditController.doSaveChildParent()}"
                                                                  update=":childForm:childTable"
@@ -196,6 +141,63 @@
                                         </p:outputPanel>
                                     </p:dialog>
 
+                                    <!--Caregiver table-->
+                                    <div align="left" style="margin-bottom: 10px;">
+                                        <p:commandButton oncomplete="PF('caregiverAddDialog').show()"
+                                                         value="Bezugsperson hinzufügen"
+                                                         style="align-items:right; margin-top:100px;"></p:commandButton>
+                                    </div>
+                                    <p:dataTable id="caregiverTable" var="child"
+                                                 widgetVar="caregiverTable"
+                                                 value="#{caregiverController.caregivers}" paginator="true"
+                                                 rows="10" paginatorPosition="bottom"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50">
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <h:outputText value="Suche "/>
+                                                <p:inputText id="globalFilter"
+                                                             onkeyup="PF('caregiverTable').filter()"
+                                                             style="width:150px" placeholder="Suchwort eingeben"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+
+                                        <p:column headerText="Vorname" filterBy="#{child.firstName}"
+                                                  sortBy="#{child.firstName}" filterStyle="display:none">
+                                            <h:outputText value="#{child.firstName}"/>
+                                        </p:column>
+                                        <p:column headerText="Nachname" filterBy="#{child.lastName}"
+                                                  sortBy="#{child.lastName}" filterStyle="display:none">
+                                            <h:outputText value="#{child.lastName}"/>
+                                        </p:column>
+                                        <p:column headerText="Telefonnummer"
+                                                  filterBy="#{child.phoneNumber}"
+                                                  sortBy="#{child.phoneNumber}" filterStyle="display:none">
+                                            <h:outputText value="#{child.phoneNumber}"/>
+                                        </p:column>
+                                        <p:column headerText="Kind" filterBy="#{child.childname}"
+                                                  sortBy="#{child.childname}" filterStyle="display:none">
+                                            <h:outputText value="#{child.childname}"/>
+                                        </p:column>
+                                        <p:column style="width:100px;text-align: center"
+                                                  exportable="false">
+                                            <p:commandButton update=":childForm:caregiverEditDialog"
+                                                             oncomplete="PF('caregiverEditDialog').show()"
+                                                             icon="ui-icon-note" title="Edit" process="@this">
+                                                <f:setPropertyActionListener value="#{child}"
+                                                                             target="#{caregiverController.caregiverEdit}"/>
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                    <p:confirmDialog global="true" showEffect="fade"
+                                                     hideEffect="fade" width="300">
+                                        <p:commandButton value="Yes" type="button"
+                                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                        <p:commandButton value="No" type="button"
+                                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                    </p:confirmDialog>
 
                                     <!--Add Caregiver Dialog -->
                                     <p:dialog header="Bezugspersonhinzufügen"
@@ -309,6 +311,8 @@
                                             </h:panelGrid>
                                         </p:outputPanel>
                                     </p:dialog>
+
+
                                 </h:form>
                             </div>
                         </div>
