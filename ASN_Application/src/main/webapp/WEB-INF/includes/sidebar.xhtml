@@ -93,13 +93,6 @@
 									style="padding-left: 40px; font-size: 25px">Angestellte</span>
 							</a></li>
 						</h:panelGroup>
-
-						<h:panelGroup>
-							<li class="treeview"><a onclick="PF('colorSettings').show()"
-								href="#"> <i class="fa fa-edit fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Farbeinstellung</span>
-							</a></li>
-						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a href="/employee/logpage_admin.xhtml">
@@ -126,12 +119,6 @@
 			</aside>
 		</ui:fragment>
 		<h:form>
-			<p:dialog header="Farbeinstellung" id="colorSettings"
-				widgetVar="colorSettings" modal="true" showEffect="fade"
-				hideEffect="fade" resizable="false" closeOnEscape="true"
-				width="350px">
-
-			</p:dialog>
 
 			<p:dialog header="Eigene Daten" id="ownDataDialog"
 				widgetVar="ownDataDialog" modal="true" showEffect="fade"
