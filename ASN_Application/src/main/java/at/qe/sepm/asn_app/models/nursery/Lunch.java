@@ -64,6 +64,10 @@ public class Lunch implements Persistable<Long> {
     public Date getDate() {
         return date;
     }
+    
+    public String getFormattedOriginDate(){
+    	return new SimpleDateFormat("dd-MM-yyyy").format(date);
+    }
 
 
     public void setDate(Date date) {

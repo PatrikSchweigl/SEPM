@@ -35,7 +35,8 @@
 													<p:dataTable id="childTable" var="reg"
 														value="#{registrationController.getRegistrationsByDate(scheduleView.selectedDay)}"
 														paginator="true" paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														 emptyMessage="Es wurden keine Kinder gefunden!">
 														<f:facet name="{Exporters}"
 															style="float: right; vertical-align: middle;">
 															<div style="float: right; vertical-align: middle;">
@@ -81,17 +82,17 @@
 															<h:outputText value="#{reg.note}" />
 														</p:column>
 														<p:column headerText="Anmeldedatum">
-															<h:outputText value="#{reg.date}" />
+															<h:outputText value="#{reg.getFormattedBringDateFull()}" />
 														</p:column>
 													</p:dataTable>
 
 												</p:tab>
 												<p:tab title="Kinder, die heute zu Mittag essen">
-													<p:dataTable id="childTableEating" var="child"
-														value="#{childController.children}" paginator="true"
-														paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
-														>
+													<p:dataTable id="childTableEating" var="rep"
+														value="#{reportController.getLunchReportByDate(scheduleView.selectedDay)}"
+														paginator="true" paginatorPosition="bottom"
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														 emptyMessage="Es wurden keine Kinder gefunden, die heute zu Mittag essen!">
 
 														<f:facet name="{Exporters}"
 															style="float: right; vertical-align: middle;">
@@ -130,17 +131,21 @@
 														</f:facet>
 
 														<p:column headerText="Vorname">
-															<h:outputText value="#{child.firstName}" />
+															<h:outputText value="#{rep.child.firstName}" />
 														</p:column>
 														<p:column headerText="Nachname">
-															<h:outputText value="#{child.lastName}" />
+															<h:outputText value="#{rep.child.lastName}" />
 														</p:column>
-														<p:column headerText="Allergien">
-															<h:outputText value="#{child.allergies}" />
+														<p:column headerText="Tag">
+															<h:outputText value="#{rep.lunch.getFormattedOriginDate()}" />
 														</p:column>
-														<p:column headerText="Unvertraeglichkeit">
-															<h:outputText value="#{child.foodIntolerances}" />
+														<p:column headerText="Mahlzeit">
+															<h:outputText value="#{rep.lunch.meal}" />
 														</p:column>
+														<p:column headerText="Kosten">
+															<h:outputText value="#{rep.lunch.cost}" />
+														</p:column>
+
 
 
 													</p:dataTable>
