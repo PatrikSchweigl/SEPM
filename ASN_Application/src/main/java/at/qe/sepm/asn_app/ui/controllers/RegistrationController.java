@@ -50,10 +50,15 @@ public class RegistrationController {
     }
 
     public Collection<Registration> getRegistrationsByDate(String date){
-    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); 
+    	SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd k:mm:ss z yyyy"); 
     	Date d = new Date();
 		try {
+			System.err.println("HEEEEERE I AM");
+			System.err.println(date);
+
 			d = formatter.parse(date);
+			System.err.println(d);
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
