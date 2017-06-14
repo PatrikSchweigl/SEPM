@@ -57,7 +57,7 @@
                                                              oncomplete="PF('childEditDialog').show()"
                                                              icon="ui-icon-note" title="Edit" process="@this">
                                                 <f:setPropertyActionListener value="#{child}"
-                                                                             target="#{childController.childEdit}"/>
+                                                                             target="#{childEditController.childEdit}"/>
                                             </p:commandButton>
                                         </p:column>
                                     </p:dataTable>
@@ -124,7 +124,7 @@
                                               widgetVar="childEditDialog" modal="true" showEffect="fade"
                                               hideEffect="fade" resizable="false">
                                         <p:outputPanel id="childDataEdit"
-                                                       rendered="#{not empty childController.childEdit}">
+                                                       rendered="#{not empty childEditController.childEdit}">
                                             <p:outputPanel>
                                                 <h:outputLabel for="fupload-edit" id="logo-section-edit">
                                                     <p:fileUpload id="fupload-edit" widgetVar="fupload-edit"
@@ -151,18 +151,18 @@
                                             <h:panelGrid columns="2">
                                                 <p:outputLabel for="pFirstName" value="Elternteil: "/>
                                                 <p:inputText disabled="true" id="pFirstName"
-                                                             value="#{childController.childEdit.getPrimaryParentFullName()}"/>
+                                                             value="#{childEditController.childEdit.getPrimaryParentFullName()}"/>
                                                 <p:outputLabel for="firstname" value="Vorname: "/>
                                                 <p:inputText id="firstname"
-                                                             value="#{childController.childEdit.firstName}"
+                                                             value="#{childEditController.childEdit.firstName}"
                                                              required="true" requiredMessage="Vorname erforderlich!"/>
                                                 <p:outputLabel for="lastname" value="Nachname: "/>
                                                 <p:inputText id="lastname"
-                                                             value="#{childController.childEdit.lastName}"
+                                                             value="#{childEditController.childEdit.lastName}"
                                                              required="true" requiredMessage="Nachname erforderlich!"/>
                                                 <p:outputLabel for="birthday" value="Geburtsdatum: "/>
                                                 <p:inputMask mask="99/99/9999" id="birthday"
-                                                             value="#{childController.childEdit.birthday}"
+                                                             value="#{childEditController.childEdit.birthday}"
                                                              required="true"
                                                              requiredMessage="Geburtsdatum erforderlich!"
                                                              validatorMessage="Ungültiges Datum für Geburtstag!"/>
@@ -170,43 +170,43 @@
                                                                value="Notfallnummer: "/>
                                                 <p:inputMask id="emergencyNumber"
                                                              mask="9?99999999999" slotChar=" " maxlength="12"
-                                                             value="#{childController.childEdit.emergencyNumber}"
+                                                             value="#{childEditController.childEdit.emergencyNumber}"
                                                              required="true" requiredMessage="Notfallkontaktnummer erforderlich!"/>
                                                 <p:outputLabel for="allergies"
                                                                value="Allergie hinzufügen: "/>
                                                 <p:inputText id="allergies"
-                                                             value="#{childController.allergy}"/>
+                                                             value="#{childEditController.allergy}"/>
                                                 <p:outputLabel for="intolerance"
                                                                value="Unverträglichkeit hinzufügen: "/>
                                                 <p:inputText id="intolerance"
-                                                             value="#{childController.intolerance}"/>
+                                                             value="#{childEditController.intolerance}"/>
                                                 <p:outputLabel for="detail" value="Detailansicht:"/>
                                                 <h:selectBooleanCheckbox id="detail"
-                                                                         value="#{childController.detail}">
+                                                                         value="#{childEditController.detail}">
                                                     <p:ajax update="childDataEdit"/>
                                                 </h:selectBooleanCheckbox>
-                                                <ui:fragment rendered="#{childController.detail}">
+                                                <ui:fragment rendered="#{childEditController.detail}">
                                                     <p:outputLabel for="all" value="Allergieliste:"/>
                                                 </ui:fragment>
 
-                                                <ui:fragment rendered="#{childController.detail}">
+                                                <ui:fragment rendered="#{childEditController.detail}">
                                                     <p:outputPanel
-                                                            id="all">#{childController.childEdit.allergies.toString()}</p:outputPanel>
+                                                            id="all">#{childEditController.childEdit.allergies.toString()}</p:outputPanel>
                                                 </ui:fragment>
-                                                <ui:fragment rendered="#{childController.detail}">
+                                                <ui:fragment rendered="#{childEditController.detail}">
                                                     <p:outputLabel for="int" value="Unverträglichkeitsliste:"/>
                                                 </ui:fragment>
 
-                                                <ui:fragment rendered="#{childController.detail}">
+                                                <ui:fragment rendered="#{childEditController.detail}">
                                                     <p:outputPanel
-                                                            id="int">#{childController.childEdit.foodIntolerances.toString()}</p:outputPanel>
+                                                            id="int">#{childEditController.childEdit.foodIntolerances.toString()}</p:outputPanel>
                                                 </ui:fragment>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
-                                                                 action="#{childController.doSaveChildEdit()}"
-                                                                 update=":childForm"
+                                                                 action="#{childEditController.doSaveChildParent()}"
+                                                                 update=":childForm:childTable"
                                                                  process="@widgetVar(childEditDialog)"/>
                                                 <p:commandButton value="Neu laden" immediate="true"
                                                                  action="#{childController.doReloadChildEdit()}"

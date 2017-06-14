@@ -55,6 +55,13 @@
 									style="padding-left: 40px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
+							<li class="treeview"><a
+									href="/employee/sibling_employee.xhtml"> <i
+									class="fa fa-child fa-3x"></i> <span
+									style="padding-left: 40px; font-size: 25px">Geschwister</span>
+							</a></li>
+						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
 							<li class="treeview"><a href="/parent/children_parent.xhtml">

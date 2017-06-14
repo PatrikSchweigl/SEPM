@@ -31,8 +31,7 @@ import java.util.Map;
  * on 24.03.2017
  */
 @Component
-//@Scope("view")
-@Scope("request")
+@Scope("view")
 public class EmployeeController {
 
     @Autowired
@@ -93,6 +92,7 @@ public class EmployeeController {
     }
     
     public void doSaveEmployee(){
+        System.out.println(employee.toString());
         if (!StringUtils.isNumeric(employee.getPostcode())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
         } else if (!StringUtils.isNumeric(employee.getPhoneNumber())) {

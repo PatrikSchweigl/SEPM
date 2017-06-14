@@ -26,7 +26,7 @@ import java.util.Collection;
 @Component
 //@Scope("view")
 //@Scope("application")
-@Scope("request")
+@Scope("view")
 public class ParentController {
     @Autowired
     private ParentService parentService;
@@ -42,7 +42,6 @@ public class ParentController {
 
 
     public Collection<Parent> getParents() {
-    	initList();
         return parents;
     }
 

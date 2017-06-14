@@ -42,12 +42,8 @@ public class ChildController {
     @Autowired
     private LunchService lunchService;
 	private Child child;
-	private Child childEdit;
 	private Caregiver caregiver;
-	private String allergy;
-	private boolean detail;
-	private String intolerance;
-	private boolean care;
+
 	private Collection<Child> children;
 
 	private String parentUserName;
@@ -110,24 +106,6 @@ public class ChildController {
         this.child = child;
     }
 
-    public Child getChildEdit() {
-        return childEdit;
-    }
-
-	public void setChildEdit(Child childEdit) {
-		this.childEdit = childEdit;
-		doReloadChildEdit();
-	}
-
-    /**
-     * Needed for JUnit tests
-     * @param childEdit The child to be saved in the database.
-     */
-    public void setChildEdit2(Child childEdit) {
-        this.childEdit = childEdit;
-    }
-
-
 	public void findParentByUsername(String usrn){
 		child.setPrimaryParent(parentService.loadParent(usrn));
 	}
@@ -165,82 +143,10 @@ public class ChildController {
 		return childReturn;
 	}
 
-	public void doSaveChildEdit() {
-		if(allergy.compareTo("") != 0)
-			childEdit.addAllergy(allergy);
-		if(intolerance.compareTo("") != 0)
-			childEdit.addFoodIntolerance(intolerance);
-		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
-		}else {
-			try {
-				childEdit = childService.saveChild(childEdit);
-				initList();
-				RequestContext context = RequestContext.getCurrentInstance();
-				context.execute("PF('childEditDialog').hide()");
-			} catch (TransactionSystemException ex) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
-			}
-		}
-
-	}
-
-	public void doDeleteChild() {
-		Parent parent = childEdit.getPrimaryParent();
-		this.childService.deleteChild(childEdit);
-		childEdit = null;
-		children = childService.getAllChildren();
-		if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
-			parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
-		}
-		parentController.initList();
-	}
 	public void doReloadChild(){
 		child = childService.loadChild(child.getId());
 	}
-	public void doReloadChildEdit(){
-		childEdit = childService.loadChild(childEdit.getId());
-	}
 
-	public boolean getCare() {
-		return care;
-	}
-
-	public void setCare(boolean care) {
-		this.care = care;
-	}
-
-	public Caregiver getCaregiver() {
-		return caregiver;
-	}
-
-	public void setCaregiver(Caregiver caregiver) {
-		this.caregiver = caregiver;
-	}
-
-	public String getAllergy() {
-		return allergy;
-	}
-
-	public void setAllergy(String allergy) {
-		this.allergy = allergy;
-	}
-
-	public String getIntolerance() {
-		return intolerance;
-	}
-
-	public void setIntolerance(String intolerance) {
-		this.intolerance = intolerance;
-	}
-
-	public boolean isDetail() {
-		return detail;
-	}
-
-	public void setDetail(boolean detail) {
-		this.detail = detail;
-	}
 
 
 }

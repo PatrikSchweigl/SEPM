@@ -20,7 +20,7 @@ import javax.faces.context.FacesContext;
  */
 @Component
 //@Scope("view")
-@Scope("request")
+@Scope("view")
 public class ParentEditController {
 
     @Autowired

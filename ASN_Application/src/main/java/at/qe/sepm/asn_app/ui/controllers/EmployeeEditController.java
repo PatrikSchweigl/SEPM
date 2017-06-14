@@ -24,8 +24,7 @@ import javax.faces.context.FacesContext;
  * on 12.06.2017.
  */
 @Component
-//@Scope("view")
-@Scope("request")
+@Scope("view")
 public class EmployeeEditController {
 
 	@Autowired
@@ -58,7 +57,8 @@ public class EmployeeEditController {
 		employee = employeeService.loadEmployee(employee.getUsername());
 	}
 
-	public void doSaveEmployee(){
+	public void doSaveEmployeeEdit(){
+		System.out.println(employee.toString());
 		if (!StringUtils.isNumeric(employee.getPostcode())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
 		} else if (!StringUtils.isNumeric(employee.getPhoneNumber())) {
@@ -67,6 +67,7 @@ public class EmployeeEditController {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
 		} else{
 			try {
+
 				employee = employeeService.saveEmployee(employee);
 				mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Änderung Benutzerdaten",
 						"Guten Tag " + employee.getFirstName() + " " + employee.getLastName() + "!\n\n" +
@@ -79,8 +80,9 @@ public class EmployeeEditController {
 			} catch (TransactionSystemException ex) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
 			}
-			employee = null;
+
 			employeeController.initList();
+			employee = null;
 		}
 	}
 

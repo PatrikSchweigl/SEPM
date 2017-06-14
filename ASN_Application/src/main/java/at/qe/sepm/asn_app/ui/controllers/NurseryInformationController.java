@@ -7,6 +7,7 @@ import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionSystemException;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +22,7 @@ import java.util.Date;
  */
 @Component
 //@Scope("view")
-@Scope("request")
+@Scope("view")
 public class NurseryInformationController {
 
 	@Autowired
@@ -39,6 +40,7 @@ public class NurseryInformationController {
 	public void setNurseryInformation(NurseryInformation nurseryInformation) {
 		this.nurseryInformation = nurseryInformation;
 	}
+
 	public void setNurseryInformation2(NurseryInformation nurseryInformation) {
 		this.nurseryInformation = nurseryInformation;
 	}

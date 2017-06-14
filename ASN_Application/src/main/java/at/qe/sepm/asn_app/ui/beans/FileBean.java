@@ -13,6 +13,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -49,7 +50,7 @@ public class FileBean {
     @Autowired
     private UserService userService;
     @Autowired
-    private ChildController childController;
+    private ChildEditController childEditController;
     @Autowired
     private ChildService childService;
     @Autowired
@@ -126,7 +127,7 @@ public class FileBean {
         String filename = FilenameUtils.getBaseName(file.getFileName());
         String extension = FilenameUtils.getExtension(file.getFileName());
         Path newFile = Files.createTempFile(folder, filename, "." + extension);
-        Child child = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(), childController.getChildEdit().getFirstName());
+        Child child = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(), childEditController.getChildEdit().getFirstName());
         child.setImgName(newFile.getFileName().toString());
         childService.saveChild(child);
         InputStream input = file.getInputstream();

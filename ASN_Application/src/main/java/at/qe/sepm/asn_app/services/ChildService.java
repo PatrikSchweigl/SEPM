@@ -98,6 +98,7 @@ public class ChildService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
             auditLogRepository.save(log);
         }
+        System.out.println(child.toString());
         childRepository.delete(child);
     }
 

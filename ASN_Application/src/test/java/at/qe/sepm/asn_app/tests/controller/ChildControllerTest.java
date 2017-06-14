@@ -12,6 +12,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
+import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
 import at.qe.sepm.asn_app.ui.controllers.ParentEditController;
 import org.junit.After;
@@ -45,6 +46,9 @@ public class ChildControllerTest {
 
     @Autowired
     private ChildController childController;
+    @Autowired
+    private ChildEditController childEditController;
+
     @Autowired
     private ChildService childService;
     @Autowired
@@ -148,8 +152,8 @@ public class ChildControllerTest {
             assertTrue(child.equals(other));
 
             // Delete the child again.
-            childController.setChildEdit2(child);
-            childController.doDeleteChild();
+            childEditController.setChildEdit(child);
+            childEditController.doDeleteChild();
             other = childService.loadChild(child.getId());
             assertFalse(child.equals(other));
             assertNull(other);
