@@ -76,16 +76,15 @@ public class ChildEditController {
 
     public void doDeleteChild() {
         Parent parent = childEdit.getPrimaryParent();
-        System.out.println(childEdit.toString());
+        parent.getChildren().remove(childEdit);
         childService.deleteChild(childEdit);
-        System.out.println(childEdit.toString());
-
         childEdit = null;
-        childController.initList();
+
         if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
             parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
         }
-        parentController.initList();
+        parentService.saveParent(parent);
+        childController.initList();
     }
 
     public String getAllergy() {

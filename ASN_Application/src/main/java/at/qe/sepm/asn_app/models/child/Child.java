@@ -5,6 +5,8 @@ import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +53,7 @@ public class Child implements Persistable<Long> {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @NotNull
+
     @ManyToOne(optional = false)
     private Parent parent1;
 
@@ -63,6 +65,7 @@ public class Child implements Persistable<Long> {
     private String allergies;
     private String foodIntolerances;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection
     private Set<Sibling> siblings;
 
     @Enumerated(EnumType.STRING)
@@ -73,6 +76,7 @@ public class Child implements Persistable<Long> {
 
     //@ElementCollection(targetClass = Caregiver.class)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection
     private Set<Caregiver> caregivers;
 
 
