@@ -389,7 +389,7 @@ public class ScheduleView implements Serializable {
 
 				registrationService.saveRegistration(reg);
 				nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
-				nurseryInformationService.saveNurseryInformation(nurseryInformation);
+				nurseryInformationService.saveNurseryInformationEdit(nurseryInformation);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
 								+ getAuthenticatedUser().getUserRole() + "] ",

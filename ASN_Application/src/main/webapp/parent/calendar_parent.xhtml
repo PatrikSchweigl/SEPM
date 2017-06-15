@@ -251,9 +251,9 @@
                                                             <h:outputText value="#{p}"/>
                                                         </p:column>
                                                     </p:selectOneListbox>
-                                                    <p:progressBar style="margin-top: 5px;margin-bottom:5px;"
-                                                                   value="4"
-                                                                   labelTemplate="{value} Kind(er)" displayOnly="true"/>
+                                                    <p:progressBar style="margin-top: 5px;margin-bottom:5px;" max="#{scheduleView.getCurrentNurseryInformation().getMaxOccupancy()}"
+                                                                   value="#{scheduleView.getCurrentNurseryInformation().getCurrentOccupancy()}"
+                                                                   labelTemplate="{value} Kinder angemeldet" displayOnly="true"/>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{scheduleView.child}">
                                                     <p:outputLabel for="too" value="Uhrzeit:"/>
