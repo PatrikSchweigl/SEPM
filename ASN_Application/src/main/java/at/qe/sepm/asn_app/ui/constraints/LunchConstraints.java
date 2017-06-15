@@ -23,8 +23,26 @@ public class LunchConstraints {
 	@Autowired
 	private NurseryInformationService nurseryService;
 
-	public boolean checkIfLunchExists(Lunch lunch) {
 
+	/**
+	 * Call all other lunch constraints from this method
+	 * @param lunch the lunch of which the constraints are to be checked
+	 * @return <code>true</code> iff no constraints are violated; <code>false</code> otherwise.
+	 */
+	public boolean checkLunchConstraints(Lunch lunch) {
+		if (checkIfLunchExists(lunch)) {
+			return false;
+		}
+		else if (checkIfNurseryInformationExists(lunch)) {
+			return false;
+		}
+		else if (!checkTimeConstraints(lunch)) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkIfLunchExists(Lunch lunch) {
 		Collection<Lunch> l = lunchService.getLunchByDate(lunch.getDate());
 		Iterator<Lunch> iterator = l.iterator();
 		while (iterator.hasNext()) {
@@ -41,8 +59,6 @@ public class LunchConstraints {
 		while (iterator.hasNext()) {
 			NurseryInformation nursery = iterator.next();
 			if (lunch.getDate().compareTo(nursery.getOriginDate()) == 0) {
-
-
 				return true;
 			}
 		}
