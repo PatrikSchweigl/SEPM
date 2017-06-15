@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.tests;
+package at.qe.sepm.asn_app.tests.constraints;
 
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
