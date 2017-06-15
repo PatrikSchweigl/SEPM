@@ -78,7 +78,6 @@ public class ParentController {
 
     public void doSaveParent() {
         if (!StringUtils.isNumeric(parent.getPostcode())) {
-            FacesContext context = FacesContext.getCurrentInstance();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
         } else if (!StringUtils.isNumeric(parent.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));

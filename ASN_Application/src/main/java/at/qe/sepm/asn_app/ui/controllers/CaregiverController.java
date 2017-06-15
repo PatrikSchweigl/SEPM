@@ -5,13 +5,17 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Hibernate;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Collection;
 
 
@@ -79,10 +83,17 @@ public class CaregiverController {
 
 
     public Caregiver doSaveCaregiver(){
-        caregiver = caregiverService.saveCaregiver(caregiver);
-        Caregiver caregiverReturn = caregiver;
-        initList();
-        initNewCaregiver();
+        Caregiver caregiverReturn = null;
+        if(!StringUtils.isNumeric(caregiver.getPhoneNumber())){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
+        } else {
+            caregiver = caregiverService.saveCaregiver(caregiver);
+            caregiverReturn = caregiver;
+            initList();
+            initNewCaregiver();
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('caregiverAddDialog').hide()");
+        }
         return caregiverReturn;
     }
 
@@ -114,8 +125,14 @@ public class CaregiverController {
     }
 
     public void doSaveCaregiverEdit(){
-        caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
-        initList();
+        if(!StringUtils.isNumeric(caregiver.getPhoneNumber())){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
+        } else {
+            caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
+            initList();
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('caregiverEditDialog').hide()");
+        }
     }
 
     public void doDeleteCaregiverEdit() {

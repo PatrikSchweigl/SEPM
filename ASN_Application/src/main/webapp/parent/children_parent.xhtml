@@ -64,6 +64,7 @@
                                     <p:dialog header="Kind bearbeiten" id="childEditDialog" closeOnEscape="true"
                                               widgetVar="childEditDialog" modal="true" showEffect="fade"
                                               hideEffect="fade" resizable="false">
+                                        <p:messages id="childAddMsg" autoUpdate="true"/>
                                         <p:outputPanel id="childDataEdit"
                                                        rendered="#{not empty childEditController.childEdit}">
                                             <p:outputPanel>
@@ -248,38 +249,40 @@
                                     </p:dialog>
 
                                     <!--Add Caregiver Dialog -->
-                                    <p:dialog header="Bezugspersonhinzufügen"
+                                    <p:dialog header="Bezugsperson hinzufügen"
                                               id="caregiverAddDialog" widgetVar="caregiverAddDialog"
                                               modal="true" showEffect="fade" hideEffect="fade"
                                               resizable="false" closeOnEscape="true">
+                                        <p:messages id="messagesAdd" autoUpdate="true" />
                                         <p:outputPanel id="caregiverDataAdd">
                                             <h:panelGrid columns="2">
                                                 <p:outputLabel for="childList" value="Kind: "/>
                                                 <p:selectOneMenu  converter="#{childConverter}" id="childList"
                                                                  value="#{caregiverController.caregiver.child}"
-                                                                 required="true">
+                                                                 required="true" requiredMessage="Kind erforderlich!">
                                                     <f:selectItems value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserName)}"
                                                                    var="child"
                                                                    itemLabel="#{child.firstName} #{child.lastName}"
                                                                    itemValue="#{child}"/>
                                                 </p:selectOneMenu>
                                                 <p:outputLabel for="firstName" value="Vorname: "/>
-                                                <p:inputText id="firstName"
+                                                <p:inputText id="firstName" required="true" requiredMessage="Vorname erforderlich!"
                                                              value="#{caregiverController.caregiver.firstName}"/>
                                                 <p:outputLabel for="lastName" value="Nachname: "/>
-                                                <p:inputText id="lastName"
+                                                <p:inputText id="lastName" required="true" requiredMessage="Nachname erforderlich!"
                                                              value="#{caregiverController.caregiver.lastName}"/>
-                                                <p:outputLabel for="tele" value="Telefonnummer: "/>
-                                                <p:inputText id="tele"
-                                                             value="#{caregiverController.caregiver.phoneNumber}"/>
+                                                <p:outputLabel for="phone" value="Telefonnummer: "/>
+                                                <p:inputMask id="phone"
+                                                             mask="9?99999999999" slotChar=" " maxlength="12"
+                                                             value="#{caregiverController.caregiver.phoneNumber}"
+                                                             required="true" requiredMessage="Telefonnummer erforderlich!"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{caregiverController.doSaveCaregiver()}"
-                                                                 oncomplete="PF('caregiverAddDialog').hide()"
-                                                process="@widgetVar(caregiverAddDialog)"
-                                                update=":childForm:caregiverTable"/>
+                                                                 process="@widgetVar(caregiverAddDialog)"
+                                                                 update=":childForm:caregiverTable"/>
                                                 <p:commandButton value="Abbruch"
                                                                  onclick="PF('childAddDialog').hide()"
                                                                  immediate="true"/>
@@ -292,6 +295,7 @@
                                               id="caregiverEditDialog" widgetVar="caregiverEditDialog"
                                               modal="true" showEffect="fade" hideEffect="fade"
                                               resizable="false" closeOnEscape="true">
+                                        <p:messages id="messagesEdit" autoUpdate="true" />
                                         <p:outputPanel id="caregiverDataEdit"
                                                        rendered="#{not empty caregiverController.caregiverEdit}">
                                             <p:outputPanel>
@@ -325,28 +329,29 @@
                                             </p:outputPanel>
                                             <h:panelGrid columns="2">
                                                 <p:outputLabel for="pFirstNameCare" value="Vorname: "/>
-                                                <p:inputText id="pFirstNameCare"
+                                                <p:inputText id="pFirstNameCare" required="true" requiredMessage="Vorname erforderlich!"
                                                              value="#{caregiverController.caregiverEdit.firstName}"/>
                                                 <p:outputLabel for="pLastNameCare" value="Nachname: "/>
-                                                <p:inputText id="pLastNameCare"
+                                                <p:inputText id="pLastNameCare" required="true" requiredMessage="Nachname erforderlich!"
                                                              value="#{caregiverController.caregiverEdit.lastName}"/>
                                                 <p:outputLabel for="pPhoneNumberCare"
                                                                value="Telefonnummer: "/>
-                                                <p:inputText id="pPhoneNumberCare"
-                                                             value="#{caregiverController.caregiverEdit.phoneNumber}"/>
+                                                <p:inputMask id="pPhoneNumberCare"
+                                                             mask="9?99999999999" slotChar=" " maxlength="12"
+                                                             value="#{caregiverController.caregiverEdit.phoneNumber}"
+                                                             required="true" requiredMessage="Telefonnummer erforderlich!"/>
                                                 <p:outputLabel for="pChildCare" value="Kind: "/>
                                                 <p:inputText disabled="true" id="pChildCare"
                                                              value="#{caregiverController.caregiverEdit.child.fullname}"/>
                                                 <p:outputLabel for="pEligibleCare" value="Bestätigt: "/>
                                                 <p:inputText disabled="true" id="pEligibleCare"
-                                                             value="#{caregiverController.caregiverEdit.eligible}"/>
+                                                             value="#{caregiverController.caregiverEdit.eligible ? 'ja' : 'nein'}"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{caregiverController.doSaveCaregiverEdit()}"
-                                                                 oncomplete="PF('caregiverEditDialog').hide()"
-                                                                 update=":childForm"
+                                                                 update=":childForm:caregiverTable"
                                                                  process="@widgetVar(caregiverEditDialog)"/>
                                                 <p:commandButton value="Neu laden" immediate="true"
                                                                  action="#{caregiverController.doReloadCaregiverEdit()}"

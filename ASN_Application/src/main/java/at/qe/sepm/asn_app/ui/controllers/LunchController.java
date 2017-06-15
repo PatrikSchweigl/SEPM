@@ -175,7 +175,6 @@ public class LunchController {
 		return lunchService.findAll();
 	}
 
-	// public void doSaveLunch(){
 	public Lunch doSaveLunch() {
 		Lunch lunchReturn = null;
 		if (lunchConstraints.checkIfLunchExists(lunch)) {
@@ -186,13 +185,13 @@ public class LunchController {
 					"An diesem Tag hat die Kinderkrippe geschlossen", null));
 		} else if (lunch.getCost() < 0.5) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben sie einen adäquaten Preis an", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben Sie einen adäquaten Preis an!", null));
 		} else if (lunch.getMeal().compareTo("") == 0) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte ein Mittagessen angeben", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben Sie ein Mittagessen an!", null));
 		} else if (lunch.getCost() > 10.0) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben sie einen adäquaten Preis an", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben Sie einen adäquaten Preis an!", null));
 		}
 
 		else {
