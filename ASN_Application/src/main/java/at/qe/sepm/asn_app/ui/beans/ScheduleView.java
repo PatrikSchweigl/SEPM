@@ -340,7 +340,16 @@ public class ScheduleView implements Serializable {
 
 	public NurseryInformation getCurrentNurseryInformation(){
 		//System.out.println(nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate()).toString()+"-----------------------");
-		return nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(event.getStartDate());
+		cal.add(Calendar.HOUR_OF_DAY, 2);
+		System.err.println("HERE I AM");
+		System.out.println(cal.getTime());
+		Collection<NurseryInformation> info = nurseryInformationService.getAllInformation();
+		for(NurseryInformation i : info){
+		System.err.println(i.getOriginDate());
+		}
+		return nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
 	}
 
 	public void addRegistration() {
@@ -367,7 +376,7 @@ public class ScheduleView implements Serializable {
 			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
-			} else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate())) == null) {
+			} else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime())) == null) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Für diesen Tag gibt es keine Information", null));
 			}else if(nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {

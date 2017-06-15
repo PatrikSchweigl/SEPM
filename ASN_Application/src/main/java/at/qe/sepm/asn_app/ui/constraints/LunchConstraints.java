@@ -23,20 +23,20 @@ public class LunchConstraints {
 	@Autowired
 	private NurseryInformationService nurseryService;
 
-
 	/**
 	 * Call all other lunch constraints from this method
-	 * @param lunch the lunch of which the constraints are to be checked
-	 * @return <code>true</code> iff no constraints are violated; <code>false</code> otherwise.
+	 * 
+	 * @param lunch
+	 *            the lunch of which the constraints are to be checked
+	 * @return <code>true</code> iff no constraints are violated;
+	 *         <code>false</code> otherwise.
 	 */
 	public boolean checkLunchConstraints(Lunch lunch) {
 		if (checkIfLunchExists(lunch)) {
 			return false;
-		}
-		else if (!checkIfNurseryInformationExists(lunch)) {
+		} else if (!checkIfNurseryInformationExists(lunch)) {
 			return false;
-		}
-		else if (!checkTimeConstraints(lunch)) {
+		} else if (!checkTimeConstraints(lunch)) {
 			return false;
 		}
 		return true;
@@ -58,17 +58,14 @@ public class LunchConstraints {
 		Iterator<NurseryInformation> iterator = n.iterator();
 		while (iterator.hasNext()) {
 			NurseryInformation nursery = iterator.next();
-			//if (lunch.getDate().compareTo(nursery.getOriginDate()) == 0) {
-			if (lunch.getDate().getYear() == nursery.getOriginDate().getYear() &&
-					lunch.getDate().getMonth() == nursery.getOriginDate().getMonth() &&
-					lunch.getDate().getDay() == nursery.getOriginDate().getDay()) {
+			if (lunch.getDate().compareTo(nursery.getOriginDate()) == 0) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public boolean checkTimeConstraints(Lunch lunch){
+
+	public boolean checkTimeConstraints(Lunch lunch) {
 		Calendar fridayConstraint = Calendar.getInstance();
 		fridayConstraint.setTime(new Date());
 		fridayConstraint.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
@@ -79,15 +76,16 @@ public class LunchConstraints {
 		System.err.println("JEEEEEEEEEEEEEEEEEEEEEEEETZT");
 		System.err.println(fridayConstraint.getTime());
 		System.err.println(cal.getTime());
-		if(new Date().compareTo(fridayConstraint.getTime()) > 0)
+		if (new Date().compareTo(fridayConstraint.getTime()) > 0)
 			return false;
 		System.err.println("JEEEEEEEEEEEEEEEEEEEEEEEETZT ABBBBER");
-		System.err.println(cal.get(Calendar.WEEK_OF_YEAR) + " vergleichen mit " + fridayConstraint.get(Calendar.WEEK_OF_YEAR));
-		if(cal.get(Calendar.WEEK_OF_YEAR) <= fridayConstraint.get(Calendar.WEEK_OF_YEAR)){
+		System.err.println(
+				cal.get(Calendar.WEEK_OF_YEAR) + " vergleichen mit " + fridayConstraint.get(Calendar.WEEK_OF_YEAR));
+		if (cal.get(Calendar.WEEK_OF_YEAR) <= fridayConstraint.get(Calendar.WEEK_OF_YEAR)) {
 			return false;
 		}
 		return true;
-			
+
 	}
 
 }
