@@ -28,6 +28,9 @@
                                         <p:column headerText="Nachname">
                                             <h:outputText value="#{sibling.lastName}"/>
                                         </p:column>
+                                        <p:column headerText="Kind">
+                                            <h:outputText value="#{sibling.child.fullname}"/>
+                                        </p:column>
                                         <p:column style="width:32px;text-align: center">
                                             <p:commandButton update=":siblingForm:siblingEdit"
                                                              oncomplete="PF('siblingEditDialog').show()"

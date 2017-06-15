@@ -12,8 +12,11 @@
             <div class="wrapper">
                 <div class="content-wrapper" style="min-height: 1126px;">
                     <section class="content">
+
                         <div class="box">
+
                             <div class="box-body">
+
                                 <h:form id="childForm">
                                     <p:dataTable id="childTable" var="child"
                                                  widgetVar="childTable"
@@ -61,7 +64,6 @@
                                             </p:commandButton>
                                         </p:column>
                                     </p:dataTable>
-
 
 
                                     <!--Edit Child Dialog -->
@@ -116,27 +118,40 @@
                                                 <p:inputMask id="emergencyNumber"
                                                              mask="9?99999999999" slotChar=" " maxlength="12"
                                                              value="#{childEditController.childEdit.emergencyNumber}"
-                                                             required="true" requiredMessage="Notfallkontaktnummer erforderlich!"/>
+                                                             required="true"
+                                                             requiredMessage="Notfallkontaktnummer erforderlich!"/>
                                                 <p:outputLabel for="allergies"
                                                                value="Allergie hinzufügen: "/>
                                                 <p:inputTextarea id="allergies"
-                                                             value="#{childEditController.childEdit.allergies}"/>
+                                                                 value="#{childEditController.childEdit.allergies}"/>
                                                 <p:outputLabel for="intolerance"
                                                                value="Unverträglichkeit hinzufügen: "/>
                                                 <p:inputTextarea id="intolerance"
-                                                             value="#{childEditController.childEdit.foodIntolerances}"/>
+                                                                 value="#{childEditController.childEdit.foodIntolerances}"/>
                                             </h:panelGrid>
                                             <p:separator/>
+
+
                                             <h:panelGrid columns="4">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{childEditController.doSaveChildParent()}"
                                                                  update=":childForm:childTable"
                                                                  process="@widgetVar(childEditDialog)"/>
+                                                <p:commandButton update=":childForm:siblingAddDialog"
+                                                                 oncomplete="PF('siblingAddDialog').show()"
+                                                                 icon="ui-icon-plus"
+                                                                 title="Geschwister hinzufügen"
+                                                                 process="@this">
+                                                    <f:setPropertyActionListener
+                                                            value="#{childEditController.childEdit}"
+                                                            target="#{siblingController.sibling.child}"/>
+                                                </p:commandButton>
                                                 <p:commandButton value="Neu laden" immediate="true"
                                                                  action="#{childController.doReloadChildEdit()}"
                                                                  update=":childForm:childDataEdit"/>
                                                 <p:commandButton value="Abbruch"
                                                                  onclick="PF('childEditDialog').hide()"/>
+
                                             </h:panelGrid>
                                         </p:outputPanel>
                                     </p:dialog>
@@ -204,20 +219,24 @@
                                               id="caregiverAddDialog" widgetVar="caregiverAddDialog"
                                               modal="true" showEffect="fade" hideEffect="fade"
                                               resizable="false" closeOnEscape="true">
-                                        <p:messages id="messages" autoUpdate="true"/>
                                         <p:outputPanel id="caregiverDataAdd">
                                             <h:panelGrid columns="2">
                                                 <p:outputLabel for="childList" value="Kind: "/>
-                                                <p:selectOneListbox id="childList" value="#{caregiverController.caregiver.child}"   var="t" filter="true" filterMatchMode="contains">
-                                                    <f:selectItems value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserData.username)}" var="child" itemLabel="#{child.firstName}" itemValue="#{child}" />
+                                                <p:selectOneListbox id="childList"
+                                                                    value="#{caregiverController.caregiver.child}"
+                                                                    var="t" filter="true" filterMatchMode="contains">
+                                                    <f:selectItems
+                                                            value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserData.username)}"
+                                                            var="child" itemLabel="#{child.firstName}"
+                                                            itemValue="#{child}"/>
 
                                                     <p:column>
                                                         <p:graphicImage name="pictures/tiger.jpg" width="32"
-                                                                        height="32" />
+                                                                        height="32"/>
                                                     </p:column>
 
                                                     <p:column>
-                                                        <h:outputText value="#{t.firstName}" />
+                                                        <h:outputText value="#{t.firstName}"/>
                                                     </p:column>
                                                 </p:selectOneListbox>
                                                 <p:outputLabel for="firstName" value="Vorname: "/>
@@ -237,6 +256,41 @@
                                                                  oncomplete="if (args &amp;&amp; !args.validationFailed) PF('caregiverAddDialog').hide()"/>
                                                 <p:commandButton value="Abbruch"
                                                                  onclick="PF('childAddDialog').hide()"
+                                                                 immediate="true"/>
+                                            </h:panelGrid>
+                                        </p:outputPanel>
+                                    </p:dialog>
+
+                                    <!--Add Sibling-->
+                                    <p:dialog header="Geschwister hinzufügen"
+                                              id="siblingAddDialog" widgetVar="siblingAddDialog"
+                                              modal="true" showEffect="fade" hideEffect="fade"
+                                              resizable="false" closeOnEscape="true">
+                                        <p:messages id="siblingAddMsg" autoUpdate="true"/>
+                                        <p:outputPanel id="siblingDataAdd">
+                                            <h:panelGrid columns="2">
+                                                <p:outputLabel for="name" value="Kind: "/>
+                                                <p:inputText id="name"
+                                                             value="#{siblingController.sibling.child.fullname}"
+                                                             disabled="true" />
+                                                <p:outputLabel for="firstN" value="Vorname: "/>
+                                                <p:inputText id="firstN"
+                                                             value="#{siblingController.sibling.firstName}"/>
+                                                <p:outputLabel for="lastN" value="Nachname: "/>
+                                                <p:inputText id="lastN"
+                                                             value="#{siblingController.sibling.lastName}"/>
+                                                <p:outputLabel for="birth" value="Geburtsdatum: "/>
+                                                <p:inputText id="birth"
+                                                             value="#{siblingController.sibling.birthday}"/>
+                                            </h:panelGrid>
+                                            <p:separator/>
+                                            <h:panelGrid columns="3">
+                                                <p:commandButton value="Speichern"
+                                                                 action="#{siblingController.doSaveSibling}"
+                                                                 oncomplete="PF('siblingAddDialog').hide()"
+                                                                 process="@widgetVar(siblingAddDialog)"/>
+                                                <p:commandButton value="Abbruch"
+                                                                 onclick="PF('siblingAddDialog').hide()"
                                                                  immediate="true"/>
                                             </h:panelGrid>
                                         </p:outputPanel>

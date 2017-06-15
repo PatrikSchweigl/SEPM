@@ -3,10 +3,7 @@ package at.qe.sepm.asn_app.models.child;
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,12 +21,13 @@ public class Sibling implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @NotNull
     private String firstName;
     @NotNull
     private String lastName;
     private String birthday;
+    @ManyToOne(optional = false)
     private Child child;
 
     public Sibling() {}
@@ -75,7 +73,7 @@ public class Sibling implements Persistable<Long> {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return id;
     }
 
 

@@ -62,6 +62,7 @@ public class SiblingController {
         Sibling siblingReturn;
         sibling = siblingService.saveSibling(sibling);
         siblingReturn = sibling;
+        sibling = null;
         initList();
         initNewSibling();
         return siblingReturn;
