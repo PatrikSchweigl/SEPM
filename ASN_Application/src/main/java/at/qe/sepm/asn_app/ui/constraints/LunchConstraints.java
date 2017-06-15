@@ -58,7 +58,10 @@ public class LunchConstraints {
 		Iterator<NurseryInformation> iterator = n.iterator();
 		while (iterator.hasNext()) {
 			NurseryInformation nursery = iterator.next();
-			if (lunch.getDate().compareTo(nursery.getOriginDate()) == 0) {
+			//if (lunch.getDate().compareTo(nursery.getOriginDate()) == 0) {
+			if (lunch.getDate().getYear() == nursery.getOriginDate().getYear() &&
+					lunch.getDate().getMonth() == nursery.getOriginDate().getMonth() &&
+					lunch.getDate().getDay() == nursery.getOriginDate().getDay()) {
 				return true;
 			}
 		}
