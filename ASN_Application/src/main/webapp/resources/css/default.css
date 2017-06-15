@@ -149,3 +149,8 @@ a:focus {
 .ui-datatable .ui-datatable-header{
 	text-align:right;
 }
+
+.ui-clock{
+  border: none;
+  background: none;
+}

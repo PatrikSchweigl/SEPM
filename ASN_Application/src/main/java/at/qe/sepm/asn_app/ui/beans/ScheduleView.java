@@ -338,7 +338,13 @@ public class ScheduleView implements Serializable {
 		}
 	}
 
+	public NurseryInformation getCurrentNurseryInformation(){
+		System.out.println(nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate()).toString()+"-----------------------");
+		return nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate());
+	}
+
 	public void addRegistration() {
+		NurseryInformation nurseryInformation;
 		try {
 			childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
 					childFirstname);
@@ -361,11 +367,20 @@ public class ScheduleView implements Serializable {
 			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
-			} else if (registrationConstraints.checkTimeConstraints(reg)) {
+			} else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate())) == null) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Für diesen Tag gibt es keine Information", null));
+			}else if(nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Kein Platz mehr frei für diesen Tag", null));
+			}else if (registrationConstraints.checkTimeConstraints(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie können kein Kind um diese Uhrzeit eintragen", null));
-			} else {
+			} else{
+
 				registrationService.saveRegistration(reg);
+				nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
+				nurseryInformationService.saveNurseryInformation(nurseryInformation);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
 								+ getAuthenticatedUser().getUserRole() + "] ",

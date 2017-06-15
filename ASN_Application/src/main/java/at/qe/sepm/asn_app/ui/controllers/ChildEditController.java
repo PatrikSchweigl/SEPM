@@ -67,6 +67,7 @@ public class ChildEditController {
                 childReturn = childEdit;
                 childEdit = null;
                 childController.initList();
+                caregiverController.initList();
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('childEditDialog').hide()");
             } catch (TransactionSystemException ex) {
