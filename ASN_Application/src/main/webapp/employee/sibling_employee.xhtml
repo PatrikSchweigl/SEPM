@@ -125,7 +125,7 @@
                                                          styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                     </p:confirmDialog>
 
-                                    <p:dataTable id="caregiverTable" var="child"
+                                    <p:dataTable id="caregiverTable" var="caregiver"
                                                  widgetVar="caregiverTable"
                                                  value="#{caregiverController.caregivers}" paginator="true"
                                                  rows="10" paginatorPosition="bottom"
@@ -143,22 +143,22 @@
                                         </f:facet>
 
 
-                                        <p:column headerText="Vorname" filterBy="#{child.firstName}"
-                                                  sortBy="#{child.firstName}" filterStyle="display:none">
-                                            <h:outputText value="#{child.firstName}"/>
+                                        <p:column headerText="Vorname" filterBy="#{caregiver.firstName}"
+                                                  sortBy="#{caregiver.firstName}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.firstName}"/>
                                         </p:column>
-                                        <p:column headerText="Nachname" filterBy="#{child.lastName}"
-                                                  sortBy="#{child.lastName}" filterStyle="display:none">
-                                            <h:outputText value="#{child.lastName}"/>
+                                        <p:column headerText="Nachname" filterBy="#{caregiver.lastName}"
+                                                  sortBy="#{caregiver.lastName}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.lastName}"/>
                                         </p:column>
                                         <p:column headerText="Telefonnummer"
-                                                  filterBy="#{child.phoneNumber}"
-                                                  sortBy="#{child.phoneNumber}" filterStyle="display:none">
-                                            <h:outputText value="#{child.phoneNumber}"/>
+                                                  filterBy="#{caregiver.phoneNumber}"
+                                                  sortBy="#{caregiver.phoneNumber}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.phoneNumber}"/>
                                         </p:column>
-                                        <p:column headerText="Kind" filterBy="#{child.childname}"
-                                                  sortBy="#{child.childname}" filterStyle="display:none">
-                                            <h:outputText value="#{child.childname}"/>
+                                        <p:column headerText="Kind" filterBy="#{caregiver.child.fullname}"
+                                                  sortBy="#{caregiver.child.fullname}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.child.fullname}"/>
                                         </p:column>
                                     </p:dataTable>
 

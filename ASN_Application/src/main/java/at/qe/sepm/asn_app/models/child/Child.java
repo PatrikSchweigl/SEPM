@@ -279,10 +279,18 @@ public class Child implements Persistable<Long> {
      * @see Sibling
      */
     @Override
-    public boolean equals(Object other) {
-        return (other instanceof Child) && (id != null)
-                ? id.equals(((Child) other).id)
-                : (other == this);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Child child = (Child) o;
+
+        return id.equals(child.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
     /*public boolean equals(Object obj) {
         if (obj == null) {

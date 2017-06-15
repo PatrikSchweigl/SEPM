@@ -43,16 +43,10 @@
                                                   sortBy="#{child.lastName}" filterStyle="display:none">
                                             <h:outputText value="#{child.lastName}"/>
                                         </p:column>
-                                        <p:column headerText="Geburtsdatum"
-                                                  filterBy="#{child.birthday}" sortBy="#{child.birthday}"
+                                        <p:column headerText="Notfallkontaktnummer"
+                                                  filterBy="#{child.emergencyNumber}" sortBy="#{child.emergencyNumber}"
                                                   filterStyle="display:none">
-                                            <h:outputText value="#{child.birthday}"/>
-                                        </p:column>
-                                        <p:column headerText="Elternteil"
-                                                  filterBy="#{child.getPrimaryParentFullName()}"
-                                                  sortBy="#{child.getPrimaryParentFullName()}"
-                                                  filterStyle="display:none">
-                                            <h:outputText value="#{child.getPrimaryParentFullName()}"/>
+                                            <h:outputText value="#{child.emergencyNumber}"/>
                                         </p:column>
                                         <p:column style="width:100px;text-align: center"
                                                   exportable="false">
@@ -135,7 +129,7 @@
                                             <h:panelGrid columns="4">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{childEditController.doSaveChildParent()}"
-                                                                 update=":childForm:childTable"
+                                                                 update=":childForm:childTable :childForm:caregiverTable"
                                                                  process="@widgetVar(childEditDialog)"/>
                                                 <p:commandButton update=":childForm:siblingAddDialog"
                                                                  oncomplete="PF('siblingAddDialog').show()"
@@ -162,12 +156,13 @@
                                                          value="Bezugsperson hinzufügen"
                                                          style="align-items:right; margin-top:100px;"></p:commandButton>
                                     </div>
-                                    <p:dataTable id="caregiverTable" var="child"
+                                    <p:dataTable id="caregiverTable" var="caregiver"
                                                  widgetVar="caregiverTable"
                                                  value="#{caregiverController.caregivers}" paginator="true"
                                                  rows="10" paginatorPosition="bottom"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate="10,25,50">
+                                                 rowsPerPageTemplate="10,25,50"
+                                                 emptyMessage="Es wurden keine Bezugspersonen gefunden!">
 
                                         <f:facet name="header">
                                             <p:outputPanel>
@@ -179,29 +174,29 @@
                                         </f:facet>
 
 
-                                        <p:column headerText="Vorname" filterBy="#{child.firstName}"
-                                                  sortBy="#{child.firstName}" filterStyle="display:none">
-                                            <h:outputText value="#{child.firstName}"/>
+                                        <p:column headerText="Vorname" filterBy="#{caregiver.firstName}"
+                                                  sortBy="#{caregiver.firstName}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.firstName}"/>
                                         </p:column>
-                                        <p:column headerText="Nachname" filterBy="#{child.lastName}"
-                                                  sortBy="#{child.lastName}" filterStyle="display:none">
-                                            <h:outputText value="#{child.lastName}"/>
+                                        <p:column headerText="Nachname" filterBy="#{caregiver.lastName}"
+                                                  sortBy="#{caregiver.lastName}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.lastName}"/>
                                         </p:column>
                                         <p:column headerText="Telefonnummer"
-                                                  filterBy="#{child.phoneNumber}"
-                                                  sortBy="#{child.phoneNumber}" filterStyle="display:none">
-                                            <h:outputText value="#{child.phoneNumber}"/>
+                                                  filterBy="#{caregiver.phoneNumber}"
+                                                  sortBy="#{caregiver.phoneNumber}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.phoneNumber}"/>
                                         </p:column>
-                                        <p:column headerText="Kind" filterBy="#{child.childname}"
-                                                  sortBy="#{child.childname}" filterStyle="display:none">
-                                            <h:outputText value="#{child.childname}"/>
+                                        <p:column headerText="Kind" filterBy="#{caregiver.child.fullname}"
+                                                  sortBy="#{caregiver.child.fullname}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.child.fullname}"/>
                                         </p:column>
                                         <p:column style="width:100px;text-align: center"
                                                   exportable="false">
                                             <p:commandButton update=":childForm:caregiverEditDialog"
                                                              oncomplete="PF('caregiverEditDialog').show()"
                                                              icon="ui-icon-note" title="Edit" process="@this">
-                                                <f:setPropertyActionListener value="#{child}"
+                                                <f:setPropertyActionListener value="#{caregiver}"
                                                                              target="#{caregiverController.caregiverEdit}"/>
                                             </p:commandButton>
                                         </p:column>
@@ -214,6 +209,44 @@
                                                          styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
                                     </p:confirmDialog>
 
+
+                                    <!--Add Sibling-->
+                                    <p:dialog header="Geschwister hinzufügen"
+                                              id="siblingAddDialog" widgetVar="siblingAddDialog"
+                                              modal="true" showEffect="fade" hideEffect="fade"
+                                              resizable="false" closeOnEscape="true">
+                                        <p:messages id="siblingAddMsg" autoUpdate="true"/>
+                                        <p:outputPanel id="siblingDataAdd">
+                                            <h:panelGrid columns="2">
+                                                <p:outputLabel for="name" value="Kind: "/>
+                                                <p:inputText id="name"
+                                                             value="#{siblingController.sibling.child.fullname}"
+                                                             disabled="true"/>
+                                                <p:outputLabel for="firstN" value="Vorname: "/>
+                                                <p:inputText id="firstN"
+                                                             value="#{siblingController.sibling.firstName}"
+                                                             required="true" requiredMessage="Vorname erforderlich!"/>
+                                                <p:outputLabel for="lastN" value="Nachname: "/>
+                                                <p:inputText id="lastN"
+                                                             value="#{siblingController.sibling.lastName}"
+                                                             required="true" requiredMessage="Nachname erforderlich!"/>
+                                                <p:outputLabel for="birth" value="Geburtsdatum: "/>
+                                                <p:inputMask mask="99/99/9999" id="birth"
+                                                             value="#{siblingController.sibling.birthday}"
+                                                             validatorMessage="Ungültiges Datum für Geburtstag!"/>
+                                            </h:panelGrid>
+                                            <p:separator/>
+                                            <h:panelGrid columns="3">
+                                                <p:commandButton value="Speichern"
+                                                                 action="#{siblingController.doSaveSibling}"
+                                                                 process="@widgetVar(siblingAddDialog)"/>
+                                                <p:commandButton value="Abbruch"
+                                                                 onclick="PF('siblingAddDialog').hide()"
+                                                                 immediate="true"/>
+                                            </h:panelGrid>
+                                        </p:outputPanel>
+                                    </p:dialog>
+
                                     <!--Add Caregiver Dialog -->
                                     <p:dialog header="Bezugspersonhinzufügen"
                                               id="caregiverAddDialog" widgetVar="caregiverAddDialog"
@@ -222,23 +255,14 @@
                                         <p:outputPanel id="caregiverDataAdd">
                                             <h:panelGrid columns="2">
                                                 <p:outputLabel for="childList" value="Kind: "/>
-                                                <p:selectOneListbox id="childList"
-                                                                    value="#{caregiverController.caregiver.child}"
-                                                                    var="t" filter="true" filterMatchMode="contains">
-                                                    <f:selectItems
-                                                            value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserData.username)}"
-                                                            var="child" itemLabel="#{child.firstName}"
-                                                            itemValue="#{child}"/>
-
-                                                    <p:column>
-                                                        <p:graphicImage name="pictures/tiger.jpg" width="32"
-                                                                        height="32"/>
-                                                    </p:column>
-
-                                                    <p:column>
-                                                        <h:outputText value="#{t.firstName}"/>
-                                                    </p:column>
-                                                </p:selectOneListbox>
+                                                <p:selectOneMenu  converter="#{childConverter}" id="childList"
+                                                                 value="#{caregiverController.caregiver.child}"
+                                                                 required="true">
+                                                    <f:selectItems value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserName)}"
+                                                                   var="child"
+                                                                   itemLabel="#{child.firstName} #{child.lastName}"
+                                                                   itemValue="#{child}"/>
+                                                </p:selectOneMenu>
                                                 <p:outputLabel for="firstName" value="Vorname: "/>
                                                 <p:inputText id="firstName"
                                                              value="#{caregiverController.caregiver.firstName}"/>
@@ -253,44 +277,10 @@
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{caregiverController.doSaveCaregiver()}"
-                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('caregiverAddDialog').hide()"/>
+                                                                 oncomplete="PF('caregiverAddDialog').hide()"
+                                                process="@widgetVar(caregiverAddDialog)"/>
                                                 <p:commandButton value="Abbruch"
                                                                  onclick="PF('childAddDialog').hide()"
-                                                                 immediate="true"/>
-                                            </h:panelGrid>
-                                        </p:outputPanel>
-                                    </p:dialog>
-
-                                    <!--Add Sibling-->
-                                    <p:dialog header="Geschwister hinzufügen"
-                                              id="siblingAddDialog" widgetVar="siblingAddDialog"
-                                              modal="true" showEffect="fade" hideEffect="fade"
-                                              resizable="false" closeOnEscape="true">
-                                        <p:messages id="siblingAddMsg" autoUpdate="true"/>
-                                        <p:outputPanel id="siblingDataAdd">
-                                            <h:panelGrid columns="2">
-                                                <p:outputLabel for="name" value="Kind: "/>
-                                                <p:inputText id="name"
-                                                             value="#{siblingController.sibling.child.fullname}"
-                                                             disabled="true" />
-                                                <p:outputLabel for="firstN" value="Vorname: "/>
-                                                <p:inputText id="firstN"
-                                                             value="#{siblingController.sibling.firstName}"/>
-                                                <p:outputLabel for="lastN" value="Nachname: "/>
-                                                <p:inputText id="lastN"
-                                                             value="#{siblingController.sibling.lastName}"/>
-                                                <p:outputLabel for="birth" value="Geburtsdatum: "/>
-                                                <p:inputText id="birth"
-                                                             value="#{siblingController.sibling.birthday}"/>
-                                            </h:panelGrid>
-                                            <p:separator/>
-                                            <h:panelGrid columns="3">
-                                                <p:commandButton value="Speichern"
-                                                                 action="#{siblingController.doSaveSibling}"
-                                                                 oncomplete="PF('siblingAddDialog').hide()"
-                                                                 process="@widgetVar(siblingAddDialog)"/>
-                                                <p:commandButton value="Abbruch"
-                                                                 onclick="PF('siblingAddDialog').hide()"
                                                                  immediate="true"/>
                                             </h:panelGrid>
                                         </p:outputPanel>
@@ -345,7 +335,7 @@
                                                              value="#{caregiverController.caregiverEdit.phoneNumber}"/>
                                                 <p:outputLabel for="pChildCare" value="Kind: "/>
                                                 <p:inputText disabled="true" id="pChildCare"
-                                                             value="#{caregiverController.caregiverEdit.childname}"/>
+                                                             value="#{caregiverController.caregiverEdit.child.fullname}"/>
                                                 <p:outputLabel for="pEligibleCare" value="Bestätigt: "/>
                                                 <p:inputText disabled="true" id="pEligibleCare"
                                                              value="#{caregiverController.caregiverEdit.eligible}"/>

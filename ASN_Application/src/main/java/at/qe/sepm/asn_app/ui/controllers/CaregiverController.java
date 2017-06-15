@@ -26,11 +26,8 @@ public class CaregiverController {
 
     @Autowired
     private CaregiverService caregiverService;
-    @Autowired
-    private ChildService childService;
     private Caregiver caregiver;
     private Caregiver caregiverEdit;
-    private Long childId;
 
     private Collection<Caregiver> caregivers;
 
@@ -68,7 +65,7 @@ public class CaregiverController {
     }
 
     @PostConstruct
-    private void initList(){
+    public void initList(){
         setCaregivers(caregiverService.getAllCaregivers());
     }
 
@@ -118,20 +115,13 @@ public class CaregiverController {
 
     public void doSaveCaregiverEdit(){
         caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
+        initList();
     }
 
     public void doDeleteCaregiverEdit() {
         caregiverService.deleteCaregiver(caregiverEdit);
         caregiverEdit = null;
     }
-
-	public Long getChildId() {
-		return childId;
-	}
-
-	public void setChildId(Long childId) {
-		this.childId = childId;
-	}
 
 
 }

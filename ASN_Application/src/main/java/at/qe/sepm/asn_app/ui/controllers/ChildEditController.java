@@ -27,6 +27,8 @@ public class ChildEditController {
     @Autowired
     private ChildController childController;
     @Autowired
+    private CaregiverController caregiverController;
+    @Autowired
     private ParentService parentService;
     @Autowired
     private ParentController parentController;

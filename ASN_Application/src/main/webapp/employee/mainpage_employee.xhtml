@@ -87,27 +87,27 @@
 														</p:dataTable>
 													</p:tab>
 													<p:tab title="Bestätigungen">
-														<p:dataTable id="anouncement" var="child"
+														<p:dataTable id="anouncement" var="caregiver"
 															value="#{caregiverController.getAllCaregiversByEligibleFalse()}"
 														emptyMessage="Es sind keine Anfragen vorhanden.">
 															<p:column headerText="Vorname">
-																<h:outputText value="#{child.firstName}" />
+																<h:outputText value="#{caregiver.firstName}" />
 															</p:column>
 															<p:column headerText="Nachname">
-																<h:outputText value="#{child.lastName}" />
+																<h:outputText value="#{caregiver.lastName}" />
 															</p:column>
 															<p:column headerText="Telefonnummer">
-																<h:outputText value="#{child.phoneNumber}" />
+																<h:outputText value="#{caregiver.phoneNumber}" />
 															</p:column>
 															<p:column headerText="Kind">
-																<h:outputText value="#{child.childname}" />
+																<h:outputText value="#{caregiver.child.fullname}" />
 															</p:column>
 															<p:column style="width:100px;text-align: center"
 																exportable="false">
 																<p:commandButton update=":dialogForm:caregiverEditDialog"
 																	oncomplete="PF('caregiverEditDialog').show()"
 																	icon="ui-icon-note" title="Edit" process="@this">
-																	<f:setPropertyActionListener value="#{child}"
+																	<f:setPropertyActionListener value="#{caregiver}"
 																		target="#{caregiverController.caregiverEdit}" />
 																</p:commandButton>
 															</p:column>
@@ -163,7 +163,7 @@
 																value="#{caregiverController.caregiverEdit.phoneNumber}" />
 															<p:outputLabel for="pChildCare" value="Kind: " />
 															<p:inputText disabled="true" id="pChildCare"
-																value="#{caregiverController.caregiverEdit.childname}" />
+																value="#{caregiverController.caregiverEdit.child.fullname}" />
 															<p:outputLabel for="pEligibleCare" value="Bestätigt: " />
 															<p:inputText disabled="true" id="pEligibleCare"
 																value="#{caregiverController.caregiverEdit.eligible}" />
