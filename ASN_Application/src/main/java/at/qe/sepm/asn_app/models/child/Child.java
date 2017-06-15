@@ -278,7 +278,7 @@ public class Child implements Persistable<Long> {
      * @see Parent
      * @see Sibling
      */
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -287,13 +287,17 @@ public class Child implements Persistable<Long> {
 
         return id.equals(child.id);
     }
+       */
 
-    @Override
+    /*@Override
     public int hashCode() {
         return id.hashCode();
-    }
-    /*public boolean equals(Object obj) {
-        if (obj == null) {
+    }*/
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null) {
             return false;
         }
         else if (!(obj instanceof Child)) {
@@ -301,7 +305,10 @@ public class Child implements Persistable<Long> {
         }
 
         Child other = (Child) obj;
-        if (this.birthday.equals(other.birthday) &&
+        if (id.equals(other.id)) {
+            return true;
+        }
+        else if (this.birthday.equals(other.birthday) &&
                 this.firstName.equals(other.firstName) &&
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
@@ -313,7 +320,7 @@ public class Child implements Persistable<Long> {
         else {
             return false;
         }
-    }*/
+    }
 
 
     @Override

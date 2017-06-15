@@ -9,7 +9,9 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        ChildConstraintsTest.class,
         LunchConstraintsTest.class
         })
+
 public class ConstraintsTestSuite {
 }

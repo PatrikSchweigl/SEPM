@@ -3,6 +3,7 @@ package at.qe.sepm.asn_app.tests.constraints;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.PasswordConstraintException;
@@ -39,8 +40,7 @@ public class PasswordConstraintsTest {
     private Child child;
     private String password;
     private Parent parent;
-    Set<Child> parentListChildren;
-    Set<Task> parentListTasks;
+    Set<Child> children;
 
 
     /**
@@ -53,13 +53,10 @@ public class PasswordConstraintsTest {
         child = new Child();
         child.setFirstName("Bob");
         child.setLastName("Dole");
-        parentListChildren = new HashSet<>(Arrays.asList(child));
-        parentListTasks = new HashSet<>();
+        children = new HashSet<>(Arrays.asList(child));
 
-        // TODO The parent constructor is useless --> it is empty
-        parent = new Parent("", "ParentUserName1", "ParentFirstName1", "ParentLastName1",
-                "ParentLocation1", "ParentStreetName1", "ParentPostcode1", UserRole.PARENT,
-                "ParentImgName1", parentListChildren, parentListTasks, FamilyStatus.VERHEIRATET, true, "24/05/1980");
+        parent = new Parent();
+        parent.setChildren(children);
     }
 
 
@@ -184,7 +181,6 @@ public class PasswordConstraintsTest {
         child = null;
         password = null;
         parent = null;
-        parentListChildren = null;
-        parentListTasks = null;
+        children = null;
     }
 }
