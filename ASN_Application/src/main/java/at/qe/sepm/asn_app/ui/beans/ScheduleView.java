@@ -339,7 +339,7 @@ public class ScheduleView implements Serializable {
 	}
 
 	public NurseryInformation getCurrentNurseryInformation(){
-		System.out.println(nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate()).toString()+"-----------------------");
+		//System.out.println(nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate()).toString()+"-----------------------");
 		return nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate());
 	}
 
