@@ -212,6 +212,20 @@ public class LunchConstraintsTest {
     }
 
 
+    /**
+     * A lunch can't be created for the current week, only future ones.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testCheckTimeConstraints3() {
+        calendar.clear();
+        calendar.set(2017, 6, 3, 0, 0);
+        lunch1.setDate(calendar.getTime());
+        assertTrue(lunchConstraints.checkTimeConstraints(lunch1));
+    }
+
+
     @After
     public void cleanUp() {
         lunch1 = null;
