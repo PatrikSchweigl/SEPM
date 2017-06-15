@@ -58,8 +58,8 @@ public class ChildConstraintsTest {
     @Before
     public void initialize() {
         // Having a '0' in front of the month could maybe be a problem because usually a 0 in front of a number means oct-numbers
-        Set<String> allergies1 = new HashSet<>();
-        Set<String> foodIntolerances1 = new HashSet<>();
+        String allergies1 = "";
+        String foodIntolerances1 = "";
         Set<Sibling> siblings1 = new HashSet<>();
         Set<Caregiver> caregivers1 = new HashSet<>();
         child1 = new Child();
@@ -71,15 +71,15 @@ public class ChildConstraintsTest {
         child1.setPrimaryParent(parent1);
         child1.setParent2(parent2);
         child1.setEmergencyNumber("478139232");
-        //child1.setAllergies(allergies1);
-        //child1.setFoodIntolerances(foodIntolerances1);
+        child1.setAllergies(allergies1);
+        child1.setFoodIntolerances(foodIntolerances1);
         child1.setSiblings(siblings1);
         child1.setCustody(Custody.BEIDE);
         child1.setReligion(Religion.CHRISTENTUM);
         child1.setCaregivers(caregivers1);
 
-        Set<String> allergies2 = new HashSet<>();
-        Set<String> foodIntolerances2 = new HashSet<>();
+        String allergies2 = "";
+        String foodIntolerances2 = "";
         Set<Sibling> siblings2 = new HashSet<>();
         Set<Caregiver> caregivers2 = new HashSet<>();
         child2 = new Child();
@@ -91,8 +91,8 @@ public class ChildConstraintsTest {
         child2.setPrimaryParent(parent3);
         child2.setParent2(parent4);
         child2.setEmergencyNumber("3184901840");
-        //child2.setAllergies(allergies2);
-        //child2.setFoodIntolerances(foodIntolerances2);
+        child2.setAllergies(allergies2);
+        child2.setFoodIntolerances(foodIntolerances2);
         child2.setSiblings(siblings2);
         child2.setCustody(Custody.BEIDE);
         child2.setReligion(Religion.BUDDHISMUS);
@@ -108,15 +108,15 @@ public class ChildConstraintsTest {
         child3.setPrimaryParent(parent1);
         child3.setParent2(parent2);
         child3.setEmergencyNumber("478139232");
-        //child3.setAllergies(allergies1);
-        //child3.setFoodIntolerances(foodIntolerances1);
+        child3.setAllergies(allergies1);
+        child3.setFoodIntolerances(foodIntolerances1);
         child3.setSiblings(siblings1);
         child3.setCustody(Custody.BEIDE);
         child3.setReligion(Religion.HINDUISMUS);
         child3.setCaregivers(caregivers1);
 
-        Set<String> allergies4 = new HashSet<>();
-        Set<String> foodIntolerances4 = new HashSet<>();
+        String allergies4 = "";
+        String foodIntolerances4 = "";
         Set<Sibling> siblings4 = new HashSet<>();
         Set<Caregiver> caregivers4 = new HashSet<>();
         child4 = new Child();
@@ -128,15 +128,15 @@ public class ChildConstraintsTest {
         child4.setPrimaryParent(parent3);
         child4.setParent2(parent5);
         child4.setEmergencyNumber("3184901840");
-        //child4.setAllergies(allergies4);
-        //child4.setFoodIntolerances(foodIntolerances4);
+        child4.setAllergies(allergies4);
+        child4.setFoodIntolerances(foodIntolerances4);
         child4.setSiblings(siblings4);
         child4.setCustody(Custody.MUTTER);
         child4.setReligion(Religion.ISLAM);
         child4.setCaregivers(caregivers4);
 
-        Set<String> allergies5 = new HashSet<>();
-        Set<String> foodIntolerances5 = new HashSet<>();
+        String allergies5 = "";
+        String foodIntolerances5 = "";
         Set<Sibling> siblings5 = new HashSet<>();
         Set<Caregiver> caregivers5 = new HashSet<>();
         child5 = new Child();
@@ -148,8 +148,8 @@ public class ChildConstraintsTest {
         child5.setPrimaryParent(parent4);
         child5.setParent2(parent5);
         child5.setEmergencyNumber("14551133086");
-        //child5.setAllergies(allergies5);
-        //child5.setFoodIntolerances(foodIntolerances5);
+        child5.setAllergies(allergies5);
+        child5.setFoodIntolerances(foodIntolerances5);
         child5.setSiblings(siblings5);
         child5.setCustody(Custody.MUTTER);
         child5.setReligion(Religion.ISLAM);
@@ -174,12 +174,12 @@ public class ChildConstraintsTest {
         Set<Child> parentChildren1 = new HashSet<>();
         Set<Child> parentChildren2 = new HashSet<>();
         Set<Child> parentChildren3 = new HashSet<>();
-        Set<Child> parentChildren4 = new HashSet<>();
+        //Set<Child> parentChildren4 = new HashSet<>();
         Set<Child> parentChildren5 = new HashSet<>();
         Set<Task> parentTasks1 = new HashSet<>();
         Set<Task> parentTasks2 = new HashSet<>();
         Set<Task> parentTasks3 = new HashSet<>();
-        Set<Task> parentTasks4 = new HashSet<>();
+        //Set<Task> parentTasks4 = new HashSet<>();
         Set<Task> parentTasks5 = new HashSet<>();
 
         parent1 = new Parent();
