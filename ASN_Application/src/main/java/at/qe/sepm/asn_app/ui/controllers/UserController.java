@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.Collection;
+
 /**
  * Controller for the userData detail view.
  *
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class UserDetailController {
+public class UserController {
 
     @Autowired
     private UserService userService;
@@ -26,6 +29,25 @@ public class UserDetailController {
      * Attribute to cache the currently displayed userData
      */
     private UserData userData;
+    private Collection<UserData> users;
+
+    @PostConstruct
+    public void initList(){
+        setUsers(userService.getAllAdmin());
+    }
+
+    /**
+     * Returns a list of all users.
+     *
+     * @return
+     */
+    public Collection<UserData> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<UserData> users) {
+        this.users = users;
+    }
 
     /**
      * Sets the currently displayed userData and reloads it form db. This userData is
