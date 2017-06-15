@@ -63,7 +63,7 @@ public class LunchConstraintsTest {
      */
     @Test
     public void checkLunchConstraints() {
-        calendar.set(2017, 5, 19, 13, 45);
+        calendar.set(2017, 6, 19, 13, 45);
         lunch1.setCost(5);
         lunch1.setDate(calendar.getTime());
         lunch1.setMeal("SpaghettiOs");
@@ -122,6 +122,7 @@ public class LunchConstraintsTest {
 
         lunch1 = lunchService.saveLunch(lunch1);
         assertNotNull(lunchService.loadLunch(lunch1.getId()));
+        // TODO make another checkIfLunchEcists here for lunch1
 
         // Delete all lunches again for completenesss.
         lunchService.deleteLunch(lunch1);

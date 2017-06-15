@@ -33,7 +33,7 @@ public class LunchConstraints {
 		if (checkIfLunchExists(lunch)) {
 			return false;
 		}
-		else if (checkIfNurseryInformationExists(lunch)) {
+		else if (!checkIfNurseryInformationExists(lunch)) {
 			return false;
 		}
 		else if (!checkTimeConstraints(lunch)) {
