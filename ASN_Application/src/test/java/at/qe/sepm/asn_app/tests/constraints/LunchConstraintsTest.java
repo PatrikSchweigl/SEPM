@@ -183,21 +183,19 @@ public class LunchConstraintsTest {
 
 
     /**
-     * It is only possible to
+     * A lunch can't be created in the past.
      */
-    /*
+    @DirtiesContext
     @Test
-    public void dateInFarFuture() {
-        calendar.set(2017, 5, 13, 12, 0);
-        Date date = calendar.getTime();
-
-        lunch2 = new Lunch();
-        lunch2.setCost(5);
-        lunch2.setDate(date);
-        lunch2.setMeal("SpaghettiOs");
-        assertFalse(lunchConstraints.checkTimeConstraints(lunch2));
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testCheckTimeConstraints1() {
+        calendar.clear();
+        calendar.set(2017, 5, 9, 0, 0);
+        lunch1.setCost(5);
+        lunch1.setDate(calendar.getTime());
+        lunch1.setMeal("SpaghettiOs");
+        assertFalse(lunchConstraints.checkTimeConstraints(lunch1));
     }
-    */
 
 
     @After
