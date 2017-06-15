@@ -1,7 +1,9 @@
 package at.qe.sepm.asn_app.tests.constraints;
 
 import at.qe.sepm.asn_app.models.nursery.Lunch;
+import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.services.LunchService;
+import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.ui.constraints.LunchConstraints;
 import org.junit.After;
 import org.junit.Before;
@@ -37,6 +39,8 @@ public class LunchConstraintsTest {
     private LunchConstraints lunchConstraints;
     @Autowired
     private LunchService lunchService;
+    @Autowired
+    private NurseryInformationService nurseryInformationService;
     private Lunch lunch1;
     private Lunch lunch2;
     private Lunch lunch3;
@@ -46,8 +50,6 @@ public class LunchConstraintsTest {
 
     @Before
     public void initialize() {
-        //lunchConstraints = new LunchConstraints();
-
         calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         calendar.clear();
         lunch1 = new Lunch();
@@ -74,7 +76,6 @@ public class LunchConstraintsTest {
      */
     @Test
     public void dateInPast() {
-        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         calendar.clear();
         calendar.set(2017, 5, 13, 12, 0);
         Date date = calendar.getTime();
@@ -92,8 +93,7 @@ public class LunchConstraintsTest {
     @DirtiesContext
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
-    public void testCheckIfLunchExists1() {
-        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
+    public void testCheckIfLunchExists() {
         calendar.clear();
         calendar.set(2017, 6, 4, 12, 0);
         lunch1.setCost(5);
@@ -132,6 +132,53 @@ public class LunchConstraintsTest {
 
         lunchService.deleteLunch(lunch3);
         assertNull(lunchService.loadLunch(lunch3.getId()));
+    }
+
+
+    /**
+     * The time of the nuseryInformation is 2 hours before the lunch because
+     * in the NurseryInformationService 2 hours get added (it didn't work
+     * otherwise on the views).
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testCheckIfNurseryInformationExists() {
+        calendar.clear();
+        calendar.set(2017, 6, 11, 12, 0);
+        lunch1.setCost(5);
+        lunch1.setDate(calendar.getTime());
+        lunch1.setMeal("SpaghettiOs");
+        lunch1 = lunchService.saveLunch(lunch1);
+        assertFalse(lunchConstraints.checkIfNurseryInformationExists(lunch1));
+
+        System.out.println("HEEEEEEEEEEEEEEEEY: " + lunch1.getDate());
+
+        calendar.clear();
+        calendar.set(2017, 6, 11, 10, 0);
+        Date date1 = calendar.getTime();
+
+        NurseryInformation nurseryInformation1 = new NurseryInformation();
+        nurseryInformation1.setBringStart(date1);
+        nurseryInformation1.setBringEnd(date1);
+        nurseryInformation1.setPickUpStart(date1);
+        nurseryInformation1.setPickUpEnd(date1);
+        nurseryInformation1.setMaxOccupancy(21);
+        nurseryInformation1.setTodaysDate(date1);
+        nurseryInformation1.setOriginDate(date1);
+
+        // Save the nurseryInformation in the database.
+        nurseryInformation1 = nurseryInformationService.saveNurseryInformation(nurseryInformation1);
+        System.out.println("HEEEEEEEEEEEEEEEEY: " + nurseryInformation1.getOriginDate());
+
+        assertTrue(lunchConstraints.checkIfNurseryInformationExists(lunch1));
+
+        // Delete the nurseryInformation again.
+        nurseryInformationService.deleteNurseryInformation(nurseryInformation1);
+        assertFalse(lunchConstraints.checkIfNurseryInformationExists(lunch1));
+
+        // Delete the lunch again.
+        lunchService.deleteLunch(lunch1);
     }
 
 
