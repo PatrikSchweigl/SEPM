@@ -63,7 +63,7 @@ public class LunchConstraintsTest {
      */
     @Test
     public void checkLunchConstraints() {
-        calendar.set(2017, 5, 19, 13, 45);
+        calendar.set(2017, Calendar.JULY, 19, 13, 45);
         lunch1.setCost(5);
         lunch1.setDate(calendar.getTime());
         lunch1.setMeal("SpaghettiOs");
@@ -77,7 +77,7 @@ public class LunchConstraintsTest {
     @Test
     public void dateInPast() {
         calendar.clear();
-        calendar.set(2017, 5, 13, 12, 0);
+        calendar.set(2017, Calendar.JUNE, 13, 12, 0);
         Date date = calendar.getTime();
 
         lunch1.setCost(5);
@@ -95,7 +95,7 @@ public class LunchConstraintsTest {
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void testCheckIfLunchExists() {
         calendar.clear();
-        calendar.set(2017, 6, 4, 12, 0);
+        calendar.set(2017, Calendar.JULY, 4, 12, 0);
         lunch1.setCost(5);
         lunch1.setDate(calendar.getTime());
         lunch1.setMeal("SpaghettiOs");
@@ -103,7 +103,7 @@ public class LunchConstraintsTest {
 
         // Create a lunch one day before the initial lunch.
         calendar.clear();
-        calendar.set(2017, 6, 3, 23, 59);
+        calendar.set(2017, Calendar.JULY, 3, 23, 59);
         lunch2.setCost(lunch1.getCost());
         lunch2.setDate(calendar.getTime());
         lunch2.setMeal(lunch1.getMeal());
@@ -111,7 +111,7 @@ public class LunchConstraintsTest {
 
         // Create another lunch one day after the initial lunch.
         calendar.clear();
-        calendar.set(2017, 6, 5, 0, 0);
+        calendar.set(2017, Calendar.JULY, 5, 0, 0);
         lunch3.setCost(lunch1.getCost());
         lunch3.setDate(calendar.getTime());
         lunch3.setMeal(lunch1.getMeal());
@@ -122,6 +122,7 @@ public class LunchConstraintsTest {
 
         lunch1 = lunchService.saveLunch(lunch1);
         assertNotNull(lunchService.loadLunch(lunch1.getId()));
+        // TODO make another checkIfLunchEcists here for lunch1
 
         // Delete all lunches again for completenesss.
         lunchService.deleteLunch(lunch1);
@@ -145,7 +146,7 @@ public class LunchConstraintsTest {
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void testCheckIfNurseryInformationExists() {
         calendar.clear();
-        calendar.set(2017, 6, 11, 12, 0);
+        calendar.set(2017, Calendar.AUGUST, 11, 12, 0);
         lunch1.setCost(5);
         lunch1.setDate(calendar.getTime());
         lunch1.setMeal("SpaghettiOs");
@@ -155,7 +156,7 @@ public class LunchConstraintsTest {
         System.out.println("HEEEEEEEEEEEEEEEEY: " + lunch1.getDate());
 
         calendar.clear();
-        calendar.set(2017, 6, 11, 10, 0);
+        calendar.set(2017, Calendar.AUGUST, 11, 10, 0);
         Date date1 = calendar.getTime();
 
         NurseryInformation nurseryInformation1 = new NurseryInformation();
@@ -183,21 +184,47 @@ public class LunchConstraintsTest {
 
 
     /**
-     * It is only possible to
+     * A lunch can't be created in the past.
      */
-    /*
+    @DirtiesContext
     @Test
-    public void dateInFarFuture() {
-        calendar.set(2017, 5, 13, 12, 0);
-        Date date = calendar.getTime();
-
-        lunch2 = new Lunch();
-        lunch2.setCost(5);
-        lunch2.setDate(date);
-        lunch2.setMeal("SpaghettiOs");
-        assertFalse(lunchConstraints.checkTimeConstraints(lunch2));
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testCheckTimeConstraints1() {
+        calendar.clear();
+        calendar.set(2017, Calendar.JUNE, 9, 0, 0);
+        lunch1.setCost(5);
+        lunch1.setDate(calendar.getTime());
+        lunch1.setMeal("SpaghettiOs");
+        assertFalse(lunchConstraints.checkTimeConstraints(lunch1));
     }
-    */
+
+
+    /**
+     * A lunch can't be created for the current week, only future ones.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testCheckTimeConstraints2() {
+        calendar.clear();
+        calendar.set(2017, Calendar.JUNE, 16, 0, 0);
+        lunch1.setDate(calendar.getTime());
+        assertFalse(lunchConstraints.checkTimeConstraints(lunch1));
+    }
+
+
+    /**
+     * A lunch can't be created for the current week, only future ones.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testCheckTimeConstraints3() {
+        calendar.clear();
+        calendar.set(2017, Calendar.JULY, 3, 0, 0);
+        lunch1.setDate(calendar.getTime());
+        assertTrue(lunchConstraints.checkTimeConstraints(lunch1));
+    }
 
 
     @After

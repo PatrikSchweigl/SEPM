@@ -76,13 +76,13 @@
 														rendered="#{not empty lunchController.lunch}">
 														<h:panelGrid columns="2">
 															<p:outputLabel for="meal" value="Gericht" />
-															<p:inputText id="meal"
+															<p:inputText id="meal" required="true" requiredMessage="Gericht erforderlich!"
 																value="#{lunchController.lunch.meal}" />
 															<p:outputLabel for="cost" value="Preis: " />
-															<p:inputText id="cost"
+															<p:inputText id="cost" required="true" requiredMessage="Preis erforderlich!"
 																value="#{lunchController.lunch.cost}" />
 															<p:outputLabel for="date" value="Datum: " />
-															<p:calendar id="date" pattern="dd/MM/yyyy"
+															<p:calendar id="date" pattern="dd/MM/yyyy" required="true" requiredMessage="Datum erforderlich!"
 																value="#{lunchController.lunch.date}" beforeShowDay="noWeekend" mindate="#{scheduleView.today}"
 																		locale="de"/>
 
