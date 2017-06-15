@@ -17,7 +17,6 @@ import at.qe.sepm.asn_app.tests.views.children.ChildServiceTest;
 import at.qe.sepm.asn_app.ui.constraints.ChildConstraints;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -37,19 +36,16 @@ public class ChildConstraintsTest {
     private Child child3;
     private Child child4;
     private Child child5;
-    private Set<Child> children;
 
     private Sibling sibling1;
     private Sibling sibling2;
     private Sibling sibling3;
-    private Set<Sibling> siblings;
 
     private Parent parent1;
     private Parent parent2;
     private Parent parent3;
     private Parent parent4;
     private Parent parent5;
-    private Set<Parent> parents;
 
     // TODO Check if a parent exists in the nursery
     // TODO check naming constraints (e.g numbers etc. )
@@ -159,14 +155,6 @@ public class ChildConstraintsTest {
         child5.setReligion(Religion.ISLAM);
         child5.setCaregivers(caregivers5);
 
-        /*children = new HashSet<>();
-        children.add(child1);
-        children.add(child2);
-        children.add(child3);
-        children.add(child4);
-        children.add(child5);*/
-
-        siblings = new HashSet<>();
         sibling1 = new Sibling();
         sibling1.setFirstName(child1.getFirstName());
         sibling1.setLastName(child1.getLastName());
@@ -294,13 +282,6 @@ public class ChildConstraintsTest {
         parent5.setTasks(parentTasks5);
         parent5.setFamilyStatus(FamilyStatus.EINGETRAGENE_PARTNERSCHAFT);
         parent5.setStatus(true);
-
-        parents = new HashSet<>();
-        parents.add(parent1);
-        parents.add(parent2);
-        parents.add(parent3);
-        parents.add(parent4);
-        parents.add(parent5);
     }
 
 
@@ -403,25 +384,20 @@ public class ChildConstraintsTest {
 
     @After
     public void cleanUp() {
-        /*for (Child child : children) {
-            child = null;
-        }
-        children = null;*/
         child1 = null;
         child2 = null;
         child3 = null;
         child4 = null;
         child5 = null;
 
-        for (Parent parent : parents) {
-            parent = null;
-        }
-        parents = null;
+        parent1 = null;
+        parent2 = null;
+        parent3 = null;
+        parent4 = null;
+        parent5 = null;
 
-        for (Sibling sibling : siblings) {
-            sibling = null;
-        }
-        siblings = null;
-
+        sibling1 = null;
+        sibling2 = null;
+        sibling3 = null;
     }
 }
