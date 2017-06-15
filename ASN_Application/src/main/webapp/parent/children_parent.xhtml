@@ -278,7 +278,8 @@
                                                 <p:commandButton value="Speichern"
                                                                  action="#{caregiverController.doSaveCaregiver()}"
                                                                  oncomplete="PF('caregiverAddDialog').hide()"
-                                                process="@widgetVar(caregiverAddDialog)"/>
+                                                process="@widgetVar(caregiverAddDialog)"
+                                                update=":childForm:caregiverTable"/>
                                                 <p:commandButton value="Abbruch"
                                                                  onclick="PF('childAddDialog').hide()"
                                                                  immediate="true"/>
