@@ -26,6 +26,10 @@
                                                 <h:form>
                                                     <div style="float:right;">
                                                         <p:commandButton style="width:250px"
+                                                                         oncomplete="PF('massSignUpDialog').show()"
+                                                                         value="Massenanmeldung"
+                                                        />
+                                                        <p:commandButton style="width:250px"
                                                                          action="#{scheduleView.registerFullWeekLunch()}"
                                                                          value="Wochenanmeldung Mittagessen"
                                                         >
@@ -314,6 +318,44 @@
 
                                                 </ui:fragment>
                                             </h:panelGrid>
+                                        </p:dialog>
+                                        <p:dialog widgetVar="massSignUpDialog" header="Termine" position="center center"
+                                                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+                                            <p:selectOneListbox style="width: 210px;" id="massBox"
+                                                                value="#{massSignupController.childId}" var="p"
+                                                                filter="true"
+                                                                filterMatchMode="contains">
+                                                <f:selectItems
+                                                        value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+                                                        var="child" itemLabel="#{child.firstName}"
+                                                        itemValue="#{child.id}"/>
+
+                                                <p:column>
+                                                    <p:graphicImage
+                                                            name="pictures/profile_pictures_children/#{childController.findOne(p).imgName}"
+                                                            width="32" height="32"
+                                                    />
+                                                </p:column>
+
+                                                <p:column>
+                                                    <h:outputText
+                                                            value="#{childController.findOne(p).firstName}"/>
+                                                </p:column>
+                                            </p:selectOneListbox>
+                                            <h:selectManyCheckbox value="#{massSignupController.strings}">
+                                                <f:selectItem itemValue="00" itemLabel="MA"/>
+                                                <f:selectItem itemValue="01" itemLabel="ME"/>
+                                                <f:selectItem itemValue="10" itemLabel="DA"/>
+                                                <f:selectItem itemValue="11" itemLabel="DE"/>
+                                                <f:selectItem itemValue="20" itemLabel="MA"/>
+                                                <f:selectItem itemValue="21" itemLabel="ME"/>
+                                                <f:selectItem itemValue="30" itemLabel="DA"/>
+                                                <f:selectItem itemValue="31" itemLabel="DE"/>
+                                                <f:selectItem itemValue="40" itemLabel="FA"/>
+                                                <f:selectItem itemValue="41" itemLabel="FE"/>
+                                            </h:selectManyCheckbox>
+                                            <p:commandButton value="OK" action="#{massSignupController.test}" process="@widgetVar(massSignUpDialog)"/>
+
                                         </p:dialog>
 
                                         <p:confirmDialog global="true" showEffect="fade"
