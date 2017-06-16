@@ -38,19 +38,11 @@ public class Comment implements Persistable<Long>{
     private String pictureName;
 
 
+    // CONSTRUCTOR
     public Comment() {}
 
-    /**
-     * Full constructor
-     */
-    public Comment(String comment, Date date, String username, String pictureName) {
-        this.comment = comment;
-        this.date = date;
-        this.username = username;
-        this.pictureName = pictureName;
-    }
 
-
+    // SETTER and GETTER
     public String getComment() {
         return comment;
     }
