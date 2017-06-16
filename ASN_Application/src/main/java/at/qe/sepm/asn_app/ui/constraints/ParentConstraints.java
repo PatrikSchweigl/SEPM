@@ -27,14 +27,15 @@ public class ParentConstraints {
      *
      * @return true iff no constraints are violated.
      */
-    public static void checkConstraints(Parent parent) throws BirthdayConstraintException {
+    public boolean checkConstraints(Parent parent) throws BirthdayConstraintException {
         if(!checkBirthdayConstraints(parent)) {
             throw new BirthdayConstraintException();
         }
+        return true;
     }
 
 
-    public static boolean checkBirthdayConstraints(Parent parent)  {
+    public boolean checkBirthdayConstraints(Parent parent)  {
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         long birthday = BirthdayParser.parseBirthdayToLong(parent.getBirthday());
         int ageDays = (int)((dateNow-birthday)/60/60/24);

@@ -80,13 +80,20 @@ public class ParentConstraintsTest {
     }
 
 
+    @Test
+    public void checkConstraints() throws BirthdayConstraintException {
+        parent.setBirthday("24/05/1980");
+        assertTrue(parentConstraints.checkConstraints(parent));
+    }
+
+
     /**
-     * No constraint violation
+     * Test a valid password.
      */
     @Test
     public void checkBirthdayConstraintsTest1() throws BirthdayConstraintException {
         parent.setBirthday("24/05/1980");
-        ParentConstraints.checkBirthdayConstraints(parent);
+        parentConstraints.checkBirthdayConstraints(parent);
     }
 
 
@@ -98,7 +105,7 @@ public class ParentConstraintsTest {
     @Test
     public void checkBirthdayConstraintsTest2() throws BirthdayConstraintException {
         parent.setBirthday("07/07/2003");
-        assertFalse(ParentConstraints.checkBirthdayConstraints(parent));
+        assertFalse(parentConstraints.checkBirthdayConstraints(parent));
     }
 
 
@@ -110,7 +117,7 @@ public class ParentConstraintsTest {
     @Test
     public void checkBirthdayConstraintsTest3() throws BirthdayConstraintException {
         parent.setBirthday("15/06/1917");
-        assertFalse(ParentConstraints.checkBirthdayConstraints(parent));
+        assertFalse(parentConstraints.checkBirthdayConstraints(parent));
     }
 
 
