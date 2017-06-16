@@ -1,7 +1,10 @@
 package at.qe.sepm.asn_app.ui.beans;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -20,33 +23,43 @@ import com.itextpdf.text.Image;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
-import at.qe.sepm.asn_app.ui.controllers.ChildController;
+import at.qe.sepm.asn_app.services.ChildService;
 
 @Component
 @Scope("request")
 public class PDFBean {
-
+	
 	@Autowired
-	private ChildController childController;
-	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD);
-	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.NORMAL);
+	private ChildService childService;
+	
+	private Child childPrint;
+	
+	@PostConstruct
+	public void init() {
+		childPrint = new Child();
 
+	}
+	
+	public PDFBean(){};
+	
 	public void createPDFChild() throws DocumentException, IOException {
+		Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD);
+		Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.NORMAL);
+		String DEST = "Stammblatt.pdf";
 
-		Child child = childController.getChild();
+        File file = new File(DEST);
+		Child child = childPrint;
+		if(child == null){
+			System.err.println("KANN NICHT SIENNIENIEINEI");
+			return;
+		}
 		Document document = new Document();
-		String home = System.getProperty("user.home");
-		final String DEST = home + "/Downloads/Stammblatt" + child.getFullname() + ".pdf";
-		PdfWriter.getInstance(document, new FileOutputStream(DEST));
+		PdfWriter.getInstance(document, new FileOutputStream(file));
 		document.open();
 		String imgString = child.getImgName();
 		if(imgString == null || imgString == "")
 			imgString = "emptypicture.png";
-		else{
-			String[] tmp = imgString.split(".");
-			imgString = tmp[0];
-		}
-		Image img = Image.getInstance("src/main/webapp/resources/pictures/profile_pictures/" + imgString +".png");
+		Image img = Image.getInstance("src/main/webapp/resources/pictures/profile_pictures/" + imgString);
 		img.setAlignment(Image.ALIGN_RIGHT);
 		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(100);
@@ -61,7 +74,7 @@ public class PDFBean {
 		Paragraph childReligion = new Paragraph(child.getReligion().toString(), redFont);
 		Paragraph childIntolerances = new Paragraph(child.getFoodIntolerances(), redFont);
 		Paragraph childAllergies = new Paragraph(child.getAllergies(), redFont);
-
+		System.err.println(child.toString());
 		PdfPCell cell = new PdfPCell(childFirstname);
 		//cell.setBorder(0);
 		// cell.setFixedHeight(40f);
@@ -156,5 +169,13 @@ public class PDFBean {
 		document.add(img);
 		document.add(table);
 		document.close();
+	}
+
+	public Child getChildPrint() {
+		return childPrint;
+	}
+
+	public void setChildPrint(Child childPrint) {
+		this.childPrint = childPrint;
 	}
 }
