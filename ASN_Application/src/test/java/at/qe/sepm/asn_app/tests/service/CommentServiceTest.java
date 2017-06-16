@@ -78,7 +78,7 @@ public class CommentServiceTest {
 
     /**
      * This test is just for completeness to make sure
-     * that everything works 100%.
+     * that everything works and is covered 100%.
      */
     @Test
     public void testSetterGetter() {

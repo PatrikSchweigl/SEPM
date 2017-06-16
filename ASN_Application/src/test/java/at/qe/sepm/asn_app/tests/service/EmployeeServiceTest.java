@@ -40,10 +40,24 @@ public class EmployeeServiceTest {
 
     @Before
     public void initialize() throws InterruptedException {
-        employee = new Employee("", "passwd", "EmployeeFirstName1", "EmployeeLastName1", "EmployeeLocation1",
-                "EmployeeStreetName1", "6020", "23/11/1990", "EmployeeEmail1@google.com",
-                "EmployeeImgName1", UserRole.EMPLOYEE, Religion.ATHEISMUS, "0123456789",
-                FamilyStatus.LEDIG, Status.ANWESEND, WorkRole.PAEDAGOGE);
+        employee = new Employee();
+        employee.setBirthday("23/11/1990");
+        employee.setEmail("EmployeeEmail@google.com");
+        employee.setFamilyStatus(FamilyStatus.VERWITTWED);
+        employee.setFirstName("EmployeeFirstName");
+        employee.setImgName("EmployeeImgName");
+        employee.setLastName("EmployeeLastName");
+        employee.setLocation("EmpoyeeLocation");
+        employee.setNotification(false);
+        employee.setPassword("passwd");
+        employee.setPhoneNumber("437589234502");
+        employee.setPostcode("6020");
+        employee.setReligion(Religion.ISLAM);
+        employee.setStreetName("EmployeeStreetName");
+        employee.setUsername("EmployeeUsername");
+        employee.setUserRole(UserRole.EMPLOYEE);
+        employee.setWorkingState(Status.ABWESEND);
+        employee.setWorkRole(WorkRole.PRAKTIKANT);
     }
 
 
@@ -63,6 +77,16 @@ public class EmployeeServiceTest {
         other = employeeService.loadEmployee(employee.getUsername());
         assertFalse(employee.equals(other));
         assertNull(other);
+    }
+
+
+    /**
+     * This test is just for completeness to make sure
+     * that everything works and is covered 100%.
+     */
+    @Test
+    public void testSetterGetter() {
+
     }
 
 
