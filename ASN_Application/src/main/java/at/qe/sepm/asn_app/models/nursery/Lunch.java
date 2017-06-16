@@ -97,6 +97,9 @@ public class Lunch implements Persistable<Long> {
     public Set<Long> getChildrenIds(){
         return childrenIds;
     }
+    public void setChildrenIds(Set<Long> childrenIds) {
+        this.childrenIds = childrenIds;
+    }
 
     @Override
     public Long getId() {
