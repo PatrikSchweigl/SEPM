@@ -17,9 +17,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -35,14 +33,14 @@ public class NurseryInformationServiceTest {
     @Autowired
     private NurseryInformationService nurseryInformationService;
     private NurseryInformation nurseryInformation;
+    private Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
+
 
     @Before
     public void initialize() {
         int originDateYear = 2018;
         int originDateMonth = Calendar.APRIL;
         int originDateDay = 27;
-
-        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
 
         calendar.clear();
         calendar.set(2017, Calendar.JULY, 11, 0, 0);
@@ -68,14 +66,25 @@ public class NurseryInformationServiceTest {
         calendar.set(originDateYear, originDateMonth, originDateDay, 16, 30);
         Date pickUpEnd = calendar.getTime();
 
+        int maxOccupancy = 21;
+
         nurseryInformation = new NurseryInformation();
         nurseryInformation.setBringStart(bringStart);
         nurseryInformation.setBringEnd(bringEnd);
         nurseryInformation.setPickUpStart(pickUpStart);
         nurseryInformation.setPickUpEnd(pickUpEnd);
-        nurseryInformation.setMaxOccupancy(21);
+        nurseryInformation.setMaxOccupancy(maxOccupancy);
         nurseryInformation.setTodaysDate(todaysDate);
         nurseryInformation.setOriginDate(originDate);
+
+        // Getters are tested here to avoid code duplication.
+        assertEquals(bringStart, nurseryInformation.getBringStart());
+        assertEquals(bringEnd, nurseryInformation.getBringEnd());
+        assertEquals(pickUpStart, nurseryInformation.getPickUpStart());
+        assertEquals(pickUpEnd, nurseryInformation.getPickUpEnd());
+        assertEquals(maxOccupancy, nurseryInformation.getMaxOccupancy());
+        assertEquals(todaysDate, nurseryInformation.getTodaysDate());
+        assertEquals(originDate, nurseryInformation.getOriginDate());
     }
 
 
@@ -96,8 +105,10 @@ public class NurseryInformationServiceTest {
     }
 
 
+
     @After
     public void cleanUp() {
+        calendar = null;
         nurseryInformation = null;
     }
 }
