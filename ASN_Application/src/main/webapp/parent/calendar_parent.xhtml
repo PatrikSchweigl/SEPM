@@ -27,7 +27,7 @@
                                                     <div style="float:right;">
                                                         <p:commandButton style="width:250px"
                                                                          oncomplete="PF('massSignUpDialog').show()"
-                                                                         value="Massenanmeldung"
+                                                                         value="Schnellanmeldung"
                                                         />
                                                         <p:commandButton style="width:250px"
                                                                          action="#{scheduleView.registerFullWeekLunch()}"
@@ -319,12 +319,12 @@
                                                 </ui:fragment>
                                             </h:panelGrid>
                                         </p:dialog>
-                                        <p:dialog widgetVar="massSignUpDialog" header="Termine" position="center center"
+                                        <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung" position="center center"
                                                   closeOnEscape="true" showEffect="clip" hideEffect="clip">
                                             <p:selectOneListbox style="width: 210px;" id="massBox"
                                                                 value="#{massSignupController.childId}" var="p"
                                                                 filter="true"
-                                                                filterMatchMode="contains">
+                                                                filterMatchMode="contains" required="true" requiredMessage="Bitte ählen Sie ein Kind aus">
                                                 <f:selectItems
                                                         value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
                                                         var="child" itemLabel="#{child.firstName}"
