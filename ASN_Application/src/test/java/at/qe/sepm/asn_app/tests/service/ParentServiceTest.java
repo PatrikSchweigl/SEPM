@@ -7,12 +7,10 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ParentService;
-import at.qe.sepm.asn_app.tests.controller.ContextMocker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -21,13 +19,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.faces.context.FacesContext;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -46,28 +41,28 @@ public class ParentServiceTest {
 
     @Before
     public void initialize() {
-        Set<Child> parentChildren1 = new HashSet<>();
-        Set<Task> parentTasks1 = new HashSet<>();
+        Set<Child> children = new HashSet<>();
+        Set<Task> tasks = new HashSet<>();
 
         parent = new Parent();
-        parent.setUsername("");
-        parent.setPassword("passwd");
+        parent.setBirthday("24/05/1980");
+        parent.setChildren(children);
+        parent.setEmail("ParentEmail1@google.com");
+        parent.setFamilyStatus(FamilyStatus.VERHEIRATET);
         parent.setFirstName("ParentFirstName1");
+        parent.setImgName("ParentImgName1");
         parent.setLastName("ParentLastName1");
         parent.setLocation("ParentLocation1");
-        parent.setStreetName("ParentStreetName1");
-        parent.setPostcode("6020");
-        parent.setBirthday("24/05/1980");
-        parent.setEmail("ParentEmail1@google.com");
-        parent.setImgName("ParentImgName1");
-        parent.setUserRole(UserRole.PARENT);
-        parent.setReligion(Religion.CHRISTENTUM);
-        parent.setPhoneNumber("0123456789");
         parent.setNotification(true);
-        parent.setChildren(parentChildren1);
-        parent.setTasks(parentTasks1);
-        parent.setFamilyStatus(FamilyStatus.VERHEIRATET);
+        parent.setPassword("passwd");
+        parent.setPhoneNumber("0123456789");
+        parent.setPostcode("6020");
+        parent.setReligion(Religion.CHRISTENTUM);
         parent.setStatus(true);
+        parent.setStreetName("ParentStreetName1");
+        parent.setTasks(tasks);
+        parent.setUsername("");
+        parent.setUserRole(UserRole.PARENT);
     }
 
 
@@ -87,6 +82,70 @@ public class ParentServiceTest {
         other = parentService.loadParent(parent.getUsername());
         assertFalse(parent.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        String birthday = "24/05/1980";
+        Set<Child> children = new HashSet<>();
+        String eMail = "ParentEmail@google.com";
+        FamilyStatus familyStatus = FamilyStatus.GESCHIEDEN;
+        String firstName = "ParentFirstName";
+        String imgName = "ParentImgName";
+        String lastName = "ParentLastName";
+        String location = "parentLocation";
+        boolean notification = true;
+        String password = "passwd";
+        String phoneNumber = "28976ß782834";
+        String postcode = "6020";
+        Religion religion = Religion.HINDUISMUS;
+        boolean status = true;
+        Set<Task> tasks = new HashSet<>();
+        String streetName = "StreetName";
+        String username = "ParentUsername";
+        UserRole userRole = UserRole.PARENT;
+
+        // Set attributes
+        parent = new Parent();
+        parent.setBirthday(birthday);
+        parent.setChildren(children);
+        parent.setEmail(eMail);
+        parent.setFamilyStatus(familyStatus);
+        parent.setFirstName(firstName);
+        parent.setImgName(imgName);
+        parent.setLastName(lastName);
+        parent.setLocation(location);
+        parent.setNotification(notification);
+        parent.setPassword(password);
+        parent.setPhoneNumber(phoneNumber);
+        parent.setPostcode(postcode);
+        parent.setReligion(religion);
+        parent.setStatus(status);
+        parent.setStreetName(streetName);
+        parent.setTasks(tasks);
+        parent.setUsername(username);
+        parent.setUserRole(userRole);
+
+        // Compare all attributes with getters.
+        assertEquals(birthday, parent.getBirthday());
+        assertEquals(children, parent.getChildren());
+        assertEquals(eMail, parent.getEmail());
+        assertEquals(familyStatus, parent.getFamilyStatus());
+        assertEquals(firstName, parent.getFirstName());
+        assertEquals(imgName, parent.getImgName());
+        assertEquals(lastName, parent.getLastName());
+        assertEquals(location, parent.getLocation());
+        assertEquals(notification, parent.isNotification());
+        assertEquals(password, parent.getPassword());
+        assertEquals(phoneNumber, parent.getPhoneNumber());
+        assertEquals(postcode, parent.getPostcode());
+        assertEquals(religion, parent.getReligion());
+        assertEquals(streetName, parent.getStreetName());
+        assertEquals(tasks, parent.getTasks());
+        assertEquals(username, parent.getUsername());
+        assertEquals(userRole, parent.getUserRole());
     }
 
 
