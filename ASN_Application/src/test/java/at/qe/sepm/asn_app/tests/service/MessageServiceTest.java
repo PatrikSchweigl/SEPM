@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.faces.context.FacesContext;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -94,6 +95,17 @@ public class MessageServiceTest {
         assertEquals(date.toString(), message.getDate());
         assertEquals(content, message.getMessage());
         assertEquals(username, message.getUsername());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test isNew()
+        assertFalse(message.isNew());
+
+        // Test getFormattedDate()
+        assertNotEquals("", message.getFormattedDate());
+        System.out.println(message.getFormattedDate());
     }
 
 
