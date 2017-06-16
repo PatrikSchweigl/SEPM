@@ -67,15 +67,8 @@ public class MassSignupController {
 
     public void test(){
         addBools();
-        System.err.println("ID IS " +childId);
         addChild(childService.loadChild(childId));
         addDate(DateUtils.getWeek(1));
-        for(int j = 0; j < signUps.size(); j++) {
-            for (int i = 0; i <signUps.get(j).length; i++) {
-                System.err.println("aghs " + signUps.get(j)[i]);
-            }
-        }
-
         process();
     }
 
@@ -88,7 +81,6 @@ public class MassSignupController {
             int offset = Character.getNumericValue(strings[i].charAt(0));
             int offset2 = Character.getNumericValue(strings[i].charAt(1));
             bools[offset*2 + offset2] = true;
-            System.err.println("FFFF "+ (offset*2 + offset2));
 
         }
         signUps.add(bools);
