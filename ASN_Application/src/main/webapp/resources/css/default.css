@@ -105,6 +105,10 @@ p {
   border: 1px solid transparent;
 }
 
+.ui-clock {
+    color: white;
+    font-size:24px;
+}
 
 a {
 	color:#337ab7;
