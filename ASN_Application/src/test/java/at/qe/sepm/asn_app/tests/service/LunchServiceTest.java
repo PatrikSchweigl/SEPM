@@ -23,8 +23,7 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -71,6 +70,33 @@ public class LunchServiceTest {
         other = lunchService.loadLunch(lunch.getId());
         assertFalse(lunch.equals(other));
         assertNull(other);
+    }
+
+
+    /**
+     * This test is just for completeness to make sure
+     * that everything works and is covered 100%.
+     */
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.clear();
+        calendar.set(2017, Calendar.JULY, 21, 16, 47);
+
+        double cost = 2;
+        Date date = calendar.getTime();
+        String meal = "Meal";
+
+        // Set attributes
+        lunch.setCost(cost);
+        lunch.setDate(date);
+        lunch.setMeal(meal);
+
+        // Compare all attributes with getters.
+        assertEquals(cost, lunch.getCost(), 0.1);
+        assertEquals(date, lunch.getDate());
+        assertEquals(meal, lunch.getMeal());
     }
 
 
