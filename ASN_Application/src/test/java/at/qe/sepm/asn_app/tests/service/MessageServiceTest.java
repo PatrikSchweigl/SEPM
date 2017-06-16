@@ -23,9 +23,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -41,11 +39,11 @@ public class MessageServiceTest {
     @Autowired
     private MessageService messageService;
     private Message message;
+    private Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
 
 
     @Before
     public void initialize() {
-        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         calendar.clear();
         calendar.set(2017, Calendar.APRIL, 23, 13, 45);
         Date date = calendar.getTime();
@@ -73,6 +71,29 @@ public class MessageServiceTest {
         other = messageService.loadMessage(message.getId());
         assertFalse(message.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        calendar.clear();
+        calendar.set(2017, Calendar.AUGUST, 17, 9, 17);
+
+        String content = "Message";
+        Date date = calendar.getTime();
+        String username = "Username";
+
+        // Set attributes
+        message = new Message();
+        message.setDate(date);
+        message.setMessage(content);
+        message.setUsername(username);
+
+        // Compare all attributes with getters.
+        assertEquals(date.toString(), message.getDate());
+        assertEquals(content, message.getMessage());
+        assertEquals(username, message.getUsername());
     }
 
 
