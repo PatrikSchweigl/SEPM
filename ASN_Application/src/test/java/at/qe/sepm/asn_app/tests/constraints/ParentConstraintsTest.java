@@ -116,13 +116,16 @@ public class ParentConstraintsTest {
 
     @Test
     public void alreadyExistsTest() {
+        // The test should fail if the parent is not in the database yet.
         assertFalse(parentConstraints.alreadyExists(parent));
-        //parent = parentService.saveParent(parent);
-        //parent3 = parentRepository.save(parent3);
-        //parentRepository.save(parent3);
-        //parentRepository.save(parent);
-        //assertTrue(ParentConstraints.alreadyExists(parent1));
-        //assertTrue(parentConstraints.alreadyExists(parent));
+
+        // Save the parent in the database and check if the test now succeeds.
+        parentService.saveParent(parent);
+        assertTrue(parentConstraints.alreadyExists(parent));
+
+        // Delete the parent again and check if it doesn't exist anymore.
+        parentService.deleteParent(parent);
+        assertFalse(parentConstraints.alreadyExists(parent));
     }
 
 
