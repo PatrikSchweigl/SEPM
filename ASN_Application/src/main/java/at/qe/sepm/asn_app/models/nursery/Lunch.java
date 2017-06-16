@@ -97,6 +97,9 @@ public class Lunch implements Persistable<Long> {
     public Set<Long> getChildrenIds(){
         return childrenIds;
     }
+    public void setChildrenIds(Set<Long> childrenIds) {
+        this.childrenIds = childrenIds;
+    }
 
     @Override
     public Long getId() {
@@ -123,13 +126,9 @@ public class Lunch implements Persistable<Long> {
         }
 
         Lunch other = (Lunch) obj;
-        if (this.cost == other.cost &&
+        return this.cost == other.cost &&
                 (date.compareTo(other.date) == 0) &&
-                this.meal.equals(other.meal)) {
-            return true;
-        } else {
-            return false;
-        }
+                this.meal.equals(other.meal);
     }
 
 

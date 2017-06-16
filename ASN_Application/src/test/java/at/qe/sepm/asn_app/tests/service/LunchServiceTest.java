@@ -2,12 +2,10 @@ package at.qe.sepm.asn_app.tests.service;
 
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.services.LunchService;
-import at.qe.sepm.asn_app.tests.controller.ContextMocker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -16,15 +14,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.faces.context.FacesContext;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import java.util.*;
 
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -47,11 +40,13 @@ public class LunchServiceTest {
         calendar.clear();
         calendar.set(2017, Calendar.APRIL, 23, 13, 45);
         Date date = calendar.getTime();
+        Set<Long> childrenIds = new HashSet<>();
 
         lunch = new Lunch();
         lunch.setCost(5);
         lunch.setDate(date);
         lunch.setMeal("SpaghettiOs");
+        lunch.setChildrenIds(childrenIds);
     }
 
 
@@ -73,6 +68,47 @@ public class LunchServiceTest {
         assertNull(other);
     }
 
+
+    /**
+     * This test is just for completeness to make sure
+     * that everything works and is covered 100%.
+     */
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.clear();
+        calendar.set(2017, Calendar.JULY, 21, 16, 47);
+
+        double cost = 2;
+        Date date = calendar.getTime();
+        Set<Long> childrenIds = new HashSet<>();
+        String meal = "Meal";
+
+        // Set attributes
+        lunch.setChildrenIds(childrenIds);
+        lunch.setCost(cost);
+        lunch.setDate(date);
+        lunch.setMeal(meal);
+
+        // Compare all attributes with getters.
+        assertEquals(childrenIds, lunch.getChildrenIds());
+        assertEquals(cost, lunch.getCost(), 0.1);
+        assertEquals(date, lunch.getDate());
+        assertEquals(meal, lunch.getMeal());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test isNew()
+        assertFalse(lunch.isNew());
+
+
+        // Test toString()
+        assertNotEquals("", lunch.toString());
+        System.out.println(lunch.toString());
+    }
 
     @After
     public void cleanUp() {

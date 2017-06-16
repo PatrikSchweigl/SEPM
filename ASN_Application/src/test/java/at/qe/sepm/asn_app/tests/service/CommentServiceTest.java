@@ -78,7 +78,7 @@ public class CommentServiceTest {
 
     /**
      * This test is just for completeness to make sure
-     * that everything works 100%.
+     * that everything works and is covered 100%.
      */
     @Test
     public void testSetterGetter() {
@@ -103,9 +103,20 @@ public class CommentServiceTest {
         assertEquals(date, comment.getDate());
         assertEquals(pictureName, comment.getPictureName());
         assertEquals(username, comment.getUsername());
+    }
 
+
+    /**
+     * Test all methods of comment that haven't been tested yet.
+     */
+    @Test
+    public void testFurtherMethods() {
         // Print all information with toString();
+        assertNotEquals("", comment.toString());
         System.out.println(comment.toString());
+
+        // Test isNew();
+        assertFalse(comment.isNew());
     }
 
 

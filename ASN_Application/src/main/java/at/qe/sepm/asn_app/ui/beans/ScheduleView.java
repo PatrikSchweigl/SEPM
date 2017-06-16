@@ -288,6 +288,7 @@ public class ScheduleView implements Serializable {
 		cal2.set(Calendar.MILLISECOND, 0);
 		Collection<Child> childs = childService.getChildrenByParentUsername(getAuthenticatedUser().getUsername());
 		for (int i = 0; i < 5; ++i) {
+			NurseryInformation nurseryInformation  = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
 			for (Child c : childs) {
 				Registration reg = new Registration("", c, cal.getTime(), cal2.getTime());
 				if (registrationConstraints.registationExists(reg))
@@ -295,6 +296,8 @@ public class ScheduleView implements Serializable {
 				if (!registrationConstraints.checkIfNurseryExists(reg))
 					continue;
 				registrationService.saveRegistration(reg);
+				nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
+				nurseryInformationService.saveNurseryInformationEdit(nurseryInformation);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
 								+ getAuthenticatedUser().getUserRole() + "] ",
