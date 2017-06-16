@@ -36,6 +36,8 @@ public class MassSignupController {
     private AuditLogRepository auditLogRepository;
     @Autowired
     private RegistrationConstraints registrationConstraints;
+    @Autowired
+    private UserController userController;
 
     private List<Boolean[]> signUps;
     private List<Child> children;
@@ -130,11 +132,7 @@ public class MassSignupController {
                 }
                 if(b[j*2]){
                     //TODO: handle registration
-                    /*
-                    Also d is a array von dates wo die nächste woche drin is (arbeit mit d[j] um den tag an dem di anmelden willsch zu bekommen)
-                    b is a array von bools, die anzeigen was angemeldet werden muss, des brauchst du nit
-                    c soll angemeldet werden
-                     */
+
 
                 }
 
@@ -145,12 +143,6 @@ public class MassSignupController {
         return childId == null;
     }
 
-
-    public UserData getAuthenticatedUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        return userRepository.findFirstByUsername(auth.getName());
-    }
     // getters,, setters ===========================================================================================
 
 
