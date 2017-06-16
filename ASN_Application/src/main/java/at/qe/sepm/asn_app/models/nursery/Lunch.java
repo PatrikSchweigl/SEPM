@@ -126,13 +126,9 @@ public class Lunch implements Persistable<Long> {
         }
 
         Lunch other = (Lunch) obj;
-        if (this.cost == other.cost &&
+        return this.cost == other.cost &&
                 (date.compareTo(other.date) == 0) &&
-                this.meal.equals(other.meal)) {
-            return true;
-        } else {
-            return false;
-        }
+                this.meal.equals(other.meal);
     }
 
 
