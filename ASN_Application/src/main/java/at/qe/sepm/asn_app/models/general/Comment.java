@@ -86,6 +86,9 @@ public class Comment implements Persistable<Long>{
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -94,16 +97,11 @@ public class Comment implements Persistable<Long>{
         }
 
         Comment other = (Comment) obj;
-        if (this.comment.equals(other.comment) &&
+        return (this.comment.equals(other.comment) &&
                 this.date.getYear() == other.date.getYear() &&
                 this.date.getMonth() == other.date.getMonth() &&
                 this.date.getDay() == other.date.getDay() &&
-                this.username.equals(other.username)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+                this.username.equals(other.username));
     }
 
 
