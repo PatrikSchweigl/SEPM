@@ -147,6 +147,8 @@ public class MassSignupController {
             cal.set(Calendar.HOUR_OF_DAY, 0);
             cal2.setTime(d);
             cal2.add(Calendar.HOUR_OF_DAY, 2);
+            nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
+            cal2.setTime(nurseryInformation.getBringStart());
             Registration reg = new Registration("Auto-Signup", childReg, cal.getTime(), cal2.getTime());
 
             if (d.compareTo(new Date()) <= 0) {
