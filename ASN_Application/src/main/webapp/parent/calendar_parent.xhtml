@@ -48,6 +48,40 @@
                                                     </div>
                                                 </h:form>
                                             </div>
+
+                                            <!-- dialog declaration -->
+                                            <h:form id="dialogForm">
+                                                <p:dialog id="dialogTest" closeOnEscape="true"
+                                                          visible="#{sessionInfoBean.hasDefaultPasswd()}"
+                                                          width="400px" closable="true" widgetVar="dialogTest"
+                                                          header="Passwort ändern" resizeable="false" modal="true">
+                                                    <h:outputText
+                                                            value="Aus Sicherheitsgründen empfehlen wir Ihnen, das Passwort zu ändern." />
+                                                    <p:messages id="messages" showDetail="true"
+                                                                autoUpdate="true" />
+
+                                                    <h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+                                                        <h:outputLabel for="pwd1" value="Password 1: *" />
+                                                        <p:password id="pwd1" value="#{parentController.password}"
+                                                                    match="pwd2" label="Passwort:" required="true"
+                                                                    feedback="true"
+                                                                    requiredMessage="Kein Passwort eingegeben"
+                                                                    promptLabel="Bitte Passwort eingeben!" weakLabel="Schwach"
+                                                                    goodLabel="Mittelmäßig" strongLabel="Sicher"/>
+
+                                                        <h:outputLabel for="pwd2" value="Password 2: *" />
+                                                        <p:password id="pwd2" value="#{parentController.password}"
+                                                                    label="Wiederholung: " required="true" />
+                                                    </h:panelGrid>
+                                                    <h:panelGrid columns="3">
+                                                        <p:commandButton
+                                                                action="#{parentController.doChangePassword(parentController.password)}"
+                                                                value="Speichern"
+                                                                oncomplete="PF('dialogTest').hide()"/>
+                                                    </h:panelGrid>
+                                                </p:dialog>
+                                            </h:form>
+
                                             <h:form>
                                                 <div class="shrinker">
                                                     <p:accordionPanel multiple="true"

@@ -19,14 +19,6 @@
 									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
 							</a></li>
 						</h:panelGroup>
-						<h:panelGroup
-							rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
-							<li class="treeview"><a
-								href="/parent/mainpage_active_parent.xhtml"> <i
-									class="fa fa-home fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Startbildschirm</span>
-							</a></li>
-						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
 									<i class="fa fa-male fa-3x"></i> <span
