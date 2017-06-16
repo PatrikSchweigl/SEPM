@@ -43,7 +43,7 @@ public class NurseryInformationServiceTest {
         int originDateDay = 27;
 
         calendar.clear();
-        calendar.set(2017, Calendar.JULY, 11, 0, 0);
+        calendar.set(2018, Calendar.JULY, 11, 0, 0);
         Date todaysDate = calendar.getTime();
 
         calendar.clear();
@@ -66,11 +66,14 @@ public class NurseryInformationServiceTest {
         calendar.set(originDateYear, originDateMonth, originDateDay, 16, 30);
         Date pickUpEnd = calendar.getTime();
 
+        int currentOccupancy = 7;
         int maxOccupancy = 21;
 
         nurseryInformation = new NurseryInformation();
         nurseryInformation.setBringStart(bringStart);
         nurseryInformation.setBringEnd(bringEnd);
+        nurseryInformation.setCurrentOccupancy(currentOccupancy);
+        nurseryInformation.setCurrentDate(todaysDate);
         nurseryInformation.setPickUpStart(pickUpStart);
         nurseryInformation.setPickUpEnd(pickUpEnd);
         nurseryInformation.setMaxOccupancy(maxOccupancy);
@@ -80,6 +83,8 @@ public class NurseryInformationServiceTest {
         // Getters are tested here to avoid code duplication.
         assertEquals(bringStart, nurseryInformation.getBringStart());
         assertEquals(bringEnd, nurseryInformation.getBringEnd());
+        assertEquals(currentOccupancy, nurseryInformation.getCurrentOccupancy());
+        assertEquals(todaysDate, nurseryInformation.getCurrentDate());
         assertEquals(pickUpStart, nurseryInformation.getPickUpStart());
         assertEquals(pickUpEnd, nurseryInformation.getPickUpEnd());
         assertEquals(maxOccupancy, nurseryInformation.getMaxOccupancy());
@@ -102,6 +107,29 @@ public class NurseryInformationServiceTest {
         other = nurseryInformationService.loadNurseryInformation(nurseryInformation.getId());
         assertFalse(nurseryInformation.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test isNew()
+        assertFalse(nurseryInformation.isNew());
+
+        // Test getFormattedOriginDate
+        assertNotEquals("", nurseryInformation.getFormattedOriginDate());
+        System.out.println(nurseryInformation.getFormattedOriginDate());
+
+        // Test getBringDuration
+        assertNotEquals("", nurseryInformation.getBringDurationNew());
+        System.out.println(nurseryInformation.getBringDurationNew());
+
+        // Test getPickUpDuration
+        assertNotEquals("", nurseryInformation.getPickUpDurationNew());
+        System.out.println(nurseryInformation.getPickUpDurationNew());
+
+        // Test toString()
+        assertNotEquals("", nurseryInformation.toString());
+        System.out.println(nurseryInformation.toString());
     }
 
 
