@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.tests.service;
 
+import at.qe.sepm.asn_app.tests.views.children.ChildServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -10,7 +11,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-        CaregiverServiceTest.class,
+        //CaregiverServiceTest.class,
         ChildServiceTest.class,
         CommentServiceTest.class,
         EmployeeServiceTest.class,
@@ -21,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
         ParentServiceTest.class,
         PictureServiceTest.class,
         PrivateMessageServiceTest.class,
-        RegistrationServiceTest.class,
+        //RegistrationServiceTest.class,
         TaskServiceTest.class
         })
 
