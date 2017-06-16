@@ -289,13 +289,16 @@
                                                             <h:outputText value="#{p}"/>
                                                         </p:column>
                                                     </p:selectOneListbox>
-                                                    <p:progressBar style="margin-top: 5px;margin-bottom:5px;"
-                                                                   value="#{scheduleView.getCurrentNurseryInformation().getCurrentOccupancy()}"
-                                                                   labelTemplate="{value} Kinder angemeldet" displayOnly="true"/>
+                                                </ui:fragment>
+
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:outputLabel for="occ" value="Plätze:"/>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{scheduleView.child}">
-                                                    <p:outputLabel for="too" value="Uhrzeit:"/>
-
+                                                    <p:outputPanel id="occ">#{scheduleView.currentNurseryInformation.currentOccupancy}/#{scheduleView.currentNurseryInformation.maxOccupancy}</p:outputPanel>
+                                                    <p:poll interval="2"
+                                                            listener="#{scheduleView.currentNurseryInformation.currentOccupancy}"
+                                                            update="occ"/>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{scheduleView.child}">
 
@@ -388,7 +391,8 @@
                                                 <f:selectItem itemValue="40" itemLabel="FA"/>
                                                 <f:selectItem itemValue="41" itemLabel="FE"/>
                                             </h:selectManyCheckbox>
-                                            <p:commandButton value="OK" action="#{massSignupController.test}" process="@widgetVar(massSignUpDialog)"/>
+                                            <p:commandButton value="OK" action="#{massSignupController.test}"
+                                                             process="@widgetVar(massSignUpDialog)"/>
 
                                         </p:dialog>
 
