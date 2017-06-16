@@ -137,7 +137,7 @@ public class ParentConstraintsTest {
     /**
      * Check for the violation of the constraint that a parent must not be younger than 14 years.
      *
-     * @throws BirthdayConstraintException
+     * @throws BirthdayConstraintException if the birthday constraints have been violated.
      */
     @Test
     public void checkBirthdayConstraintsTest2() throws BirthdayConstraintException {
@@ -148,7 +148,7 @@ public class ParentConstraintsTest {
     /**
      * Check for the violation of the constraint that a parent must not be older than 99 years.
      *
-     * @throws BirthdayConstraintException
+     * @throws BirthdayConstraintException if the birthday constraints have been violated. 
      */
     @Test
     public void checkBirthdayConstraintsTest3() throws BirthdayConstraintException {
