@@ -136,6 +136,24 @@ public class PictureServiceTest {
     }
 
 
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(picture.toString());
+        assertNotEquals("", picture.toString());
+        System.out.println(picture.toString());
+
+        // Test isNew()
+        picture = new Picture();
+        assertNull(picture.getUrl());
+        picture.setUrl("");
+        assertTrue(picture.isNew());
+        picture.setUrl("Url");
+        assertFalse(picture.isNew());
+
+    }
+
+
     @After
     public void cleanUp() {
         calendar = null;
