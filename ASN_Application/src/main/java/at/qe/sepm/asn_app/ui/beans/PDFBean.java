@@ -49,7 +49,7 @@ public class PDFBean {
 			System.err.println("KANN NICHT SIENNIENIEINEI");
 			return;
 		}
-		String DEST = "Downloads/Stammblatt" + child.getFirstName() + child.getLastName() + ".pdf";
+		String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + child.getFirstName() + child.getLastName() + ".pdf";
 		File file = new File(DEST);
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(file));
