@@ -24,9 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.faces.context.FacesContext;
 import java.util.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -44,6 +42,7 @@ public class PictureServiceTest {
     private UserService userService;
     private UserData userData;
     private Picture picture;
+    private Calendar calendar;
 
 
     @Before
@@ -55,7 +54,7 @@ public class PictureServiceTest {
         comment.setUsername("Username1");
         Set<Comment> comments = new HashSet<>();
 
-        Calendar calendar = GregorianCalendar.getInstance();
+        calendar = GregorianCalendar.getInstance();
         calendar.clear();
         calendar.set(2017, Calendar.JULY, 11, 16, 47);
         Date date = calendar.getTime();
@@ -110,8 +109,37 @@ public class PictureServiceTest {
     }
 
 
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        Set<Comment> comments = new HashSet<>();
+        calendar.clear();
+        calendar.set(2014, Calendar.NOVEMBER, 19, 17, 53);
+        Date date = calendar.getTime();
+        String title = "PictureTitle";
+        String url = "PictureUrl";
+
+        // Set attributes
+        picture = new Picture();
+        picture.setComment(comments);
+        picture.setDate(date);
+        picture.setPublisher(userData);
+        picture.setTitle(title);
+        picture.setUrl(url);
+
+        // Compare all attributes with getters.
+        assertEquals(comments, picture.getComment());
+        assertEquals(date, picture.getDate());
+        assertEquals(userData, picture.getPublisher());
+        assertEquals(title, picture.getTitle());
+        assertEquals(url, picture.getUrl());
+    }
+
+
     @After
     public void cleanUp() {
+        calendar = null;
         picture = null;
+        userData = null;
     }
 }
