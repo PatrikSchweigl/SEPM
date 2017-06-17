@@ -8,6 +8,7 @@ import at.qe.sepm.asn_app.repositories.UserRepository;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,6 +32,10 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private AuditLogService auditLogService;
+    @Autowired
+    private MailService mailService;
+    
+    private String email;
 
     /**
      * Returns a collection of all users.
@@ -43,6 +48,10 @@ public class UserService {
 
     public Collection<UserData> getAllAdmin() {
         return userRepository.findAllAdmin();
+    }
+    
+    public UserData findFirstUserByEMail(String email){
+    	return userRepository.findFirstByEMail(email);
     }
 
 
@@ -72,6 +81,29 @@ public class UserService {
         return userRepository.save(userData);
     }
 
+    public void generatePassword(){
+    	char[] chars = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789".toCharArray();
+    	StringBuilder sb = new StringBuilder();
+    	Random random = new Random();
+    	for (int i = 0; i < 8; i++) {
+    	    char c = chars[random.nextInt(chars.length)];
+    	    sb.append(c);
+    	}
+    	UserData userData = findFirstUserByEMail(email);
+    	if(userData == null){
+    		System.err.println("FRAAAAAAAAAAAAAAAAAAAAAAAAAAAGE");
+    		return;
+    	}
+    	mailService.sendEmail(userData.getEmail(), "Care4Fun-App - Passwortzuruecksetzung",
+                "Guten Tag " + userData.getFirstName() + " " + userData.getLastName() + "!\n\n" +
+                        "Soeben wurde Ihr Passwort zurueckgesetzt.\n\n" +
+                        "Das neue Passwort lautet:  " + sb +"\n" +
+                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Viel Spaß wünscht das Kinderkrippen-Team!");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        userData.setPassword( passwordEncoder.encode(sb));
+        userRepository.save(userData);
+    }
 
     public UserData changeData(UserData userData) {
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"CHANGED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
@@ -96,5 +128,13 @@ public class UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

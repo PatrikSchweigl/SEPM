@@ -107,7 +107,14 @@ p {
 
 .ui-clock {
     color: white;
-    font-size:24px;
+    font-size:22px;
+    margin-left: -12px;
+    margin-top: 10px;
+}
+
+.profileNameClock{
+	font-size:24px;
+	font-weight:bold;
 }
 
 a {

@@ -2,12 +2,10 @@ package at.qe.sepm.asn_app.tests.service;
 
 import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.services.MessageService;
-import at.qe.sepm.asn_app.tests.controller.ContextMocker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -17,15 +15,12 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.faces.context.FacesContext;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -41,11 +36,11 @@ public class MessageServiceTest {
     @Autowired
     private MessageService messageService;
     private Message message;
+    private Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
 
 
     @Before
     public void initialize() {
-        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         calendar.clear();
         calendar.set(2017, Calendar.APRIL, 23, 13, 45);
         Date date = calendar.getTime();
@@ -73,6 +68,44 @@ public class MessageServiceTest {
         other = messageService.loadMessage(message.getId());
         assertFalse(message.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        calendar.clear();
+        calendar.set(2017, Calendar.AUGUST, 17, 9, 17);
+
+        String content = "Message";
+        Date date = calendar.getTime();
+        String username = "Username";
+
+        // Set attributes
+        message = new Message();
+        message.setDate(date);
+        message.setMessage(content);
+        message.setUsername(username);
+
+        // Compare all attributes with getters.
+        assertEquals(date.toString(), message.getDate());
+        assertEquals(content, message.getMessage());
+        assertEquals(username, message.getUsername());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test isNew()
+        assertFalse(message.isNew());
+
+        // Test getFormattedDate()
+        assertNotEquals("", message.getFormattedDate());
+        System.out.println(message.getFormattedDate());
+
+        // Test toString()
+        assertNotEquals("", message.toString());
+        System.out.println(message.toString());
     }
 
 

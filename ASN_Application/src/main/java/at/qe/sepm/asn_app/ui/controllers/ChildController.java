@@ -1,6 +1,12 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.Gender;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.child.Custody;
+import at.qe.sepm.asn_app.models.child.Sibling;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
@@ -9,6 +15,8 @@ import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.ParentService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +25,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -146,7 +157,5 @@ public class ChildController {
 	public void doReloadChild(){
 		child = childService.loadChild(child.getId());
 	}
-
-
 
 }

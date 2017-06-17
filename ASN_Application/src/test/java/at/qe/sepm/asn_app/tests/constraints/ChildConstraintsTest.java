@@ -13,7 +13,6 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
-import at.qe.sepm.asn_app.tests.views.children.ChildServiceTest;
 import at.qe.sepm.asn_app.ui.constraints.ChildConstraints;
 import org.junit.After;
 import org.junit.Before;
@@ -53,7 +52,7 @@ public class ChildConstraintsTest {
     /**
      * To make sure that every test works with the same starting values all generally
      * needed attributes get initialized before each test. After each test all attributes
-     * get set to null again in {@link ChildServiceTest#cleanUp()}.
+     * get set to null again in {@link ChildConstraintsTest#cleanUp()}.
      */
     @Before
     public void initialize() {

@@ -8,6 +8,7 @@ import at.qe.sepm.asn_app.models.nursery.Picture;
 import at.qe.sepm.asn_app.services.PictureService;
 import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.tests.controller.ContextMocker;
+import at.qe.sepm.asn_app.tests.initialize.InitializeUserData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,9 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.faces.context.FacesContext;
 import java.util.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -44,6 +43,7 @@ public class PictureServiceTest {
     private UserService userService;
     private UserData userData;
     private Picture picture;
+    private Calendar calendar;
 
 
     @Before
@@ -55,26 +55,11 @@ public class PictureServiceTest {
         comment.setUsername("Username1");
         Set<Comment> comments = new HashSet<>();
 
-        Calendar calendar = GregorianCalendar.getInstance();
+        calendar = GregorianCalendar.getInstance();
         calendar.clear();
         calendar.set(2017, Calendar.JULY, 11, 16, 47);
         Date date = calendar.getTime();
-
-        userData = new UserData();
-        userData.setBirthday("22/05/1989");
-        userData.setEmail("UserDataEmail1@google.com");
-        userData.setFirstName("UserDataFirstName1");
-        userData.setLastName("UserDataLastName1");
-        userData.setImgName("UserDataImgName1");
-        userData.setLocation("UserDataLocation1");
-        userData.setNotification(true);
-        userData.setPassword("passwd");
-        userData.setPhoneNumber("0123456789");
-        userData.setPostcode("6020");
-        userData.setReligion(Religion.CHRISTENTUM);
-        userData.setStreetName("UserDataStreetName1");
-        userData.setUsername("UserDataUsername1");
-        userData.setUserRole(UserRole.PARENT);
+        userData = InitializeUserData.initialize1();
 
         picture = new Picture();
         picture.setComment(comments);
@@ -110,8 +95,55 @@ public class PictureServiceTest {
     }
 
 
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        Set<Comment> comments = new HashSet<>();
+        calendar.clear();
+        calendar.set(2014, Calendar.NOVEMBER, 19, 17, 53);
+        Date date = calendar.getTime();
+        String title = "PictureTitle";
+        String url = "PictureUrl";
+
+        // Set attributes
+        picture = new Picture();
+        picture.setComment(comments);
+        picture.setDate(date);
+        picture.setPublisher(userData);
+        picture.setTitle(title);
+        picture.setUrl(url);
+
+        // Compare all attributes with getters.
+        assertEquals(comments, picture.getComment());
+        assertEquals(date, picture.getDate());
+        assertEquals(userData, picture.getPublisher());
+        assertEquals(title, picture.getTitle());
+        assertEquals(url, picture.getUrl());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(picture.toString());
+        assertNotEquals("", picture.toString());
+        System.out.println(picture.toString());
+
+        // Test isNew()
+        picture = new Picture();
+        assertNull(picture.getUrl());
+        picture.setUrl("");
+        assertTrue(picture.isNew());
+        picture.setUrl("Url");
+        assertFalse(picture.isNew());
+
+    }
+
+
     @After
     public void cleanUp() {
+        calendar = null;
         picture = null;
+        userData = null;
     }
 }
