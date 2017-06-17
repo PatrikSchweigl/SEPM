@@ -43,21 +43,21 @@ public class TaskServiceTest {
     private UserService userService;
 
     private Task task;
+
+    private Date beginDate;
+    private String description;
+    private Date endingDate;
+    private boolean important;
     private UserData receiver;
     private UserData sender;
+    private String stringId;
+    private String styleClass;
+    private boolean status;
 
 
     @Before
     public void initialize() {
-        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
-        calendar.clear();
-        calendar.set(2017, Calendar.JUNE, 26, 8, 0);
-        Date beginDate = calendar.getTime();
-
-        calendar.clear();
-        calendar.set(2017, Calendar.JUNE, 26, 12, 0);
-        Date endingDate = calendar.getTime();
-
+        // Initialize receiver
         receiver = new UserData();
         receiver.setBirthday("22/05/1989");
         receiver.setEmail("TaskUserDataEmail1@google.com");
@@ -74,6 +74,7 @@ public class TaskServiceTest {
         receiver.setUsername("TaskUserDataUsername1");
         receiver.setUserRole(UserRole.PARENT);
 
+        // Initialize sender
         sender = new UserData();
         sender.setBirthday("07/03/1985");
         sender.setEmail("TaskUserDataEmail2@google.com");
@@ -90,16 +91,32 @@ public class TaskServiceTest {
         sender.setUsername("TaskUserDataUsername2");
         sender.setUserRole(UserRole.PARENT);
 
+        // Initialize task
+        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
+        calendar.clear();
+        calendar.set(2017, Calendar.JUNE, 26, 8, 0);
+        beginDate = calendar.getTime();
+
+        calendar.clear();
+        calendar.set(2017, Calendar.JUNE, 26, 12, 0);
+        endingDate = calendar.getTime();
+
+        description = "TaskDescription";
+        important = true;
+        stringId = "TaskStringId";
+        styleClass = "TaskStyleClass";
+        status = true;
+
         task = new Task();
         task.setBeginDate(beginDate);
-        task.setDescription("TaskDescription1");
+        task.setDescription(description);
         task.setEndingDate(endingDate);
-        task.setImportant(true);
+        task.setImportant(important);
         task.setReceiver(receiver);
         task.setSender(sender);
-        task.setStringId("StringId1");
-        task.setStyleClass("TaskStyleClass1");
-        task.setTaskStatus(true);
+        task.setStringId(stringId);
+        task.setStyleClass(styleClass);
+        task.setTaskStatus(status);
     }
 
 
