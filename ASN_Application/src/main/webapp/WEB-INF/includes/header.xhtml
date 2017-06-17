@@ -49,9 +49,11 @@
                                         name="pictures/profile_pictures/#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
                                         width="60" height="60"/>
                                 </li>
-                                <li class="dropdown tasks-menu" style="width:200px;margin-left:20px;color:#fff;margin-top:-15px">
-                                    <h1>#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getFirstName()} #{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getLastName()}</h1>
-									<p:clock pattern="hh:mm:ss"/>				
+                                <li class="dropdown tasks-menu" style="width:200px;margin-left:20px;color:#fff;margin-top:10px">
+                                	<div class="profileNameClock">
+                                    #{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getFirstName()} #{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getLastName()}
+                                    </div>
+									<p:clock pattern="k:mm:ss"/>				
                                 </li>
                             </ul>
                         </div>
