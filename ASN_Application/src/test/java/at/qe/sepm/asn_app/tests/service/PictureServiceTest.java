@@ -8,6 +8,7 @@ import at.qe.sepm.asn_app.models.nursery.Picture;
 import at.qe.sepm.asn_app.services.PictureService;
 import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.tests.controller.ContextMocker;
+import at.qe.sepm.asn_app.tests.initialize.InitializeComment;
 import at.qe.sepm.asn_app.tests.initialize.InitializeUserData;
 import org.junit.After;
 import org.junit.Before;
@@ -48,12 +49,8 @@ public class PictureServiceTest {
 
     @Before
     public void initialize() {
-        Comment comment = new Comment();
-        comment.setComment("I am a comment.");
-        comment.setDate(new Date());
-        comment.setPictureName("PictureName1");
-        comment.setUsername("Username1");
         Set<Comment> comments = new HashSet<>();
+        comments.add(InitializeComment.initialize1());
 
         calendar = GregorianCalendar.getInstance();
         calendar.clear();
