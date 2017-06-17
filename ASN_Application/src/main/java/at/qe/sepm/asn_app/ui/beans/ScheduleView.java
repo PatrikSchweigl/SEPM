@@ -223,15 +223,26 @@ public class ScheduleView implements Serializable {
 		String desc = event.getTitle();
 		Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
 		Set<Child> c = p.getChildren();
+		System.err.println("WWWWWWWWWWWWWWWWWWWW");
 		System.err.println(desc);
 		if (desc.contains("Anmeldung:")) {
 			Child child = null;
 			for (Child ch : c) {
-				if (desc.contains(ch.getFullname())) {
+				System.err.println("compare " + ch.getFirstName() + " MMMMMMMMIT " + desc + desc.contains(ch.getFirstName()));
+				if (desc.contains(ch.getFirstName())) {
+					System.err.println("PEACE");
 					child = ch;
+					System.err.println(ch.getFirstName());
+					break;
+				}
+				else{
+					System.err.println("BBBBBBBBBBBBBBBBB");
 				}
 			}
+			System.err.println(child.getFirstName() + "Zeit  " + event.getStartDate());
 			Collection<Registration> reg = registrationService.getAllRegistrationsByDate(event.getStartDate());
+			if(reg == null)
+				System.err.println("NOOOOOOOOOOOOOOOOOOOOO");
 			for (Registration r : reg) {
 				System.err.println(r.getChild().getFirstName() + " " + child.getFirstName());
 
@@ -246,6 +257,7 @@ public class ScheduleView implements Serializable {
 			cal.setTime(new Date());
 			Child child = null;
 			for (Child ch : c) {
+				System.err.println("compare " + ch.getFirstName() + " MMMMMMMMIT " + desc );
 				if (desc.contains(ch.getFullname())) {
 					child = ch;
 				}
