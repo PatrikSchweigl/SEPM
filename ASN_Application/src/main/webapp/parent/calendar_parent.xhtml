@@ -345,6 +345,7 @@
                                         </p:dialog>
                                         <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung" position="center center"
                                                   closeOnEscape="true" showEffect="clip" hideEffect="clip">
+											<li>#{massSignupController.getMassSignupDaysStr()}</li>
                                             <p:selectOneListbox style="width: 210px; margin:auto;" id="massBox"
                                                                 value="#{massSignupController.childId}" var="p"
                                                                 filter="true"
@@ -424,7 +425,7 @@
 													action="#{massSignupController.massSignup}"
 													process="@widgetVar(massSignUpDialog)"
 												oncomplete="PF('massSignUpDialog').hide()"/>
-												<p:commandButton value="Anmelden" action="#{massSignupController.massSignUp}" />
+												<p:commandButton value="Anmelden" action="#{massSignupController.massSignup}" />
 												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
 
 											</p:dialog>

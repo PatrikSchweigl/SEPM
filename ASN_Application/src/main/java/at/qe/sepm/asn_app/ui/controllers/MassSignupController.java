@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -66,10 +67,28 @@ public class MassSignupController {
     }
 
     public void massSignup(){
+        LocalDate now = LocalDate.now();
+
+        int x = 1;
+        if(now.getDayOfWeek().getValue() > 5){
+            x = 2;
+        }
         addBools();
         addChild(childService.loadChild(childId));
-        addDate(DateUtils.getWeek(1));
+        addDate(DateUtils.getWeek(x));
         process();
+    }
+
+    public String getMassSignupDaysStr(){
+        LocalDate now = LocalDate.now();
+
+        int x = 1;
+        if(now.getDayOfWeek().getValue() > 5){
+            x = 2;
+        }
+        Date[] dates = DateUtils.getWeek(x);
+        return "Vom " + dates[0].getDate() + "." + (dates[0].getMonth()+1) + ". bis zum " + dates[dates.length-1].getDate() + "." + (dates[dates.length-1].getMonth()+1) + ".";
+
     }
 
     public void addBools(){
@@ -123,9 +142,11 @@ public class MassSignupController {
             for(int j = 0; j < 5; j++){
                 Lunch l;
                 if(b[j*2 + 1]) {
-                    l = lunchService.getLunchByDate(d[j]).get(0);
-                    l.addChild(c);
-                    lunchService.saveLunch(l);
+                    if(b[j*2]) {
+                        l = lunchService.getLunchByDate(d[j]).get(0);
+                        l.addChild(c);
+                        lunchService.saveLunch(l);
+                    }
                 }
                 if(b[j*2]){
                     addRegistration(d[j], c);
