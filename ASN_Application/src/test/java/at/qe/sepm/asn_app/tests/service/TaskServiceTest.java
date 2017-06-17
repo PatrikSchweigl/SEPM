@@ -23,9 +23,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -144,6 +142,25 @@ public class TaskServiceTest {
         // Delete the sender and receiver again.
         userService.deleteUser(sender);
         userService.deleteUser(receiver);
+    }
+
+
+    /**
+     * This test is just for completeness to make sure
+     * that everything works and is covered 100%.
+     */
+    @Test
+    public void testSetterGetter() {
+        // Compare attributes with getter
+        assertEquals(beginDate, task.getBeginDate());
+        assertEquals(description, task.getDescription());
+        assertEquals(endingDate, task.getEndingDate());
+        assertEquals(important, task.getImportant());
+        assertEquals(receiver, task.getReceiver());
+        assertEquals(sender, task.getSender());
+        assertEquals(stringId, task.getStringId());
+        assertEquals(styleClass, task.getStyleClass());
+        assertEquals(status, task.isTaskStatus());
     }
 
 
