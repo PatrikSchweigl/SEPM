@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,28 +42,7 @@ public class ParentServiceTest {
 
     @Before
     public void initialize() {
-        Set<Child> children = new HashSet<>();
-        Set<Task> tasks = new HashSet<>();
-
-        parent = new Parent();
-        parent.setBirthday("24/05/1980");
-        parent.setChildren(children);
-        parent.setEmail("ParentEmail1@google.com");
-        parent.setFamilyStatus(FamilyStatus.VERHEIRATET);
-        parent.setFirstName("ParentFirstName1");
-        parent.setImgName("ParentImgName1");
-        parent.setLastName("ParentLastName1");
-        parent.setLocation("ParentLocation1");
-        parent.setNotification(true);
-        parent.setPassword("passwd");
-        parent.setPhoneNumber("0123456789");
-        parent.setPostcode("6020");
-        parent.setReligion(Religion.CHRISTENTUM);
-        parent.setStatus(true);
-        parent.setStreetName("ParentStreetName1");
-        parent.setTasks(tasks);
-        parent.setUsername("");
-        parent.setUserRole(UserRole.PARENT);
+        parent = InitializeParent.initialize1();
     }
 
 
