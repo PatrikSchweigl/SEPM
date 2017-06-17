@@ -9,6 +9,8 @@ import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.ParentService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -145,6 +150,17 @@ public class ChildController {
 
 	public void doReloadChild(){
 		child = childService.loadChild(child.getId());
+	}
+
+	public void printLunchReportForMonthToJSON(){
+		try (Writer writer = new FileWriter("Output.json")) {
+			Gson gson = new GsonBuilder().create();
+
+			gson.toJson(children,writer);
+
+		}catch (IOException ex){
+			ex.printStackTrace();
+		}
 	}
 
 

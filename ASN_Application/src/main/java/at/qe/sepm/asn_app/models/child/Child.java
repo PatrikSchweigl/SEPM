@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.domain.Persistable;
@@ -129,7 +130,7 @@ public class Child implements Persistable<Long> {
     public String getPrimaryParentFullName(){
         return parent1.getFirstName() + " " + parent1.getLastName();
     }
-
+    @JsonIgnore
     public Parent getPrimaryParent() {
         return parent1;
     }
@@ -137,7 +138,7 @@ public class Child implements Persistable<Long> {
     public void setPrimaryParent(Parent p){
         parent1= p;
     }
-
+    @JsonIgnore
     public Parent getParent2() {
         return parent2;
     }
@@ -205,7 +206,7 @@ public class Child implements Persistable<Long> {
     public void setEmergencyNumber(String emergencyNumber) {
         this.emergencyNumber = emergencyNumber;
     }
-
+    @JsonIgnore
     public Set<Sibling> getSiblings() {
         return siblings;
     }
@@ -229,7 +230,7 @@ public class Child implements Persistable<Long> {
     public void setReligion(Religion religion) {
         this.religion = religion;
     }
-
+    @JsonIgnore
     public Set<Caregiver> getCaregivers() {
         return caregivers;
     }

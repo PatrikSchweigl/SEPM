@@ -6,6 +6,8 @@ import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.Null;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collection;
 
 /**
@@ -107,6 +112,8 @@ public class ParentController {
 
         }
     }
+
+
 
     public Parent getParent() {
         return parent;
