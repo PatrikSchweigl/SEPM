@@ -25,7 +25,6 @@
 									navigation</span> <span class="icon-bar"></span> <span
                                 class="icon-bar"></span> <span class="icon-bar"></span>
                         </a>
-                        <p:clock pattern="hh:mm:ss"/>
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
                                 <h:panelGroup rendered="#{!sessionInfoBean.inactiveParent}">
@@ -50,9 +49,9 @@
                                         name="pictures/profile_pictures/#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
                                         width="60" height="60"/>
                                 </li>
-                                <li class="dropdown tasks-menu" style="width:200px;margin-left:20px;color:#fff">
+                                <li class="dropdown tasks-menu" style="width:200px;margin-left:20px;color:#fff;margin-top:-15px">
                                     <h1>#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getFirstName()} #{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getLastName()}</h1>
-
+									<p:clock pattern="hh:mm:ss"/>				
                                 </li>
                             </ul>
                         </div>
