@@ -164,6 +164,25 @@ public class TaskServiceTest {
     }
 
 
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(task.toString());
+        assertNotEquals("", task.toString());
+        System.out.println(task.toString());
+
+        // Test isNew()
+        task = new Task();
+        assertTrue(task.isNew());
+        task.setSender(sender);
+        assertFalse(task.isNew());
+
+        // Test getFormattedDate
+        assertNotEquals("", task.getFormattedDate(beginDate));
+        System.out.println(task.getFormattedDate(beginDate));
+    }
+
+
     @After
     public void cleanUp() {
         task = null;
