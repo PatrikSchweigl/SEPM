@@ -25,7 +25,7 @@
 											paginator="true" rows="10" paginatorPosition="bottom"
 											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 											rowsPerPageTemplate="10,25,50" selectionMode="single"
-											selection="#{pDFBean.childPrint}" rowKey="#{childController.children}"
+											selection="#{PDFBean.childPrint}" rowKey="#{child.id}"
 											emptyMessage="Es wurden keine Kinder gefunden!">
 
 											<f:facet name="header">
@@ -165,37 +165,37 @@
 
 										<!-- More Info Dialog -->
 										<p:dialog
-											header="#{pDFBean.childPrint.firstName} #{pDFBean.childPrint.lastName}"
+											header="#{PDFBean.childPrint.firstName} #{PDFBean.childPrint.lastName}"
 											widgetVar="infoDialog" id="infoDialog" modal="true"
 											showEffect="fade" hideEffect="fade" resizable="false">
 											<p:outputPanel id="infosheet" style="text-align:center;">
 												<p:panelGrid columns="2" columnClasses="label,value">
 													<f:facet name="header">
 														<p:graphicImage
-															name="pictures/profile_pictures_children/#{pDFBean.childPrint.imgName}"
+															name="pictures/profile_pictures_children/#{PDFBean.childPrint.imgName}"
 															class="picture" />
 													</f:facet>
 
 													<h:outputText value="Geburtstag:" />
-													<h:outputText value="#{pDFBean.childPrint.firstName}" />
+													<h:outputText value="#{PDFBean.childPrint.birthday}" />
 
 													<h:outputText value="Geschlecht:" />
 													<h:outputText
-														value="#{pDFBean.childPrint.firstName}" />
+														value="#{PDFBean.childPrint.gender}" />
 
 													<h:outputText value="Bekenntnis:" />
 													<h:outputText
-														value="#{pDFBean.childPrint.firstName}" />
+														value="#{PDFBean.childPrint.religion}" />
 												</p:panelGrid>
 												<p:panelGrid columns="1" style="width:100%;">
-													<p:dataList value="#{pDFBean.childPrint.caregivers}" emptyMessage="Keine Bezugspersonen vorhanden!"
+													<p:dataList value="#{PDFBean.childPrint.caregivers}" emptyMessage="Keine Bezugspersonen vorhanden!"
 														var="care" type="ordered">
 														<f:facet name="header">
 																Bezugspersonen
 															</f:facet>
 															#{care.firstName} #{care.lastName})
 														</p:dataList>
-													<p:dataList value="#{pDFBean.childPrint.siblings}" emptyMessage="Keine Geschwister gefunden!"
+													<p:dataList value="#{PDFBean.childPrint.siblings}" emptyMessage="Keine Geschwister gefunden!"
 														var="sib" type="ordered">
 														<f:facet name="header">
 																Geschwister

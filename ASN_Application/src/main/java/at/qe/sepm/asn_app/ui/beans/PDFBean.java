@@ -26,7 +26,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.services.ChildService;
 
 @Component
-@Scope("request")
+@Scope("view")
 public class PDFBean {
 	
 	@Autowired
@@ -34,11 +34,12 @@ public class PDFBean {
 	
 	private Child childPrint;
 	
+	/*
 	@PostConstruct
 	public void init() {
 		childPrint = new Child();
 
-	}
+	}*/
 	
 	public PDFBean(){};
 	
@@ -66,12 +67,11 @@ public class PDFBean {
 		Paragraph childFirstname = new Paragraph(child.getFirstName(), redFont);
 		Paragraph childSurname = new Paragraph(child.getLastName(), redFont);
 		Paragraph childBirthday = new Paragraph(child.getBirthday(), redFont);
-		Paragraph childGender = new Paragraph(child.getGender().toString(), redFont);
+		//Paragraph childGender = new Paragraph(child.getGender().toString(), redFont);
 		Paragraph childParent1 = new Paragraph(child.getPrimaryParentFullName(), redFont);
-		Paragraph childParent2 = new Paragraph(
-				child.getParent2().getFirstName() + " " + child.getParent2().getLastName(), redFont);
+		//Paragraph childParent2 = new Paragraph(child.getParent2().getFirstName() + " " + child.getParent2().getLastName(), redFont);
 		Paragraph childEmergencyNumber = new Paragraph(child.getEmergencyNumber(), redFont);
-		Paragraph childReligion = new Paragraph(child.getReligion().toString(), redFont);
+		//Paragraph childReligion = new Paragraph(child.getReligion().toString(), redFont);
 		Paragraph childIntolerances = new Paragraph(child.getFoodIntolerances(), redFont);
 		Paragraph childAllergies = new Paragraph(child.getAllergies(), redFont);
 		System.err.println(child.toString());
@@ -96,20 +96,20 @@ public class PDFBean {
 		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Geburtsdatum", catFont));
 		table.addCell(cell3);
-		PdfPCell cell4 = new PdfPCell(childGender);
+		//PdfPCell cell4 = new PdfPCell(childGender);
 		//cell4.setBorder(0);
 		// cell4.setFixedHeight(40f);
 		//cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		//cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Geschlecht", catFont));
-		table.addCell(cell4);
-		PdfPCell cell9 = new PdfPCell(childReligion);
+		//table.addCell(cell4);
+		//PdfPCell cell9 = new PdfPCell(childReligion);
 		//cell9.setBorder(0);
 		// cell9.setFixedHeight(40f);
 		//cell9.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		//cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
-		table.addCell(cell9);
+		//table.addCell(cell9);
 		PdfPCell cell5 = new PdfPCell(childParent1);
 		//cell5.setBorder(0);
 		// cell5.setFixedHeight(40f);
@@ -117,13 +117,13 @@ public class PDFBean {
 		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Primärer Elternteil", catFont));
 		table.addCell(cell5);
-		PdfPCell cell6 = new PdfPCell(childParent2);
+		//PdfPCell cell6 = new PdfPCell(childParent2);
 		//cell6.setBorder(0);
 		// cell6.setFixedHeight(40f);
 		//cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell6.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		//cell6.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Elternteil", catFont));
-		table.addCell(cell6);
+		//table.addCell(cell6);
 		PdfPCell cell7 = new PdfPCell(childEmergencyNumber);
 		//cell7.setBorder(0);
 		// cell7.setFixedHeight(40f);
