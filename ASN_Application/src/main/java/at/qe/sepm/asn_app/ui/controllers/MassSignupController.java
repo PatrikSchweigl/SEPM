@@ -4,18 +4,21 @@ import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
+import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
-import at.qe.sepm.asn_app.services.ChildService;
-import at.qe.sepm.asn_app.services.LunchService;
-import at.qe.sepm.asn_app.services.RegistrationService;
+import at.qe.sepm.asn_app.services.*;
 import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
 import at.qe.sepm.asn_app.utils.DateUtils;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,7 +40,9 @@ public class MassSignupController {
     @Autowired
     private RegistrationConstraints registrationConstraints;
     @Autowired
-    private UserController userController;
+    private UserService userService;
+    @Autowired
+    private NurseryInformationService nurseryInformationService;
 
     private List<Boolean[]> signUps;
     private List<Child> children;
@@ -60,17 +65,10 @@ public class MassSignupController {
         strings = new String[10];
     }
 
-    public void test(){
+    public void massSignup(){
         addBools();
-        System.err.println("ID IS " +childId);
         addChild(childService.loadChild(childId));
         addDate(DateUtils.getWeek(1));
-        for(int j = 0; j < signUps.size(); j++) {
-            for (int i = 0; i <signUps.get(j).length; i++) {
-                System.err.println("aghs " + signUps.get(j)[i]);
-            }
-        }
-
         process();
     }
 
@@ -83,7 +81,6 @@ public class MassSignupController {
             int offset = Character.getNumericValue(strings[i].charAt(0));
             int offset2 = Character.getNumericValue(strings[i].charAt(1));
             bools[offset*2 + offset2] = true;
-            System.err.println("FFFF "+ (offset*2 + offset2));
 
         }
         signUps.add(bools);
@@ -131,12 +128,63 @@ public class MassSignupController {
                     lunchService.saveLunch(l);
                 }
                 if(b[j*2]){
-                    //TODO: handle registration
-
+                    addRegistration(d[j], c);
 
                 }
 
             }
+        }
+    }
+    public void addRegistration(Date d, Child childReg) {
+        NurseryInformation nurseryInformation;
+        try {
+            Calendar cal = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            cal.setTime(d);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal2.setTime(d);
+            cal2.add(Calendar.HOUR_OF_DAY, 2);
+            nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
+            cal2.setTime(nurseryInformation.getBringStart());
+            Registration reg = new Registration("Auto-Signup", childReg, cal.getTime(), cal2.getTime());
+
+            if (d.compareTo(new Date()) <= 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Keine Anmeldung in der Vergangenheit möglich", null));
+
+            } else if (registrationConstraints.registationExists(reg)) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Sie haben für heute ihr Kind schon angemeldet", null));
+
+            } else if (!registrationConstraints.checkIfNurseryExists(reg)) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
+
+            } else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime())) == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Für diesen Tag gibt es keine Information", null));
+
+            }else if(nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Kein Platz mehr frei für diesen Tag", null));
+
+            } else{
+                registrationService.saveRegistration(reg);
+                nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
+                nurseryInformationService.saveNurseryInformationEdit(nurseryInformation);
+                AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
+                        "REGISTRATION CREATED: " + userService.getAuthenticatedUser().getUsername() + " ["
+                                + userService.getAuthenticatedUser().getUserRole() + "] ",
+                        reg.getBringdate());
+                auditLogRepository.save(log);
+                RequestContext context = RequestContext.getCurrentInstance();
+            }
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+            ex.printStackTrace();
         }
     }
     public boolean hasChild(){
