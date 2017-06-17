@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.tests.service;
 
 import at.qe.sepm.asn_app.models.general.Comment;
 import at.qe.sepm.asn_app.services.CommentService;
+import at.qe.sepm.asn_app.tests.initialize.InitializeComment;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,11 +41,7 @@ public class CommentServiceTest {
      */
     @Before
     public void initialize() {
-        comment = new Comment();
-        comment.setComment("I am a comment.");
-        comment.setDate(new Date());
-        comment.setPictureName("PictureName1");
-        comment.setUsername("Username1");
+        comment = InitializeComment.initialize1();
     }
 
 
@@ -68,11 +65,6 @@ public class CommentServiceTest {
         other = commentService.loadMessage(comment.getId());
         assertFalse(comment.equals(other));
         assertNull(other);
-    }
-
-
-    public void testMultipleComments() {
-
     }
 
 

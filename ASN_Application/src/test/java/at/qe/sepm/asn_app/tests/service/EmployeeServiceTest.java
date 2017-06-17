@@ -7,6 +7,7 @@ import at.qe.sepm.asn_app.models.employee.WorkRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.services.EmployeeService;
+import at.qe.sepm.asn_app.tests.initialize.InitializeEmployee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,24 +39,7 @@ public class EmployeeServiceTest {
 
     @Before
     public void initialize() throws InterruptedException {
-        employee = new Employee();
-        employee.setBirthday("23/11/1990");
-        employee.setEmail("EmployeeEmail@google.com");
-        employee.setFamilyStatus(FamilyStatus.VERWITTWED);
-        employee.setFirstName("EmployeeFirstName");
-        employee.setImgName("EmployeeImgName");
-        employee.setLastName("EmployeeLastName");
-        employee.setLocation("EmpoyeeLocation");
-        employee.setNotification(false);
-        employee.setPassword("passwd");
-        employee.setPhoneNumber("437589234502");
-        employee.setPostcode("6020");
-        employee.setReligion(Religion.ISLAM);
-        employee.setStreetName("EmployeeStreetName");
-        employee.setUsername("EmployeeUsername");
-        employee.setUserRole(UserRole.EMPLOYEE);
-        employee.setWorkingState(Status.ABWESEND);
-        employee.setWorkRole(WorkRole.PRAKTIKANT);
+        employee = InitializeEmployee.initialize1();
     }
 
 
@@ -84,7 +68,6 @@ public class EmployeeServiceTest {
      */
     @Test
     public void testSetterGetter() {
-
         // Initialize attributes
         String birthday = "23/11/1990";
         String eMail = "EmployeeEmail@google.com";
@@ -123,6 +106,7 @@ public class EmployeeServiceTest {
         employee.setWorkingState(workingState);
         employee.setWorkRole(workRole);
 
+        // Compare all attributes with getters.
         assertEquals(birthday, employee.getBirthday());
         assertEquals(eMail, employee.getEmail());
         assertEquals(familyStatus, employee.getFamilyStatus());
