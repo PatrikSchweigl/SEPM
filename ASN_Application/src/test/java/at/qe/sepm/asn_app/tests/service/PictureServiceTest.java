@@ -8,6 +8,7 @@ import at.qe.sepm.asn_app.models.nursery.Picture;
 import at.qe.sepm.asn_app.services.PictureService;
 import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.tests.controller.ContextMocker;
+import at.qe.sepm.asn_app.tests.initialize.InitializeUserData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,22 +59,7 @@ public class PictureServiceTest {
         calendar.clear();
         calendar.set(2017, Calendar.JULY, 11, 16, 47);
         Date date = calendar.getTime();
-
-        userData = new UserData();
-        userData.setBirthday("22/05/1989");
-        userData.setEmail("UserDataEmail1@google.com");
-        userData.setFirstName("UserDataFirstName1");
-        userData.setLastName("UserDataLastName1");
-        userData.setImgName("UserDataImgName1");
-        userData.setLocation("UserDataLocation1");
-        userData.setNotification(true);
-        userData.setPassword("passwd");
-        userData.setPhoneNumber("0123456789");
-        userData.setPostcode("6020");
-        userData.setReligion(Religion.CHRISTENTUM);
-        userData.setStreetName("UserDataStreetName1");
-        userData.setUsername("UserDataUsername1");
-        userData.setUserRole(UserRole.PARENT);
+        userData = InitializeUserData.initialize1();
 
         picture = new Picture();
         picture.setComment(comments);
