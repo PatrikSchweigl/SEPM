@@ -16,7 +16,7 @@ import java.util.Collection;
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
 @Component
-@Scope("view")
+@Scope("application")
 public class UserController {
 
     @Autowired
