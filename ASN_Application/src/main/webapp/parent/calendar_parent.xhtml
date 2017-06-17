@@ -360,10 +360,10 @@
                                         </p:dialog>
                                         <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung" position="center center"
                                                   closeOnEscape="true" showEffect="clip" hideEffect="clip">
-                                            <p:selectOneListbox style="width: 210px;" id="massBox"
+                                            <p:selectOneListbox style="width: 210px; margin:auto;" id="massBox"
                                                                 value="#{massSignupController.childId}" var="p"
                                                                 filter="true"
-                                                                filterMatchMode="contains" required="true" requiredMessage="Bitte ählen Sie ein Kind aus">
+                                                                filterMatchMode="contains" required="true" requiredMessage="Bitte ählen Sie ein Kind aus" >
                                                 <f:selectItems
                                                         value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
                                                         var="child" itemLabel="#{child.firstName}"
@@ -380,22 +380,67 @@
 															value="#{childController.findOne(p).firstName}" />
 													</p:column>
 												</p:selectOneListbox>
-												<h:selectManyCheckbox
-													value="#{massSignupController.strings}">
-													<f:selectItem itemValue="00" itemLabel="MA" />
-													<f:selectItem itemValue="01" itemLabel="ME" />
+											<p:separator/>
+												<p:selectManyCheckbox
+													value="#{massSignupController.strings}" layout="custom" id="massCheck">
+
+													<f:selectItem id="mon" itemValue="00" itemLabel="Anmeldung"/>
+													<f:selectItem itemValue="01" itemLabel="Essen" />
 													<f:selectItem itemValue="10" itemLabel="DA" />
-													<f:selectItem itemValue="11" itemLabel="DE" />
+													<f:selectItem id="tuer" itemValue="11" itemLabel="DE" />
 													<f:selectItem itemValue="20" itemLabel="MA" />
 													<f:selectItem itemValue="21" itemLabel="ME" />
 													<f:selectItem itemValue="30" itemLabel="DA" />
 													<f:selectItem itemValue="31" itemLabel="DE" />
 													<f:selectItem itemValue="40" itemLabel="FA" />
 													<f:selectItem itemValue="41" itemLabel="FE" />
-												</h:selectManyCheckbox>
-												<p:commandButton value="OK"
-													action="#{massSignupController.test}"
-													process="@widgetVar(massSignUpDialog)" />
+												</p:selectManyCheckbox>
+											<div class="ui-grid ui-grid-responsive">
+												<div class="ui-grid-row" style="width:500px;">
+													<div class="ui-grid-col-4" style="text-align:center">
+														<h:outputLabel for="opt11" value="Mo" style="display:block;margin-bottom:8px"/>
+														<h:outputLabel for="opt11" value="Anmeldung" style="display:block"/>
+														<p:checkbox id="opt11" for="massCheck" itemIndex="0" value="true"/>
+														<h:outputLabel for="opt12" value="Essen" style="display:block"/>
+														<p:checkbox id="opt12" for="massCheck" itemIndex="1" />
+													</div>
+													<div class="ui-grid-col-4" style="text-align:center">
+														<h:outputLabel for="opt21" value="Di" style="display:block;margin-bottom:8px"/>
+														<h:outputLabel for="opt21" value="Anmeldung" style="display:block"/>
+														<p:checkbox id="opt21" for="massCheck" itemIndex="2" />
+														<h:outputLabel for="opt22" value="Essen" style="display:block"/>
+														<p:checkbox id="opt22" for="massCheck" itemIndex="3" />
+													</div>
+													<div class="ui-grid-col-4" style="text-align:center">
+														<h:outputLabel for="opt31" value="Mi" style="display:block;margin-bottom:8px"/>
+														<h:outputLabel for="opt31" value="Anmeldung" style="display:block"/>
+														<p:checkbox id="opt31" for="massCheck" itemIndex="4" />
+														<h:outputLabel for="opt32" value="Essen" style="display:block"/>
+														<p:checkbox id="opt32" for="massCheck" itemIndex="5" />
+													</div>
+													<div class="ui-grid-col-4" style="text-align:center">
+														<h:outputLabel for="opt41" value="Do" style="display:block;margin-bottom:8px"/>
+														<h:outputLabel for="opt41" value="Anmeldung" style="display:block"/>
+														<p:checkbox id="opt41" for="massCheck" itemIndex="6"  />
+														<h:outputLabel for="opt12" value="Essen" style="display:block"/>
+														<p:checkbox id="opt42" for="massCheck" itemIndex="7" />
+													</div>
+													<div class="ui-grid-col-4" style="text-align:center">
+														<h:outputLabel for="opt51" value="Fr" style="display:block;margin-bottom:8px"/>
+														<h:outputLabel for="opt51" value="Anmeldung" style="display:block"/>
+														<p:checkbox id="opt51" for="massCheck" itemIndex="8" />
+														<h:outputLabel for="opt52" value="Essen" style="display:block"/>
+														<p:checkbox id="opt52" for="massCheck" itemIndex="9" />
+													</div>
+												</div>
+											</div>
+											<p:separator/>
+												<p:commandButton value="Anmelden &amp; Schließen"
+													action="#{massSignupController.massSignup}"
+													process="@widgetVar(massSignUpDialog)"
+												oncomplete="PF('massSignUpDialog').hide()"/>
+												<p:commandButton value="Anmelden" action="#{massSignupController.massSignUp}" />
+												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
 
 											</p:dialog>
 

@@ -65,7 +65,7 @@ public class MassSignupController {
         strings = new String[10];
     }
 
-    public void test(){
+    public void massSignup(){
         addBools();
         addChild(childService.loadChild(childId));
         addDate(DateUtils.getWeek(1));
@@ -128,7 +128,6 @@ public class MassSignupController {
                     lunchService.saveLunch(l);
                 }
                 if(b[j*2]){
-                    //TODO: handle registration
                     addRegistration(d[j], c);
 
                 }
@@ -154,23 +153,23 @@ public class MassSignupController {
             if (d.compareTo(new Date()) <= 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Keine Anmeldung in der Vergangenheit möglich", null));
-                System.err.println("VRG");
+
             } else if (registrationConstraints.registationExists(reg)) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Sie haben für heute ihr Kind schon angemeldet", null));
-                System.err.println("ISSCHO");
+
             } else if (!registrationConstraints.checkIfNurseryExists(reg)) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
-                System.err.println("GETNIT");
+
             } else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime())) == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Für diesen Tag gibt es keine Information", null));
-                System.err.println("KOAINF");
+
             }else if(nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Kein Platz mehr frei für diesen Tag", null));
-                System.err.println("PLTZ");
+
             } else{
                 registrationService.saveRegistration(reg);
                 nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
