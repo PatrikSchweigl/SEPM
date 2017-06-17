@@ -6,10 +6,13 @@ import at.qe.sepm.asn_app.models.nursery.LunchReport;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.utils.DateUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -32,6 +35,7 @@ public class ReportController {
     private Collection<LunchReport> weeklyReport;
     private Collection<LunchReport> annualReport;
     private Collection<LunchReport> dateReport;
+
 
     
     @PostConstruct
@@ -82,6 +86,17 @@ public class ReportController {
         return getLunchReportInTimeWindowIE(start, end);
     }
 
+    public void printLunchReportForMonthToJSON(){
+        try (Writer writer = new FileWriter("Output.json")) {
+            Gson gson = new GsonBuilder().create();
+
+            gson.toJson(monthlyReport,writer);
+
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
     /** getLunchReportForMonth
      *  returns LR for month relative to current
      * @param i int specifying which month to get (0 = current, -1 = previous, etc)
@@ -119,7 +134,7 @@ public class ReportController {
     }
 
     /** getLunchReportInTimeWindowII
-     *  IE stands for including including
+     *  II stands for including including
      * @param start including
      * @param end including
      * @return list of lunchs

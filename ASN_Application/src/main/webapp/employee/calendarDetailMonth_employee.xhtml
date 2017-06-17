@@ -82,6 +82,7 @@
                                                                 <p:dataExporter type="csv" target="childTable"
                                                                                 fileName="Kinder_anwesend"/>
                                                             </p:commandLink>
+
                                                         </div>
                                                     </f:facet>
                                                     <p:column headerText="Vorname"
@@ -170,6 +171,12 @@
                                                                 <p:tooltip for="csv2" value="CSV" position="top"/>
                                                                 <p:dataExporter type="csv" target="childTableEating"
                                                                                 fileName="Kinder_Essen"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true" action="#{childController.printLunchReportForMonthToJSON}">
+                                                                <p:graphicImage id="json"
+                                                                                name="pictures/extractors/json.png"
+                                                                                width="32"/>
+
                                                             </p:commandLink>
                                                         </div>
                                                     </f:facet>

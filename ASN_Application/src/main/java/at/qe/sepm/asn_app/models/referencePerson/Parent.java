@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Parent extends UserData {
 
     private static final long serialVersionUID = 1L;
 
-    private String imgName;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "parent1", cascade = CascadeType.ALL, orphanRemoval = true)
     @ElementCollection
     private Set<Child> children;
@@ -53,7 +54,7 @@ public class Parent extends UserData {
         super(username, password, firstName, lastName, location, streetName, postcode,
                 birthday, email, imgName, userRole, religion, phoneNumber, notification);
 
-        this.imgName = imgName;
+
         this.children = children;
         this.tasks = tasks;
         this.familyStatus = familyStatus;
@@ -66,14 +67,7 @@ public class Parent extends UserData {
     public Parent(String s, String passwd, String parentFirstName1, String parentLastName1, String parentLocation1, String parentStreetName1, String parentPostcode1, String s1, String s2, UserRole parent, String parentImageName1, Set<Child> parentListChildren1, Set<Task> parentListTasks1, FamilyStatus verheiratet, boolean b) {
     }
 
-    public String getImgName() {
-        return imgName;
-    }
-
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
-    }
-
+    @JsonIgnore
     public Set<Child> getChildren() {
         return children;
     }
@@ -168,7 +162,6 @@ public class Parent extends UserData {
                 "Location: " + getLocation() + "\n" +
                 "StreetName: " + getStreetName() + "\n" +
                 "Children: " + getChildrenNames() + "\n" +
-                "Tasks: " + tasks + "\n" +
-                "ImgName: " + imgName;
+                "Tasks: " + tasks + "\n";
     }
 }
