@@ -186,5 +186,12 @@ public class TaskServiceTest {
     @After
     public void cleanUp() {
         task = null;
+        beginDate = null;
+        description = null;
+        endingDate = null;
+        receiver = null;
+        sender = null;
+        stringId = null;
+        styleClass = null;
     }
 }
