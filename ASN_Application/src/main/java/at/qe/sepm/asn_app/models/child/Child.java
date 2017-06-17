@@ -6,6 +6,8 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.domain.Persistable;
@@ -42,16 +44,22 @@ public class Child implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private Long id;
     @NotNull
+    @Expose
     private String firstName;
     @NotNull
+    @Expose
     private String lastName;
     @NotNull
+    @Expose
     private String birthday;
+    @Expose
     private String imgName;
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Expose
     private Gender gender;
 
 
@@ -62,8 +70,11 @@ public class Child implements Persistable<Long> {
     private Parent parent2;
 
     @NotNull
+    @Expose
     private String emergencyNumber;
+    @Expose
     private String allergies;
+    @Expose
     private String foodIntolerances;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     @ElementCollection
@@ -73,6 +84,7 @@ public class Child implements Persistable<Long> {
     private Custody custody;
 
     @Enumerated(EnumType.STRING)
+    @Expose
     private Religion religion;
 
     //@ElementCollection(targetClass = Caregiver.class)
@@ -130,7 +142,7 @@ public class Child implements Persistable<Long> {
     public String getPrimaryParentFullName(){
         return parent1.getFirstName() + " " + parent1.getLastName();
     }
-    @JsonIgnore
+    
     public Parent getPrimaryParent() {
         return parent1;
     }
@@ -138,7 +150,7 @@ public class Child implements Persistable<Long> {
     public void setPrimaryParent(Parent p){
         parent1= p;
     }
-    @JsonIgnore
+    
     public Parent getParent2() {
         return parent2;
     }
@@ -206,7 +218,7 @@ public class Child implements Persistable<Long> {
     public void setEmergencyNumber(String emergencyNumber) {
         this.emergencyNumber = emergencyNumber;
     }
-    @JsonIgnore
+    
     public Set<Sibling> getSiblings() {
         return siblings;
     }
@@ -230,7 +242,7 @@ public class Child implements Persistable<Long> {
     public void setReligion(Religion religion) {
         this.religion = religion;
     }
-    @JsonIgnore
+    
     public Set<Caregiver> getCaregivers() {
         return caregivers;
     }

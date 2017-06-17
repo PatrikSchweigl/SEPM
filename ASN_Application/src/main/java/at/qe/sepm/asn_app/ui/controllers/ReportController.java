@@ -88,7 +88,7 @@ public class ReportController {
 
     public void printLunchReportForMonthToJSON(){
         try (Writer writer = new FileWriter("Output.json")) {
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
             gson.toJson(monthlyReport,writer);
 

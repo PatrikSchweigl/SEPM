@@ -4,6 +4,8 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.utils.DateUtils;
 import org.springframework.data.domain.Persistable;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
@@ -27,12 +29,16 @@ public class Lunch implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private Long id;
     @NotNull
+    @Expose
     private Date date;
     @NotNull
+    @Expose
     private String meal;
     @NotNull
+    @Expose
     private double cost;
     @ElementCollection(targetClass = Long.class, fetch = FetchType.EAGER)
     private Set<Long> childrenIds;

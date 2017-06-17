@@ -1,6 +1,12 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.Gender;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.child.Custody;
+import at.qe.sepm.asn_app.models.child.Sibling;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
@@ -151,18 +157,5 @@ public class ChildController {
 	public void doReloadChild(){
 		child = childService.loadChild(child.getId());
 	}
-
-	public void printLunchReportForMonthToJSON(){
-		try (Writer writer = new FileWriter("Output.json")) {
-			Gson gson = new GsonBuilder().create();
-
-			gson.toJson(children,writer);
-
-		}catch (IOException ex){
-			ex.printStackTrace();
-		}
-	}
-
-
 
 }
