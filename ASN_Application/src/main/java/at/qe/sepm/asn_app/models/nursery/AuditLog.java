@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -66,6 +68,10 @@ public class AuditLog implements Persistable<Long> {
 
     public Date getDate() {
         return date;
+    }
+    
+    public String getFormattedOriginDate(){
+    	return new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(date);
     }
 
     public void setDate(Date date) {
