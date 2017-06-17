@@ -1,6 +1,5 @@
 package at.qe.sepm.asn_app.tests.service;
 
-import at.qe.sepm.asn_app.tests.views.children.ChildServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
