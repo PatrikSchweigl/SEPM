@@ -81,7 +81,7 @@ public class UserService {
         return userRepository.save(userData);
     }
 
-    public void generatePassword(){
+    public void generatePassword(String email){
     	char[] chars = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789".toCharArray();
     	StringBuilder sb = new StringBuilder();
     	Random random = new Random();
@@ -91,7 +91,6 @@ public class UserService {
     	}
     	UserData userData = findFirstUserByEMail(email);
     	if(userData == null){
-    		System.err.println("FRAAAAAAAAAAAAAAAAAAAAAAAAAAAGE");
     		return;
     	}
     	mailService.sendEmail(userData.getEmail(), "Care4Fun-App - Passwortzuruecksetzung",
