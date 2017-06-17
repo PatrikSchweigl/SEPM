@@ -45,27 +45,6 @@ public class Parent extends UserData {
 
     public Parent(){}
 
-    public Parent(String username, String password, String firstName, String lastName,
-                  String location, String streetName, String postcode, String birthday,
-                  String email, String imgName, UserRole userRole, Religion religion,
-                  String phoneNumber, boolean notification, Set<Child> children,
-                  Set<Task> tasks, FamilyStatus familyStatus, boolean status) {
-
-        super(username, password, firstName, lastName, location, streetName, postcode,
-                birthday, email, imgName, userRole, religion, phoneNumber, notification);
-
-
-        this.children = children;
-        this.tasks = tasks;
-        this.familyStatus = familyStatus;
-        this.status = status;
-    }
-
-    public Parent(String s, String parentUserName1, String parentFirstName1, String parentLastName1, String parentLocation1, String parentStreetName1, String parentPostcode1, UserRole parent, String parentImgName1, Set<Child> parentListChildren1, Set<Task> parentListTasks1, FamilyStatus married, boolean b, String s1) {
-    }
-
-    public Parent(String s, String passwd, String parentFirstName1, String parentLastName1, String parentLocation1, String parentStreetName1, String parentPostcode1, String s1, String s2, UserRole parent, String parentImageName1, Set<Child> parentListChildren1, Set<Task> parentListTasks1, FamilyStatus verheiratet, boolean b) {
-    }
 
     @JsonIgnore
     public Set<Child> getChildren() {
