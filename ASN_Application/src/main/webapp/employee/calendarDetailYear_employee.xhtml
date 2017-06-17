@@ -27,66 +27,84 @@
 											</h:form>
 
 										</div>
-										<h:form>
+
 											<p:accordionPanel multiple="true">
 												<p:tab title="Anwesende Kinder in diesem Kalenderjahr">
+													<h:form id="childTableForm">
 													<p:dataTable id="childTable" var="reg"
 														value="#{registrationController.getAllRegistrationsYear()}"
 														paginator="true" paginatorPosition="bottom"
 														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-														 emptyMessage="Es wurden keine Kinder gefunden!">
+														 emptyMessage="Es sind in diesem Jahr keine Kinder angemeldet!">
 														<f:facet name="{Exporters}"
-															style="float: right; vertical-align: middle;">
+																 style="float: right; vertical-align: middle;">
 															<div style="float: right; vertical-align: middle;">
 																<p:commandLink ajax="false" immediate="true">
-																	<p:graphicImage id="print"
-																		name="pictures/extractors/printer.png" width="32" />
-																	<p:spacer width="10" />
-																	<p:tooltip for="print" value="Drucken" position="top" />
-																	<p:printer />
+																	<p:graphicImage id="print1"
+																					name="pictures/extractors/printer.png"
+																					width="32"/>
+																	<p:spacer width="10"/>
+																	<p:tooltip for="print1" value="Drucken" position="top"/>
+																	<p:printer/>
 																</p:commandLink>
 																<p:commandLink ajax="false" immediate="true">
-																	<p:graphicImage id="excel"
-																		name="pictures/extractors/excel.png" width="32" />
-																	<p:spacer width="10" />
-																	<p:tooltip for="excel" value="Excel" position="top" />
-																	<p:dataExporter type="xls" target="employeeTable"
-																		fileName="Angestellte" />
+																	<p:graphicImage id="excel1"
+																					name="pictures/extractors/excel.png"
+																					width="32"/>
+																	<p:spacer width="10"/>
+																	<p:tooltip for="excel1" value="Excel" position="top"/>
+																	<p:dataExporter type="xls" target="childTable"
+																					fileName="Kinder_anwesend"/>
 																</p:commandLink>
 																<p:commandLink ajax="false" immediate="true">
-																	<p:graphicImage id="pdf"
-																		name="pictures/extractors/pdf.png" width="32" />
-																	<p:spacer width="10" />
-																	<p:tooltip for="pdf" value="PDF" position="top" />
-																	<p:dataExporter type="pdf" target="employeeTable"
-																		fileName="Angestellte" />
+																	<p:graphicImage id="pdf1"
+																					name="pictures/extractors/pdf.png"
+																					width="32"/>
+																	<p:spacer width="10"/>
+																	<p:tooltip for="pdf1" value="PDF" position="top"/>
+																	<p:dataExporter type="pdf" target="childTable"
+																					fileName="Kinder_anwesend"/>
 																</p:commandLink>
 																<p:commandLink ajax="false" immediate="true">
-																	<p:graphicImage id="csv"
-																		name="pictures/extractors/csv.png" width="32" />
-																	<p:tooltip for="csv" value="CSV" position="top" />
-																	<p:dataExporter type="csv" target="employeeTable"
-																		fileName="Angestellte" />
+																	<p:graphicImage id="csv1"
+																					name="pictures/extractors/csv.png"
+																					width="32"/>
+																	<p:tooltip for="csv1" value="CSV" position="top"/>
+																	<p:dataExporter type="csv" target="childTable"
+																					fileName="Kinder_anwesend"/>
 																</p:commandLink>
 															</div>
 														</f:facet>
-														<p:column headerText="Vorname">
-															<h:outputText value="#{reg.child.firstName}" />
+														<p:column headerText="Vorname"
+																  filterBy="#{reg.child.firstName}"
+																  sortBy="#{reg.child.firstName}"
+																  filterStyle="display:none">
+															<h:outputText value="#{reg.child.firstName}"/>
 														</p:column>
-														<p:column headerText="Nachname">
-															<h:outputText value="#{reg.child.lastName}" />
+														<p:column headerText="Nachname"
+																  filterBy="#{reg.child.lastName}"
+																  sortBy="#{reg.child.lastName}"
+																  filterStyle="display:none">
+															<h:outputText value="#{reg.child.lastName}"/>
 														</p:column>
-														<p:column headerText="Anmerkung">
-															<h:outputText value="#{reg.note}" />
+														<p:column headerText="Anmerkung"
+																  filterBy="#{reg.note}"
+																  sortBy="#{reg.note}"
+																  filterStyle="display:none">
+															<h:outputText
+																	value="#{reg.note}"/>
 														</p:column>
-														<p:column headerText="Tag">
-															<h:outputText value="#{reg.date}" />
+														<p:column headerText="Tag" filterBy="#{reg.date}"
+																  filterStyle="display:none">
+															<h:outputText value="#{reg.getFormattedBringDateFull()}"/>
 														</p:column>
 													</p:dataTable>
+													</h:form>
 
 												</p:tab>
 												<p:tab
 													title="Kinder die in diesem Kalenderjahr Essen konsumiert haben">
+													<h:form id="lunchForm">
 													<p:dataTable id="childTableEating" var="report" widgetVar="childTableEating"
 														value="#{reportController.annualReport}"
 														paginator="true" paginatorPosition="bottom"
@@ -104,37 +122,41 @@
 														</f:facet>
 
 														<f:facet name="{Exporters}"
-															style="float: right; vertical-align: middle;">
+																 style="float: right; vertical-align: middle;">
 															<div style="float: right; vertical-align: middle;">
 																<p:commandLink ajax="false" immediate="true">
 																	<p:graphicImage id="print2"
-																		name="pictures/extractors/printer.png" width="32" />
-																	<p:spacer width="10" />
-																	<p:tooltip for="print2" value="Drucken" position="top" />
-																	<p:printer />
+																					name="pictures/extractors/printer.png"
+																					width="32"/>
+																	<p:spacer width="10"/>
+																	<p:tooltip for="print2" value="Drucken" position="top"/>
+																	<p:printer/>
 																</p:commandLink>
 																<p:commandLink ajax="false" immediate="true">
 																	<p:graphicImage id="excel2"
-																		name="pictures/extractors/excel.png" width="32" />
-																	<p:spacer width="10" />
-																	<p:tooltip for="excel2" value="Excel" position="top" />
-																	<p:dataExporter type="xls" target="childtableEating"
-																		fileName="Angestellte" />
+																					name="pictures/extractors/excel.png"
+																					width="32"/>
+																	<p:spacer width="10"/>
+																	<p:tooltip for="excel2" value="Excel" position="top"/>
+																	<p:dataExporter type="xls" target="childTableEating"
+																					fileName="Kinder_Essen"/>
 																</p:commandLink>
 																<p:commandLink ajax="false" immediate="true">
 																	<p:graphicImage id="pdf2"
-																		name="pictures/extractors/pdf.png" width="32" />
-																	<p:spacer width="10" />
-																	<p:tooltip for="pdf2" value="PDF" position="top" />
-																	<p:dataExporter type="pdf" target="childtableEating"
-																		fileName="Angestellte" />
+																					name="pictures/extractors/pdf.png"
+																					width="32"/>
+																	<p:spacer width="10"/>
+																	<p:tooltip for="pdf2" value="PDF" position="top"/>
+																	<p:dataExporter type="pdf" target="childTableEating"
+																					fileName="Kinder_Essen"/>
 																</p:commandLink>
 																<p:commandLink ajax="false" immediate="true">
 																	<p:graphicImage id="csv2"
-																		name="pictures/extractors/csv.png" width="32" />
-																	<p:tooltip for="csv2" value="CSV" position="top" />
-																	<p:dataExporter type="csv" target="childtableEating"
-																		fileName="Angestellte" />
+																					name="pictures/extractors/csv.png"
+																					width="32"/>
+																	<p:tooltip for="csv2" value="CSV" position="top"/>
+																	<p:dataExporter type="csv" target="childTableEating"
+																					fileName="Kinder_Essen"/>
 																</p:commandLink>
 															</div>
 														</f:facet>
@@ -169,9 +191,10 @@
 															</p:column>
 														</p:summaryRow>
 													</p:dataTable>
+													</h:form>
 												</p:tab>
 											</p:accordionPanel>
-										</h:form>
+
 									</div>
 								</div>
 								<!-- /.box -->
