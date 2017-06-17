@@ -229,7 +229,8 @@
 													<p:outputLabel for="to" value="Ende:" />
 													<p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
 													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEventParent()}" />
+														action="#{scheduleView.deleteEventParent()}"
+														oncomplete="window.location.replace(window.location.href);" />
 												</h:panelGrid>
 											</p:dialog>
 
@@ -304,7 +305,8 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:commandButton id="addButton" value="Speichern"
-															actionListener="#{scheduleView.addRegistration}" />
+															actionListener="#{scheduleView.addRegistration}"
+															oncomplete="window.location.replace(window.location.href);" />
 
 													</ui:fragment>
 
@@ -335,6 +337,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
+														oncomplete="window.location.replace(window.location.href);"
 															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}" />
 
                                                 </ui:fragment>
@@ -420,7 +423,7 @@
 											<p:separator/>
 												<p:commandButton value="Anmelden"
 													action="#{massSignupController.massSignup}"
-												oncomplete="PF('massSignUpDialog').hide()"/>
+												oncomplete="window.location.replace(window.location.href);"/>
 												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
 
 											</p:dialog>
