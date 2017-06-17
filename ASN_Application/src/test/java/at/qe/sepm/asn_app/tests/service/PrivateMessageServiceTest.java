@@ -22,9 +22,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -39,6 +37,10 @@ public class PrivateMessageServiceTest {
     @Autowired
     private PrivateMessageService privateMessageService;
     private PrivateMessage privateMessage;
+    private Date date;
+    private String message;
+    private String usernameReceiver;
+    private String usernameSender;
 
 
     @Before
@@ -46,13 +48,18 @@ public class PrivateMessageServiceTest {
         Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
         calendar.clear();
         calendar.set(2017, Calendar.APRIL, 23, 13, 45);
-        Date date = calendar.getTime();
+
+        // Initialize attributes
+        date = calendar.getTime();
+        message = "PrivateMessage";
+        usernameReceiver = "UsernameReceiver";
+        usernameSender = "UsernameSender";
 
         privateMessage = new PrivateMessage();
         privateMessage.setDate(date);
-        privateMessage.setMessage("PrivateMessage1");
-        privateMessage.setUsernameReceiver("UsernameReceiver1");
-        privateMessage.setUsernameSender("UsernameSender1");
+        privateMessage.setMessage(message);
+        privateMessage.setUsernameReceiver(usernameReceiver);
+        privateMessage.setUsernameSender(usernameSender);
     }
 
 
@@ -72,6 +79,16 @@ public class PrivateMessageServiceTest {
         other = privateMessageService.loadPrivateMessage(privateMessage.getId());
         assertFalse(privateMessage.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Compare attributes with getter
+        assertEquals(date.toString(), privateMessage.getDate());
+        assertEquals(message, privateMessage.getMessage());
+        assertEquals(usernameReceiver, privateMessage.getUsernameReceiver());
+        assertEquals(usernameSender, privateMessage.getUsernameSender());
     }
 
 
