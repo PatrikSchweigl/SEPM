@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,7 +71,13 @@ public class LunchController {
 	public List<Lunch> getCurrentWeek() {
 		List<Lunch> ret = null;
 		if (!thisWeekFlag) {
-			Date[] dates = DateUtils.getWeek(0);
+			LocalDate now = LocalDate.now();
+
+			int x = 0;
+			if(now.getDayOfWeek().getValue() > 5){
+				x = 1;
+			}
+			Date[] dates = DateUtils.getWeek(x);
 
 			for (Date s : dates) {
 				if (ret == null) {
@@ -105,7 +112,13 @@ public class LunchController {
 	public List<Lunch> getNextWeek() {
 		List<Lunch> ret = null;
 		if (!nextWeekFlag) {
-			Date[] dates = DateUtils.getWeek(1);
+			LocalDate now = LocalDate.now();
+
+			int x = 1;
+			if(now.getDayOfWeek().getValue() > 5){
+				x = 2;
+			}
+			Date[] dates = DateUtils.getWeek(x);
 
 			for (Date s : dates) {
 				if (ret == null) {
