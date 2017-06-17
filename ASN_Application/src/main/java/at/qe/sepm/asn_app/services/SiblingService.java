@@ -31,4 +31,9 @@ public class SiblingService {
     public void deleteSibling(Sibling sibling) {
         siblingRepository.delete(sibling);
     }
+
+
+    public Sibling loadSibling(Long id) {
+        return siblingRepository.findOne(id);
+    }
 }
