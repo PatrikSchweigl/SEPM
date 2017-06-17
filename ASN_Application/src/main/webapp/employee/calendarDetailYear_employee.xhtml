@@ -31,11 +31,21 @@
 											<p:accordionPanel multiple="true">
 												<p:tab title="Anwesende Kinder in diesem Kalenderjahr">
 													<h:form id="childTableForm">
-													<p:dataTable id="childTable" var="reg"
+													<p:dataTable id="childTable" var="reg" widgetVar="childTable"
 														value="#{registrationController.getAllRegistrationsYear()}"
 														paginator="true" paginatorPosition="bottom"
 														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 														 emptyMessage="Es sind in diesem Jahr keine Kinder angemeldet!">
+														<f:facet name="header">
+															<p:outputPanel>
+																<h:outputText value="Suche "/>
+																<p:inputText id="globalFilter"
+																			 onkeyup="PF('childTable').filter()"
+																			 style="width:150px"
+																			 placeholder="Suchwort eingeben"/>
+															</p:outputPanel>
+														</f:facet>
+
 														<f:facet name="{Exporters}"
 																 style="float: right; vertical-align: middle;">
 															<div style="float: right; vertical-align: middle;">

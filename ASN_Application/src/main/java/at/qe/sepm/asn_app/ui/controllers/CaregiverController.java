@@ -50,13 +50,13 @@ public class CaregiverController {
     public void setCaregiver2(Caregiver caregiverEdit) {
         this.caregiver = caregiverEdit;
     }
-    
-    public Collection<Caregiver> getCaregiverByChildId(Long id){
-    	return caregiverService.getAllCaregiversByChildId(id);
+
+    public Collection<Caregiver> getCaregiverByChildId(Long id) {
+        return caregiverService.getAllCaregiversByChildId(id);
     }
-    
-    public Collection<Caregiver> getAllCaregiversByEligibleFalse(){
-    	return caregiverService.getAllCaregiversByEligibleFalse();
+
+    public Collection<Caregiver> getAllCaregiversByEligibleFalse() {
+        return caregiverService.getAllCaregiversByEligibleFalse();
     }
 
     public void doReloadCaregiver() {
@@ -64,12 +64,12 @@ public class CaregiverController {
     }
 
     @PostConstruct
-    private void initNewCaregiver(){
+    private void initNewCaregiver() {
         caregiver = new Caregiver();
     }
 
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setCaregivers(caregiverService.getAllCaregivers());
     }
 
@@ -77,14 +77,14 @@ public class CaregiverController {
         return caregiver;
     }
 
-    public Collection<Caregiver> getCaregivers(){
+    public Collection<Caregiver> getCaregivers() {
         return caregivers;
     }
 
 
-    public Caregiver doSaveCaregiver(){
+    public Caregiver doSaveCaregiver() {
         Caregiver caregiverReturn = null;
-        if(!StringUtils.isNumeric(caregiver.getPhoneNumber())){
+        if (!StringUtils.isNumeric(caregiver.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
         } else {
             caregiver = caregiverService.saveCaregiver(caregiver);
@@ -112,20 +112,20 @@ public class CaregiverController {
      */
     public void setCaregiverEdit2(Caregiver caregiver) {
         this.caregiverEdit = caregiver;
-     }
+    }
 
     public void doReloadCaregiverEdit() {
         //child = childService.loadUser(child.getUsername());
         caregiverEdit = caregiverService.loadCaregiver(caregiverEdit.getId());
     }
-    
-    public void setEligibleToTrue(){
-    	caregiverEdit.setEligible(true);
-    	caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
+
+    public void setEligibleToTrue() {
+        caregiverEdit.setEligible(true);
+        caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
     }
 
-    public void doSaveCaregiverEdit(){
-        if(!StringUtils.isNumeric(caregiver.getPhoneNumber())){
+    public void doSaveCaregiverEdit() {
+        if (!StringUtils.isNumeric(caregiver.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
         } else {
             caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
