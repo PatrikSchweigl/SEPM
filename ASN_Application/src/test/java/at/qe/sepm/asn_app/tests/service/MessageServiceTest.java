@@ -2,12 +2,10 @@ package at.qe.sepm.asn_app.tests.service;
 
 import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.services.MessageService;
-import at.qe.sepm.asn_app.tests.controller.ContextMocker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -17,8 +15,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.faces.context.FacesContext;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -106,6 +102,10 @@ public class MessageServiceTest {
         // Test getFormattedDate()
         assertNotEquals("", message.getFormattedDate());
         System.out.println(message.getFormattedDate());
+
+        // Test toString()
+        assertNotEquals("", message.toString());
+        System.out.println(message.toString());
     }
 
 
