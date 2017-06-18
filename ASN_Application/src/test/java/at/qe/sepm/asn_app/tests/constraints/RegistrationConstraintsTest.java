@@ -59,16 +59,7 @@ public class RegistrationConstraintsTest {
         child.setParent2(parent2);
         registration = InitializeRegistration.initialize();
 
-        // Save the parents in the database.
-        parentService.saveParent(parent1);
-        parentService.saveParent(parent2);
-
-        // Save the child in the database.
-        child = childService.saveChild(child);
-        registration.setChild(child);
-
-        // Save the registration in the database for further testing.
-        registration = registrationService.saveRegistration(registration);
+        saveElements();
     }
 
 
@@ -85,8 +76,44 @@ public class RegistrationConstraintsTest {
     }
 
 
+    /**
+     * If there is no registration saved in the database the
+     * method should return almost immediately.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testInvalidRegistrationExists() {
+
+    }
+
     @After
     public void cleanUp() {
+        deleteElements();
+
+        // Set all attributes to null to assure clean values.
+        child = null;
+        parent1 = null;
+        parent2 = null;
+        registration = null;
+    }
+
+
+    private void saveElements() {
+        // Save the parents in the database.
+        parentService.saveParent(parent1);
+        parentService.saveParent(parent2);
+
+        // Save the child in the database.
+        child = childService.saveChild(child);
+        registration.setChild(child);
+
+        // Save the registration in the database for further testing.
+        registration = registrationService.saveRegistration(registration);
+    }
+
+
+    private void deleteElements() {
         // Delete the registration again.
         registrationService.deleteRegistration(registration);
 
@@ -96,11 +123,5 @@ public class RegistrationConstraintsTest {
         // Delete the parent again.
         parentService.deleteParent(parent1);
         parentService.deleteParent(parent2);
-
-        // Set all attributes to null to assure clean values.
-        child = null;
-        parent1 = null;
-        parent2 = null;
-        registration = null;
     }
 }
