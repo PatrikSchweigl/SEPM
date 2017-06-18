@@ -169,7 +169,7 @@ public class MassSignupController {
             cal2.add(Calendar.HOUR_OF_DAY, 2);
             nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
             cal2.setTime(nurseryInformation.getBringStart());
-            Registration reg = new Registration("Auto-Signup", childReg, cal.getTime(), cal2.getTime());
+            Registration reg = new Registration("Automatische Anmeldung", childReg, cal.getTime(), cal2.getTime());
 
             if (d.compareTo(new Date()) <= 0) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
