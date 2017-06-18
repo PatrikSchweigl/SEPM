@@ -125,4 +125,13 @@ public class Registration implements Persistable<Long> {
                 bringdate.getMonth() == other.bringdate.getMonth() &&
                 bringdate.getDay() == other.bringdate.getDay());
     }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n" +
+                "BringDate: " + bringdate + "\n" +
+                "Child: " + child.getFirstName() + " " + child.getLastName() + "\n" +
+                "Note: " + note;
+    }
 }
