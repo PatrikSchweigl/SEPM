@@ -114,4 +114,12 @@ public class AuditLog implements Persistable<Long> {
                 log.equals(other.log) &&
                 userName.equals(other.userName));
     }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n" +
+                "Log: " + log + "\n" +
+                "Username: " + userName;
+    }
 }
