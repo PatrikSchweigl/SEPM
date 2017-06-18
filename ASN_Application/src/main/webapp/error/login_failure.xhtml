@@ -9,10 +9,22 @@
 	<ui:define name="content">
 		<body class="theme-blue">
 			<div class="ui-g">
+				<p:graphicImage name="pictures/C4F_logo_login.png" width="170"
+					height="170" style="margin:70 auto 0 auto;" />
 				<div class="ui-g-12 ui-md-3 center-login">
 					<p:panel id="basic" style="margin-bottom:20px">
+						<p:messages id="loginInfo" autoUpdate="true" />
 						<div class="login-page">
 							<div class="form">
+								<h:form class="register-form">
+									<p:inputText id="e-mail" type="text" required="true" value="#{userController.email}"
+										placeholder="E-Mailadresse" />
+									<p:commandButton class="login-button" value="Passwort senden"
+										action="#{userController.generatePassword()}" update="@all"></p:commandButton>
+									<p class="message">
+										<a href="#">Anmelden</a>
+									</p>
+								</h:form>
 								<form class="login-form" action="#{request.contextPath}/login"
 									method="post">
 									<div>
@@ -27,6 +39,9 @@
 										placeholder="Passwort" />
 
 									<button class="login-button" type="submit">Anmelden</button>
+									<p class="message">
+										<a href="#">Passwort vergessen?</a>
+									</p>
 								</form>
 							</div>
 						</div>
