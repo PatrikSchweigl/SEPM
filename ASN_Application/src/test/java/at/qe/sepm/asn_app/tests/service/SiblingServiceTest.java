@@ -19,9 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -59,10 +57,12 @@ public class SiblingServiceTest {
     @Test
     public void testSaveAndDelete() {
         // Save the parents in the database.
-        parentService.saveParent(parent1);
-        parentService.saveParent(parent2);
+        parent1 = parentService.saveParent(parent1);
+        parent2 = parentService.saveParent(parent2);
 
         // Save the child in the database.
+        child.setPrimaryParent(parent1);
+        child.setParent2(parent2);
         child = childService.saveChild(child);
 
         // Save the sibling in the database.
@@ -70,6 +70,8 @@ public class SiblingServiceTest {
         // It has to be set after child was saved.
         sibling.setChild(child);
         sibling = siblingService.saveSibling(sibling);
+        System.out.println("SIBLIIIIIIIIIIING: " + sibling +
+                            sibling.getId() + sibling.getChild().getId());
 
         // Check if the values have changed since the sibling was saved.
         Sibling other = siblingService.loadSibling(sibling.getId());
@@ -87,6 +89,28 @@ public class SiblingServiceTest {
         // Delete the parent again.
         parentService.deleteParent(parent1);
         parentService.deleteParent(parent2);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        String birthday = "11/11/2015";
+        String firstName = "SiblingFirstName";
+        String lastName = "SiblingLastName";
+
+        // Sett attributes
+        sibling = new Sibling();
+        sibling.setBirthday(birthday);
+        sibling.setChild(child);
+        sibling.setFirstName(firstName);
+        sibling.setLastName(lastName);
+
+        // Compare all attributes with getters.
+        assertEquals(birthday, sibling.getBirthday());
+        assertEquals(child, sibling.getChild());
+        assertEquals(firstName, sibling.getFirstName());
+        assertEquals(lastName, sibling.getLastName());
     }
 
 
