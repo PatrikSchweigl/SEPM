@@ -86,6 +86,14 @@ public class AuditLogServiceTest {
         // Test toString()
         assertNotNull(auditLog.toString());
         assertNotEquals("", auditLog.toString());
+
+        // Test getFormattedDate()
+        assertNotEquals("", auditLog.getFormattedOriginDate());
+
+        // Test isNew()
+        assertFalse(auditLog.isNew());
+        auditLog = new AuditLog();
+        assertTrue(auditLog.isNew());
     }
 
 
