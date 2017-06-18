@@ -89,4 +89,29 @@ public class AuditLog implements Persistable<Long> {
     public boolean isNew() {
         return (null == userName);
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof AuditLog)) {
+            return false;
+        }
+
+        AuditLog other = (AuditLog) obj;
+        if (id.equals(other.id)) {
+            return true;
+        }
+
+        return (date.getYear() == other.date.getYear() &&
+                date.getMonth() == other.date.getMonth() &&
+                date.getDay() == other.date.getDay() &&
+                log.equals(other.log) &&
+                userName.equals(other.userName));
+    }
 }
