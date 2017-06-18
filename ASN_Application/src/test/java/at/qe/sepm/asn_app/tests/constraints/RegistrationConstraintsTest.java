@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -58,8 +59,6 @@ public class RegistrationConstraintsTest {
         child.setPrimaryParent(parent1);
         child.setParent2(parent2);
         registration = InitializeRegistration.initialize();
-
-        saveElements();
     }
 
 
@@ -70,9 +69,11 @@ public class RegistrationConstraintsTest {
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void testValidRegistration() {
+        saveElements();
         assertTrue(registrationConstraints.checkIfNurseryExists(registration));
         assertTrue(registrationConstraints.checkTimeConstraints(registration));
         assertTrue(registrationConstraints.registationExists(registration));
+        deleteElements();
     }
 
 
@@ -84,13 +85,14 @@ public class RegistrationConstraintsTest {
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void testInvalidRegistrationExists() {
-
+        //registration = InitializeRegistration.initialize();
+        //registration.setChild(child);
+        assertFalse(registrationConstraints.registationExists(registration));
     }
+
 
     @After
     public void cleanUp() {
-        deleteElements();
-
         // Set all attributes to null to assure clean values.
         child = null;
         parent1 = null;
