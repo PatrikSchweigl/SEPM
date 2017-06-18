@@ -13,6 +13,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
+import at.qe.sepm.asn_app.tests.initialize.InitializeSibling;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
@@ -165,6 +166,7 @@ public class ChildServiceTest {
         String imgName = "ChildImgName";
         String lastName = "ChildLastName";
         Religion religion = Religion.ISLAM;
+        Sibling sibling = InitializeSibling.initialize1();
         Set<Sibling> siblings = new HashSet<>();
 
         // Set attributes
@@ -183,20 +185,44 @@ public class ChildServiceTest {
         child.setParent2(parent2);
         child.setReligion(religion);
         child.setSiblings(siblings);
+        child.addSibling(sibling);
 
         // Compare attributes with getter
         assertEquals(birthday, child.getBirthday());
         assertEquals(caregivers, child.getCaregivers());
         assertEquals(custody, child.getCustody());
         assertEquals(emergencyNumber, child.getEmergencyNumber());
+        assertEquals(firstName + " " + lastName, child.getFullname());
         assertEquals(firstName, child.getFirstName());
         assertEquals(gender, child.getGender());
         assertEquals(imgName, child.getImgName());
         assertEquals(lastName, child.getLastName());
         assertEquals(parent1, child.getPrimaryParent());
+        assertEquals(parent1.getFirstName() + " " + parent1.getLastName(), child.getPrimaryParentFullName());
         assertEquals(parent2, child.getParent2());
         assertEquals(religion, child.getReligion());
         assertEquals(siblings, child.getSiblings());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotEquals("", child.toString());
+
+        // Test isNew()
+        assertFalse(child.isNew());
+
+        child = new Child();
+        child.setFirstName("ChildIsNewFirstName");
+        assertFalse(child.isNew());
+
+        child = new Child();
+        child.setLastName("ChildIsNewLastName");
+        assertFalse(child.isNew());
+
+        child = new Child();
+        assertTrue(child.isNew());
     }
 
 
