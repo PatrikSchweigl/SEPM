@@ -114,6 +114,28 @@ public class SiblingServiceTest {
     }
 
 
+    @Test
+    public void testFurtherMethods() {
+        // Print all information with toString();
+        assertNotEquals("", sibling.toString());
+        System.out.println(sibling.toString());
+
+        // Test isNew()
+        assertFalse(sibling.isNew());
+
+        sibling = new Sibling();
+        sibling.setFirstName("SiblingIsNewFirstName");
+        assertFalse(sibling.isNew());
+
+        sibling = new Sibling();
+        sibling.setLastName("SiblingIsNewLastName");
+        assertFalse(sibling.isNew());
+
+        sibling = new Sibling();
+        assertTrue(sibling.isNew());
+    }
+
+
 
     @After
     public void cleanUp() {
