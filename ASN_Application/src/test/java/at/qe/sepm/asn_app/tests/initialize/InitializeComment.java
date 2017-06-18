@@ -3,8 +3,6 @@ package at.qe.sepm.asn_app.tests.initialize;
 import at.qe.sepm.asn_app.models.general.Comment;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>

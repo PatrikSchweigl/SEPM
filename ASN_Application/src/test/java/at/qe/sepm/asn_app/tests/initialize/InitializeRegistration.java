@@ -23,7 +23,7 @@ public class InitializeRegistration {
         Date bringDate = calendar.getTime();
 
         calendar.clear();
-        calendar.set(2017, Calendar.JULY, 14, 0, 0);
+        calendar.set(2017, Calendar.JULY, 14, 2, 0);
         Date date = calendar.getTime();
 
         Registration registration = new Registration();
