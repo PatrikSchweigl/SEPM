@@ -91,6 +91,22 @@ public class RegistrationConstraintsTest {
     }
 
 
+    /**
+     * If there is no nurseryInformation saved on the date
+     * of registration.date then checkIfNurseryExists should
+     * return <code>false</code>.
+     */
+    @Test
+    public void testCheckIfNurseryExists() {
+        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
+        calendar.clear();
+        calendar.set(2017, Calendar.AUGUST, 14, 8, 0);
+
+        registration.setDate(calendar.getTime());
+        assertFalse(registrationConstraints.checkIfNurseryExists(registration));
+    }
+
+
     @After
     public void cleanUp() {
         // Set all attributes to null to assure clean values.
