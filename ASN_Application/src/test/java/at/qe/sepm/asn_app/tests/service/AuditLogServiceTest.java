@@ -69,7 +69,7 @@ public class AuditLogServiceTest {
         String username = "AuditLogUsername";
 
         // Set attributes
-        AuditLog auditLog = new AuditLog();
+        auditLog = new AuditLog();
         auditLog.setDate(date);
         auditLog.setLog(log);
         auditLog.setUserName(username);
@@ -78,6 +78,14 @@ public class AuditLogServiceTest {
         assertEquals(date, auditLog.getDate());
         assertEquals(log, auditLog.getLog());
         assertEquals(username, auditLog.getUserName());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(auditLog.toString());
+        assertNotEquals("", auditLog.toString());
     }
 
 
