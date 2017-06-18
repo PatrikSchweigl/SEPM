@@ -67,9 +67,10 @@ public class RegistrationServiceTest {
         parentService.saveParent(parent2);
 
         // Save the child in the database.
-        childService.saveChild(child);
+        child = childService.saveChild(child);
 
         // Save a Registration in the database.
+        registration.setChild(child);
         registration = registrationService.saveRegistration(registration);
 
         // Check if the values have changed since the registration was saved.
