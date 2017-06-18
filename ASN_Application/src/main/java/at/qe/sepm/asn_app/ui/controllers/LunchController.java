@@ -42,6 +42,7 @@ public class LunchController {
 
 	private Lunch lunch;
 	private Lunch lunchEdit;
+	private List<Lunch> lunchAll;
 
 	private Child child;
 	private String childFirstname;
@@ -55,6 +56,11 @@ public class LunchController {
 	private boolean nextWeekFlag;
 	private boolean[] signUp = new boolean[5];
 
+	
+	@PostConstruct
+	public void init(){
+		lunchAll = lunchService.findAll();
+	}
 	/*
 	 * public void processSignUp(){ Lunch l; for(int i = 0; i < 5; i++){
 	 * if(thisWeekLunch.size() > i) { l = thisWeekLunch.get(i); if (signUp[i]) {
@@ -214,6 +220,7 @@ public class LunchController {
 			RequestContext context = RequestContext.getCurrentInstance();
 			context.execute("PF('lunchAddDialog').hide()");
 		}
+		lunchAll = findAll();
 		return lunchReturn;
 	}
 
@@ -323,5 +330,13 @@ public class LunchController {
 	}
 	public void setChildFirstname(String childFirstname) {
 		this.childFirstname = childFirstname;
+	}
+
+	public List<Lunch> getLunchAll() {
+		return lunchAll;
+	}
+
+	public void setLunchAll(List<Lunch> lunchAll) {
+		this.lunchAll = lunchAll;
 	}
 }

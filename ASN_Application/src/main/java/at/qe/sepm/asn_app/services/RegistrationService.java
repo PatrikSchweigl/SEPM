@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -37,11 +38,12 @@ public class RegistrationService {
     	cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		Collection<Registration> reg = registrationRepository.findAll();
+		Collection<Registration> ret = new LinkedList<>();
 		for(Registration r : reg){
-			System.err.println(r.getDate());
+			if(r.getDate().getDay() == date.getDay() && r.getDate().getMonth() == date.getMonth() && r.getDate().getYear() == date.getYear())
+				ret.add(r);
 		}
-    	System.err.println(cal.getTime());
-        return registrationRepository.getRegistrationsByDate(cal.getTime());
+        return ret;
     }
 
     public Collection<Registration> getAllRegistrationsByParent(){

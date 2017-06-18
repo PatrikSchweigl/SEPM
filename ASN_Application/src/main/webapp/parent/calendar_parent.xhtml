@@ -229,7 +229,8 @@
 													<p:outputLabel for="to" value="Ende:" />
 													<p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
 													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEventParent()}" />
+														action="#{scheduleView.deleteEventParent()}"
+														oncomplete="window.location.replace(window.location.href);" />
 												</h:panelGrid>
 											</p:dialog>
 
@@ -283,9 +284,6 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:outputPanel id="occ">#{scheduleView.currentNurseryInformation.currentOccupancy}/#{scheduleView.currentNurseryInformation.maxOccupancy} belegt</p:outputPanel>
-														<p:poll interval="2"
-															listener="#{scheduleView.currentNurseryInformation.currentOccupancy}"
-															update="occ" />
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:outputLabel for="too" value="Uhrzeit:" />
@@ -307,7 +305,8 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:commandButton id="addButton" value="Speichern"
-															actionListener="#{scheduleView.addRegistration}" />
+															actionListener="#{scheduleView.addRegistration}"
+															oncomplete="window.location.replace(window.location.href);" />
 
 													</ui:fragment>
 
@@ -338,6 +337,7 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
+														oncomplete="window.location.replace(window.location.href);"
 															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}" />
 
                                                 </ui:fragment>
@@ -349,7 +349,7 @@
                                             <p:selectOneListbox style="width: 210px; margin:auto;" id="massBox"
                                                                 value="#{massSignupController.childId}" var="p"
                                                                 filter="true"
-                                                                filterMatchMode="contains" required="true" requiredMessage="Bitte ählen Sie ein Kind aus" >
+                                                                filterMatchMode="contains" >
                                                 <f:selectItems
                                                         value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
                                                         var="child" itemLabel="#{child.firstName}"
@@ -421,11 +421,9 @@
 												</div>
 											</div>
 											<p:separator/>
-												<p:commandButton value="Anmelden &amp; Schließen"
+												<p:commandButton value="Anmelden"
 													action="#{massSignupController.massSignup}"
-													process="@widgetVar(massSignUpDialog)"
-												oncomplete="PF('massSignUpDialog').hide()"/>
-												<p:commandButton value="Anmelden" action="#{massSignupController.massSignup}" />
+												oncomplete="window.location.replace(window.location.href);"/>
 												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
 
 											</p:dialog>

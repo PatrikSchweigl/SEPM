@@ -1,4 +1,4 @@
-package at.qe.sepm.asn_app.tests.service;
+package at.qe.sepm.asn_app.tests.constraints;
 
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Registration;
@@ -9,6 +9,7 @@ import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.tests.initialize.InitializeChild;
 import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
 import at.qe.sepm.asn_app.tests.initialize.InitializeRegistration;
+import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,19 +22,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.*;
+
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
- * on 14.06.17 12:16 CEST.
+ * on 17.06.17 14:35 CEST.
  */
 @Component
-@Scope("view")
+@Scope("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class RegistrationServiceTest {
+public class RegistrationConstraintsTest {
 
     @Autowired
     private ChildService childService;
@@ -41,6 +43,8 @@ public class RegistrationServiceTest {
     private ParentService parentService;
     @Autowired
     private RegistrationService registrationService;
+    @Autowired
+    private RegistrationConstraints registrationConstraints;
     private Child child;
     private Parent parent1;
     private Parent parent2;
@@ -58,30 +62,62 @@ public class RegistrationServiceTest {
     }
 
 
+    /**
+     * Test a registration with no violation
+     */
     @DirtiesContext
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
-    public void test1() {
+    public void testValidRegistration() {
+        saveElements();
+        assertTrue(registrationConstraints.checkIfNurseryExists(registration));
+        assertTrue(registrationConstraints.checkTimeConstraints(registration));
+        assertTrue(registrationConstraints.registationExists(registration));
+        deleteElements();
+    }
+
+
+    /**
+     * If there is no registration saved in the database the
+     * method should return almost immediately.
+     */
+    @DirtiesContext
+    @Test
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    public void testInvalidRegistrationExists() {
+        //registration = InitializeRegistration.initialize();
+        //registration.setChild(child);
+        assertFalse(registrationConstraints.registationExists(registration));
+    }
+
+
+    @After
+    public void cleanUp() {
+        // Set all attributes to null to assure clean values.
+        child = null;
+        parent1 = null;
+        parent2 = null;
+        registration = null;
+    }
+
+
+    private void saveElements() {
         // Save the parents in the database.
         parentService.saveParent(parent1);
         parentService.saveParent(parent2);
 
         // Save the child in the database.
         child = childService.saveChild(child);
-
-        // Save a Registration in the database.
         registration.setChild(child);
+
+        // Save the registration in the database for further testing.
         registration = registrationService.saveRegistration(registration);
+    }
 
-        // Check if the values have changed since the registration was saved.
-        Registration other = registrationService.loadRegistration(registration.getId());
-        assertTrue(registration.equals(other));
 
+    private void deleteElements() {
         // Delete the registration again.
         registrationService.deleteRegistration(registration);
-        other = registrationService.loadRegistration(registration.getId());
-        assertFalse(registration.equals(other));
-        assertNull(other);
 
         // Delete the child again.
         childService.deleteChild(child);
@@ -89,14 +125,5 @@ public class RegistrationServiceTest {
         // Delete the parent again.
         parentService.deleteParent(parent1);
         parentService.deleteParent(parent2);
-    }
-
-
-    @After
-    public void cleanUp() {
-        child = null;
-        parent1 = null;
-        parent2 = null;
-        registration = null;
     }
 }

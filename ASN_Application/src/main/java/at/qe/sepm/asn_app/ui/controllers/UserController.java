@@ -24,6 +24,7 @@ public class UserController {
 
     @Autowired
     private SessionInfoBean sessionInfoBean;
+    private String email;
 
     /**
      * Attribute to cache the currently displayed userData
@@ -70,6 +71,10 @@ public class UserController {
     public UserData getUserData() {
         return userData;
     }
+    
+    public void generatePassword(){
+    	userService.generatePassword(email);
+    }
 
 
     /**
@@ -97,5 +102,13 @@ public class UserController {
         this.userService.deleteUser(userData);
         userData = null;
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

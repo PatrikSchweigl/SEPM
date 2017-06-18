@@ -15,6 +15,8 @@ import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.primefaces.context.RequestContext;
@@ -45,6 +47,8 @@ public class ChildController {
 	@Autowired
 	private ChildService childService;
 	@Autowired
+	private SessionInfoBean sessionInfo;
+	@Autowired
 	private ParentService parentService;
 	@Autowired
 	private ParentController parentController;
@@ -56,6 +60,7 @@ public class ChildController {
 	private Caregiver caregiver;
 
 	private Collection<Child> children;
+	private Collection<Child> childrenParent;
 
 	private String parentUserName;
 
@@ -93,6 +98,7 @@ public class ChildController {
 	@PostConstruct
 	public void initList(){
 		children = childService.getAllChildren();
+		childrenParent = childService.getChildrenByParentUsername(sessionInfo.getCurrentUserName());
 	}
 
 	@PostConstruct
@@ -156,6 +162,14 @@ public class ChildController {
 
 	public void doReloadChild(){
 		child = childService.loadChild(child.getId());
+	}
+
+	public Collection<Child> getChildrenParent() {
+		return childrenParent;
+	}
+
+	public void setChildrenParent(Collection<Child> childrenParent) {
+		this.childrenParent = childrenParent;
 	}
 
 }

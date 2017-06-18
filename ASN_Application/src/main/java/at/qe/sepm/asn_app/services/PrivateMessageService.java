@@ -32,8 +32,8 @@ public class PrivateMessageService implements Serializable {
         return privateMessageRepository.findAll();
     }
 
-    public PrivateMessage savePrivateMessage(PrivateMessage task){
-        return privateMessageRepository.save(task);
+    public PrivateMessage savePrivateMessage(PrivateMessage privateMessage){
+        return privateMessageRepository.save(privateMessage);
     }
 
     public void deletePrivateMessage(PrivateMessage message){

@@ -86,7 +86,7 @@
 													</p:column>
 													<p:column headerText="Datum" sortBy="#{log.date}"
 														filterBy="#{log.date}" filterStyle="display:none">
-														<h:outputText value="#{log.date}" />
+														<h:outputText value="#{log.getFormattedOriginDate()}" />
 													</p:column>
 												</p:dataTable>
 											</h:form>
