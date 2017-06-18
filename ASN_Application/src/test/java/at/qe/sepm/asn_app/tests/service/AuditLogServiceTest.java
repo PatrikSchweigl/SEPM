@@ -13,9 +13,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -52,6 +54,30 @@ public class AuditLogServiceTest {
         other = auditLogService.loadAuditLog(auditLog.getId());
         assertFalse(auditLog.equals(other));
         assertNull(other);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.clear();
+        calendar.set(2017, Calendar.JULY, 11, 16, 47);
+
+        Date date = calendar.getTime();
+        String log = "Log";
+        String username = "AuditLogUsername";
+
+        // Set attributes
+        AuditLog auditLog = new AuditLog();
+        auditLog.setDate(date);
+        auditLog.setLog(log);
+        auditLog.setUserName(username);
+
+        // Test getter
+        assertEquals(date, auditLog.getDate());
+        assertEquals(log, auditLog.getLog());
+        assertEquals(username, auditLog.getUserName());
     }
 
 
