@@ -86,7 +86,6 @@ public class EmployeeController {
     }
 
     public Collection<Employee> getEmployees(){
-    	initList();
         return employees;
     }
 
