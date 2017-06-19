@@ -32,6 +32,10 @@ public class ParentService {
     private AuditLogRepository auditLogRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private UserService userService;
 
 
     public Collection<Parent> getAllParents(){
@@ -46,9 +50,17 @@ public class ParentService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
             auditLogRepository.save(log);
         }
-
+        String pwd = userService.generatePasswordNew(parent.getEmail());
+        mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Registrierung",
+                "Willkommen bei Care4Fun-Application!\n\n" +
+                        "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                        "Ihr Benutzername: " + parent.getUsername() + "\n" +
+                        "Ihr Passwort:     " + pwd +
+                        "\n\n\n" +
+                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Viel Spaß wünschen das Kinderkrippen-Team!");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        parent.setPassword(passwordEncoder.encode("passwd"));
+        parent.setPassword(passwordEncoder.encode(pwd));
         parent.setUserRole(UserRole.PARENT);
         return parentRepository.save(parent);
     }

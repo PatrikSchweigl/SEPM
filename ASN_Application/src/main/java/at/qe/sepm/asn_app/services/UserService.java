@@ -84,7 +84,7 @@ public class UserService {
 		return userRepository.save(userData);
 	}
 
-	public void generatePassword(String email) {
+	public String generatePassword(String email) {
 		char[] chars = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789".toCharArray();
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
@@ -96,7 +96,7 @@ public class UserService {
 		if (userData == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Wir konnten keine Email an diese Adresse schicken", null));
-			return;
+			return "";
 		}
 		mailService.sendEmail(userData.getEmail(), "Care4Fun-App - Passwortzuruecksetzung",
 				"Guten Tag " + userData.getFirstName() + " " + userData.getLastName() + "!\n\n"
@@ -108,6 +108,18 @@ public class UserService {
 		userRepository.save(userData);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Ihr Passwort wurde geändert. Bitte überprüfen Sie Ihre Mails.", null));
+		return sb.toString();
+	}
+	
+	public String generatePasswordNew(String email) {
+		char[] chars = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 8; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		return sb.toString();
 	}
 
 	public UserData changeData(UserData userData) {
