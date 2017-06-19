@@ -1,4 +1,4 @@
-INSERT INTO user_data (FIRST_NAME, LAST_NAME, USERNAME, LOCATION, POSTCODE, STREET_NAME,  EMAIL,PASSWORD, USER_ROLE) VALUES('Admin', 'Istrator', 'admin', 'Innsbruck', '6020', 'Tiergartenstrasse','xyzdafsasdf233223@abc.at', '$2a$10$W9xQIwa/FstPUvcbzJXnQ.XjVdTyIcCEp.g6VCq1gYuSsQNjJjbJG', 'ADMIN');
+INSERT INTO user_data (FIRST_NAME, LAST_NAME, USERNAME, LOCATION, POSTCODE, STREET_NAME,  EMAIL,PASSWORD, USER_ROLE,IMG_NAME) VALUES('Admin', 'Istrator', 'admin', 'Innsbruck', '6020', 'Tiergartenstrasse','xyzdafsasdf233223@abc.at', '$2a$10$W9xQIwa/FstPUvcbzJXnQ.XjVdTyIcCEp.g6VCq1gYuSsQNjJjbJG', 'ADMIN', 'emptypicture');
 
 INSERT INTO user_data (IMG_NAME, FIRST_NAME, LAST_NAME, USERNAME, LOCATION, POSTCODE, STREET_NAME, EMAIL, PASSWORD, USER_ROLE) VALUES('emptypicture.png', 'Bernardo', 'Menia', 'bernd', 'Innsbruck', '6020', 'Technikerstrasse', 'patrik.schweigl@student.uibk.ac.at', '$2a$10$6dQcayeT/JAFvgFvzIjlcew5z9cmdCrGlv57.BGnIKvPXTDsQm7hG', 'PARENT');
 INSERT INTO parent (FAMILY_STATUS, STATUS, USERNAME) VALUES ('VERHEIRATET', TRUE, 'bernd');
