@@ -83,21 +83,7 @@ p {
   background-color: #eee;
 }
 
-.important{
-    background: red;
-}
-.employee{
-   background: green;
- }
-.info{
-   background: brown;
-}
-.registration{
-   background: purple;
-}
-.meal{
-   background: blue;
-}
+
 .navbar {
   position: relative;
   min-height: 50px;

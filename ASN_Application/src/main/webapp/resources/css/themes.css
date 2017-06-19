@@ -1,6 +1,23 @@
+.skin-green .important{
+    background: #008448;
+    color:#ffffff
+}
+.skin-green .employee{
+    background: #063F67;
+}
+.skin-green .info{
+    background: #BF3400;
+}
+.skin-green .registration{
+    background: #652FB0;
+}
+.skin-green .meal{
+    background: #BFAC00;
+    color:#ffffff;
+}
+
 .skin-green .ui-state-highlight, .skin-green .ui-widget-content .ui-state-highlight, .skin-green .ui-widget-header .ui-state-highlight {
-    border: 2px solid #008d4c;
-    background: #008d4c;
+    background: #00a65a;
     color: #fff;
 }
 
@@ -324,10 +341,27 @@
     border-bottom-left-radius: 0 !important;
 }
 
+.skin-red .important{
+    background: #BB2C1A;
+    color:#ffffff
+}
+.skin-red .employee{
+    background: #0C5F5C;
+}
+.skin-red .info{
+    background: #513387;
+}
+.skin-red .registration{
+    background: #2BA54B;
+}
+.skin-red .meal{
+    background: #BFAC00;
+}
+
+
 .skin-red .ui-state-highlight, .skin-red .ui-widget-content .ui-state-highlight, .skin-red .ui-widget-header .ui-state-highlight {
-    border: 2px solid #d73925;
-    background: #d73925;
-    color: #fff;
+    background: #dd4b39;
+    color: #dddddd;
 }
 .skin-red .ui-selectbooleanbutton.ui-button.ui-state-active, .skin-red .ui-selectonebutton .ui-button.ui-state-active,.skin-red .ui-selectmanybutton .ui-button.ui-state-active{
 	    background: #d73925;
@@ -601,9 +635,26 @@
     border-bottom-left-radius: 0 !important;
 }
 
+
+.skin-yellow .important{
+    background: #BB2C1A;
+    color:#ffffff
+}
+.skin-yellow .employee{
+    background: #4F026A;
+}
+.skin-yellow .info{
+    background: #18559F;
+}
+.skin-yellow .registration{
+    background: #F36312;
+}
+.skin-yellow .meal{
+    background: #0C9F76;
+}
 .skin-yellow .ui-state-highlight, .skin-yellow .ui-widget-content .ui-state-highlight, .skin-yellow .ui-widget-header .ui-state-highlight {
-    border: 2px solid #e08e0b;
-    background: #e08e0b;
+
+    background: #f39c12;
     color: #fff;
 }
 .skin-yellow .ui-selectbooleanbutton.ui-button.ui-state-active, .skin-yellow .ui-selectonebutton .ui-button.ui-state-active,.skin-yellow .ui-selectmanybutton .ui-button.ui-state-active{
@@ -877,9 +928,26 @@
     border-bottom-left-radius: 0 !important;
 }
 
+
+.skin-purple .important{
+    background: #2c2777;
+    color:#ffffff
+}
+.skin-purple .employee{
+    background: #902053;
+}
+.skin-purple .info{
+    background: #DC6885;
+}
+.skin-purple .registration{
+    background: #6DB53E;
+}
+.skin-purple .meal{
+    background: #BFAC00;
+}
+
 .skin-purple .ui-state-highlight, .skin-purple .ui-widget-content .ui-state-highlight, .skin-purple .ui-widget-header .ui-state-highlight {
-    border: 2px solid #555299;
-    background: #555299;
+    background: #605ca8;
     color: #fff;
 }
 

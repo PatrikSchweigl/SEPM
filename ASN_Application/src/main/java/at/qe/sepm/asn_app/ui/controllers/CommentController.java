@@ -23,7 +23,7 @@ import javax.annotation.PostConstruct;
 
 @Component
 //@Scope("view")
-@Scope("application")
+@Scope("view")
 public class CommentController{
 
     @Autowired
