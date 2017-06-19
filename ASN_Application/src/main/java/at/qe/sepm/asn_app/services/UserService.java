@@ -77,7 +77,7 @@ public class UserService {
 
 	public UserData saveUser(UserData userData) {
 		AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),
-				"SAVED: " + userData.getUsername() + " [" + userData.getUserRole() + "] ", new Date());
+				"SAVED: " + userData.getUsername(), new Date());
 		auditLogService.saveAuditLog(log);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userData.setPassword(passwordEncoder.encode("passwd"));
