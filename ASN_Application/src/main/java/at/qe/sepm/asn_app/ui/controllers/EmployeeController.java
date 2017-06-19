@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import at.qe.sepm.asn_app.services.EmployeeService;
 import at.qe.sepm.asn_app.services.MailService;
+import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
@@ -45,6 +46,8 @@ public class EmployeeController {
 	private UserRepository userRepository;
     @Autowired
     private UserConstraints userConstraints;
+    @Autowired
+    private UserService userService;
 
 
 
@@ -105,14 +108,6 @@ public class EmployeeController {
             try {
             	employee.setImgName("emptypicture.png");
                 employee = employeeService.saveEmployee(employee);
-                mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Registrierung",
-                        "Willkommen bei Care4Fun-Application!\n\n" +
-                                "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
-                                "Ihr Benutzername: " + employee.getUsername() + "\n" +
-                                "Ihr Passwort: passwd" +
-                                "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
-                                "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                                "Viel Spaß wünscht das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('employeeAddDialog').hide()");
             } catch (TransactionSystemException ex) {

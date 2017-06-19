@@ -3,7 +3,6 @@ package at.qe.sepm.asn_app.ui.beans;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -28,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.TransactionSystemException;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
@@ -303,7 +301,7 @@ public class ScheduleView implements Serializable {
 			NurseryInformation nurseryInformation  = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
 			for (Child c : childs) {
 				Registration reg = new Registration("", c, cal.getTime(), cal2.getTime());
-				if (registrationConstraints.registationExists(reg))
+				if (registrationConstraints.registrationExists(reg))
 					continue;
 				if (!registrationConstraints.checkIfNurseryExists(reg))
 					continue;
@@ -385,7 +383,7 @@ public class ScheduleView implements Serializable {
 			if (event.getStartDate().compareTo(new Date()) <= 0) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Keine Anmeldung in der Vergangenheit möglich", null));
-			} else if (registrationConstraints.registationExists(reg)) {
+			} else if (registrationConstraints.registrationExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie haben für heute ihr Kind schon angemeldet", null));
 			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {

@@ -31,6 +31,10 @@ public class EmployeeService {
     private AuditLogRepository auditLogRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private MailService mailService;
 
     public Collection<Employee> getAllEmployees(){
         return employeeRepository.findAll();
@@ -44,8 +48,17 @@ public class EmployeeService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
             auditLogRepository.save(log);
         }
+    	String pwd = userService.generatePasswordNew(employee.getEmail());
+        mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Registrierung",
+                "Willkommen bei Care4Fun-Application!\n\n" +
+                        "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                        "Ihr Benutzername: " + employee.getUsername() + "\n" +
+                        "Ihr Passwort: " + pwd +
+                        "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
+                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Viel Spaß wünscht das Kinderkrippen-Team!");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        employee.setPassword(passwordEncoder.encode("passwd"));
+        employee.setPassword(passwordEncoder.encode(pwd));
         employee.setUserRole(UserRole.EMPLOYEE);
 
         return employeeRepository.save(employee);

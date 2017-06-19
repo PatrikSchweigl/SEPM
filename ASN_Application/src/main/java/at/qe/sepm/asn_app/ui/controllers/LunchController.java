@@ -4,8 +4,10 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.LunchService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import at.qe.sepm.asn_app.ui.constraints.LunchConstraints;
+import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
 import at.qe.sepm.asn_app.utils.DateUtils;
 
 import org.primefaces.context.RequestContext;
@@ -33,11 +35,15 @@ public class LunchController {
 	private LunchService lunchService;
 	@Autowired
 	private ChildService childService;
+	@Autowired
+	private RegistrationService registrationService;
 
 	@Autowired
 	private SessionInfoBean session;
 	@Autowired
 	private LunchConstraints lunchConstraints;
+	@Autowired
+	private RegistrationConstraints registrationConstraints;
 
 	private Lunch lunch;
 	private Lunch lunchEdit;
@@ -161,7 +167,10 @@ public class LunchController {
 			if (lunchs.get(0).getChildrenIds().contains(childId)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie haben Ihr Kind schon zum Mittagessen eingetragen", null));
-			} else {
+			} else if (!registrationConstraints.checkIfChildIsRegisteredOnDate(d,childId)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Ihr Kind ist an diesem Tag nicht für die Kinderkrippe angemeldet", null));
+			}else{
 				lunchs.get(0).addChild(childId);
 				lunchService.saveLunch(lunchs.get(0));
 				RequestContext context = RequestContext.getCurrentInstance();

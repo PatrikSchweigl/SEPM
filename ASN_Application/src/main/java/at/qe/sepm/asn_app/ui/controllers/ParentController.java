@@ -94,14 +94,6 @@ public class ParentController {
             try {
             	parent.setImgName("emptypicture.png");
                 parent = parentService.saveParent(parent);
-                mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Registrierung",
-                        "Willkommen bei Care4Fun-Application!\n\n" +
-                                "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
-                                "Ihr Benutzername: " + parent.getUsername() + "\n" +
-                                "Ihr Passwort: passwd" +
-                                "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
-                                "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
-                                "Viel Spaß wünschen das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('parentAddDialog').hide()");
             } catch (TransactionSystemException ex) {
