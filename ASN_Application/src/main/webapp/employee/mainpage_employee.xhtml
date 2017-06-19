@@ -20,7 +20,9 @@
 									<!-- Default box -->
 									<div class="box">
 										<div class="box-body">
-											<div align="left" style="margin-left: 10px;"><h1>Startseite</h1></div>
+											<div align="left" style="margin-left: 10px;">
+												<h1>Startseite</h1>
+											</div>
 											<h:form id="dialogForm">
 												<p:dialog id="dialogTest"
 													visible="#{sessionInfoBean.hasDefaultPasswd()}"
@@ -38,8 +40,9 @@
 															label="Passwort:" required="true" feedback="true"
 															validatorMessage="Passwörter stimmen nicht überein!"
 															requiredMessage="Kein Passwort eingegeben! (Feld 1)"
-																	promptLabel="Bitte Passwort eingeben!" weakLabel="Schwach"
-																	goodLabel="Mittelmäßig" strongLabel="Sicher"/>
+															promptLabel="Bitte Passwort eingeben!"
+															weakLabel="Schwach" goodLabel="Mittelmäßig"
+															strongLabel="Sicher" />
 
 														<h:outputLabel for="pwd2" value="Password 2: *" />
 														<p:password id="pwd2"
@@ -57,14 +60,18 @@
 
 												<p:accordionPanel multiple="true">
 													<p:tab title="Anwesende Kinder">
-														<p:dataTable id="childTable" var="reg" rowStyleClass="#{childController.checkBirthday(reg.child) ? 'important' : null}"
+														<p:dataTable id="childTable" var="reg"
+															rowStyleClass="#{childController.checkBirthday(reg.child) ? 'important' : null}"
 															value="#{registrationController.getRegistrationsByDateToday()}"
-														emptyMessage="Es sind heute keine Kinder anwesend.">
+															emptyMessage="Es sind heute keine Kinder anwesend.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{reg.child.firstName}" />
 															</p:column>
 															<p:column headerText="Nachname">
 																<h:outputText value="#{reg.child.lastName}" />
+															</p:column>
+															<p:column headerText="Geburtsdatum">
+																<h:outputText value="#{reg.child.birthday}" />
 															</p:column>
 															<p:column headerText="Anmerkung">
 																<h:outputText value="#{reg.note}" />
@@ -76,12 +83,18 @@
 													<p:tab title="Kinder, die heute zu Mittag essen">
 														<p:dataTable id="childTableEating" var="child"
 															value="#{childController.getChildrenByLunchToday()}"
-														emptyMessage="Es sind heute keine Kinder für das Essen angemeldet.">
+															emptyMessage="Es sind heute keine Kinder für das Essen angemeldet.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{child.firstName}" />
 															</p:column>
 															<p:column headerText="Nachname">
 																<h:outputText value="#{child.lastName}" />
+															</p:column>
+															<p:column headerText="Allergien">
+																<h:outputText value="#{child.allergies}" />
+															</p:column>
+															<p:column headerText="Unverträglichkeiten">
+																<h:outputText value="#{child.foodIntolerances}" />
 															</p:column>
 
 
@@ -90,7 +103,7 @@
 													<p:tab title="Bestätigungen">
 														<p:dataTable id="anouncement" var="caregiver"
 															value="#{caregiverController.getAllCaregiversByEligibleFalse()}"
-														emptyMessage="Es sind keine Anfragen vorhanden.">
+															emptyMessage="Es sind keine Anfragen vorhanden.">
 															<p:column headerText="Vorname">
 																<h:outputText value="#{caregiver.firstName}" />
 															</p:column>
@@ -105,7 +118,8 @@
 															</p:column>
 															<p:column style="width:100px;text-align: center"
 																exportable="false">
-																<p:commandButton update=":dialogForm:caregiverEditDialog"
+																<p:commandButton
+																	update=":dialogForm:caregiverEditDialog"
 																	oncomplete="PF('caregiverEditDialog').show()"
 																	icon="ui-icon-note" title="Edit" process="@this">
 																	<f:setPropertyActionListener value="#{caregiver}"
