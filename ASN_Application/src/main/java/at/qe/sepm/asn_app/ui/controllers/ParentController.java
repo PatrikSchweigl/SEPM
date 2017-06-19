@@ -92,6 +92,7 @@ public class ParentController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
         } else {
             try {
+            	parent.setImgName("emptypicture.png");
                 parent = parentService.saveParent(parent);
                 mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Registrierung",
                         "Willkommen bei Care4Fun-Application!\n\n" +
