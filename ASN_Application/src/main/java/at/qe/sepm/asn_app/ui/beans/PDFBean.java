@@ -22,7 +22,9 @@ import com.itextpdf.text.Image;
 
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
+import at.qe.sepm.asn_app.models.employee.Employee;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 
 @Component
@@ -30,6 +32,8 @@ import at.qe.sepm.asn_app.services.ChildService;
 public class PDFBean {
 
 	private Child childPrint;
+	private Employee employeePrint;
+	private Parent parentPrint;
 
 	/*
 	 * @PostConstruct public void init() { childPrint = new Child();
@@ -154,5 +158,21 @@ public class PDFBean {
 
 	public void setChildPrint(Child childPrint) {
 		this.childPrint = childPrint;
+	}
+
+	public Employee getEmployeePrint() {
+		return employeePrint;
+	}
+
+	public void setEmployeePrint(Employee employeePrint) {
+		this.employeePrint = employeePrint;
+	}
+
+	public Parent getParentPrint() {
+		return parentPrint;
+	}
+
+	public void setParentPrint(Parent parentPrint) {
+		this.parentPrint = parentPrint;
 	}
 }
