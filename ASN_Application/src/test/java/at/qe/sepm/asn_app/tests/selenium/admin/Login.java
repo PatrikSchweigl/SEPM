@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class Login {
 
-    public void login(WebDriver driver, String baseUrl) throws InterruptedException {
+    public static void login(WebDriver driver, String baseUrl) throws InterruptedException {
         driver.get(baseUrl + "/login.xhtml");
         driver.findElement(By.id("username")).clear();
         driver.findElement(By.id("username")).sendKeys("admin");
