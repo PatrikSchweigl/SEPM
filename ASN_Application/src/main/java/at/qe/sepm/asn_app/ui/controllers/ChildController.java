@@ -30,6 +30,8 @@ import javax.faces.context.FacesContext;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +43,7 @@ import org.springframework.transaction.TransactionSystemException;
  * on 14.04.17.
  */
 @Component
-@Scope("request")
+@Scope("view")
 public class ChildController {
 
 	@Autowired
@@ -58,6 +60,7 @@ public class ChildController {
     private LunchService lunchService;
 	private Child child;
 	private Caregiver caregiver;
+	private Date now;
 
 	private Collection<Child> children;
 	private Collection<Child> childrenParent;
@@ -92,6 +95,20 @@ public class ChildController {
     }
 	public Collection<Child> getChildrenByLunch(Lunch lunch){
 		return childService.getChildrenByLunch(lunch);
+	}
+	
+	public boolean checkBirthday(Child child){
+		Date d = new Date();
+		Date birth = new Date();
+		try {
+			birth = new SimpleDateFormat("dd/MM/yyyy").parse(child.getBirthday());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth())
+			return true;
+		return false;
 	}
 
 
@@ -170,6 +187,14 @@ public class ChildController {
 
 	public void setChildrenParent(Collection<Child> childrenParent) {
 		this.childrenParent = childrenParent;
+	}
+
+	public Date getNow() {
+		return now;
+	}
+
+	public void setNow(Date now) {
+		this.now = new Date();
 	}
 
 }

@@ -57,7 +57,7 @@
 
 												<p:accordionPanel multiple="true">
 													<p:tab title="Anwesende Kinder">
-														<p:dataTable id="childTable" var="reg"
+														<p:dataTable id="childTable" var="reg" rowStyleClass="#{childController.checkBirthday(reg.child) ? 'important' : null}"
 															value="#{registrationController.getRegistrationsByDateToday()}"
 														emptyMessage="Es sind heute keine Kinder anwesend.">
 															<p:column headerText="Vorname">
