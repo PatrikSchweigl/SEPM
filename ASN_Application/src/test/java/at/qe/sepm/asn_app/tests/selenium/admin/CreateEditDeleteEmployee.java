@@ -70,9 +70,9 @@ public class CreateEditDeleteEmployee {
     driver.findElement(By.id("employeeForm:roleCreate_2")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("employeeForm:j_idt172")).click();
-    Thread.sleep(1000);
-    driver.navigate().refresh();
-    Thread.sleep(1000);
+    Thread.sleep(5000);
+    //driver.navigate().refresh();
+    //Thread.sleep(1000);
     driver.findElement(By.id("employeeForm:employeeTable:1:j_idt143")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("employeeForm:firstnameEdit")).clear();
