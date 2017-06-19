@@ -82,7 +82,10 @@ public class CommentController{
     }
     
     public void doDeleteMessage(Comment message) {
-        this.commentService.deleteMessage(message);
+    	Comment commi = commentService.loadMessage(message.getId());
+    	System.err.println("CHHHHHHHHHHHHHHHHHHHHHH");
+    	System.err.println(commi.getComment());
+        commentService.deleteMessage(message);
         initList();
     }
 }
