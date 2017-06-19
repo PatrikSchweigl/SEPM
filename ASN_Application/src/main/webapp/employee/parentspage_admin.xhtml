@@ -32,7 +32,7 @@
 												rows="10" paginatorPosition="bottom" paginator="true"
 												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 												rowsPerPageTemplate="10,25,50" selectionMode="single"
-												selection="#{parentController.parent}"
+												selection="#{PDFBean.parentPrint}"
 												rowKey="#{parent.username}"
 												emptyMessage="Es wurden keine Eltern gefunden!">
 
@@ -150,37 +150,35 @@
 
 											<!-- More Info Dialog -->
 											<p:dialog
-												header="#{parentController.parent.firstName} #{parentController.parent.lastName}"
+												header="#{PDFBean.parentPrint.firstName} #{PDFBean.parentPrint.lastName}"
 												widgetVar="infoDialog" id="infoDialog" modal="true"
 												showEffect="fade" hideEffect="fade" resizable="false">
 												<p:outputPanel id="infosheet" style="text-align:center;">
+													<p:messages id="infoParent" autoUpdate="true" />
+
 													<p:panelGrid columns="2" columnClasses="label,value">
 														<f:facet name="header">
 															<p:graphicImage
-																name="pictures/profile_pictures/#{parentController.parent.imgName}"
+																name="pictures/profile_pictures/#{PDFBean.parentPrint.imgName}"
 																class="picture" />
 														</f:facet>
 														<h:outputText value="Wohnort:" />
-														<h:outputText value="#{parentController.parent.location}" />
+														<h:outputText value="#{PDFBean.parentPrint.location}" />
 														<h:outputText value="Straße:" />
-														<h:outputText
-															value="#{parentController.parent.streetName}" />
+														<h:outputText value="#{PDFBean.parentPrint.streetName}" />
 
 														<h:outputText value="PLZ:" />
-														<h:outputText value="#{parentController.parent.postcode}" />
+														<h:outputText value="#{PDFBean.parentPrint.postcode}" />
 														<h:outputText value="Telefonnummer" />
-														<h:outputText
-															value="#{parentController.parent.phoneNumber}" />
+														<h:outputText value="#{PDFBean.parentPrint.phoneNumber}" />
 														<h:outputText value="Emailadresse:" />
-														<h:outputText
-															value="#{parentController.parent.email}" />
+														<h:outputText value="#{PDFBean.parentPrint.email}" />
 														<h:outputText value="Familienstatus:" />
-														<h:outputText
-															value="#{parentController.parent.familyStatus}" />
+														<h:outputText value="#{PDFBean.parentPrint.familyStatus}" />
 													</p:panelGrid>
 													<p:panelGrid columns="2" style="width:100%;">
 														<p:dataList
-															value="#{parentController.getChildren(parentController.parent.username)}"
+															value="#{parentController.getChildren(PDFBean.parentPrint.username)}"
 															var="child" type="ordered">
 															<f:facet name="header">
 																Kinder
@@ -188,6 +186,10 @@
 															#{child.firstName} #{child.lastName} - (#{child.birthday})
 														</p:dataList>
 													</p:panelGrid>
+													<p:commandButton value="Stammblatt PDF" immediate="true"
+														action="#{PDFBean.createPDFParent()}" />
+													<p:commandButton value="Schließen" immediate="true"
+														onclick="PF('infoDialog').hide();" />
 												</p:outputPanel>
 											</p:dialog>
 

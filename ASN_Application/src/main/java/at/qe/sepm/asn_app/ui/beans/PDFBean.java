@@ -135,7 +135,7 @@ public class PDFBean {
 			Paragraph childCaregivers = new Paragraph(c.getFullName(), redFont);
 			PdfPCell cell10 = new PdfPCell(childCaregivers);
 			cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Bezugspersonen", catFont));
+			table.addCell(new Paragraph("Bezugsperson", catFont));
 			table.addCell(cell10);
 		}
 		Paragraph childIntolerances = new Paragraph(child.getFoodIntolerances(), redFont);
@@ -152,7 +152,12 @@ public class PDFBean {
 		document.add(table);
 		document.close();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Sie haben eine PDF Datei im Ordner Downloads erstellt.", null));
+				"Sie haben eine PDF Datei", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Stammblatt" + child.getFirstName() + child.getLastName() + ".pdf erstellt.", null));
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie befindet sich im Ordner Downloads.", null));
 	}
 
 	public void createPDFEmployee() throws DocumentException, IOException {
@@ -231,6 +236,15 @@ public class PDFBean {
 		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
 		table.addCell(cell9);
+		Paragraph parentFamily;
+		if(employee.getFamilyStatus() == null)
+			parentFamily = new Paragraph("k.A.", redFont);
+		else
+			parentFamily = new Paragraph(employee.getFamilyStatus().toString(), redFont);
+		PdfPCell cell20 = new PdfPCell(parentFamily);
+		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Familienstatus", catFont));
+		table.addCell(cell20);
 		Paragraph employeeWorkingstate;
 		if(employee.getWorkRole() == null)
 			employeeWorkingstate = new Paragraph("k.A.", redFont);
@@ -244,7 +258,116 @@ public class PDFBean {
 		document.add(table);
 		document.close();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Sie haben eine PDF Datei im Ordner Downloads erstellt.", null));
+				"Sie haben eine PDF Datei", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Stammblatt" + employee.getFirstName() + employee.getLastName() + ".pdf erstellt.", null));
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie befindet sich im Ordner Downloads.", null));
+	}
+	
+	public void createPDFParent() throws DocumentException, IOException {
+		Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD);
+		Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.NORMAL);
+
+		Parent parent = parentPrint;
+		if (parent == null) {
+			System.err.println("KANN NICHT SIENNIENIEINEI");
+			return;
+		}
+		String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + parent.getFirstName()
+				+ parent.getLastName() + ".pdf";
+		File file = new File(DEST);
+		Document document = new Document();
+		PdfWriter.getInstance(document, new FileOutputStream(file));
+		document.open();
+		String imgString = parent.getImgName();
+		System.err.println(imgString);
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		if (imgString == null || imgString.compareTo("emptypicture.png") == 0 || imgString.compareTo("") == 0) {
+			System.err.println("HEJHEJAHEY");
+			imgString = "empty_profile_pdf.png";
+		}
+		Image img = Image.getInstance("src/main/webapp/resources/pictures/profile_pictures/" + imgString);
+		img.setAlignment(Image.ALIGN_RIGHT);
+		img.scaleAbsolute(200f, 200f);
+		PdfPTable table = new PdfPTable(2);
+		table.setWidthPercentage(100);
+		Paragraph parentFirstname = new Paragraph(parent.getFirstName(), redFont);
+		PdfPCell cell = new PdfPCell(parentFirstname);
+		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(cell);
+		Paragraph parentSurname = new Paragraph(parent.getLastName(), redFont);
+		PdfPCell cell2 = new PdfPCell(parentSurname);
+		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(cell2);
+		Paragraph parentBirthday = new Paragraph(parent.getBirthday(), redFont);
+		PdfPCell cell3 = new PdfPCell(parentBirthday);
+		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Geburtsdatum", catFont));
+		table.addCell(cell3);
+		Paragraph parentLocation = new Paragraph(parent.getLocation(), redFont);
+		PdfPCell cell4 = new PdfPCell(parentLocation);
+		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Wohnort", catFont));
+		table.addCell(cell4);
+		Paragraph parentStreet = new Paragraph(parent.getStreetName(), redFont);
+		PdfPCell cell5 = new PdfPCell(parentStreet);
+		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Straße", catFont));
+		table.addCell(cell5);
+		Paragraph parentpostcode = new Paragraph(parent.getLocation(), redFont);
+		PdfPCell cell13 = new PdfPCell(parentpostcode);
+		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Postleitzahl", catFont));
+		table.addCell(cell13);
+		Paragraph parentNumber = new Paragraph(parent.getPhoneNumber(), redFont);
+		PdfPCell cell7 = new PdfPCell(parentNumber);
+		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Telefonnummer", catFont));
+		table.addCell(cell7);
+		Paragraph parentEmail = new Paragraph(parent.getEmail(), redFont);
+		PdfPCell cell11 = new PdfPCell(parentEmail);
+		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Emailadresse", catFont));
+		table.addCell(cell11);
+		Paragraph parentReligion;
+		if(parent.getReligion() == null)
+			parentReligion = new Paragraph("k.A.", redFont);
+		else
+			parentReligion = new Paragraph(parent.getReligion().toString(), redFont);
+		PdfPCell cell9 = new PdfPCell(parentReligion);
+		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
+		table.addCell(cell9);
+		Paragraph parentFamily;
+		if(parent.getFamilyStatus() == null)
+			parentFamily = new Paragraph("k.A.", redFont);
+		else
+			parentFamily = new Paragraph(parent.getFamilyStatus().toString(), redFont);
+		PdfPCell cell10 = new PdfPCell(parentFamily);
+		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Familienstatus", catFont));
+		table.addCell(cell10);
+		for (Child c : parent.getChildren()) {
+			Paragraph parentChilds = new Paragraph(c.getFullname(), redFont);
+			PdfPCell cell15 = new PdfPCell(parentChilds);
+			cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			table.addCell(new Paragraph("Kind", catFont));
+			table.addCell(cell15);
+		}
+		document.add(img);
+		document.add(table);
+		document.close();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie haben eine PDF Datei", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Stammblatt" + parent.getFirstName() + parent.getLastName() + ".pdf erstellt.", null));
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie befindet sich im Ordner Downloads.", null));
 	}
 
 	public Child getChildPrint() {
