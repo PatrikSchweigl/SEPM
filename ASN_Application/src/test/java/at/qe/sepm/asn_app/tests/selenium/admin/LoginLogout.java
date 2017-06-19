@@ -24,8 +24,7 @@ public class LoginLogout {
 
   @Test
   public void testLoginLogout() throws Exception {
-      Login login = new Login();
-      login.login(driver, baseUrl);
+      Login.login(driver, baseUrl);
       driver.findElement(By.cssSelector("a.sidebar-toggle")).click();
       Thread.sleep(1000);
       driver.findElement(By.cssSelector("a.sidebar-toggle")).click();
