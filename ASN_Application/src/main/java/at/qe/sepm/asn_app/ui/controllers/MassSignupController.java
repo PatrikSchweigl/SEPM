@@ -1,6 +1,5 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
-import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
@@ -175,7 +174,7 @@ public class MassSignupController {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Keine Anmeldung in der Vergangenheit möglich", null));
 
-            } else if (registrationConstraints.registationExists(reg)) {
+            } else if (registrationConstraints.registrationExists(reg)) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Sie haben für heute ihr Kind schon angemeldet", null));
 

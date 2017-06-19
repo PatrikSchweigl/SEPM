@@ -72,7 +72,7 @@ public class RegistrationConstraintsTest {
         saveElements();
         assertTrue(registrationConstraints.checkIfNurseryExists(registration));
         assertTrue(registrationConstraints.checkTimeConstraints(registration));
-        assertTrue(registrationConstraints.registationExists(registration));
+        assertTrue(registrationConstraints.registrationExists(registration));
         deleteElements();
     }
 
@@ -87,7 +87,7 @@ public class RegistrationConstraintsTest {
     public void testInvalidRegistrationExists() {
         //registration = InitializeRegistration.initialize();
         //registration.setChild(child);
-        assertFalse(registrationConstraints.registationExists(registration));
+        assertFalse(registrationConstraints.registrationExists(registration));
     }
 
 
