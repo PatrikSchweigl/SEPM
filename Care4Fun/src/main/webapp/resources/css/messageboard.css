@@ -1,0 +1,97 @@
+.messageboard {
+  position: relative;
+  margin: 0 0 30px 0;
+  padding: 0;
+  list-style: none;
+}
+.messageboard:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ddd;
+  left: 160px;
+  margin: 0;
+  border-radius: 2px;
+}
+.messageboard > li {
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+.messageboard > li:before,
+.messageboard > li:after {
+  content: " ";
+  display: table;
+}
+.messageboard > li:after {
+  clear: both;
+}
+.messageboard > li > .messageboard-item {
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  margin-top: 0;
+  background: #f8f8f8;
+  color: #444;
+  margin-left: 200px;
+  margin-right: 200px;
+  padding: 0;
+  position: relative;
+}
+.messageboard > li > .messageboard-item > .time {
+  color: #999;
+  float: right;
+  font-size: 12px;
+  bottom: 10px;
+}
+.messageboard > li > .messageboard-item > .messageboard-header {
+  margin: 0;
+  color: #555;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.1;
+}
+.messageboard > li > .messageboard-item > .messageboard-header > a {
+  font-weight: 600;
+}
+.messageboard > li > .messageboard-item > .messageboard-body,
+.messageboard > li > .messageboard-item > .messageboard-footer {
+  padding: 10px;
+}
+.messageboard.delete{
+
+}
+.bg-gray {
+    color: #000;
+    background-color: #d2d6de !important;
+      width: 30px;
+  height: 30px;
+  font-size: 15px;
+  line-height: 30px;
+  position: absolute;
+  color: #666;
+  background: #d2d6de;
+  border-radius: 50%;
+  text-align: center;
+  right: 5px;
+  bottom: 5px
+}
+.messageboard > .time-label > span {
+  font-weight: 600;
+  padding: 5px;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.messageboard-inverse > li > .messageboard-item {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.messageboard-inverse > li > .messageboard-item > .messageboard-header {
+  border-bottom-color: #ddd;
+}
