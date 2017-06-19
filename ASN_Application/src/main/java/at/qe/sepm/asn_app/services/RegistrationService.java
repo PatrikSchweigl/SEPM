@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -68,5 +65,13 @@ public class RegistrationService {
 
     public Registration loadRegistration(Long id){
         return registrationRepository.findOne(id);
+    }
+
+    public List<Registration> getRegistrationInTimeWindowIE(Date start, Date end){
+        return registrationRepository.getRegistrationInTimeWindowIE(start, end);
+    }
+
+    public List<Registration> getRegistrationInTimeWindowII(Date start, Date end){
+        return registrationRepository.getRegistrationInTimeWindowII(start, end);
     }
 }

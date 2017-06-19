@@ -79,11 +79,7 @@ public class LunchController {
 		if (!thisWeekFlag) {
 			LocalDate now = LocalDate.now();
 
-			int x = 0;
-			if(now.getDayOfWeek().getValue() > 5){
-				x = 1;
-			}
-			Date[] dates = DateUtils.getWeek(x);
+			Date[] dates = DateUtils.getWeek(0);
 
 			for (Date s : dates) {
 				if (ret == null) {
@@ -120,11 +116,8 @@ public class LunchController {
 		if (!nextWeekFlag) {
 			LocalDate now = LocalDate.now();
 
-			int x = 1;
-			if(now.getDayOfWeek().getValue() > 5){
-				x = 2;
-			}
-			Date[] dates = DateUtils.getWeek(x);
+
+			Date[] dates = DateUtils.getWeek(1);
 
 			for (Date s : dates) {
 				if (ret == null) {

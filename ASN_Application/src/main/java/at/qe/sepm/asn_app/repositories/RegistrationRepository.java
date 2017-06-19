@@ -18,4 +18,10 @@ public interface RegistrationRepository extends AbstractRepository<Registration,
 
     @Query("SELECT r FROM Registration r WHERE r.date = :date")
     List<Registration> getRegistrationsByDate(@Param("date") Date date);
+
+    @Query("SELECT r from Registration r WHERE ((DATE(r.date) < DATE(:end)) AND (DATE(r.date) >= DATE(:start)))")
+    List<Registration> getRegistrationInTimeWindowIE(@Param("start") Date start, @Param("end") Date end);
+
+    @Query("SELECT r from Registration r WHERE ((DATE(r.date) <= DATE(:end)) AND (DATE(r.date) >= DATE(:start)))")
+    List<Registration> getRegistrationInTimeWindowII(@Param("start") Date start, @Param("end") Date end);
 }
