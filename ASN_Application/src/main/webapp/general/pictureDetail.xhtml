@@ -8,9 +8,9 @@
 	template="/WEB-INF/templates/main.xhtml"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 	<ui:fragment name="metadata">
-	<f:metadata>
-		<f:viewParam name="picture" value="#{fileBean.selectedPicture}" />
-	</f:metadata>
+		<f:metadata>
+			<f:viewParam name="picture" value="#{fileBean.selectedPicture}" />
+		</f:metadata>
 	</ui:fragment>
 	<ui:define name="content">
 		<h:body>
@@ -53,7 +53,7 @@
 																			rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
 																			<div align="right">
 																				<p:commandLink
-																					action="#{commentController.doDeleteMessage(message)}"
+																					action="#{commentController.doDeleteMessage(message)}" immediate="true"
 																					icon="ui-icon-trash" title="Kommentar löschen"
 																					update=":messages">
 																					<span class="time"> <i
@@ -75,6 +75,15 @@
 												</ui:repeat>
 
 											</ul>
+											<p:confirmDialog global="true" showEffect="fade"
+												hideEffect="fade" width="300">
+												<p:commandButton value="Ja" type="button"
+													styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+												<p:commandButton value="Nein" type="button"
+													styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+											</p:confirmDialog>
+
+
 											<p:dialog header="Kommentar schreiben" id="commentAddDialog"
 												widgetVar="commentAddDialog" modal="true" showEffect="fade"
 												hideEffect="fade" resizable="false">
