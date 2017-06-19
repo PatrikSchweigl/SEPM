@@ -103,6 +103,7 @@ public class EmployeeController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
         } else {
             try {
+            	employee.setImgName("emptypicture.png");
                 employee = employeeService.saveEmployee(employee);
                 mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Registrierung",
                         "Willkommen bei Care4Fun-Application!\n\n" +
