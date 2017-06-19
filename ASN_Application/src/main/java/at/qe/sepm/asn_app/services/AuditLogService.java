@@ -22,7 +22,7 @@ public class AuditLogService {
     public AuditLog loadAuditLog(Long id) {
         return auditLogRepository.findOne(id);
     }
-
+    //method to delete auditLog
     public void deleteAuditLog(AuditLog auditLog) {
         auditLogRepository.delete(auditLog);
     }
