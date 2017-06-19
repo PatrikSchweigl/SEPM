@@ -16,6 +16,7 @@
 						<!-- =============================================== -->
 						<div class="content-wrapper" style="min-height: 1126px;">
 							<section class="content">
+
 								<f:metadata>
 									<f:viewParam name="picture" value="#{fileBean.selectedPicture}" />
 								</f:metadata>
@@ -24,6 +25,10 @@
 										<div align="left" style="margin-bottom: 10px;">
 											<p:commandButton oncomplete="PF('commentAddDialog').show()" rendered="#{!sessionInfoBean.inactiveParent}"
 												value="Kommentar hinzufügen" style="align-items:right;"></p:commandButton>
+											<p:button
+													outcome="/general/picturegalery.xhtml"
+													value="Zurück zur Bildergalerie">
+											</p:button>
 										</div>
 										<h:graphicImage class="picture-center"
 											name="pictures/gallery/#{fileBean.selectedPicture}"
