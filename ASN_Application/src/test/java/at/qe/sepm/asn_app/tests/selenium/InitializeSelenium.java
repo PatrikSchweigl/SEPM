@@ -16,8 +16,14 @@ public class InitializeSelenium {
             case "gecko":
                 System.setProperty("webdriver.gecko.driver", "geckodriver");
                 return new FirefoxDriver();
+            case "geckoWin":
+                System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+                return new FirefoxDriver();
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+                return new ChromeDriver();
+            case "chromeWin":
+                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
                 return new ChromeDriver();
             default: return null;
         }
