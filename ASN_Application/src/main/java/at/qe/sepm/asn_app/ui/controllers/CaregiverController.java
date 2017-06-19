@@ -25,7 +25,7 @@ import java.util.Collection;
 
 @Component
 //@Scope("view")
-@Scope("application")
+@Scope("view")
 public class CaregiverController {
 
     @Autowired

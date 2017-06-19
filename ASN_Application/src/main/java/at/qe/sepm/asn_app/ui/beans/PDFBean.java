@@ -36,6 +36,7 @@ public class PDFBean {
 	private Child childPrint;
 	private Employee employeePrint;
 	private Parent parentPrint;
+	private Caregiver caregiverPrint;
 
 	/*
 	 * @PostConstruct public void init() { childPrint = new Child();
@@ -155,7 +156,6 @@ public class PDFBean {
 				"Sie haben eine PDF Datei", null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 			"Stammblatt" + child.getFirstName() + child.getLastName() + ".pdf erstellt.", null));
-
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Sie befindet sich im Ordner Downloads.", null));
 	}
@@ -261,7 +261,6 @@ public class PDFBean {
 				"Sie haben eine PDF Datei", null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 			"Stammblatt" + employee.getFirstName() + employee.getLastName() + ".pdf erstellt.", null));
-
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Sie befindet sich im Ordner Downloads.", null));
 	}
@@ -365,7 +364,73 @@ public class PDFBean {
 				"Sie haben eine PDF Datei", null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 			"Stammblatt" + parent.getFirstName() + parent.getLastName() + ".pdf erstellt.", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie befindet sich im Ordner Downloads.", null));
+	}
+	
+	public void createPDFCaregiver() throws DocumentException, IOException {
+		Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD);
+		Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.NORMAL);
 
+		Caregiver caregiver = caregiverPrint;
+		if (caregiver == null) {
+			System.err.println("KANN NICHT SIENNIENIEINEI");
+			return;
+		}
+		String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + caregiver.getFirstName()
+				+ caregiver.getLastName() + ".pdf";
+		File file = new File(DEST);
+		Document document = new Document();
+		PdfWriter.getInstance(document, new FileOutputStream(file));
+		document.open();
+		String imgString = caregiver.getImgName();
+		System.err.println(imgString);
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		if (imgString == null || imgString.compareTo("emptypicture.png") == 0 || imgString.compareTo("") == 0) {
+			System.err.println("HEJHEJAHEY");
+			imgString = "empty_profile_pdf.png";
+		}
+		Image img = Image.getInstance("src/main/webapp/resources/pictures/profile_pictures_caregiver/" + imgString);
+		img.setAlignment(Image.ALIGN_RIGHT);
+		img.scaleAbsolute(200f, 200f);
+		PdfPTable table = new PdfPTable(2);
+		table.setWidthPercentage(100);
+		Paragraph careFirstname = new Paragraph(caregiver.getFirstName(), redFont);
+		PdfPCell cell = new PdfPCell(careFirstname);
+		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(cell);
+		Paragraph careSurname = new Paragraph(caregiver.getLastName(), redFont);
+		PdfPCell cell2 = new PdfPCell(careSurname);
+		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(cell2);
+		Paragraph carePhone = new Paragraph(caregiver.getPhoneNumber(), redFont);
+		PdfPCell cell3 = new PdfPCell(carePhone);
+		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Telefonnummer", catFont));
+		table.addCell(cell3);
+		Paragraph careChild = new Paragraph(caregiver.getChild().getFullname(), redFont);
+		PdfPCell cell4 = new PdfPCell(careChild);
+		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Kind", catFont));
+		table.addCell(cell4);
+		Paragraph careElig;
+		if(caregiver.getEligible() == false)
+			careElig = new Paragraph("Nein", redFont);
+		else
+			careElig = new Paragraph("Ja", redFont);
+		PdfPCell cell5 = new PdfPCell(careElig);
+		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Bestätigt", catFont));
+		table.addCell(cell5);
+		document.add(img);
+		document.add(table);
+		document.close();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie haben eine PDF Datei", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Stammblatt" + caregiver.getFirstName() + caregiver.getLastName() + ".pdf erstellt.", null));
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Sie befindet sich im Ordner Downloads.", null));
 	}
@@ -392,5 +457,13 @@ public class PDFBean {
 
 	public void setParentPrint(Parent parentPrint) {
 		this.parentPrint = parentPrint;
+	}
+
+	public Caregiver getCaregiverPrint() {
+		return caregiverPrint;
+	}
+
+	public void setCaregiverPrint(Caregiver caregiverPrint) {
+		this.caregiverPrint = caregiverPrint;
 	}
 }
