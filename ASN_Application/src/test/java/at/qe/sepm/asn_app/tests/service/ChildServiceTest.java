@@ -12,6 +12,8 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
+import at.qe.sepm.asn_app.tests.initialize.InitializeSibling;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
@@ -33,9 +35,7 @@ import javax.faces.context.FacesContext;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -149,6 +149,80 @@ public class ChildServiceTest {
         // Delete the parent again.
         parentService.deleteParent(parent1);
         parentService.deleteParent(parent2);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        Set<String> allergies = new HashSet<>();
+        String birthday = "22/05/2015";
+        Set<Caregiver> caregivers = new HashSet<>();
+        Custody custody = Custody.VATER;
+        String emergencyNumber = "53ß45435239802";
+        String firstName = "ChildFirstName";
+        Set<String> foodIntolerances = new HashSet<>();
+        Gender gender = Gender.ANDERES;
+        String imgName = "ChildImgName";
+        String lastName = "ChildLastName";
+        Religion religion = Religion.ISLAM;
+        Sibling sibling = InitializeSibling.initialize1();
+        Set<Sibling> siblings = new HashSet<>();
+
+        // Set attributes
+        child = new Child();
+        //child.setAllergies(allergies);
+        child.setBirthday(birthday);
+        child.setCaregivers(caregivers);
+        child.setCustody(custody);
+        child.setEmergencyNumber(emergencyNumber);
+        child.setFirstName(firstName);
+        //child.setFoodIntolerances(foodIntolerances);
+        child.setGender(gender);
+        child.setImgName(imgName);
+        child.setLastName(lastName);
+        child.setPrimaryParent(parent1);
+        child.setParent2(parent2);
+        child.setReligion(religion);
+        child.setSiblings(siblings);
+        child.addSibling(sibling);
+
+        // Compare attributes with getter
+        assertEquals(birthday, child.getBirthday());
+        assertEquals(caregivers, child.getCaregivers());
+        assertEquals(custody, child.getCustody());
+        assertEquals(emergencyNumber, child.getEmergencyNumber());
+        assertEquals(firstName + " " + lastName, child.getFullname());
+        assertEquals(firstName, child.getFirstName());
+        assertEquals(gender, child.getGender());
+        assertEquals(imgName, child.getImgName());
+        assertEquals(lastName, child.getLastName());
+        assertEquals(parent1, child.getPrimaryParent());
+        assertEquals(parent1.getFirstName() + " " + parent1.getLastName(), child.getPrimaryParentFullName());
+        assertEquals(parent2, child.getParent2());
+        assertEquals(religion, child.getReligion());
+        assertEquals(siblings, child.getSiblings());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotEquals("", child.toString());
+
+        // Test isNew()
+        assertFalse(child.isNew());
+
+        child = new Child();
+        child.setFirstName("ChildIsNewFirstName");
+        assertFalse(child.isNew());
+
+        child = new Child();
+        child.setLastName("ChildIsNewLastName");
+        assertFalse(child.isNew());
+
+        child = new Child();
+        assertTrue(child.isNew());
     }
 
 

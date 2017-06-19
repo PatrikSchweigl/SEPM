@@ -19,7 +19,6 @@ public class InitializeChild {
 
     public static Child initialize() {
         Parent parent1 = InitializeParent.initialize1();
-
         Parent parent2 = InitializeParent.initialize2();
 
         Set<String> allergies = new HashSet<>();

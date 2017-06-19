@@ -32,7 +32,7 @@ public class AuditLog implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     @NotNull
     private String userName;
     @NotNull
@@ -81,12 +81,45 @@ public class AuditLog implements Persistable<Long> {
 
     @Override
     public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
 
     @Override
     public boolean isNew() {
         return (null == userName);
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof AuditLog)) {
+            return false;
+        }
+
+        AuditLog other = (AuditLog) obj;
+        if (id.equals(other.id)) {
+            return true;
+        }
+
+        return (date.getYear() == other.date.getYear() &&
+                date.getMonth() == other.date.getMonth() &&
+                date.getDay() == other.date.getDay() &&
+                log.equals(other.log) &&
+                userName.equals(other.userName));
+    }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n" +
+                "Log: " + log + "\n" +
+                "Username: " + userName;
     }
 }

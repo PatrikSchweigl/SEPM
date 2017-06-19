@@ -32,9 +32,7 @@ import javax.faces.context.FacesContext;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -123,12 +121,13 @@ public class CaregiverServiceTest {
         child.setCaregivers(caregivers);
 
         caregiver = new Caregiver();
+        caregiver.setEligible(true);
         caregiver.setFirstName("CaregiverFirstName1");
         caregiver.setLastName("CaregiverLastName1");
         caregiver.setRelationship(Relationship.AUNT_UNCLE);
         caregiver.setImgName("CaregiverImgName1");
         caregiver.setPhoneNumber("0123456789");
-        //caregiver.setChild(child);
+        caregiver.setChild(child);
     }
 
 
@@ -168,6 +167,59 @@ public class CaregiverServiceTest {
         // Delete the parent again.
         parentService.deleteParent(parent1);
         parentService.deleteParent(parent2);
+    }
+
+
+    @Test
+    public void testSetterGetter() {
+        // Initialize attributes
+        boolean eligible = true;
+        String firstName = "CaregiverFirstName";
+        String lastName = "CaregiverLastName";
+        Relationship relationship = Relationship.GRANDPARENT;
+        String imgName = "CaregiverImgName";
+        String phoneNumber = "27851508914598";
+
+        // Set attributes
+        caregiver.setEligible(eligible);
+        caregiver.setFirstName(firstName);
+        caregiver.setLastName(lastName);
+        caregiver.setRelationship(relationship);
+        caregiver.setImgName(imgName);
+        caregiver.setPhoneNumber(phoneNumber);
+
+        // Compare attributes with getter
+        assertEquals(eligible, caregiver.getEligible());
+        assertEquals(child, caregiver.getChild());
+        assertEquals(firstName, caregiver.getFirstName());
+        assertEquals(lastName + " " + firstName, caregiver.getFullName());
+        assertEquals(lastName, caregiver.getLastName());
+        assertEquals(relationship, caregiver.getRelationship());
+        assertEquals(imgName, caregiver.getImgName());
+        assertEquals(phoneNumber, caregiver.getPhoneNumber());
+    }
+
+
+    @Test
+    public void testFurtherMethods() {
+        // Print all information with toString();
+        assertNotEquals("", caregiver.toString());
+        System.out.println(caregiver.toString());
+
+
+        // Test isNew()
+        assertFalse(caregiver.isNew());
+
+        caregiver = new Caregiver();
+        caregiver.setFirstName("CaregiverIsNewFirstName");
+        assertFalse(caregiver.isNew());
+
+        caregiver = new Caregiver();
+        caregiver.setLastName("CaregiverIsNewLastName");
+        assertFalse(caregiver.isNew());
+
+        caregiver = new Caregiver();
+        assertTrue(caregiver.isNew());
     }
 
 
