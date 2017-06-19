@@ -41,7 +41,7 @@ import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 
 @Component
-@Scope("request")
+@Scope("view")
 public class FileBean {
 	@Autowired
 	private PictureService pictureService;
