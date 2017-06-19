@@ -27,7 +27,6 @@ public class CreateAndDeleteEmployee {
 
   @Test
   public void testCreateAndDeleteEmployee() throws Exception {
-    //driver.get(baseUrl + "/admin/mainpage_admin.xhtml");
     Login.login(driver, baseUrl);
     driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[3]/a/i")).click();
     Thread.sleep(1000);
