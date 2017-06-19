@@ -52,12 +52,21 @@ public class Lunch implements Persistable<Long> {
     }
     public Lunch(){}
 
+    /** addChild
+     *  adds child to lunch
+     * @param id Child or Long (id)
+     */
     public void addChild(Long id){
         childrenIds.add(id);
     }
     public void addChild(Child c){
         addChild(c.getId());
     }
+
+    /** removeChild
+     *  removes a child from lunch
+     * @param id Child or Long(id)
+     */
 
     public void removeChild(Long id){
         childrenIds.remove(id);

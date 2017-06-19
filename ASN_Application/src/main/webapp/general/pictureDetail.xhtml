@@ -7,6 +7,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/main.xhtml"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	<ui:fragment name="metadata">
+	<f:metadata>
+		<f:viewParam name="picture" value="#{fileBean.selectedPicture}" />
+	</f:metadata>
+	</ui:fragment>
 	<ui:define name="content">
 		<h:body>
 			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
@@ -16,79 +21,77 @@
 						<!-- =============================================== -->
 						<div class="content-wrapper" style="min-height: 1126px;">
 							<section class="content">
-
-								<f:metadata>
-									<f:viewParam name="picture" value="#{fileBean.selectedPicture}" />
-								</f:metadata>
 								<div class="box">
 									<div class="box-body">
 										<div align="left" style="margin-bottom: 10px;">
-											<p:commandButton oncomplete="PF('commentAddDialog').show()" rendered="#{!sessionInfoBean.inactiveParent}"
+											<p:commandButton oncomplete="PF('commentAddDialog').show()"
+												rendered="#{!sessionInfoBean.inactiveParent}"
 												value="Kommentar hinzufügen" style="align-items:right;"></p:commandButton>
-											<p:button
-													outcome="/general/picturegalery.xhtml"
-													value="Zurück zur Bildergalerie">
+											<p:button outcome="/general/picturegalery.xhtml"
+												value="Zurück zur Bildergalerie">
 											</p:button>
 										</div>
 										<h:graphicImage class="picture-center"
 											name="pictures/gallery/#{fileBean.selectedPicture}"
 											id="tiger" />
 										<h:form id="messages">
-												<ul class="messageboard">
-													<ui:repeat var="message"
-														value="#{commentController.getAllCommentsByPicture(fileBean.selectedPicture)}">
-														<li>
-															<div class="messageboard-item">
-																<span class="time"> <i class="fa fa-clock-o"></i>
-																	#{message.formattedDate}
-																</span>
-																<div class="messageboard-body">
-																	<blockquote class="rectangle-speech-border">
-																		<h3>#{message.username} schrieb:</h3>
+											<ul class="messageboard">
+												<ui:repeat var="message"
+													value="#{commentController.getAllCommentsByPicture(fileBean.selectedPicture)}">
+													<li>
+														<div class="messageboard-item">
+															<span class="time"> <i class="fa fa-clock-o"></i>
+																#{message.formattedDate}
+															</span>
+															<div class="messageboard-body">
+																<blockquote class="rectangle-speech-border">
+																	<h3>#{message.username} schrieb:</h3>
 
-																		<div class="text">
-																			<p>#{message.comment}</p>
-																			<ui:fragment
-																				rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
-																				<div align="right">
-																					<p:commandLink
-																						action="#{commentController.doDeleteMessage(message)}"
-																						icon="ui-icon-trash" title="Kommentar löschen"
-																						update=":messages">
-																						<span class="time"> <i
-																							class="fa fa-trash-o bg-gray"></i>
-																						</span>
-																						<p:confirm header="Bestätigung"
-																							message="Sind Sie sicher, dass Sie die Nachricht löschen wollen? Dies lässt sich nicht rückgängig machen."
-																							icon="ui-icon-alert" />
-																					</p:commandLink>
+																	<div class="text">
+																		<p>#{message.comment}</p>
+																		<ui:fragment
+																			rendered="#{message.username eq sessionInfoBean.currentUserData.username}">
+																			<div align="right">
+																				<p:commandLink
+																					action="#{commentController.doDeleteMessage(message)}"
+																					icon="ui-icon-trash" title="Kommentar löschen"
+																					update=":messages">
+																					<span class="time"> <i
+																						class="fa fa-trash-o bg-gray"></i>
+																					</span>
+																					<p:confirm header="Bestätigung"
+																						message="Sind Sie sicher, dass Sie die Nachricht löschen wollen? Dies lässt sich nicht rückgängig machen."
+																						icon="ui-icon-alert" />
+																				</p:commandLink>
 
-																				</div>
-																			</ui:fragment>
-																		</div>
-																	</blockquote>
+																			</div>
+																		</ui:fragment>
+																	</div>
+																</blockquote>
 
-																</div>
 															</div>
-														</li>
-													</ui:repeat>
+														</div>
+													</li>
+												</ui:repeat>
 
-												</ul>
-												<p:dialog header="Kommentar schreiben" id="commentAddDialog"
-													widgetVar="commentAddDialog" modal="true" showEffect="fade"
-													hideEffect="fade" resizable="false">
-													<p:inputTextarea id="messageInput"
-														value="#{commentController.message.comment}" rows="5"
-														cols="30" counter="display" maxlength="200"
-														counterTemplate="{0} Zeichen übrig." autoResize="false" required="true" requiredMessage="Nachricht fehlt" />
-													<p:separator />
-													<h:outputText id="display" />
-													<p:separator />
-													<p:commandButton id="button" value="Senden"
-														action="#{commentController.doSaveMessage}"
-														oncomplete="if (args &amp;&amp; !args.validationFailed) PF('commentAddDialog').hide()" update=":messages" />
-												</p:dialog>
-											</h:form>
+											</ul>
+											<p:dialog header="Kommentar schreiben" id="commentAddDialog"
+												widgetVar="commentAddDialog" modal="true" showEffect="fade"
+												hideEffect="fade" resizable="false">
+												<p:inputTextarea id="messageInput"
+													value="#{commentController.message.comment}" rows="5"
+													cols="30" counter="display" maxlength="200"
+													counterTemplate="{0} Zeichen übrig." autoResize="false"
+													required="true" requiredMessage="Nachricht fehlt" />
+												<p:separator />
+												<h:outputText id="display" />
+												<p:separator />
+												<p:commandButton id="button" value="Senden"
+													action="#{commentController.doSaveMessage}"
+													oncomplete="if (args &amp;&amp; !args.validationFailed) PF('commentAddDialog').hide()"
+													update=":messages" />
+											</p:dialog>
+										</h:form>
 									</div>
 								</div>
 								<!-- /.box -->
