@@ -32,7 +32,7 @@
 												<p:tab title="Anwesende Kinder in diesem Kalenderjahr">
 													<h:form id="childTableForm">
 													<p:dataTable id="childTable" var="reg" widgetVar="childTable"
-														value="#{registrationController.getAllRegistrationsYear()}"
+														value="#{registrationController.allRegistrationsYear}"
 														paginator="true" paginatorPosition="bottom"
 														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 														 emptyMessage="Es sind in diesem Jahr keine Kinder angemeldet!">
