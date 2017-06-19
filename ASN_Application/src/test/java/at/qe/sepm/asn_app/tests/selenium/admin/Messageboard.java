@@ -70,7 +70,7 @@ public class Messageboard {
     Thread.sleep(1000);
     driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
     Thread.sleep(1000);
-    driver.findElement(By.linkText("Pinnwand")).click();
+    driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[4]/a/i")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("j_idt117")).click();
     Thread.sleep(1000);
