@@ -175,6 +175,7 @@ public class ScheduleView implements Serializable {
 			Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
 			Set<Child> arr = p.getChildren();
 			for (Lunch l : lunchs) {
+				if(l.getDate().compareTo(new Date()) > 0){
 				for (Child c : arr) {
 					if (l.getChildrenIds().contains(c.getId())) {
 						DefaultScheduleEvent ev;
@@ -183,6 +184,7 @@ public class ScheduleView implements Serializable {
 								l.getDate(), l.getDate(), "meal");
 						eventModel.addEvent(ev);
 					}
+				}
 				}
 			}
 		}
