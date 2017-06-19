@@ -347,6 +347,7 @@
 												widgetVar="infoDialog" id="infoDialog" modal="true"
 												showEffect="fade" hideEffect="fade" resizable="false">
 												<p:outputPanel id="infosheet" style="text-align:center;">
+													<p:messages id="infoEmp" autoUpdate="true" />
 													<p:panelGrid columns="2" columnClasses="label,value">
 														<f:facet name="header">
 															<p:graphicImage
@@ -371,8 +372,14 @@
 														<h:outputText value="#{PDFBean.employeePrint.workRole}" />
 
 													</p:panelGrid>
+													<p:commandButton value="Stammblatt PDF"
+														immediate="true"
+														action="#{PDFBean.createPDFEmployee()}" />
+													<p:commandButton value="Schließen"
+														onclick="PF('infoDialog').hide();" />
 												</p:outputPanel>
 											</p:dialog>
+
 
 											<p:confirmDialog global="true" showEffect="fade"
 												hideEffect="fade" width="300">

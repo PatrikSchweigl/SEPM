@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -53,22 +55,20 @@ public class PDFBean {
 			System.err.println("KANN NICHT SIENNIENIEINEI");
 			return;
 		}
-		String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + child.getFirstName() + child.getLastName() + ".pdf";
+		String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + child.getFirstName() + child.getLastName()
+				+ ".pdf";
 		File file = new File(DEST);
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(file));
 		document.open();
 		String imgString = child.getImgName();
 		System.err.println(imgString);
-        System.out.println("Working Directory = " +
-                System.getProperty("user.dir"));
-		if (imgString == null || imgString.compareTo("emptypicture.png") == 0 || imgString.compareTo("") == 0){
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		if (imgString == null || imgString.compareTo("emptypicture.png") == 0 || imgString.compareTo("") == 0) {
 			System.err.println("HEJHEJAHEY");
 			imgString = "empty_profile_pdf.png";
 		}
-		Image img =
-		Image.getInstance("src/main/webapp/resources/pictures/profile_pictures_children/"
-		+ imgString);
+		Image img = Image.getInstance("src/main/webapp/resources/pictures/profile_pictures_children/" + imgString);
 		img.setAlignment(Image.ALIGN_RIGHT);
 		img.scaleAbsolute(200f, 200f);
 		PdfPTable table = new PdfPTable(2);
@@ -88,20 +88,21 @@ public class PDFBean {
 		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell(new Paragraph("Geburtsdatum", catFont));
 		table.addCell(cell3);
-		if (child.getGender() != null) {
-			Paragraph childGender = new Paragraph(child.getGender().toString(), redFont);
-			PdfPCell cell4 = new PdfPCell(childGender);
-			cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Geschlecht", catFont));
-			table.addCell(cell4);
-		}
-		if (child.getReligion() != null) {
-			Paragraph childReligion = new Paragraph(child.getReligion().toString(), redFont);
-			PdfPCell cell9 = new PdfPCell(childReligion);
-			cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Religionsbekenntnis", catFont));
-			table.addCell(cell9);
-		}
+		Paragraph childGender = new Paragraph(child.getGender().toString(), redFont);
+		PdfPCell cell4 = new PdfPCell(childGender);
+		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Geschlecht", catFont));
+		table.addCell(cell4);
+		Paragraph childReligion;
+		if(child.getReligion() == null)
+			childReligion = new Paragraph("k.A.", redFont);
+		else
+			childReligion = new Paragraph(child.getReligion().toString(), redFont);
+		
+		PdfPCell cell9 = new PdfPCell(childReligion);
+		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
+		table.addCell(cell9);
 		Paragraph childParent1 = new Paragraph(child.getPrimaryParentFullName(), redFont);
 		PdfPCell cell5 = new PdfPCell(childParent1);
 
@@ -150,6 +151,100 @@ public class PDFBean {
 		document.add(img);
 		document.add(table);
 		document.close();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie haben eine PDF Datei im Ordner Downloads erstellt.", null));
+	}
+
+	public void createPDFEmployee() throws DocumentException, IOException {
+		Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD);
+		Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.NORMAL);
+
+		Employee employee = employeePrint;
+		if (employee == null) {
+			System.err.println("KANN NICHT SIENNIENIEINEI");
+			return;
+		}
+		String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + employee.getFirstName()
+				+ employee.getLastName() + ".pdf";
+		File file = new File(DEST);
+		Document document = new Document();
+		PdfWriter.getInstance(document, new FileOutputStream(file));
+		document.open();
+		String imgString = employee.getImgName();
+		System.err.println(imgString);
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		if (imgString == null || imgString.compareTo("emptypicture.png") == 0 || imgString.compareTo("") == 0) {
+			System.err.println("HEJHEJAHEY");
+			imgString = "empty_profile_pdf.png";
+		}
+		Image img = Image.getInstance("src/main/webapp/resources/pictures/profile_pictures/" + imgString);
+		img.setAlignment(Image.ALIGN_RIGHT);
+		img.scaleAbsolute(200f, 200f);
+		PdfPTable table = new PdfPTable(2);
+		table.setWidthPercentage(100);
+		Paragraph employeeFirstname = new Paragraph(employee.getFirstName(), redFont);
+		PdfPCell cell = new PdfPCell(employeeFirstname);
+		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(cell);
+		Paragraph employeeSurname = new Paragraph(employee.getLastName(), redFont);
+		PdfPCell cell2 = new PdfPCell(employeeSurname);
+		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(cell2);
+		Paragraph employeeBirthday = new Paragraph(employee.getBirthday(), redFont);
+		PdfPCell cell3 = new PdfPCell(employeeBirthday);
+		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Geburtsdatum", catFont));
+		table.addCell(cell3);
+		Paragraph employeeLocation = new Paragraph(employee.getLocation(), redFont);
+		PdfPCell cell4 = new PdfPCell(employeeLocation);
+		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Wohnort", catFont));
+		table.addCell(cell4);
+		Paragraph employeeStreet = new Paragraph(employee.getStreetName(), redFont);
+		PdfPCell cell5 = new PdfPCell(employeeStreet);
+		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Straße", catFont));
+		table.addCell(cell5);
+		Paragraph employeepostcode = new Paragraph(employee.getLocation(), redFont);
+		PdfPCell cell13 = new PdfPCell(employeepostcode);
+		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Postleitzahl", catFont));
+		table.addCell(cell13);
+		Paragraph employeeNumber = new Paragraph(employee.getPhoneNumber(), redFont);
+		PdfPCell cell7 = new PdfPCell(employeeNumber);
+		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Telefonnummer", catFont));
+		table.addCell(cell7);
+		Paragraph employeeEmail = new Paragraph(employee.getEmail(), redFont);
+		PdfPCell cell11 = new PdfPCell(employeeEmail);
+		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Emailadresse", catFont));
+		table.addCell(cell11);
+		Paragraph employeeReligion;
+		if(employee.getReligion() == null)
+			employeeReligion = new Paragraph("k.A.", redFont);
+		else
+			employeeReligion = new Paragraph(employee.getReligion().toString(), redFont);
+		PdfPCell cell9 = new PdfPCell(employeeReligion);
+		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
+		table.addCell(cell9);
+		Paragraph employeeWorkingstate;
+		if(employee.getWorkRole() == null)
+			employeeWorkingstate = new Paragraph("k.A.", redFont);
+		else
+			employeeWorkingstate = new Paragraph(employee.getWorkRole().toString(), redFont);
+		PdfPCell cell10 = new PdfPCell(employeeWorkingstate);
+		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Arbeitsstatus", catFont));
+		table.addCell(cell10);
+		document.add(img);
+		document.add(table);
+		document.close();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Sie haben eine PDF Datei im Ordner Downloads erstellt.", null));
 	}
 
 	public Child getChildPrint() {

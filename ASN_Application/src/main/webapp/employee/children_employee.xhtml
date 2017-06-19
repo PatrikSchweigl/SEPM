@@ -14,7 +14,9 @@
 						<section class="content">
 							<div class="box">
 								<div class="box-body">
-									<div align="left" style="margin-left: 10px;"><h1>Alle Kinder</h1></div>
+									<div align="left" style="margin-left: 10px;">
+										<h1>Alle Kinder</h1>
+									</div>
 									<div align="right" style="margin-bottom: 10px;">
 										<p:commandButton oncomplete="PF('childAddDialog').show()"
 											value="Kind hinzufügen" style="align-items:right;"></p:commandButton>
@@ -169,6 +171,7 @@
 											header="#{PDFBean.childPrint.firstName} #{PDFBean.childPrint.lastName}"
 											widgetVar="infoDialog" id="infoDialog" modal="true"
 											showEffect="fade" hideEffect="fade" resizable="false">
+											<p:messages id="infoChild" autoUpdate="true" />
 											<p:outputPanel id="infosheet" style="text-align:center;">
 												<p:panelGrid columns="2" columnClasses="label,value">
 													<f:facet name="header">
@@ -181,32 +184,34 @@
 													<h:outputText value="#{PDFBean.childPrint.birthday}" />
 
 													<h:outputText value="Geschlecht:" />
-													<h:outputText
-														value="#{PDFBean.childPrint.gender}" />
+													<h:outputText value="#{PDFBean.childPrint.gender}" />
 
 													<h:outputText value="Bekenntnis:" />
-													<h:outputText
-														value="#{PDFBean.childPrint.religion}" />
+													<h:outputText value="#{PDFBean.childPrint.religion}" />
 												</p:panelGrid>
 												<p:panelGrid columns="1" style="width:100%;">
-													<p:dataList value="#{PDFBean.childPrint.caregivers}" emptyMessage="Keine Bezugspersonen vorhanden!"
-														var="care" type="ordered">
+													<p:dataList value="#{PDFBean.childPrint.caregivers}"
+														emptyMessage="Keine Bezugspersonen vorhanden!" var="care"
+														type="ordered">
 														<f:facet name="header">
 																Bezugspersonen
 															</f:facet>
 															#{care.firstName} #{care.lastName})
 														</p:dataList>
-													<p:dataList value="#{PDFBean.childPrint.siblings}" emptyMessage="Keine Geschwister gefunden!"
-														var="sib" type="ordered">
+													<p:dataList value="#{PDFBean.childPrint.siblings}"
+														emptyMessage="Keine Geschwister gefunden!" var="sib"
+														type="ordered">
 														<f:facet name="header">
 																Geschwister
 															</f:facet>
 															#{sib.firstName} #{sib.lastName} - #{sib.birthday})
 														</p:dataList>
 												</p:panelGrid>
-												<p:commandButton value="Stammblatt PDF"
-														onclick="PF('infoDialog').hide();" immediate="true"
-														action="#{PDFBean.createPDFChild()}"/>
+												<p:commandButton value="Stammblatt PDF" immediate="true"
+													action="#{PDFBean.createPDFChild()}" />
+												<p:commandButton value="Schließen" immediate="true"
+												onclick="PF('infoDialog').hide();"
+													 />
 											</p:outputPanel>
 										</p:dialog>
 
@@ -228,8 +233,9 @@
 															itemValue="#{parent.username}" />
 
 														<p:column>
-															<p:graphicImage name="pictures/profile_pictures/#{userService.loadUser(p).imgName}" width="32"
-																height="32" />
+															<p:graphicImage
+																name="pictures/profile_pictures/#{userService.loadUser(p).imgName}"
+																width="32" height="32" />
 														</p:column>
 
 														<p:column>
