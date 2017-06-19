@@ -19,7 +19,9 @@
 								<!-- Default box -->
 								<div class="box">
 									<div class="box-body">
-										<div align="left" style="margin-left: 10px;"><h1>Alle Elternteile</h1></div>
+										<div align="left" style="margin-left: 10px;">
+											<h1>Alle Elternteile</h1>
+										</div>
 										<div align="right" style="margin-bottom: 10px;">
 											<p:commandButton oncomplete="PF('parentAddDialog').show()"
 												value="Elternteil hinzufügen" style="align-items:right;"></p:commandButton>
@@ -29,8 +31,10 @@
 												widgetVar="parentTable" value="#{parentController.parents}"
 												rows="10" paginatorPosition="bottom" paginator="true"
 												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-												rowsPerPageTemplate="10,25,50" selectionMode="single" selection="#{parentController.parent}" rowKey="#{parent.username}"
-											emptyMessage="Es wurden keine Eltern gefunden!">
+												rowsPerPageTemplate="10,25,50" selectionMode="single"
+												selection="#{parentController.parent}"
+												rowKey="#{parent.username}"
+												emptyMessage="Es wurden keine Eltern gefunden!">
 
 												<f:facet name="header">
 													<p:outputPanel>
@@ -41,7 +45,8 @@
 													</p:outputPanel>
 												</f:facet>
 
-												<p:ajax event="rowSelect" update=":parentForm:infoDialog" oncomplete="PF('infoDialog').show()"/>
+												<p:ajax event="rowSelect" update=":parentForm:infoDialog"
+													oncomplete="PF('infoDialog').show()" />
 
 
 												<f:facet name="{Exporters}"
@@ -99,7 +104,8 @@
 													sortBy="#{parent.location}" filterStyle="display:none">
 													<h:outputText value="#{parent.location}" />
 												</p:column>
-												<p:column headerText="Status" filterBy="#{parent.status}" filterMatchMode="equals">
+												<p:column headerText="Status" filterBy="#{parent.status}"
+													filterMatchMode="equals">
 													<f:facet name="filter">
 														<p:selectOneButton onchange="PF('parentTable').filter()">
 															<f:converter converterId="javax.faces.Boolean" />
@@ -108,7 +114,8 @@
 															<f:selectItem itemLabel="inaktiv" itemValue="false" />
 														</p:selectOneButton>
 													</f:facet>
-													<h:outputText value="#{parent.status ? 'aktiv' : 'inaktiv'}"/>
+													<h:outputText
+														value="#{parent.status ? 'aktiv' : 'inaktiv'}" />
 												</p:column>
 												<p:column style="width:120px;text-align: center"
 													exportable="false">
@@ -142,25 +149,39 @@
 											</p:dataTable>
 
 											<!-- More Info Dialog -->
-											<p:dialog header="#{parentController.parent.firstName} #{parentController.parent.lastName}" widgetVar="infoDialog" id="infoDialog"
-													  modal="true" showEffect="fade" hideEffect="fade" resizable="false" >
+											<p:dialog
+												header="#{parentController.parent.firstName} #{parentController.parent.lastName}"
+												widgetVar="infoDialog" id="infoDialog" modal="true"
+												showEffect="fade" hideEffect="fade" resizable="false">
 												<p:outputPanel id="infosheet" style="text-align:center;">
 													<p:panelGrid columns="2" columnClasses="label,value">
 														<f:facet name="header">
-															<p:graphicImage name="pictures/profile_pictures/#{parentController.parent.imgName}" class="picture"/>
+															<p:graphicImage
+																name="pictures/profile_pictures/#{parentController.parent.imgName}"
+																class="picture" />
 														</f:facet>
+														<h:outputText value="Wohnort:" />
+														<h:outputText value="#{parentController.parent.location}" />
+														<h:outputText value="Straße:" />
+														<h:outputText
+															value="#{parentController.parent.streetName}" />
 
-														<h:outputText value="Straße:"/>
-														<h:outputText value="#{parentController.parent.streetName}"/>
-
-														<h:outputText value="PLZ:"/>
-														<h:outputText value="#{parentController.parent.postcode}"/>
-
-														<h:outputText value="Familienstatus:"/>
-														<h:outputText value="#{parentController.parent.familyStatus}"/>
+														<h:outputText value="PLZ:" />
+														<h:outputText value="#{parentController.parent.postcode}" />
+														<h:outputText value="Telefonnummer" />
+														<h:outputText
+															value="#{parentController.parent.phoneNumber}" />
+														<h:outputText value="Emailadresse:" />
+														<h:outputText
+															value="#{parentController.parent.email}" />
+														<h:outputText value="Familienstatus:" />
+														<h:outputText
+															value="#{parentController.parent.familyStatus}" />
 													</p:panelGrid>
 													<p:panelGrid columns="2" style="width:100%;">
-														<p:dataList value="#{parentController.getChildren(parentController.parent.username)}" var="child" type="ordered">
+														<p:dataList
+															value="#{parentController.getChildren(parentController.parent.username)}"
+															var="child" type="ordered">
 															<f:facet name="header">
 																Kinder
 															</f:facet>
@@ -189,54 +210,53 @@
 														<p:outputLabel for="firstnameCreate" value="Vorname: " />
 														<p:inputText id="firstnameCreate"
 															value="#{parentController.parent.firstName}"
-																	 required="true"
-																	 requiredMessage="Vorname erforderlich!"/>
+															required="true" requiredMessage="Vorname erforderlich!" />
 														<p:outputLabel for="lastnameCreate" value="Nachname: " />
 														<p:inputText id="lastnameCreate"
 															value="#{parentController.parent.lastName}"
-																	 required="true"
-																	 requiredMessage="Nachname erforderlich!"/>
+															required="true" requiredMessage="Nachname erforderlich!" />
 													</h:panelGrid>
 													<p:separator />
 													<h:panelGrid columns="2">
 														<p:outputLabel for="streetCreate" value="Straße: " />
 														<p:inputText id="streetCreate"
 															value="#{parentController.parent.streetName}"
-																	 required="true"
-																	 requiredMessage="Straßenname erforderlich!"/>
+															required="true"
+															requiredMessage="Straßenname erforderlich!" />
 														<p:outputLabel for="locationCreate" value="Ort: " />
 														<p:inputText id="locationCreate"
 															value="#{parentController.parent.location}"
-																	 required="true"
-																	 requiredMessage="Ortsangabe erforderlich!"/>
+															required="true"
+															requiredMessage="Ortsangabe erforderlich!" />
 														<p:outputLabel for="postcodeCreate" value="Postleitzahl: " />
 														<p:inputMask id="postcodeCreate" maxlength="5"
 															value="#{parentController.parent.postcode}" mask="9999?9"
-															slotChar=" "
-																	 required="true"
-																	 requiredMessage="Postleitzahl erforderlich!"/>
+															slotChar=" " required="true"
+															requiredMessage="Postleitzahl erforderlich!" />
 													</h:panelGrid>
 													<p:separator />
 													<h:panelGrid columns="2">
-														<p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
-														<p:inputMask id="phonenumberCreate"
-																	 mask="9?99999999999" slotChar=" " maxlength="12"
-																	 value="#{parentController.parent.phoneNumber}"
-																	 required="true" requiredMessage="Telefonnummer erforderlich!"/>
+														<p:outputLabel for="phonenumberCreate"
+															value="Telefonnummer: " />
+														<p:inputMask id="phonenumberCreate" mask="9?99999999999"
+															slotChar=" " maxlength="12"
+															value="#{parentController.parent.phoneNumber}"
+															required="true"
+															requiredMessage="Telefonnummer erforderlich!" />
 														<p:outputLabel for="emailCreate" value="Email: " />
 														<p:inputText id="emailCreate"
-																	 validatorMessage="Ungültiges Email-Format!"
-																	 value="#{parentController.parent.email}"
-																	 required="true" requiredMessage="Email erforderlich!">
+															validatorMessage="Ungültiges Email-Format!"
+															value="#{parentController.parent.email}" required="true"
+															requiredMessage="Email erforderlich!">
 															<f:validateRegex
-																	pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+																pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 														</p:inputText>
 													</h:panelGrid>
 													<h:panelGrid columns="3">
 														<p:commandButton value="Speichern"
 															action="#{parentController.doSaveParent()}"
 															update=":parentForm:parentTable"
-																		 process="@widgetVar(parentAddDialog)"/>
+															process="@widgetVar(parentAddDialog)" />
 														<p:commandButton value="Abbruch"
 															oncomplete="PF('parentAddDialog').hide()"
 															immediate="true" />
@@ -266,31 +286,34 @@
 														<p:outputLabel for="lastnameEdit" value="Nachname: " />
 														<p:inputText id="lastnameEdit"
 															value="#{parentEditController.parent.lastName}"
-															required="true" requiredMessage="Nachname erforderlich!"/>
+															required="true" requiredMessage="Nachname erforderlich!" />
 													</h:panelGrid>
 													<p:separator />
 													<h:panelGrid columns="2">
 														<p:outputLabel for="streetEdit" value="Straße: " />
 														<p:inputText id="streetEdit"
 															value="#{parentEditController.parent.streetName}"
-															required="true" requiredMessage="Straßenname erforderlich!"/>
+															required="true"
+															requiredMessage="Straßenname erforderlich!" />
 														<p:outputLabel for="locationEdit" value="Ort: " />
 														<p:inputText id="locationEdit"
 															value="#{parentEditController.parent.location}"
-															required="true" requiredMessage="Ort erforderlich!"/>
+															required="true" requiredMessage="Ort erforderlich!" />
 														<p:outputLabel for="postcodeEdit" value="Postleitzahl: " />
 														<p:inputMask id="postcodeEdit" maxlength="5"
 															value="#{parentEditController.parent.postcode}"
-															mask="9999?9" slotChar=" "
-															required="true" requiredMessage="Postleitzahl erforderlich!"/>
+															mask="9999?9" slotChar=" " required="true"
+															requiredMessage="Postleitzahl erforderlich!" />
 													</h:panelGrid>
 													<p:separator />
 													<h:panelGrid columns="2">
-														<p:outputLabel for="phonenumberCreate" value="Telefonnummer: "/>
-														<p:inputMask id="phonenumberEdit"
-																	 mask="9?99999999999" slotChar=" " maxlength="12"
-																	 value="#{parentEditController.parent.phoneNumber}"
-																	 required="true" requiredMessage="Telefonnummer erforderlich!"/>
+														<p:outputLabel for="phonenumberCreate"
+															value="Telefonnummer: " />
+														<p:inputMask id="phonenumberEdit" mask="9?99999999999"
+															slotChar=" " maxlength="12"
+															value="#{parentEditController.parent.phoneNumber}"
+															required="true"
+															requiredMessage="Telefonnummer erforderlich!" />
 														<p:outputLabel for="emailEdit" value="Email: " />
 														<p:inputText id="emailEdit"
 															validatorMessage="Ungültiges Email-Format!"
