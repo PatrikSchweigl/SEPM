@@ -87,6 +87,7 @@ public class CaregiverController {
         if (!StringUtils.isNumeric(caregiver.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
         } else {
+        	caregiver.setImgName("emptypicture.png");
             caregiver = caregiverService.saveCaregiver(caregiver);
             caregiverReturn = caregiver;
             initList();
