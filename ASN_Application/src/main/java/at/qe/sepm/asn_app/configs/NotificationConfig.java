@@ -37,7 +37,7 @@ public class NotificationConfig {
 	@Autowired
 	private TaskService taskService;
 	@Autowired
-	private ReportController reportController;
+	private LunchService lunchService;
 
 	@Scheduled(cron = "0 0 10 * * *") // 60000 for one minute - "0 0 10 * * *"
 										// 10 AM everyday
@@ -95,8 +95,8 @@ public class NotificationConfig {
 			}
 		}
 	}
-
-	/*public void monthlyLunchCalc() {
+	@Scheduled(cron = "0 10 10 28-31 * ?")
+	public void monthlyLunchCalc() {
 		String footer = "Das Kinderkrippen-Team bedankt sich für Ihre Mitarbeit!";
 		Collection<Parent> list = parentService.getAllParents();
 		Iterator<Parent> iter = list.iterator();
@@ -104,7 +104,20 @@ public class NotificationConfig {
 			double costPerMonth = 0.0;
 			Parent p = iter.next();
 			for (Child c : p.getChildren()) {
-				costPerMonth += reportController.getLunchCostByChildMonthly(c);
+		        Date start = new Date();
+		        start.setDate(1);
+		        start.setMonth((start.getMonth() + 0)%12);
+		        Date end = new Date();
+		        end.setDate(1);
+		        end.setMonth((end.getMonth() + 0 + 1)%12);
+		        if(end.getMonth() == 0){
+		            end.setYear(end.getYear() + 1);
+		        }
+		        Collection<Lunch> lunch = lunchService.getLunchInTimeWindowIE(start, end);
+		        for(Lunch l : lunch){
+		        	if(l.getChildrenIds().contains(c.getId()))
+		        		costPerMonth += l.getCost();
+		        }
 			}
 			mailService.sendEmail(p.getEmail(), "Essensabrechnung",
 					"Guten Tag " + p.getFirstName() + " " + p.getLastName()
@@ -112,5 +125,5 @@ public class NotificationConfig {
 							+ "Offener Betrag:  " + costPerMonth + " zahlbar binnen 14 Tagen."
 							+ "\n\n" + footer);
 		}
-	}*/
+	}
 }
