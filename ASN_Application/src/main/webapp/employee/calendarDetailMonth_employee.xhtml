@@ -34,7 +34,7 @@
                                                              value="#{registrationController.allRegistrationsMonth}"
                                                              paginator="true" paginatorPosition="bottom"
                                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                                             rowsPerPageTemplate="10,25,50"
+                                                             rowsPerPageTemplate="10,25,50,100" rows="10"
                                                              emptyMessage="Es sind in diesem Monat keine Kinder angemeldet!">
                                                     <f:facet name="header">
                                                         <p:outputPanel>
@@ -123,7 +123,7 @@
                                                              value="#{reportController.monthlyReport}" paginator="true"
                                                              paginatorPosition="bottom"
                                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                                             rowsPerPageTemplate="10,25,50"
+                                                             rowsPerPageTemplate="10,25,50,100" rows="10"
                                                              emptyMessage="Es wurden keine Kinder gefunden, die diesen Monat am Mittagessen teilnehmen!">
 
                                                     <f:facet name="header">

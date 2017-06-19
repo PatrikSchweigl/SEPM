@@ -36,10 +36,9 @@
 													<h:form id="childTableForm">
 													<p:dataTable id="childTable" var="reg" widgetVar="childTable"
 														value="#{registrationController.getRegistrationsByDate(scheduleView.selectedDay)}"
-														paginator="true" paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,25,50"
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 														 emptyMessage="Es sind an diesem Tag keine Kinder angemeldet!">
-
 
 														<f:facet name="header">
 															<p:outputPanel>
@@ -109,7 +108,7 @@
 													<p:dataTable id="childTableEating" var="rep" widgetVar="childTableEating"
 														value="#{reportController.getLunchReportByDate(scheduleView.selectedDay)}"
 														paginator="true" paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 														 emptyMessage="Es wurden keine Kinder gefunden, die heute zu Mittag essen!">
 														
 														<f:facet name="header">

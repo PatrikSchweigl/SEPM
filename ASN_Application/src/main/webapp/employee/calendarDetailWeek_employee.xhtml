@@ -34,8 +34,8 @@
 													<h:form id="childTableForm">
 													<p:dataTable id="childTable" var="reg" widgetVar="childTable"
 														value="#{registrationController.allRegistrationsWeek}"
-														paginator="true" paginatorPosition="bottom"
-														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+														paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="10,25,50,100"
+														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 														 emptyMessage="Es sind in dieser Woche keine Kinder angemeldet!">
 
 														<f:facet name="header">
@@ -121,7 +121,7 @@
 														value="#{reportController.weeklyReport}"
 														paginator="true" paginatorPosition="bottom"
 														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-														rowsPerPageTemplate="10,25,50"
+														rowsPerPageTemplate="10,25,50,100" page="10"
 														 emptyMessage="Es wurden keine Kinder gefunden, die diese Woche am Mittagessen teilnehmen!">
 
 														<f:facet name="header">
