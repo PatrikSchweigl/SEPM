@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.tests.selenium2;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
@@ -10,10 +11,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class InitializeSelenium {
 
     public static WebDriver initialize() {
-        // Set the path to the firefox and chrome driver.
-        //System.setProperty("webdriver.gecko.driver", "geckodriver");
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        //return new FirefoxDriver();
-        return new ChromeDriver();
+        String browser = "chrome";   // use this to change browser
+        switch(browser) {
+            case "gecko":
+                System.setProperty("webdriver.gecko.driver", "geckodriver");
+                return new FirefoxDriver();
+            case "chrome":
+                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+                return new ChromeDriver();
+            default: return null;
+        }
     }
 }
