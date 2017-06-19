@@ -421,9 +421,11 @@
 												</div>
 											</div>
 											<p:separator/>
-												<p:commandButton value="Anmelden"
+												<p:commandButton value="Anmelden &amp; Schliessen"
 													action="#{massSignupController.massSignup}"
 												oncomplete="window.location.replace(window.location.href);"/>
+											<p:commandButton value="Anmelden"
+															 action="#{massSignupController.massSignup}"/>
 												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
 
 											</p:dialog>

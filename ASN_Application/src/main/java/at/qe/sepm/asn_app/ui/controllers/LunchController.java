@@ -27,8 +27,7 @@ import java.util.List;
  * Created by Lukas Aukenthaler on 22.05.2017.
  */
 @Component
-// @Scope("view")
-@Scope("application")
+@Scope("view")
 public class LunchController {
 	@Autowired
 	private LunchService lunchService;
