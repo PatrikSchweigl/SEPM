@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/main.xhtml">
+	<ui:define name="content">
+		<h:body>
+			<body class="theme-blue sidebar-mini sidebar-collapse">
+				<div class="wrapper">
+					<div class="content-wrapper" style="min-height: 1126px;">
+						<section class="content">
+
+							<div class="box">
+
+								<div class="box-body">
+
+									<h:form id="childForm">
+										<p:dataTable id="childTable" var="child"
+											widgetVar="childTable"
+											value="#{childController.childrenParent}"
+											paginator="true" rows="10" paginatorPosition="bottom"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="10,25,50">
+
+											<f:facet name="header">
+												<p:outputPanel>
+													<h:outputText value="Suche " />
+													<p:inputText id="globalFilter"
+														onkeyup="PF('childTable').filter()" style="width:150px"
+														placeholder="Suchwort eingeben" />
+												</p:outputPanel>
+											</f:facet>
+
+
+											<p:column headerText="Vorname" filterBy="#{child.firstName}"
+												sortBy="#{child.firstName}" filterStyle="display:none">
+												<h:outputText value="#{child.firstName}" />
+											</p:column>
+											<p:column headerText="Nachname" filterBy="#{child.lastName}"
+												sortBy="#{child.lastName}" filterStyle="display:none">
+												<h:outputText value="#{child.lastName}" />
+											</p:column>
+											<p:column headerText="Notfallkontaktnummer"
+												filterBy="#{child.emergencyNumber}"
+												sortBy="#{child.emergencyNumber}" filterStyle="display:none">
+												<h:outputText value="#{child.emergencyNumber}" />
+											</p:column>
+											<p:column headerText="Geburtstag"
+												filterBy="#{child.birthday}"
+												sortBy="#{child.birthday}" filterStyle="display:none">
+												<h:outputText value="#{child.birthday}" />
+											</p:column>
+											<p:column style="width:100px;text-align: center"
+												exportable="false">
+												<p:commandButton update=":childForm:childEditDialog"
+													oncomplete="PF('childEditDialog').show()"
+													icon="ui-icon-note" title="Edit" process="@this">
+													<f:setPropertyActionListener value="#{child}"
+														target="#{childEditController.childEdit}" />
+												</p:commandButton>
+											</p:column>
+										</p:dataTable>
+
+
+										<!--Edit Child Dialog -->
+										<p:dialog header="Kind bearbeiten" id="childEditDialog"
+											closeOnEscape="true" widgetVar="childEditDialog" modal="true"
+											showEffect="fade" hideEffect="fade" resizable="false">
+											<p:messages id="childAddMsg" autoUpdate="true" />
+											<p:outputPanel id="childDataEdit"
+												rendered="#{not empty childEditController.childEdit}">
+												<p:outputPanel>
+													<h:outputLabel for="fupload-edit" id="logo-section-edit">
+														<p:fileUpload id="fupload-edit" widgetVar="fupload-edit"
+															auto="true" mode="advanced" style="display:none;"
+															oncomplete="window.location.replace(window.location.href);"
+															fileUploadListener="#{fileBean.handleFileUploadProfilePictureChildren}"
+															dragDropSupport="true" update="logo-section-edit">
+														</p:fileUpload>
+														<div align="center"
+															onclick="$('input[type=file]').click()">
+															<p:graphicImage id="out-image-edit"
+																style="max-height: 200px; max-width: 200px"
+																name="pictures/profile_pictures_children/#{childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserData().getUsername(), childEditController.childEdit.firstName).getImgName()}">
+															</p:graphicImage>
+															<p:outputPanel>
+																<p:graphicImage
+																	rendered="#{empty childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserData().getUsername(), childEditController.childEdit.firstName).getImgName()}"
+																	name="pictures/profile_pictures/emptypicture.png"
+																	value="Bild hochladen"></p:graphicImage>
+															</p:outputPanel>
+															<br />
+														</div>
+													</h:outputLabel>
+												</p:outputPanel>
+												<h:panelGrid columns="2">
+													<p:outputLabel for="pFirstName" value="Elternteil: " />
+													<p:inputText disabled="true" id="pFirstName"
+														value="#{childEditController.childEdit.getPrimaryParentFullName()}" />
+													<p:outputLabel for="firstname" value="Vorname: " />
+													<p:inputText id="firstname"
+														value="#{childEditController.childEdit.firstName}"
+														required="true" requiredMessage="Vorname erforderlich!" />
+													<p:outputLabel for="lastname" value="Nachname: " />
+													<p:inputText id="lastname"
+														value="#{childEditController.childEdit.lastName}"
+														required="true" requiredMessage="Nachname erforderlich!" />
+													<p:outputLabel for="birthday" value="Geburtsdatum: " />
+													<p:inputMask mask="99/99/9999" id="birthday"
+														value="#{childEditController.childEdit.birthday}"
+														required="true"
+														requiredMessage="Geburtsdatum erforderlich!"
+														validatorMessage="Ungültiges Datum für Geburtstag!" />
+													<p:outputLabel for="emergencyNumber"
+														value="Notfallnummer: " />
+													<p:inputMask id="emergencyNumber" mask="9?99999999999"
+														slotChar=" " maxlength="12"
+														value="#{childEditController.childEdit.emergencyNumber}"
+														required="true"
+														requiredMessage="Notfallkontaktnummer erforderlich!" />
+													<p:outputLabel for="allergies"
+														value="Allergie hinzufügen: " />
+													<p:inputTextarea id="allergies"
+														value="#{childEditController.childEdit.allergies}" />
+													<p:outputLabel for="intolerance"
+														value="Unverträglichkeit hinzufügen: " />
+													<p:inputTextarea id="intolerance"
+														value="#{childEditController.childEdit.foodIntolerances}" />
+												</h:panelGrid>
+												<p:separator />
+
+
+												<h:panelGrid columns="4">
+													<p:commandButton value="Speichern"
+														action="#{childEditController.doSaveChildParent()}"
+														update=":childForm:childTable :childForm:caregiverTable"
+														process="@widgetVar(childEditDialog)" />
+													<p:commandButton update=":childForm:siblingAddDialog"
+														oncomplete="PF('siblingAddDialog').show()"
+														icon="ui-icon-plus" title="Geschwister hinzufügen"
+														process="@this">
+														<f:setPropertyActionListener
+															value="#{childEditController.childEdit}"
+															target="#{siblingController.sibling.child}" />
+													</p:commandButton>
+													<p:commandButton value="Neu laden" immediate="true"
+														action="#{childController.doReloadChildEdit()}"
+														update=":childForm:childDataEdit" />
+													<p:commandButton value="Abbruch"
+														onclick="PF('childEditDialog').hide()" />
+
+												</h:panelGrid>
+											</p:outputPanel>
+										</p:dialog>
+
+										<!--Caregiver table-->
+										<div align="left" style="margin-bottom: 10px;">
+											<p:commandButton oncomplete="PF('caregiverAddDialog').show()"
+												value="Bezugsperson hinzufügen"
+												style="align-items:right; margin-top:100px;"></p:commandButton>
+										</div>
+										<p:dataTable id="caregiverTable" var="caregiver"
+											widgetVar="caregiverTable"
+											value="#{caregiverController.caregivers}" paginator="true"
+											rows="10" paginatorPosition="bottom"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="10,25,50"
+											emptyMessage="Es wurden keine Bezugspersonen gefunden!">
+
+											<f:facet name="header">
+												<p:outputPanel>
+													<h:outputText value="Suche " />
+													<p:inputText id="globalFilter"
+														onkeyup="PF('caregiverTable').filter()"
+														style="width:150px" placeholder="Suchwort eingeben" />
+												</p:outputPanel>
+											</f:facet>
+
+
+											<p:column headerText="Vorname"
+												filterBy="#{caregiver.firstName}"
+												sortBy="#{caregiver.firstName}" filterStyle="display:none">
+												<h:outputText value="#{caregiver.firstName}" />
+											</p:column>
+											<p:column headerText="Nachname"
+												filterBy="#{caregiver.lastName}"
+												sortBy="#{caregiver.lastName}" filterStyle="display:none">
+												<h:outputText value="#{caregiver.lastName}" />
+											</p:column>
+											<p:column headerText="Telefonnummer"
+												filterBy="#{caregiver.phoneNumber}"
+												sortBy="#{caregiver.phoneNumber}" filterStyle="display:none">
+												<h:outputText value="#{caregiver.phoneNumber}" />
+											</p:column>
+											<p:column headerText="Kind"
+												filterBy="#{caregiver.child.fullname}"
+												sortBy="#{caregiver.child.fullname}"
+												filterStyle="display:none">
+												<h:outputText value="#{caregiver.child.fullname}" />
+											</p:column>
+											<p:column style="width:100px;text-align: center"
+												exportable="false">
+												<p:commandButton update=":childForm:caregiverEditDialog"
+													oncomplete="PF('caregiverEditDialog').show()"
+													icon="ui-icon-note" title="Edit" process="@this">
+													<f:setPropertyActionListener value="#{caregiver}"
+														target="#{caregiverController.caregiverEdit}" />
+												</p:commandButton>
+											</p:column>
+										</p:dataTable>
+										<p:confirmDialog global="true" showEffect="fade"
+											hideEffect="fade" width="300">
+											<p:commandButton value="Yes" type="button"
+												styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+											<p:commandButton value="No" type="button"
+												styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+										</p:confirmDialog>
+
+
+										<!--Add Sibling-->
+										<p:dialog header="Geschwister hinzufügen"
+											id="siblingAddDialog" widgetVar="siblingAddDialog"
+											modal="true" showEffect="fade" hideEffect="fade"
+											resizable="false" closeOnEscape="true">
+											<p:messages id="siblingAddMsg" autoUpdate="true" />
+											<p:outputPanel id="siblingDataAdd">
+												<h:panelGrid columns="2">
+													<p:outputLabel for="name" value="Kind: " />
+													<p:inputText id="name"
+														value="#{siblingController.sibling.child.fullname}"
+														disabled="true" />
+													<p:outputLabel for="firstN" value="Vorname: " />
+													<p:inputText id="firstN"
+														value="#{siblingController.sibling.firstName}"
+														required="true" requiredMessage="Vorname erforderlich!" />
+													<p:outputLabel for="lastN" value="Nachname: " />
+													<p:inputText id="lastN"
+														value="#{siblingController.sibling.lastName}"
+														required="true" requiredMessage="Nachname erforderlich!" />
+													<p:outputLabel for="birth" value="Geburtsdatum: " />
+													<p:inputMask mask="99/99/9999" id="birth"
+														value="#{siblingController.sibling.birthday}"
+														validatorMessage="Ungültiges Datum für Geburtstag!" />
+												</h:panelGrid>
+												<p:separator />
+												<h:panelGrid columns="3">
+													<p:commandButton value="Speichern"
+														action="#{siblingController.doSaveSibling}"
+														process="@widgetVar(siblingAddDialog)" />
+													<p:commandButton value="Abbruch"
+														onclick="PF('siblingAddDialog').hide()" immediate="true" />
+												</h:panelGrid>
+											</p:outputPanel>
+										</p:dialog>
+
+										<!--Add Caregiver Dialog -->
+										<p:dialog header="Bezugsperson hinzufügen"
+											id="caregiverAddDialog" widgetVar="caregiverAddDialog"
+											modal="true" showEffect="fade" hideEffect="fade"
+											resizable="false" closeOnEscape="true">
+											<p:messages id="messagesAdd" autoUpdate="true" />
+											<p:outputPanel id="caregiverDataAdd">
+												<h:panelGrid columns="2">
+													<p:outputLabel for="childList" value="Kind: " />
+													<p:selectOneMenu converter="#{childConverter}"
+														id="childList"
+														value="#{caregiverController.caregiver.child}"
+														required="true" requiredMessage="Kind erforderlich!">
+														<f:selectItems
+															value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserName)}"
+															var="child"
+															itemLabel="#{child.firstName} #{child.lastName}"
+															itemValue="#{child}" />
+													</p:selectOneMenu>
+													<p:outputLabel for="firstName" value="Vorname: " />
+													<p:inputText id="firstName" required="true"
+														requiredMessage="Vorname erforderlich!"
+														value="#{caregiverController.caregiver.firstName}" />
+													<p:outputLabel for="lastName" value="Nachname: " />
+													<p:inputText id="lastName" required="true"
+														requiredMessage="Nachname erforderlich!"
+														value="#{caregiverController.caregiver.lastName}" />
+													<p:outputLabel for="phone" value="Telefonnummer: " />
+													<p:inputMask id="phone" mask="9?99999999999" slotChar=" "
+														maxlength="12"
+														value="#{caregiverController.caregiver.phoneNumber}"
+														required="true"
+														requiredMessage="Telefonnummer erforderlich!" />
+												</h:panelGrid>
+												<p:separator />
+												<h:panelGrid columns="3">
+													<p:commandButton value="Speichern"
+														action="#{caregiverController.doSaveCaregiver()}"
+														process="@widgetVar(caregiverAddDialog)"
+														update=":childForm:caregiverTable" />
+													<p:commandButton value="Abbruch"
+														onclick="PF('childAddDialog').hide()" immediate="true" />
+												</h:panelGrid>
+											</p:outputPanel>
+										</p:dialog>
+
+										<!--Edit Caregiver Dialog -->
+										<p:dialog header="Bezugsperson bearbeiten"
+											id="caregiverEditDialog" widgetVar="caregiverEditDialog"
+											modal="true" showEffect="fade" hideEffect="fade"
+											resizable="false" closeOnEscape="true">
+											<p:messages id="messagesEdit" autoUpdate="true" />
+											<p:outputPanel id="caregiverDataEdit"
+												rendered="#{not empty caregiverController.caregiverEdit}">
+												<p:outputPanel>
+													<h:outputLabel for="fupload-edit-care"
+														id="logo-section-edit-care">
+														<p:fileUpload id="fupload-edit-care"
+															widgetVar="fupload-edit-care" auto="true" mode="advanced"
+															style="display:none;"
+															fileUploadListener="#{fileBean.handleFileUploadProfilePictureCaregiver}"
+															dragDropSupport="true"
+															oncomplete="window.location.replace(window.location.href);"
+															update="logo-section-edit-care">
+															<f:attribute name="caregiverId"
+																value="#{caregiverController.caregiverEdit.id}" />
+														</p:fileUpload>
+														<div align="center"
+															onclick="$('input[type=file]').click()">
+															<p:graphicImage id="out-image-edit-care"
+																style="max-height: 200px; max-width: 200px"
+																name="pictures/profile_pictures_caregiver/#{caregiverController.caregiverEdit.getImgName()}">
+															</p:graphicImage>
+															<p:outputPanel>
+																<p:graphicImage
+																	rendered="#{empty caregiverController.caregiverEdit.getImgName()}"
+																	name="pictures/profile_pictures/emptypicture.png"
+																	value="Bild hochladen"></p:graphicImage>
+															</p:outputPanel>
+															<br />
+														</div>
+													</h:outputLabel>
+												</p:outputPanel>
+												<h:panelGrid columns="2">
+													<p:outputLabel for="pFirstNameCare" value="Vorname: " />
+													<p:inputText id="pFirstNameCare" required="true"
+														requiredMessage="Vorname erforderlich!"
+														value="#{caregiverController.caregiverEdit.firstName}" />
+													<p:outputLabel for="pLastNameCare" value="Nachname: " />
+													<p:inputText id="pLastNameCare" required="true"
+														requiredMessage="Nachname erforderlich!"
+														value="#{caregiverController.caregiverEdit.lastName}" />
+													<p:outputLabel for="pPhoneNumberCare"
+														value="Telefonnummer: " />
+													<p:inputMask id="pPhoneNumberCare" mask="9?99999999999"
+														slotChar=" " maxlength="12"
+														value="#{caregiverController.caregiverEdit.phoneNumber}"
+														required="true"
+														requiredMessage="Telefonnummer erforderlich!" />
+													<p:outputLabel for="pChildCare" value="Kind: " />
+													<p:inputText disabled="true" id="pChildCare"
+														value="#{caregiverController.caregiverEdit.child.fullname}" />
+													<p:outputLabel for="pEligibleCare" value="Bestätigt: " />
+													<p:inputText disabled="true" id="pEligibleCare"
+														value="#{caregiverController.caregiverEdit.eligible ? 'ja' : 'nein'}" />
+												</h:panelGrid>
+												<p:separator />
+												<h:panelGrid columns="3">
+													<p:commandButton value="Speichern"
+														action="#{caregiverController.doSaveCaregiverEdit()}"
+														update=":childForm:caregiverTable"
+														process="@widgetVar(caregiverEditDialog)" />
+													<p:commandButton value="Neu laden" immediate="true"
+														action="#{caregiverController.doReloadCaregiverEdit()}"
+														update=":childForm:caregiverDataEdit" />
+													<p:commandButton value="Abbruch"
+														onclick="PF('caregiverEditDialog').hide()" />
+												</h:panelGrid>
+											</p:outputPanel>
+										</p:dialog>
+
+
+									</h:form>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</body>
+		</h:body>
+	</ui:define>
+</ui:composition>

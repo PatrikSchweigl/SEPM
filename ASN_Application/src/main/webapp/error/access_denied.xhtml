@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+
+        <body class="theme-blue sidebar-mini sidebar-collapse">
+        <div class="wrapper">
+            <div class="content-wrapper" style="min-height: 1126px;">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-body">
+                        <h:form style="">
+                            <p:panel header="Zugriff verweigert!">
+                                Sie haben keine Berechtigung, den gewünschten Pfad zu betreten.
+                            </p:panel>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </body>
+
+    </ui:define>
+</ui:composition>

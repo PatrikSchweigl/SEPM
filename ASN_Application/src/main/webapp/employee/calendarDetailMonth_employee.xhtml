@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+                <body class="theme-blue sidebar-mini sidebar-collapse">
+                <div class="wrapper">
+                    <!-- =============================================== -->
+
+                    <div class="content-wrapper" style="min-height: 1126px;">
+                        <section class="content">
+
+                            <!-- Default box -->
+                            <div class="box">
+                                <div class="box-body">
+                                    <div align="right" style="margin-bottom: 10px;">
+                                        <p:button outcome="/employee/calendar_employee.xhtml"
+                                                  value="Kalenderansicht" style="align-items:right;">
+                                        </p:button>
+                                    </div>
+
+                                    <p:accordionPanel multiple="true">
+                                        <p:tab title="Anwesende Kinder in diesem Monat">
+                                            <h:form id="childTableForm">
+                                                <p:dataTable id="childTable" var="reg"
+                                                             widgetVar="childTable"
+                                                             value="#{registrationController.allRegistrationsMonth}"
+                                                             paginator="true" paginatorPosition="bottom"
+                                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                             rowsPerPageTemplate="10,25,50"
+                                                             emptyMessage="Es sind in diesem Monat keine Kinder angemeldet!">
+                                                    <f:facet name="header">
+                                                        <p:outputPanel>
+                                                            <h:outputText value="Suche "/>
+                                                            <p:inputText id="globalFilter"
+                                                                         onkeyup="PF('childTable').filter()"
+                                                                         style="width:150px"
+                                                                         placeholder="Suchwort eingeben"/>
+                                                        </p:outputPanel>
+                                                    </f:facet>
+
+                                                    <f:facet name="{Exporters}"
+                                                             style="float: right; vertical-align: middle;">
+                                                        <div style="float: right; vertical-align: middle;">
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="print1"
+                                                                                name="pictures/extractors/printer.png"
+                                                                                width="32"/>
+                                                                <p:spacer width="10"/>
+                                                                <p:tooltip for="print1" value="Drucken" position="top"/>
+                                                                <p:printer target="childTable"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="excel1"
+                                                                                name="pictures/extractors/excel.png"
+                                                                                width="32"/>
+                                                                <p:spacer width="10"/>
+                                                                <p:tooltip for="excel1" value="Excel" position="top"/>
+                                                                <p:dataExporter type="xls" target="childTable"
+                                                                                fileName="Kinder_anwesend"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="pdf1"
+                                                                                name="pictures/extractors/pdf.png"
+                                                                                width="32"/>
+                                                                <p:spacer width="10"/>
+                                                                <p:tooltip for="pdf1" value="PDF" position="top"/>
+                                                                <p:dataExporter type="pdf" target="childTable"
+                                                                                fileName="Kinder_anwesend"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="csv1"
+                                                                                name="pictures/extractors/csv.png"
+                                                                                width="32"/>
+                                                                <p:tooltip for="csv1" value="CSV" position="top"/>
+                                                                <p:dataExporter type="csv" target="childTable"
+                                                                                fileName="Kinder_anwesend"/>
+                                                            </p:commandLink>
+
+                                                        </div>
+                                                    </f:facet>
+                                                    <p:column headerText="Vorname"
+                                                              filterBy="#{reg.child.firstName}"
+                                                              sortBy="#{reg.child.firstName}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText value="#{reg.child.firstName}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Nachname"
+                                                              filterBy="#{reg.child.lastName}"
+                                                              sortBy="#{reg.child.lastName}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText value="#{reg.child.lastName}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Anmerkung"
+                                                              filterBy="#{reg.note}"
+                                                              sortBy="#{reg.note}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText
+                                                                value="#{reg.note}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Tag" filterBy="#{reg.date}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText value="#{reg.getFormattedBringDateFull()}"/>
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </h:form>
+
+                                        </p:tab>
+                                        <p:tab
+                                                title="Kinder die diesen Monat Essen konsumiert haben">
+                                            <h:form id="lunchForm">
+
+
+                                                <p:dataTable id="childTableEating" var="report"
+                                                             widgetVar="childTableEating"
+                                                             value="#{reportController.monthlyReport}" paginator="true"
+                                                             paginatorPosition="bottom"
+                                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                             rowsPerPageTemplate="10,25,50"
+                                                             emptyMessage="Es wurden keine Kinder gefunden, die diesen Monat am Mittagessen teilnehmen!">
+
+                                                    <f:facet name="header">
+                                                        <p:outputPanel>
+                                                            <h:outputText value="Suche "/>
+                                                            <p:inputText id="globalFilter"
+                                                                         onkeyup="PF('childTableEating').filter()"
+                                                                         style="width:150px"
+                                                                         placeholder="Suchwort eingeben"/>
+                                                        </p:outputPanel>
+                                                    </f:facet>
+
+                                                    <f:facet name="{Exporters}"
+                                                             style="float: right; vertical-align: middle;">
+                                                        <div style="float: right; vertical-align: middle;">
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="print2"
+                                                                                name="pictures/extractors/printer.png"
+                                                                                width="32"/>
+                                                                <p:spacer width="10"/>
+                                                                <p:tooltip for="print2" value="Drucken" position="top"/>
+                                                                <p:printer target="childTableEating"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="excel2"
+                                                                                name="pictures/extractors/excel.png"
+                                                                                width="32"/>
+                                                                <p:spacer width="10"/>
+                                                                <p:tooltip for="excel2" value="Excel" position="top"/>
+                                                                <p:dataExporter type="xls" target="childTableEating"
+                                                                                fileName="Kinder_Essen"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="pdf2"
+                                                                                name="pictures/extractors/pdf.png"
+                                                                                width="32"/>
+                                                                <p:spacer width="10"/>
+                                                                <p:tooltip for="pdf2" value="PDF" position="top"/>
+                                                                <p:dataExporter type="pdf" target="childTableEating"
+                                                                                fileName="Kinder_Essen"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true">
+                                                                <p:graphicImage id="csv2"
+                                                                                name="pictures/extractors/csv.png"
+                                                                                width="32"/>
+                                                                <p:tooltip for="csv2" value="CSV" position="top"/>
+                                                                <p:dataExporter type="csv" target="childTableEating"
+                                                                                fileName="Kinder_Essen"/>
+                                                            </p:commandLink>
+                                                            <p:commandLink ajax="false" immediate="true" action="#{reportController.printLunchReportForMonthToJSON}">
+                                                                <p:graphicImage id="json"
+                                                                                name="pictures/extractors/json.png"
+                                                                                width="32" style="margin-left: 10px"/>
+                                                                <p:tooltip for="json" value="JSON" position="top"/>
+
+                                                            </p:commandLink>
+                                                        </div>
+                                                    </f:facet>
+                                                    <p:column headerText="Name"
+                                                              filterBy="#{report.child.firstName}"
+                                                              sortBy="#{report.child.firstName}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText value="#{report.child.firstName}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Mittagessen"
+                                                              filterBy="#{report.lunch.meal}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText value="#{report.lunch.meal}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Tag" filterBy="#{report.lunch.date}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText
+                                                                value="#{report.lunch.getFormattedOriginDate()}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Kosten"
+                                                              filterBy="#{report.lunch.cost}"
+                                                              filterStyle="display:none">
+                                                        <h:outputText value="#{report.lunch.cost}"/>
+                                                    </p:column>
+                                                    <p:summaryRow>
+                                                        <p:column colspan="3" style="text-align:right">
+                                                            <h:outputText value="Summe:"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <h:outputText
+                                                                    value="#{reportController.getLunchCostByChild(report.child)}">
+                                                                <f:convertNumber type="currency" currencySymbol="€"/>
+                                                            </h:outputText>
+                                                        </p:column>
+                                                    </p:summaryRow>
+                                                </p:dataTable>
+                                            </h:form>
+                                        </p:tab>
+                                    </p:accordionPanel>
+
+                                </div>
+                            </div>
+                            <!-- /.box -->
+
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                </div>
+
+                </body>
+
+
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            </ui:fragment>
+
+        </h:body>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <body class="theme-blue sidebar-mini sidebar-collapse">
+            <div class="wrapper">
+                <div class="content-wrapper" style="min-height: 1126px;">
+                    <section class="content">
+                        <div class="box">
+                            <div class="box-body">
+                                <h:form id="caregiverForm">
+                                    <p:dataTable id="caregiverTable" var="caregiver"
+                                                 widgetVar="caregiverTable"
+                                                 value="#{caregiverController.caregivers}" paginator="true"
+                                                 rows="10" paginatorPosition="bottom"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="10,25,50"
+                                                 emptyMessage="Es wurden keine Bezugspersonen gefunden!">
+
+                                        <f:facet name="header">
+                                            <p:outputPanel>
+                                                <h:outputText value="Suche "/>
+                                                <p:inputText id="globalFilter"
+                                                             onkeyup="PF('caregiverTable').filter()"
+                                                             style="width:150px" placeholder="Suchwort eingeben"/>
+                                            </p:outputPanel>
+                                        </f:facet>
+
+
+                                        <p:column headerText="Vorname" filterBy="#{caregiver.firstName}"
+                                                  sortBy="#{caregiver.firstName}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.firstName}"/>
+                                        </p:column>
+                                        <p:column headerText="Nachname" filterBy="#{caregiver.lastName}"
+                                                  sortBy="#{caregiver.lastName}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.lastName}"/>
+                                        </p:column>
+                                        <p:column headerText="Telefonnummer"
+                                                  filterBy="#{caregiver.phoneNumber}"
+                                                  sortBy="#{caregiver.phoneNumber}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.phoneNumber}"/>
+                                        </p:column>
+                                        <p:column headerText="Kind" filterBy="#{caregiver.child.fullname}"
+                                                  sortBy="#{caregiver.child.fullname}" filterStyle="display:none">
+                                            <h:outputText value="#{caregiver.child.fullname}"/>
+                                        </p:column>
+                                    </p:dataTable>
+
+                                    <p:confirmDialog global="true" showEffect="fade"
+                                                     hideEffect="fade" width="300">
+                                        <p:commandButton value="Ja" type="button"
+                                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                        <p:commandButton value="Nein" type="button"
+                                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                    </p:confirmDialog>
+
+
+                                </h:form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            </body>
+        </h:body>
+    </ui:define>
+</ui:composition>
