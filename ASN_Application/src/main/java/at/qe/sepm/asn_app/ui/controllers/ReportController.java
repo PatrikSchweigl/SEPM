@@ -181,7 +181,16 @@ public class ReportController {
         this.dateReport = dateReport;
     }
 
-    public double getLunchCostByChild(Child child){
+    public double getLunchCostByChildWeekly(Child child){
+        double sum = 0.0;
+        for(LunchReport lr : weeklyReport){
+            if(lr.getChild().getId().equals(child.getId())){
+                sum += lr.getLunch().getCost();
+            }
+        }
+        return sum;
+    }
+    public double getLunchCostByChildMonthly(Child child){
         double sum = 0.0;
         for(LunchReport lr : monthlyReport){
             if(lr.getChild().getId().equals(child.getId())){
@@ -190,6 +199,16 @@ public class ReportController {
         }
         return sum;
     }
+    public double getLunchCostByChildAnnually(Child child){
+        double sum = 0.0;
+        for(LunchReport lr : annualReport){
+            if(lr.getChild().getId().equals(child.getId())){
+                sum += lr.getLunch().getCost();
+            }
+        }
+        return sum;
+    }
+
     public List<LunchReport> getLunchReportByDate(String date){
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd k:mm:ss z yyyy");
         LinkedList<LunchReport> lunchReports = new LinkedList<>();
