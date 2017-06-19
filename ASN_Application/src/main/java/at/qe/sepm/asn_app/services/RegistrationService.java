@@ -37,7 +37,7 @@ public class RegistrationService {
 		Collection<Registration> reg = registrationRepository.findAll();
 		Collection<Registration> ret = new LinkedList<>();
 		for(Registration r : reg){
-			if(r.getDate().getDay() == date.getDay() && r.getDate().getMonth() == date.getMonth() && r.getDate().getYear() == date.getYear())
+			if(r.getDate().getDate() == date.getDate() && r.getDate().getMonth() == date.getMonth() && r.getDate().getYear() == date.getYear())
 				ret.add(r);
 		}
         return ret;
