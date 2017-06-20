@@ -58,7 +58,7 @@ public class ParentService {
                         "Ihr Benutzername: " + parent.getUsername() + "\n" +
                         "Ihr Passwort:     " + pwd +
                         "\n\n\n" +
-                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
                         "Viel Spaß wünschen das Kinderkrippen-Team!");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         parent.setPassword(passwordEncoder.encode(pwd));
@@ -74,7 +74,7 @@ public class ParentService {
                         " aus unserem System entfernt. Sollten Sie nur dieses Kind angemeldet haben, wird Ihr Status auf INAKTIV gesetzt und Sie genießen" +
                         " nur noch beschränkte Zugriffsrechte." +
                         "\n\nSollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
-                        "Liebe Grüße das Kinderkrippen-Team!");
+                        "Liebe Grüße wünscht das Kinderkrippen-Team!");
         return parentRepository.save(parent);
     }
 

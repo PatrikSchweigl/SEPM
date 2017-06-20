@@ -57,7 +57,7 @@ public class RegistrationService {
 
     public void deleteRegistration(Registration registration){
         AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
-                "DEREGISTER: "+registration.getChild().getFirstName()+" "+registration.getChild().getLastName(),
+                "DEREGISTER: "+registration.getChild().getFirstName()+" "+registration.getChild().getLastName()+" ["+registration.getId()+"]",
                 new Date());
         auditLogService.saveAuditLog(auditLog);
         registrationRepository.delete(registration);

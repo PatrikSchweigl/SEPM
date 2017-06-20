@@ -55,7 +55,7 @@ public class EmployeeService {
                         "Ihr Benutzername: " + employee.getUsername() + "\n" +
                         "Ihr Passwort: " + pwd +
                         "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
-                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
                         "Viel Spaß wünscht das Kinderkrippen-Team!");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         employee.setPassword(passwordEncoder.encode(pwd));

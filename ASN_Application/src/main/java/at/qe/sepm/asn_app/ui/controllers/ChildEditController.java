@@ -86,7 +86,6 @@ public class ChildEditController {
         Parent parent = childEdit.getPrimaryParent();
         parent.getChildren().remove(childEdit);
         Collection<Registration> registrations = registrationService.getAllRegistrationsByChild(childEdit.getId());
-        System.err.println(registrations.isEmpty());
             for (Registration r: registrations) {
                 registrationService.deleteRegistration(r);
             }

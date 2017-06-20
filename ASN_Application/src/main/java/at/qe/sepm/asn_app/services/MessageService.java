@@ -58,8 +58,6 @@ public class MessageService {
     }
     
     public void deleteMessage(Message message){
-    	System.err.println("WOHOOOOOOO");
-    	System.err.println(message.toString());
         AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
         messageRepository.delete(message);

@@ -52,14 +52,11 @@ public class RegistrationController {
     	SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd k:mm:ss z yyyy"); 
     	Date d = new Date();
 		try {
-			System.err.println("HEEEEERE I AM");
-			System.err.println(date);
-
 			d = formatter.parse(date);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(d);
 			cal.add(Calendar.DAY_OF_MONTH, 1);
-			System.err.println(d);
+
 			d = cal.getTime();
 		} catch (ParseException e) {
 			e.printStackTrace();

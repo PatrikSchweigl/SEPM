@@ -101,7 +101,7 @@ public class UserService {
 		mailService.sendEmail(userData.getEmail(), "Care4Fun-App - Passwortzuruecksetzung",
 				"Guten Tag " + userData.getFirstName() + " " + userData.getLastName() + "!\n\n"
 						+ "Soeben wurde Ihr Passwort zurueckgesetzt.\n\n" + "Das neue Passwort lautet:  " + sb + "\n"
-						+ "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n"
+						+ "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n"
 						+ "Viel Spaß wünscht das Kinderkrippen-Team!");
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userData.setPassword(passwordEncoder.encode(sb));

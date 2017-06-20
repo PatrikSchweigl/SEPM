@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 
+import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Hibernate;
@@ -33,11 +34,14 @@ public class CaregiverController {
     private CaregiverService caregiverService;
     @Autowired
     private SessionInfoBean sessionInfoBean;
+    @Autowired
+    private MailService mailService;
 
     private Caregiver caregiver;
     private Caregiver caregiverEdit;
 
     private Collection<Caregiver> caregivers;
+    private Collection<Caregiver> caregiversEmployee;
 
     public void setCaregivers(Collection<Caregiver> caregivers) {
         this.caregivers = caregivers;
@@ -46,6 +50,14 @@ public class CaregiverController {
     public void setCaregiver(Caregiver caregiverEdit) {
         this.caregiver = caregiverEdit;
         doReloadCaregiver();
+    }
+
+    public Collection<Caregiver> getCaregiversEmployee() {
+        return caregiversEmployee;
+    }
+
+    public void setCaregiversEmployee(Collection<Caregiver> caregiversEmployee) {
+        this.caregiversEmployee = caregiversEmployee;
     }
 
     /**
@@ -74,6 +86,7 @@ public class CaregiverController {
 
     @PostConstruct
     public void initList() {
+        setCaregiversEmployee(caregiverService.getAllCaregiversByEligibleTrue());
         setCaregivers(caregiverService.getCaregiversForParent(sessionInfoBean.getCurrentUserName()));
     }
 
@@ -127,6 +140,13 @@ public class CaregiverController {
     public void setEligibleToTrue() {
         caregiverEdit.setEligible(true);
         caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
+
+        mailService.sendEmail(caregiverEdit.getChild().getPrimaryParent().getEmail(),"Care4Fun - Bestätigung Bezugsperson",
+                "Guten Tag " + caregiverEdit.getChild().getPrimaryParent().getFirstName() + " " + caregiverEdit.getChild().getPrimaryParent().getFirstName() + "!\n\n" +
+                "Soeben wurde die von Ihnen hinzugefügte Bezugsperson "+caregiverEdit.getFullName()+" als bestätigt markiert.\n\n" +
+                "Bitte kontrollieren Sie, ob im Bearbeitungsfenster für diese Person bei 'Bestätigt' JA eingetragen wurde.\n" +
+                "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
+                "Liebe Grüße wünscht das Kinderkrippen-Team!");
     }
 
     public void doSaveCaregiverEdit() {

@@ -62,7 +62,7 @@ public class ParentEditController {
                         "Guten Tag " + parent.getFirstName() + " " + parent.getLastName() + "!\n\n" +
                                 "Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
                                 "Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
-                                "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                                "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
                                 "Viel Spaß wünscht das Kinderkrippen-Team!");
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('parentEditDialog').hide()");
@@ -87,7 +87,7 @@ public class ParentEditController {
                         "Ihr Benutzername: "+ parent.getUsername() + "\n" +
                         "Ihr Passwort: passwd" +
                         "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
-                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
                         "Viel Spaß wünscht das Kinderkrippen-Team!");
         parentService.resetPassword(parent);
     }

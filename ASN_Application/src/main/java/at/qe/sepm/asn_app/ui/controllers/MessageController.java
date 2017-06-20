@@ -89,7 +89,7 @@ public class MessageController extends Thread{
         while(iterator.hasNext()){
             UserData user = iterator.next();
             UserData sender = userService.loadUser(message.getUsername());
-            mailService.sendEmail(user.getEmail(),"Neuigkeiten", "Guten Tag "+ user.getFirstName()+" "+user.getLastName()+
+            mailService.sendEmail(user.getEmail(),"Care4Fun - Neuigkeiten", "Guten Tag "+ user.getFirstName()+" "+user.getLastName()+
                     "!\n\nEs gibt eine neue Nachricht von "+sender.getFirstName() +" "+sender.getLastName()+ " auf unserer Pinnwand für Sie.\n\n" +
                   "Schönen Tag wünscht das Kinderkrippen-Team!");
 

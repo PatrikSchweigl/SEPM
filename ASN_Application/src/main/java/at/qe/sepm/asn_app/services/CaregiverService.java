@@ -54,6 +54,10 @@ public class CaregiverService {
     	return caregiverRepository.getCaregiversByEligibleFalse();
     }
 
+    public Collection<Caregiver> getAllCaregiversByEligibleTrue(){
+        return caregiverRepository.getCaregiversByEligibleTrue();
+    }
+
     public void deleteCaregiver(Caregiver caregiver){
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

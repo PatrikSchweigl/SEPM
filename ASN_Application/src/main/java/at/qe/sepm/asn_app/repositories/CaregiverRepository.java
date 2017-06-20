@@ -31,4 +31,8 @@ public interface CaregiverRepository extends AbstractRepository <Caregiver, Long
     @Query("SELECT u FROM UserData u WHERE u.userRole = 'ADMIN'")
     List<Caregiver> findAllAdmin();
     */
+
+	@Query("SELECT c FROM Caregiver c WHERE c.eligible = TRUE")
+	Collection<Caregiver> getCaregiversByEligibleTrue();
+
 }

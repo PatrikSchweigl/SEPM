@@ -73,7 +73,7 @@ public class EmployeeEditController {
 						"Guten Tag " + employee.getFirstName() + " " + employee.getLastName() + "!\n\n" +
 								"Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
 								"Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
-								"Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+								"Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
 								"Viel Spaß wünscht das Kinderkrippen-Team!");
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('employeeEditDialog').hide()");

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Emanuel Striednig <emanuel.striednig@student.uibk.ac.at>
@@ -25,8 +27,9 @@ public class AuditLogController {
 	 * @return
 	 */
 	public Collection<AuditLog> getAuditLogs() {
-
-		return auditLogRepository.findAll();
+		Collection<AuditLog> list = auditLogRepository.findAll();
+		Collections.reverse((List<?>) list);
+		return list;
 	}
 
 }
