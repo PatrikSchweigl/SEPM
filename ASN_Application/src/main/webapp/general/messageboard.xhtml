@@ -75,7 +75,7 @@
 
                                                 <p:dialog header="Nachricht schreiben" id="createMessage"
                                                           widgetVar="createMessage" modal="true" showEffect="fade"
-                                                          hideEffect="fade" resizable="false">
+                                                          hideEffect="fade" resizable="false" closeOnEscape="true">
                                                     <p:messages id="messagesMessageBoard" autoUpdate="true"/>
                                                     <p:inputTextarea id="messageInput"
                                                                      value="#{messageController.message.message}" rows="5" cols="30"

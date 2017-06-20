@@ -82,12 +82,13 @@
 							<div align="center" onclick="$('input[type=file]').click()">
 								<p:graphicImage id="out-image-edit"
 									style="max-height: 200px; max-width: 200px"
-									name="pictures/profile_pictures/#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}">
+									name="pictures/profile_pictures/#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
+									rendered="#{!userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName().equals('emptypicture.png')}">
 								</p:graphicImage>
 								<p:outputPanel>
 									<p:graphicImage
-										rendered="#{empty userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName()}"
-										name="pictures/profile_pictures/emptypicture.png"
+										rendered="#{userService.loadUser(sessionInfoBean.getCurrentUserData().getUsername()).getImgName().equals('emptypicture.png')}"
+										name="pictures/profile_pictures/empty_profile_pdf.png" style="max-height: 200px; max-width: 200px"
 										value="Bild hochladen"></p:graphicImage>
 								</p:outputPanel>
 								<br />
