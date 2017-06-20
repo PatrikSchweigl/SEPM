@@ -9,7 +9,9 @@ import org.openqa.selenium.*;
 
 
 /**
- *
+ * This test logs in as a parent and changed all possible own data.
+ * After the changes have been made it logs in as an employee and
+ * check if the changes have been made successfully. 
  */
 public class ChangeOwnData {
     private WebDriver driver;
@@ -97,13 +99,6 @@ public class ChangeOwnData {
         // Search for the parent via the username in the search bar.
         driver.findElement(By.id("parentForm:parentTable:globalFilter")).clear();
         driver.findElement(By.id("parentForm:parentTable:globalFilter")).sendKeys("bernd");
-
-        // Click on details.
-        //driver.findElement(By.id("parentForm:parentTable:0:j_idt150")).click();
-        //Thread.sleep(1000);
-
-        // Close the modal again.
-        //driver.findElement(By.xpath("//div[@id='parentForm:parentEditDialog']/div/a/span")).click();
         Thread.sleep(1000);
 
         // Logout.
