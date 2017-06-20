@@ -72,7 +72,7 @@ public class Parent extends UserData {
     }
 
     public boolean isStatus() {
-        return status;
+        return children.size() > 0;
     }
 
     public void setStatus(boolean status) {
