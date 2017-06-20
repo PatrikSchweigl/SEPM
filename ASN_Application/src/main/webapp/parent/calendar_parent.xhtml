@@ -28,6 +28,7 @@
                                                             <p:commandButton style="width:250px"
                                                                              oncomplete="PF('massSignUpDialog').show()"
                                                                              value="Schnellanmeldung"
+																			 rendered="#{not empty childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
                                                             />
 														</div>
 													</h:form>
