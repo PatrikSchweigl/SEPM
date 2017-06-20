@@ -5,12 +5,17 @@ package at.qe.sepm.asn_app.tests.selenium.admin;
  * on 19.06.17 19:54 CEST.
  */
 
+import at.qe.sepm.asn_app.tests.selenium.general.Messageboard;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        AuditLog.class,
+        CalendarAppointment.class,
+        CalendarSwitchViews.class,
         CreateEditDeleteEmployee.class,
+        LoginLogout.class,
         Messageboard.class,
         SearchSortEmployee.class
 })
