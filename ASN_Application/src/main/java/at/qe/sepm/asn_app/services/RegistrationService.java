@@ -74,4 +74,8 @@ public class RegistrationService {
     public List<Registration> getRegistrationInTimeWindowII(Date start, Date end){
         return registrationRepository.getRegistrationInTimeWindowII(start, end);
     }
+
+    public List<Registration> getAllRegistrationsByChild(Long childId){
+        return registrationRepository.getRegistrationsByChild(childId);
+    }
 }

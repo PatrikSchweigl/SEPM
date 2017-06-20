@@ -25,9 +25,10 @@
 												<div align="right" style="margin-bottom: 10px;">
 													<h:form>
 														<div style="float: right;">
-                                                            <p:commandButton style="width:250px"
+                                                            <p:commandButton style="width:250px; height:100px; font-size:1.4em"
                                                                              oncomplete="PF('massSignUpDialog').show()"
                                                                              value="Schnellanmeldung"
+																			 rendered="#{not empty childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
                                                             />
 														</div>
 													</h:form>

@@ -1,9 +1,11 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.transaction.TransactionSystemException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.Collection;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -24,6 +27,8 @@ public class ChildEditController {
 
     @Autowired
     private ChildService childService;
+    @Autowired
+    private RegistrationService registrationService;
     @Autowired
     private ChildController childController;
     @Autowired
@@ -80,6 +85,12 @@ public class ChildEditController {
     public void doDeleteChild() {
         Parent parent = childEdit.getPrimaryParent();
         parent.getChildren().remove(childEdit);
+        Collection<Registration> registrations = registrationService.getAllRegistrationsByChild(childEdit.getId());
+        System.err.println(registrations.isEmpty());
+            for (Registration r: registrations) {
+                registrationService.deleteRegistration(r);
+            }
+
         childService.deleteChild(childEdit);
         childEdit = null;
 
