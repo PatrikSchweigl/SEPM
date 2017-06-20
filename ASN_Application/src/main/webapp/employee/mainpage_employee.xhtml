@@ -71,7 +71,7 @@
 																<h:outputText value="#{reg.child.lastName}" />
 															</p:column>
 															<p:column headerText="Geburtsdatum">
-																<h:outputText value="#{reg.child.birthday}" />
+																<h:outputText value="#{reg.child.birthday}" /><ui:fragment rendered="#{childController.checkBirthday(reg.child)}"><p:spacer width="10"/><i class="fa fa-birthday-cake" /></ui:fragment>
 															</p:column>
 															<p:column headerText="Anmerkung">
 																<h:outputText value="#{reg.note}" />
