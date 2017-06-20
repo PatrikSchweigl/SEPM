@@ -23,7 +23,7 @@
 									</div>
 									<h:form id="childForm">
 
-										<p:dataTable id="childTable" var="child" rowStyleClass="#{childController.checkBirthday(child) ? 'important' : null}"
+										<p:dataTable id="childTable" var="child"
 											widgetVar="childTable" value="#{childController.children}"
 											paginator="true"  paginatorPosition="bottom"
 											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"

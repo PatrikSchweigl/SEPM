@@ -11,7 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SearchSortEmployee {
+public class CalendarSwitchViews {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -25,7 +25,7 @@ public class SearchSortEmployee {
   }
 
   @Test
-  public void testSearchSortEmployee() throws Exception {
+  public void testCalendar() throws Exception {
     driver.get(baseUrl + "/login.xhtml");
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
@@ -33,58 +33,55 @@ public class SearchSortEmployee {
     driver.findElement(By.id("password")).sendKeys("passwd");
     driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).click();
+    driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[2]/a/i")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).sendKeys("a");
+    driver.findElement(By.xpath("(//button[@type='button'])[4]")).click();
     Thread.sleep(1000);
-    driver.navigate().refresh();
+    driver.findElement(By.xpath("(//button[@type='button'])[6]")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).clear();
+    driver.findElement(By.xpath("(//button[@type='button'])[6]")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).sendKeys("b");
+    driver.findElement(By.xpath("(//button[@type='button'])[4]")).click();
     Thread.sleep(1000);
-    driver.navigate().refresh();
+    driver.findElement(By.xpath("(//button[@type='button'])[8]")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).clear();
+    driver.findElement(By.xpath("(//button[@type='button'])[9]")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).sendKeys("c");
+    driver.findElement(By.xpath("(//button[@type='button'])[7]")).click();
     Thread.sleep(1000);
-    driver.navigate().refresh();
+    //driver.findElement(By.id("j_idt117:j_idt118")).click();
+    driver.findElement(By.id("j_idt118:j_idt119")).click();
     Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:globalFilter")).clear();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    //driver.findElement(By.xpath("//div[@id='j_idt120']/h3[2]")).click();
+    driver.findElement(By.xpath("//div[@id='j_idt121']/h3[2]")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt134")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt135")).click();
+    //driver.findElement(By.id("j_idt117:j_idt118")).click();
+    driver.findElement(By.id("j_idt118:j_idt119")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt134")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt135")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    //driver.findElement(By.id("j_idt117:j_idt119")).click();
+    driver.findElement(By.id("j_idt118:j_idt120")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt136")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt137")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    //driver.findElement(By.xpath("//div[@id='j_idt119']/h3[2]")).click();
+    driver.findElement(By.xpath("//div[@id='j_idt120']/h3[2]")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt136")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt137")).click();
+    //driver.findElement(By.id("j_idt117")).click();
+    driver.findElement(By.id("j_idt118")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt138")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt139")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    //driver.findElement(By.id("j_idt117:j_idt120")).click();
+    driver.findElement(By.id("j_idt118:j_idt121")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt138")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt139")).click();
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
+    //driver.findElement(By.xpath("//div[@id='j_idt120']/h3[2]")).click();
+    driver.findElement(By.xpath("//div[@id='j_idt121']/h3[2]")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt140")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt141")).click();
+    //driver.findElement(By.id("j_idt117:j_idt118")).click();
+    driver.findElement(By.id("j_idt118:j_idt119")).click();
     Thread.sleep(1000);
-    //driver.findElement(By.id("employeeForm:employeeTable:j_idt140")).click();
-    driver.findElement(By.id("employeeForm:employeeTable:j_idt141")).click();
-    Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:excel")).click();
-    Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:pdf")).click();
-    Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:csv")).click();
-    Thread.sleep(1000);
-    driver.findElement(By.id("employeeForm:employeeTable:print")).click();
-    Thread.sleep(1000);
+    // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
     driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[2]/a/i")).click();
   }
 

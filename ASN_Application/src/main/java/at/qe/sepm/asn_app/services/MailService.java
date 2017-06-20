@@ -38,7 +38,7 @@ public class MailService {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                mimeMessage.setFrom("asn.sepm@gmail.com");
+                mimeMessage.setFrom("care4fun.sepm@gmail.com");
                 mimeMessage.setRecipient(Message.RecipientType.TO,
                         new InternetAddress(recipientMail));
                 mimeMessage.setText(message);

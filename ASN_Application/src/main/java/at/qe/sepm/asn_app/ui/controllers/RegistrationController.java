@@ -29,24 +29,23 @@ public class RegistrationController {
     private Registration registrationEdit;
     private Collection<Registration> registrations;
 
+
+
     public Collection<Registration> getRegistrations(){
         return registrations;
     }
     
-    public Collection<Registration> getAllRegistrationsYear(){
-    	return getRegistrationReportForYear(0);
-    }
-    
-    public Collection<Registration> getAllRegistrationsMonth(){
-    	return getRegistrationReportForMonth(0);
-    }
-    
-    public Collection<Registration> getAllRegistrationsWeek(){
-    	return getRegistrationReportForWeek(0);
-    }
+
 
     public Collection<Registration> getRegistrationsByParent(){
         return registrationService.getAllRegistrationsByParent();
+    }
+
+
+
+    @PostConstruct
+    public void initList(){
+        setRegistrations(registrationService.getAllRegistrations());
     }
 
     public Collection<Registration> getRegistrationsByDate(String date){
@@ -102,10 +101,6 @@ public class RegistrationController {
         registration = new Registration();
     }
 
-    @PostConstruct
-    public void initList(){
-        setRegistrations(registrationService.getAllRegistrations());
-    }
 
     public Registration getRegistrationEdit() {
         return registrationEdit;
@@ -131,42 +126,4 @@ public class RegistrationController {
     }
 
 
-
-
-
-    public List<Registration> getRegistrationReportForMonth(int i){
-        Date start = new Date();
-        start.setDate(1);
-        start.setMonth((start.getMonth() + i)%12);
-        Date end = new Date();
-        end.setDate(1);
-        end.setMonth((end.getMonth() + i + 1)%12);
-        if(end.getMonth() == 0){
-            end.setYear(end.getYear() + 1);
-        }
-        return registrationService.getRegistrationInTimeWindowIE(start, end);
-    }
-
-    public List<Registration> getRegistrationReportForYear(int i){
-        Date start = new Date();
-        start.setDate(1);
-        start.setMonth(0);
-        start.setYear(start.getYear() + i);
-        Date end = new Date();
-        end.setDate(1);
-        end.setMonth(0);
-        end.setYear(end.getYear() + i + 1);
-        return registrationService.getRegistrationInTimeWindowIE(start, end);
-    }
-
-    public List<Registration> getRegistrationReportForWeek(int i){
-        Date[] dates = DateUtils.getWeek(i);
-        if(dates.length < 1){
-            return null;
-        }
-        Date start = dates[0];
-        Date end = dates[dates.length-1];
-        return registrationService.getRegistrationInTimeWindowII(start, end);
-
-    }
 }
