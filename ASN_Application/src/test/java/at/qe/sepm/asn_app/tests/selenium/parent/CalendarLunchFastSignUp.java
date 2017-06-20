@@ -8,10 +8,15 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 
 
+/**
+ * This test logs in as a parent and signs up a child for the next week
+ * including lunch with the fast sign-up button on the calendar view.
+ */
 public class CalendarLunchFastSignUp {
     private WebDriver driver;
     private String baseUrl;
     private StringBuffer verificationErrors = new StringBuffer();
+
 
     @Before
     public void setUp() throws Exception {
@@ -19,6 +24,7 @@ public class CalendarLunchFastSignUp {
         baseUrl = "http://192.168.33.10:8080/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
+
 
     @Test
     public void testCalendarSwitchViewsParent2() throws Exception {
@@ -84,6 +90,7 @@ public class CalendarLunchFastSignUp {
         // Logout.
         driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[3]/a/i")).click();
     }
+
 
     @After
     public void tearDown() throws Exception {
