@@ -22,6 +22,7 @@ public class AuditLog {
 
   @Test
   public void testAuditLog() throws Exception {
+    // Login
     driver.get(baseUrl + "/login.xhtml");
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("admin");
@@ -29,8 +30,12 @@ public class AuditLog {
     driver.findElement(By.id("password")).sendKeys("passwd");
     driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
     Thread.sleep(1000);
+
+    // Navigate to the AuditLog.
     driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[4]/a/i")).click();
     Thread.sleep(1000);
+
+    // Change the list size from 10 to 25 and then 50.
     driver.findElement(By.id("j_idt118:auditLogTable:j_id2")).click();
     Thread.sleep(1000);
     new Select(driver.findElement(By.id("j_idt118:auditLogTable:j_id2"))).selectByVisibleText("25");
@@ -41,6 +46,8 @@ public class AuditLog {
     new Select(driver.findElement(By.id("j_idt118:auditLogTable:j_id2"))).selectByVisibleText("50");
     driver.findElement(By.cssSelector("option[value=\"50\"]")).click();
     Thread.sleep(1000);
+
+    // Search for different keywords in the search bar.
     driver.findElement(By.id("j_idt118:auditLogTable:globalFilter")).clear();
     driver.findElement(By.id("j_idt118:auditLogTable:globalFilter")).sendKeys("task");
     Thread.sleep(1000);
@@ -65,8 +72,15 @@ public class AuditLog {
     driver.findElement(By.id("j_idt118:auditLogTable:globalFilter")).clear();
     driver.findElement(By.id("j_idt118:auditLogTable:globalFilter")).sendKeys("");
     Thread.sleep(1000);
+
+    // Reload the page to refreshen the list.
     driver.navigate().refresh();
     Thread.sleep(1000);
+    new Select(driver.findElement(By.id("j_idt118:auditLogTable:j_id2"))).selectByVisibleText("50");
+    driver.findElement(By.cssSelector("option[value=\"50\"]")).click();
+    Thread.sleep(1000);
+
+    // Sort the AuditLog with all options.
     driver.findElement(By.id("j_idt118:auditLogTable:j_idt134")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("j_idt118:auditLogTable:j_idt134")).click();
@@ -87,6 +101,8 @@ public class AuditLog {
     Thread.sleep(1000);
     driver.findElement(By.id("j_idt118:auditLogTable:j_idt138")).click();
     Thread.sleep(1000);
+
+    // Export the AuditLog.
     driver.findElement(By.id("j_idt118:auditLogTable:excel")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("j_idt118:auditLogTable:pdf")).click();
@@ -95,6 +111,8 @@ public class AuditLog {
     Thread.sleep(1000);
     driver.findElement(By.id("j_idt118:auditLogTable:print")).click();
     Thread.sleep(1000);
+
+    // Logout again.
     driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[2]/a/i")).click();
   }
 
