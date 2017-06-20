@@ -45,7 +45,7 @@ public class EmployeeService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [EMPLOYEE]", new Date());
             auditLogRepository.save(log);
         }
     	String pwd = userService.generatePasswordNew(employee.getEmail());
