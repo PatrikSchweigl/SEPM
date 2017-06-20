@@ -1,10 +1,13 @@
 package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.CaregiverRepository;
+import at.qe.sepm.asn_app.repositories.ChildRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -29,6 +33,8 @@ public class CaregiverService {
 
     @Autowired
     private CaregiverRepository caregiverRepository;
+    @Autowired
+    private ChildRepository childRepository;
 
     @Autowired
     private AuditLogRepository auditLogRepository;
@@ -68,6 +74,15 @@ public class CaregiverService {
     private String getAuthenticatedUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
+    }
+
+    public Collection<Caregiver> getCaregiversForParent(String usrn){
+        Collection<Caregiver> ret = new HashSet<Caregiver>();
+        Collection<Child> children = childRepository.getChildrenByParentUsername(usrn);
+        for(Child c : children){
+            ret.addAll(caregiverRepository.getAllCaregiversByChildId(c.getId()));
+        }
+        return ret;
     }
 
 	public Collection<Caregiver> getAllCaregiversByChildId(Long id) {

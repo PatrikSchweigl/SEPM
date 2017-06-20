@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 
+import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Hibernate;
 import org.primefaces.context.RequestContext;
@@ -30,6 +31,9 @@ public class CaregiverController {
 
     @Autowired
     private CaregiverService caregiverService;
+    @Autowired
+    private SessionInfoBean sessionInfoBean;
+
     private Caregiver caregiver;
     private Caregiver caregiverEdit;
 
@@ -70,7 +74,7 @@ public class CaregiverController {
 
     @PostConstruct
     public void initList() {
-        setCaregivers(caregiverService.getAllCaregivers());
+        setCaregivers(caregiverService.getCaregiversForParent(sessionInfoBean.getCurrentUserName()));
     }
 
     public Caregiver getCaregiver() {

@@ -14,7 +14,7 @@ import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
  */
 public interface CaregiverRepository extends AbstractRepository <Caregiver, Long>{
 
-	@Query("SELECT c FROM Caregiver c WHERE c.id = :id")
+	@Query("SELECT c FROM Caregiver c WHERE c.child.id = :id")
 	Collection<Caregiver> getAllCaregiversByChildId(@Param("id")Long id);
 	
 	@Query("SELECT c FROM Caregiver c WHERE c.eligible = FALSE")
