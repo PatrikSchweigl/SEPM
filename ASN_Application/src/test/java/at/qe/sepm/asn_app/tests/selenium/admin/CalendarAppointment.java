@@ -49,7 +49,7 @@ public class CalendarAppointment {
     driver.findElement(By.id("sheduleForm:title")).sendKeys("Termin");
     Thread.sleep(1000);
 
-    // Set the begin date.
+    // Set the begin time.
     driver.findElement(By.id("sheduleForm:from_input")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("sheduleForm:from_input")).clear();
@@ -58,7 +58,7 @@ public class CalendarAppointment {
     driver.findElement(By.xpath("//table[@id='sheduleForm:eventDetails']/tbody/tr[2]/td")).click();
     Thread.sleep(1000);
 
-    // Set the end date.
+    // Set the end time.
     driver.findElement(By.id("sheduleForm:to_input")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("sheduleForm:to_input")).clear();
@@ -67,15 +67,19 @@ public class CalendarAppointment {
     driver.findElement(By.xpath("//table[@id='sheduleForm:eventDetails']/tbody/tr/td")).click();
     Thread.sleep(1000);
 
-    // Save the appointment
+    // Save the appointment.
     driver.findElement(By.id("sheduleForm:addButton")).click();
     Thread.sleep(1000);
 
-
+    // Edit the appointment.
     driver.findElement(By.xpath("//div[@id='sheduleForm:schedule_container']/div[2]/div/table/tbody/tr/td/div/div/div[5]/div[2]/table/tbody/tr/td/a/div")).click();
     Thread.sleep(1000);
+
+    // Edit the title.
     driver.findElement(By.id("sheduleForm:title")).clear();
     driver.findElement(By.id("sheduleForm:title")).sendKeys("TerminEdit");
+
+    // Edit the begin time.
     driver.findElement(By.id("sheduleForm:from_input")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("sheduleForm:from_input")).clear();
@@ -83,6 +87,8 @@ public class CalendarAppointment {
     driver.findElement(By.id("sheduleForm:from_input")).sendKeys("26/06/2017 13:47");
     driver.findElement(By.xpath("//table[@id='sheduleForm:eventDetails']/tbody/tr[2]/td")).click();
     Thread.sleep(1000);
+
+    // Edit the end time.
     driver.findElement(By.id("sheduleForm:to_input")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("sheduleForm:to_input")).clear();
@@ -90,12 +96,18 @@ public class CalendarAppointment {
     driver.findElement(By.id("sheduleForm:to_input")).sendKeys("26/06/2017 15:00");
     driver.findElement(By.xpath("//table[@id='sheduleForm:eventDetails']/tbody/tr/td")).click();
     Thread.sleep(1000);
+
+    // Save the changes.
     driver.findElement(By.id("sheduleForm:addButton")).click();
     Thread.sleep(1000);
+
+    // Delete the appointment again.
     driver.findElement(By.xpath("//div[@id='sheduleForm:schedule_container']/div[2]/div/table/tbody/tr/td/div/div/div[5]/div[2]/table/tbody/tr/td/a/div")).click();
     Thread.sleep(1000);
     driver.findElement(By.id("sheduleForm:deleteButton")).click();
     Thread.sleep(1000);
+
+    // Logout
     driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[2]/a/i")).click();
   }
 
