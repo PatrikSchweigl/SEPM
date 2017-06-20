@@ -16,41 +16,41 @@
 							<li class="treeview"><a
 								href="/employee/mainpage_employee.xhtml"> <i
 									class="fa fa-home fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Startseite</span>
+									style="padding-left: 5px; font-size: 25px">Startseite</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 							<li class="treeview"><a href="/admin/adminpage_admin.xhtml">
 									<i class="fa fa-male fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Adminstrator</span>
+									style="padding-left: 5px; font-size: 25px">Adminstrator</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/children_employee.xhtml"> <i
 									class="fa fa-child fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kinder</span>
+									style="padding-left: 5px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/parentspage_admin.xhtml"> <i
 									class="fa fa-users fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Elternteile</span>
+									style="padding-left: 5px; font-size: 25px">Elternteile</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/caregiver_employee.xhtml"> <i
 									class="fa fa-female fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Bezugspersonen</span>
+									style="padding-left: 5px; font-size: 25px">Bezugsperson</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('PARENT') and !sessionInfoBean.inactiveParent}">
 							<li class="treeview"><a href="/parent/children_parent.xhtml">
 									<i class="fa fa-child fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Kinder</span>
+									style="padding-left: 5px; font-size: 25px">Kinder</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
@@ -58,7 +58,7 @@
 							<li class="dropdown tasks-menu"><a
 								href="/parent/calendar_parent.xhtml"> <i
 									class="fa fa-calendar fa-3x" title="Kalender"></i><span
-									style="padding-left: 40px; font-size: 25px">Kalender</span>
+									style="padding-left: 5px; font-size: 25px">Kalender</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
@@ -66,48 +66,48 @@
 							<li class="dropdown tasks-menu"><a
 								href="/employee/calendar_employee.xhtml"> <i
 									class="fa fa-calendar fa-3x" title="Kalender"></i><span
-									style="padding-left: 40px; font-size: 25px">Kalender</span>
+									style="padding-left: 5px; font-size: 25px">Kalender</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/lunch_employee.xhtml"> <i
 									class="fa fa-cutlery fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Essen</span>
+									style="padding-left: 5px; font-size: 25px">Essen</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/employee/taskList_employee.xhtml"> <i
 									class="fa fa-tasks fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Aufgaben</span>
+									style="padding-left: 5px; font-size: 25px">Aufgaben</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('ADMIN')}">
 							<li class="treeview"><a
 								href="/admin/employeepage_admin.xhtml"> <i
 									class="fa fa-female fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Angestellte</span>
+									style="padding-left: 5px; font-size: 25px">Angestellte</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('ADMIN') or sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a href="/employee/logpage_admin.xhtml">
 									<i class="fa fa-file-archive-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Logdatei</span>
+									style="padding-left: 5px; font-size: 25px">Logdatei</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{sessionInfoBean.hasRole('EMPLOYEE')}">
 							<li class="treeview"><a
 								href="/nursery/nursery_information.xhtml"><i
 									class="fa fa-info-circle fa-3x "></i> <span
-									style="padding-left: 40px; font-size: 25px">KiTa Info</span> </a></li>
+									style="padding-left: 5px; font-size: 25px">KiTa Info</span> </a></li>
 						</h:panelGroup>
 												<h:panelGroup
 							rendered="#{sessionInfoBean.hasRole('EMPLOYEE') or sessionInfoBean.hasRole('PARENT')}">
 							<li class="treeview"><a href="/general/picturegalery.xhtml">
 									<i class="fa fa-picture-o fa-3x"></i> <span
-									style="padding-left: 40px; font-size: 25px">Bildergalerie</span>
+									style="padding-left: 5px; font-size: 25px">Bildergalerie</span>
 							</a></li>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{!sessionInfoBean.inactiveParent}">
@@ -115,7 +115,7 @@
 								onclick="#{scheduleView.test()}"
 								href="/general/messageboard.xhtml"> <i
 									class="fa fa-sticky-note-o fa-3x" title="Messageboard"></i><span
-									style="padding-left: 40px; font-size: 25px">Pinnwand</span>
+									style="padding-left: 5px; font-size: 25px">Pinnwand</span>
 							</a></li>
 						</h:panelGroup>
 					</ul>

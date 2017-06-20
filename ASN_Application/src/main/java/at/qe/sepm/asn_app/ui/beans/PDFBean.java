@@ -76,23 +76,27 @@ public class PDFBean {
 		table.setWidthPercentage(100);
 		Paragraph childFirstname = new Paragraph(child.getFirstName(), redFont);
 		PdfPCell cell = new PdfPCell(childFirstname);
+		cell.setMinimumHeight(35f);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(new Paragraph("Vorname:", catFont));
 		table.addCell(cell);
 		Paragraph childSurname = new Paragraph(child.getLastName(), redFont);
 		PdfPCell cell2 = new PdfPCell(childSurname);
+		cell2.setMinimumHeight(35f);
 		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(new Paragraph("Familienname:", catFont));
 		table.addCell(cell2);
 		Paragraph childBirthday = new Paragraph(child.getBirthday(), redFont);
 		PdfPCell cell3 = new PdfPCell(childBirthday);
+		cell3.setMinimumHeight(35f);
 		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Geburtsdatum", catFont));
+		table.addCell(new Paragraph("Geburtsdatum:", catFont));
 		table.addCell(cell3);
 		Paragraph childGender = new Paragraph(child.getGender().toString(), redFont);
 		PdfPCell cell4 = new PdfPCell(childGender);
 		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Geschlecht", catFont));
+		cell4.setMinimumHeight(35f);
+		table.addCell(new Paragraph("Geschlecht:", catFont));
 		table.addCell(cell4);
 		Paragraph childReligion;
 		if(child.getReligion() == null)
@@ -102,13 +106,14 @@ public class PDFBean {
 		
 		PdfPCell cell9 = new PdfPCell(childReligion);
 		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
+		cell9.setMinimumHeight(35f);
+		table.addCell(new Paragraph("Religionsbekenntnis:", catFont));
 		table.addCell(cell9);
 		Paragraph childParent1 = new Paragraph(child.getPrimaryParentFullName(), redFont);
 		PdfPCell cell5 = new PdfPCell(childParent1);
-
+		cell5.setMinimumHeight(35f);
 		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Primärer Elternteil", catFont));
+		table.addCell(new Paragraph("Primärer Elternteil:", catFont));
 		table.addCell(cell5);
 
 		if (child.getParent2() != null) {
@@ -116,38 +121,51 @@ public class PDFBean {
 					child.getParent2().getFirstName() + " " + child.getParent2().getLastName(), redFont);
 			PdfPCell cell6 = new PdfPCell(childParent2);
 			cell6.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Elternteil", catFont));
+			table.addCell(new Paragraph("Elternteil:", catFont));
 			table.addCell(cell6);
 		}
 		Paragraph childEmergencyNumber = new Paragraph(child.getEmergencyNumber(), redFont);
 		PdfPCell cell7 = new PdfPCell(childEmergencyNumber);
 		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Notfallkontakt", catFont));
+		cell7.setMinimumHeight(35f);
+		table.addCell(new Paragraph("Notfallkontakt:", catFont));
 		table.addCell(cell7);
 		for (Sibling s : child.getSiblings()) {
 			Paragraph childSiblings = new Paragraph(s.getFirstName() + " " + s.getLastName(), redFont);
 
 			PdfPCell cell8 = new PdfPCell(childSiblings);
 			cell8.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Geschwister", catFont));
+			cell8.setMinimumHeight(35f);			
+			table.addCell(new Paragraph("Geschwister:", catFont));
 			table.addCell(cell8);
 		}
 		for (Caregiver c : child.getCaregivers()) {
 			Paragraph childCaregivers = new Paragraph(c.getFullName(), redFont);
 			PdfPCell cell10 = new PdfPCell(childCaregivers);
 			cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Bezugsperson", catFont));
+			cell10.setMinimumHeight(35f);
+			table.addCell(new Paragraph("Bezugsperson:", catFont));
 			table.addCell(cell10);
 		}
-		Paragraph childIntolerances = new Paragraph(child.getFoodIntolerances(), redFont);
+		Paragraph childIntolerances;
+		if(child.getFoodIntolerances() == null)
+			childIntolerances = new Paragraph("k.A.", redFont);
+		else
+			childIntolerances = new Paragraph(child.getFoodIntolerances(), redFont);
 		PdfPCell cell11 = new PdfPCell(childIntolerances);
+		cell11.setMinimumHeight(35f);
 		cell11.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Unverträglichkeiten", catFont));
+		table.addCell(new Paragraph("Unverträglichkeiten:", catFont));
 		table.addCell(cell11);
-		Paragraph childAllergies = new Paragraph(child.getAllergies(), redFont);
+		Paragraph childAllergies;
+		if(child.getAllergies() == null)
+			childAllergies = new Paragraph("k.A.", redFont);
+		else
+			childAllergies = new Paragraph(child.getAllergies(), redFont);
 		PdfPCell cell12 = new PdfPCell(childAllergies);
+		cell12.setMinimumHeight(35f);
 		cell12.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Allergien", catFont));
+		table.addCell(new Paragraph("Allergien:", catFont));
 		table.addCell(cell12);
 		document.add(img);
 		document.add(table);
@@ -189,33 +207,39 @@ public class PDFBean {
 		table.setWidthPercentage(100);
 		Paragraph employeeFirstname = new Paragraph(employee.getFirstName(), redFont);
 		PdfPCell cell = new PdfPCell(employeeFirstname);
+		cell.setMinimumHeight(35f);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(new Paragraph("Vorname:", catFont));
 		table.addCell(cell);
 		Paragraph employeeSurname = new Paragraph(employee.getLastName(), redFont);
 		PdfPCell cell2 = new PdfPCell(employeeSurname);
+		cell2.setMinimumHeight(35f);
 		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(new Paragraph("Familienname:", catFont));
 		table.addCell(cell2);
 		Paragraph employeeBirthday = new Paragraph(employee.getBirthday(), redFont);
 		PdfPCell cell3 = new PdfPCell(employeeBirthday);
+		cell3.setMinimumHeight(35f);
 		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Geburtsdatum", catFont));
+		table.addCell(new Paragraph("Geburtsdatum:", catFont));
 		table.addCell(cell3);
 		Paragraph employeeLocation = new Paragraph(employee.getLocation(), redFont);
 		PdfPCell cell4 = new PdfPCell(employeeLocation);
+		cell4.setMinimumHeight(35f);
 		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Wohnort", catFont));
+		table.addCell(new Paragraph("Wohnort:", catFont));
 		table.addCell(cell4);
 		Paragraph employeeStreet = new Paragraph(employee.getStreetName(), redFont);
 		PdfPCell cell5 = new PdfPCell(employeeStreet);
+		cell5.setMinimumHeight(35f);
 		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Straße", catFont));
+		table.addCell(new Paragraph("Straße:", catFont));
 		table.addCell(cell5);
 		Paragraph employeepostcode = new Paragraph(employee.getLocation(), redFont);
 		PdfPCell cell13 = new PdfPCell(employeepostcode);
-		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Postleitzahl", catFont));
+		cell13.setMinimumHeight(35f);
+		cell13.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Postleitzahl:", catFont));
 		table.addCell(cell13);
 		Paragraph employeeNumber = new Paragraph(employee.getPhoneNumber(), redFont);
 		PdfPCell cell7 = new PdfPCell(employeeNumber);
@@ -224,8 +248,9 @@ public class PDFBean {
 		table.addCell(cell7);
 		Paragraph employeeEmail = new Paragraph(employee.getEmail(), redFont);
 		PdfPCell cell11 = new PdfPCell(employeeEmail);
+		cell7.setMinimumHeight(35f);
 		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Emailadresse", catFont));
+		table.addCell(new Paragraph("Emailadresse:", catFont));
 		table.addCell(cell11);
 		Paragraph employeeReligion;
 		if(employee.getReligion() == null)
@@ -233,8 +258,9 @@ public class PDFBean {
 		else
 			employeeReligion = new Paragraph(employee.getReligion().toString(), redFont);
 		PdfPCell cell9 = new PdfPCell(employeeReligion);
+		cell9.setMinimumHeight(35f);
 		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
+		table.addCell(new Paragraph("Religionsbekenntnis:", catFont));
 		table.addCell(cell9);
 		Paragraph parentFamily;
 		if(employee.getFamilyStatus() == null)
@@ -242,7 +268,8 @@ public class PDFBean {
 		else
 			parentFamily = new Paragraph(employee.getFamilyStatus().toString(), redFont);
 		PdfPCell cell20 = new PdfPCell(parentFamily);
-		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		cell20.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		cell20.setMinimumHeight(35f);
 		table.addCell(new Paragraph("Familienstatus", catFont));
 		table.addCell(cell20);
 		Paragraph employeeWorkingstate;
@@ -251,8 +278,9 @@ public class PDFBean {
 		else
 			employeeWorkingstate = new Paragraph(employee.getWorkRole().toString(), redFont);
 		PdfPCell cell10 = new PdfPCell(employeeWorkingstate);
-		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Arbeitsstatus", catFont));
+		cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		cell10.setMinimumHeight(35f);
+		table.addCell(new Paragraph("Arbeitsstatus:", catFont));
 		table.addCell(cell10);
 		document.add(img);
 		document.add(table);
@@ -294,43 +322,51 @@ public class PDFBean {
 		table.setWidthPercentage(100);
 		Paragraph parentFirstname = new Paragraph(parent.getFirstName(), redFont);
 		PdfPCell cell = new PdfPCell(parentFirstname);
+		cell.setMinimumHeight(35f);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(new Paragraph("Vorname:", catFont));
 		table.addCell(cell);
 		Paragraph parentSurname = new Paragraph(parent.getLastName(), redFont);
 		PdfPCell cell2 = new PdfPCell(parentSurname);
+		cell2.setMinimumHeight(35f);
 		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(new Paragraph("Familienname:", catFont));
 		table.addCell(cell2);
 		Paragraph parentBirthday = new Paragraph(parent.getBirthday(), redFont);
 		PdfPCell cell3 = new PdfPCell(parentBirthday);
+		cell3.setMinimumHeight(35f);
 		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Geburtsdatum", catFont));
+		table.addCell(new Paragraph("Geburtsdatum:", catFont));
 		table.addCell(cell3);
 		Paragraph parentLocation = new Paragraph(parent.getLocation(), redFont);
 		PdfPCell cell4 = new PdfPCell(parentLocation);
+		cell4.setMinimumHeight(35f);
 		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Wohnort", catFont));
+		table.addCell(new Paragraph("Wohnort:", catFont));
 		table.addCell(cell4);
 		Paragraph parentStreet = new Paragraph(parent.getStreetName(), redFont);
 		PdfPCell cell5 = new PdfPCell(parentStreet);
+		cell5.setMinimumHeight(35f);
 		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Straße", catFont));
+		table.addCell(new Paragraph("Straße:", catFont));
 		table.addCell(cell5);
 		Paragraph parentpostcode = new Paragraph(parent.getLocation(), redFont);
 		PdfPCell cell13 = new PdfPCell(parentpostcode);
-		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Postleitzahl", catFont));
+		cell13.setMinimumHeight(35f);
+		cell13.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Postleitzahl:", catFont));
 		table.addCell(cell13);
 		Paragraph parentNumber = new Paragraph(parent.getPhoneNumber(), redFont);
 		PdfPCell cell7 = new PdfPCell(parentNumber);
+		cell7.setMinimumHeight(35f);
 		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Telefonnummer", catFont));
+		table.addCell(new Paragraph("Telefonnummer:", catFont));
 		table.addCell(cell7);
 		Paragraph parentEmail = new Paragraph(parent.getEmail(), redFont);
 		PdfPCell cell11 = new PdfPCell(parentEmail);
-		cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Emailadresse", catFont));
+		cell11.setMinimumHeight(35f);
+		cell11.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Emailadresse:", catFont));
 		table.addCell(cell11);
 		Paragraph parentReligion;
 		if(parent.getReligion() == null)
@@ -338,8 +374,9 @@ public class PDFBean {
 		else
 			parentReligion = new Paragraph(parent.getReligion().toString(), redFont);
 		PdfPCell cell9 = new PdfPCell(parentReligion);
+		cell9.setMinimumHeight(35f);
 		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Religionsbekenntnis", catFont));
+		table.addCell(new Paragraph("Religionsbekenntnis:", catFont));
 		table.addCell(cell9);
 		Paragraph parentFamily;
 		if(parent.getFamilyStatus() == null)
@@ -347,14 +384,16 @@ public class PDFBean {
 		else
 			parentFamily = new Paragraph(parent.getFamilyStatus().toString(), redFont);
 		PdfPCell cell10 = new PdfPCell(parentFamily);
-		cell9.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Familienstatus", catFont));
+		cell10.setMinimumHeight(35f);
+		cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Familienstatus:", catFont));
 		table.addCell(cell10);
 		for (Child c : parent.getChildren()) {
 			Paragraph parentChilds = new Paragraph(c.getFullname(), redFont);
 			PdfPCell cell15 = new PdfPCell(parentChilds);
-			cell10.setVerticalAlignment(Element.ALIGN_MIDDLE);
-			table.addCell(new Paragraph("Kind", catFont));
+			cell15.setMinimumHeight(35f);
+			cell15.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			table.addCell(new Paragraph("Kind:", catFont));
 			table.addCell(cell15);
 		}
 		document.add(img);
@@ -397,23 +436,27 @@ public class PDFBean {
 		table.setWidthPercentage(100);
 		Paragraph careFirstname = new Paragraph(caregiver.getFirstName(), redFont);
 		PdfPCell cell = new PdfPCell(careFirstname);
+		cell.setMinimumHeight(35f);
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Vorname", catFont));
+		table.addCell(new Paragraph("Vorname:", catFont));
 		table.addCell(cell);
 		Paragraph careSurname = new Paragraph(caregiver.getLastName(), redFont);
 		PdfPCell cell2 = new PdfPCell(careSurname);
+		cell2.setMinimumHeight(35f);
 		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Familienname", catFont));
+		table.addCell(new Paragraph("Familienname:", catFont));
 		table.addCell(cell2);
 		Paragraph carePhone = new Paragraph(caregiver.getPhoneNumber(), redFont);
 		PdfPCell cell3 = new PdfPCell(carePhone);
-		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Telefonnummer", catFont));
+		cell3.setMinimumHeight(35f);
+		cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Telefonnummer:", catFont));
 		table.addCell(cell3);
 		Paragraph careChild = new Paragraph(caregiver.getChild().getFullname(), redFont);
 		PdfPCell cell4 = new PdfPCell(careChild);
-		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Kind", catFont));
+		cell4.setMinimumHeight(35f);
+		cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Kind:", catFont));
 		table.addCell(cell4);
 		Paragraph careElig;
 		if(caregiver.getEligible() == false)
@@ -421,8 +464,9 @@ public class PDFBean {
 		else
 			careElig = new Paragraph("Ja", redFont);
 		PdfPCell cell5 = new PdfPCell(careElig);
-		cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-		table.addCell(new Paragraph("Bestätigt", catFont));
+		cell5.setMinimumHeight(35f);
+		cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		table.addCell(new Paragraph("Bestätigt:", catFont));
 		table.addCell(cell5);
 		document.add(img);
 		document.add(table);
