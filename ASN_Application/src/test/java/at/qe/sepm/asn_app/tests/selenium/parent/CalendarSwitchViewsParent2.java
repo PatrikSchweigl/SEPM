@@ -1,4 +1,4 @@
-package com.example.tests;
+package at.qe.sepm.asn_app.tests.selenium.parent;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
