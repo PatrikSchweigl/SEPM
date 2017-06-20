@@ -775,3 +775,10 @@ INSERT INTO task (BEGIN_DATE, DESCRIPTION, ENDING_DATE, IMPORTANT, RECEIVER_USER
 INSERT INTO task (BEGIN_DATE, DESCRIPTION, ENDING_DATE, IMPORTANT, RECEIVER_USERNAME, SENDER_USERNAME, STRING_ID) VALUES ('2017-10-26 02:00:00', 'Feiertag: Nationalfeiertag', '2017-10-26 02:00:00', TRUE, 'cheng', 'cheng', '0eb8eddf-fa64-4ce4-ab00-d82afdd3fd30');
 
 INSERT INTO task (BEGIN_DATE, DESCRIPTION, ENDING_DATE, IMPORTANT, RECEIVER_USERNAME, SENDER_USERNAME, STRING_ID) VALUES ('2017-06-06 02:00:00', 'Ferientag: Pfingstdienstag', '2017-06-06 02:00:00', TRUE, 'cheng', 'cheng', '0eb8eddf-fa64-4ce4-ab00-d82afdd3fd50');
+
+INSERT INTO picture(DATE, TITLE, URL, PUBLISHER_USERNAME) VALUES('2017-06-20 02:06:13','birdhouse.jpg','birdhouse.jpg', 'cheng');
+INSERT INTO picture(DATE, TITLE, URL, PUBLISHER_USERNAME) VALUES('2017-06-20 02:06:13','colormanager.jpg','colormanager.jpg', 'cheng');
+INSERT INTO picture(DATE, TITLE, URL, PUBLISHER_USERNAME) VALUES('2017-06-20 02:06:13','javascript.jpg','javascript.jpg', 'cheng');
+INSERT INTO picture(DATE, TITLE, URL, PUBLISHER_USERNAME) VALUES('2017-06-20 02:06:13','notebook.jpg','notebook.jpg', 'cheng');
+INSERT INTO picture(DATE, TITLE, URL, PUBLISHER_USERNAME) VALUES('2017-06-20 02:06:13','panoramaalps.jpg','panoramaalps.jpg', 'cheng');
+INSERT INTO picture(DATE, TITLE, URL, PUBLISHER_USERNAME) VALUES('2017-06-20 02:06:13','C4F_logo_login.png','C4F_logo_login.png', 'cheng');
