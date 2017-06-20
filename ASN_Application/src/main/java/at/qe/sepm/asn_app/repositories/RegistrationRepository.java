@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.repositories;
 
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,4 +25,7 @@ public interface RegistrationRepository extends AbstractRepository<Registration,
 
     @Query("SELECT r from Registration r WHERE ((DATE(r.date) <= DATE(:end)) AND (DATE(r.date) >= DATE(:start)))")
     List<Registration> getRegistrationInTimeWindowII(@Param("start") Date start, @Param("end") Date end);
+
+    @Query("SELECT r FROM Registration r WHERE r.child.id = :child")
+    List<Registration> getRegistrationsByChild(@Param("child") Long child);
 }
