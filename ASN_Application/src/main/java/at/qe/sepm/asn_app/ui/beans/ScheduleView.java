@@ -211,6 +211,8 @@ public class ScheduleView implements Serializable {
 			taskService.deleteTaskById(event.getId());
 			RequestContext context = RequestContext.getCurrentInstance();
 			context.execute("PF('eventDialog').hide()");
+			context.execute("window.location.replace(window.location.href)");
+
 		}
 
 		else {
@@ -273,6 +275,8 @@ public class ScheduleView implements Serializable {
 						lunchService.saveLunch(r);
 						RequestContext context = RequestContext.getCurrentInstance();
 						context.execute("PF('eventDialog').hide()");
+						context.execute("window.location.replace(window.location.href)");
+
 					}
 				}
 
@@ -412,6 +416,8 @@ public class ScheduleView implements Serializable {
 				auditLogRepository.save(log);
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('eventDateDialog').hide()");
+				context.execute("window.location.replace(window.location.href)");
+
 			}
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -507,6 +513,8 @@ public class ScheduleView implements Serializable {
 		event = new DefaultScheduleEvent();
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('eventDialog').hide()");
+		context.execute("window.location.replace(window.location.href)");
+
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {

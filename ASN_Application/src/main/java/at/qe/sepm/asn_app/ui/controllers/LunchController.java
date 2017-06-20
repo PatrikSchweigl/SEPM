@@ -175,6 +175,7 @@ public class LunchController {
 				lunchService.saveLunch(lunchs.get(0));
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('eventDateDialog').hide()");
+				context.execute("window.location.replace(window.location.href)");
 			}
 		}
 	}

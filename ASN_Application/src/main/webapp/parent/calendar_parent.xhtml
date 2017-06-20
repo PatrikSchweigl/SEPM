@@ -230,12 +230,12 @@
 													<p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
 													<p:commandButton id="deleteButton" value="Löschen"
 														action="#{scheduleView.deleteEventParent()}"
-														oncomplete="window.location.replace(window.location.href);" />
+														 />
 												</h:panelGrid>
 											</p:dialog>
 
 											<p:dialog widgetVar="eventDateDialog" header="Termine"
-												position="700, 400" closeOnEscape="true"
+												closeOnEscape="true" 
 												showEffect="clip" hideEffect="clip">
 												<p:messages id="messagesInfo" autoUpdate="true" />
 
@@ -306,7 +306,7 @@
 													<ui:fragment rendered="#{scheduleView.child}">
 														<p:commandButton id="addButton" value="Speichern"
 															actionListener="#{scheduleView.addRegistration}"
-															oncomplete="window.location.replace(window.location.href);" />
+															/>
 
 													</ui:fragment>
 
@@ -337,13 +337,13 @@
 													</ui:fragment>
 													<ui:fragment rendered="#{scheduleView.meal}">
 														<p:commandButton id="mealButton" value="Speichern"
-														oncomplete="window.location.replace(window.location.href);"
+														
 															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}" />
 
                                                 </ui:fragment>
                                             </h:panelGrid>
                                         </p:dialog>
-                                        <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung" position="center center"
+                                        <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung" position="700, 400"
                                                   closeOnEscape="true" showEffect="clip" hideEffect="clip">
 											<li>#{massSignupController.getMassSignupDaysStr()}</li>
                                             <p:selectOneListbox style="width: 210px; margin:auto;" id="massBox"
@@ -423,7 +423,7 @@
 											<p:separator/>
 												<p:commandButton value="Anmelden &amp; Schliessen"
 													action="#{massSignupController.massSignup}"
-												oncomplete="window.location.replace(window.location.href);"/>
+												/>
 											<p:commandButton value="Anmelden"
 															 action="#{massSignupController.massSignup}"/>
 												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>

@@ -76,6 +76,9 @@ public class MassSignupController {
         addChild(childService.loadChild(childId));
         addDate(DateUtils.getWeek(x));
         process();
+        RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("window.location.replace(window.location.href);");
+        
     }
 
     public String getMassSignupDaysStr(){
