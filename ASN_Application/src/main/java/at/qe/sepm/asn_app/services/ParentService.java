@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
@@ -32,6 +33,10 @@ public class ParentService {
     private AuditLogRepository auditLogRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private UserService userService;
 
 
     public Collection<Parent> getAllParents(){
@@ -46,10 +51,30 @@ public class ParentService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
             auditLogRepository.save(log);
         }
-
+        String pwd = userService.generatePasswordNew(parent.getEmail());
+        mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Registrierung",
+                "Willkommen bei Care4Fun-Application!\n\n" +
+                        "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
+                        "Ihr Benutzername: " + parent.getUsername() + "\n" +
+                        "Ihr Passwort:     " + pwd +
+                        "\n\n\n" +
+                        "Sollten Probleme auftauchen, bitte umgehend beim Administrator melden.\n\n" +
+                        "Viel Spaß wünschen das Kinderkrippen-Team!");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        parent.setPassword(passwordEncoder.encode("passwd"));
+        parent.setPassword(passwordEncoder.encode(pwd));
         parent.setUserRole(UserRole.PARENT);
+        return parentRepository.save(parent);
+    }
+
+    public Parent updateParent(Parent parent, Child child){
+        mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Kind Abmeldung",
+                "Guten Tag " + parent.getFirstName() + " " + parent.getLastName() +
+                        "\n\nIhr Kind ("+child.getFirstName()+" "+child.getLastName()+") wurde von unserer" +
+                        " Kinderkrippe abgemeldet. Desweiteren wurde der diesbezügliche Datensatz (inkl. täglicher Anmeldungen und Essensanmeldungen)" +
+                        " aus unserem System entfernt. Sollten Sie nur dieses Kind angemeldet haben, wird Ihr Status auf INAKTIV gesetzt und Sie genießen" +
+                        " nur noch beschränkte Zugriffsrechte." +
+                        "\n\nSollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
+                        "Liebe Grüße das Kinderkrippen-Team!");
         return parentRepository.save(parent);
     }
 

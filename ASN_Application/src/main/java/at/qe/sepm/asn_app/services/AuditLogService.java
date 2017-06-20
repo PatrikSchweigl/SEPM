@@ -15,7 +15,15 @@ public class AuditLogService {
     @Autowired
     private AuditLogRepository auditLogRepository;
 
-    public void saveAuditLog(AuditLog log){
-        auditLogRepository.save(log);
+    public AuditLog saveAuditLog(AuditLog log){
+        return auditLogRepository.save(log);
+    }
+
+    public AuditLog loadAuditLog(Long id) {
+        return auditLogRepository.findOne(id);
+    }
+
+    public void deleteAuditLog(AuditLog auditLog) {
+        auditLogRepository.delete(auditLog);
     }
 }

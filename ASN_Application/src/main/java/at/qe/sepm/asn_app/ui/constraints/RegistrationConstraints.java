@@ -1,8 +1,6 @@
 package at.qe.sepm.asn_app.ui.constraints;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +20,7 @@ public class RegistrationConstraints {
 	@Autowired
 	private NurseryInformationService nurseryService;
 
-	public boolean registationExists(Registration reg) {
+	public boolean registrationExists(Registration reg) {
 		Collection<Registration> register = registrationService.getAllRegistrations();
 		Iterator<Registration> iterator = register.iterator();
 		while (iterator.hasNext()) {
@@ -60,4 +58,19 @@ public class RegistrationConstraints {
 			}
 		return false;
 	}
+
+	public boolean checkIfChildIsRegisteredOnDate(Date d, Long childId){
+		Collection<Registration> registrations = registrationService.getAllRegistrationsByDate(d);
+
+		if(!registrations.isEmpty()){
+			for (Registration r: registrations) {
+				if(r.getChild().getId() == childId){
+					return true;
+				}
+
+			}
+		}
+		return false;
+	}
+
 }

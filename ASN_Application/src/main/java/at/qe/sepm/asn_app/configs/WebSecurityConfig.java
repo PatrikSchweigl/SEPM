@@ -1,5 +1,7 @@
 package at.qe.sepm.asn_app.configs;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
 
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
@@ -19,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.util.Date;
 
 /**
  * Spring configuration for web security.

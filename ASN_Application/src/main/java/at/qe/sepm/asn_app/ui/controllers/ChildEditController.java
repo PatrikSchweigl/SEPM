@@ -1,9 +1,11 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.transaction.TransactionSystemException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.Collection;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -25,7 +28,11 @@ public class ChildEditController {
     @Autowired
     private ChildService childService;
     @Autowired
+    private RegistrationService registrationService;
+    @Autowired
     private ChildController childController;
+    @Autowired
+    private CaregiverController caregiverController;
     @Autowired
     private ParentService parentService;
     @Autowired
@@ -48,13 +55,7 @@ public class ChildEditController {
     }
 
     public Child doSaveChildParent() {
-        Child childReturn = null;
-        if (allergy.compareTo("") != 0){
-            childEdit.addAllergy(allergy);
-        }
-        if (intolerance.compareTo("") != 0){
-            childEdit.addFoodIntolerance(intolerance);
-        }
+        Child childReturn;
         childReturn = doSaveChildEmployee();
         return childReturn;
     }
@@ -71,6 +72,7 @@ public class ChildEditController {
                 childReturn = childEdit;
                 childEdit = null;
                 childController.initList();
+                caregiverController.initList();
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('childEditDialog').hide()");
             } catch (TransactionSystemException ex) {
@@ -82,16 +84,22 @@ public class ChildEditController {
 
     public void doDeleteChild() {
         Parent parent = childEdit.getPrimaryParent();
-        System.out.println(childEdit.toString());
-        childService.deleteChild(childEdit);
-        System.out.println(childEdit.toString());
+        parent.getChildren().remove(childEdit);
+        Collection<Registration> registrations = registrationService.getAllRegistrationsByChild(childEdit.getId());
+        System.err.println(registrations.isEmpty());
+            for (Registration r: registrations) {
+                registrationService.deleteRegistration(r);
+            }
 
-        childEdit = null;
-        childController.initList();
+        childService.deleteChild(childEdit);
+
+
         if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
             parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
         }
-        parentController.initList();
+        parentService.updateParent(parent,childEdit);
+        childEdit = null;
+        childController.initList();
     }
 
     public String getAllergy() {

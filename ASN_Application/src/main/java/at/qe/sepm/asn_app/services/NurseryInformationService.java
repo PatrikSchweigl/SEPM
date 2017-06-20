@@ -44,6 +44,10 @@ public class NurseryInformationService {
         nurseryInformation.setOriginDate(cal.getTime());
         return nurseryInformationRepository.save(nurseryInformation);
     }
+    
+    public NurseryInformation saveNurseryInformationEdit(NurseryInformation nurseryInformation){
+        return nurseryInformationRepository.save(nurseryInformation);
+    }
 
     public NurseryInformation loadNurseryInformation(Long id){
         return nurseryInformationRepository.findOne(id);

@@ -83,21 +83,7 @@ p {
   background-color: #eee;
 }
 
-.important{
-    background: red;
-}
-.employee{
-   background: green;
- }
-.info{
-   background: brown;
-}
-.registration{
-   background: purple;
-}
-.meal{
-   background: blue;
-}
+
 .navbar {
   position: relative;
   min-height: 50px;
@@ -105,6 +91,17 @@ p {
   border: 1px solid transparent;
 }
 
+.ui-clock {
+    color: white;
+    font-size:22px;
+    margin-left: -12px;
+    margin-top: 10px;
+}
+
+.profileNameClock{
+	font-size:24px;
+	font-weight:bold;
+}
 
 a {
 	color:#337ab7;
@@ -144,4 +141,13 @@ a:focus {
     padding-top: 15px;
     padding-bottom: 15px;
   }
+}
+
+.ui-datatable .ui-datatable-header{
+	text-align:right;
+}
+
+.ui-clock{
+  border: none;
+  background: none;
 }

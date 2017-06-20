@@ -18,7 +18,8 @@
 							<section class="content">
 								<div class="box">
 									<div class="box-body">
-										<h:form enctype="multipart/form-data">
+										<div align="left" style="margin-left: 10px;"><h1>Bildergalerie</h1></div>
+										<h:form enctype="multipart/form-data" rendered="#{!sessionInfoBean.inactiveParent}">
 											<p:fileUpload
 												fileUploadListener="#{fileBean.handleFileUpload}"
 												auto="true" update="pictureForm" label="Durchsuchen" />
@@ -29,7 +30,7 @@
 												<h:outputLink onclick="PF('comments').show()"
 													value="pictureDetail.xhtml">
 													<h:graphicImage class="picture"
-														name="pictures/gallery/#{picture.url}" id="tiger" />
+														name="pictures/gallery/#{picture.url}"/>
 													<f:param name="picture" value="#{picture.url}" />
 												</h:outputLink>
 											</ui:repeat>

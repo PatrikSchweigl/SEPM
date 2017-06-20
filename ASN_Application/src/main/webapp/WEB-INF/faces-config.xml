@@ -11,11 +11,10 @@
     <factory>
         <exception-handler-factory>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory</exception-handler-factory>
     </factory>
+<converter>
+    <converter-id>childConverter</converter-id>
+    <converter-class>at.qe.sepm.asn_app.utils.ChildConverter</converter-class>
+</converter>
 
-    <converter>
-        <converter-id>childConverter</converter-id>
-        <converter-class>at.qe.sepm.asn_app.ui.controllers.ChildConverter</converter-class>
-    </converter>
-    
 
 </faces-config>

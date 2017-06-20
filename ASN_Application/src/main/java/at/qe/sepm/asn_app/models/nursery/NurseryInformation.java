@@ -1,5 +1,6 @@
 package at.qe.sepm.asn_app.models.nursery;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -35,19 +36,24 @@ public class NurseryInformation implements Persistable<Long> {
     private Date pickUpEnd;
     @NotNull
     private int maxOccupancy;
+    @Column(columnDefinition = "int default 0")
+    private int currentOccupancy;
     @NotNull
     private Date todaysDate;
     @NotNull
     private Date originDate;
 
 
-    public NurseryInformation(Date bringStart, Date bringEnd, Date pickUpStart, Date pickUpEnd,
-                              int maxOccupancy, Date todaysDate, Date originDate) {
+    public NurseryInformation(Date bringStart, Date bringEnd,
+                              Date pickUpStart, Date pickUpEnd,
+                              int maxOccupancy, int currentOccupancy,
+                              Date todaysDate, Date originDate) {
         this.bringStart = bringStart;
         this.bringEnd = bringEnd;
         this.pickUpStart = pickUpStart;
         this.pickUpEnd = pickUpEnd;
         this.maxOccupancy = maxOccupancy;
+        this.currentOccupancy = currentOccupancy;
         this.todaysDate = todaysDate;
         this.originDate = originDate;
     }
@@ -221,5 +227,13 @@ public class NurseryInformation implements Persistable<Long> {
 
 
         return start + " - " + end + " Uhr";
+    }
+
+    public int getCurrentOccupancy() {
+        return currentOccupancy;
+    }
+
+    public void setCurrentOccupancy(int currentOccupancy) {
+        this.currentOccupancy = currentOccupancy;
     }
 }

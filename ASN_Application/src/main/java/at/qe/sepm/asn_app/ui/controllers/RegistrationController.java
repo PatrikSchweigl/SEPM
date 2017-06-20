@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.services.RegistrationService;
+import at.qe.sepm.asn_app.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,7 @@ import javax.imageio.spi.RegisterableService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -30,24 +29,23 @@ public class RegistrationController {
     private Registration registrationEdit;
     private Collection<Registration> registrations;
 
+
+
     public Collection<Registration> getRegistrations(){
         return registrations;
     }
     
-    public Collection<Registration> getAllRegistrationsYear(){
-    	return registrationService.getAllRegistrations();
-    }
-    
-    public Collection<Registration> getAllRegistrationsMonth(){
-    	return registrationService.getAllRegistrations();
-    }
-    
-    public Collection<Registration> getAllRegistrationsWeek(){
-    	return registrationService.getAllRegistrations();
-    }
+
 
     public Collection<Registration> getRegistrationsByParent(){
         return registrationService.getAllRegistrationsByParent();
+    }
+
+
+
+    @PostConstruct
+    public void initList(){
+        setRegistrations(registrationService.getAllRegistrations());
     }
 
     public Collection<Registration> getRegistrationsByDate(String date){
@@ -103,10 +101,6 @@ public class RegistrationController {
         registration = new Registration();
     }
 
-    @PostConstruct
-    public void initList(){
-        setRegistrations(registrationService.getAllRegistrations());
-    }
 
     public Registration getRegistrationEdit() {
         return registrationEdit;
@@ -130,4 +124,6 @@ public class RegistrationController {
     public void doReloadRegistrationEdit(){
         registrationService.loadRegistration(registrationEdit.getId());
     }
+
+
 }

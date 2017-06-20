@@ -24,17 +24,27 @@ public class ParentConstraints {
     private ParentService parentService;
 
     /**
+     * The main method of ParentConstraints. From here on all constraints
+     * get checked.
      *
+     * @param parent the parent of which the constraints are to be checked.
      * @return true iff no constraints are violated.
      */
-    public static void checkConstraints(Parent parent) throws BirthdayConstraintException {
+    public boolean checkConstraints(Parent parent) throws BirthdayConstraintException {
         if(!checkBirthdayConstraints(parent)) {
             throw new BirthdayConstraintException();
         }
+        return true;
     }
 
 
-    public static boolean checkBirthdayConstraints(Parent parent)  {
+    /**
+     * Checks if a parent is between 14 and 99 years old.
+     *
+     * @param parent the parent of which the birthday is too be checked.
+     * @return <code>true</code> iff the parent is between 14 and 99 years old; <code>false</code> otherwise.
+     */
+    public boolean checkBirthdayConstraints(Parent parent)  {
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         long birthday = BirthdayParser.parseBirthdayToLong(parent.getBirthday());
         int ageDays = (int)((dateNow-birthday)/60/60/24);
@@ -58,12 +68,10 @@ public class ParentConstraints {
 
 
     /**
-     * @return true if the parent already exists in the database; false otherwise
+     * @param parent check if this parent already exists in the database
+     * @return <code>true</code> if the parent already exists in the database; <code>false</code> otherwise
      */
-    // TODO instead of getting all parents it suffices to get only the one with the same identifier
-    //public static boolean alreadyExists(Parent parent) {
     public boolean alreadyExists(Parent parent) {
-        //Collection<Parent> parents = new ParentService().getAllParents();
         Collection<Parent> parents = parentService.getAllParents();
         for (Parent p : parents) {
             if (p.equals(parent)) {

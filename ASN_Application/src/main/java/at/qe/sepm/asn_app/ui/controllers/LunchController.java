@@ -4,8 +4,10 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.LunchService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import at.qe.sepm.asn_app.ui.constraints.LunchConstraints;
+import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
 import at.qe.sepm.asn_app.utils.DateUtils;
 
 import org.primefaces.context.RequestContext;
@@ -18,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,21 +29,25 @@ import java.util.List;
  * Created by Lukas Aukenthaler on 22.05.2017.
  */
 @Component
-// @Scope("view")
-@Scope("application")
+@Scope("view")
 public class LunchController {
 	@Autowired
 	private LunchService lunchService;
 	@Autowired
 	private ChildService childService;
+	@Autowired
+	private RegistrationService registrationService;
 
 	@Autowired
 	private SessionInfoBean session;
 	@Autowired
 	private LunchConstraints lunchConstraints;
+	@Autowired
+	private RegistrationConstraints registrationConstraints;
 
 	private Lunch lunch;
 	private Lunch lunchEdit;
+	private List<Lunch> lunchAll;
 
 	private Child child;
 	private String childFirstname;
@@ -54,6 +61,11 @@ public class LunchController {
 	private boolean nextWeekFlag;
 	private boolean[] signUp = new boolean[5];
 
+	
+	@PostConstruct
+	public void init(){
+		lunchAll = lunchService.findAll();
+	}
 	/*
 	 * public void processSignUp(){ Lunch l; for(int i = 0; i < 5; i++){
 	 * if(thisWeekLunch.size() > i) { l = thisWeekLunch.get(i); if (signUp[i]) {
@@ -70,6 +82,8 @@ public class LunchController {
 	public List<Lunch> getCurrentWeek() {
 		List<Lunch> ret = null;
 		if (!thisWeekFlag) {
+			LocalDate now = LocalDate.now();
+
 			Date[] dates = DateUtils.getWeek(0);
 
 			for (Date s : dates) {
@@ -105,6 +119,9 @@ public class LunchController {
 	public List<Lunch> getNextWeek() {
 		List<Lunch> ret = null;
 		if (!nextWeekFlag) {
+			LocalDate now = LocalDate.now();
+
+
 			Date[] dates = DateUtils.getWeek(1);
 
 			for (Date s : dates) {
@@ -150,11 +167,15 @@ public class LunchController {
 			if (lunchs.get(0).getChildrenIds().contains(childId)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie haben Ihr Kind schon zum Mittagessen eingetragen", null));
-			} else {
+			} else if (!registrationConstraints.checkIfChildIsRegisteredOnDate(d,childId)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Ihr Kind ist an diesem Tag nicht für die Kinderkrippe angemeldet", null));
+			}else{
 				lunchs.get(0).addChild(childId);
 				lunchService.saveLunch(lunchs.get(0));
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('eventDateDialog').hide()");
+				context.execute("window.location.replace(window.location.href)");
 			}
 		}
 	}
@@ -175,7 +196,6 @@ public class LunchController {
 		return lunchService.findAll();
 	}
 
-	// public void doSaveLunch(){
 	public Lunch doSaveLunch() {
 		Lunch lunchReturn = null;
 		if (lunchConstraints.checkIfLunchExists(lunch)) {
@@ -186,13 +206,13 @@ public class LunchController {
 					"An diesem Tag hat die Kinderkrippe geschlossen", null));
 		} else if (lunch.getCost() < 0.5) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben sie einen adäquaten Preis an", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben Sie einen adäquaten Preis an!", null));
 		} else if (lunch.getMeal().compareTo("") == 0) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte ein Mittagessen angeben", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben Sie ein Mittagessen an!", null));
 		} else if (lunch.getCost() > 10.0) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben sie einen adäquaten Preis an", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bitte geben Sie einen adäquaten Preis an!", null));
 		}
 
 		else {
@@ -202,6 +222,7 @@ public class LunchController {
 			RequestContext context = RequestContext.getCurrentInstance();
 			context.execute("PF('lunchAddDialog').hide()");
 		}
+		lunchAll = findAll();
 		return lunchReturn;
 	}
 
@@ -311,5 +332,13 @@ public class LunchController {
 	}
 	public void setChildFirstname(String childFirstname) {
 		this.childFirstname = childFirstname;
+	}
+
+	public List<Lunch> getLunchAll() {
+		return lunchAll;
+	}
+
+	public void setLunchAll(List<Lunch> lunchAll) {
+		this.lunchAll = lunchAll;
 	}
 }

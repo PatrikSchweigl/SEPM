@@ -23,7 +23,7 @@ import javax.annotation.PostConstruct;
 
 
 @Component
-@Scope("view")
+@Scope("application")
 public class PrivateMessageController {
 
     @Autowired

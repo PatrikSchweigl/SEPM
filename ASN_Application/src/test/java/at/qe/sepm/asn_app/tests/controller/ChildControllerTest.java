@@ -120,8 +120,8 @@ public class ChildControllerTest {
         child.setPrimaryParent(parent1);
         child.setParent2(parent2);
         child.setEmergencyNumber("01234456789");
-        child.setAllergies(allergies);
-        child.setFoodIntolerances(foodIntolerances);
+        //child.setAllergies(allergies);
+        //child.setFoodIntolerances(foodIntolerances);
         child.setSiblings(siblings);
         child.setCustody(Custody.BEIDE);
         child.setReligion(Religion.CHRISTENTUM);

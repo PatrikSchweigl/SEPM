@@ -5,6 +5,11 @@ import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,19 +44,25 @@ public class Child implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Expose
     private Long id;
     @NotNull
+    @Expose
     private String firstName;
     @NotNull
+    @Expose
     private String lastName;
     @NotNull
+    @Expose
     private String birthday;
+    @Expose
     private String imgName;
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Expose
     private Gender gender;
 
-    @NotNull
+
     @ManyToOne(optional = false)
     private Parent parent1;
 
@@ -59,22 +70,26 @@ public class Child implements Persistable<Long> {
     private Parent parent2;
 
     @NotNull
+    @Expose
     private String emergencyNumber;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    private Set<String> allergies;
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    private Set<String> foodIntolerances;
+    @Expose
+    private String allergies;
+    @Expose
+    private String foodIntolerances;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection
     private Set<Sibling> siblings;
 
     @Enumerated(EnumType.STRING)
     private Custody custody;
 
     @Enumerated(EnumType.STRING)
+    @Expose
     private Religion religion;
 
     //@ElementCollection(targetClass = Caregiver.class)
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ElementCollection
     private Set<Caregiver> caregivers;
 
 
@@ -107,8 +122,8 @@ public class Child implements Persistable<Long> {
      * Full constructor
      */
     public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1,
-                 Parent par2, String emergencyNumber, Set<String> allergies, Set<String> foodIntolerances,
-                 Set<Sibling> siblings, Custody custody, Religion religion, Set<Caregiver> caregivers) {
+                 Parent par2, String emergencyNumber, Set<Sibling> siblings, Custody custody, Religion religion,
+                 Set<Caregiver> caregivers) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -117,8 +132,6 @@ public class Child implements Persistable<Long> {
         this.parent1 = par1;
         this.parent2 = par2;
         this.emergencyNumber = emergencyNumber;
-        this.allergies = allergies;
-        this.foodIntolerances = foodIntolerances;
         this.siblings = siblings;
         this.custody = custody;
         this.religion = religion;
@@ -129,7 +142,7 @@ public class Child implements Persistable<Long> {
     public String getPrimaryParentFullName(){
         return parent1.getFirstName() + " " + parent1.getLastName();
     }
-
+    
     public Parent getPrimaryParent() {
         return parent1;
     }
@@ -137,7 +150,7 @@ public class Child implements Persistable<Long> {
     public void setPrimaryParent(Parent p){
         parent1= p;
     }
-
+    
     public Parent getParent2() {
         return parent2;
     }
@@ -148,14 +161,6 @@ public class Child implements Persistable<Long> {
 
     public void addCaregiver(Caregiver c){
         caregivers.add(c);
-    }
-
-    public void addAllergy(String s){
-        allergies.add(s);
-    }
-
-    public void addFoodIntolerance(String s){
-        foodIntolerances.add(s);
     }
 
     public void addSibling(Sibling s){
@@ -213,23 +218,7 @@ public class Child implements Persistable<Long> {
     public void setEmergencyNumber(String emergencyNumber) {
         this.emergencyNumber = emergencyNumber;
     }
-
-    public Set<String> getAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(Set<String> allergies) {
-        this.allergies = allergies;
-    }
-
-    public Set<String> getFoodIntolerances() {
-        return foodIntolerances;
-    }
-
-    public void setFoodIntolerances(Set<String> foodIntolerances) {
-        this.foodIntolerances = foodIntolerances;
-    }
-
+    
     public Set<Sibling> getSiblings() {
         return siblings;
     }
@@ -253,7 +242,7 @@ public class Child implements Persistable<Long> {
     public void setReligion(Religion religion) {
         this.religion = religion;
     }
-
+    
     public Set<Caregiver> getCaregivers() {
         return caregivers;
     }
@@ -261,6 +250,24 @@ public class Child implements Persistable<Long> {
     public void setCaregivers(Set<Caregiver> caregivers) {
         this.caregivers = caregivers;
     }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
+    public String getFoodIntolerances() {
+        return foodIntolerances;
+    }
+
+    public void setFoodIntolerances(String foodIntolerances) {
+        this.foodIntolerances = foodIntolerances;
+    }
+
+
 
     @Override
     public Long getId() {
@@ -284,14 +291,26 @@ public class Child implements Persistable<Long> {
      * @see Parent
      * @see Sibling
      */
-    @Override
-    public boolean equals(Object other) {
-        return (other instanceof Child) && (id != null)
-                ? id.equals(((Child) other).id)
-                : (other == this);
+    /*@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Child child = (Child) o;
+
+        return id.equals(child.id);
     }
-    /*public boolean equals(Object obj) {
-        if (obj == null) {
+       */
+
+    /*@Override
+    public int hashCode() {
+        return id.hashCode();
+    }*/
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null) {
             return false;
         }
         else if (!(obj instanceof Child)) {
@@ -299,7 +318,10 @@ public class Child implements Persistable<Long> {
         }
 
         Child other = (Child) obj;
-        if (this.birthday.equals(other.birthday) &&
+        if (id.equals(other.id)) {
+            return true;
+        }
+        else if (this.birthday.equals(other.birthday) &&
                 this.firstName.equals(other.firstName) &&
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
@@ -311,12 +333,13 @@ public class Child implements Persistable<Long> {
         else {
             return false;
         }
-    }*/
+    }
 
 
     @Override
     public String toString() {
-        return "FirstName: " + firstName + "\n" +
+        return "ID: " + id + "\n" +
+                "FirstName: " + firstName + "\n" +
                 "LastName: " + lastName + "\n" +
                 "Birthday: " + birthday + "\n" +
                 "Gender: " + gender + "\n" +

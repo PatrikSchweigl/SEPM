@@ -1,6 +1,12 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.Gender;
+import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.child.Custody;
+import at.qe.sepm.asn_app.models.child.Sibling;
+import at.qe.sepm.asn_app.models.general.FamilyStatus;
+import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
@@ -9,6 +15,10 @@ import at.qe.sepm.asn_app.services.ChildService;
 
 import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +27,11 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,11 +43,13 @@ import org.springframework.transaction.TransactionSystemException;
  * on 14.04.17.
  */
 @Component
-@Scope("request")
+@Scope("view")
 public class ChildController {
 
 	@Autowired
 	private ChildService childService;
+	@Autowired
+	private SessionInfoBean sessionInfo;
 	@Autowired
 	private ParentService parentService;
 	@Autowired
@@ -43,8 +60,10 @@ public class ChildController {
     private LunchService lunchService;
 	private Child child;
 	private Caregiver caregiver;
+	private Date now;
 
 	private Collection<Child> children;
+	private Collection<Child> childrenParent;
 
 	private String parentUserName;
 
@@ -77,11 +96,26 @@ public class ChildController {
 	public Collection<Child> getChildrenByLunch(Lunch lunch){
 		return childService.getChildrenByLunch(lunch);
 	}
+	
+	public boolean checkBirthday(Child child){
+		Date d = new Date();
+		Date birth = new Date();
+		try {
+			birth = new SimpleDateFormat("dd/MM/yyyy").parse(child.getBirthday());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth())
+			return true;
+		return false;
+	}
 
 
 	@PostConstruct
 	public void initList(){
 		children = childService.getAllChildren();
+		childrenParent = childService.getChildrenByParentUsername(sessionInfo.getCurrentUserName());
 	}
 
 	@PostConstruct
@@ -147,6 +181,20 @@ public class ChildController {
 		child = childService.loadChild(child.getId());
 	}
 
+	public Collection<Child> getChildrenParent() {
+		return childrenParent;
+	}
 
+	public void setChildrenParent(Collection<Child> childrenParent) {
+		this.childrenParent = childrenParent;
+	}
+
+	public Date getNow() {
+		return now;
+	}
+
+	public void setNow(Date now) {
+		this.now = new Date();
+	}
 
 }

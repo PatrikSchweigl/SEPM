@@ -97,4 +97,41 @@ public class Registration implements Persistable<Long> {
 	public void setBringdate(Date bringdate) {
 		this.bringdate = bringdate;
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (obj == null) {
+            return false;
+        }
+        else if (!(obj instanceof Registration)) {
+            return false;
+        }
+
+        Registration other = (Registration) obj;
+        if (id.equals(other.id)) {
+            return true;
+        }
+
+        return (note.equals(other.note) &&
+                child.equals(other.child) &&
+                date.getYear() == other.date.getYear() &&
+                date.getMonth() == other.date.getMonth() &&
+                date.getDay() == other.date.getDay() &&
+                bringdate.getYear() == other.bringdate.getYear() &&
+                bringdate.getMonth() == other.bringdate.getMonth() &&
+                bringdate.getDay() == other.bringdate.getDay());
+    }
+
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n" +
+                "BringDate: " + bringdate + "\n" +
+                "Child: " + child.getFirstName() + " " + child.getLastName() + "\n" +
+                "Note: " + note;
+    }
 }

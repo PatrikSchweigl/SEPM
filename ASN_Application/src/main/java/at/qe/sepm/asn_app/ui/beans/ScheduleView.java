@@ -3,7 +3,6 @@ package at.qe.sepm.asn_app.ui.beans;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -28,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.TransactionSystemException;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
@@ -177,6 +175,7 @@ public class ScheduleView implements Serializable {
 			Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
 			Set<Child> arr = p.getChildren();
 			for (Lunch l : lunchs) {
+				if(l.getDate().compareTo(new Date()) > 0){
 				for (Child c : arr) {
 					if (l.getChildrenIds().contains(c.getId())) {
 						DefaultScheduleEvent ev;
@@ -185,6 +184,7 @@ public class ScheduleView implements Serializable {
 								l.getDate(), l.getDate(), "meal");
 						eventModel.addEvent(ev);
 					}
+				}
 				}
 			}
 		}
@@ -211,6 +211,8 @@ public class ScheduleView implements Serializable {
 			taskService.deleteTaskById(event.getId());
 			RequestContext context = RequestContext.getCurrentInstance();
 			context.execute("PF('eventDialog').hide()");
+			context.execute("window.location.replace(window.location.href)");
+
 		}
 
 		else {
@@ -223,15 +225,26 @@ public class ScheduleView implements Serializable {
 		String desc = event.getTitle();
 		Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
 		Set<Child> c = p.getChildren();
+		System.err.println("WWWWWWWWWWWWWWWWWWWW");
 		System.err.println(desc);
 		if (desc.contains("Anmeldung:")) {
 			Child child = null;
 			for (Child ch : c) {
-				if (desc.contains(ch.getFullname())) {
+				System.err.println("compare " + ch.getFirstName() + " MMMMMMMMIT " + desc + desc.contains(ch.getFirstName()));
+				if (desc.contains(ch.getFirstName())) {
+					System.err.println("PEACE");
 					child = ch;
+					System.err.println(ch.getFirstName());
+					break;
+				}
+				else{
+					System.err.println("BBBBBBBBBBBBBBBBB");
 				}
 			}
+			System.err.println(child.getFirstName() + "Zeit  " + event.getStartDate());
 			Collection<Registration> reg = registrationService.getAllRegistrationsByDate(event.getStartDate());
+			if(reg == null)
+				System.err.println("NOOOOOOOOOOOOOOOOOOOOO");
 			for (Registration r : reg) {
 				System.err.println(r.getChild().getFirstName() + " " + child.getFirstName());
 
@@ -246,6 +259,7 @@ public class ScheduleView implements Serializable {
 			cal.setTime(new Date());
 			Child child = null;
 			for (Child ch : c) {
+				System.err.println("compare " + ch.getFirstName() + " MMMMMMMMIT " + desc );
 				if (desc.contains(ch.getFullname())) {
 					child = ch;
 				}
@@ -261,6 +275,8 @@ public class ScheduleView implements Serializable {
 						lunchService.saveLunch(r);
 						RequestContext context = RequestContext.getCurrentInstance();
 						context.execute("PF('eventDialog').hide()");
+						context.execute("window.location.replace(window.location.href)");
+
 					}
 				}
 
@@ -288,13 +304,16 @@ public class ScheduleView implements Serializable {
 		cal2.set(Calendar.MILLISECOND, 0);
 		Collection<Child> childs = childService.getChildrenByParentUsername(getAuthenticatedUser().getUsername());
 		for (int i = 0; i < 5; ++i) {
+			NurseryInformation nurseryInformation  = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
 			for (Child c : childs) {
 				Registration reg = new Registration("", c, cal.getTime(), cal2.getTime());
-				if (registrationConstraints.registationExists(reg))
+				if (registrationConstraints.registrationExists(reg))
 					continue;
 				if (!registrationConstraints.checkIfNurseryExists(reg))
 					continue;
 				registrationService.saveRegistration(reg);
+				nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
+				nurseryInformationService.saveNurseryInformationEdit(nurseryInformation);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
 								+ getAuthenticatedUser().getUserRole() + "] ",
@@ -338,7 +357,22 @@ public class ScheduleView implements Serializable {
 		}
 	}
 
+	public NurseryInformation getCurrentNurseryInformation(){
+		//System.out.println(nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate()).toString()+"-----------------------");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(event.getStartDate());
+		cal.add(Calendar.HOUR_OF_DAY, 2);
+		System.err.println("HERE I AM");
+		System.out.println(cal.getTime());
+		Collection<NurseryInformation> info = nurseryInformationService.getAllInformation();
+		for(NurseryInformation i : info){
+		System.err.println(i.getOriginDate());
+		}
+		return nurseryInformationService.nurseryInformationByOriginDate(cal.getTime());
+	}
+
 	public void addRegistration() {
+		NurseryInformation nurseryInformation;
 		try {
 			childReg = childService.getChildrenByFirstnameAndParentUsername(getAuthenticatedUser().getUsername(),
 					childFirstname);
@@ -355,17 +389,26 @@ public class ScheduleView implements Serializable {
 			if (event.getStartDate().compareTo(new Date()) <= 0) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Keine Anmeldung in der Vergangenheit möglich", null));
-			} else if (registrationConstraints.registationExists(reg)) {
+			} else if (registrationConstraints.registrationExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie haben für heute ihr Kind schon angemeldet", null));
 			} else if (!registrationConstraints.checkIfNurseryExists(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
-			} else if (registrationConstraints.checkTimeConstraints(reg)) {
+			} else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime())) == null) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Für diesen Tag gibt es keine Information", null));
+			}else if(nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Kein Platz mehr frei für diesen Tag", null));
+			}else if (registrationConstraints.checkTimeConstraints(reg)) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Sie können kein Kind um diese Uhrzeit eintragen", null));
-			} else {
+			} else{
+
 				registrationService.saveRegistration(reg);
+				nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
+				nurseryInformationService.saveNurseryInformationEdit(nurseryInformation);
 				AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
 						"REGISTRATION CREATED: " + getAuthenticatedUser().getUsername() + " ["
 								+ getAuthenticatedUser().getUserRole() + "] ",
@@ -373,6 +416,8 @@ public class ScheduleView implements Serializable {
 				auditLogRepository.save(log);
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('eventDateDialog').hide()");
+				context.execute("window.location.replace(window.location.href)");
+
 			}
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -468,6 +513,8 @@ public class ScheduleView implements Serializable {
 		event = new DefaultScheduleEvent();
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('eventDialog').hide()");
+		context.execute("window.location.replace(window.location.href)");
+
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {

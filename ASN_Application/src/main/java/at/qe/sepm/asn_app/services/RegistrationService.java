@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -37,11 +35,12 @@ public class RegistrationService {
     	cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		Collection<Registration> reg = registrationRepository.findAll();
+		Collection<Registration> ret = new LinkedList<>();
 		for(Registration r : reg){
-			System.err.println(r.getDate());
+			if(r.getDate().getDate() == date.getDate() && r.getDate().getMonth() == date.getMonth() && r.getDate().getYear() == date.getYear())
+				ret.add(r);
 		}
-    	System.err.println(cal.getTime());
-        return registrationRepository.getRegistrationsByDate(cal.getTime());
+        return ret;
     }
 
     public Collection<Registration> getAllRegistrationsByParent(){
@@ -66,5 +65,17 @@ public class RegistrationService {
 
     public Registration loadRegistration(Long id){
         return registrationRepository.findOne(id);
+    }
+
+    public List<Registration> getRegistrationInTimeWindowIE(Date start, Date end){
+        return registrationRepository.getRegistrationInTimeWindowIE(start, end);
+    }
+
+    public List<Registration> getRegistrationInTimeWindowII(Date start, Date end){
+        return registrationRepository.getRegistrationInTimeWindowII(start, end);
+    }
+
+    public List<Registration> getAllRegistrationsByChild(Long childId){
+        return registrationRepository.getRegistrationsByChild(childId);
     }
 }

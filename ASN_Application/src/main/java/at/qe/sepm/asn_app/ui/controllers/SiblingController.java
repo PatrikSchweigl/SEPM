@@ -2,11 +2,15 @@ package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.services.SiblingService;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionSystemException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Collection;
 
 /**
@@ -24,12 +28,12 @@ public class SiblingController {
     private Collection<Sibling> siblings;
 
     @PostConstruct
-    private void initNewSibling(){
+    private void initNewSibling() {
         sibling = new Sibling();
     }
 
     @PostConstruct
-    private void initList(){
+    private void initList() {
         setSiblings(siblingService.getAllSiblings());
     }
 
@@ -57,18 +61,24 @@ public class SiblingController {
         this.siblings = siblings;
     }
 
-    public Sibling doSaveSibling(){
-        System.out.println(sibling.toString());
-        Sibling siblingReturn;
-        sibling = siblingService.saveSibling(sibling);
-        siblingReturn = sibling;
-        initList();
-        initNewSibling();
+    public Sibling doSaveSibling() {
+        Sibling siblingReturn = null;
+        try {
+            sibling = siblingService.saveSibling(sibling);
+            sibling = null;
+            initList();
+            initNewSibling();
+            siblingReturn = sibling;
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('siblingAddDialog').hide()");
+        } catch (TransactionSystemException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+        }
+
         return siblingReturn;
     }
 
-    public Sibling doSaveSiblingEdit(){
-        System.out.println(siblingEdit.toString());
+    public Sibling doSaveSiblingEdit() {
         Sibling siblingReturn;
         siblingEdit = siblingService.saveSibling(siblingEdit);
         siblingReturn = siblingEdit;
@@ -76,7 +86,7 @@ public class SiblingController {
         return siblingReturn;
     }
 
-    public void doDeleteSibling(){
+    public void doDeleteSibling() {
         siblingService.deleteSibling(siblingEdit);
         siblingEdit = null;
     }

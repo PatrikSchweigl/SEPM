@@ -43,7 +43,7 @@ public class Caregiver implements Persistable<Long>{
     @NotNull
     @ColumnDefault("false")
     private boolean eligible;
-    @NotNull
+
     @ManyToOne(optional = false)
     private Child child;
 

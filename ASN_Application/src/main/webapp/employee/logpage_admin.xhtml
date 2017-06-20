@@ -21,6 +21,7 @@
 									<!-- Default box -->
 									<div class="box">
 										<div class="box-body">
+											<div align="left" style="margin-left: 10px;"><h1>Logdatei</h1></div>
 											<h:form>
 												<p:dataTable id="auditLogTable" var="log"
 													widgetVar="auditLogTable"
@@ -86,7 +87,7 @@
 													</p:column>
 													<p:column headerText="Datum" sortBy="#{log.date}"
 														filterBy="#{log.date}" filterStyle="display:none">
-														<h:outputText value="#{log.date}" />
+														<h:outputText value="#{log.getFormattedOriginDate()}" />
 													</p:column>
 												</p:dataTable>
 											</h:form>
