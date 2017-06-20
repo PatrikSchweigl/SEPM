@@ -7,13 +7,17 @@ import at.qe.sepm.asn_app.models.child.Custody;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.services.RegistrationService;
+import at.qe.sepm.asn_app.tests.initialize.InitializeChild;
 import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
 import at.qe.sepm.asn_app.tests.initialize.InitializeSibling;
+import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
 import at.qe.sepm.asn_app.ui.controllers.ChildController;
 import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
 import at.qe.sepm.asn_app.ui.controllers.ParentController;
@@ -32,6 +36,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.faces.context.FacesContext;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,6 +56,8 @@ public class ChildServiceTest {
     private ChildService childService;
     @Autowired
     private ParentService parentService;
+    @Autowired
+    private RegistrationService registrationService;
     private Child child;
     private Parent parent1;
     private Parent parent2;
@@ -59,69 +66,15 @@ public class ChildServiceTest {
 
     @Before
     public void initialize() {
-        Set<Task> parentTasks1 = new HashSet<>();
-        Set<Task> parentTasks2 = new HashSet<>();
+        parent1 = InitializeParent.initialize1();
+        parent2 = InitializeParent.initialize2();
+        child = InitializeChild.initialize();
+        sibling1 = InitializeSibling.initialize1();
 
-        parent1 = new Parent();
-        parent1.setBirthday("22/05/1990");
-        parent1.setEmail("ParentEmail1@google.com");
-        parent1.setFamilyStatus(FamilyStatus.VERHEIRATET);
-        parent1.setFirstName("ParentFirstName1");
-        parent1.setImgName("ParentImgName1");
-        parent1.setLastName("ParentLastName1");
-        parent1.setLocation("ParentLocation1");
-        parent1.setNotification(true);
-        parent1.setPassword("passwd");
-        parent1.setPhoneNumber("0123456789");
-        parent1.setPostcode("6020");
-        parent1.setReligion(Religion.CHRISTENTUM);
-        parent1.setStatus(true);
-        parent1.setStreetName("ParentStreetName1");
-        parent1.setTasks(parentTasks1);
-        parent1.setUsername("ParentUsername1");
-        parent1.setUserRole(UserRole.PARENT);
-
-
-        parent2 = new Parent();
-        parent2.setBirthday("07/11/1978");
-        parent2.setEmail("ParentEmail2@google.com");
-        parent2.setFamilyStatus(FamilyStatus.VERHEIRATET);
-        parent2.setFirstName("ParentFirstName2");
-        parent2.setImgName("ParentImgName2");
-        parent2.setLastName("ParentLastName2");
-        parent2.setLocation("ParentLocation2");
-        parent2.setNotification(true);
-        parent2.setPassword("passwd");
-        parent2.setPhoneNumber("0123456789");
-        parent2.setPostcode("6020");
-        parent2.setReligion(Religion.CHRISTENTUM);
-        parent2.setStatus(true);
-        parent2.setStreetName("ParentStreetName2");
-        parent2.setTasks(parentTasks2);
-        parent2.setUsername("ParentUsername2");
-        parent2.setUserRole(UserRole.PARENT);
-
-
-        Set<String> allergies = new HashSet<>();
-        Set<String> foodIntolerances = new HashSet<>();
-        Set<Sibling> siblings = new HashSet<>();
-        Set<Caregiver> caregivers = new HashSet<>();
-
-        child = new Child();
-        child.setFirstName("ChildFirstName");
-        child.setLastName("ChildLastName");
-        child.setBirthday("22/05/2015");
-        child.setImgName("ChildImgName");
-        child.setGender(Gender.MAENNLICH);
-        child.setPrimaryParent(parent1);
-        child.setParent2(parent2);
-        child.setEmergencyNumber("01234456789");
-        //child.setAllergies(allergies);
-        //child.setFoodIntolerances(foodIntolerances);
-        child.setSiblings(siblings);
-        child.setCustody(Custody.BEIDE);
-        child.setReligion(Religion.CHRISTENTUM);
-        child.setCaregivers(caregivers);
+        //Set<Child> children = new HashSet<>();
+        //children.add(child);
+        //parent1.setChildren(children);
+        //parent2.setChildren(children);
     }
 
 
@@ -130,18 +83,23 @@ public class ChildServiceTest {
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void test1() {
         // Save the parents in the database.
-        parentService.saveParent(parent1);
-        parentService.saveParent(parent2);
+        parent1 = parentService.saveParent(parent1);
+        parent2 = parentService.saveParent(parent2);
 
         // Save the child in the database.
+        child.setPrimaryParent(parent1);
+        child.setParent2(parent2);
         child = childService.saveChild(child);
 
         // Check if the values have changed since the child was saved.
         Child other = childService.loadChild(child.getId());
         assertTrue(child.equals(other));
 
+        parent1.getChildren().remove(child);
+        parent2.getChildren().remove(child);
+
         // Delete the child again.
-        childService.deleteChild(child);
+        //childService.deleteChild(child);
         other = childService.loadChild(child.getId());
         assertFalse(child.equals(other));
         assertNull(other);
