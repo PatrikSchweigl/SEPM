@@ -23,8 +23,8 @@ public class MailSender {
         //Using gmail
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("asn.sepm");
-        mailSender.setPassword("sepmASN2017");
+        mailSender.setUsername("care4fun.sepm");
+        mailSender.setPassword("carefourfun");
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
