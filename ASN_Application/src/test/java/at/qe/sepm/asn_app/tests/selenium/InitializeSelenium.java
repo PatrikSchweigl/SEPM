@@ -11,21 +11,31 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class InitializeSelenium {
 
     public static WebDriver initialize() {
+        WebDriver driver;
         String browser = "chrome";   // use this to change browser
+
         switch(browser) {
             case "gecko":
                 System.setProperty("webdriver.gecko.driver", "geckodriver");
-                return new FirefoxDriver();
+                driver = new FirefoxDriver();
+                break;
             case "geckoWin":
                 System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
-                return new FirefoxDriver();
+                driver = new FirefoxDriver();
+                break;
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-                return new ChromeDriver();
+                driver = new ChromeDriver();
+                break;
             case "chromeWin":
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-                return new ChromeDriver();
-            default: return null;
+                driver = new ChromeDriver();
+                break;
+            default:
+                driver = null;
         }
+
+        driver.manage().window().maximize();
+        return driver;
     }
 }
