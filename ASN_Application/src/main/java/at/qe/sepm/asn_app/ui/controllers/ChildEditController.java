@@ -92,12 +92,13 @@ public class ChildEditController {
             }
 
         childService.deleteChild(childEdit);
-        childEdit = null;
+
 
         if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
             parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
         }
-        parentService.saveParent(parent);
+        parentService.updateParent(parent,childEdit);
+        childEdit = null;
         childController.initList();
     }
 

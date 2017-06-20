@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
@@ -62,6 +63,18 @@ public class ParentService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         parent.setPassword(passwordEncoder.encode(pwd));
         parent.setUserRole(UserRole.PARENT);
+        return parentRepository.save(parent);
+    }
+
+    public Parent updateParent(Parent parent, Child child){
+        mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Kind Abmeldung",
+                "Guten Tag " + parent.getFirstName() + " " + parent.getLastName() +
+                        "\n\nIhr Kind ("+child.getFirstName()+" "+child.getLastName()+") wurde von unserer" +
+                        " Kinderkrippe abgemeldet. Desweiteren wurde der diesbezügliche Datensatz (inkl. täglicher Anmeldungen und Essensanmeldungen)" +
+                        " aus unserem System entfernt. Sollten Sie nur dieses Kind angemeldet haben, wird Ihr Status auf INAKTIV gesetzt und Sie genießen" +
+                        " nur noch beschränkte Zugriffsrechte." +
+                        "\n\nSollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
+                        "Liebe Grüße das Kinderkrippen-Team!");
         return parentRepository.save(parent);
     }
 
