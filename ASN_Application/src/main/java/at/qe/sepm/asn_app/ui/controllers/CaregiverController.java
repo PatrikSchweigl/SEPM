@@ -126,7 +126,7 @@ public class CaregiverController {
     }
 
     public void doSaveCaregiverEdit() {
-        if (!StringUtils.isNumeric(caregiver.getPhoneNumber())) {
+        if (!StringUtils.isNumeric(caregiverEdit.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
         } else {
             caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
