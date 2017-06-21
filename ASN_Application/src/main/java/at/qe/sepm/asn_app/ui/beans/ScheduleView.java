@@ -267,6 +267,7 @@ public class ScheduleView implements Serializable {
 					registrationService.deleteRegistration(r);
 					RequestContext context = RequestContext.getCurrentInstance();
 					context.execute("PF('eventDialog').hide()");
+					context.execute("window.location.replace(window.location.href)");
 				}
 			}
 		} else if (desc.contains("Mittagessen:")) {

@@ -265,7 +265,9 @@
 								</div>
 							</div>
 						</ui:repeat>
-
+						<p:poll interval="2"
+							listener="#{privateMessageController.getPrivateMessagesBySender(privateMessageController.getAuthenticatedUser().getUsername(), privateMessageController.getUsername())}"
+							update="scroller" ignoreAutoUpdate="true" />
 
 					</p:scrollPanel>
 
