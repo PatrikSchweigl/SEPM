@@ -57,12 +57,15 @@ public class CreateNurseryInfo {
 		driver.findElement(By.id("infoForm:pickUpFrom_input")).sendKeys("12:15");
 		driver.findElement(By.id("infoForm:pickUpTo_input")).clear();
 		driver.findElement(By.id("infoForm:pickUpTo_input")).sendKeys("13:00");
+		// save
 		driver.findElement(By.id("infoForm:j_idt146")).click();
 		Thread.sleep(1000);
+		// sort
 		driver.findElement(By.xpath("//th[@id='infoForm:infoTable:j_idt127']/span")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//th[@id='infoForm:infoTable:j_idt127']/span")).click();
 		Thread.sleep(1000);
+		// logout
 		driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[3]/a/i")).click();
 	}
 
