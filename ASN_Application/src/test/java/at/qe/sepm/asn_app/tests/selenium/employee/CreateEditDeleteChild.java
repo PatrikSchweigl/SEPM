@@ -13,6 +13,10 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ * This test logs in as an employee and creates a new child.
+ * Then its data is edited and finally the new child is deleted
+ */
 public class CreateEditDeleteChild {
 	private WebDriver driver;
 	private String baseUrl;
