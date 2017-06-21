@@ -41,20 +41,6 @@ public class Employee extends UserData {
     public Employee() {//required for jpa repository
     }
 
-    /**
-     * Full constructor
-     */
-    public Employee(String username, String password, String firstName, String lastName,
-                    String location, String streetName, String postcode, String birthday,
-                    String email, String imgName, UserRole userRole, Religion religion,
-                    String phoneNumber, FamilyStatus familyStatus, Status workingState, WorkRole workRole) {
-        super(username, password, firstName, lastName, location, streetName, postcode, birthday, email,
-                imgName, userRole, religion, phoneNumber);
-        this.familyStatus = familyStatus;
-        this.workingState = workingState;
-        this.workRole = workRole;
-    }
-
 
     public FamilyStatus getFamilyStatus() {
         return familyStatus;
