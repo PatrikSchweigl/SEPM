@@ -262,7 +262,7 @@ public class ScheduleView implements Serializable {
 					}
 					else{
 					nursery.setCurrentOccupancy(nursery.getCurrentOccupancy() - 1);
-					nurseryInformationService.saveNurseryInformation(nursery);
+					nurseryInformationService.saveEditNurseryInformation(nursery);
 					}
 					registrationService.deleteRegistration(r);
 					RequestContext context = RequestContext.getCurrentInstance();

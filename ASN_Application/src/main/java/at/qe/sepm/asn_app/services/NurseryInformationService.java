@@ -45,6 +45,10 @@ public class NurseryInformationService {
         return nurseryInformationRepository.save(nurseryInformation);
     }
     
+    public NurseryInformation saveEditNurseryInformation(NurseryInformation nurseryInformation){
+    	return nurseryInformationRepository.save(nurseryInformation);
+    }
+    
     public NurseryInformation saveNurseryInformationEdit(NurseryInformation nurseryInformation){
         return nurseryInformationRepository.save(nurseryInformation);
     }
