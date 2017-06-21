@@ -13,7 +13,11 @@ import static org.junit.Assert.fail;
 
 
 /**
- *
+ * Log in as a parent, choose an employee and write some messages
+ * to them. Then log in as that employee, and write some messages
+ * back to the parent. The final step is to log back in as the
+ * parent and write once more some messages to the employee.
+ * After all these steps the parent logs out and the test finishes.
  */
 public class PrivateMessage {
     private WebDriver driver;

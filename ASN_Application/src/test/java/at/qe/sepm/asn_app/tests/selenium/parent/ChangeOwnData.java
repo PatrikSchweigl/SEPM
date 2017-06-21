@@ -13,7 +13,7 @@ import static org.junit.Assert.fail;
 
 
 /**
- * This test logs in as a parent and changed all possible own data.
+ * This test logs in as a parent and changes all possible own data.
  * After the changes have been made it logs in as an employee and
  * check if the changes have been made successfully.
  */
