@@ -182,7 +182,7 @@ public class EditChild {
         // Click on the first element.
         driver.findElement(By.id("childForm:childTable:0:j_idt141")).click();
         Thread.sleep(1000);
-        
+
         // Search for the child in the search bar.
         /*driver.findElement(By.id("childForm:childTable:globxalFilter")).clear();
         driver.findElement(By.id("childForm:childTable:globalFilter")).sendKeys("ChildFirstName");
