@@ -43,10 +43,7 @@ public class NurseryConstraints {
             return false;
         if (nurseryInformation.getPickUpStart().compareTo(nurseryInformation.getPickUpEnd()) >= 0)
             return false;
-        if (nurseryInformation.getBringEnd().compareTo(nurseryInformation.getPickUpStart()) >= 0)
-            return false;
-
-        return true;
+        return nurseryInformation.getBringEnd().compareTo(nurseryInformation.getPickUpStart()) < 0;
 
     }
 

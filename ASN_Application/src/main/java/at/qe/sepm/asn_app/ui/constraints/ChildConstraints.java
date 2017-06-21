@@ -55,11 +55,7 @@ public class ChildConstraints {
         }
 
         // Check if the child is older than 3 years.
-        if (ageDays > (3 * 365)) {
-            return false;
-        }
-
-        return true;
+        return ageDays <= (3 * 365);
     }
 
 
@@ -79,11 +75,7 @@ public class ChildConstraints {
             return false;
         }
 
-        if (p1.equals(p2)) {
-            return false;
-        }
-
-        return true;
+        return !p1.equals(p2);
     }
 
 

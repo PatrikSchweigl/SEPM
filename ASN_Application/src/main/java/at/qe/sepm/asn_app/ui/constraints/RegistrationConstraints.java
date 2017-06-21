@@ -51,10 +51,7 @@ public class RegistrationConstraints {
         NurseryInformation nurse = nurseryService.nurseryInformationByOriginDate(reg.getDate());
         Date dateStart = nurse.getBringStart();
         Date dateEnd = nurse.getBringEnd();
-        if (dateStart.compareTo(reg.getBringdate()) > 0 || dateEnd.compareTo(reg.getBringdate()) < 0) {
-            return true;
-        }
-        return false;
+        return dateStart.compareTo(reg.getBringdate()) > 0 || dateEnd.compareTo(reg.getBringdate()) < 0;
     }
 
     public boolean checkIfChildIsRegisteredOnDate(Date d, Long childId) {

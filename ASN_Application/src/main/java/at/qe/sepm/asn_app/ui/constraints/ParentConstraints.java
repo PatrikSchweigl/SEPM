@@ -57,11 +57,7 @@ public class ParentConstraints {
         }
 
         // Check if the parent is older than 99 years.
-        if (ageDays > (99 * 365)) {
-
-            return false;
-        }
-        return true;
+        return ageDays <= (99 * 365);
     }
 
 

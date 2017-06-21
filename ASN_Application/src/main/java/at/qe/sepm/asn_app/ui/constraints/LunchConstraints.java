@@ -74,10 +74,7 @@ public class LunchConstraints {
         if (new Date().compareTo(fridayConstraint.getTime()) > 0)
             return false;
 
-        if (cal.get(Calendar.WEEK_OF_YEAR) <= fridayConstraint.get(Calendar.WEEK_OF_YEAR)) {
-            return false;
-        }
-        return true;
+        return cal.get(Calendar.WEEK_OF_YEAR) > fridayConstraint.get(Calendar.WEEK_OF_YEAR);
 
     }
 
