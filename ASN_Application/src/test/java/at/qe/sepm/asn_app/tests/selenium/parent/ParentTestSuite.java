@@ -9,6 +9,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        AddCaregiver.class,
         CalendarLunchFastSignUp.class,
         CalendarSwitchViewsParent.class,
         ChangeOwnData.class
