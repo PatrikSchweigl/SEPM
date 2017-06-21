@@ -105,7 +105,7 @@ public class CommentServiceTest {
     public void testFurtherMethods() {
         // Print all information with toString();
         assertNotEquals("", comment.toString());
-        System.out.println(comment.toString());
+
 
         // Test isNew();
         assertFalse(comment.isNew());

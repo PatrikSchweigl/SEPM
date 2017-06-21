@@ -58,7 +58,6 @@ public class ChildControllerTest {
     private Child child;
     private Parent parent1;
     private Parent parent2;
-    private Sibling sibling1;
 
 
     @Before
@@ -163,8 +162,7 @@ public class ChildControllerTest {
             parentEditController.doDeleteParent();
             parentEditController.setParent2(parent2);
             parentEditController.doDeleteParent();
-        }
-        finally {
+        } finally {
             context.release();
             requestContext.release();
         }
@@ -176,6 +174,5 @@ public class ChildControllerTest {
         child = null;
         parent1 = null;
         parent2 = null;
-        sibling1 = null;
     }
 }

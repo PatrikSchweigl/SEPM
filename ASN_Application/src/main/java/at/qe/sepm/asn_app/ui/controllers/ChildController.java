@@ -46,155 +46,147 @@ import org.springframework.transaction.TransactionSystemException;
 @Scope("view")
 public class ChildController {
 
-	@Autowired
-	private ChildService childService;
-	@Autowired
-	private SessionInfoBean sessionInfo;
-	@Autowired
-	private ParentService parentService;
-	@Autowired
-	private ParentController parentController;
-	@Autowired
-	private CaregiverService caregiverService;
+    @Autowired
+    private ChildService childService;
+    @Autowired
+    private SessionInfoBean sessionInfo;
+    @Autowired
+    private ParentService parentService;
+    @Autowired
+    private ParentController parentController;
     @Autowired
     private LunchService lunchService;
-	private Child child;
-	private Caregiver caregiver;
-	private Date now;
+    private Child child;
 
-	private Collection<Child> children;
-	private Collection<Child> childrenParent;
+    private Collection<Child> children;
+    private Collection<Child> childrenParent;
 
-	private String parentUserName;
+    private String parentUserName;
 
-	public void setChildren(Collection<Child> children) {
-		this.children = children;
-	}
+    public void setChildren(Collection<Child> children) {
+        this.children = children;
+    }
 
-	public Child findOne(Long id){
-		return childService.loadChild(id);
-	}
+    public Child findOne(Long id) {
+        return childService.loadChild(id);
+    }
 
-	public Collection<Child> getChildren(){
-		return children;
-	}
+    public Collection<Child> getChildren() {
+        return children;
+    }
 
-	public Collection<Child> getChildrenByParentUsername(String usrn){return childService.getChildrenByParentUsername(usrn);}
+    public Collection<Child> getChildrenByParentUsername(String usrn) {
+        return childService.getChildrenByParentUsername(usrn);
+    }
     /*
     public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
     */
 
-    public Collection<Child> getChildrenByLunchToday(){
+    public Collection<Child> getChildrenByLunchToday() {
         Date today = new Date();
         List<Lunch> lunchs = lunchService.getLunchByDate(today);
-        if(lunchs.size() < 1){
+        if (lunchs.size() < 1) {
             return null;
         }
         Lunch lunch = lunchs.get(0);
         return getChildrenByLunch(lunch);
     }
-	public Collection<Child> getChildrenByLunch(Lunch lunch){
-		return childService.getChildrenByLunch(lunch);
-	}
-	
-	public boolean checkBirthday(Child child){
-		Date d = new Date();
-		Date birth = new Date();
-		try {
-			birth = new SimpleDateFormat("dd/MM/yyyy").parse(child.getBirthday());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth())
-			return true;
-		return false;
-	}
+
+    public Collection<Child> getChildrenByLunch(Lunch lunch) {
+        return childService.getChildrenByLunch(lunch);
+    }
+
+    public boolean checkBirthday(Child child) {
+        Date d = new Date();
+        Date birth = new Date();
+        try {
+            birth = new SimpleDateFormat("dd/MM/yyyy").parse(child.getBirthday());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth())
+            return true;
+        return false;
+    }
 
 
-	@PostConstruct
-	public void initList(){
-		children = childService.getAllChildren();
-		childrenParent = childService.getChildrenByParentUsername(sessionInfo.getCurrentUserName());
-	}
+    @PostConstruct
+    public void initList() {
+        children = childService.getAllChildren();
+        childrenParent = childService.getChildrenByParentUsername(sessionInfo.getCurrentUserName());
+    }
 
-	@PostConstruct
-	public void initNewChild(){
-		child = new Child();
-	}
+    @PostConstruct
+    public void initNewChild() {
+        child = new Child();
+    }
 
-	public Child getChild() {
-		return child;
-	}
+    public Child getChild() {
+        return child;
+    }
 
-	public void setChild(Child child) {
-		this.child = child;
-		doReloadChild();
-	}
+    public void setChild(Child child) {
+        this.child = child;
+        doReloadChild();
+    }
 
     /**
      * Needed for JUnit tests
+     *
      * @param child The child to be saved in the database.
      */
     public void setChild2(Child child) {
         this.child = child;
     }
 
-	public void findParentByUsername(String usrn){
-		child.setPrimaryParent(parentService.loadParent(usrn));
-	}
+    public void findParentByUsername(String usrn) {
+        child.setPrimaryParent(parentService.loadParent(usrn));
+    }
 
-	public String getParentUserName() {
-		return parentUserName;
-	}
+    public String getParentUserName() {
+        return parentUserName;
+    }
 
-	public void setParentUserName(String parentUserName) {
-		this.parentUserName = parentUserName;
-	}
+    public void setParentUserName(String parentUserName) {
+        this.parentUserName = parentUserName;
+    }
 
-	public Child doSaveChild(){
-		Child childReturn = null; 	// Needed for JUnit tests
+    public Child doSaveChild() {
+        Child childReturn = null;    // Needed for JUnit tests
 
-		if(!StringUtils.isNumeric(child.getEmergencyNumber())){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
-		}else{
-			try{
-				findParentByUsername(parentUserName);
-				Parent parent = parentService.loadParent(parentUserName);
-				parentService.changeStatus(parent, true);	// set parent status to active when child is added
-				child = childService.saveChild(child);
-				childReturn = child;
-				child = null;
-				initNewChild();
-				initList();
-				parentController.initList();
-				RequestContext context = RequestContext.getCurrentInstance();
-				context.execute("PF('childAddDialog').hide()");
-			} catch(TransactionSystemException ex){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
-			}
-		}
-		return childReturn;
-	}
+        if (!StringUtils.isNumeric(child.getEmergencyNumber())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
+        } else {
+            try {
+                findParentByUsername(parentUserName);
+                Parent parent = parentService.loadParent(parentUserName);
+                parentService.changeStatus(parent, true);    // set parent status to active when child is added
+                child = childService.saveChild(child);
+                childReturn = child;
+                child = null;
+                initNewChild();
+                initList();
+                parentController.initList();
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.execute("PF('childAddDialog').hide()");
+            } catch (TransactionSystemException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+            }
+        }
+        return childReturn;
+    }
 
-	public void doReloadChild(){
-		child = childService.loadChild(child.getId());
-	}
+    public void doReloadChild() {
+        child = childService.loadChild(child.getId());
+    }
 
-	public Collection<Child> getChildrenParent() {
-		return childrenParent;
-	}
+    public Collection<Child> getChildrenParent() {
+        return childrenParent;
+    }
 
-	public void setChildrenParent(Collection<Child> childrenParent) {
-		this.childrenParent = childrenParent;
-	}
-
-	public Date getNow() {
-		return now;
-	}
-
-	public void setNow(Date now) {
-		this.now = new Date();
-	}
+    public void setChildrenParent(Collection<Child> childrenParent) {
+        this.childrenParent = childrenParent;
+    }
 
 }

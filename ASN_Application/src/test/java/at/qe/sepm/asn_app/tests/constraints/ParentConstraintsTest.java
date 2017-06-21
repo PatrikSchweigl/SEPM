@@ -1,31 +1,24 @@
 package at.qe.sepm.asn_app.tests.constraints;
 
-import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
-import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
-import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
-import at.qe.sepm.asn_app.repositories.ParentRepository;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.ui.constraints.ParentConstraints;
-import org.junit.Ignore;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,7 +39,6 @@ public class ParentConstraintsTest {
     ParentService parentService;
     @Autowired
     ParentConstraints parentConstraints;
-    private Child child;
     private Parent parent;
 
 
@@ -141,7 +133,6 @@ public class ParentConstraintsTest {
      */
     @After
     public void cleanUp() {
-        child = null;
         parent = null;
     }
 }

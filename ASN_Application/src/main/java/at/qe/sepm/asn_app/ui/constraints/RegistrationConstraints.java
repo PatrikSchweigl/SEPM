@@ -15,62 +15,59 @@ import at.qe.sepm.asn_app.services.RegistrationService;
 @Scope("application")
 public class RegistrationConstraints {
 
-	@Autowired
-	private RegistrationService registrationService;
-	@Autowired
-	private NurseryInformationService nurseryService;
+    @Autowired
+    private RegistrationService registrationService;
+    @Autowired
+    private NurseryInformationService nurseryService;
 
-	public boolean registrationExists(Registration reg) {
-		Collection<Registration> register = registrationService.getAllRegistrations();
-		Iterator<Registration> iterator = register.iterator();
-		while (iterator.hasNext()) {
-			Registration r = iterator.next();
-			Date date = r.getDate();
-			System.err.println(date + "  vergleich mit  " + reg.getDate());
-			if (date.compareTo(reg.getDate()) == 0 && reg.getChild().getId() == r.getChild().getId()) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean checkIfNurseryExists(Registration reg){
-		Collection<NurseryInformation> nurse = nurseryService.getAllInformation();
-		Iterator<NurseryInformation> iterator = nurse.iterator();
-		while (iterator.hasNext()) {
-			NurseryInformation n = iterator.next();
-			Date date = n.getOriginDate();
-			System.err.println(date + "  vergleich mit  " + reg.getDate());
-			if (date.compareTo(reg.getDate()) == 0) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean checkTimeConstraints(Registration reg){
-		NurseryInformation nurse = nurseryService.nurseryInformationByOriginDate(reg.getDate());
-			Date dateStart = nurse.getBringStart();
-			Date dateEnd = nurse.getBringEnd();
-			System.err.println(dateStart + "  " +  dateEnd +  "  vergleich mit!!!!!!!!!!!!!  " + reg.getDate());
-			if (dateStart.compareTo(reg.getBringdate()) > 0 || dateEnd.compareTo(reg.getBringdate()) < 0) {
-				return true;
-			}
-		return false;
-	}
+    public boolean registrationExists(Registration reg) {
+        Collection<Registration> register = registrationService.getAllRegistrations();
+        Iterator<Registration> iterator = register.iterator();
+        while (iterator.hasNext()) {
+            Registration r = iterator.next();
+            Date date = r.getDate();
+            if (date.compareTo(reg.getDate()) == 0 && reg.getChild().getId() == r.getChild().getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean checkIfChildIsRegisteredOnDate(Date d, Long childId){
-		Collection<Registration> registrations = registrationService.getAllRegistrationsByDate(d);
+    public boolean checkIfNurseryExists(Registration reg) {
+        Collection<NurseryInformation> nurse = nurseryService.getAllInformation();
+        Iterator<NurseryInformation> iterator = nurse.iterator();
+        while (iterator.hasNext()) {
+            NurseryInformation n = iterator.next();
+            Date date = n.getOriginDate();
+            if (date.compareTo(reg.getDate()) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-		if(!registrations.isEmpty()){
-			for (Registration r: registrations) {
-				if(r.getChild().getId() == childId){
-					return true;
-				}
+    public boolean checkTimeConstraints(Registration reg) {
+        NurseryInformation nurse = nurseryService.nurseryInformationByOriginDate(reg.getDate());
+        Date dateStart = nurse.getBringStart();
+        Date dateEnd = nurse.getBringEnd();
+        if (dateStart.compareTo(reg.getBringdate()) > 0 || dateEnd.compareTo(reg.getBringdate()) < 0) {
+            return true;
+        }
+        return false;
+    }
 
-			}
-		}
-		return false;
-	}
+    public boolean checkIfChildIsRegisteredOnDate(Date d, Long childId) {
+        Collection<Registration> registrations = registrationService.getAllRegistrationsByDate(d);
+
+        if (!registrations.isEmpty()) {
+            for (Registration r : registrations) {
+                if (r.getChild().getId() == childId) {
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
 
 }

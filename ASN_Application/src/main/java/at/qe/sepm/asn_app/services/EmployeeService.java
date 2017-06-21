@@ -36,7 +36,7 @@ public class EmployeeService {
     @Autowired
     private MailService mailService;
 
-    public Collection<Employee> getAllEmployees(){
+    public Collection<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
@@ -48,7 +48,7 @@ public class EmployeeService {
             AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [EMPLOYEE]", new Date());
             auditLogRepository.save(log);
         }
-    	String pwd = userService.generatePasswordNew(employee.getEmail());
+        String pwd = userService.generatePasswordNew(employee.getEmail());
         mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Registrierung",
                 "Willkommen bei Care4Fun-Application!\n\n" +
                         "Die Plattform der Kinderkrippe erreichen Sie via localhost:8080.\n\n" +
@@ -85,14 +85,14 @@ public class EmployeeService {
         return userRepository.findFirstByUsername(auth.getName());
     }
 
-    public void changePassword(String password){
+    public void changePassword(String password) {
         UserData user = getAuthenticatedUser();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
     }
 
-    public void resetPassword(Employee employee){
+    public void resetPassword(Employee employee) {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {

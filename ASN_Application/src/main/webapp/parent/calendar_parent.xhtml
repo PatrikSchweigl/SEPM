@@ -13,448 +13,465 @@
                 <div class="wrapper">
                     <!-- =============================================== -->
 
-						<div class="content-wrapper" style="min-height: 1126px;">
-							<section class="content">
+                    <div class="content-wrapper" style="min-height: 1126px;">
+                        <section class="content">
 
-								<!-- Default box -->
-								<div class="box">
-									<div class="box-body">
-										<div align="right" style="margin-bottom: 10px;"></div>
-										<div class="ui-g">
-											<div class="ui-g-12 ui-md-12 ui-lg-12">
-												<div align="right" style="margin-bottom: 10px;">
-													<h:form>
-														<div style="float: right;">
-                                                            <p:commandButton style="width:250px; height:100px; font-size:1.4em"
-                                                                             oncomplete="PF('massSignUpDialog').show()"
-                                                                             value="Schnellanmeldung"
-																			 rendered="#{not empty childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
-                                                            />
-														</div>
-													</h:form>
-												</div>
+                            <!-- Default box -->
+                            <div class="box">
+                                <div class="box-body">
+                                    <div align="right" style="margin-bottom: 10px;"></div>
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                            <div align="right" style="margin-bottom: 10px;">
+                                                <h:form>
+                                                    <div style="float: right;">
+                                                        <p:commandButton
+                                                                style="width:250px; height:100px; font-size:1.4em"
+                                                                oncomplete="PF('massSignUpDialog').show()"
+                                                                value="Schnellanmeldung"
+                                                                rendered="#{not empty childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+                                                        />
+                                                    </div>
+                                                </h:form>
+                                            </div>
 
-												<!-- dialog declaration -->
-												<h:form id="dialogForm">
-													<p:dialog id="dialogTest" closeOnEscape="true"
-														visible="#{sessionInfoBean.hasDefaultPasswd()}"
-														width="400px" closable="true" widgetVar="dialogTest"
-														header="Passwort ändern" resizeable="false" modal="true">
-														<h:outputText
-															value="Aus Sicherheitsgründen empfehlen wir Ihnen, das Passwort zu ändern." />
-														<p:messages id="messages" showDetail="true"
-															autoUpdate="true" />
+                                            <!-- dialog declaration -->
+                                            <h:form id="dialogForm">
+                                                <p:dialog id="dialogTest" closeOnEscape="true"
+                                                          visible="#{sessionInfoBean.hasDefaultPasswd()}"
+                                                          width="400px" closable="true" widgetVar="dialogTest"
+                                                          header="Passwort ändern" resizeable="false" modal="true">
+                                                    <h:outputText
+                                                            value="Aus Sicherheitsgründen empfehlen wir Ihnen, das Passwort zu ändern."/>
+                                                    <p:messages id="messages" showDetail="true"
+                                                                autoUpdate="true"/>
 
-														<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
-															<h:outputLabel for="pwd1" value="Password 1: *" />
-															<p:password id="pwd1"
-																value="#{parentController.password}" match="pwd2"
-																label="Passwort:" required="true" feedback="true"
-																requiredMessage="Kein Passwort eingegeben"
-																promptLabel="Bitte Passwort eingeben!"
-																weakLabel="Schwach" goodLabel="Mittelmäßig"
-																strongLabel="Sicher" />
+                                                    <h:panelGrid columns="2" id="matchGrid" cellpadding="5">
+                                                        <h:outputLabel for="pwd1" value="Password 1: *"/>
+                                                        <p:password id="pwd1"
+                                                                    value="#{parentController.password}" match="pwd2"
+                                                                    label="Passwort:" required="true" feedback="true"
+                                                                    requiredMessage="Kein Passwort eingegeben"
+                                                                    promptLabel="Bitte Passwort eingeben!"
+                                                                    weakLabel="Schwach" goodLabel="Mittelmäßig"
+                                                                    strongLabel="Sicher"/>
 
-															<h:outputLabel for="pwd2" value="Password 2: *" />
-															<p:password id="pwd2"
-																value="#{parentController.password}"
-																label="Wiederholung: " required="true" />
-														</h:panelGrid>
-														<h:panelGrid columns="3">
-															<p:commandButton
-																action="#{parentController.doChangePassword(parentController.password)}"
-																value="Speichern" oncomplete="PF('dialogTest').hide()" />
-														</h:panelGrid>
-													</p:dialog>
-												</h:form>
+                                                        <h:outputLabel for="pwd2" value="Password 2: *"/>
+                                                        <p:password id="pwd2"
+                                                                    value="#{parentController.password}"
+                                                                    label="Wiederholung: " required="true"/>
+                                                    </h:panelGrid>
+                                                    <h:panelGrid columns="3">
+                                                        <p:commandButton
+                                                                action="#{parentController.doChangePassword(parentController.password)}"
+                                                                value="Speichern" oncomplete="PF('dialogTest').hide()"/>
+                                                    </h:panelGrid>
+                                                </p:dialog>
+                                            </h:form>
 
-												<h:form>
-													<div class="shrinker">
-														<p:accordionPanel multiple="true"
-															style="padding-left:50px; width:800px;">
-															<p:tab title="Mittagsmenü für die aktuelle Woche">
-																<h:panelGrid columns="5" layout="grid">
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(0).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(1).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(2).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(3).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(4).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-
-
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(0).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(1).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(2).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(3).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(4).meal}" />
-
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(0).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(1).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(2).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(3).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getCurrentWeek().get(4).cost}€" />
-																</h:panelGrid>
-															</p:tab>
-															<p:tab title="Mittagsmenü für die kommende Woche">
-																<h:panelGrid columns="5" layout="grid">
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(0).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(1).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(2).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(3).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(4).date}"
-																		style="padding-right:60px">
-																		<f:convertDateTime type="date" pattern="dd.MM." />
-																	</h:outputText>
+                                            <h:form>
+                                                <div class="shrinker">
+                                                    <p:accordionPanel multiple="true"
+                                                                      style="padding-left:50px; width:800px;">
+                                                        <p:tab title="Mittagsmenü für die aktuelle Woche">
+                                                            <h:panelGrid columns="5" layout="grid">
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(0).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(1).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(2).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(3).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(4).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
 
 
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(0).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(1).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(2).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(3).meal}"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(4).meal}" />
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(0).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(1).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(2).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(3).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(4).meal}"/>
 
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(0).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(1).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(2).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(3).cost}€"
-																		style="padding-right:60px" />
-																	<h:outputText
-																		value="#{lunchController.getNextWeek().get(4).cost}€" />
-																</h:panelGrid>
-															</p:tab>
-														</p:accordionPanel>
-													</div>
-												</h:form>
-											</div>
-										</div>
-										<h:form id="sheduleForm">
-											<p:growl id="growl" showDetail="true" sticky="true" />
-											<p:schedule locale="de" aspectRatio="1.5"
-												style="padding-left:50px; padding-right: 50px;"
-												leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
-												centerHeaderTemplate="month, agendaWeek, agendaDay"
-												showWeekends="false" id="schedule"
-												value="#{scheduleView.eventModel}" widgetVar="myschedule"
-												timeZone="GMT+2">
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(0).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(1).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(2).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(3).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getCurrentWeek().get(4).cost}€"/>
+                                                            </h:panelGrid>
+                                                        </p:tab>
+                                                        <p:tab title="Mittagsmenü für die kommende Woche">
+                                                            <h:panelGrid columns="5" layout="grid">
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(0).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(1).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(2).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(3).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(4).date}"
+                                                                        style="padding-right:60px">
+                                                                    <f:convertDateTime type="date" pattern="dd.MM."/>
+                                                                </h:outputText>
 
-												<p:ajax event="dateSelect" update="eventDateDetails"
-													listener="#{scheduleView.onDateSelect}"
-													oncomplete="PF('eventDateDialog').show();" />
-												<p:ajax event="eventSelect"
-													listener="#{scheduleView.onEventSelect}"
-													update="eventDetails"
-													oncomplete="PF('eventDialog').show();" />
 
-											</p:schedule>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(0).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(1).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(2).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(3).meal}"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(4).meal}"/>
 
-											<p:dialog widgetVar="eventDialog" header="Termine"
-												position="750, 700" closeOnEscape="true"
-												showEffect="clip" hideEffect="clip">
-												<p:messages id="messagesInfo2" autoUpdate="true" />
-												<h:panelGrid id="eventDetails" columns="2">
-													<p:outputLabel for="title" value="Titel:" />
-													<p:outputLabel id="title"
-														value="#{scheduleView.event.title}" />
-													<p:outputLabel for="from" value="Beginn:" />
-													<p:outputPanel id="from">#{scheduleView.event.startDate}</p:outputPanel>
-													<p:outputLabel for="to" value="Ende:" />
-													<p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
-													<p:commandButton id="deleteButton" value="Löschen"
-														action="#{scheduleView.deleteEventParent()}"
-														 />
-												</h:panelGrid>
-											</p:dialog>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(0).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(1).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(2).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(3).cost}€"
+                                                                        style="padding-right:60px"/>
+                                                                <h:outputText
+                                                                        value="#{lunchController.getNextWeek().get(4).cost}€"/>
+                                                            </h:panelGrid>
+                                                        </p:tab>
+                                                    </p:accordionPanel>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                    <h:form id="sheduleForm">
+                                        <p:growl id="growl" showDetail="true" sticky="true"/>
+                                        <p:schedule locale="de" aspectRatio="1.5"
+                                                    style="padding-left:50px; padding-right: 50px;"
+                                                    leftHeaderTemplate="prev, today" rightHeaderTemplate="next"
+                                                    centerHeaderTemplate="month, agendaWeek, agendaDay"
+                                                    showWeekends="false" id="schedule"
+                                                    value="#{scheduleView.eventModel}" widgetVar="myschedule"
+                                                    timeZone="GMT+2">
 
-											<p:dialog widgetVar="eventDateDialog" header="Termine"
-												closeOnEscape="true" 
-												showEffect="clip" hideEffect="clip">
-												<p:messages id="messagesInfo" autoUpdate="true" />
+                                            <p:ajax event="dateSelect" update="eventDateDetails"
+                                                    listener="#{scheduleView.onDateSelect}"
+                                                    oncomplete="PF('eventDateDialog').show();"/>
+                                            <p:ajax event="eventSelect"
+                                                    listener="#{scheduleView.onEventSelect}"
+                                                    update="eventDetails"
+                                                    oncomplete="PF('eventDialog').show();"/>
 
-												<h:panelGrid id="eventDateDetails" columns="2">
+                                        </p:schedule>
 
-													<p:outputLabel for="child" value="Kinder anmelden:" />
-													<h:selectBooleanCheckbox id="child"
-														disabled="#{scheduleView.meal}"
-														value="#{scheduleView.child}">
-														<p:ajax update="eventDateDetails" />
-													</h:selectBooleanCheckbox>
+                                        <p:dialog widgetVar="eventDialog" header="Termine"
+                                                  position="750, 700" closeOnEscape="true"
+                                                  showEffect="clip" hideEffect="clip">
+                                            <p:messages id="messagesInfo2" autoUpdate="true"/>
+                                            <h:panelGrid id="eventDetails" columns="2">
+                                                <p:outputLabel for="title" value="Titel:"/>
+                                                <p:outputLabel id="title"
+                                                               value="#{scheduleView.event.title}"/>
+                                                <p:outputLabel for="from" value="Beginn:"/>
+                                                <p:outputPanel id="from">#{scheduleView.event.startDate}</p:outputPanel>
+                                                <p:outputLabel for="to" value="Ende:"/>
+                                                <p:outputPanel id="to">#{scheduleView.event.endDate}</p:outputPanel>
+                                                <p:commandButton id="deleteButton" value="Löschen"
+                                                                 action="#{scheduleView.deleteEventParent()}"
+                                                />
+                                            </h:panelGrid>
+                                        </p:dialog>
 
-													<p:outputLabel for="meal" value="Essen:" />
-													<h:selectBooleanCheckbox id="meal"
-														disabled="#{scheduleView.child}"
-														value="#{scheduleView.meal}">
-														<p:ajax update="eventDateDetails" />
+                                        <p:dialog widgetVar="eventDateDialog" header="Termine"
+                                                  closeOnEscape="true"
+                                                  showEffect="clip" hideEffect="clip">
+                                            <p:messages id="messagesInfo" autoUpdate="true"/>
 
-													</h:selectBooleanCheckbox>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:outputLabel for="advanced" value="Kinder:" />
+                                            <h:panelGrid id="eventDateDetails" columns="2">
 
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:selectOneListbox style="width: 210px;" id="advanced"
-															value="#{scheduleView.childFirstname}" var="p"
-															filter="true" filterMatchMode="contains">
-															<f:selectItems
-																value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserName)}"
-																var="child" itemLabel="#{child.firstName}"
-																itemValue="#{child.firstName}" />
-															<p:column>
-																<p:graphicImage
-																	name="pictures/profile_pictures_children/#{childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserName(), p).imgName}"
-																	width="32" height="32" cache="false" />
-															</p:column>
+                                                <p:outputLabel for="child" value="Kinder anmelden:"/>
+                                                <h:selectBooleanCheckbox id="child"
+                                                                         disabled="#{scheduleView.meal}"
+                                                                         value="#{scheduleView.child}">
+                                                    <p:ajax update="eventDateDetails"/>
+                                                </h:selectBooleanCheckbox>
 
-															<p:column>
-																<h:outputText value="#{p}" />
-															</p:column>
-														</p:selectOneListbox>
-													</ui:fragment>
+                                                <p:outputLabel for="meal" value="Essen:"/>
+                                                <h:selectBooleanCheckbox id="meal"
+                                                                         disabled="#{scheduleView.child}"
+                                                                         value="#{scheduleView.meal}">
+                                                    <p:ajax update="eventDateDetails"/>
 
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:outputLabel for="occ" value="Plätze:" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:outputPanel id="occ">#{scheduleView.currentNurseryInformation.currentOccupancy}/#{scheduleView.currentNurseryInformation.maxOccupancy} belegt</p:outputPanel>
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:outputLabel for="too" value="Uhrzeit:" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
+                                                </h:selectBooleanCheckbox>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:outputLabel for="advanced" value="Kinder:"/>
 
-														<p:calendar id="too" beforeShowDay="noWeekend"
-															mindate="#{scheduleView.today}"
-															value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-															pattern="dd/MM/yyyy HH:mm" locale="de" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:outputLabel for="advanced" value="Anmerkungen:" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:inputTextarea placeholder="Anmerkung" id="messageInput"
-															value="#{scheduleView.description}" rows="5" cols="20"
-															autoResize="false" />
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.child}">
-														<p:commandButton id="addButton" value="Speichern"
-															actionListener="#{scheduleView.addRegistration}"
-															/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:selectOneListbox style="width: 210px;" id="advanced"
+                                                                        value="#{scheduleView.childFirstname}" var="p"
+                                                                        filter="true" filterMatchMode="contains">
+                                                        <f:selectItems
+                                                                value="#{childController.getChildrenByParentUsername(sessionInfoBean.currentUserName)}"
+                                                                var="child" itemLabel="#{child.firstName}"
+                                                                itemValue="#{child.firstName}"/>
+                                                        <p:column>
+                                                            <p:graphicImage
+                                                                    name="pictures/profile_pictures_children/#{childService.getChildrenByFirstnameAndParentUsername(sessionInfoBean.getCurrentUserName(), p).imgName}"
+                                                                    width="32" height="32" cache="false"/>
+                                                        </p:column>
 
-													</ui:fragment>
+                                                        <p:column>
+                                                            <h:outputText value="#{p}"/>
+                                                        </p:column>
+                                                    </p:selectOneListbox>
+                                                </ui:fragment>
 
-													<ui:fragment rendered="#{scheduleView.meal}">
-														<p:outputLabel for="mealBox" value="Kinder:" />
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:outputLabel for="occ" value="Plätze:"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:outputPanel
+                                                            id="occ">#{scheduleView.currentNurseryInformation.currentOccupancy}/#{scheduleView.currentNurseryInformation.maxOccupancy} belegt</p:outputPanel>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:outputLabel for="too" value="Uhrzeit:"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
 
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.meal}">
-														<p:selectOneListbox style="width: 210px;" id="mealBox"
-															value="#{lunchController.childId}" var="p" filter="true"
-															filterMatchMode="contains">
-															<f:selectItems
-																value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
-																var="child" itemLabel="#{child.firstName}"
-																itemValue="#{child.id}" />
+                                                    <p:calendar id="too" beforeShowDay="noWeekend"
+                                                                mindate="#{scheduleView.today}"
+                                                                value="#{scheduleView.event.startDate}" timeZone="GMT+2"
+                                                                pattern="dd/MM/yyyy HH:mm" locale="de"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:outputLabel for="advanced" value="Anmerkungen:"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:inputTextarea placeholder="Anmerkung" id="messageInput"
+                                                                     value="#{scheduleView.description}" rows="5"
+                                                                     cols="20"
+                                                                     autoResize="false"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.child}">
+                                                    <p:commandButton id="addButton" value="Speichern"
+                                                                     actionListener="#{scheduleView.addRegistration}"
+                                                    />
 
-															<p:column>
-																<p:graphicImage
-																	name="pictures/profile_pictures_children/#{childController.findOne(p).imgName}"
-																	width="32" height="32" />
-															</p:column>
+                                                </ui:fragment>
 
-															<p:column>
-																<h:outputText
-																	value="#{childController.findOne(p).firstName}" />
-															</p:column>
-														</p:selectOneListbox>
-													</ui:fragment>
-													<ui:fragment rendered="#{scheduleView.meal}">
-														<p:commandButton id="mealButton" value="Speichern"
-														
-															actionListener="#{lunchController.signUp(scheduleView.event.startDate)}" />
+                                                <ui:fragment rendered="#{scheduleView.meal}">
+                                                    <p:outputLabel for="mealBox" value="Kinder:"/>
+
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.meal}">
+                                                    <p:selectOneListbox style="width: 210px;" id="mealBox"
+                                                                        value="#{lunchController.childId}" var="p"
+                                                                        filter="true"
+                                                                        filterMatchMode="contains">
+                                                        <f:selectItems
+                                                                value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
+                                                                var="child" itemLabel="#{child.firstName}"
+                                                                itemValue="#{child.id}"/>
+
+                                                        <p:column>
+                                                            <p:graphicImage
+                                                                    name="pictures/profile_pictures_children/#{childController.findOne(p).imgName}"
+                                                                    width="32" height="32"/>
+                                                        </p:column>
+
+                                                        <p:column>
+                                                            <h:outputText
+                                                                    value="#{childController.findOne(p).firstName}"/>
+                                                        </p:column>
+                                                    </p:selectOneListbox>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{scheduleView.meal}">
+                                                    <p:commandButton id="mealButton" value="Speichern"
+
+                                                                     actionListener="#{lunchController.signUp(scheduleView.event.startDate)}"/>
 
                                                 </ui:fragment>
                                             </h:panelGrid>
                                         </p:dialog>
-                                        <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung" position="700, 400"
+                                        <p:dialog widgetVar="massSignUpDialog" header="Schnellanmeldung"
+                                                  position="700, 400"
                                                   closeOnEscape="true" showEffect="clip" hideEffect="clip">
-											<li>#{massSignupController.getMassSignupDaysStr()}</li>
+                                            <li>#{massSignupController.getMassSignupDaysStr()}</li>
                                             <p:selectOneListbox style="width: 210px; margin:auto;" id="massBox"
                                                                 value="#{massSignupController.childId}" var="p"
                                                                 filter="true"
-                                                                filterMatchMode="contains" >
+                                                                filterMatchMode="contains">
                                                 <f:selectItems
                                                         value="#{childService.getChildrenByParentUsername(sessionInfoBean.getCurrentUserName())}"
                                                         var="child" itemLabel="#{child.firstName}"
                                                         itemValue="#{child.id}"/>
 
-													<p:column>
-														<p:graphicImage
-															name="pictures/profile_pictures_children/#{childController.findOne(p).imgName}"
-															width="32" height="32" />
-													</p:column>
+                                                <p:column>
+                                                    <p:graphicImage
+                                                            name="pictures/profile_pictures_children/#{childController.findOne(p).imgName}"
+                                                            width="32" height="32"/>
+                                                </p:column>
 
-													<p:column>
-														<h:outputText
-															value="#{childController.findOne(p).firstName}" />
-													</p:column>
-												</p:selectOneListbox>
-											<p:separator/>
-												<p:selectManyCheckbox
-													value="#{massSignupController.strings}" layout="custom" id="massCheck">
+                                                <p:column>
+                                                    <h:outputText
+                                                            value="#{childController.findOne(p).firstName}"/>
+                                                </p:column>
+                                            </p:selectOneListbox>
+                                            <p:separator/>
+                                            <p:selectManyCheckbox
+                                                    value="#{massSignupController.strings}" layout="custom"
+                                                    id="massCheck">
 
-													<f:selectItem id="mon" itemValue="00" itemLabel="Anmeldung"/>
-													<f:selectItem itemValue="01" itemLabel="Essen" />
-													<f:selectItem itemValue="10" itemLabel="DA" />
-													<f:selectItem id="tuer" itemValue="11" itemLabel="DE" />
-													<f:selectItem itemValue="20" itemLabel="MA" />
-													<f:selectItem itemValue="21" itemLabel="ME" />
-													<f:selectItem itemValue="30" itemLabel="DA" />
-													<f:selectItem itemValue="31" itemLabel="DE" />
-													<f:selectItem itemValue="40" itemLabel="FA" />
-													<f:selectItem itemValue="41" itemLabel="FE" />
-												</p:selectManyCheckbox>
-											<div class="ui-grid ui-grid-responsive">
-												<div class="ui-grid-row" style="width:500px;">
-													<div class="ui-grid-col-4" style="text-align:center">
-														<h:outputLabel for="opt11" value="Mo" style="display:block;margin-bottom:8px"/>
-														<h:outputLabel for="opt11" value="Anmeldung" style="display:block"/>
-														<p:checkbox id="opt11" for="massCheck" itemIndex="0" value="true"/>
-														<h:outputLabel for="opt12" value="Essen" style="display:block"/>
-														<p:checkbox id="opt12" for="massCheck" itemIndex="1" />
-													</div>
-													<div class="ui-grid-col-4" style="text-align:center">
-														<h:outputLabel for="opt21" value="Di" style="display:block;margin-bottom:8px"/>
-														<h:outputLabel for="opt21" value="Anmeldung" style="display:block"/>
-														<p:checkbox id="opt21" for="massCheck" itemIndex="2" />
-														<h:outputLabel for="opt22" value="Essen" style="display:block"/>
-														<p:checkbox id="opt22" for="massCheck" itemIndex="3" />
-													</div>
-													<div class="ui-grid-col-4" style="text-align:center">
-														<h:outputLabel for="opt31" value="Mi" style="display:block;margin-bottom:8px"/>
-														<h:outputLabel for="opt31" value="Anmeldung" style="display:block"/>
-														<p:checkbox id="opt31" for="massCheck" itemIndex="4" />
-														<h:outputLabel for="opt32" value="Essen" style="display:block"/>
-														<p:checkbox id="opt32" for="massCheck" itemIndex="5" />
-													</div>
-													<div class="ui-grid-col-4" style="text-align:center">
-														<h:outputLabel for="opt41" value="Do" style="display:block;margin-bottom:8px"/>
-														<h:outputLabel for="opt41" value="Anmeldung" style="display:block"/>
-														<p:checkbox id="opt41" for="massCheck" itemIndex="6"  />
-														<h:outputLabel for="opt12" value="Essen" style="display:block"/>
-														<p:checkbox id="opt42" for="massCheck" itemIndex="7" />
-													</div>
-													<div class="ui-grid-col-4" style="text-align:center">
-														<h:outputLabel for="opt51" value="Fr" style="display:block;margin-bottom:8px"/>
-														<h:outputLabel for="opt51" value="Anmeldung" style="display:block"/>
-														<p:checkbox id="opt51" for="massCheck" itemIndex="8" />
-														<h:outputLabel for="opt52" value="Essen" style="display:block"/>
-														<p:checkbox id="opt52" for="massCheck" itemIndex="9" />
-													</div>
-												</div>
-											</div>
-											<p:separator/>
-												<p:commandButton value="Anmelden &amp; Schließen"
-													action="#{massSignupController.massSignup}"
-												/>
-											<p:commandButton value="Anmelden"
-															 action="#{massSignupController.massSignup}"/>
-												<p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
+                                                <f:selectItem id="mon" itemValue="00" itemLabel="Anmeldung"/>
+                                                <f:selectItem itemValue="01" itemLabel="Essen"/>
+                                                <f:selectItem itemValue="10" itemLabel="DA"/>
+                                                <f:selectItem id="tuer" itemValue="11" itemLabel="DE"/>
+                                                <f:selectItem itemValue="20" itemLabel="MA"/>
+                                                <f:selectItem itemValue="21" itemLabel="ME"/>
+                                                <f:selectItem itemValue="30" itemLabel="DA"/>
+                                                <f:selectItem itemValue="31" itemLabel="DE"/>
+                                                <f:selectItem itemValue="40" itemLabel="FA"/>
+                                                <f:selectItem itemValue="41" itemLabel="FE"/>
+                                            </p:selectManyCheckbox>
+                                            <div class="ui-grid ui-grid-responsive">
+                                                <div class="ui-grid-row" style="width:500px;">
+                                                    <div class="ui-grid-col-4" style="text-align:center">
+                                                        <h:outputLabel for="opt11" value="Mo"
+                                                                       style="display:block;margin-bottom:8px"/>
+                                                        <h:outputLabel for="opt11" value="Anmeldung"
+                                                                       style="display:block"/>
+                                                        <p:checkbox id="opt11" for="massCheck" itemIndex="0"
+                                                                    value="true"/>
+                                                        <h:outputLabel for="opt12" value="Essen" style="display:block"/>
+                                                        <p:checkbox id="opt12" for="massCheck" itemIndex="1"/>
+                                                    </div>
+                                                    <div class="ui-grid-col-4" style="text-align:center">
+                                                        <h:outputLabel for="opt21" value="Di"
+                                                                       style="display:block;margin-bottom:8px"/>
+                                                        <h:outputLabel for="opt21" value="Anmeldung"
+                                                                       style="display:block"/>
+                                                        <p:checkbox id="opt21" for="massCheck" itemIndex="2"/>
+                                                        <h:outputLabel for="opt22" value="Essen" style="display:block"/>
+                                                        <p:checkbox id="opt22" for="massCheck" itemIndex="3"/>
+                                                    </div>
+                                                    <div class="ui-grid-col-4" style="text-align:center">
+                                                        <h:outputLabel for="opt31" value="Mi"
+                                                                       style="display:block;margin-bottom:8px"/>
+                                                        <h:outputLabel for="opt31" value="Anmeldung"
+                                                                       style="display:block"/>
+                                                        <p:checkbox id="opt31" for="massCheck" itemIndex="4"/>
+                                                        <h:outputLabel for="opt32" value="Essen" style="display:block"/>
+                                                        <p:checkbox id="opt32" for="massCheck" itemIndex="5"/>
+                                                    </div>
+                                                    <div class="ui-grid-col-4" style="text-align:center">
+                                                        <h:outputLabel for="opt41" value="Do"
+                                                                       style="display:block;margin-bottom:8px"/>
+                                                        <h:outputLabel for="opt41" value="Anmeldung"
+                                                                       style="display:block"/>
+                                                        <p:checkbox id="opt41" for="massCheck" itemIndex="6"/>
+                                                        <h:outputLabel for="opt12" value="Essen" style="display:block"/>
+                                                        <p:checkbox id="opt42" for="massCheck" itemIndex="7"/>
+                                                    </div>
+                                                    <div class="ui-grid-col-4" style="text-align:center">
+                                                        <h:outputLabel for="opt51" value="Fr"
+                                                                       style="display:block;margin-bottom:8px"/>
+                                                        <h:outputLabel for="opt51" value="Anmeldung"
+                                                                       style="display:block"/>
+                                                        <p:checkbox id="opt51" for="massCheck" itemIndex="8"/>
+                                                        <h:outputLabel for="opt52" value="Essen" style="display:block"/>
+                                                        <p:checkbox id="opt52" for="massCheck" itemIndex="9"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p:separator/>
+                                            <p:commandButton value="Anmelden &amp; Schließen"
+                                                             action="#{massSignupController.massSignup}"
+                                            />
+                                            <p:commandButton value="Anmelden"
+                                                             action="#{massSignupController.massSignup}"/>
+                                            <p:commandButton value="Abbrechen" action="PF('massSignUpDialog').hide()"/>
 
-											</p:dialog>
+                                        </p:dialog>
 
-											<p:confirmDialog global="true" showEffect="fade"
-												hideEffect="fade" width="400">
-												<p:commandButton value="Anmelden" type="button"
-													styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-												<p:commandButton value="Abbruch" type="button"
-													styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-											</p:confirmDialog>
-										</h:form>
-									</div>
-								</div>
-								<!-- /.box -->
+                                        <p:confirmDialog global="true" showEffect="fade"
+                                                         hideEffect="fade" width="400">
+                                            <p:commandButton value="Anmelden" type="button"
+                                                             styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                            <p:commandButton value="Abbruch" type="button"
+                                                             styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                        </p:confirmDialog>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <!-- /.box -->
 
-							</section>
-							<!-- /.content -->
-						</div>
-					</div>
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                </div>
 
-				</body>
+                </body>
 
 
-				<link rel="stylesheet"
-					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-			</ui:fragment>
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            </ui:fragment>
 
-		</h:body>
-	</ui:define>
+        </h:body>
+    </ui:define>
 </ui:composition>

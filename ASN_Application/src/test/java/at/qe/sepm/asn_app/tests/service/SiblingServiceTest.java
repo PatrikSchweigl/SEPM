@@ -53,7 +53,6 @@ public class SiblingServiceTest {
     }
 
 
-
     @Test
     public void testSaveAndDelete() {
         // Save the parents in the database.
@@ -70,8 +69,6 @@ public class SiblingServiceTest {
         // It has to be set after child was saved.
         sibling.setChild(child);
         sibling = siblingService.saveSibling(sibling);
-        System.out.println("SIBLIIIIIIIIIIING: " + sibling +
-                            sibling.getId() + sibling.getChild().getId());
 
         // Check if the values have changed since the sibling was saved.
         Sibling other = siblingService.loadSibling(sibling.getId());
@@ -118,7 +115,7 @@ public class SiblingServiceTest {
     public void testFurtherMethods() {
         // Print all information with toString();
         assertNotEquals("", sibling.toString());
-        System.out.println(sibling.toString());
+
 
         // Test isNew()
         assertFalse(sibling.isNew());
@@ -134,7 +131,6 @@ public class SiblingServiceTest {
         sibling = new Sibling();
         assertTrue(sibling.isNew());
     }
-
 
 
     @After

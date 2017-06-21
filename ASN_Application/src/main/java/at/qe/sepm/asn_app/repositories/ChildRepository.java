@@ -21,10 +21,8 @@ public interface ChildRepository extends AbstractRepository<Child, Long> {
     List<Child> getChildrenByParentUsername(@Param("username") String usrn);
 
     @Query("SELECT u from Child u WHERE (u.firstName = :childFirstname AND (u.parent1.username = :username OR u.parent2.username = :username))")
-	Child getChildrenByFirstnameAndParentUsername(@Param("username") String username,@Param("childFirstname") String childFirstname);
+    Child getChildrenByFirstnameAndParentUsername(@Param("username") String username, @Param("childFirstname") String childFirstname);
 
-    @Query("SELECT u from Child u WHERE u.id = :id")
-	Child getChildById(@Param("id") long id);
     /*
     List<Child> getChildrenByParent(Parent p){return null;}
     */

@@ -20,47 +20,44 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public Collection<Task> getAllTasks(){
+    public Collection<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
-    public Task saveTask(Task task){
+    public Task saveTask(Task task) {
         return taskRepository.save(task);
     }
 
-    public void deleteTask(Task task){
+    public void deleteTask(Task task) {
         taskRepository.delete(task);
     }
 
-    public Task loadTask(Long id){
+    public Task loadTask(Long id) {
         return taskRepository.findOne(id);
     }
+
     @Modifying
-    public void deleteTaskById(String id){
-    	taskRepository.DeleteTaskByStringId(id);
+    public void deleteTaskById(String id) {
+        taskRepository.DeleteTaskByStringId(id);
     }
 
-    public Collection<Task> getAllTasksBySender(String id){
-        return taskRepository.getTasksBySender(id);
-    }
-
-    public Collection<Task> getAllTasksByReceiver(String id){
+    public Collection<Task> getAllTasksByReceiver(String id) {
         return taskRepository.getTasksByReceiver(id);
     }
-    
-    public Collection<Task> getAllTasksByReceiverAndImportance(String id){
+
+    public Collection<Task> getAllTasksByReceiverAndImportance(String id) {
         return taskRepository.getTasksByReceiverAndImportance(id);
     }
 
-    public Collection<Task> getTasksByImportance(Boolean imp){
+    public Collection<Task> getTasksByImportance(Boolean imp) {
         return taskRepository.getTasksByImportance(imp);
     }
 
-    public Task getTaskByStringId(String id){
+    public Task getTaskByStringId(String id) {
         return taskRepository.getTaskByStringId(id);
     }
 
-    public Task changeTaskStatus(Task task, Boolean status){
+    public Task changeTaskStatus(Task task, Boolean status) {
         task.setTaskStatus(status);
         return taskRepository.save(task);
     }

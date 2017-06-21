@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
- *
+ * <p>
  * A PrivateMessage contains the name of the sender, the receiver, the message itself
  * and a date on which the message got sent. The difference to a normal {@link Message}
  * is that a PrivateMessage is not broadcasted, but has exactly one receiver.
@@ -33,33 +33,27 @@ public class PrivateMessage implements Persistable<Long> {
     private String usernameReceiver;
     @NotNull
     private String message;
-	private Date date;
+    private Date date;
 
 
-	public PrivateMessage() {}
-
-	public PrivateMessage(String usernameSender, String usernameReceiver, String message, Date date) {
-		this.usernameSender = usernameSender;
-		this.usernameReceiver = usernameReceiver;
-		this.message = message;
-		this.date = date;
-	}
-
-
-	public String getUsernameReceiver() {
-		return usernameReceiver;
-	}
-
-	public void setUsernameReceiver(String usernameReceiver) {
-		this.usernameReceiver = usernameReceiver;
+    public PrivateMessage() {
     }
-	
-	public String getUsernameSender() {
-		return usernameSender;
-	}
 
-	public void setUsernameSender(String usernameSender) {
-		this.usernameSender = usernameSender;
+
+    public String getUsernameReceiver() {
+        return usernameReceiver;
+    }
+
+    public void setUsernameReceiver(String usernameReceiver) {
+        this.usernameReceiver = usernameReceiver;
+    }
+
+    public String getUsernameSender() {
+        return usernameSender;
+    }
+
+    public void setUsernameSender(String usernameSender) {
+        this.usernameSender = usernameSender;
     }
 
     public String getMessage() {
@@ -81,7 +75,7 @@ public class PrivateMessage implements Persistable<Long> {
 
     @Override
     public Long getId() {
-    	return  id;
+        return id;
     }
 
 
@@ -112,7 +106,7 @@ public class PrivateMessage implements Persistable<Long> {
 
     @Override
     public String toString() {
-	    return "Date: " + date + "\n" +
+        return "Date: " + date + "\n" +
                 "Message: " + message + "\n" +
                 "UsernameReceiver: " + usernameReceiver + "\n" +
                 "UsernameSender: " + usernameSender;

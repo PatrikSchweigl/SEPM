@@ -181,8 +181,7 @@ public class CaregiverControllerTest {
             parentEditController.doDeleteParent();
             parentEditController.setParent2(parent2);
             parentEditController.doDeleteParent();
-        }
-        finally {
+        } finally {
             context.release();
             requestContext.release();
         }

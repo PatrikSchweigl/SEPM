@@ -50,26 +50,25 @@ public class MassSignupController {
 
     private String[] strings;
     private Long childId;
-    private Date date[];
 
 
     @PostConstruct
-    public void initLists(){
+    public void initLists() {
         signUps = new LinkedList<Boolean[]>();
         children = new LinkedList<Child>();
         dates = new LinkedList<Date[]>();
     }
 
     @PostConstruct
-    public void initBools(){
+    public void initBools() {
         strings = new String[10];
     }
 
-    public void massSignup(){
+    public void massSignup() {
         LocalDate now = LocalDate.now();
 
         int x = 1;
-        if(now.getDayOfWeek().getValue() > 5){
+        if (now.getDayOfWeek().getValue() > 5) {
             x = 2;
         }
         addBools();
@@ -77,80 +76,65 @@ public class MassSignupController {
         addDate(DateUtils.getWeek(x));
         process();
         RequestContext context = RequestContext.getCurrentInstance();
-		context.execute("window.location.replace(window.location.href);");
-        
+        context.execute("window.location.replace(window.location.href);");
+
     }
 
-    public String getMassSignupDaysStr(){
+    public String getMassSignupDaysStr() {
         LocalDate now = LocalDate.now();
 
         int x = 1;
-        if(now.getDayOfWeek().getValue() > 5){
+        if (now.getDayOfWeek().getValue() > 5) {
             x = 2;
         }
         Date[] dates = DateUtils.getWeek(x);
-        return "Vom " + dates[0].getDate() + "." + (dates[0].getMonth()+1) + ". bis zum " + dates[dates.length-1].getDate() + "." + (dates[dates.length-1].getMonth()+1) + ".";
+        return "Vom " + dates[0].getDate() + "." + (dates[0].getMonth() + 1) + ". bis zum " + dates[dates.length - 1].getDate() + "." + (dates[dates.length - 1].getMonth() + 1) + ".";
 
     }
 
-    public void addBools(){
+    public void addBools() {
         Boolean[] bools = new Boolean[10];
-        for(int i = 0; i < bools.length ; i++){
+        for (int i = 0; i < bools.length; i++) {
             bools[i] = false;
         }
-        for(int i = 0; i < strings.length; i++){
+        for (int i = 0; i < strings.length; i++) {
             int offset = Character.getNumericValue(strings[i].charAt(0));
             int offset2 = Character.getNumericValue(strings[i].charAt(1));
-            bools[offset*2 + offset2] = true;
+            bools[offset * 2 + offset2] = true;
 
         }
         signUps.add(bools);
     }
-    public void addSignUp(Boolean[] booleans){
-        signUps.add(booleans);
-    }
 
-    public void addChild(Child c){
+    public void addChild(Child c) {
         children.add(c);
     }
 
-    public void addDate(Date[] d){
+    public void addDate(Date[] d) {
         dates.add(d);
     }
 
-    public void addData(Child c, Date[] d, Boolean[] b){
-        addChild(c);
-        addDate(d);
-        addSignUp(b);
-    }
-
-    public void addAndProcess(){
-        addBools();
-        process();
-    }
-
-    public void process(){
-        if(signUps == null || children == null || dates == null || signUps.size() != children.size() || children.size() != dates.size()){
-            System.err.println("SOMETHING WENT TERRIBLY WRONG");
+    public void process() {
+        if (signUps == null || children == null || dates == null || signUps.size() != children.size() || children.size() != dates.size()) {
             return;
         }
 
-        for(int i = 0; i < signUps.size(); i++){
+        for (int i = 0; i < signUps.size(); i++) {
 
             Date[] d = dates.get(i);
             Boolean[] b = signUps.get(i);
             Child c = children.get(i);
 
-            for(int j = 0; j < 5; j++){
+            for (int j = 0; j < 5; j++) {
                 Lunch l;
-                if(b[j*2 + 1]) {
-                    if(b[j*2]) {
+                if (b[j * 2 + 1]) {
+                    if (b[j * 2]) {
                         l = lunchService.getLunchByDate(d[j]).get(0);
                         l.addChild(c);
                         lunchService.saveLunch(l);
                     }
                 }
-                if(b[j*2]){
+                if (b[j * 2]) {
                     addRegistration(d[j], c);
 
                 }
@@ -158,6 +142,7 @@ public class MassSignupController {
             }
         }
     }
+
     public void addRegistration(Date d, Child childReg) {
         NurseryInformation nurseryInformation;
         try {
@@ -185,17 +170,17 @@ public class MassSignupController {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sie können kein Kind eintragen", null));
 
-            } else if((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime())) == null) {
+            } else if ((nurseryInformation = nurseryInformationService.nurseryInformationByOriginDate(cal.getTime())) == null) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Für diesen Tag gibt es keine Information", null));
 
-            }else if(nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {
+            } else if (nurseryInformation.getCurrentOccupancy() == nurseryInformation.getMaxOccupancy()) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Kein Platz mehr frei für diesen Tag", null));
 
-            } else{
+            } else {
                 registrationService.saveRegistration(reg);
-                nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy()+1);
+                nurseryInformation.setCurrentOccupancy(nurseryInformation.getCurrentOccupancy() + 1);
                 nurseryInformationService.saveNurseryInformationEdit(nurseryInformation);
                 AuditLog log = new AuditLog(reg.getChild().getFirstName() + " " + reg.getChild().getLastName(),
                         "REGISTRATION CREATED: " + userService.getAuthenticatedUser().getUsername() + " ["
@@ -210,20 +195,9 @@ public class MassSignupController {
             ex.printStackTrace();
         }
     }
-    public boolean hasChild(){
-        return childId == null;
-    }
 
     // getters,, setters ===========================================================================================
 
-
-    public Date[] getDate() {
-        return date;
-    }
-
-    public void setDate(Date[] date) {
-        this.date = date;
-    }
 
     public String[] getStrings() {
         return strings;
@@ -241,27 +215,4 @@ public class MassSignupController {
         this.childId = childId;
     }
 
-    public List<Boolean[]> getSignUps() {
-        return signUps;
-    }
-
-    public void setSignUps(List<Boolean[]> signUps) {
-        this.signUps = signUps;
-    }
-
-    public List<Child> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Child> children) {
-        this.children = children;
-    }
-
-    public List<Date[]> getDates() {
-        return dates;
-    }
-
-    public void setDates(List<Date[]> dates) {
-        this.dates = dates;
-    }
 }

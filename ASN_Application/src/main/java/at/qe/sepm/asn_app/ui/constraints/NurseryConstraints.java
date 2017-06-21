@@ -19,15 +19,14 @@ public class NurseryConstraints {
     @Autowired
     private NurseryInformationService nurseryInformationService;
 
-    public  boolean nurseryInfoExists(NurseryInformation nurseryInformation){
+    public boolean nurseryInfoExists(NurseryInformation nurseryInformation) {
         Collection<NurseryInformation> list = nurseryInformationService.getAllInformation();    //throws null pointer exception
         Iterator<NurseryInformation> iterator = list.iterator();
         Calendar cal = Calendar.getInstance();
         cal.setTime(nurseryInformation.getOriginDate());
         cal.add(Calendar.HOUR_OF_DAY, 2);
-        while(iterator.hasNext()) {
-        	Date date = iterator.next().getOriginDate();
-        	System.out.println(date + "  vergleich mit  " + cal.getTime());
+        while (iterator.hasNext()) {
+            Date date = iterator.next().getOriginDate();
             if (date.compareTo(cal.getTime()) == 0) {
                 return true;
             }
@@ -35,17 +34,17 @@ public class NurseryConstraints {
 
         return false;
     }
-    
-    public boolean checkTimeConstraints(NurseryInformation nurseryInformation){
-    	if(nurseryInformation.getBringStart().compareTo(nurseryInformation.getBringEnd()) >= 0)
-    		return false;
-    	if(nurseryInformation.getPickUpStart().compareTo(nurseryInformation.getPickUpEnd()) >= 0)
-    		return false;
-    	if(nurseryInformation.getBringEnd().compareTo(nurseryInformation.getPickUpStart()) >= 0)
-    		return false;
-    	
-    	return true;
-    	
+
+    public boolean checkTimeConstraints(NurseryInformation nurseryInformation) {
+        if (nurseryInformation.getBringStart().compareTo(nurseryInformation.getBringEnd()) >= 0)
+            return false;
+        if (nurseryInformation.getPickUpStart().compareTo(nurseryInformation.getPickUpEnd()) >= 0)
+            return false;
+        if (nurseryInformation.getBringEnd().compareTo(nurseryInformation.getPickUpStart()) >= 0)
+            return false;
+
+        return true;
+
     }
 
 }

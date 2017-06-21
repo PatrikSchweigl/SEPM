@@ -6,6 +6,7 @@ import at.qe.sepm.asn_app.utils.ViewScope;
 
 import java.util.HashMap;
 import javax.faces.webapp.FacesServlet;
+
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +29,7 @@ public class Main extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-    
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(new Class[]{Main.class, CustomServletContextInitializer.class, WebSecurityConfig.class});

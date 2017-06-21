@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.xhtml")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/secured/welcome.xhtml").successHandler(successHandler())
-        		.failureForwardUrl("/error/login_failure.xhtml");
+                .failureForwardUrl("/error/login_failure.xhtml");
 
         http.exceptionHandling().accessDeniedPage("/error/access_denied.xhtml");
 
@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }

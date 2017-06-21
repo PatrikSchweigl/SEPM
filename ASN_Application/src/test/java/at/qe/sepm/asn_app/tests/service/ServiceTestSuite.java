@@ -10,20 +10,22 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-        //CaregiverServiceTest.class,
+        AuditLogServiceTest.class,
+        CaregiverServiceTest.class,
         ChildServiceTest.class,
         CommentServiceTest.class,
         EmployeeServiceTest.class,
-        //EnumServiceTest.class,
         LunchServiceTest.class,
         MessageServiceTest.class,
         NurseryInformationServiceTest.class,
         ParentServiceTest.class,
         PictureServiceTest.class,
         PrivateMessageServiceTest.class,
-        //RegistrationServiceTest.class,
-        TaskServiceTest.class
-        })
+        RegistrationServiceTest.class,
+        SiblingServiceTest.class,
+        TaskServiceTest.class,
+        UserServiceTest.class,
+})
 
 public class ServiceTestSuite {
 }

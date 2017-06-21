@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
- *
+ * <p>
  * AuditLog contains information about changes made to the database. This includes the following:
  * - Create a person
  * - Delete a person
@@ -41,7 +41,8 @@ public class AuditLog implements Persistable<Long> {
     private Date date;
 
 
-    public AuditLog(){}
+    public AuditLog() {
+    }
 
     public AuditLog(String userName, String log, Date date) {
         this.userName = userName;
@@ -69,9 +70,9 @@ public class AuditLog implements Persistable<Long> {
     public Date getDate() {
         return date;
     }
-    
-    public String getFormattedOriginDate(){
-    	return new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(date);
+
+    public String getFormattedOriginDate() {
+        return new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(date);
     }
 
     public void setDate(Date date) {
@@ -95,11 +96,9 @@ public class AuditLog implements Persistable<Long> {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        }
-        else if (obj == null) {
+        } else if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof AuditLog)) {
+        } else if (!(obj instanceof AuditLog)) {
             return false;
         }
 

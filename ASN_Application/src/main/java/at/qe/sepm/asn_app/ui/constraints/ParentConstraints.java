@@ -31,7 +31,7 @@ public class ParentConstraints {
      * @return true iff no constraints are violated.
      */
     public boolean checkConstraints(Parent parent) throws BirthdayConstraintException {
-        if(!checkBirthdayConstraints(parent)) {
+        if (!checkBirthdayConstraints(parent)) {
             throw new BirthdayConstraintException();
         }
         return true;
@@ -44,23 +44,21 @@ public class ParentConstraints {
      * @param parent the parent of which the birthday is too be checked.
      * @return <code>true</code> iff the parent is between 14 and 99 years old; <code>false</code> otherwise.
      */
-    public boolean checkBirthdayConstraints(Parent parent)  {
+    public boolean checkBirthdayConstraints(Parent parent) {
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
         long birthday = BirthdayParser.parseBirthdayToLong(parent.getBirthday());
-        int ageDays = (int)((dateNow-birthday)/60/60/24);
-        System.out.println("date now: " + dateNow);
-        System.out.println("birthday: " + birthday);
-        System.out.println("age in days: " + ageDays);
+        int ageDays = (int) ((dateNow - birthday) / 60 / 60 / 24);
+
 
         // Check if the parent is younger than 14 years.
-        if (ageDays < 14*365) {
-            System.out.println("Too young");
+        if (ageDays < 14 * 365) {
+
             return false;
         }
 
         // Check if the parent is older than 99 years.
-        if (ageDays > (99*365)) {
-            System.out.println("Too old");
+        if (ageDays > (99 * 365)) {
+
             return false;
         }
         return true;

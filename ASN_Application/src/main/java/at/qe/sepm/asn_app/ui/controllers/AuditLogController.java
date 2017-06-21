@@ -18,18 +18,18 @@ import java.util.List;
 @Scope("view")
 public class AuditLogController {
 
-	@Autowired
-	private AuditLogRepository auditLogRepository;
+    @Autowired
+    private AuditLogRepository auditLogRepository;
 
-	/**
-	 * Returns a list of all users.
-	 *
-	 * @return
-	 */
-	public Collection<AuditLog> getAuditLogs() {
-		Collection<AuditLog> list = auditLogRepository.findAll();
-		Collections.reverse((List<?>) list);
-		return list;
-	}
+    /**
+     * Returns a list of all users.
+     *
+     * @return
+     */
+    public Collection<AuditLog> getAuditLogs() {
+        Collection<AuditLog> list = auditLogRepository.findAll();
+        Collections.reverse((List<?>) list);
+        return list;
+    }
 
 }

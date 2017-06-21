@@ -49,9 +49,9 @@ public class EmployeeControllerTest {
     @Before
     public void initialize() throws InterruptedException {
         employee = new Employee("", "passwd", "EmployeeFirstName1", "EmployeeLastName1", "EmployeeLocation1",
-                                "EmployeeStreetName1", "6020", "23/11/1990", "EmployeeEmail1@google.com",
-                                "EmployeeImgName1", UserRole.EMPLOYEE, Religion.ATHEISMUS, "0123456789",
-                                FamilyStatus.LEDIG, Status.ANWESEND, WorkRole.PAEDAGOGE);
+                "EmployeeStreetName1", "6020", "23/11/1990", "EmployeeEmail1@google.com",
+                "EmployeeImgName1", UserRole.EMPLOYEE, Religion.ATHEISMUS, "0123456789",
+                FamilyStatus.LEDIG, Status.ANWESEND, WorkRole.PAEDAGOGE);
     }
 
 

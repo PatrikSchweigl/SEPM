@@ -90,9 +90,9 @@
                                             <p:column style="width:100px;text-align: center"
                                                       exportable="false">
                                                 <p:commandButton rendered="#{not sessionInfoBean.hasRole('ADMIN')}"
-                                                        action="#{userController.doDeleteUser}"
-                                                        icon="ui-icon-trash" title="Löschen"
-                                                        update=":userForm:usersTable">
+                                                                 action="#{userController.doDeleteUser}"
+                                                                 icon="ui-icon-trash" title="Löschen"
+                                                                 update=":userForm:usersTable">
                                                     <f:setPropertyActionListener value="#{userData}"
                                                                                  target="#{userController.userData}"/>
                                                     <p:confirm header="Bestätigung"

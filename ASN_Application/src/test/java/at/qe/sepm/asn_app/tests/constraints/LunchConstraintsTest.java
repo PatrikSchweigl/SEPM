@@ -153,7 +153,6 @@ public class LunchConstraintsTest {
         lunch1 = lunchService.saveLunch(lunch1);
         assertFalse(lunchConstraints.checkIfNurseryInformationExists(lunch1));
 
-        System.out.println("HEEEEEEEEEEEEEEEEY: " + lunch1.getDate());
 
         calendar.clear();
         calendar.set(2017, Calendar.AUGUST, 11, 10, 0);
@@ -170,7 +169,7 @@ public class LunchConstraintsTest {
 
         // Save the nurseryInformation in the database.
         nurseryInformation1 = nurseryInformationService.saveNurseryInformation(nurseryInformation1);
-        System.out.println("HEEEEEEEEEEEEEEEEY: " + nurseryInformation1.getOriginDate());
+
 
         assertTrue(lunchConstraints.checkIfNurseryInformationExists(lunch1));
 

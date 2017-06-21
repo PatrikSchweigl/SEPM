@@ -39,12 +39,12 @@ public class ParentService {
     private UserService userService;
 
 
-    public Collection<Parent> getAllParents(){
+    public Collection<Parent> getAllParents() {
         return parentRepository.findAll();
     }
 
 
-    public Parent saveParent(Parent parent){
+    public Parent saveParent(Parent parent) {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -66,10 +66,10 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-    public Parent updateParent(Parent parent, Child child){
+    public Parent updateParent(Parent parent, Child child) {
         mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Kind Abmeldung",
                 "Guten Tag " + parent.getFirstName() + " " + parent.getLastName() +
-                        "\n\nIhr Kind ("+child.getFirstName()+" "+child.getLastName()+") wurde von unserer" +
+                        "\n\nIhr Kind (" + child.getFirstName() + " " + child.getLastName() + ") wurde von unserer" +
                         " Kinderkrippe abgemeldet. Desweiteren wurde der diesbezügliche Datensatz (inkl. täglicher Anmeldungen und Essensanmeldungen)" +
                         " aus unserem System entfernt. Sollten Sie nur dieses Kind angemeldet haben, wird Ihr Status auf INAKTIV gesetzt und Sie genießen" +
                         " nur noch beschränkte Zugriffsrechte." +
@@ -78,18 +78,18 @@ public class ParentService {
         return parentRepository.save(parent);
     }
 
-    public Parent changeStatus(Parent parent, Boolean status){
+    public Parent changeStatus(Parent parent, Boolean status) {
         parent.setStatus(status);
         return parentRepository.save(parent);
     }
 
 
-    public Parent loadParent(String username){
+    public Parent loadParent(String username) {
         return parentRepository.findFirstByUsername(username);
     }
 
 
-    public void deleteParent(Parent parent){
+    public void deleteParent(Parent parent) {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -99,12 +99,12 @@ public class ParentService {
         parentRepository.delete(parent);
     }
 
-    private UserData getAuthenticatedUser(){
+    private UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
 
-    public void changePassword(String password){
+    public void changePassword(String password) {
         UserData user = getAuthenticatedUser();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(password));
@@ -112,15 +112,13 @@ public class ParentService {
     }
 
 
-    public void resetPassword(Parent parent){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "RESET PASSWD: "+ parent.getUsername() + " [" + parent.getUserRole() +"]", new Date());
+    public void resetPassword(Parent parent) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "RESET PASSWD: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
         auditLogRepository.save(log);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         parent.setPassword(passwordEncoder.encode("passwd"));
         parentRepository.save(parent);
     }
-
-
 
 
 }

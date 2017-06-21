@@ -49,16 +49,16 @@ public class CaregiverService {
         }
         return caregiverRepository.save(caregiver);
     }
-    
-    public Collection<Caregiver> getAllCaregiversByEligibleFalse(){
-    	return caregiverRepository.getCaregiversByEligibleFalse();
+
+    public Collection<Caregiver> getAllCaregiversByEligibleFalse() {
+        return caregiverRepository.getCaregiversByEligibleFalse();
     }
 
-    public Collection<Caregiver> getAllCaregiversByEligibleTrue(){
+    public Collection<Caregiver> getAllCaregiversByEligibleTrue() {
         return caregiverRepository.getCaregiversByEligibleTrue();
     }
 
-    public void deleteCaregiver(Caregiver caregiver){
+    public void deleteCaregiver(Caregiver caregiver) {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -67,12 +67,9 @@ public class CaregiverService {
         }
         caregiverRepository.delete(caregiver);
     }
+
     public Caregiver loadCaregiver(Long id) {
         return caregiverRepository.findOne(id);
-    }
-
-    public Collection<Caregiver> getAllCaregivers() {
-        return caregiverRepository.findAll();
     }
 
     private String getAuthenticatedUserName() {
@@ -80,16 +77,13 @@ public class CaregiverService {
         return auth.getName();
     }
 
-    public Collection<Caregiver> getCaregiversForParent(String usrn){
+    public Collection<Caregiver> getCaregiversForParent(String usrn) {
         Collection<Caregiver> ret = new HashSet<Caregiver>();
         Collection<Child> children = childRepository.getChildrenByParentUsername(usrn);
-        for(Child c : children){
+        for (Child c : children) {
             ret.addAll(caregiverRepository.getAllCaregiversByChildId(c.getId()));
         }
         return ret;
     }
 
-	public Collection<Caregiver> getAllCaregiversByChildId(Long id) {
-		return caregiverRepository.getAllCaregiversByChildId(id);
-	}
 }

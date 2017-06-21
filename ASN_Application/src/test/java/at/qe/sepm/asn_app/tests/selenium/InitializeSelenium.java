@@ -16,7 +16,7 @@ public class InitializeSelenium {
         WebDriver driver;
         String browser = "chrome";   // use this to change browser
 
-        switch(browser) {
+        switch (browser) {
             case "gecko":
                 System.setProperty("webdriver.gecko.driver", "geckodriver");
                 driver = new FirefoxDriver();

@@ -6,25 +6,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import at.qe.sepm.asn_app.models.child.Child;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
- *
+ * <p>
  * A caregiver takes responsibility for a child if their parent is not available.
  * This class only has some attributes to reference a caregiver like the full name,
  * a profile picture, a phone number and the relationship status to the child.
  * In contrast to Parent and Employee Caregiver does not inherit from UserData.
+ *
  * @see Relationship
  */
 @Entity
 @Transactional
-public class Caregiver implements Persistable<Long>{
+public class Caregiver implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,16 +46,7 @@ public class Caregiver implements Persistable<Long>{
     private Child child;
 
 
-
-    public Caregiver(){}
-
-    public Caregiver(String firstName, String lastName, Relationship relationship, String imgName, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.relationship = relationship;
-        this.imgName = imgName;
-        this.phoneNumber = phoneNumber;
-        eligible = false;
+    public Caregiver() {
     }
 
 
@@ -85,7 +74,9 @@ public class Caregiver implements Persistable<Long>{
         this.lastName = lastName;
     }
 
-    public String getFullName(){ return getLastName() + " " + getFirstName();}
+    public String getFullName() {
+        return getLastName() + " " + getFirstName();
+    }
 
     public Relationship getRelationship() {
         return relationship;
@@ -120,8 +111,7 @@ public class Caregiver implements Persistable<Long>{
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof Caregiver)) {
+        } else if (!(obj instanceof Caregiver)) {
             return false;
         }
 
@@ -131,8 +121,7 @@ public class Caregiver implements Persistable<Long>{
                 this.relationship.equals(other.relationship) &&
                 this.getPhoneNumber().equals(other.phoneNumber)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -146,13 +135,13 @@ public class Caregiver implements Persistable<Long>{
                 "Phone number: " + phoneNumber + "\n";
     }
 
-	public boolean getEligible() {
-		return eligible;
-	}
+    public boolean getEligible() {
+        return eligible;
+    }
 
-	public void setEligible(boolean eligible) {
-		this.eligible = eligible;
-	}
+    public void setEligible(boolean eligible) {
+        this.eligible = eligible;
+    }
 
 
     public boolean isEligible() {

@@ -31,21 +31,21 @@ public class RegistrationMonthController {
         this.monthlyRegistrations = monthlyRegistrations;
     }
 
-    public List<Registration> getRegistrationReportForMonth(int i){
+    public List<Registration> getRegistrationReportForMonth(int i) {
         Date start = new Date();
         start.setDate(1);
-        start.setMonth((start.getMonth() + i)%12);
+        start.setMonth((start.getMonth() + i) % 12);
         Date end = new Date();
         end.setDate(1);
-        end.setMonth((end.getMonth() + i + 1)%12);
-        if(end.getMonth() == 0){
+        end.setMonth((end.getMonth() + i + 1) % 12);
+        if (end.getMonth() == 0) {
             end.setYear(end.getYear() + 1);
         }
         return registrationService.getRegistrationInTimeWindowIE(start, end);
     }
 
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setMonthlyRegistrations(getRegistrationReportForMonth(0));
     }
 }

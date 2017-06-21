@@ -78,10 +78,13 @@
                                                           hideEffect="fade" resizable="false" closeOnEscape="true">
                                                     <p:messages id="messagesMessageBoard" autoUpdate="true"/>
                                                     <p:inputTextarea id="messageInput"
-                                                                     value="#{messageController.message.message}" rows="5" cols="30"
+                                                                     value="#{messageController.message.message}"
+                                                                     rows="5" cols="30"
                                                                      counter="display" maxlength="500"
-                                                                     counterTemplate="{0} Zeichen übrig." autoResize="false"
-                                                                     required="true" requiredMessage="Nachricht darf nicht leer sein!"/>
+                                                                     counterTemplate="{0} Zeichen übrig."
+                                                                     autoResize="false"
+                                                                     required="true"
+                                                                     requiredMessage="Nachricht darf nicht leer sein!"/>
                                                     <p:separator/>
                                                     <h:outputText id="display"/>
                                                     <p:separator/>
@@ -94,9 +97,11 @@
                                                 <p:confirmDialog global="true" showEffect="fade"
                                                                  hideEffect="fade" width="300">
                                                     <p:commandButton value="Ja" type="button"
-                                                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                                                     styleClass="ui-confirmdialog-yes"
+                                                                     icon="ui-icon-check"/>
                                                     <p:commandButton value="Nein" type="button"
-                                                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                                                     styleClass="ui-confirmdialog-no"
+                                                                     icon="ui-icon-close"/>
                                                 </p:confirmDialog>
                                             </h:form>
                                         </div>

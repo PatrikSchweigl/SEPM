@@ -32,18 +32,19 @@ public class RegistrationWeekController {
         this.weeklyRegistrations = weeklyRegistrations;
     }
 
-    public List<Registration> getRegistrationReportForWeek(int i){
+    public List<Registration> getRegistrationReportForWeek(int i) {
         Date[] dates = DateUtils.getWeek(i);
-        if(dates.length < 1){
+        if (dates.length < 1) {
             return null;
         }
         Date start = dates[0];
-        Date end = dates[dates.length-1];
+        Date end = dates[dates.length - 1];
         return registrationService.getRegistrationInTimeWindowII(start, end);
 
     }
+
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setWeeklyRegistrations(getRegistrationReportForWeek(0));
     }
 }

@@ -104,16 +104,17 @@
                                                                        onLabel="Erledigt" offLabel="Nicht erledigt"
                                                                        onIcon="ui-icon-check" offIcon="ui-icon-close"
                                                                        style="width:150px">
-                                                    <p:ajax update="taskTable" listener="#{taskService.changeTaskStatus(task, !task.taskStatus)}" />
+                                                    <p:ajax update="taskTable"
+                                                            listener="#{taskService.changeTaskStatus(task, !task.taskStatus)}"/>
                                                 </p:selectBooleanButton>
                                             </p:column>
-                        </p:dataTable>
-                    </h:form>
-                </div>
-            </div>
+                                        </p:dataTable>
+                                    </h:form>
+                                </div>
+                            </div>
 
-        </section>
-        <!-- /.content -->
+                        </section>
+                        <!-- /.content -->
                     </div>
                 </div>
 

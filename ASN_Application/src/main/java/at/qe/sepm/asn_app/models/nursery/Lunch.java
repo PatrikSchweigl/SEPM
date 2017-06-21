@@ -15,9 +15,10 @@ import java.util.Set;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
- *
+ * <p>
  * Lunch holds information on which date a meal is available and how much it costs.
  * Additionally Lunch contains a list of all children (as ids) who are signed up for it.
+ *
  * @see Child
  * @see Date
  */
@@ -44,44 +45,46 @@ public class Lunch implements Persistable<Long> {
     private Set<Long> childrenIds;
 
 
-
     public Lunch(Date date, String meal, double cost) {
         this.date = date;
         this.meal = meal;
         this.cost = cost;
     }
-    public Lunch(){}
 
-    /** addChild
-     *  adds child to lunch
+    public Lunch() {
+    }
+
+    /**
+     * addChild
+     * adds child to lunch
+     *
      * @param id Child or Long (id)
      */
-    public void addChild(Long id){
+    public void addChild(Long id) {
         childrenIds.add(id);
     }
-    public void addChild(Child c){
+
+    public void addChild(Child c) {
         addChild(c.getId());
     }
 
-    /** removeChild
-     *  removes a child from lunch
+    /**
+     * removeChild
+     * removes a child from lunch
+     *
      * @param id Child or Long(id)
      */
 
-    public void removeChild(Long id){
+    public void removeChild(Long id) {
         childrenIds.remove(id);
-    }
-
-    public void removeChild(Child c){
-        removeChild(c.getId());
     }
 
     public Date getDate() {
         return date;
     }
-    
-    public String getFormattedOriginDate(){
-    	return new SimpleDateFormat("dd-MM-yyyy").format(date);
+
+    public String getFormattedOriginDate() {
+        return new SimpleDateFormat("dd-MM-yyyy").format(date);
     }
 
 
@@ -109,9 +112,11 @@ public class Lunch implements Persistable<Long> {
     public int getNumChildren() {
         return childrenIds.size();
     }
-    public Set<Long> getChildrenIds(){
+
+    public Set<Long> getChildrenIds() {
         return childrenIds;
     }
+
     public void setChildrenIds(Set<Long> childrenIds) {
         this.childrenIds = childrenIds;
     }
@@ -120,10 +125,6 @@ public class Lunch implements Persistable<Long> {
     public Long getId() {
         return id;
         //return new Long(id);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

@@ -9,8 +9,9 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
- *
+ * <p>
  * Sibling is a minimalistic version of Child. In contrast to Child it only holds the full name and birthday.
+ *
  * @see Child
  */
 @Entity
@@ -30,7 +31,8 @@ public class Sibling implements Persistable<Long> {
     @ManyToOne(optional = false)
     private Child child;
 
-    public Sibling() {}
+    public Sibling() {
+    }
 
     public Sibling(String firstName, String lastName, String birthday) {
         this.firstName = firstName;
@@ -73,7 +75,7 @@ public class Sibling implements Persistable<Long> {
 
     @Override
     public Long getId() {
-       return id;
+        return id;
     }
 
 

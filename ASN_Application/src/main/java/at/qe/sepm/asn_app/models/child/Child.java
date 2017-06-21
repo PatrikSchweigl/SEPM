@@ -5,11 +5,8 @@ import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,12 +19,13 @@ import java.util.Set;
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
  * Edit by Stefan Mattersberger on 18.03.2017
- *
+ * <p>
  * Child contains all basic information for a child such as the name, birthday, gender,
  * the parents, an emergency number, the religion, allergies and food intolerances.
  * Additionally Child holds information about the caregivers in case a Parent is not available,
  * the custody regarding that the parents are divorced and references to all siblings of the child.
  * In contrary to Employee and Parent Child does not inherit from UserData.
+ *
  * @see at.qe.sepm.asn_app.models.employee.Employee
  * @see Caregiver
  * @see Custody
@@ -94,63 +92,22 @@ public class Child implements Persistable<Long> {
 
 
     /* CONSTRUCTORS */
-    public Child() {}
-
-    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent parent) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.imgName = imgName;
-        this.gender = gender;
-        this.parent1 = parent;
-    }
-
-    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1, Parent par2, String emergencyNumber, Custody custody, Religion religion) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.imgName = imgName;
-        this.gender = gender;
-        this.parent1 = par1;
-        this.parent2 = par2;
-        this.emergencyNumber = emergencyNumber;
-        this.custody = custody;
-        this.religion = religion;
-    }
-
-    /**
-     * Full constructor
-     */
-    public Child(String firstName, String lastName, String birthday, String imgName, Gender gender, Parent par1,
-                 Parent par2, String emergencyNumber, Set<Sibling> siblings, Custody custody, Religion religion,
-                 Set<Caregiver> caregivers) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.imgName = imgName;
-        this.gender = gender;
-        this.parent1 = par1;
-        this.parent2 = par2;
-        this.emergencyNumber = emergencyNumber;
-        this.siblings = siblings;
-        this.custody = custody;
-        this.religion = religion;
-        this.caregivers = caregivers;
+    public Child() {
     }
 
 
-    public String getPrimaryParentFullName(){
+    public String getPrimaryParentFullName() {
         return parent1.getFirstName() + " " + parent1.getLastName();
     }
-    
+
     public Parent getPrimaryParent() {
         return parent1;
     }
 
-    public void setPrimaryParent(Parent p){
-        parent1= p;
+    public void setPrimaryParent(Parent p) {
+        parent1 = p;
     }
-    
+
     public Parent getParent2() {
         return parent2;
     }
@@ -159,11 +116,7 @@ public class Child implements Persistable<Long> {
         this.parent2 = parent2;
     }
 
-    public void addCaregiver(Caregiver c){
-        caregivers.add(c);
-    }
-
-    public void addSibling(Sibling s){
+    public void addSibling(Sibling s) {
         siblings.add(s);
     }
 
@@ -186,9 +139,9 @@ public class Child implements Persistable<Long> {
     public String getBirthday() {
         return birthday;
     }
-    
-    public String getFullname(){
-    	return firstName + " " + lastName;
+
+    public String getFullname() {
+        return firstName + " " + lastName;
     }
 
     public void setBirthday(String birthday) {
@@ -218,7 +171,7 @@ public class Child implements Persistable<Long> {
     public void setEmergencyNumber(String emergencyNumber) {
         this.emergencyNumber = emergencyNumber;
     }
-    
+
     public Set<Sibling> getSiblings() {
         return siblings;
     }
@@ -242,7 +195,7 @@ public class Child implements Persistable<Long> {
     public void setReligion(Religion religion) {
         this.religion = religion;
     }
-    
+
     public Set<Caregiver> getCaregivers() {
         return caregivers;
     }
@@ -268,7 +221,6 @@ public class Child implements Persistable<Long> {
     }
 
 
-
     @Override
     public Long getId() {
         return id;
@@ -285,6 +237,7 @@ public class Child implements Persistable<Long> {
      * even though some attributes like religion may be different the child
      * could still be the "same" person. We focus only on the main attributes
      * to determine equality.
+     *
      * @param other The object to be compared. If it's not an instance of Child then <code>false</code> gets returned immediately.
      * @return <code>true</code> iff the main attributes are equal of the current child and the parameter; <code>false</code> in any other case.
      * @see Gender
@@ -309,19 +262,16 @@ public class Child implements Persistable<Long> {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        }
-        else if (obj == null) {
+        } else if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof Child)) {
+        } else if (!(obj instanceof Child)) {
             return false;
         }
 
         Child other = (Child) obj;
         if (id.equals(other.id)) {
             return true;
-        }
-        else if (this.birthday.equals(other.birthday) &&
+        } else if (this.birthday.equals(other.birthday) &&
                 this.firstName.equals(other.firstName) &&
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
@@ -329,8 +279,7 @@ public class Child implements Persistable<Long> {
                 this.parent2.equals(other.parent2) &&
                 this.siblings.equals(other.siblings)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

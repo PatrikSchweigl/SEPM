@@ -36,8 +36,6 @@ public class ParentController {
     @Autowired
     private ParentService parentService;
     @Autowired
-    private MailService mailService;
-    @Autowired
     private ChildService childService;
     @Autowired
     private UserConstraints userConstraints;
@@ -92,7 +90,7 @@ public class ParentController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
         } else {
             try {
-            	parent.setImgName("emptypicture.png");
+                parent.setImgName("emptypicture.png");
                 parent = parentService.saveParent(parent);
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('parentAddDialog').hide()");
@@ -105,7 +103,6 @@ public class ParentController {
 
         }
     }
-
 
 
     public Parent getParent() {

@@ -30,7 +30,7 @@ public class Registration implements Persistable<Long> {
     @NotNull
     private Date bringdate;
 
-    public Registration(){
+    public Registration() {
 
     }
 
@@ -50,10 +50,6 @@ public class Registration implements Persistable<Long> {
     @Override
     public boolean isNew() {
         return (this.date == null && this.child == null);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNote() {
@@ -79,35 +75,33 @@ public class Registration implements Persistable<Long> {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    public String getFormattedBringDate(){
-    	return new SimpleDateFormat("hh:mm").format(bringdate);
-    }
-    
-    public String getFormattedBringDateFull(){
-    	return new SimpleDateFormat("dd-MM-yyyy hh:mm").format(bringdate);
+
+    public String getFormattedBringDate() {
+        return new SimpleDateFormat("hh:mm").format(bringdate);
     }
 
-
-	public Date getBringdate() {
-		return bringdate;
-	}
-
-
-	public void setBringdate(Date bringdate) {
-		this.bringdate = bringdate;
-	}
+    public String getFormattedBringDateFull() {
+        return new SimpleDateFormat("dd-MM-yyyy hh:mm").format(bringdate);
+    }
 
 
-	@Override
-	public boolean equals(Object obj) {
+    public Date getBringdate() {
+        return bringdate;
+    }
+
+
+    public void setBringdate(Date bringdate) {
+        this.bringdate = bringdate;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        }
-        else if (obj == null) {
+        } else if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof Registration)) {
+        } else if (!(obj instanceof Registration)) {
             return false;
         }
 

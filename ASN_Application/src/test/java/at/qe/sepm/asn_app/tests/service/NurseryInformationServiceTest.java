@@ -117,21 +117,20 @@ public class NurseryInformationServiceTest {
 
         // Test getFormattedOriginDate
         assertNotEquals("", nurseryInformation.getFormattedOriginDate());
-        System.out.println(nurseryInformation.getFormattedOriginDate());
+
 
         // Test getBringDuration
         assertNotEquals("", nurseryInformation.getBringDurationNew());
-        System.out.println(nurseryInformation.getBringDurationNew());
+
 
         // Test getPickUpDuration
         assertNotEquals("", nurseryInformation.getPickUpDurationNew());
-        System.out.println(nurseryInformation.getPickUpDurationNew());
+
 
         // Test toString()
         assertNotEquals("", nurseryInformation.toString());
-        System.out.println(nurseryInformation.toString());
-    }
 
+    }
 
 
     @After

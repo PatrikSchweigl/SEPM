@@ -17,7 +17,7 @@ import java.util.Properties;
 public class MailSender {
 
     @Bean
-    public JavaMailSender getMailSender(){
+    public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         //Using gmail

@@ -25,12 +25,12 @@ public class PictureService {
         return pictureRepository.findOne(id);
     }
 
-    public Collection<Picture> getAllPictures(){
+    public Collection<Picture> getAllPictures() {
         return pictureRepository.findAll();
     }
-    
-    public Picture savePicture(Picture picture){
-    	return pictureRepository.save(picture);
+
+    public Picture savePicture(Picture picture) {
+        return pictureRepository.save(picture);
     }
 
     public void deletePicture(Picture picture) {

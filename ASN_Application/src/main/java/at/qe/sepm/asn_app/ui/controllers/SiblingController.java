@@ -23,9 +23,6 @@ public class SiblingController {
     @Autowired
     private SiblingService siblingService;
     private Sibling sibling;
-    private Sibling siblingEdit;
-
-    private Collection<Sibling> siblings;
 
     @PostConstruct
     private void initNewSibling() {
@@ -45,20 +42,7 @@ public class SiblingController {
         this.sibling = sibling;
     }
 
-    public Sibling getSiblingEdit() {
-        return siblingEdit;
-    }
-
-    public void setSiblingEdit(Sibling siblingEdit) {
-        this.siblingEdit = siblingEdit;
-    }
-
-    public Collection<Sibling> getSiblings() {
-        return siblings;
-    }
-
     public void setSiblings(Collection<Sibling> siblings) {
-        this.siblings = siblings;
     }
 
     public Sibling doSaveSibling() {
@@ -78,16 +62,4 @@ public class SiblingController {
         return siblingReturn;
     }
 
-    public Sibling doSaveSiblingEdit() {
-        Sibling siblingReturn;
-        siblingEdit = siblingService.saveSibling(siblingEdit);
-        siblingReturn = siblingEdit;
-        initList();
-        return siblingReturn;
-    }
-
-    public void doDeleteSibling() {
-        siblingService.deleteSibling(siblingEdit);
-        siblingEdit = null;
-    }
 }

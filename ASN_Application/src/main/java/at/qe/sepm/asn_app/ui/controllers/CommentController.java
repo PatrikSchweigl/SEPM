@@ -3,7 +3,6 @@ package at.qe.sepm.asn_app.ui.controllers;
 import at.qe.sepm.asn_app.models.general.Comment;
 
 import at.qe.sepm.asn_app.services.CommentService;
-import at.qe.sepm.asn_app.services.UserService;
 import at.qe.sepm.asn_app.ui.beans.FileBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -24,40 +21,40 @@ import javax.annotation.PostConstruct;
 @Component
 //@Scope("view")
 @Scope("view")
-public class CommentController{
+public class CommentController {
 
     @Autowired
     private CommentService commentService;
     @Autowired
     private FileBean fileBean;
     private Comment message;    // TODO change the attribute name from message to comment. It's unnecessarily confusing.
-    private Collection<Comment> messages;
-    
+
     public Comment getMessage() {
         return message;
     }
-    
-    public Collection<Comment> getAllCommentsByPicture(String pictureName){
-    	return commentService.getAllCommentsByPicture(pictureName);
+
+    public Collection<Comment> getAllCommentsByPicture(String pictureName) {
+        return commentService.getAllCommentsByPicture(pictureName);
     }
 
     @PostConstruct
-    public void init(){
-    	message = new Comment();
+    public void init() {
+        message = new Comment();
     }
+
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setComments(commentService.getAllMessages());
     }
 
     public void setComments(Collection<Comment> messages) {
-        this.messages = messages;
     }
 
     public void setMessage(Comment message) {
         this.message = message;
         doReloadMessage();
     }
+
     public void setMessage2(Comment message) {
         this.message = message;
     }
@@ -66,7 +63,7 @@ public class CommentController{
         message = commentService.loadMessage(message.getId());
     }
 
-    public Comment doSaveMessage(){
+    public Comment doSaveMessage() {
         if (fileBean.getSelectedPicture() != null) {
             message.setPictureName(fileBean.getSelectedPicture());
         }
@@ -77,14 +74,8 @@ public class CommentController{
         return messageReturn;
     }
 
-    public Collection<Comment> getMessages(){
-        return messages;
-    }
-    
     public void doDeleteMessage(Comment message) {
-    	Comment commi = commentService.loadMessage(message.getId());
-    	System.err.println("CHHHHHHHHHHHHHHHHHHHHHH");
-    	System.err.println(commi.getComment());
+        Comment commi = commentService.loadMessage(message.getId());
         commentService.deleteMessage(message);
         initList();
     }

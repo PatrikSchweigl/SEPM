@@ -1,9 +1,11 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
+import at.qe.sepm.asn_app.services.LunchService;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.RegistrationService;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +18,7 @@ import org.springframework.transaction.TransactionSystemException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -36,14 +39,9 @@ public class ChildEditController {
     @Autowired
     private ParentService parentService;
     @Autowired
-    private ParentController parentController;
+    private LunchService lunchService;
 
     private Child childEdit;
-
-    private String allergy;
-    private boolean detail;
-    private String intolerance;
-    private boolean care;
 
 
     public Child getChildEdit() {
@@ -62,12 +60,10 @@ public class ChildEditController {
 
     public Child doSaveChildEmployee() {
         Child childReturn = null;
-        System.out.println(childEdit.toString());
         if (!StringUtils.isNumeric(childEdit.getEmergencyNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notfallkontaktnummer enthält Buchstaben!", null));
         } else {
             try {
-                System.out.println(childEdit.toString());
                 childEdit = childService.saveChild(childEdit);
                 childReturn = childEdit;
                 childEdit = null;
@@ -86,50 +82,25 @@ public class ChildEditController {
         Parent parent = childEdit.getPrimaryParent();
         parent.getChildren().remove(childEdit);
         Collection<Registration> registrations = registrationService.getAllRegistrationsByChild(childEdit.getId());
-            for (Registration r: registrations) {
-                registrationService.deleteRegistration(r);
-            }
+        for (Registration r : registrations) {
+            registrationService.deleteRegistration(r);
+        }
+
+        Collection<Lunch> lunches = lunchService.findAll();
+
+        for (Lunch l : lunches) {
+            l.getChildrenIds().remove(childEdit.getId());
+        }
 
         childService.deleteChild(childEdit);
 
 
-        if(childService.getChildrenByParentUsername(parent.getUsername()).size() < 1){
-            parentService.changeStatus(parent, false);	// set parent status to inactive when last child is deleted
+        if (childService.getChildrenByParentUsername(parent.getUsername()).size() < 1) {
+            parentService.changeStatus(parent, false);    // set parent status to inactive when last child is deleted
         }
-        parentService.updateParent(parent,childEdit);
+        parentService.updateParent(parent, childEdit);
         childEdit = null;
         childController.initList();
     }
 
-    public String getAllergy() {
-        return allergy;
-    }
-
-    public void setAllergy(String allergy) {
-        this.allergy = allergy;
-    }
-
-    public boolean isDetail() {
-        return detail;
-    }
-
-    public void setDetail(boolean detail) {
-        this.detail = detail;
-    }
-
-    public String getIntolerance() {
-        return intolerance;
-    }
-
-    public void setIntolerance(String intolerance) {
-        this.intolerance = intolerance;
-    }
-
-    public boolean isCare() {
-        return care;
-    }
-
-    public void setCare(boolean care) {
-        this.care = care;
-    }
 }

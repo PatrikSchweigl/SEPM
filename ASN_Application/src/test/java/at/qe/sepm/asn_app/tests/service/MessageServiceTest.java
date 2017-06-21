@@ -101,11 +101,11 @@ public class MessageServiceTest {
 
         // Test getFormattedDate()
         assertNotEquals("", message.getFormattedDate());
-        System.out.println(message.getFormattedDate());
+
 
         // Test toString()
         assertNotEquals("", message.toString());
-        System.out.println(message.toString());
+
     }
 
 

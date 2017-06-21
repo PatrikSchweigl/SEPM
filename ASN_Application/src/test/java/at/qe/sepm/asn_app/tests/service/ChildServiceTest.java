@@ -56,8 +56,6 @@ public class ChildServiceTest {
     private ChildService childService;
     @Autowired
     private ParentService parentService;
-    @Autowired
-    private RegistrationService registrationService;
     private Child child;
     private Parent parent1;
     private Parent parent2;
@@ -124,7 +122,7 @@ public class ChildServiceTest {
         String imgName = "ChildImgName";
         String lastName = "ChildLastName";
         Religion religion = Religion.ISLAM;
-        Sibling sibling = InitializeSibling.initialize1();
+        sibling1 = InitializeSibling.initialize1();
         Set<Sibling> siblings = new HashSet<>();
 
         // Set attributes
@@ -143,7 +141,7 @@ public class ChildServiceTest {
         child.setParent2(parent2);
         child.setReligion(religion);
         child.setSiblings(siblings);
-        child.addSibling(sibling);
+        child.addSibling(sibling1);
 
         // Compare attributes with getter
         assertEquals(birthday, child.getBirthday());

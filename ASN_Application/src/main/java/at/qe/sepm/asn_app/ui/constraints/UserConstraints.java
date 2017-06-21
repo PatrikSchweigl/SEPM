@@ -18,7 +18,7 @@ public class UserConstraints {
     @Autowired
     private UserService userService;
 
-    public boolean checkIfUsernameExists(String username){
+    public boolean checkIfUsernameExists(String username) {
         UserData userData = userService.loadUser(username);
         return userData != null;
     }

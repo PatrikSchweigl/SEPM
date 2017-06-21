@@ -7,9 +7,10 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 09.05.17.
- *
+ * <p>
  * BirthdayParser holds a method in which a birthday represented as a String gets parsed to the amount of second from
  * the birthday to now.
+ *
  * @see at.qe.sepm.asn_app.ui.constraints.ChildConstraints
  * @see at.qe.sepm.asn_app.ui.constraints.ParentConstraints
  */
@@ -20,6 +21,7 @@ public class BirthdayParser {
      * returned as a <code>long</code>.
      * The String has to be casted to a LocalDateTime because it is not possible to get second, milliseconds etc. out
      * of LocalDate.
+     *
      * @param birthday The birthday to be converted to seconds.
      * @return The amount of seconds from birthday to now.
      * @see DateTimeFormatter

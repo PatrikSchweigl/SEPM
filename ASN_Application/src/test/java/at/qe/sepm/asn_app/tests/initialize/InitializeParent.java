@@ -15,7 +15,7 @@ import java.util.Set;
  * on 17.06.17 14:49 CEST.
  */
 public class InitializeParent {
-    
+
     public static Parent initialize1() {
         Set<Child> children = new HashSet<>();
         Set<Task> tasks = new HashSet<>();
@@ -39,7 +39,7 @@ public class InitializeParent {
         parent.setTasks(tasks);
         parent.setUsername("ParentUsername1");
         parent.setUserRole(UserRole.PARENT);
-        
+
         return parent;
     }
 

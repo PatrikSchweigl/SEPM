@@ -18,7 +18,7 @@ public class SiblingService {
     @Autowired
     private SiblingRepository siblingRepository;
 
-    public Collection<Sibling> getAllSiblings(){
+    public Collection<Sibling> getAllSiblings() {
         return siblingRepository.findAll();
     }
 

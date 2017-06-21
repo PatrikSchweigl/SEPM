@@ -89,7 +89,7 @@ public class NurseryInformationControllerTest {
         //nurseryInformationController.setNurseryInformation2(nurseryInformation);
         FacesContext context = ContextMocker.mockFacesContext();
         RequestContext requestContext = ContextMocker.mockRequestContext();
-        try{
+        try {
             nurseryInformationController.setNurseryInformation(nurseryInformation);
             nurseryInformation = nurseryInformationController.doSaveNurseryInformation();
             //nurseryInformation = nurseryInformationService.saveNurseryInformation(nurseryInformation);
@@ -104,11 +104,10 @@ public class NurseryInformationControllerTest {
             other = nurseryInformationService.loadNurseryInformation(nurseryInformation.getId());
             assertFalse(nurseryInformation.equals(other));
             assertNull(other);
-        }finally {
+        } finally {
             context.release();
             requestContext.release();
         }
-
 
 
     }

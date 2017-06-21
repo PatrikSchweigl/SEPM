@@ -21,13 +21,13 @@ public class MailService {
     @Autowired
     JavaMailSender mailSender;
 
-    public void sendEmail(final String recipient, final String subject, final String message){
+    public void sendEmail(final String recipient, final String subject, final String message) {
 
         MimeMessagePreparator preparator = getMessagePreparator(recipient, subject, message);
 
-        try{
+        try {
             mailSender.send(preparator);
-        }catch(MailException ex){
+        } catch (MailException ex) {
             ex.printStackTrace();
         }
 

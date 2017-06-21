@@ -24,58 +24,58 @@ public class RegistrationService {
     @Autowired
     private UserService userService;
 
-    public Collection<Registration> getAllRegistrations(){
+    public Collection<Registration> getAllRegistrations() {
         return registrationRepository.findAll();
     }
 
-    public Collection<Registration> getAllRegistrationsByDate(Date date){
-    	Calendar cal = Calendar.getInstance();
-    	cal.setTime(date);
-    	cal.set(Calendar.HOUR_OF_DAY, 0);
-    	cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		Collection<Registration> reg = registrationRepository.findAll();
-		Collection<Registration> ret = new LinkedList<>();
-		for(Registration r : reg){
-			if(r.getDate().getDate() == date.getDate() && r.getDate().getMonth() == date.getMonth() && r.getDate().getYear() == date.getYear())
-				ret.add(r);
-		}
+    public Collection<Registration> getAllRegistrationsByDate(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        Collection<Registration> reg = registrationRepository.findAll();
+        Collection<Registration> ret = new LinkedList<>();
+        for (Registration r : reg) {
+            if (r.getDate().getDate() == date.getDate() && r.getDate().getMonth() == date.getMonth() && r.getDate().getYear() == date.getYear())
+                ret.add(r);
+        }
         return ret;
     }
 
-    public Collection<Registration> getAllRegistrationsByParent(){
+    public Collection<Registration> getAllRegistrationsByParent() {
         return registrationRepository.getRegistrationsByParent(userService.getAuthenticatedUser().getUsername());
     }
 
-    public Registration saveRegistration(Registration registration){
+    public Registration saveRegistration(Registration registration) {
         AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
-                "REGISTER: "+registration.getChild().getFirstName()+" "+registration.getChild().getLastName(),
+                "REGISTER: " + registration.getChild().getFirstName() + " " + registration.getChild().getLastName(),
                 new Date());
         auditLogService.saveAuditLog(auditLog);
         return registrationRepository.save(registration);
     }
 
-    public void deleteRegistration(Registration registration){
+    public void deleteRegistration(Registration registration) {
         AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
-                "DEREGISTER: "+registration.getChild().getFirstName()+" "+registration.getChild().getLastName()+" ["+registration.getId()+"]",
+                "DEREGISTER: " + registration.getChild().getFirstName() + " " + registration.getChild().getLastName() + " [" + registration.getId() + "]",
                 new Date());
         auditLogService.saveAuditLog(auditLog);
         registrationRepository.delete(registration);
     }
 
-    public Registration loadRegistration(Long id){
+    public Registration loadRegistration(Long id) {
         return registrationRepository.findOne(id);
     }
 
-    public List<Registration> getRegistrationInTimeWindowIE(Date start, Date end){
+    public List<Registration> getRegistrationInTimeWindowIE(Date start, Date end) {
         return registrationRepository.getRegistrationInTimeWindowIE(start, end);
     }
 
-    public List<Registration> getRegistrationInTimeWindowII(Date start, Date end){
+    public List<Registration> getRegistrationInTimeWindowII(Date start, Date end) {
         return registrationRepository.getRegistrationInTimeWindowII(start, end);
     }
 
-    public List<Registration> getAllRegistrationsByChild(Long childId){
+    public List<Registration> getAllRegistrationsByChild(Long childId) {
         return registrationRepository.getRegistrationsByChild(childId);
     }
 }

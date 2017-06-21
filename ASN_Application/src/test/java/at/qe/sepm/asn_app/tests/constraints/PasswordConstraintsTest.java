@@ -21,7 +21,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 13.05.17.
- *
+ * <p>
  * This class checks various constraints made by the class PasswordConstraints. For a password to be valid the
  * following constraints must be true:
  * - a digit must occur at least once
@@ -31,6 +31,7 @@ import static org.junit.Assert.assertFalse;
  * - no whitespace allowed in the entire string
  * - at least 8 characters long
  * - the name of a child of a parent must not be a substring of the password of a parent
+ *
  * @see Child
  * @see Parent
  * @see PasswordConstraints
@@ -168,7 +169,7 @@ public class PasswordConstraintsTest {
      */
     @Test
     public void checkPasswordChildName4() throws PasswordConstraintException {
-        password="aB1+btoebst";
+        password = "aB1+btoebst";
         PasswordConstraints.checkPasswordConstraintsParent(password, parent);
     }
 

@@ -32,9 +32,6 @@ public class SessionInfoBeanTest {
     @Autowired
     SessionInfoBean sessionInfoBean;
 
-    @Autowired
-    UserService userService;
-
     @Test
     @WithMockUser(username = "user1", authorities = {"EMPLOYEE"})
     public void testLoggedIn() {

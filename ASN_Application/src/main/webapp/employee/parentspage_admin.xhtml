@@ -1,355 +1,366 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/main.xhtml">
-	<ui:define name="content">
-		<h:body>
-			<ui:fragment rendered="#{sessionInfoBean.loggedIn}">
-				<body class="theme-blue sidebar-mini sidebar-collapse">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/main.xhtml">
+    <ui:define name="content">
+        <h:body>
+            <ui:fragment rendered="#{sessionInfoBean.loggedIn}">
+                <body class="theme-blue sidebar-mini sidebar-collapse">
 
-					<div class="wrapper">
+                <div class="wrapper">
 
-						<div class="content-wrapper" style="min-height: 1126px;">
-							<section class="content">
+                    <div class="content-wrapper" style="min-height: 1126px;">
+                        <section class="content">
 
-								<!-- Default box -->
-								<div class="box">
-									<div class="box-body">
-										<div align="left" style="margin-left: 10px;">
-											<h1>Alle Elternteile</h1>
-										</div>
-										<div align="right" style="margin-bottom: 10px;">
-											<p:commandButton oncomplete="PF('parentAddDialog').show()"
-												value="Elternteil hinzufügen" style="align-items:right;"></p:commandButton>
-										</div>
-										<h:form id="parentForm">
-											<p:dataTable id="parentTable" var="parent"
-												widgetVar="parentTable" value="#{parentController.parents}"
-												rows="10" paginatorPosition="bottom" paginator="true"
-												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-												rowsPerPageTemplate="10,25,50" selectionMode="single"
-												selection="#{PDFBean.parentPrint}"
-												rowKey="#{parent.username}"
-												emptyMessage="Es wurden keine Eltern gefunden!">
+                            <!-- Default box -->
+                            <div class="box">
+                                <div class="box-body">
+                                    <div align="left" style="margin-left: 10px;">
+                                        <h1>Alle Elternteile</h1>
+                                    </div>
+                                    <div align="right" style="margin-bottom: 10px;">
+                                        <p:commandButton oncomplete="PF('parentAddDialog').show()"
+                                                         value="Elternteil hinzufügen"
+                                                         style="align-items:right;"></p:commandButton>
+                                    </div>
+                                    <h:form id="parentForm">
+                                        <p:dataTable id="parentTable" var="parent"
+                                                     widgetVar="parentTable" value="#{parentController.parents}"
+                                                     rows="10" paginatorPosition="bottom" paginator="true"
+                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                                     rowsPerPageTemplate="10,25,50" selectionMode="single"
+                                                     selection="#{PDFBean.parentPrint}"
+                                                     rowKey="#{parent.username}"
+                                                     emptyMessage="Es wurden keine Eltern gefunden!">
 
-												<f:facet name="header">
-													<p:outputPanel>
-														<h:outputText value="Suche " />
-														<p:inputText id="globalFilter"
-															onkeyup="PF('parentTable').filter()" style="width:150px"
-															placeholder="Suchwort eingeben" />
-													</p:outputPanel>
-												</f:facet>
+                                            <f:facet name="header">
+                                                <p:outputPanel>
+                                                    <h:outputText value="Suche "/>
+                                                    <p:inputText id="globalFilter"
+                                                                 onkeyup="PF('parentTable').filter()"
+                                                                 style="width:150px"
+                                                                 placeholder="Suchwort eingeben"/>
+                                                </p:outputPanel>
+                                            </f:facet>
 
-												<p:ajax event="rowSelect" update=":parentForm:infoDialog"
-													oncomplete="PF('infoDialog').show()" />
-
-
-												<f:facet name="{Exporters}"
-													style="float: right; vertical-align: middle;">
-													<div style="float: right; vertical-align: middle;">
-														<p:commandLink ajax="false" immediate="true">
-															<p:graphicImage id="print"
-																name="pictures/extractors/printer.png" width="32" />
-															<p:spacer width="10" />
-															<p:tooltip for="print" value="Drucken" position="top" />
-															<p:printer />
-														</p:commandLink>
-														<p:commandLink ajax="false" immediate="true">
-															<p:graphicImage id="excel"
-																name="pictures/extractors/excel.png" width="32" />
-															<p:spacer width="10" />
-															<p:tooltip for="excel" value="Excel" position="top" />
-															<p:dataExporter type="xls" target="parentTable"
-																fileName="Kinder" />
-														</p:commandLink>
-														<p:commandLink ajax="false" immediate="true">
-															<p:graphicImage id="pdf"
-																name="pictures/extractors/pdf.png" width="32" />
-															<p:spacer width="10" />
-															<p:tooltip for="pdf" value="PDF" position="top" />
-															<p:dataExporter type="pdf" target="parentTable"
-																fileName="Kinder" />
-														</p:commandLink>
-														<p:commandLink ajax="false" immediate="true">
-															<p:graphicImage id="csv"
-																name="pictures/extractors/csv.png" width="32" />
-															<p:tooltip for="csv" value="CSV" position="top" />
-															<p:dataExporter type="csv" target="parentTable"
-																fileName="Kinder" />
-														</p:commandLink>
-													</div>
-												</f:facet>
-
-												<p:column headerText="Benutzername"
-													filterBy="#{parent.username}" sortBy="#{parent.username}"
-													filterStyle="display:none">
-													<h:outputText value="#{parent.username}" />
-												</p:column>
-												<p:column headerText="Vorname"
-													filterBy="#{parent.firstName}" sortBy="#{parent.firstName}"
-													filterStyle="display:none">
-													<h:outputText value="#{parent.firstName}" />
-												</p:column>
-												<p:column headerText="Nachname"
-													filterBy="#{parent.lastName}" sortBy="#{parent.lastName}"
-													filterStyle="display:none">
-													<h:outputText value="#{parent.lastName}" />
-												</p:column>
-												<p:column headerText="Wohnort" filterBy="#{parent.location}"
-													sortBy="#{parent.location}" filterStyle="display:none">
-													<h:outputText value="#{parent.location}" />
-												</p:column>
-												<p:column headerText="Status" filterBy="#{parent.status}"
-													filterMatchMode="equals">
-													<f:facet name="filter">
-														<p:selectOneButton onchange="PF('parentTable').filter()">
-															<f:converter converterId="javax.faces.Boolean" />
-															<f:selectItem itemLabel="alle" itemValue="" />
-															<f:selectItem itemLabel="aktiv" itemValue="true" />
-															<f:selectItem itemLabel="inaktiv" itemValue="false" />
-														</p:selectOneButton>
-													</f:facet>
-													<h:outputText
-														value="#{parent.status ? 'aktiv' : 'inaktiv'}" />
-												</p:column>
-												<p:column style="width:120px;text-align: center"
-													exportable="false">
-													<p:commandButton update=":parentForm"
-														oncomplete="PF('parentEditDialog').show()"
-														icon="ui-icon-note" title="Ändern" process="@this">
-														<f:setPropertyActionListener value="#{parent}"
-															target="#{parentEditController.parent}" />
-													</p:commandButton>
-													<p:commandButton
-														action="#{parentEditController.doDeleteParent}"
-														icon="ui-icon-trash" title="Löschen" update=":parentForm"
-														process="@this">
-														<f:setPropertyActionListener value="#{parent}"
-															target="#{parentEditController.parent}" />
-														<p:confirm header="Bestätigung!"
-															message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Es werden auch alle Abhängigkeiten, wie Kinder, etc. gelöscht. Dies lässt sich nicht mehr rückgängig machen."
-															icon="ui-icon-alert" />
-													</p:commandButton>
-												</p:column>
-											</p:dataTable>
-
-											<!-- More Info Dialog -->
-											<p:dialog
-												header="#{PDFBean.parentPrint.firstName} #{PDFBean.parentPrint.lastName}"
-												widgetVar="infoDialog" id="infoDialog" modal="true"
-												showEffect="fade" hideEffect="fade" resizable="false">
-												<p:outputPanel id="infosheet" style="text-align:center;">
-													<p:messages id="infoParent" autoUpdate="true" />
-
-													<p:panelGrid columns="2" columnClasses="label,value">
-														<f:facet name="header">
-															<p:graphicImage
-																name="pictures/profile_pictures/#{PDFBean.parentPrint.imgName}"
-																class="picture" />
-														</f:facet>
-														<h:outputText value="Wohnort:" />
-														<h:outputText value="#{PDFBean.parentPrint.location}" />
-														<h:outputText value="Straße:" />
-														<h:outputText value="#{PDFBean.parentPrint.streetName}" />
-
-														<h:outputText value="PLZ:" />
-														<h:outputText value="#{PDFBean.parentPrint.postcode}" />
-														<h:outputText value="Telefonnummer" />
-														<h:outputText value="#{PDFBean.parentPrint.phoneNumber}" />
-														<h:outputText value="Emailadresse:" />
-														<h:outputText value="#{PDFBean.parentPrint.email}" />
-														<h:outputText value="Familienstatus:" />
-														<h:outputText value="#{PDFBean.parentPrint.familyStatus}" />
-													</p:panelGrid>
-													<p:panelGrid columns="2" style="width:100%;">
-														<p:dataList
-															value="#{parentController.getChildren(PDFBean.parentPrint.username)}"
-															var="child" type="ordered">
-															<f:facet name="header">
-																Kinder
-															</f:facet>
-															#{child.firstName} #{child.lastName} - (#{child.birthday})
-														</p:dataList>
-													</p:panelGrid>
-													<p:commandButton value="Stammblatt PDF" immediate="true"
-														action="#{PDFBean.createPDFParent()}" />
-													<p:commandButton value="Schließen" immediate="true"
-														onclick="PF('infoDialog').hide();" />
-												</p:outputPanel>
-											</p:dialog>
+                                            <p:ajax event="rowSelect" update=":parentForm:infoDialog"
+                                                    oncomplete="PF('infoDialog').show()"/>
 
 
-											<!-- Create Parent Dialog -->
-											<p:dialog header="Elternteil anlegen" id="parentAddDialog"
-												widgetVar="parentAddDialog" modal="true" showEffect="fade"
-												hideEffect="fade" resizable="false" closeOnEscape="true">
-												<p:messages id="messagesCreate" autoUpdate="true" />
-												<p:outputPanel id="parentDataCreate">
-													<h:panelGrid columns="2">
-														<p:outputLabel for="usernameCreate" value="Benutzername: " />
-														<p:inputText id="usernameCreate"
-															value="#{parentController.parent.username}"
-															required="true"
-															requiredMessage="Benutzername erforderlich!" />
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="2">
-														<p:outputLabel for="firstnameCreate" value="Vorname: " />
-														<p:inputText id="firstnameCreate"
-															value="#{parentController.parent.firstName}"
-															required="true" requiredMessage="Vorname erforderlich!" />
-														<p:outputLabel for="lastnameCreate" value="Nachname: " />
-														<p:inputText id="lastnameCreate"
-															value="#{parentController.parent.lastName}"
-															required="true" requiredMessage="Nachname erforderlich!" />
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="2">
-														<p:outputLabel for="streetCreate" value="Straße: " />
-														<p:inputText id="streetCreate"
-															value="#{parentController.parent.streetName}"
-															required="true"
-															requiredMessage="Straßenname erforderlich!" />
-														<p:outputLabel for="locationCreate" value="Ort: " />
-														<p:inputText id="locationCreate"
-															value="#{parentController.parent.location}"
-															required="true"
-															requiredMessage="Ortsangabe erforderlich!" />
-														<p:outputLabel for="postcodeCreate" value="Postleitzahl: " />
-														<p:inputMask id="postcodeCreate" maxlength="5"
-															value="#{parentController.parent.postcode}" mask="9999?9"
-															slotChar=" " required="true"
-															requiredMessage="Postleitzahl erforderlich!" />
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="2">
-														<p:outputLabel for="phonenumberCreate"
-															value="Telefonnummer: " />
-														<p:inputMask id="phonenumberCreate" mask="9?99999999999"
-															slotChar=" " maxlength="12"
-															value="#{parentController.parent.phoneNumber}"
-															required="true"
-															requiredMessage="Telefonnummer erforderlich!" />
-														<p:outputLabel for="emailCreate" value="Email: " />
-														<p:inputText id="emailCreate"
-															validatorMessage="Ungültiges Email-Format!"
-															value="#{parentController.parent.email}" required="true"
-															requiredMessage="Email erforderlich!">
-															<f:validateRegex
-																pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-														</p:inputText>
-													</h:panelGrid>
-													<h:panelGrid columns="3">
-														<p:commandButton value="Speichern"
-															action="#{parentController.doSaveParent()}"
-															update=":parentForm:parentTable"
-															process="@widgetVar(parentAddDialog)" />
-														<p:commandButton value="Abbruch"
-															oncomplete="PF('parentAddDialog').hide()"
-															immediate="true" />
-													</h:panelGrid>
-												</p:outputPanel>
-											</p:dialog>
+                                            <f:facet name="{Exporters}"
+                                                     style="float: right; vertical-align: middle;">
+                                                <div style="float: right; vertical-align: middle;">
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="print"
+                                                                        name="pictures/extractors/printer.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="print" value="Drucken" position="top"/>
+                                                        <p:printer/>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="excel"
+                                                                        name="pictures/extractors/excel.png"
+                                                                        width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="excel" value="Excel" position="top"/>
+                                                        <p:dataExporter type="xls" target="parentTable"
+                                                                        fileName="Kinder"/>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="pdf"
+                                                                        name="pictures/extractors/pdf.png" width="32"/>
+                                                        <p:spacer width="10"/>
+                                                        <p:tooltip for="pdf" value="PDF" position="top"/>
+                                                        <p:dataExporter type="pdf" target="parentTable"
+                                                                        fileName="Kinder"/>
+                                                    </p:commandLink>
+                                                    <p:commandLink ajax="false" immediate="true">
+                                                        <p:graphicImage id="csv"
+                                                                        name="pictures/extractors/csv.png" width="32"/>
+                                                        <p:tooltip for="csv" value="CSV" position="top"/>
+                                                        <p:dataExporter type="csv" target="parentTable"
+                                                                        fileName="Kinder"/>
+                                                    </p:commandLink>
+                                                </div>
+                                            </f:facet>
 
-											<!-- Edit Parent Dialog -->
-											<p:dialog header="Elternteil ändern" id="parentEditDialog"
-												widgetVar="parentEditDialog" modal="true" showEffect="fade"
-												hideEffect="fade" resizable="false" closeOnEscape="true">
-												<p:messages id="messagesEdit" autoUpdate="true" />
-												<p:outputPanel id="parentDataEdit"
-													rendered="#{not empty parentEditController.parent}">
-													<h:panelGrid columns="2">
-														<p:outputLabel for="usernameEdit" value="Benutzername: " />
-														<p:inputText id="usernameEdit"
-															value="#{parentEditController.parent.username}"
-															disabled="true" />
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="2">
-														<p:outputLabel for="firstnameEdit" value="Vorname: " />
-														<p:inputText id="firstnameEdit"
-															value="#{parentEditController.parent.firstName}"
-															required="true" requiredMessage="Vorname erforderlich!" />
-														<p:outputLabel for="lastnameEdit" value="Nachname: " />
-														<p:inputText id="lastnameEdit"
-															value="#{parentEditController.parent.lastName}"
-															required="true" requiredMessage="Nachname erforderlich!" />
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="2">
-														<p:outputLabel for="streetEdit" value="Straße: " />
-														<p:inputText id="streetEdit"
-															value="#{parentEditController.parent.streetName}"
-															required="true"
-															requiredMessage="Straßenname erforderlich!" />
-														<p:outputLabel for="locationEdit" value="Ort: " />
-														<p:inputText id="locationEdit"
-															value="#{parentEditController.parent.location}"
-															required="true" requiredMessage="Ort erforderlich!" />
-														<p:outputLabel for="postcodeEdit" value="Postleitzahl: " />
-														<p:inputMask id="postcodeEdit" maxlength="5"
-															value="#{parentEditController.parent.postcode}"
-															mask="9999?9" slotChar=" " required="true"
-															requiredMessage="Postleitzahl erforderlich!" />
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="2">
-														<p:outputLabel for="phonenumberCreate"
-															value="Telefonnummer: " />
-														<p:inputMask id="phonenumberEdit" mask="9?99999999999"
-															slotChar=" " maxlength="12"
-															value="#{parentEditController.parent.phoneNumber}"
-															required="true"
-															requiredMessage="Telefonnummer erforderlich!" />
-														<p:outputLabel for="emailEdit" value="Email: " />
-														<p:inputText id="emailEdit"
-															validatorMessage="Ungültiges Email-Format!"
-															value="#{parentEditController.parent.email}"
-															required="true" requiredMessage="Email erforderlich!">
-															<f:validateRegex
-																pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-														</p:inputText>
-													</h:panelGrid>
-													<p:separator />
-													<h:panelGrid columns="3">
-														<p:commandButton value="Speichern"
-															action="#{parentEditController.doSaveParent}"
-															update=":parentForm:parentTable"
-															process="@widgetVar(parentEditDialog)" />
-														<p:commandButton value="Neu laden"
-															action="#{parentEditController.doReloadParent}" />
-														<p:commandButton value="Abbruch"
-															onclick="PF('parentEditDialog').hide()" immediate="true" />
-													</h:panelGrid>
-												</p:outputPanel>
-											</p:dialog>
+                                            <p:column headerText="Benutzername"
+                                                      filterBy="#{parent.username}" sortBy="#{parent.username}"
+                                                      filterStyle="display:none">
+                                                <h:outputText value="#{parent.username}"/>
+                                            </p:column>
+                                            <p:column headerText="Vorname"
+                                                      filterBy="#{parent.firstName}" sortBy="#{parent.firstName}"
+                                                      filterStyle="display:none">
+                                                <h:outputText value="#{parent.firstName}"/>
+                                            </p:column>
+                                            <p:column headerText="Nachname"
+                                                      filterBy="#{parent.lastName}" sortBy="#{parent.lastName}"
+                                                      filterStyle="display:none">
+                                                <h:outputText value="#{parent.lastName}"/>
+                                            </p:column>
+                                            <p:column headerText="Wohnort" filterBy="#{parent.location}"
+                                                      sortBy="#{parent.location}" filterStyle="display:none">
+                                                <h:outputText value="#{parent.location}"/>
+                                            </p:column>
+                                            <p:column headerText="Status" filterBy="#{parent.status}"
+                                                      filterMatchMode="equals">
+                                                <f:facet name="filter">
+                                                    <p:selectOneButton onchange="PF('parentTable').filter()">
+                                                        <f:converter converterId="javax.faces.Boolean"/>
+                                                        <f:selectItem itemLabel="alle" itemValue=""/>
+                                                        <f:selectItem itemLabel="aktiv" itemValue="true"/>
+                                                        <f:selectItem itemLabel="inaktiv" itemValue="false"/>
+                                                    </p:selectOneButton>
+                                                </f:facet>
+                                                <h:outputText
+                                                        value="#{parent.status ? 'aktiv' : 'inaktiv'}"/>
+                                            </p:column>
+                                            <p:column style="width:120px;text-align: center"
+                                                      exportable="false">
+                                                <p:commandButton update=":parentForm"
+                                                                 oncomplete="PF('parentEditDialog').show()"
+                                                                 icon="ui-icon-note" title="Ändern" process="@this">
+                                                    <f:setPropertyActionListener value="#{parent}"
+                                                                                 target="#{parentEditController.parent}"/>
+                                                </p:commandButton>
+                                                <p:commandButton
+                                                        action="#{parentEditController.doDeleteParent}"
+                                                        icon="ui-icon-trash" title="Löschen" update=":parentForm"
+                                                        process="@this">
+                                                    <f:setPropertyActionListener value="#{parent}"
+                                                                                 target="#{parentEditController.parent}"/>
+                                                    <p:confirm header="Bestätigung!"
+                                                               message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Es werden auch alle Abhängigkeiten, wie Kinder, etc. gelöscht. Dies lässt sich nicht mehr rückgängig machen."
+                                                               icon="ui-icon-alert"/>
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
 
-											<p:confirmDialog global="true" showEffect="fade"
-												hideEffect="fade" width="300">
-												<p:commandButton value="Ja" type="button"
-													styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-												<p:commandButton value="Nein" type="button"
-													styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-											</p:confirmDialog>
+                                        <!-- More Info Dialog -->
+                                        <p:dialog
+                                                header="#{PDFBean.parentPrint.firstName} #{PDFBean.parentPrint.lastName}"
+                                                widgetVar="infoDialog" id="infoDialog" modal="true"
+                                                showEffect="fade" hideEffect="fade" resizable="false">
+                                            <p:outputPanel id="infosheet" style="text-align:center;">
+                                                <p:messages id="infoParent" autoUpdate="true"/>
 
-										</h:form>
+                                                <p:panelGrid columns="2" columnClasses="label,value">
+                                                    <f:facet name="header">
+                                                        <p:graphicImage
+                                                                name="pictures/profile_pictures/#{PDFBean.parentPrint.imgName}"
+                                                                class="picture"/>
+                                                    </f:facet>
+                                                    <h:outputText value="Wohnort:"/>
+                                                    <h:outputText value="#{PDFBean.parentPrint.location}"/>
+                                                    <h:outputText value="Straße:"/>
+                                                    <h:outputText value="#{PDFBean.parentPrint.streetName}"/>
 
-									</div>
-								</div>
+                                                    <h:outputText value="PLZ:"/>
+                                                    <h:outputText value="#{PDFBean.parentPrint.postcode}"/>
+                                                    <h:outputText value="Telefonnummer"/>
+                                                    <h:outputText value="#{PDFBean.parentPrint.phoneNumber}"/>
+                                                    <h:outputText value="Emailadresse:"/>
+                                                    <h:outputText value="#{PDFBean.parentPrint.email}"/>
+                                                    <h:outputText value="Familienstatus:"/>
+                                                    <h:outputText value="#{PDFBean.parentPrint.familyStatus}"/>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="2" style="width:100%;">
+                                                    <p:dataList
+                                                            value="#{parentController.getChildren(PDFBean.parentPrint.username)}"
+                                                            var="child" type="ordered">
+                                                        <f:facet name="header">
+                                                            Kinder
+                                                        </f:facet>
+                                                        #{child.firstName} #{child.lastName} - (#{child.birthday})
+                                                    </p:dataList>
+                                                </p:panelGrid>
+                                                <p:commandButton value="Stammblatt PDF" immediate="true"
+                                                                 action="#{PDFBean.createPDFParent()}"/>
+                                                <p:commandButton value="Schließen" immediate="true"
+                                                                 onclick="PF('infoDialog').hide();"/>
+                                            </p:outputPanel>
+                                        </p:dialog>
 
-							</section>
-							<!-- /.content -->
-						</div>
-					</div>
-				</body>
-				<link rel="stylesheet"
-					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-			</ui:fragment>
-		</h:body>
-	</ui:define>
+
+                                        <!-- Create Parent Dialog -->
+                                        <p:dialog header="Elternteil anlegen" id="parentAddDialog"
+                                                  widgetVar="parentAddDialog" modal="true" showEffect="fade"
+                                                  hideEffect="fade" resizable="false" closeOnEscape="true">
+                                            <p:messages id="messagesCreate" autoUpdate="true"/>
+                                            <p:outputPanel id="parentDataCreate">
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="usernameCreate" value="Benutzername: "/>
+                                                    <p:inputText id="usernameCreate"
+                                                                 value="#{parentController.parent.username}"
+                                                                 required="true"
+                                                                 requiredMessage="Benutzername erforderlich!"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="firstnameCreate" value="Vorname: "/>
+                                                    <p:inputText id="firstnameCreate"
+                                                                 value="#{parentController.parent.firstName}"
+                                                                 required="true"
+                                                                 requiredMessage="Vorname erforderlich!"/>
+                                                    <p:outputLabel for="lastnameCreate" value="Nachname: "/>
+                                                    <p:inputText id="lastnameCreate"
+                                                                 value="#{parentController.parent.lastName}"
+                                                                 required="true"
+                                                                 requiredMessage="Nachname erforderlich!"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="streetCreate" value="Straße: "/>
+                                                    <p:inputText id="streetCreate"
+                                                                 value="#{parentController.parent.streetName}"
+                                                                 required="true"
+                                                                 requiredMessage="Straßenname erforderlich!"/>
+                                                    <p:outputLabel for="locationCreate" value="Ort: "/>
+                                                    <p:inputText id="locationCreate"
+                                                                 value="#{parentController.parent.location}"
+                                                                 required="true"
+                                                                 requiredMessage="Ortsangabe erforderlich!"/>
+                                                    <p:outputLabel for="postcodeCreate" value="Postleitzahl: "/>
+                                                    <p:inputMask id="postcodeCreate" maxlength="5"
+                                                                 value="#{parentController.parent.postcode}"
+                                                                 mask="9999?9"
+                                                                 slotChar=" " required="true"
+                                                                 requiredMessage="Postleitzahl erforderlich!"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="phonenumberCreate"
+                                                                   value="Telefonnummer: "/>
+                                                    <p:inputMask id="phonenumberCreate" mask="9?99999999999"
+                                                                 slotChar=" " maxlength="12"
+                                                                 value="#{parentController.parent.phoneNumber}"
+                                                                 required="true"
+                                                                 requiredMessage="Telefonnummer erforderlich!"/>
+                                                    <p:outputLabel for="emailCreate" value="Email: "/>
+                                                    <p:inputText id="emailCreate"
+                                                                 validatorMessage="Ungültiges Email-Format!"
+                                                                 value="#{parentController.parent.email}"
+                                                                 required="true"
+                                                                 requiredMessage="Email erforderlich!">
+                                                        <f:validateRegex
+                                                                pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                    </p:inputText>
+                                                </h:panelGrid>
+                                                <h:panelGrid columns="3">
+                                                    <p:commandButton value="Speichern"
+                                                                     action="#{parentController.doSaveParent()}"
+                                                                     update=":parentForm:parentTable"
+                                                                     process="@widgetVar(parentAddDialog)"/>
+                                                    <p:commandButton value="Abbruch"
+                                                                     oncomplete="PF('parentAddDialog').hide()"
+                                                                     immediate="true"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </p:dialog>
+
+                                        <!-- Edit Parent Dialog -->
+                                        <p:dialog header="Elternteil ändern" id="parentEditDialog"
+                                                  widgetVar="parentEditDialog" modal="true" showEffect="fade"
+                                                  hideEffect="fade" resizable="false" closeOnEscape="true">
+                                            <p:messages id="messagesEdit" autoUpdate="true"/>
+                                            <p:outputPanel id="parentDataEdit"
+                                                           rendered="#{not empty parentEditController.parent}">
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="usernameEdit" value="Benutzername: "/>
+                                                    <p:inputText id="usernameEdit"
+                                                                 value="#{parentEditController.parent.username}"
+                                                                 disabled="true"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="firstnameEdit" value="Vorname: "/>
+                                                    <p:inputText id="firstnameEdit"
+                                                                 value="#{parentEditController.parent.firstName}"
+                                                                 required="true"
+                                                                 requiredMessage="Vorname erforderlich!"/>
+                                                    <p:outputLabel for="lastnameEdit" value="Nachname: "/>
+                                                    <p:inputText id="lastnameEdit"
+                                                                 value="#{parentEditController.parent.lastName}"
+                                                                 required="true"
+                                                                 requiredMessage="Nachname erforderlich!"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="streetEdit" value="Straße: "/>
+                                                    <p:inputText id="streetEdit"
+                                                                 value="#{parentEditController.parent.streetName}"
+                                                                 required="true"
+                                                                 requiredMessage="Straßenname erforderlich!"/>
+                                                    <p:outputLabel for="locationEdit" value="Ort: "/>
+                                                    <p:inputText id="locationEdit"
+                                                                 value="#{parentEditController.parent.location}"
+                                                                 required="true" requiredMessage="Ort erforderlich!"/>
+                                                    <p:outputLabel for="postcodeEdit" value="Postleitzahl: "/>
+                                                    <p:inputMask id="postcodeEdit" maxlength="5"
+                                                                 value="#{parentEditController.parent.postcode}"
+                                                                 mask="9999?9" slotChar=" " required="true"
+                                                                 requiredMessage="Postleitzahl erforderlich!"/>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="2">
+                                                    <p:outputLabel for="phonenumberCreate"
+                                                                   value="Telefonnummer: "/>
+                                                    <p:inputMask id="phonenumberEdit" mask="9?99999999999"
+                                                                 slotChar=" " maxlength="12"
+                                                                 value="#{parentEditController.parent.phoneNumber}"
+                                                                 required="true"
+                                                                 requiredMessage="Telefonnummer erforderlich!"/>
+                                                    <p:outputLabel for="emailEdit" value="Email: "/>
+                                                    <p:inputText id="emailEdit"
+                                                                 validatorMessage="Ungültiges Email-Format!"
+                                                                 value="#{parentEditController.parent.email}"
+                                                                 required="true" requiredMessage="Email erforderlich!">
+                                                        <f:validateRegex
+                                                                pattern="^$|^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                    </p:inputText>
+                                                </h:panelGrid>
+                                                <p:separator/>
+                                                <h:panelGrid columns="3">
+                                                    <p:commandButton value="Speichern"
+                                                                     action="#{parentEditController.doSaveParent}"
+                                                                     update=":parentForm:parentTable"
+                                                                     process="@widgetVar(parentEditDialog)"/>
+                                                    <p:commandButton value="Neu laden"
+                                                                     action="#{parentEditController.doReloadParent}"/>
+                                                    <p:commandButton value="Abbruch"
+                                                                     onclick="PF('parentEditDialog').hide()"
+                                                                     immediate="true"/>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </p:dialog>
+
+                                        <p:confirmDialog global="true" showEffect="fade"
+                                                         hideEffect="fade" width="300">
+                                            <p:commandButton value="Ja" type="button"
+                                                             styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                            <p:commandButton value="Nein" type="button"
+                                                             styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                                        </p:confirmDialog>
+
+                                    </h:form>
+
+                                </div>
+                            </div>
+
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                </div>
+                </body>
+                <link rel="stylesheet"
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            </ui:fragment>
+        </h:body>
+    </ui:define>
 </ui:composition>

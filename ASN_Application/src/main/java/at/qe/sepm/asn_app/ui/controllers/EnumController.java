@@ -21,39 +21,39 @@ import java.util.Map;
 @Scope("request")
 public class EnumController {
 
-    public Map<String,String> getFamilyStatus(){
-        Map<String,String> familystatus = new HashMap<String,String>();
+    public Map<String, String> getFamilyStatus() {
+        Map<String, String> familystatus = new HashMap<String, String>();
 
-        for(FamilyStatus fm: FamilyStatus.values()){
-            familystatus.put(fm.name(),fm.name());
+        for (FamilyStatus fm : FamilyStatus.values()) {
+            familystatus.put(fm.name(), fm.name());
         }
 
         return familystatus;
     }
 
-    public Map<String,String> getReligions(){
-        Map<String,String> religions =  new HashMap<String, String>();
+    public Map<String, String> getReligions() {
+        Map<String, String> religions = new HashMap<String, String>();
 
-        for(Religion r : Religion.values()){
-            religions.put(r.name(),r.name());
+        for (Religion r : Religion.values()) {
+            religions.put(r.name(), r.name());
         }
         return religions;
     }
 
-    public Map<String,String> getWorkRoles(){
-        Map<String,String> roles =  new HashMap<String, String>();
+    public Map<String, String> getWorkRoles() {
+        Map<String, String> roles = new HashMap<String, String>();
 
-        for(WorkRole r: WorkRole.values()){
-            roles.put(r.name(),r.name());
+        for (WorkRole r : WorkRole.values()) {
+            roles.put(r.name(), r.name());
         }
         return roles;
     }
 
-    public Map<String,String> getGender(){
-        Map<String,String> gender = new HashMap<String, String>();
+    public Map<String, String> getGender() {
+        Map<String, String> gender = new HashMap<String, String>();
 
-        for(Gender g: Gender.values()){
-            gender.put(g.name(),g.name());
+        for (Gender g : Gender.values()) {
+            gender.put(g.name(), g.name());
         }
 
         return gender;

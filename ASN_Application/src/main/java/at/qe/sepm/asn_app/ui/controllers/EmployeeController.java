@@ -37,18 +37,11 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private MailService mailService;
     private Collection<Employee> employees;
     private Employee employee;
     private String password;
     @Autowired
-	private UserRepository userRepository;
-    @Autowired
     private UserConstraints userConstraints;
-    @Autowired
-    private UserService userService;
-
 
 
     public void setEmployee(Employee employee) {
@@ -58,6 +51,7 @@ public class EmployeeController {
 
     /**
      * Needed for JUNit tests
+     *
      * @param employee
      */
     public void setEmployee2(Employee employee) {
@@ -67,17 +61,18 @@ public class EmployeeController {
     public void setEmployees(Collection<Employee> employees) {
         this.employees = employees;
     }
+
     public void doReloadEmployee() {
         employee = employeeService.loadEmployee(employee.getUsername());
     }
 
     @PostConstruct
-    private void initNewEmployee(){
+    private void initNewEmployee() {
         employee = new Employee();
     }
 
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setEmployees(employeeService.getAllEmployees());
     }
 
@@ -85,16 +80,15 @@ public class EmployeeController {
         return employee;
     }
 
-    public Collection<Employee> getEmployees(){
+    public Collection<Employee> getEmployees() {
         return employees;
     }
 
-    public void doChangePassword(String password){
-    	employeeService.changePassword(password);
+    public void doChangePassword(String password) {
+        employeeService.changePassword(password);
     }
-    
-    public void doSaveEmployee(){
-        System.out.println(employee.toString());
+
+    public void doSaveEmployee() {
         if (!StringUtils.isNumeric(employee.getPostcode())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
         } else if (!StringUtils.isNumeric(employee.getPhoneNumber())) {
@@ -105,7 +99,7 @@ public class EmployeeController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Benutzername existiert bereits!", null));
         } else {
             try {
-            	employee.setImgName("emptypicture.png");
+                employee.setImgName("emptypicture.png");
                 employee = employeeService.saveEmployee(employee);
                 RequestContext context = RequestContext.getCurrentInstance();
                 context.execute("PF('employeeAddDialog').hide()");
@@ -118,12 +112,12 @@ public class EmployeeController {
         }
     }
 
-	public void setPassword(String password){
-		this.password = password;
-	}
-	
-	public String getPassword(){
-		return password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
 }

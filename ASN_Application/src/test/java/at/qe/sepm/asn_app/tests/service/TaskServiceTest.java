@@ -169,7 +169,6 @@ public class TaskServiceTest {
         // Test toString()
         assertNotNull(task.toString());
         assertNotEquals("", task.toString());
-        System.out.println(task.toString());
 
         // Test isNew()
         task = new Task();
@@ -179,7 +178,6 @@ public class TaskServiceTest {
 
         // Test getFormattedDate
         assertNotEquals("", task.getFormattedDate(beginDate));
-        System.out.println(task.getFormattedDate(beginDate));
     }
 
 

@@ -27,74 +27,74 @@ import javax.faces.context.FacesContext;
 @Scope("view")
 public class EmployeeEditController {
 
-	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
-	private MailService mailService;
-	@Autowired
-	private EmployeeController employeeController;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private EmployeeController employeeController;
 
-	private Employee employee;
+    private Employee employee;
 
-	public Employee getEmployee() {
-		return employee;
-	}
+    public Employee getEmployee() {
+        return employee;
+    }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-		doReloadEmployee();
-	}
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+        doReloadEmployee();
+    }
 
-	/**
-	 * Needed for JUnit tests
-	 * @param employee
-	 */
-	public void setEmployee2(Employee employee) {
-		this.employee = employee;
-	}
+    /**
+     * Needed for JUnit tests
+     *
+     * @param employee
+     */
+    public void setEmployee2(Employee employee) {
+        this.employee = employee;
+    }
 
-	public void doReloadEmployee() {
-		employee = employeeService.loadEmployee(employee.getUsername());
-	}
+    public void doReloadEmployee() {
+        employee = employeeService.loadEmployee(employee.getUsername());
+    }
 
-	public void doSaveEmployeeEdit(){
-		System.out.println(employee.toString());
-		if (!StringUtils.isNumeric(employee.getPostcode())) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
-		} else if (!StringUtils.isNumeric(employee.getPhoneNumber())) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
-		} else if (!employee.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
-		} else{
-			try {
+    public void doSaveEmployeeEdit() {
+        if (!StringUtils.isNumeric(employee.getPostcode())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Postleitzahl enthält Buchstaben!", null));
+        } else if (!StringUtils.isNumeric(employee.getPhoneNumber())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben oder Sonderzeichen (Leertaste, etc.)!", null));
+        } else if (!employee.getEmail().matches("^$|^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email Format ist nicht gültig!", null));
+        } else {
+            try {
 
-				employee = employeeService.saveEmployee(employee);
-				mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Änderung Benutzerdaten",
-						"Guten Tag " + employee.getFirstName() + " " + employee.getLastName() + "!\n\n" +
-								"Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
-								"Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
-								"Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
-								"Viel Spaß wünscht das Kinderkrippen-Team!");
-				RequestContext context = RequestContext.getCurrentInstance();
-				context.execute("PF('employeeEditDialog').hide()");
-			} catch (TransactionSystemException ex) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
-			}
+                employee = employeeService.saveEmployee(employee);
+                mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Änderung Benutzerdaten",
+                        "Guten Tag " + employee.getFirstName() + " " + employee.getLastName() + "!\n\n" +
+                                "Soeben wurden Ihre Benutzerdaten geändert.\n\n" +
+                                "Bitte kontrollieren Sie Ihre Daten unter dem Menüpunkt Eigene Daten.\n" +
+                                "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
+                                "Viel Spaß wünscht das Kinderkrippen-Team!");
+                RequestContext context = RequestContext.getCurrentInstance();
+                context.execute("PF('employeeEditDialog').hide()");
+            } catch (TransactionSystemException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Es müssen alle Felder ausgefüllt werden!", null));
+            }
 
-			employeeController.initList();
-			employee = null;
-		}
-	}
+            employeeController.initList();
+            employee = null;
+        }
+    }
 
-	public void doDeleteEmployee() {
-		employeeService.deleteEmployee(employee);
-		employee = null;
-		employeeController.initList();
-	}
+    public void doDeleteEmployee() {
+        employeeService.deleteEmployee(employee);
+        employee = null;
+        employeeController.initList();
+    }
 
-	public void doResetPassword(){
-		employeeService.resetPassword(employee);
-	}
+    public void doResetPassword() {
+        employeeService.resetPassword(employee);
+    }
 
 }
 

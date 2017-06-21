@@ -1,34 +1,34 @@
 .picture {
-	width: 300px;
-	height: 210px;
-	margin-right: 20px;
-	margin-top:30px;
+    width: 300px;
+    height: 210px;
+    margin-right: 20px;
+    margin-top: 30px;
 }
 
 .picture-nursery {
-	width: 400px;
-	height: 400px;
-	margin: auto;
+    width: 400px;
+    height: 400px;
+    margin: auto;
 }
 
 .picture-text {
-	padding-top: 100px;
-	padding-left: 200px;
-	padding-right: 200px;
+    padding-top: 100px;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 
 .picture-menu {
-	width: 150px;
-	height: 105px;
-	margin-right: 20px
+    width: 150px;
+    height: 105px;
+    margin-right: 20px
 }
 
 .no-pic {
-	width: 200px;
-	height: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 .picture-center {
-	display: block;
-	margin: 0 auto;
+    display: block;
+    margin: 0 auto;
 }

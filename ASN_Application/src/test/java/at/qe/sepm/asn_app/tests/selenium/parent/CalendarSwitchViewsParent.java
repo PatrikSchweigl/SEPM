@@ -4,7 +4,9 @@ import java.util.concurrent.TimeUnit;
 
 import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
 import org.junit.*;
+
 import static org.junit.Assert.*;
+
 import org.openqa.selenium.*;
 
 

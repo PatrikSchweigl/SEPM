@@ -13,19 +13,4 @@ import org.springframework.stereotype.Component;
 @Scope("request")
 public class SecurityTestBean {
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public void doAdminAction() {
-        return;
-    }
-
-    @PreAuthorize("hasAuthority('MANAGER')")
-    public void doManagerAction() {
-        return;
-    }
-
-    @PreAuthorize("hasAuthority('EMPLOYEE')")
-    public void doEmployeeAction() {
-        return;
-    }
-
 }

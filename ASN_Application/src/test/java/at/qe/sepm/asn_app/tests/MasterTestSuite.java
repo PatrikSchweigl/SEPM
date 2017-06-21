@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 15.06.17 18:03 CEST.
- *
+ * <p>
  * This test suite calls all other test suites.
  */
 @RunWith(Suite.class)

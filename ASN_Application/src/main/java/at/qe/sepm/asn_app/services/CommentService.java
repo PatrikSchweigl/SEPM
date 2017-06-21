@@ -1,4 +1,5 @@
 package at.qe.sepm.asn_app.services;
+
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.general.Comment;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
@@ -22,63 +23,51 @@ import java.util.List;
 @Scope("application")
 public class CommentService {
     /**
-	 * 
-	 */
+     *
+     */
 
-	@Autowired
+    @Autowired
     private CommentRepository commentRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private AuditLogRepository auditLogRepository;
-    
-    private String text;
 
-    public Collection<Comment> getAllMessages(){
-    	Collection<Comment> temp = commentRepository.findAll();
-        Collections.reverse( (List<?>) temp );
+    public Collection<Comment> getAllMessages() {
+        Collection<Comment> temp = commentRepository.findAll();
+        Collections.reverse((List<?>) temp);
         return temp;
     }
-    
-    public Collection<Comment> getAllCommentsByPicture(String pictureName){
-    	Collection<Comment> temp = commentRepository.getAllCommentsByPicture(pictureName);
-        Collections.reverse( (List<?>) temp );
+
+    public Collection<Comment> getAllCommentsByPicture(String pictureName) {
+        Collection<Comment> temp = commentRepository.getAllCommentsByPicture(pictureName);
+        Collections.reverse((List<?>) temp);
         return temp;
     }
-    
-    
-    public Comment saveMessage(Comment message){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"COMMENT POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+
+    public Comment saveMessage(Comment message) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "COMMENT POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
         message.setDate(new Date());
         message.setUsername(getAuthenticatedUser().getUsername());
-    	return commentRepository.save(message);
+        return commentRepository.save(message);
     }
-    
-    public void deleteMessage(Comment message){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"COMMENT DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+    public void deleteMessage(Comment message) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "COMMENT DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
         commentRepository.delete(message);
     }
-    
+
     public UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
 
 
-	public String getText() {
-		return text;
-	}
-
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-
-	public Comment loadMessage(long id) {
+    public Comment loadMessage(long id) {
         return commentRepository.findOne(id);
-	}
+    }
 
 }

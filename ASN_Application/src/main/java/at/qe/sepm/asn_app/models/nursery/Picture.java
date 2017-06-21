@@ -12,9 +12,10 @@ import java.util.Set;
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 02.05.2017
- *
+ * <p>
  * A picture is either displayed as a profile picture of a person or publicly displayed
  * in the picture gallery. It holds a publisher, a publish date, a title and a set of comments.
+ *
  * @see Comment
  */
 
@@ -40,7 +41,8 @@ public class Picture implements Persistable<Long> {
     private String title;
 
 
-    public Picture() {}
+    public Picture() {
+    }
 
     public Picture(String url, UserData publisher, Date date, String title) {
         this.url = url;
@@ -49,10 +51,6 @@ public class Picture implements Persistable<Long> {
         this.title = title;
     }
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUrl() {
         return url;
@@ -119,12 +117,11 @@ public class Picture implements Persistable<Long> {
         Picture other = (Picture) obj;
         if (//this.comment.equals(other.comment) &&
                 this.date.equals(other.date) &&
-                this.publisher.equals(other.publisher) &&
-                this.title.equals(other.title) &&
-                this.url.equals(other.url)) {
+                        this.publisher.equals(other.publisher) &&
+                        this.title.equals(other.title) &&
+                        this.url.equals(other.url)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

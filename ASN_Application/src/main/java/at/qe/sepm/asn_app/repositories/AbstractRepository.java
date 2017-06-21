@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.repositories;
 
 import java.io.Serializable;
 import java.util.List;
+
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
@@ -9,7 +10,7 @@ import org.springframework.data.repository.Repository;
  * Common base repository for all other repositories. Provides basic methods for
  * loading, saving and removing entities.
  *
- * @param <T> The domain type this repository manages.
+ * @param <T>  The domain type this repository manages.
  * @param <ID> The type of the id of the entity this repository manages.
  */
 @NoRepositoryBean
@@ -43,7 +44,7 @@ public interface AbstractRepository<T, ID extends Serializable> extends Reposito
      * Saves a given entity. Use the returned instance for further operations as
      * the save operation might have changed the entity instance completely.
      *
-     * @param <S> The actual domain type if the entity.
+     * @param <S>    The actual domain type if the entity.
      * @param entity The entity to be saved or updated.
      * @return The saved entity.
      */

@@ -15,14 +15,15 @@ import java.util.Date;
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 02.05.2017
- *
+ * <p>
  * A comment can be posted under a Picture. Similar to Picture a comment has a publish date and a publisher,
  * but it also contains the content of the comment as a String.
+ *
  * @see at.qe.sepm.asn_app.models.nursery.Picture
  */
 @Entity
 @Transactional
-public class Comment implements Persistable<Long>{
+public class Comment implements Persistable<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +40,8 @@ public class Comment implements Persistable<Long>{
 
 
     // CONSTRUCTOR
-    public Comment() {}
+    public Comment() {
+    }
 
 
     // SETTER and GETTER
@@ -66,10 +68,6 @@ public class Comment implements Persistable<Long>{
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    public String getFormattedDate(){
-        return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
-    }
 
 
     @Override
@@ -91,8 +89,7 @@ public class Comment implements Persistable<Long>{
         }
         if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof Comment)) {
+        } else if (!(obj instanceof Comment)) {
             return false;
         }
 
@@ -113,11 +110,11 @@ public class Comment implements Persistable<Long>{
                 "Picture name: " + pictureName;
     }
 
-	public String getPictureName() {
-		return pictureName;
-	}
+    public String getPictureName() {
+        return pictureName;
+    }
 
-	public void setPictureName(String pictureName) {
-		this.pictureName = pictureName;
-	}
+    public void setPictureName(String pictureName) {
+        this.pictureName = pictureName;
+    }
 }

@@ -1,4 +1,5 @@
 package at.qe.sepm.asn_app.services;
+
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Message;
@@ -30,57 +31,45 @@ import java.io.Serializable;
 @Scope("application")
 public class MessageService {
     /**
-	 * 
-	 */
+     *
+     */
 
-	@Autowired
+    @Autowired
     private MessageRepository messageRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private AuditLogRepository auditLogRepository;
-    
-    private String text;
 
-    public Collection<Message> getAllMessages(){
-    	Collection<Message> temp = messageRepository.findAll();
-        Collections.reverse( (List<?>) temp );
+    public Collection<Message> getAllMessages() {
+        Collection<Message> temp = messageRepository.findAll();
+        Collections.reverse((List<?>) temp);
         return temp;
     }
-    
-    
-    public Message saveMessage(Message message){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+
+    public Message saveMessage(Message message) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "MESSAGE POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
         message.setDate(new Date());
         message.setUsername(getAuthenticatedUser().getUsername());
-    	return messageRepository.save(message);
+        return messageRepository.save(message);
     }
-    
-    public void deleteMessage(Message message){
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+    public void deleteMessage(Message message) {
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogRepository.save(log);
         messageRepository.delete(message);
     }
-    
+
     public UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());
     }
 
 
-	public String getText() {
-		return text;
-	}
-
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-
-	public Message loadMessage(long id) {
+    public Message loadMessage(long id) {
         return messageRepository.findOne(id);
-	}
+    }
 
 }

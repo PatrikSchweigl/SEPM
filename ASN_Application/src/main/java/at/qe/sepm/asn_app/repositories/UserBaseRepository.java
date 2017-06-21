@@ -8,6 +8,6 @@ import org.springframework.data.repository.NoRepositoryBean;
  * on 20.03.2017
  */
 @NoRepositoryBean
-public interface UserBaseRepository<T extends UserData> extends AbstractRepository<T, Long>{
+public interface UserBaseRepository<T extends UserData> extends AbstractRepository<T, Long> {
     T findFirstByUsername(String username);
 }

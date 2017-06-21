@@ -73,7 +73,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
             return "/parent/calendar_parent.xhtml";
         } else if (isEmployee) {
             return "/employee/mainpage_employee.xhtml";
-        }else {
+        } else {
             throw new IllegalStateException();
         }
     }
@@ -86,11 +86,4 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
-    }
-
-    protected RedirectStrategy getRedirectStrategy() {
-        return redirectStrategy;
-    }
 }

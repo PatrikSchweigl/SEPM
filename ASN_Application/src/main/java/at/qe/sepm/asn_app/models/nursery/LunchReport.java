@@ -8,12 +8,12 @@ import at.qe.sepm.asn_app.models.child.Child;
  * Created by Auki on 13.06.2017.
  */
 public class LunchReport {
-	@Expose
+    @Expose
     private Lunch lunch;
-	@Expose
+    @Expose
     private Child child;
 
-    public LunchReport(Lunch lunch, Child child){
+    public LunchReport(Lunch lunch, Child child) {
         this.lunch = lunch;
         this.child = child;
     }

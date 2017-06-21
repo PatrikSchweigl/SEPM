@@ -2,6 +2,7 @@ package at.qe.sepm.asn_app.repositories;
 
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.UserRole;
+
 import java.util.List;
 
 
@@ -16,16 +17,8 @@ import javax.transaction.Transactional;
  * @author Michael Brunner <Michael.Brunner@uibk.ac.at>
  */
 @Transactional
-public interface UserRepository extends UserBaseRepository<UserData>, AbstractRepository<UserData,Long> {
+public interface UserRepository extends UserBaseRepository<UserData>, AbstractRepository<UserData, Long> {
 
-
-    List<UserData> findByUsernameContaining(String username);
-
-    @Query("SELECT u FROM UserData u WHERE CONCAT(u.firstName, ' ', u.lastName) = :wholeName")
-    List<UserData> findByWholeNameConcat(@Param("wholeName") String wholeName);
-
-    @Query("SELECT u FROM UserData u WHERE :role = u.userRole")
-    List<UserData> findByRole(@Param("role") UserRole role);
 
     @Query("SELECT u FROM UserData u WHERE u.userRole = 'ADMIN'")
     List<UserData> findAllAdmin();
@@ -34,6 +27,6 @@ public interface UserRepository extends UserBaseRepository<UserData>, AbstractRe
     List<UserData> findParentsByNotification();
 
     @Query("SELECT u FROM UserData u WHERE u.email = :email")
-	UserData findFirstByEMail(@Param("email")String email);
+    UserData findFirstByEMail(@Param("email") String email);
 
 }

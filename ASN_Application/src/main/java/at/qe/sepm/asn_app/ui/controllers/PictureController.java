@@ -21,7 +21,7 @@ public class PictureController {
     @Autowired
     private PictureService pictureService;
 
-    public Collection<Picture> getPictures(){
+    public Collection<Picture> getPictures() {
         return pictureService.getAllPictures();
     }
 }

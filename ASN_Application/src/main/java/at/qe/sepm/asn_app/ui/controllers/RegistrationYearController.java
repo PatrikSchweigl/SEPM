@@ -31,7 +31,7 @@ public class RegistrationYearController {
         this.yearlyRegistrations = yearlyRegistrations;
     }
 
-    public List<Registration> getRegistrationReportForYear(int i){
+    public List<Registration> getRegistrationReportForYear(int i) {
         Date start = new Date();
         start.setDate(1);
         start.setMonth(0);
@@ -42,8 +42,9 @@ public class RegistrationYearController {
         end.setYear(end.getYear() + i + 1);
         return registrationService.getRegistrationInTimeWindowIE(start, end);
     }
+
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setYearlyRegistrations(getRegistrationReportForYear(0));
     }
 

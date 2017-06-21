@@ -21,11 +21,11 @@ public class NurseryInformationService {
     @Autowired
     private NurseryInformationRepository nurseryInformationRepository;
 
-    public Collection<NurseryInformation> getAllInformation(){
+    public Collection<NurseryInformation> getAllInformation() {
         return nurseryInformationRepository.findAll();
     }
 
-    public NurseryInformation saveNurseryInformation(NurseryInformation nurseryInformation){
+    public NurseryInformation saveNurseryInformation(NurseryInformation nurseryInformation) {
         nurseryInformation.setCurrentDate(new Date());
         Date date;
 
@@ -45,24 +45,24 @@ public class NurseryInformationService {
         nurseryInformation.setOriginDate(cal.getTime());
         return nurseryInformationRepository.save(nurseryInformation);
     }
-    
-    public NurseryInformation saveEditNurseryInformation(NurseryInformation nurseryInformation){
-    	return nurseryInformationRepository.save(nurseryInformation);
-    }
-    
-    public NurseryInformation saveNurseryInformationEdit(NurseryInformation nurseryInformation){
+
+    public NurseryInformation saveEditNurseryInformation(NurseryInformation nurseryInformation) {
         return nurseryInformationRepository.save(nurseryInformation);
     }
 
-    public NurseryInformation loadNurseryInformation(Long id){
+    public NurseryInformation saveNurseryInformationEdit(NurseryInformation nurseryInformation) {
+        return nurseryInformationRepository.save(nurseryInformation);
+    }
+
+    public NurseryInformation loadNurseryInformation(Long id) {
         return nurseryInformationRepository.findOne(id);
     }
 
-    public void deleteNurseryInformation(NurseryInformation nurseryInformation){
+    public void deleteNurseryInformation(NurseryInformation nurseryInformation) {
         nurseryInformationRepository.delete(nurseryInformation);
     }
 
-    public Date calculateFromToTimes(Date timestamp, Date originTime){
+    public Date calculateFromToTimes(Date timestamp, Date originTime) {
         int hours, mins;
         long milliDate;
         Date date = new Date();
@@ -73,8 +73,8 @@ public class NurseryInformationService {
         hours = cal.get(Calendar.HOUR_OF_DAY);
         mins = cal.get(Calendar.MINUTE);
 
-        hours = hours*3600*1000;
-        mins = mins*60*1000;
+        hours = hours * 3600 * 1000;
+        mins = mins * 60 * 1000;
 
 
         milliDate = originTime.getTime();
@@ -84,7 +84,7 @@ public class NurseryInformationService {
         return date;
     }
 
-	public NurseryInformation nurseryInformationByOriginDate(Date date) {
-		return nurseryInformationRepository.getInformationByOriginDate(date);
-	}
+    public NurseryInformation nurseryInformationByOriginDate(Date date) {
+        return nurseryInformationRepository.getInformationByOriginDate(date);
+    }
 }

@@ -1,4 +1,5 @@
 package at.qe.sepm.asn_app.services;
+
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class AuditLogService {
     @Autowired
     private AuditLogRepository auditLogRepository;
 
-    public AuditLog saveAuditLog(AuditLog log){
+    public AuditLog saveAuditLog(AuditLog log) {
         return auditLogRepository.save(log);
     }
 

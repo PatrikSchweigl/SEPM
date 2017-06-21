@@ -28,24 +28,6 @@ public class InitializeUserData {
         userData.setUserRole(UserRole.PARENT);
         return userData;
     }
-    
-    
-    public static UserData initialize2() {
-        UserData userData = new UserData();
-        userData.setBirthday("07/03/1985");
-        userData.setEmail("UserDataEmail2@google.com");
-        userData.setFirstName("UserDataFirstName2");
-        userData.setLastName("UserDataLastName2");
-        userData.setImgName("UserDataImgName2");
-        userData.setLocation("UserDataLocation2");
-        userData.setNotification(true);
-        userData.setPassword("passwd");
-        userData.setPhoneNumber("9876543210");
-        userData.setPostcode("6020");
-        userData.setReligion(Religion.HINDUISMUS);
-        userData.setStreetName("UserDataStreetName2");
-        userData.setUsername("UserDataUsername2");
-        userData.setUserRole(UserRole.EMPLOYEE);
-        return userData;
-    }
+
+
 }

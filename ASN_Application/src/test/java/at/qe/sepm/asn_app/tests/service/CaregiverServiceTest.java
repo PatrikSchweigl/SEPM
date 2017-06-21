@@ -204,7 +204,6 @@ public class CaregiverServiceTest {
     public void testFurtherMethods() {
         // Print all information with toString();
         assertNotEquals("", caregiver.toString());
-        System.out.println(caregiver.toString());
 
 
         // Test isNew()

@@ -22,8 +22,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SessionInfoBean sessionInfoBean;
     private String email;
 
     /**
@@ -33,7 +31,7 @@ public class UserController {
     private Collection<UserData> users;
 
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setUsers(userService.getAllAdmin());
     }
 
@@ -71,9 +69,9 @@ public class UserController {
     public UserData getUserData() {
         return userData;
     }
-    
-    public void generatePassword(){
-    	userService.generatePassword(email);
+
+    public void generatePassword() {
+        userService.generatePassword(email);
     }
 
 
@@ -85,17 +83,6 @@ public class UserController {
     }
 
     /**
-     * Action to save the currently displayed userData.
-     */
-    public void doSaveUser() {
-        userData = this.userService.saveUser(userData);
-    }
-
-    public void doChangeUser() {
-        userData = this.userService.changeData(userData);
-    }
-
-    /**
      * Action to delete the currently displayed userData.
      */
     public void doDeleteUser() {
@@ -103,12 +90,12 @@ public class UserController {
         userData = null;
     }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }

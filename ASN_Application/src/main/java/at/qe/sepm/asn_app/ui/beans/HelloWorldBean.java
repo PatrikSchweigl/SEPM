@@ -12,12 +12,4 @@ import org.springframework.stereotype.Component;
 @Scope("request")
 public class HelloWorldBean {
 
-    /**
-     * Returns a hello-world-string.
-     *
-     * @return hello-world-string
-     */
-    public String getHello() {
-        return "Hello from a JSF-managed bean!";
-    }
 }

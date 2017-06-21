@@ -107,7 +107,6 @@ public class LunchServiceTest {
 
         // Test toString()
         assertNotEquals("", lunch.toString());
-        System.out.println(lunch.toString());
     }
 
     @After

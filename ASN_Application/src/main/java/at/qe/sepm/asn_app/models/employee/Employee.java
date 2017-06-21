@@ -10,11 +10,12 @@ import javax.persistence.*;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 17.03.17.
- *
+ * <p>
  * Employee inherits from UserData in which all basic information about a
  * person is stored. The class Employee itself gives further information
  * like religion, the phone number, the family status, if the employee is
  * a pedagogue or a trainee and if the employee is currently active or not.
+ *
  * @see FamilyStatus
  * @see Religion
  * @see Status
@@ -35,17 +36,7 @@ public class Employee extends UserData {
     private WorkRole workRole;
 
 
-    public Employee(){//required for jpa repository
-    }
-
-    public Employee(String username, String password, String firstName, String lastName,
-                    String location, String streetName, String postcode, String birthday,
-                    String email, UserRole userRole, FamilyStatus familyStatus, Status workingState,
-                    WorkRole workRole) {
-        super(username, password, firstName, lastName, location, streetName, postcode, birthday, email, userRole);
-        this.familyStatus = familyStatus;
-        this.workingState = workingState;
-        this.workRole = workRole;
+    public Employee() {//required for jpa repository
     }
 
     /**
@@ -61,7 +52,6 @@ public class Employee extends UserData {
         this.workingState = workingState;
         this.workRole = workRole;
     }
-
 
 
     public FamilyStatus getFamilyStatus() {
@@ -89,10 +79,9 @@ public class Employee extends UserData {
     }
 
 
-
-
     /**
      * This method doesn't check for every attribute because some are unnecessary to check (e.g. username).
+     *
      * @param obj the object to compare
      * @return true iff the current instance of Employee and the parameter object are the same Employee.
      */
@@ -100,8 +89,7 @@ public class Employee extends UserData {
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof Employee)) {
+        } else if (!(obj instanceof Employee)) {
             return false;
         }
 
@@ -114,8 +102,7 @@ public class Employee extends UserData {
                 this.getPostcode().equals(other.getPostcode()) &&
                 this.getStreetName().equals(other.getStreetName())) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

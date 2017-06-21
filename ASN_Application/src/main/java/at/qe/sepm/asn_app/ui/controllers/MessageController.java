@@ -26,7 +26,7 @@ import javax.faces.context.FacesContext;
 @Component
 //@Scope("view")
 @Scope("application")
-public class MessageController extends Thread{
+public class MessageController extends Thread {
 
     @Autowired
     private MessageService messageService;
@@ -36,17 +36,18 @@ public class MessageController extends Thread{
     private UserService userService;
     private Message message;
     private Collection<Message> messages;
-    
+
     public Message getMessage() {
         return message;
     }
 
     @PostConstruct
-    public void init(){
-    	message = new Message();
+    public void init() {
+        message = new Message();
     }
+
     @PostConstruct
-    public void initList(){
+    public void initList() {
         setMessages(messageService.getAllMessages());
     }
 
@@ -58,6 +59,7 @@ public class MessageController extends Thread{
         this.message = message;
         doReloadMessage();
     }
+
     public void setMessage2(Message message) {
         this.message = message;
     }
@@ -66,8 +68,8 @@ public class MessageController extends Thread{
         message = messageService.loadMessage(message.getId());
     }
 
-    public Message doSaveMessage(){
-        if(message == null){
+    public Message doSaveMessage() {
+        if (message == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Leere Nachrichten können nicht gesendet werden!", null));
         } else {
             message = messageService.saveMessage(message);
@@ -84,22 +86,22 @@ public class MessageController extends Thread{
     }
 
     @Override
-    public void run(){
+    public void run() {
         Iterator<UserData> iterator = userService.getParentsByNotification().iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             UserData user = iterator.next();
             UserData sender = userService.loadUser(message.getUsername());
-            mailService.sendEmail(user.getEmail(),"Care4Fun - Neuigkeiten", "Guten Tag "+ user.getFirstName()+" "+user.getLastName()+
-                    "!\n\nEs gibt eine neue Nachricht von "+sender.getFirstName() +" "+sender.getLastName()+ " auf unserer Pinnwand für Sie.\n\n" +
-                  "Schönen Tag wünscht das Kinderkrippen-Team!");
+            mailService.sendEmail(user.getEmail(), "Care4Fun - Neuigkeiten", "Guten Tag " + user.getFirstName() + " " + user.getLastName() +
+                    "!\n\nEs gibt eine neue Nachricht von " + sender.getFirstName() + " " + sender.getLastName() + " auf unserer Pinnwand für Sie.\n\n" +
+                    "Schönen Tag wünscht das Kinderkrippen-Team!");
 
         }
     }
 
-    public Collection<Message> getMessages(){
+    public Collection<Message> getMessages() {
         return messages;
     }
-    
+
     public void doDeleteMessage(Message message) {
         messageService.deleteMessage(message);
         initList();

@@ -28,7 +28,7 @@ import java.util.HashSet;
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>
  * on 08.05.17.
- *
+ * <p>
  * The main method of ChildConstraint checkConstraints(Child child) only returns true iff
  * none of the following constraints is violated:
  * - The child is between 1/2 and 3 years old.
@@ -36,6 +36,7 @@ import java.util.HashSet;
  * - The parents of the child are not the same person.
  * - The child is no sibling of itself.
  * - The child does not have the same sibling twice or more.
+ *
  * @see Parent
  * @see Sibling
  * @see BirthdayConstraintException
@@ -46,45 +47,26 @@ import java.util.HashSet;
 @Scope("application")
 public class ChildConstraints {
 
-    /**
-     * The main method of ChildConstraints. Starting from this method all
-     * constraints get validated.
-     * @return <code>true</code> iff no constraints are violated; <code>false</code> otherwise
-     */
-    public static boolean checkConstraints(Child child) throws BirthdayConstraintException, ParentConstraintException, SiblingConstraintException {
-        if(!checkBirthdayConstraints(child)) {
-            return false;   // Returning false here makes no sense since we throw an exception in the method.
-        }
-        else if(!checkParentsConstraints(child)) {
-            return false;
-        }
-        else if(!checkSiblingsConstraints(child)) {
-            return false;
-        }
-        return true;
-    }
-
 
     /**
      * Checks for the following constraints:
      * - A child may not be younger than 1/2 year and not older than 3 years.
+     *
      * @return <code>true</code> iff a child is between the age of 1/2 and 3 years.
      */
     public static boolean checkBirthdayConstraints(Child child) throws BirthdayConstraintException {
         long birthday = BirthdayParser.parseBirthdayToLong(child.getBirthday());
         long dateNow = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-        int ageDays = (int)((dateNow-birthday)/60/60/24);
-        System.out.println("date now: " + dateNow);
-        System.out.println("birthday: " + birthday);
-        System.out.println("age in days: " + ageDays);
+        int ageDays = (int) ((dateNow - birthday) / 60 / 60 / 24);
+
 
         // Check if the child is younger than 0.5 year.
-        if (ageDays < 0.5*365) {
+        if (ageDays < 0.5 * 365) {
             return false;
         }
 
         // Check if the child is older than 3 years.
-        if (ageDays > (3*365)) {
+        if (ageDays > (3 * 365)) {
             return false;
         }
 
@@ -96,6 +78,7 @@ public class ChildConstraints {
      * Checks for the following constraints:
      * - At least one parent must be registered in the nursery.
      * - Parents may not be the same person.
+     *
      * @return <code>true</code> iff no constraints regarding parents are violated; <code>false</code> otherwise
      */
     public static boolean checkParentsConstraints(Child child) throws ParentConstraintException {
@@ -119,19 +102,20 @@ public class ChildConstraints {
      * Check whether or not one of the following constraints is violated:
      * - A child may not be a sibling of itself.
      * - A child can not have the same sibling twice or more.
+     *
      * @return <code>true</code> iff no constraints are violated.
      */
     public static boolean checkSiblingsConstraints(Child child) throws SiblingConstraintException {
         HashSet<Sibling> setSiblings = (HashSet) child.getSiblings();
 
-        for(Sibling s : setSiblings) {
-            System.out.println(s);
+        for (Sibling s : setSiblings) {
+
         }
 
         // Check if the child is a sibling of itself.
         for (Sibling s : setSiblings) {
-            System.out.println(s.getFirstName());
-            if(s.equals(new Sibling(child.getFirstName(), child.getLastName(), child.getBirthday()))) {
+
+            if (s.equals(new Sibling(child.getFirstName(), child.getLastName(), child.getBirthday()))) {
                 return false;
             }
         }

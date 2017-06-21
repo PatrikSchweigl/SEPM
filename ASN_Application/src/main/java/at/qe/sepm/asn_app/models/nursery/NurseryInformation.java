@@ -1,20 +1,17 @@
 package at.qe.sepm.asn_app.models.nursery;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 20.03.2017
- *
+ * <p>
  * NurseryInformation stores the bring- and pick up times for children in the nursery.
  * It also stores an integer which specifies the maximum occupancy of children of the nursery.
  */
@@ -44,21 +41,8 @@ public class NurseryInformation implements Persistable<Long> {
     private Date originDate;
 
 
-    public NurseryInformation(Date bringStart, Date bringEnd,
-                              Date pickUpStart, Date pickUpEnd,
-                              int maxOccupancy, int currentOccupancy,
-                              Date todaysDate, Date originDate) {
-        this.bringStart = bringStart;
-        this.bringEnd = bringEnd;
-        this.pickUpStart = pickUpStart;
-        this.pickUpEnd = pickUpEnd;
-        this.maxOccupancy = maxOccupancy;
-        this.currentOccupancy = currentOccupancy;
-        this.todaysDate = todaysDate;
-        this.originDate = originDate;
+    public NurseryInformation() {
     }
-
-    public NurseryInformation(){}
 
     public Date getBringStart() {
         return bringStart;
@@ -120,9 +104,9 @@ public class NurseryInformation implements Persistable<Long> {
     public Date getOriginDate() {
         return originDate;
     }
-    
-    public String getFormattedOriginDate(){
-    	return new SimpleDateFormat("dd-MM-yyyy").format(originDate);
+
+    public String getFormattedOriginDate() {
+        return new SimpleDateFormat("dd-MM-yyyy").format(originDate);
     }
 
     public void setOriginDate(Date originDate) {
@@ -145,8 +129,7 @@ public class NurseryInformation implements Persistable<Long> {
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
-        }
-        else if(!(obj instanceof NurseryInformation)) {
+        } else if (!(obj instanceof NurseryInformation)) {
             return false;
         }
 
@@ -173,8 +156,7 @@ public class NurseryInformation implements Persistable<Long> {
 
                 this.maxOccupancy == other.maxOccupancy) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -182,7 +164,7 @@ public class NurseryInformation implements Persistable<Long> {
 
     @Override
     public String toString() {
-        return  "OriginDate: " + originDate + "\n" +
+        return "OriginDate: " + originDate + "\n" +
                 "TodaysDate: " + todaysDate + "\n" +
                 "BringStart: " + bringStart + "\n" +
                 "BringEnd: " + bringEnd + "\n" +
@@ -191,39 +173,17 @@ public class NurseryInformation implements Persistable<Long> {
                 "MaxOccupancy: " + maxOccupancy;
     }
 
-    public String getBringDuration(){
-        Calendar calb = Calendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
-        calb.setTime(this.getBringStart());
-        int hb = calb.get(Calendar.HOUR_OF_DAY);
-        int minb = calb.get(Calendar.MINUTE);
-        calb.setTime(this.getBringEnd());
-        int he = calb.get(Calendar.HOUR_OF_DAY);
-        int mine = calb.get(Calendar.MINUTE);
-
-        return hb +":" +minb + " Uhr - " + he +":" + mine +" Uhr";
-    }
-    public String getPickUpDuration(){
-        Calendar calp = Calendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
-        calp.setTime(this.getPickUpStart());
-        int hb = calp.get(Calendar.HOUR_OF_DAY);
-        int minb = calp.get(Calendar.MINUTE);
-        calp.setTime(this.getPickUpEnd());
-        int he = calp.get(Calendar.HOUR_OF_DAY);
-        int mine = calp.get(Calendar.MINUTE);
-
-        return hb +":" +minb + " Uhr - " + he +":" + mine +" Uhr";
-    }
-    
-    public String getBringDurationNew(){
-    	String start = new SimpleDateFormat("H:mm").format(this.bringStart);
-    	String end = new SimpleDateFormat("H:mm").format(this.bringEnd);
+    public String getBringDurationNew() {
+        String start = new SimpleDateFormat("H:mm").format(this.bringStart);
+        String end = new SimpleDateFormat("H:mm").format(this.bringEnd);
 
 
         return start + " - " + end + " Uhr";
     }
-    public String getPickUpDurationNew(){
-    	String start = new SimpleDateFormat("H:mm").format(this.pickUpStart);
-    	String end = new SimpleDateFormat("H:mm").format(this.pickUpEnd);
+
+    public String getPickUpDurationNew() {
+        String start = new SimpleDateFormat("H:mm").format(this.pickUpStart);
+        String end = new SimpleDateFormat("H:mm").format(this.pickUpEnd);
 
 
         return start + " - " + end + " Uhr";

@@ -15,11 +15,12 @@ import java.util.Set;
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
  * on 14.05.2017
- *
+ * <p>
  * The basic informations about a parent are stored in the superclass UserData.
  * Parent itself has some additional attributes like the children of the parent
  * a profile image, the family status and if the parent is an active user or not.
  * A unique attribute is tasks which holds a set of all tasks that have been assigned to a parent.
+ *
  * @see Child
  * @see FamilyStatus
  * @see Task
@@ -42,8 +43,8 @@ public class Parent extends UserData {
     private boolean status;
 
 
-
-    public Parent(){}
+    public Parent() {
+    }
 
 
     @JsonIgnore
@@ -80,10 +81,9 @@ public class Parent extends UserData {
     }
 
 
-
-
     /**
      * This method doesn't check for equality of every object because it is not needed.
+     *
      * @param other The object to be compared. If obj is not an instance of Parent then false is returned immediately.
      * @return <code>true</code> iff the current instance of Parent and the parameter are the same; <code>false</code> otherwise.
      */
@@ -119,9 +119,9 @@ public class Parent extends UserData {
                 : super.hashCode();
     }
 
-    public String getChildrenNames(){
+    public String getChildrenNames() {
         String s = "";
-        for(Child c: children){
+        for (Child c : children) {
             s += c.getFirstName() + " " + c.getLastName() + ", ";
         }
         return s;

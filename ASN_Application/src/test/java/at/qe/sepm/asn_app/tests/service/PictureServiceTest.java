@@ -116,7 +116,6 @@ public class PictureServiceTest {
         // Test toString()
         assertNotNull(picture.toString());
         assertNotEquals("", picture.toString());
-        System.out.println(picture.toString());
 
         // Test isNew()
         picture = new Picture();

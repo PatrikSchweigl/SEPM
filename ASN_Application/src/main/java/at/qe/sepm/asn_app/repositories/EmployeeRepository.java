@@ -9,5 +9,5 @@ import javax.transaction.Transactional;
  * on 20.03.2017
  */
 @Transactional
-public interface EmployeeRepository extends UserBaseRepository<Employee>, AbstractRepository<Employee,Long>{
+public interface EmployeeRepository extends UserBaseRepository<Employee>, AbstractRepository<Employee, Long> {
 }

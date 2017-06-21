@@ -67,10 +67,6 @@ public class CaregiverController {
         this.caregiver = caregiverEdit;
     }
 
-    public Collection<Caregiver> getCaregiverByChildId(Long id) {
-        return caregiverService.getAllCaregiversByChildId(id);
-    }
-
     public Collection<Caregiver> getAllCaregiversByEligibleFalse() {
         return caregiverService.getAllCaregiversByEligibleFalse();
     }
@@ -104,7 +100,7 @@ public class CaregiverController {
         if (!StringUtils.isNumeric(caregiver.getPhoneNumber())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Telefonnummer enthält Buchstaben!", null));
         } else {
-        	caregiver.setImgName("emptypicture.png");
+            caregiver.setImgName("emptypicture.png");
             caregiver = caregiverService.saveCaregiver(caregiver);
             caregiverReturn = caregiver;
             initList();
@@ -141,12 +137,12 @@ public class CaregiverController {
         caregiverEdit.setEligible(true);
         caregiverEdit = caregiverService.saveCaregiver(caregiverEdit);
 
-        mailService.sendEmail(caregiverEdit.getChild().getPrimaryParent().getEmail(),"Care4Fun - Bestätigung Bezugsperson",
+        mailService.sendEmail(caregiverEdit.getChild().getPrimaryParent().getEmail(), "Care4Fun - Bestätigung Bezugsperson",
                 "Guten Tag " + caregiverEdit.getChild().getPrimaryParent().getFirstName() + " " + caregiverEdit.getChild().getPrimaryParent().getFirstName() + "!\n\n" +
-                "Soeben wurde die von Ihnen hinzugefügte Bezugsperson "+caregiverEdit.getFullName()+" als bestätigt markiert.\n\n" +
-                "Bitte kontrollieren Sie, ob im Bearbeitungsfenster für diese Person bei 'Bestätigt' JA eingetragen wurde.\n" +
-                "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
-                "Liebe Grüße wünscht das Kinderkrippen-Team!");
+                        "Soeben wurde die von Ihnen hinzugefügte Bezugsperson " + caregiverEdit.getFullName() + " als bestätigt markiert.\n\n" +
+                        "Bitte kontrollieren Sie, ob im Bearbeitungsfenster für diese Person bei 'Bestätigt' JA eingetragen wurde.\n" +
+                        "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
+                        "Liebe Grüße wünscht das Kinderkrippen-Team!");
     }
 
     public void doSaveCaregiverEdit() {

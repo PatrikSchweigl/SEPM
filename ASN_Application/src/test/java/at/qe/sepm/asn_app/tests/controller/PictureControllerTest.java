@@ -37,8 +37,6 @@ import static org.junit.Assert.assertTrue;
 public class PictureControllerTest {
 
     @Autowired
-    private PictureController pictureController;
-    @Autowired
     private PictureService pictureService;
     @Autowired
     private UserService userService;

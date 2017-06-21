@@ -43,8 +43,8 @@ import at.qe.sepm.asn_app.ui.controllers.ChildController;
 @Component
 @Scope("view")
 public class FileBean {
-	@Autowired
-	private PictureService pictureService;
+    @Autowired
+    private PictureService pictureService;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -55,39 +55,20 @@ public class FileBean {
     private ChildService childService;
     @Autowired
     private AuditLogService auditLogService;
-	private Picture picture;
-	private String selectedPicture;
-    private UploadedFile file;
+    private String selectedPicture;
     @Autowired
-	private CaregiverService caregiverService;
-	public FileBean(){}
-	
-	
-    public Picture getPicture(){
-    	return picture;
+    private CaregiverService caregiverService;
+
+    public FileBean() {
     }
-    
-    public void setPicture(Picture picture){
-    	this.picture = picture;
-    }
-    
-    
-    public UploadedFile getFile() {
-        return file;
-    }
- 
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
-	
-	public void handleFileUpload(FileUploadEvent event) throws IOException {
-		UploadedFile file = event.getFile();
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+        UploadedFile file = event.getFile();
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogService.saveAuditLog(log);
-       
-        System.out.println("Working Directory = " +
-                System.getProperty("user.dir"));
-		
+
+
         Path folder = Paths.get("src/main/webapp/resources/pictures/gallery");
         String filename = FilenameUtils.getBaseName(file.getFileName());
         String extension = FilenameUtils.getExtension(file.getFileName());
@@ -96,13 +77,13 @@ public class FileBean {
 
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println("Uploaded file successfully saved in " + newFile);
-        
-	}
-	
-	public void handleFileUploadProfilePicture(FileUploadEvent event) throws IOException {
-		UploadedFile file = event.getFile();
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PROFILE_PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+
+    }
+
+    public void handleFileUploadProfilePicture(FileUploadEvent event) throws IOException {
+        UploadedFile file = event.getFile();
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "PROFILE_PICTURE UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogService.saveAuditLog(log);
 
         Path folder = Paths.get("src/main/webapp/resources/pictures/profile_pictures");
@@ -114,13 +95,13 @@ public class FileBean {
         userService.saveUser(user);
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println("Uploaded file successfully saved in " + newFile);
-        
-	}
-	
-	public void handleFileUploadProfilePictureChildren(FileUploadEvent event) throws IOException {
-		UploadedFile file = event.getFile();
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PROFILE_PICTURE_CHILD UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+
+    }
+
+    public void handleFileUploadProfilePictureChildren(FileUploadEvent event) throws IOException {
+        UploadedFile file = event.getFile();
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "PROFILE_PICTURE_CHILD UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogService.saveAuditLog(log);
 
         Path folder = Paths.get("src/main/webapp/resources/pictures/profile_pictures_children");
@@ -132,13 +113,13 @@ public class FileBean {
         childService.saveChild(child);
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println("Uploaded file successfully saved in " + newFile);
-        
-	}
-	
-	public void handleFileUploadProfilePictureCaregiver(FileUploadEvent event) throws IOException {
-		UploadedFile file = event.getFile();
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),"PROFILE_PICTURE_CAREGIVER UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+
+
+    }
+
+    public void handleFileUploadProfilePictureCaregiver(FileUploadEvent event) throws IOException {
+        UploadedFile file = event.getFile();
+        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "PROFILE_PICTURE_CAREGIVER UPLOADED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
         auditLogService.saveAuditLog(log);
 
         Path folder = Paths.get("src/main/webapp/resources/pictures/profile_pictures_caregiver");
@@ -146,30 +127,30 @@ public class FileBean {
         String extension = FilenameUtils.getExtension(file.getFileName());
         Path newFile = Files.createTempFile(folder, filename, "." + extension);
         Map<String, Object> requestAttributes = event.getComponent().getAttributes();
-        Long personId = (Long)requestAttributes.get("caregiverId");
+        Long personId = (Long) requestAttributes.get("caregiverId");
         Caregiver caregiver = caregiverService.loadCaregiver(personId);
         caregiver.setImgName(newFile.getFileName().toString());
         caregiverService.saveCaregiver(caregiver);
         InputStream input = file.getInputstream();
         Files.copy(input, newFile, StandardCopyOption.REPLACE_EXISTING);
-        System.out.println("Uploaded file successfully saved in " + newFile);
-        
-	}
-	
+
+
+    }
+
     public UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return userRepository.findFirstByUsername(auth.getName());
+        return userRepository.findFirstByUsername(auth.getName());
     }
 
 
-	public String getSelectedPicture() {
-		return selectedPicture;
-	}
+    public String getSelectedPicture() {
+        return selectedPicture;
+    }
 
 
-	public void setSelectedPicture(String selectedPicture) {
-		this.selectedPicture = selectedPicture;
-	}
+    public void setSelectedPicture(String selectedPicture) {
+        this.selectedPicture = selectedPicture;
+    }
 
 
 }

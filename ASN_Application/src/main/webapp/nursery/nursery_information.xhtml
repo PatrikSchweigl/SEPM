@@ -27,7 +27,7 @@
                                                  value="#{nurseryInformationController.nurseryInformations}"
                                                  paginator="true" rows="10" paginatorPosition="bottom"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate="10,25,50" >
+                                                 rowsPerPageTemplate="10,25,50">
 
                                         <f:facet name="header">
                                             <p:outputPanel>
@@ -45,9 +45,9 @@
                                             <h:outputText value="#{info.pickUpDurationNew}"/>
                                         </p:column>
                                         <p:column headerText="Max. Belegung"
-                                        filterBy="#{info.maxOccupancy}"
-                                        filterStyle="display: none;"
-                                        sortBy="#{info.maxOccupancy}">
+                                                  filterBy="#{info.maxOccupancy}"
+                                                  filterStyle="display: none;"
+                                                  sortBy="#{info.maxOccupancy}">
                                             <h:outputText value="#{info.maxOccupancy}"/>
                                         </p:column>
                                         <p:column headerText="Datum"
@@ -59,18 +59,18 @@
                                     </p:dataTable>
 
 
-
-                                <p:dialog header="Allgemeine Information erstellen" id="nurseryInfo" closeOnEscape="true"
-                                          widgetVar="nurseryInformationDialog"
-                                          modal="true" showEffect="fade"
-                                          hideEffect="fade" resizable="false">
-                                    <p:messages id="messagesInfo" autoUpdate="true"/>
+                                    <p:dialog header="Allgemeine Information erstellen" id="nurseryInfo"
+                                              closeOnEscape="true"
+                                              widgetVar="nurseryInformationDialog"
+                                              modal="true" showEffect="fade"
+                                              hideEffect="fade" resizable="false">
+                                        <p:messages id="messagesInfo" autoUpdate="true"/>
 
                                         <h:outputLabel id="information">
                                             <h:panelGrid columns="2">
                                                 <h:outputLabel for="maxOcc" value="Max. Belegung:"/>
                                                 <p:inputText id="maxOcc" required="true"
-                                                                 requiredMessage="Max. Belegung erforderlich!"
+                                                             requiredMessage="Max. Belegung erforderlich!"
                                                              value="#{nurseryInformationController.nurseryInformation.maxOccupancy}"/>
                                                 <h:outputLabel for="originDate" value="Datum:"/>
                                                 <p:calendar id="originDate"
@@ -78,7 +78,7 @@
                                                             required="true"
                                                             requiredMessage="Datum erforderlich!"
                                                             timeZone="Europe/Vienna"
-                                                locale="de"/>
+                                                            locale="de"/>
                                             </h:panelGrid>
                                             <p:separator/>
                                             <h:panelGrid columns="1">
@@ -128,12 +128,12 @@
                                             <h:panelGrid columns="3">
                                                 <p:commandButton value="Speichern"
                                                                  action="#{nurseryInformationController.doSaveNurseryInformation()}"
-                                                update=":infoForm:infoTable"/>
+                                                                 update=":infoForm:infoTable"/>
                                                 <p:commandButton value="Abbrechen"
                                                                  onclick="PF('nurseryInformationDialog').hide()"/>
                                             </h:panelGrid>
                                         </h:outputLabel>
-                                </p:dialog>
+                                    </p:dialog>
                                 </h:form>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ import javax.faces.convert.FacesConverter;
  * on 15.06.2017
  */
 @Service
-public class ChildConverter implements Converter{
+public class ChildConverter implements Converter {
 
     @Autowired
     private ChildService childService;
@@ -33,9 +33,8 @@ public class ChildConverter implements Converter{
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object obj) {
         if (obj instanceof Child) {
-            return ((Child)obj).getId().toString();
-        }
-        else {
+            return ((Child) obj).getId().toString();
+        } else {
             return "";
         }
     }

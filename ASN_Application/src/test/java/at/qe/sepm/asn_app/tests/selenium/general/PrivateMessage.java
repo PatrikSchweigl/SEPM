@@ -4,7 +4,9 @@ import java.util.concurrent.TimeUnit;
 
 import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
 import org.junit.*;
+
 import static org.junit.Assert.*;
+
 import org.openqa.selenium.*;
 
 
@@ -18,7 +20,7 @@ public class PrivateMessage {
 
 
     @Before
-        public void setUp() throws Exception {
+    public void setUp() throws Exception {
         driver = InitializeSelenium.initialize();
         baseUrl = InitializeSelenium.BASE_URL;
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

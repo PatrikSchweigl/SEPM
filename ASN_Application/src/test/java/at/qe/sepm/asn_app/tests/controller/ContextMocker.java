@@ -16,7 +16,8 @@ public abstract class ContextMocker extends FacesContext {
     private static final Release RELEASE = new Release();
 
 
-    private ContextMocker() {}
+    private ContextMocker() {
+    }
 
 
     private static class Release implements Answer<Void> {

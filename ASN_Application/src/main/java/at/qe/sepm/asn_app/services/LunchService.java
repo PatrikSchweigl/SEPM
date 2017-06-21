@@ -1,4 +1,5 @@
 package at.qe.sepm.asn_app.services;
+
 import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
@@ -25,19 +26,22 @@ import java.util.List;
 //@Scope("view")
 @Scope("application")
 public class LunchService {
-    @Autowired private LunchRepository lunchRepository;
-    @Autowired private AuditLogRepository auditLogRepository;
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private LunchRepository lunchRepository;
+    @Autowired
+    private AuditLogRepository auditLogRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     /*
     public List<Lunch> getLunchByDate(String date){
         return lunchRepository.getLunchByDate(date);
     } */
-    public List<Lunch> getLunchByDate(Date date){
+    public List<Lunch> getLunchByDate(Date date) {
         return lunchRepository.getLunchByDate(date);
     }
 
-    public List<Lunch> findAll(){
+    public List<Lunch> findAll() {
         return lunchRepository.findAll();
     }
 
@@ -48,14 +52,15 @@ public class LunchService {
         return lunch;
     }
 
-    public Lunch loadLunch(Long id){
+    public Lunch loadLunch(Long id) {
         return lunchRepository.findOne(id);
     }
 
-    public List<Lunch> getLunchInTimeWindowIE(Date start, Date end){
+    public List<Lunch> getLunchInTimeWindowIE(Date start, Date end) {
         return lunchRepository.getLunchInTimeWindowIE(start, end);
     }
-    public List<Lunch> getLunchInTimeWindowII(Date start, Date end){
+
+    public List<Lunch> getLunchInTimeWindowII(Date start, Date end) {
         return lunchRepository.getLunchInTimeWindowII(start, end);
     }
 
@@ -64,6 +69,7 @@ public class LunchService {
         auditLogRepository.save(log);
         lunchRepository.delete(lunch);
     }
+
     private UserData getAuthenticatedUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findFirstByUsername(auth.getName());

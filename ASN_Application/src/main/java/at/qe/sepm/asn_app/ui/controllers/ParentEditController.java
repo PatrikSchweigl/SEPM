@@ -1,8 +1,12 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
+import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.Registration;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
@@ -13,6 +17,8 @@ import org.springframework.transaction.TransactionSystemException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
@@ -28,6 +34,10 @@ public class ParentEditController {
     @Autowired
     private ParentController parentController;
     @Autowired
+    private ChildService childService;
+    @Autowired
+    private RegistrationService registrationService;
+    @Autowired
     private MailService mailService;
 
     private Parent parent;
@@ -40,11 +50,12 @@ public class ParentEditController {
         this.parent = parent;
         doReloadParent();
     }
+
     public void setParent2(Parent parent) {
         this.parent = parent;
     }
 
-    public void doReloadParent(){
+    public void doReloadParent() {
         parent = parentService.loadParent(parent.getUsername());
     }
 
@@ -74,17 +85,25 @@ public class ParentEditController {
         }
     }
 
-    public void doDeleteParent(){
+    public void doDeleteParent() {
+        Collection<Child> children = childService.getChildrenByParentUsername(parent.getUsername());
+
+        for (Child child : children) {
+            Collection<Registration> registrations = registrationService.getAllRegistrationsByChild(child.getId());
+            for (Registration r : registrations) {
+                registrationService.deleteRegistration(r);
+            }
+        }
         parentService.deleteParent(parent);
         parent = null;
         parentController.initList();
     }
 
-    public void doResetPassword(){
+    public void doResetPassword() {
         mailService.sendEmail(parent.getEmail(), "Care4Fun - Password wurde geändert",
                 "Guten Tag " + parent.getFirstName() + " " + parent.getLastName() + "\n\n" +
                         "Soeben wurde Ihr Passwort zurückgesetzt.\n\n" +
-                        "Ihr Benutzername: "+ parent.getUsername() + "\n" +
+                        "Ihr Benutzername: " + parent.getUsername() + "\n" +
                         "Ihr Passwort: passwd" +
                         "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
                         "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +

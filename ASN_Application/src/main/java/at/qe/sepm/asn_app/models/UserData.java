@@ -18,6 +18,7 @@ import org.springframework.data.domain.Persistable;
  * which specifies if a person is an admin, an employee or a parent.
  * A lot of classes make use of UserData, among others Employee and Parent
  * which both inherit from UserData.
+ *
  * @see at.qe.sepm.asn_app.models.employee.Employee
  * @see at.qe.sepm.asn_app.models.referencePerson.Parent
  * @see at.qe.sepm.asn_app.models.nursery.Picture
@@ -65,7 +66,8 @@ public class UserData implements Persistable<String> {
     //@Transient
     private static int usernameCounter = 1;
 
-    public UserData(){}
+    public UserData() {
+    }
 
 
     public UserData(String username, String password, String firstName, String lastName,
@@ -223,14 +225,14 @@ public class UserData implements Persistable<String> {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-	public String getImgName() {
-		return imgName;
-	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
+    }
 
     public boolean isNotification() {
         return notification;
@@ -252,7 +254,7 @@ public class UserData implements Persistable<String> {
 
     @Override
     public String getId() {
-    	return username;
+        return username;
     }
 
 
@@ -266,8 +268,7 @@ public class UserData implements Persistable<String> {
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
-        }
-        else if (!(obj instanceof UserData)) {
+        } else if (!(obj instanceof UserData)) {
             return false;
         }
 
@@ -281,8 +282,7 @@ public class UserData implements Persistable<String> {
                 username.equals(other.username) &&
                 userRole.equals(other.userRole)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
