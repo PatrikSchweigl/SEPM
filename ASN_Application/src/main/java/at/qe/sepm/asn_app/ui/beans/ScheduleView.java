@@ -24,6 +24,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -55,7 +56,7 @@ import at.qe.sepm.asn_app.ui.constraints.ScheduleConstraints;
  */
 
 @Component
-@ViewScoped
+@Scope("view")
 public class ScheduleView implements Serializable {
 
 	/**
@@ -223,6 +224,9 @@ public class ScheduleView implements Serializable {
 
 	public void deleteEventParent() {
 		String desc = event.getTitle();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(event.getStartDate());
+		cal.add(Calendar.HOUR_OF_DAY, 2);
 		Parent p = parentService.loadParent(getAuthenticatedUser().getUsername());
 		Set<Child> c = p.getChildren();
 		System.err.println("WWWWWWWWWWWWWWWWWWWW");
@@ -249,14 +253,25 @@ public class ScheduleView implements Serializable {
 				System.err.println(r.getChild().getFirstName() + " " + child.getFirstName());
 
 				if (child.getId() == r.getChild().getId()) {
+					NurseryInformation nursery = nurseryInformationService.nurseryInformationByOriginDate(event.getStartDate());
+					if(nursery == null){
+						Collection<NurseryInformation> infos = nurseryInformationService.getAllInformation();
+						System.err.println(infos.iterator().next().getOriginDate());
+						System.err.println("KUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+						System.err.println(event.getStartDate());
+					}
+					else{
+					nursery.setCurrentOccupancy(nursery.getCurrentOccupancy() - 1);
+					nurseryInformationService.saveNurseryInformation(nursery);
+					}
 					registrationService.deleteRegistration(r);
 					RequestContext context = RequestContext.getCurrentInstance();
 					context.execute("PF('eventDialog').hide()");
 				}
 			}
 		} else if (desc.contains("Mittagessen:")) {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(new Date());
+			Calendar cal2 = Calendar.getInstance();
+			cal2.setTime(new Date());
 			Child child = null;
 			for (Child ch : c) {
 				System.err.println("compare " + ch.getFirstName() + " MMMMMMMMIT " + desc );
@@ -267,7 +282,7 @@ public class ScheduleView implements Serializable {
 			Collection<Lunch> lun = lunchService.getLunchByDate(event.getStartDate());
 			for (Lunch r : lun) {
 				if (r.getChildrenIds().contains(child.getId())) {
-					if (r.getDate().compareTo(cal.getTime()) <= 0) {
+					if (r.getDate().compareTo(cal2.getTime()) <= 0) {
 						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Die Abmeldefrist für das Essen ist verstrichen", null));
 					} else {

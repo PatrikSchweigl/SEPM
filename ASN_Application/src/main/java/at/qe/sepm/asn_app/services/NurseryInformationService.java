@@ -40,7 +40,7 @@ public class NurseryInformationService {
         Date origin = nurseryInformation.getOriginDate();
         Calendar cal = Calendar.getInstance();
         cal.setTime(origin);
-        cal.add(Calendar.HOUR_OF_DAY, 2);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
         nurseryInformation.setOriginDate(cal.getTime());
         return nurseryInformationRepository.save(nurseryInformation);
     }
