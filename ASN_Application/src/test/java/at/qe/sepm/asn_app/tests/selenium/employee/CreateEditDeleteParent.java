@@ -13,6 +13,10 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
+/**
+ * This test logs in as an employee and creates a new parent.
+ * Then their data is edited and finally the new parent is deleted
+ */
 public class CreateEditDeleteParent {
 	private WebDriver driver;
 	private String baseUrl;

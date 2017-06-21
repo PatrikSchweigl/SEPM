@@ -13,6 +13,10 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ * This test logs in as an employee and creates a new lunch.
+ * Then its data is edited and finally the new lunch is deleted
+ */
 public class CreateEditDeleteLunch {
 	private WebDriver driver;
 	private String baseUrl;
@@ -65,11 +69,7 @@ public class CreateEditDeleteLunch {
 		driver.findElement(By.id("lunchForm:mealEdit")).sendKeys("Ananaskompott");
 		driver.findElement(By.id("lunchForm:costEdit")).clear();
 		driver.findElement(By.id("lunchForm:costEdit")).sendKeys("4.2");
-		Thread.sleep(1000);
 		driver.findElement(By.id("lunchForm:dateEdit")).click();
-		Thread.sleep(1000);
-		WebElement toClear = driver.findElement(By.id("lunchForm:dateEdit"));
-		Thread.sleep(1000);
 		driver.findElement(By.id("lunchForm:dateEdit_input")).clear();
 		Thread.sleep(1000);
 		driver.findElement(By.id("lunchForm:dateEdit_input")).sendKeys("27/07/2017");
