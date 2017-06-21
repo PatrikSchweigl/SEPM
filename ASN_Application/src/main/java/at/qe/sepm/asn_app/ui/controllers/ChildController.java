@@ -91,9 +91,7 @@ public class ChildController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        if (birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth())
-            return true;
-        return false;
+        return birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth();
     }
 
 
