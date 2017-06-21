@@ -22,22 +22,27 @@ public class CreateEditDeleteParent {
 	@Before
 	public void setUp() throws Exception {
 		driver = InitializeSelenium.initialize();
-		baseUrl = "http://localhost:8080/";
+		baseUrl = InitializeSelenium.BASE_URL;
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
 	public void testCreateEditDeleteChild() throws Exception {
+		// login
 		driver.get(baseUrl + "/login.xhtml");
 		driver.findElement(By.id("username")).clear();
 		driver.findElement(By.id("username")).sendKeys("cheng");
 		driver.findElement(By.id("password")).clear();
 		driver.findElement(By.id("password")).sendKeys("passwd");
+		// close password change dialog
 		driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
+		// navigate
 		driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
+		// create parent
 		driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[3]/a/i")).click();
 		driver.findElement(By.id("j_idt118")).click();
 		Thread.sleep(1000);
+		// fill form
 		driver.findElement(By.id("parentForm:usernameCreate")).clear();
 		driver.findElement(By.id("parentForm:usernameCreate")).sendKeys("aaron");
 		driver.findElement(By.id("parentForm:firstnameCreate")).clear();
@@ -55,15 +60,19 @@ public class CreateEditDeleteParent {
 		driver.findElement(By.id("parentForm:emailCreate")).clear();
 		driver.findElement(By.id("parentForm:emailCreate")).sendKeys("mail@domain.com");
 		Thread.sleep(1000);
+		// save
 		driver.findElement(By.id("parentForm:j_idt191")).click();
 		//WebElement element = driver.findElement(By.id("parentForm:j_idt191"));
 		//Actions actions = new Actions(driver);
 		//actions.moveToElement(element).click().perform();
 		Thread.sleep(1000);
+		// sort
 		driver.findElement(By.cssSelector("span.ui-column-title")).click();
 		Thread.sleep(1000);
+		// edit
 		driver.findElement(By.id("parentForm:parentTable:0:j_idt150")).click();
 		Thread.sleep(1000);
+		// fill form
 		driver.findElement(By.id("parentForm:firstnameEdit")).clear();
 		driver.findElement(By.id("parentForm:firstnameEdit")).sendKeys("Aaronus");
 		driver.findElement(By.id("parentForm:lastnameEdit")).clear();
@@ -78,12 +87,15 @@ public class CreateEditDeleteParent {
 		driver.findElement(By.id("parentForm:phonenumberCreate")).sendKeys("987654321");
 		driver.findElement(By.id("parentForm:emailEdit")).clear();
 		driver.findElement(By.id("parentForm:emailEdit")).sendKeys("mail2@server.net");
+		// save
 		driver.findElement(By.id("parentForm:j_idt211")).click();
 		Thread.sleep(1000);
+		// delete
 		driver.findElement(By.id("parentForm:parentTable:0:j_idt151")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("(//button[@id='parentForm:j_idt215'])[2]")).click();
 		Thread.sleep(1000);
+		// logout
 		driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[3]/a/i")).click();
 	}
 

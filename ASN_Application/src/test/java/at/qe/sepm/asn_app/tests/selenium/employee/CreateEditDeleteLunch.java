@@ -2,7 +2,7 @@ package at.qe.sepm.asn_app.tests.selenium.employee;
 
 /**
  * Created by Emanuel Striednig <emanuel.striednig@student.uibk.ac.at>
- * on 20.06.2017.
+ * on 21.06.2017.
  */
 
 import java.util.concurrent.TimeUnit;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
-public class CreateEditDeleteChild {
+public class CreateEditDeleteLunch {
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
@@ -34,58 +34,56 @@ public class CreateEditDeleteChild {
 		driver.findElement(By.id("username")).sendKeys("cheng");
 		driver.findElement(By.id("password")).clear();
 		driver.findElement(By.id("password")).sendKeys("passwd");
-		driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
 		// close password change dialog
-		driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
+		driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
 		// navigate
-		driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[2]/a/i")).click();
-		// create child
-		driver.findElement(By.id("j_idt117")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//div[@id='childForm:parent']/div[3]/table/tbody/tr[3]/td[2]")).click();
+		driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
+		// create lunch
+		driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[6]/a/i")).click();
+		driver.findElement(By.id("j_idt118")).click();
 		Thread.sleep(1000);
 		// fill form
-		driver.findElement(By.id("childForm:firstName")).clear();
-		driver.findElement(By.id("childForm:firstName")).sendKeys("Abuelita");
-		driver.findElement(By.id("childForm:lastName")).clear();
-		driver.findElement(By.id("childForm:lastName")).sendKeys("Dolorosa");
-		driver.findElement(By.id("childForm:birthDay")).clear();
-		driver.findElement(By.id("childForm:birthDay")).sendKeys("01/01/2016");
-		driver.findElement(By.id("childForm:emgNum")).clear();
-		driver.findElement(By.id("childForm:emgNum")).sendKeys("1234656789");
+		driver.findElement(By.id("lunchForm:meal")).clear();
+		driver.findElement(By.id("lunchForm:meal")).sendKeys("Ananas");
+		driver.findElement(By.id("lunchForm:cost")).clear();
+		driver.findElement(By.id("lunchForm:cost")).sendKeys("3.5");
+		driver.findElement(By.id("lunchForm:date_input")).clear();
+		driver.findElement(By.id("lunchForm:date_input")).sendKeys("17/07/2017");
 		// save
-		driver.findElement(By.xpath("//div[@id='childForm:genderCreate']/div[3]/span")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.id("childForm:genderCreate_1")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.id("childForm:j_idt192")).click();
+		driver.findElement(By.id("lunchForm:lunchAddDialog_title")).click();
 		Thread.sleep(1000);
 		// sort
-		driver.findElement(By.xpath("//th[@id='childForm:childTable:j_idt134']/span[2]")).click();
+		driver.findElement(By.id("lunchForm:j_idt156")).click();
 		Thread.sleep(1000);
 		// edit
-		driver.findElement(By.id("childForm:childTable:0:j_idt141")).click();
+		driver.findElement(By.xpath("//th[@id='lunchForm:lunchTable:j_idt135']/span[2]")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("lunchForm:lunchTable:0:j_idt144")).click();
 		Thread.sleep(1000);
 		// fill form
-		driver.findElement(By.id("childForm:firstname")).clear();
-		driver.findElement(By.id("childForm:firstname")).sendKeys("Abuela");
-		driver.findElement(By.id("childForm:lastname")).clear();
-		driver.findElement(By.id("childForm:lastname")).sendKeys("Dolores");
-		driver.findElement(By.id("childForm:birthday")).clear();
+		driver.findElement(By.id("lunchForm:mealEdit")).clear();
+		driver.findElement(By.id("lunchForm:mealEdit")).sendKeys("Ananaskompott");
+		driver.findElement(By.id("lunchForm:costEdit")).clear();
+		driver.findElement(By.id("lunchForm:costEdit")).sendKeys("4.2");
 		Thread.sleep(1000);
-		driver.findElement(By.id("childForm:birthday")).clear();
-		driver.findElement(By.id("childForm:birthday")).sendKeys("03/03/2016");
-		WebElement toClear = driver.findElement(By.id("childForm:emergencyNumber"));
+		driver.findElement(By.id("lunchForm:dateEdit")).click();
+		Thread.sleep(1000);
+		WebElement toClear = driver.findElement(By.id("lunchForm:dateEdit"));
+		Thread.sleep(1000);
 		for(int i = 0; i<15; i++)
 			toClear.sendKeys(Keys.BACK_SPACE);
-		driver.findElement(By.id("childForm:emergencyNumber")).sendKeys("987654321");
+		Thread.sleep(1000);
+		driver.findElement(By.id("lunchForm:dateEdit")).sendKeys("27/07/2017");
 		// save
-		driver.findElement(By.id("childForm:j_idt153")).click();
+		driver.findElement(By.id("lunchForm:j_idt165")).click();
+		Thread.sleep(1000);
+		// sort
+		driver.findElement(By.id("lunchForm:lunchTable:0:j_idt145")).click();
 		Thread.sleep(1000);
 		// delete
-		driver.findElement(By.id("childForm:childTable:0:j_idt142")).click();
+		driver.findElement(By.xpath("(//button[@id='lunchForm:j_idt147'])[2]")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.id("childForm:j_idt195")).click();
+		driver.findElement(By.id("lunchForm:lunchTable:j_idt135")).click();
 		Thread.sleep(1000);
 		// logout
 		driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[3]/a/i")).click();
