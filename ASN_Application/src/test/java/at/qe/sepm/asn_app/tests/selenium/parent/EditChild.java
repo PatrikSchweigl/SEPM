@@ -100,8 +100,12 @@ public class EditChild {
         driver.findElement(By.cssSelector("option[value=\"50\"]")).click();
         Thread.sleep(1000);
 
-        // Click on edit child.
-        driver.findElement(By.id("childForm:childTable:2:j_idt128")).click();
+        // Sort the children in descending order.
+        driver.findElement(By.id("childForm:childTable:j_idt119")).click();
+        Thread.sleep(1000);
+
+        // Click on the edit button of the first child.
+        driver.findElement(By.id("childForm:childTable:0:j_idt128")).click();
         Thread.sleep(1000);
 
         // Overwrite the old data of the child with new one.
