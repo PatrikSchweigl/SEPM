@@ -45,7 +45,9 @@ public class LunchConstraints {
         Iterator<Lunch> iterator = l.iterator();
         while (iterator.hasNext()) {
             Lunch temp = iterator.next();
-            if (temp.getDate().compareTo(lunch.getDate()) == 0)
+            if (temp.getDate().getYear() == lunch.getDate().getYear() &&
+                    temp.getDate().getMonth() == lunch.getDate().getMonth() &&
+                    temp.getDate().getDay() == lunch.getDate().getDay())
                 return true;
         }
         return false;
