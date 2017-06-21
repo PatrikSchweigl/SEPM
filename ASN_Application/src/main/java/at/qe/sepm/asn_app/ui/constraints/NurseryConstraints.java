@@ -30,7 +30,11 @@ public class NurseryConstraints {
         cal.add(Calendar.HOUR_OF_DAY, 2);
         while (iterator.hasNext()) {
             Date date = iterator.next().getOriginDate();
-            if (date.compareTo(cal.getTime()) == 0) {
+            //if (date.compareTo(cal.getTime()) == 0) {
+            Date calTime = cal.getTime();
+            if (date.getYear() == calTime.getYear() &&
+                    date.getMonth() == calTime.getMonth() &&
+                    date.getDay() == calTime.getDay()) {
                 return true;
             }
         }
