@@ -135,16 +135,6 @@
 															message="Sind Sie sich sicher, dass Sie den Benutzer löschen wollen? Es werden auch alle Abhängigkeiten, wie Kinder, etc. gelöscht. Dies lässt sich nicht mehr rückgängig machen."
 															icon="ui-icon-alert" />
 													</p:commandButton>
-													<p:commandButton
-														action="#{parentEditController.doResetPassword}"
-														icon="ui-icon-refresh" title="Passwort zurücksetzen"
-														update=":parentForm" process="@this">
-														<f:setPropertyActionListener value="#{parent}"
-															target="#{parentEditController.parent}" />
-														<p:confirm header="Bestätigung"
-															message="Sind Sie sich sicher, dass Sie dieses Passwort zurücksetzen wollen? Dies lässt sich nicht mehr rückgängig machen."
-															icon="ui-icon-alert" />
-													</p:commandButton>
 												</p:column>
 											</p:dataTable>
 
