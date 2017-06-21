@@ -1,6 +1,8 @@
 package at.qe.sepm.asn_app.tests.selenium;
 
 import at.qe.sepm.asn_app.tests.selenium.admin.AdminTestSuite;
+import at.qe.sepm.asn_app.tests.selenium.employee.EmployeeTestSuite;
+import at.qe.sepm.asn_app.tests.selenium.general.GeneralTestSuite;
 import at.qe.sepm.asn_app.tests.selenium.parent.ParentTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -12,6 +14,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         AdminTestSuite.class,
+        EmployeeTestSuite.class,
+        GeneralTestSuite.class,
         ParentTestSuite.class
 })
 

@@ -100,8 +100,12 @@ public class EditChild {
         driver.findElement(By.cssSelector("option[value=\"50\"]")).click();
         Thread.sleep(1000);
 
-        // Click on edit child.
-        driver.findElement(By.id("childForm:childTable:2:j_idt128")).click();
+        // Sort the children in descending order.
+        driver.findElement(By.id("childForm:childTable:j_idt119")).click();
+        Thread.sleep(1000);
+
+        // Click on the edit button of the first child.
+        driver.findElement(By.id("childForm:childTable:0:j_idt128")).click();
         Thread.sleep(1000);
 
         // Overwrite the old data of the child with new one.
@@ -175,13 +179,22 @@ public class EditChild {
         Thread.sleep(1000);
         //driver.findElement(By.linkText("Kinder")).click();
 
+        // Sort to find the first child (should be the auto-generated child).
+        driver.findElement(By.id("childForm:childTable:j_idt134")).click();
+        Thread.sleep(1000);
+
+        // Click on the first element.
+        driver.findElement(By.id("childForm:childTable:0:j_idt141")).click();
+        Thread.sleep(1000);
+
         // Search for the child in the search bar.
-        driver.findElement(By.id("childForm:childTable:globalFilter")).clear();
+        /*driver.findElement(By.id("childForm:childTable:globxalFilter")).clear();
         driver.findElement(By.id("childForm:childTable:globalFilter")).sendKeys("ChildFirstName");
 
         // Click on the first element (should be only left to assure no errors).
         driver.findElement(By.id("childForm:childTable:0:j_idt141")).click();
         Thread.sleep(1000);
+        */
 
         // Close the show child modal again.
         driver.findElement(By.xpath("//div[@id='childForm:childEditDialog']/div/a/span")).click();
