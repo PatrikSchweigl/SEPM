@@ -1,12 +1,10 @@
 package at.qe.sepm.asn_app.repositories;
 
-import java.util.Collection;
-
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-
-import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
+import java.util.Collection;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>

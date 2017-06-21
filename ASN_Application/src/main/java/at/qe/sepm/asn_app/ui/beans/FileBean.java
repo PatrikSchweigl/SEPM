@@ -1,18 +1,12 @@
 package at.qe.sepm.asn_app.ui.beans;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Date;
-import java.util.Map;
-
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-
+import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.nursery.Picture;
+import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
+import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.*;
 import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
@@ -23,22 +17,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-
-import at.qe.sepm.asn_app.models.UserData;
-import at.qe.sepm.asn_app.models.child.Child;
-import at.qe.sepm.asn_app.models.nursery.AuditLog;
-import at.qe.sepm.asn_app.models.nursery.Picture;
-import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
-import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.repositories.AuditLogRepository;
-import at.qe.sepm.asn_app.repositories.UserRepository;
-import at.qe.sepm.asn_app.services.AuditLogService;
-import at.qe.sepm.asn_app.services.CaregiverService;
-import at.qe.sepm.asn_app.services.ChildService;
-import at.qe.sepm.asn_app.services.ParentService;
-import at.qe.sepm.asn_app.services.PictureService;
-import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.ui.controllers.ChildController;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Date;
+import java.util.Map;
 
 @Component
 @Scope("view")

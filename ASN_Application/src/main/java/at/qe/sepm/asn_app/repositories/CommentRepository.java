@@ -1,11 +1,10 @@
 package at.qe.sepm.asn_app.repositories;
 
-import java.util.Collection;
-
+import at.qe.sepm.asn_app.models.general.Comment;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import at.qe.sepm.asn_app.models.general.Comment;
+import java.util.Collection;
 
 public interface CommentRepository extends AbstractRepository<Comment, Long> {
 

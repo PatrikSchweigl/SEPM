@@ -4,7 +4,6 @@ import at.qe.sepm.asn_app.models.Gender;
 import at.qe.sepm.asn_app.models.employee.WorkRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

@@ -1,15 +1,12 @@
 package at.qe.sepm.asn_app.models;
 
-import java.util.Objects;
-import javax.persistence.*;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-
 import at.qe.sepm.asn_app.models.general.Religion;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.*;
 import org.springframework.data.domain.Persistable;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Entity representing users.

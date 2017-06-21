@@ -7,7 +7,6 @@ import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.services.ParentService;
 import at.qe.sepm.asn_app.services.RegistrationService;
-import at.qe.sepm.asn_app.ui.constraints.UserConstraints;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.transaction.TransactionSystemException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>

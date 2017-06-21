@@ -1,6 +1,5 @@
 package at.qe.sepm.asn_app.repositories;
 
-import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Registration;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

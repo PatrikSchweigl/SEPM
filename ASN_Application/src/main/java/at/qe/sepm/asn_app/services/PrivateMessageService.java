@@ -1,20 +1,13 @@
 package at.qe.sepm.asn_app.services;
 
-import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.nursery.PrivateMessage;
 import at.qe.sepm.asn_app.repositories.PrivateMessageRepository;
-import at.qe.sepm.asn_app.repositories.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
-
 
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.Collection;
 
 
 @Component

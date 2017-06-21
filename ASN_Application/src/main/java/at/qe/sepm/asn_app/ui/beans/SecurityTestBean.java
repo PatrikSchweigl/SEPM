@@ -1,7 +1,6 @@
 package at.qe.sepm.asn_app.ui.beans;
 
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 
 /**

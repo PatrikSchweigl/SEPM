@@ -5,15 +5,15 @@ package at.qe.sepm.asn_app.tests.selenium.employee;
  * on 21.06.2017.
  */
 
+import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.*;
+
 import java.util.concurrent.TimeUnit;
 
-import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Select;
+import static org.junit.Assert.fail;
 
 /**
  * This test logs in as an employee and creates a new NurseryInformation.

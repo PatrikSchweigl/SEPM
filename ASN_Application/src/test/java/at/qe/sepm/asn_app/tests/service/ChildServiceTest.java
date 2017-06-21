@@ -1,32 +1,21 @@
 package at.qe.sepm.asn_app.tests.service;
 
 import at.qe.sepm.asn_app.models.Gender;
-import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Custody;
 import at.qe.sepm.asn_app.models.child.Sibling;
-import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
-import at.qe.sepm.asn_app.models.nursery.Registration;
-import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
-import at.qe.sepm.asn_app.services.RegistrationService;
 import at.qe.sepm.asn_app.tests.initialize.InitializeChild;
 import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
 import at.qe.sepm.asn_app.tests.initialize.InitializeSibling;
-import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
-import at.qe.sepm.asn_app.ui.controllers.ChildController;
-import at.qe.sepm.asn_app.ui.controllers.ChildEditController;
-import at.qe.sepm.asn_app.ui.controllers.ParentController;
-import at.qe.sepm.asn_app.ui.controllers.ParentEditController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -35,8 +24,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.faces.context.FacesContext;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 

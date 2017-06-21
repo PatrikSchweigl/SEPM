@@ -1,10 +1,6 @@
 package at.qe.sepm.asn_app.tests.constraints;
 
-import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
-import at.qe.sepm.asn_app.models.general.FamilyStatus;
-import at.qe.sepm.asn_app.models.general.Religion;
-import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.PasswordConstraintException;
 import at.qe.sepm.asn_app.ui.constraints.PasswordConstraints;

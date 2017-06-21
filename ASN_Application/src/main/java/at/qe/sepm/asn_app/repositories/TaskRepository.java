@@ -1,14 +1,12 @@
 package at.qe.sepm.asn_app.repositories;
 
 import at.qe.sepm.asn_app.models.nursery.Task;
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>

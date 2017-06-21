@@ -1,14 +1,13 @@
 package at.qe.sepm.asn_app.ui.constraints;
 
-import java.util.Collection;
-import java.util.Iterator;
-
+import at.qe.sepm.asn_app.models.nursery.Task;
+import at.qe.sepm.asn_app.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import at.qe.sepm.asn_app.models.nursery.Task;
-import at.qe.sepm.asn_app.services.TaskService;
+import java.util.Collection;
+import java.util.Iterator;
 
 @Component
 @Scope("application")

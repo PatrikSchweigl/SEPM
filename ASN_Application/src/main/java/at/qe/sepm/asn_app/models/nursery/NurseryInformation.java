@@ -4,7 +4,6 @@ import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

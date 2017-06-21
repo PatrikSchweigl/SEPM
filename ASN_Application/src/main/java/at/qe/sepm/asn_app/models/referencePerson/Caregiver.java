@@ -1,10 +1,9 @@
 package at.qe.sepm.asn_app.models.referencePerson;
 
+import at.qe.sepm.asn_app.models.child.Child;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
-
-import at.qe.sepm.asn_app.models.child.Child;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

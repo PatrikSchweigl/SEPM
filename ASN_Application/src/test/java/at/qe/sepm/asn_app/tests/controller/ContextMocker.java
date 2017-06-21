@@ -1,11 +1,11 @@
 package at.qe.sepm.asn_app.tests.controller;
 
-import javax.faces.context.FacesContext;
-
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.primefaces.context.RequestContext;
+
+import javax.faces.context.FacesContext;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>

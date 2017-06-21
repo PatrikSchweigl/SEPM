@@ -14,12 +14,10 @@ import at.qe.sepm.asn_app.models.referencePerson.Relationship;
 import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
-import at.qe.sepm.asn_app.ui.controllers.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -28,7 +26,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.faces.context.FacesContext;
 import java.util.HashSet;
 import java.util.Set;
 

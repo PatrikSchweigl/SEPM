@@ -1,13 +1,10 @@
 package at.qe.sepm.asn_app.models.referencePerson;
 
 import at.qe.sepm.asn_app.models.UserData;
-import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
-import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Set;

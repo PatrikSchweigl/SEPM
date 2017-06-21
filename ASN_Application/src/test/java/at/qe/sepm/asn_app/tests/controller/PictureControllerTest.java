@@ -7,7 +7,6 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.nursery.Picture;
 import at.qe.sepm.asn_app.services.PictureService;
 import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.ui.controllers.PictureController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,9 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>

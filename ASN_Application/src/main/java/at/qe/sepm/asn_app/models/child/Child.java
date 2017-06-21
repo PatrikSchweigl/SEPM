@@ -6,7 +6,6 @@ import at.qe.sepm.asn_app.models.general.Religion;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import com.google.gson.annotations.Expose;
-
 import org.springframework.data.domain.Persistable;
 import org.springframework.transaction.annotation.Transactional;
 

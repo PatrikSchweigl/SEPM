@@ -7,7 +7,6 @@ import at.qe.sepm.asn_app.services.NurseryInformationService;
 import at.qe.sepm.asn_app.ui.constraints.LunchConstraints;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

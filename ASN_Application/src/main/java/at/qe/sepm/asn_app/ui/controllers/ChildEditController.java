@@ -18,7 +18,6 @@ import org.springframework.transaction.TransactionSystemException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>

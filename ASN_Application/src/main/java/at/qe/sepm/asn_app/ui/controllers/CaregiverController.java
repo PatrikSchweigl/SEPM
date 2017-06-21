@@ -1,18 +1,13 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
-import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.services.CaregiverService;
-import at.qe.sepm.asn_app.services.ChildService;
-
 import at.qe.sepm.asn_app.services.MailService;
 import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Hibernate;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

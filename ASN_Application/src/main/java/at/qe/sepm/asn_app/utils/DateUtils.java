@@ -5,7 +5,6 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Lukas Aukenthaler on 22.05.2017.

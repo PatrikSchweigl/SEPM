@@ -1,10 +1,10 @@
 package at.qe.sepm.asn_app.utils;
 
-import java.util.Map;
-import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
+
+import javax.faces.context.FacesContext;
+import java.util.Map;
 
 /**
  * Custom scope implementation for spring to enable JSF2-like view-scoped beans.

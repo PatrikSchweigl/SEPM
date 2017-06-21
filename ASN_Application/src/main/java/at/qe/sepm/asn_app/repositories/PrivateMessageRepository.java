@@ -1,11 +1,10 @@
 package at.qe.sepm.asn_app.repositories;
 
-import java.util.List;
-
+import at.qe.sepm.asn_app.models.nursery.PrivateMessage;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import at.qe.sepm.asn_app.models.nursery.PrivateMessage;
+import java.util.List;
 
 public interface PrivateMessageRepository extends AbstractRepository<PrivateMessage, Long> {
 

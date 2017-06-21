@@ -1,15 +1,11 @@
 package at.qe.sepm.asn_app.repositories;
 
 import at.qe.sepm.asn_app.models.UserData;
-import at.qe.sepm.asn_app.models.UserRole;
-
-import java.util.List;
-
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Repository for managing {@link UserData} entities.

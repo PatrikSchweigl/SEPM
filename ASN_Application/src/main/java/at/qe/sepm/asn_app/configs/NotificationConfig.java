@@ -5,19 +5,12 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.nursery.Task;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.services.LunchService;
-import at.qe.sepm.asn_app.services.MailService;
-import at.qe.sepm.asn_app.services.ParentService;
-import at.qe.sepm.asn_app.services.TaskService;
-import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.ui.controllers.ReportController;
-
+import at.qe.sepm.asn_app.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**

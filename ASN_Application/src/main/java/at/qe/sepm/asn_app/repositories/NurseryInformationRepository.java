@@ -1,13 +1,10 @@
 package at.qe.sepm.asn_app.repositories;
 
-import java.util.Date;
-import java.util.List;
-
+import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
-import at.qe.sepm.asn_app.models.nursery.PrivateMessage;
+import java.util.Date;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>

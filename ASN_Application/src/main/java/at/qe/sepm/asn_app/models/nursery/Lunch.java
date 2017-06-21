@@ -1,10 +1,8 @@
 package at.qe.sepm.asn_app.models.nursery;
 
 import at.qe.sepm.asn_app.models.child.Child;
-import at.qe.sepm.asn_app.utils.DateUtils;
-import org.springframework.data.domain.Persistable;
-
 import com.google.gson.annotations.Expose;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

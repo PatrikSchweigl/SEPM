@@ -1,25 +1,18 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
-import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.nursery.Lunch;
-import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.LunchService;
-import at.qe.sepm.asn_app.services.RegistrationService;
-import at.qe.sepm.asn_app.ui.beans.SessionInfoBean;
 import at.qe.sepm.asn_app.ui.constraints.LunchConstraints;
 import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
 import at.qe.sepm.asn_app.utils.DateUtils;
-
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
-
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;

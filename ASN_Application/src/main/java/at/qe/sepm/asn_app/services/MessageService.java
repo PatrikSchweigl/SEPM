@@ -6,7 +6,6 @@ import at.qe.sepm.asn_app.models.nursery.Message;
 import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.MessageRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -17,9 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import javax.faces.bean.ViewScoped;
-import java.io.Serializable;
 
 
 /**

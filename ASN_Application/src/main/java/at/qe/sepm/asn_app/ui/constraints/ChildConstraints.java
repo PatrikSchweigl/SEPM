@@ -1,28 +1,17 @@
 package at.qe.sepm.asn_app.ui.constraints;
 
-import at.qe.sepm.asn_app.models.UserData;
 import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Sibling;
-import at.qe.sepm.asn_app.models.nursery.AuditLog;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.ownExceptions.BirthdayConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.ParentConstraintException;
 import at.qe.sepm.asn_app.ownExceptions.SiblingConstraintException;
-import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.parser.BirthdayParser;
-import at.qe.sepm.asn_app.repositories.AuditLogRepository;
-import at.qe.sepm.asn_app.repositories.ChildRepository;
-import at.qe.sepm.asn_app.repositories.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashSet;
 
 /**

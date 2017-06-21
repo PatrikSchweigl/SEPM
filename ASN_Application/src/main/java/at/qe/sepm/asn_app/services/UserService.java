@@ -1,18 +1,8 @@
 package at.qe.sepm.asn_app.services;
 
 import at.qe.sepm.asn_app.models.UserData;
-import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.nursery.AuditLog;
-import at.qe.sepm.asn_app.repositories.AuditLogRepository;
 import at.qe.sepm.asn_app.repositories.UserRepository;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.Random;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * Service for accessing and manipulating user data.

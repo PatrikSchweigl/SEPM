@@ -1,13 +1,15 @@
 package at.qe.sepm.asn_app.tests.selenium.admin;
 
+import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
 import java.util.concurrent.TimeUnit;
 
-import at.qe.sepm.asn_app.tests.selenium.InitializeSelenium;
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
-import org.openqa.selenium.*;
+import static org.junit.Assert.fail;
 
 public class CalendarAppointment {
     private WebDriver driver;

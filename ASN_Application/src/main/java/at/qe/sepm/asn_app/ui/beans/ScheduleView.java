@@ -1,16 +1,15 @@
 package at.qe.sepm.asn_app.ui.beans;
 
-import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
+import at.qe.sepm.asn_app.models.UserData;
+import at.qe.sepm.asn_app.models.UserRole;
+import at.qe.sepm.asn_app.models.child.Child;
+import at.qe.sepm.asn_app.models.nursery.*;
+import at.qe.sepm.asn_app.models.referencePerson.Parent;
+import at.qe.sepm.asn_app.repositories.AuditLogRepository;
+import at.qe.sepm.asn_app.repositories.UserRepository;
+import at.qe.sepm.asn_app.services.*;
+import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
+import at.qe.sepm.asn_app.ui.constraints.ScheduleConstraints;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -25,27 +24,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import at.qe.sepm.asn_app.models.UserData;
-import at.qe.sepm.asn_app.models.UserRole;
-import at.qe.sepm.asn_app.models.child.Child;
-import at.qe.sepm.asn_app.models.nursery.AuditLog;
-import at.qe.sepm.asn_app.models.nursery.Lunch;
-import at.qe.sepm.asn_app.models.nursery.NurseryInformation;
-import at.qe.sepm.asn_app.models.nursery.Registration;
-import at.qe.sepm.asn_app.models.nursery.Task;
-import at.qe.sepm.asn_app.models.referencePerson.Parent;
-import at.qe.sepm.asn_app.repositories.AuditLogRepository;
-import at.qe.sepm.asn_app.repositories.UserRepository;
-import at.qe.sepm.asn_app.services.ChildService;
-import at.qe.sepm.asn_app.services.LunchService;
-import at.qe.sepm.asn_app.services.MailService;
-import at.qe.sepm.asn_app.services.NurseryInformationService;
-import at.qe.sepm.asn_app.services.ParentService;
-import at.qe.sepm.asn_app.services.RegistrationService;
-import at.qe.sepm.asn_app.services.TaskService;
-import at.qe.sepm.asn_app.services.UserService;
-import at.qe.sepm.asn_app.ui.constraints.RegistrationConstraints;
-import at.qe.sepm.asn_app.ui.constraints.ScheduleConstraints;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Auki on 02.05.2017.

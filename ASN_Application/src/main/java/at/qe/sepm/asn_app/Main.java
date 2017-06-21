@@ -3,10 +3,6 @@ package at.qe.sepm.asn_app;
 import at.qe.sepm.asn_app.configs.CustomServletContextInitializer;
 import at.qe.sepm.asn_app.configs.WebSecurityConfig;
 import at.qe.sepm.asn_app.utils.ViewScope;
-
-import java.util.HashMap;
-import javax.faces.webapp.FacesServlet;
-
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +11,9 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+
+import javax.faces.webapp.FacesServlet;
+import java.util.HashMap;
 
 /**
  * Spring boot application. Execute maven with <code>mvn spring-boot:run</code>

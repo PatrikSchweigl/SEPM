@@ -5,7 +5,9 @@ import at.qe.sepm.asn_app.models.UserRole;
 import at.qe.sepm.asn_app.models.general.FamilyStatus;
 import at.qe.sepm.asn_app.models.general.Religion;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * Created by Bernd Menia <bernd.menia@student.uibk.ac.at>

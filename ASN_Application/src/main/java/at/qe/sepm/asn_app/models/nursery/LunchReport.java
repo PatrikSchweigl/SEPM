@@ -1,8 +1,7 @@
 package at.qe.sepm.asn_app.models.nursery;
 
-import com.google.gson.annotations.Expose;
-
 import at.qe.sepm.asn_app.models.child.Child;
+import com.google.gson.annotations.Expose;
 
 /**
  * Created by Auki on 13.06.2017.

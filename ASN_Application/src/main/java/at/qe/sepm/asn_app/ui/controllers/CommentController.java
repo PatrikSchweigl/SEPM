@@ -1,17 +1,14 @@
 package at.qe.sepm.asn_app.ui.controllers;
 
 import at.qe.sepm.asn_app.models.general.Comment;
-
 import at.qe.sepm.asn_app.services.CommentService;
 import at.qe.sepm.asn_app.ui.beans.FileBean;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-
 import javax.annotation.PostConstruct;
+import java.util.Collection;
 
 /**
  * Created by Stefan Mattersberger <stefan.mattersberger@student.uibk.ac.at>
