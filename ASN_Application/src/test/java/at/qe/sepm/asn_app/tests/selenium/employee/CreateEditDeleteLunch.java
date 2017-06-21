@@ -70,10 +70,9 @@ public class CreateEditDeleteLunch {
 		Thread.sleep(1000);
 		WebElement toClear = driver.findElement(By.id("lunchForm:dateEdit"));
 		Thread.sleep(1000);
-		for(int i = 0; i<15; i++)
-			toClear.sendKeys(Keys.BACK_SPACE);
+		driver.findElement(By.id("lunchForm:dateEdit_input")).clear();
 		Thread.sleep(1000);
-		driver.findElement(By.id("lunchForm:dateEdit")).sendKeys("27/07/2017");
+		driver.findElement(By.id("lunchForm:dateEdit_input")).sendKeys("27/07/2017");
 		// save
 		driver.findElement(By.id("lunchForm:j_idt165")).click();
 		Thread.sleep(1000);
