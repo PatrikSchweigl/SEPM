@@ -95,12 +95,9 @@ public class Sibling implements Persistable<Long> {
         }
 
         Sibling other = (Sibling) obj;
-        if (birthday.equals(other.birthday) &&
+        return birthday.equals(other.birthday) &&
                 firstName.equals(other.firstName) &&
-                lastName.equals(other.lastName)) {
-            return true;
-        }
-        return false;
+                lastName.equals(other.lastName);
     }
 
 

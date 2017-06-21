@@ -90,15 +90,11 @@ public class Message implements Persistable<Long> {
         }
 
         Message other = (Message) obj;
-        if (date.getYear() == other.date.getYear() &&
+        return date.getYear() == other.date.getYear() &&
                 date.getMonth() == other.date.getMonth() &&
                 date.getDay() == other.date.getDay() &&
                 message.equals(other.message) &&
-                username.equals(other.username)) {
-            return true;
-        } else {
-            return false;
-        }
+                username.equals(other.username);
     }
 
 

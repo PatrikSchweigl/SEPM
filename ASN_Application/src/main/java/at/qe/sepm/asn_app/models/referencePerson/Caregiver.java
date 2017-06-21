@@ -115,14 +115,10 @@ public class Caregiver implements Persistable<Long> {
         }
 
         Caregiver other = (Caregiver) obj;
-        if (this.firstName.equals(other.firstName) &&
+        return this.firstName.equals(other.firstName) &&
                 this.lastName.equals(other.lastName) &&
                 this.relationship.equals(other.relationship) &&
-                this.getPhoneNumber().equals(other.phoneNumber)) {
-            return true;
-        } else {
-            return false;
-        }
+                this.getPhoneNumber().equals(other.phoneNumber);
     }
 
 

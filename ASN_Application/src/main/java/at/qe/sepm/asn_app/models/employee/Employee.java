@@ -96,17 +96,13 @@ public class Employee extends UserData {
         }
 
         Employee other = (Employee) obj;
-        if (this.getFamilyStatus().equals(other.getFamilyStatus()) &&
+        return this.getFamilyStatus().equals(other.getFamilyStatus()) &&
                 this.getBirthday().equals(other.getBirthday()) &&
                 this.getFirstName().equals(other.getFirstName()) &&
                 this.getLastName().equals(other.getLastName()) &&
                 this.getLocation().equals(other.getLocation()) &&
                 this.getPostcode().equals(other.getPostcode()) &&
-                this.getStreetName().equals(other.getStreetName())) {
-            return true;
-        } else {
-            return false;
-        }
+                this.getStreetName().equals(other.getStreetName());
     }
 
 

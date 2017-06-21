@@ -143,18 +143,14 @@ public class Task implements Persistable<Long> {
         }
 
         Task other = (Task) obj;
-        if (this.beginDate.equals(other.beginDate) &&
+        return this.beginDate.equals(other.beginDate) &&
                 this.description.equals(other.description) &&
                 this.endingDate.equals(other.endingDate) &&
                 this.important == other.important &&
                 this.receiver.equals(other.receiver) &&
                 this.sender.equals(other.sender) &&
                 this.stringId.equals(other.stringId) &&
-                this.styleClass.equals(other.styleClass)) {
-            return true;
-        } else {
-            return false;
-        }
+                this.styleClass.equals(other.styleClass);
     }
 
 

@@ -133,7 +133,7 @@ public class NurseryInformation implements Persistable<Long> {
         }
 
         NurseryInformation other = (NurseryInformation) obj;
-        if (originDate.getYear() == other.originDate.getYear() &&
+        return originDate.getYear() == other.originDate.getYear() &&
                 originDate.getMonth() == other.originDate.getMonth() &&
                 originDate.getDay() == other.originDate.getDay() &&
 
@@ -153,11 +153,7 @@ public class NurseryInformation implements Persistable<Long> {
                 pickUpEnd.getHours() == other.pickUpEnd.getHours() &&
                 pickUpEnd.getMinutes() == other.pickUpEnd.getMinutes() &&
 
-                this.maxOccupancy == other.maxOccupancy) {
-            return true;
-        } else {
-            return false;
-        }
+                this.maxOccupancy == other.maxOccupancy;
     }
 
 

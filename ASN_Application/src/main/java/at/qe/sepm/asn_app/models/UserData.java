@@ -270,18 +270,14 @@ public class UserData implements Persistable<String> {
         }
 
         UserData other = (UserData) obj;
-        if (birthday.equals(other.birthday) &&
+        return birthday.equals(other.birthday) &&
                 firstName.equals(other.firstName) &&
                 lastName.equals(other.lastName) &&
                 location.equals(other.location) &&
                 postcode.equals(other.postcode) &&
                 streetName.equals(other.streetName) &&
                 username.equals(other.username) &&
-                userRole.equals(other.userRole)) {
-            return true;
-        } else {
-            return false;
-        }
+                userRole.equals(other.userRole);
     }
 
 

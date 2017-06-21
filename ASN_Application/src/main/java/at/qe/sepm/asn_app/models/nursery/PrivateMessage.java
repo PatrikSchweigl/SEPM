@@ -94,13 +94,13 @@ public class PrivateMessage implements Persistable<Long> {
         }
 
         PrivateMessage other = (PrivateMessage) obj;
-        if (this.date.equals(other.date) &&
+        return date.getYear() == other.date.getYear() &&
+                date.getMonth() == other.date.getMonth() &&
+                date.getDay() == other.date.getDay() &&
+
                 this.message.equals(other.message) &&
                 this.usernameReceiver.equals(other.usernameReceiver) &&
-                this.usernameSender.equals(other.usernameSender)) {
-            return true;
-        }
-        return false;
+                this.usernameSender.equals(other.usernameSender);
     }
 
 

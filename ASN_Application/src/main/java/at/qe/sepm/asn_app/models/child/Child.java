@@ -270,17 +270,13 @@ public class Child implements Persistable<Long> {
         Child other = (Child) obj;
         if (id.equals(other.id)) {
             return true;
-        } else if (this.birthday.equals(other.birthday) &&
+        } else return this.birthday.equals(other.birthday) &&
                 this.firstName.equals(other.firstName) &&
                 this.gender.equals(other.gender) &&
                 this.lastName.equals(other.lastName) &&
                 this.parent1.equals(other.parent1) &&
                 this.parent2.equals(other.parent2) &&
-                this.siblings.equals(other.siblings)) {
-            return true;
-        } else {
-            return false;
-        }
+                this.siblings.equals(other.siblings);
     }
 
 
