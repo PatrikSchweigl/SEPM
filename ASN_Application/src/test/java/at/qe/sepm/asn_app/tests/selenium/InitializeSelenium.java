@@ -9,6 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * on 19.06.17 11:48 CEST.
  */
 public class InitializeSelenium {
+    public static final String BASE_URL = "http://192.168.33.10:8080/";
+
 
     public static WebDriver initialize() {
         WebDriver driver;
