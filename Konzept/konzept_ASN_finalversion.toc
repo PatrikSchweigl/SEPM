@@ -25,7 +25,7 @@
 \contentsline {paragraph}{Schritte}{7}{section*.15}
 \contentsline {paragraph}{Alternative Schritte}{7}{section*.16}
 \contentsline {paragraph}{Nachbedingungen}{7}{section*.17}
-\contentsline {subsection}{\numberline {2.5}Use-Case Maximalbelegung eintragen}{8}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.5}Use-Case Passwort vergessen}{8}{subsection.2.5}
 \contentsline {paragraph}{Identifier}{8}{section*.18}
 \contentsline {paragraph}{Beschreibung}{8}{section*.19}
 \contentsline {paragraph}{Ausl"oser}{8}{section*.20}
@@ -34,7 +34,7 @@
 \contentsline {paragraph}{Schritte}{8}{section*.23}
 \contentsline {paragraph}{Alternative Schritte}{8}{section*.24}
 \contentsline {paragraph}{Nachbedingungen}{8}{section*.25}
-\contentsline {subsection}{\numberline {2.6}Use-Case Feiertage und Ferienzeiten eintragen}{9}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.6}Use-Case Tagesbelegung eintragen}{9}{subsection.2.6}
 \contentsline {paragraph}{Identifier}{9}{section*.26}
 \contentsline {paragraph}{Beschreibung}{9}{section*.27}
 \contentsline {paragraph}{Ausl"oser}{9}{section*.28}
@@ -43,7 +43,7 @@
 \contentsline {paragraph}{Schritte}{9}{section*.31}
 \contentsline {paragraph}{Alternative Schritte}{9}{section*.32}
 \contentsline {paragraph}{Nachbedingungen}{9}{section*.33}
-\contentsline {subsection}{\numberline {2.7}Use-Case Kind anmelden}{10}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.7}Use-Case Feiertage und Ferienzeiten eintragen}{10}{subsection.2.7}
 \contentsline {paragraph}{Identifier}{10}{section*.34}
 \contentsline {paragraph}{Beschreibung}{10}{section*.35}
 \contentsline {paragraph}{Ausl"oser}{10}{section*.36}
@@ -52,7 +52,7 @@
 \contentsline {paragraph}{Schritte}{10}{section*.39}
 \contentsline {paragraph}{Alternative Schritte}{10}{section*.40}
 \contentsline {paragraph}{Nachbedingungen}{10}{section*.41}
-\contentsline {subsection}{\numberline {2.8}Use-Case Kind abmelden}{11}{subsection.2.8}
+\contentsline {subsection}{\numberline {2.8}Use-Case Kind anmelden}{11}{subsection.2.8}
 \contentsline {paragraph}{Identifier}{11}{section*.42}
 \contentsline {paragraph}{Beschreibung}{11}{section*.43}
 \contentsline {paragraph}{Ausl"oser}{11}{section*.44}
@@ -61,7 +61,7 @@
 \contentsline {paragraph}{Schritte}{11}{section*.47}
 \contentsline {paragraph}{Alternative Schritte}{11}{section*.48}
 \contentsline {paragraph}{Nachbedingungen}{11}{section*.49}
-\contentsline {subsection}{\numberline {2.9}Use-Case Benutzerdaten "andern}{12}{subsection.2.9}
+\contentsline {subsection}{\numberline {2.9}Use-Case Kind abmelden}{12}{subsection.2.9}
 \contentsline {paragraph}{Identifier}{12}{section*.50}
 \contentsline {paragraph}{Beschreibung}{12}{section*.51}
 \contentsline {paragraph}{Ausl"oser}{12}{section*.52}
@@ -70,7 +70,7 @@
 \contentsline {paragraph}{Schritte}{12}{section*.55}
 \contentsline {paragraph}{Alternative Schritte}{12}{section*.56}
 \contentsline {paragraph}{Nachbedingungen}{12}{section*.57}
-\contentsline {subsection}{\numberline {2.10}Use-Case Daten drucken}{13}{subsection.2.10}
+\contentsline {subsection}{\numberline {2.10}Use-Case Benutzerdaten "andern}{13}{subsection.2.10}
 \contentsline {paragraph}{Identifier}{13}{section*.58}
 \contentsline {paragraph}{Beschreibung}{13}{section*.59}
 \contentsline {paragraph}{Ausl"oser}{13}{section*.60}
@@ -79,7 +79,7 @@
 \contentsline {paragraph}{Schritte}{13}{section*.63}
 \contentsline {paragraph}{Alternative Schritte}{13}{section*.64}
 \contentsline {paragraph}{Nachbedingungen}{13}{section*.65}
-\contentsline {subsection}{\numberline {2.11}Use-Case Daten exportieren}{14}{subsection.2.11}
+\contentsline {subsection}{\numberline {2.11}Use-Case Daten drucken}{14}{subsection.2.11}
 \contentsline {paragraph}{Identifier}{14}{section*.66}
 \contentsline {paragraph}{Beschreibung}{14}{section*.67}
 \contentsline {paragraph}{Ausl"oser}{14}{section*.68}
@@ -88,7 +88,7 @@
 \contentsline {paragraph}{Schritte}{14}{section*.71}
 \contentsline {paragraph}{Alternative Schritte}{14}{section*.72}
 \contentsline {paragraph}{Nachbedingungen}{14}{section*.73}
-\contentsline {subsection}{\numberline {2.12}Use-Case Elternteil registrieren}{15}{subsection.2.12}
+\contentsline {subsection}{\numberline {2.12}Use-Case Daten exportieren}{15}{subsection.2.12}
 \contentsline {paragraph}{Identifier}{15}{section*.74}
 \contentsline {paragraph}{Beschreibung}{15}{section*.75}
 \contentsline {paragraph}{Ausl"oser}{15}{section*.76}
@@ -97,7 +97,7 @@
 \contentsline {paragraph}{Schritte}{15}{section*.79}
 \contentsline {paragraph}{Alternative Schritte}{15}{section*.80}
 \contentsline {paragraph}{Nachbedingungen}{15}{section*.81}
-\contentsline {subsection}{\numberline {2.13}Use-Case Betreuungstage eintragen}{16}{subsection.2.13}
+\contentsline {subsection}{\numberline {2.13}Use-Case Elternteil registrieren}{16}{subsection.2.13}
 \contentsline {paragraph}{Identifier}{16}{section*.82}
 \contentsline {paragraph}{Beschreibung}{16}{section*.83}
 \contentsline {paragraph}{Ausl"oser}{16}{section*.84}
@@ -106,7 +106,7 @@
 \contentsline {paragraph}{Schritte}{16}{section*.87}
 \contentsline {paragraph}{Alternative Schritte}{16}{section*.88}
 \contentsline {paragraph}{Nachbedingungen}{16}{section*.89}
-\contentsline {subsection}{\numberline {2.14}Use-Case Kontaktliste einsehen}{17}{subsection.2.14}
+\contentsline {subsection}{\numberline {2.14}Use-Case Anlegen von Bezugspersonen}{17}{subsection.2.14}
 \contentsline {paragraph}{Identifier}{17}{section*.90}
 \contentsline {paragraph}{Beschreibung}{17}{section*.91}
 \contentsline {paragraph}{Ausl"oser}{17}{section*.92}
@@ -115,270 +115,172 @@
 \contentsline {paragraph}{Schritte}{17}{section*.95}
 \contentsline {paragraph}{Alternative Schritte}{17}{section*.96}
 \contentsline {paragraph}{Nachbedingungen}{17}{section*.97}
-\contentsline {subsection}{\numberline {2.15}Use-Case Anlegen von Bezugspersonen}{18}{subsection.2.15}
-\contentsline {paragraph}{Beschreibung}{18}{section*.98}
-\contentsline {paragraph}{Ausl"oser}{18}{section*.99}
-\contentsline {paragraph}{Beteiligte Akteure}{18}{section*.100}
-\contentsline {paragraph}{Vorbedingungen}{18}{section*.101}
-\contentsline {paragraph}{Schritte}{18}{section*.102}
-\contentsline {paragraph}{Alternative Schritte}{18}{section*.103}
-\contentsline {paragraph}{Nachbedingungen}{18}{section*.104}
-\contentsline {subsection}{\numberline {2.16}Use-Case L"oschen von Bezugspersonen (Elternteil)}{19}{subsection.2.16}
-\contentsline {paragraph}{Beschreibung}{19}{section*.105}
-\contentsline {paragraph}{Ausl"oser}{19}{section*.106}
-\contentsline {paragraph}{Beteiligte Akteure}{19}{section*.107}
-\contentsline {paragraph}{Vorbedingungen}{19}{section*.108}
-\contentsline {paragraph}{Schritte}{19}{section*.109}
-\contentsline {paragraph}{Alternative Schritte}{19}{section*.110}
-\contentsline {paragraph}{Nachbedingungen}{19}{section*.111}
-\contentsline {subsection}{\numberline {2.17}Use-Case L"oschen von Bezugspersonen (Elternteil)}{20}{subsection.2.17}
-\contentsline {paragraph}{Beschreibung}{20}{section*.112}
-\contentsline {paragraph}{Ausl"oser}{20}{section*.113}
-\contentsline {paragraph}{Beteiligte Akteure}{20}{section*.114}
-\contentsline {paragraph}{Vorbedingungen}{20}{section*.115}
-\contentsline {paragraph}{Schritte}{20}{section*.116}
-\contentsline {paragraph}{Alternative Schritte}{20}{section*.117}
-\contentsline {paragraph}{Nachbedingungen}{20}{section*.118}
-\contentsline {subsection}{\numberline {2.18}Use-Case Freischaltung der Bezugspersonen}{21}{subsection.2.18}
-\contentsline {paragraph}{Beschreibung}{21}{section*.119}
-\contentsline {paragraph}{Ausl"oser}{21}{section*.120}
-\contentsline {paragraph}{Beteiligte Akteure}{21}{section*.121}
-\contentsline {paragraph}{Vorbedingungen}{21}{section*.122}
-\contentsline {paragraph}{Schritte}{21}{section*.123}
-\contentsline {paragraph}{Alternative Schritte}{21}{section*.124}
-\contentsline {paragraph}{Nachbedingungen}{21}{section*.125}
-\contentsline {subsection}{\numberline {2.19}Use-Case Kinderstammblatt einsehen (Elternteil)}{22}{subsection.2.19}
-\contentsline {paragraph}{Beschreibung}{22}{section*.126}
-\contentsline {paragraph}{Ausl"oser}{22}{section*.127}
-\contentsline {paragraph}{Beteiligte Akteure}{22}{section*.128}
-\contentsline {paragraph}{Vorbedingungen}{22}{section*.129}
-\contentsline {paragraph}{Schritte}{22}{section*.130}
-\contentsline {paragraph}{Alternative Schritte}{22}{section*.131}
-\contentsline {paragraph}{Nachbedingungen}{22}{section*.132}
-\contentsline {subsection}{\numberline {2.20}Use-Case Kinderstammblatt einsehen (Mitarbeiter)}{23}{subsection.2.20}
-\contentsline {paragraph}{Identifier}{23}{section*.133}
-\contentsline {paragraph}{Beschreibung}{23}{section*.134}
-\contentsline {paragraph}{Ausl"oser}{23}{section*.135}
-\contentsline {paragraph}{Beteiligte Akteure}{23}{section*.136}
-\contentsline {paragraph}{Vorbedingungen}{23}{section*.137}
-\contentsline {paragraph}{Schritte}{23}{section*.138}
-\contentsline {paragraph}{Alternative Schritte}{23}{section*.139}
-\contentsline {paragraph}{Nachbedingungen}{23}{section*.140}
-\contentsline {subsection}{\numberline {2.21}Use-Case Kinderstammblatt bearbeiten (Elternteil)}{24}{subsection.2.21}
-\contentsline {paragraph}{Beschreibung}{24}{section*.141}
-\contentsline {paragraph}{Ausl"oser}{24}{section*.142}
-\contentsline {paragraph}{Beteiligte Akteure}{24}{section*.143}
-\contentsline {paragraph}{Vorbedingungen}{24}{section*.144}
-\contentsline {paragraph}{Schritte}{24}{section*.145}
-\contentsline {paragraph}{Alternative Schritte}{24}{section*.146}
-\contentsline {paragraph}{Nachbedingungen}{24}{section*.147}
-\contentsline {subsection}{\numberline {2.22}Use-Case Kinderstammblatt bearbeiten (Mitarbeiter)}{25}{subsection.2.22}
-\contentsline {paragraph}{Beschreibung}{25}{section*.148}
-\contentsline {paragraph}{Ausl"oser}{25}{section*.149}
-\contentsline {paragraph}{Beteiligte Akteure}{25}{section*.150}
-\contentsline {paragraph}{Vorbedingungen}{25}{section*.151}
-\contentsline {paragraph}{Schritte}{25}{section*.152}
-\contentsline {paragraph}{Alternative Schritte}{25}{section*.153}
-\contentsline {paragraph}{Nachbedingungen}{25}{section*.154}
-\contentsline {subsection}{\numberline {2.23}Use-Case Tagesplaner einsehen}{26}{subsection.2.23}
-\contentsline {paragraph}{Identifier}{26}{section*.155}
-\contentsline {paragraph}{Beschreibung}{26}{section*.156}
-\contentsline {paragraph}{Ausl"oser}{26}{section*.157}
-\contentsline {paragraph}{Beteiligte Akteure}{26}{section*.158}
-\contentsline {paragraph}{Vorbedingungen}{26}{section*.159}
-\contentsline {paragraph}{Schritte}{26}{section*.160}
-\contentsline {paragraph}{Alternative Schritte}{26}{section*.161}
-\contentsline {paragraph}{Nachbedingungen}{26}{section*.162}
-\contentsline {subsection}{\numberline {2.24}Use-Case Aufgaben der Eltern eintragen}{27}{subsection.2.24}
-\contentsline {paragraph}{Identifier}{27}{section*.163}
-\contentsline {paragraph}{Beschreibung}{27}{section*.164}
-\contentsline {paragraph}{Ausl"oser}{27}{section*.165}
-\contentsline {paragraph}{Beteiligte Akteure}{27}{section*.166}
-\contentsline {paragraph}{Vorbedingungen}{27}{section*.167}
-\contentsline {paragraph}{Schritte}{27}{section*.168}
-\contentsline {subsection}{\numberline {2.25}Use-Case Einsehen der eigenen Aufgaben}{28}{subsection.2.25}
-\contentsline {paragraph}{Beschreibung}{28}{section*.169}
-\contentsline {paragraph}{Ausl"oser}{28}{section*.170}
-\contentsline {paragraph}{Beteiligte Akteure}{28}{section*.171}
-\contentsline {paragraph}{Vorbedingungen}{28}{section*.172}
-\contentsline {paragraph}{Schritte}{28}{section*.173}
-\contentsline {paragraph}{Alternative Schritte}{28}{section*.174}
-\contentsline {paragraph}{Nachbedingungen}{28}{section*.175}
-\contentsline {subsection}{\numberline {2.26}Use-Case Auditlog einsehen}{29}{subsection.2.26}
-\contentsline {paragraph}{Identifier}{29}{section*.176}
-\contentsline {paragraph}{Beschreibung}{29}{section*.177}
-\contentsline {paragraph}{Ausl"oser}{29}{section*.178}
-\contentsline {paragraph}{Beteiligte Akteure}{29}{section*.179}
-\contentsline {paragraph}{Vorbedingungen}{29}{section*.180}
-\contentsline {paragraph}{Schritte}{29}{section*.181}
-\contentsline {paragraph}{Alternative Schritte}{29}{section*.182}
-\contentsline {paragraph}{Nachbedingungen}{29}{section*.183}
-\contentsline {subsection}{\numberline {2.27}Use-Case Bring- und Abholzeiten eintragen (Eltern)}{30}{subsection.2.27}
-\contentsline {paragraph}{Identifier}{30}{section*.184}
-\contentsline {paragraph}{Beschreibung}{30}{section*.185}
-\contentsline {paragraph}{Ausl"oser}{30}{section*.186}
-\contentsline {paragraph}{Beteiligte Akteure}{30}{section*.187}
-\contentsline {paragraph}{Vorbedingungen}{30}{section*.188}
-\contentsline {paragraph}{Schritte}{30}{section*.189}
-\contentsline {paragraph}{Alternative Schritte}{30}{section*.190}
-\contentsline {paragraph}{Nachbedingungen}{30}{section*.191}
-\contentsline {subsection}{\numberline {2.28}Use-Case Bring- und Abholzeiten eintragen (Mitarbeiter)}{31}{subsection.2.28}
-\contentsline {paragraph}{Beschreibung}{31}{section*.192}
-\contentsline {paragraph}{Ausl"oser}{31}{section*.193}
-\contentsline {paragraph}{Beteiligte Akteure}{31}{section*.194}
-\contentsline {paragraph}{Vorbedingungen}{31}{section*.195}
-\contentsline {paragraph}{Schritte}{31}{section*.196}
-\contentsline {paragraph}{Alternative Schritte}{31}{section*.197}
-\contentsline {paragraph}{Nachbedingungen}{31}{section*.198}
-\contentsline {subsection}{\numberline {2.29}Use-Case Abwesenheit eintragen}{32}{subsection.2.29}
-\contentsline {paragraph}{Identifier}{32}{section*.199}
-\contentsline {paragraph}{Beschreibung}{32}{section*.200}
-\contentsline {paragraph}{Ausl"oser}{32}{section*.201}
-\contentsline {paragraph}{Beteiligte Akteure}{32}{section*.202}
-\contentsline {paragraph}{Vorbedingungen}{32}{section*.203}
-\contentsline {paragraph}{Schritte}{32}{section*.204}
-\contentsline {paragraph}{Alternative Schritte}{32}{section*.205}
-\contentsline {paragraph}{Nachbedingungen}{32}{section*.206}
-\contentsline {subsection}{\numberline {2.30}Use-Case Mittagessen anmelden/abmelden}{33}{subsection.2.30}
-\contentsline {paragraph}{Identifier}{33}{section*.207}
-\contentsline {paragraph}{Beschreibung}{33}{section*.208}
-\contentsline {paragraph}{Ausl"oser}{33}{section*.209}
-\contentsline {paragraph}{Beteiligte Akteure}{33}{section*.210}
-\contentsline {paragraph}{Vorbedingungen}{33}{section*.211}
-\contentsline {paragraph}{Schritte}{33}{section*.212}
-\contentsline {paragraph}{Alternative Schritte}{33}{section*.213}
-\contentsline {paragraph}{Nachbedingungen}{33}{section*.214}
-\contentsline {subsection}{\numberline {2.31}Use-Case Eigene Daten bearbeiten}{34}{subsection.2.31}
-\contentsline {paragraph}{Identifier}{34}{section*.215}
-\contentsline {paragraph}{Beschreibung}{34}{section*.216}
-\contentsline {paragraph}{Ausl"oser}{34}{section*.217}
-\contentsline {paragraph}{Beteiligte Akteure}{34}{section*.218}
-\contentsline {paragraph}{Vorbedingungen}{34}{section*.219}
-\contentsline {paragraph}{Schritte}{34}{section*.220}
-\contentsline {paragraph}{Alternative Schritte}{34}{section*.221}
-\contentsline {paragraph}{Nachbedingungen}{34}{section*.222}
-\contentsline {subsection}{\numberline {2.32}Use-Case Anmeldung f\IeC {\"u}r E-Mail-Benachrichtigungen}{35}{subsection.2.32}
-\contentsline {paragraph}{Beschreibung}{35}{section*.223}
-\contentsline {paragraph}{Ausl"oser}{35}{section*.224}
-\contentsline {paragraph}{Beteiligte Akteure}{35}{section*.225}
-\contentsline {paragraph}{Vorbedingungen}{35}{section*.226}
-\contentsline {paragraph}{Schritte}{35}{section*.227}
-\contentsline {paragraph}{Alternative Schritte}{35}{section*.228}
-\contentsline {paragraph}{Nachbedingungen}{35}{section*.229}
-\contentsline {subsection}{\numberline {2.33}Use-Case Abmeldung von E-Mail-Benachrichtigungen}{36}{subsection.2.33}
-\contentsline {paragraph}{Beschreibung}{36}{section*.230}
-\contentsline {paragraph}{Ausl"oser}{36}{section*.231}
-\contentsline {paragraph}{Beteiligte Akteure}{36}{section*.232}
-\contentsline {paragraph}{Vorbedingungen}{36}{section*.233}
-\contentsline {paragraph}{Schritte}{36}{section*.234}
-\contentsline {paragraph}{Alternative Schritte}{36}{section*.235}
-\contentsline {paragraph}{Nachbedingungen}{36}{section*.236}
-\contentsline {subsection}{\numberline {2.34}Use-Case Benachrichtigungen einsehen und bearbeiten}{37}{subsection.2.34}
-\contentsline {paragraph}{Identifier}{37}{section*.237}
-\contentsline {paragraph}{Beschreibung}{37}{section*.238}
-\contentsline {paragraph}{Ausl"oser}{37}{section*.239}
-\contentsline {paragraph}{Beteiligte Akteure}{37}{section*.240}
-\contentsline {paragraph}{Vorbedingungen}{37}{section*.241}
-\contentsline {paragraph}{Schritte}{37}{section*.242}
-\contentsline {paragraph}{Alternative Schritte}{37}{section*.243}
-\contentsline {paragraph}{Nachbedingungen}{37}{section*.244}
-\contentsline {subsection}{\numberline {2.35}Use-Case Messageboard "offnen (Sonderfunktion)}{38}{subsection.2.35}
-\contentsline {paragraph}{Identifier}{38}{section*.245}
-\contentsline {paragraph}{Beschreibung}{38}{section*.246}
-\contentsline {paragraph}{Ausl"oser}{38}{section*.247}
-\contentsline {paragraph}{Beteiligte Akteure}{38}{section*.248}
-\contentsline {paragraph}{Vorbedingungen}{38}{section*.249}
-\contentsline {paragraph}{Schritte}{38}{section*.250}
-\contentsline {paragraph}{Alternative Schritte}{38}{section*.251}
-\contentsline {paragraph}{Nachbedingungen}{38}{section*.252}
-\contentsline {subsection}{\numberline {2.36}Use-Case Nachricht auf Messageboard posten (Sonderfunktion)}{39}{subsection.2.36}
-\contentsline {paragraph}{Identifier}{39}{section*.253}
-\contentsline {paragraph}{Beschreibung}{39}{section*.254}
-\contentsline {paragraph}{Ausl"oser}{39}{section*.255}
-\contentsline {paragraph}{Beteiligte Akteure}{39}{section*.256}
-\contentsline {paragraph}{Vorbedingungen}{39}{section*.257}
-\contentsline {paragraph}{Schritte}{39}{section*.258}
-\contentsline {paragraph}{Alternative Schritte}{39}{section*.259}
-\contentsline {paragraph}{Nachbedingungen}{39}{section*.260}
-\contentsline {subsection}{\numberline {2.37}Use-Case Privatnachricht senden (Sonderfunktion)}{40}{subsection.2.37}
-\contentsline {paragraph}{Identifier}{40}{section*.261}
-\contentsline {paragraph}{Beschreibung}{40}{section*.262}
-\contentsline {paragraph}{Ausl"oser}{40}{section*.263}
-\contentsline {paragraph}{Beteiligte Akteure}{40}{section*.264}
-\contentsline {paragraph}{Vorbedingungen}{40}{section*.265}
-\contentsline {paragraph}{Schritte}{40}{section*.266}
-\contentsline {paragraph}{Alternative Schritte}{40}{section*.267}
-\contentsline {paragraph}{Nachbedingungen}{40}{section*.268}
-\contentsline {subsection}{\numberline {2.38}Use-Case Bildergalerie "offnen (Sonderfunktion)}{41}{subsection.2.38}
-\contentsline {paragraph}{Identifier}{41}{section*.269}
-\contentsline {paragraph}{Beschreibung}{41}{section*.270}
-\contentsline {paragraph}{Ausl"oser}{41}{section*.271}
-\contentsline {paragraph}{Beteiligte Akteure}{41}{section*.272}
-\contentsline {paragraph}{Vorbedingungen}{41}{section*.273}
-\contentsline {paragraph}{Schritte}{41}{section*.274}
-\contentsline {paragraph}{Alternative Schritte}{41}{section*.275}
-\contentsline {paragraph}{Nachbedingungen}{41}{section*.276}
-\contentsline {subsection}{\numberline {2.39}Use-Case Bilder kommentieren (Sonderfunktion)}{42}{subsection.2.39}
-\contentsline {paragraph}{Identifier}{42}{section*.277}
-\contentsline {paragraph}{Beschreibung}{42}{section*.278}
-\contentsline {paragraph}{Ausl"oser}{42}{section*.279}
-\contentsline {paragraph}{Beteiligte Akteure}{42}{section*.280}
-\contentsline {paragraph}{Vorbedingungen}{42}{section*.281}
-\contentsline {paragraph}{Schritte}{42}{section*.282}
-\contentsline {paragraph}{Alternative Schritte}{42}{section*.283}
-\contentsline {paragraph}{Nachbedingungen}{42}{section*.284}
-\contentsline {subsection}{\numberline {2.40}Use-Case Personen suchen}{43}{subsection.2.40}
-\contentsline {paragraph}{Identifier}{43}{section*.285}
-\contentsline {paragraph}{Beschreibung}{43}{section*.286}
-\contentsline {paragraph}{Ausl"oser}{43}{section*.287}
-\contentsline {paragraph}{Beteiligte Akteure}{43}{section*.288}
-\contentsline {paragraph}{Vorbedingungen}{43}{section*.289}
-\contentsline {paragraph}{Schritte}{43}{section*.290}
-\contentsline {paragraph}{Alternative Schritte}{43}{section*.291}
-\contentsline {paragraph}{Nachbedingungen}{43}{section*.292}
-\contentsline {section}{\numberline {3}Klassendiagramm}{44}{section.3}
-\contentsline {subsection}{\numberline {3.1}Klassendiagramm}{44}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Child}{45}{subsection.3.2}
-\contentsline {paragraph}{Absence}{45}{section*.293}
-\contentsline {paragraph}{Custody}{45}{section*.294}
-\contentsline {paragraph}{Pairtime}{45}{section*.295}
-\contentsline {paragraph}{Sibling}{45}{section*.296}
-\contentsline {subsection}{\numberline {3.3}Employee}{45}{subsection.3.3}
-\contentsline {paragraph}{Status}{45}{section*.297}
-\contentsline {paragraph}{WorkRole}{45}{section*.298}
-\contentsline {subsection}{\numberline {3.4}Nursery}{45}{subsection.3.4}
-\contentsline {paragraph}{AuditLog}{45}{section*.299}
-\contentsline {paragraph}{Lunch}{46}{section*.300}
-\contentsline {paragraph}{Message}{46}{section*.301}
-\contentsline {paragraph}{NurseryInformation}{46}{section*.302}
-\contentsline {subsection}{\numberline {3.5}User}{46}{subsection.3.5}
-\contentsline {paragraph}{UserRole}{46}{section*.303}
-\contentsline {section}{\numberline {4}Software Stack}{47}{section.4}
-\contentsline {subsection}{\numberline {4.1}Spring Framework}{48}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Prime Faces/ CSS}{48}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}H2}{48}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Testen}{48}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Version Control}{48}{subsection.4.5}
-\contentsline {section}{\numberline {5}GUI-Prototypen}{49}{section.5}
-\contentsline {subsection}{\numberline {5.1}Loginseite}{49}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Templateseite Elternteil}{50}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Templateseite Mitarbeiter}{50}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Templateseite Kontaktliste}{51}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Templateseite Daten bearbeiten}{51}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}Templateseite Stammblatt}{52}{subsection.5.6}
-\contentsline {subsection}{\numberline {5.7}Templateseite Tagesplaner}{52}{subsection.5.7}
-\contentsline {subsection}{\numberline {5.8}Templateseite Messageboard}{53}{subsection.5.8}
-\contentsline {subsection}{\numberline {5.9}Templateseite Auditlog}{53}{subsection.5.9}
-\contentsline {subsection}{\numberline {5.10}Templateseite Bildergalerie}{54}{subsection.5.10}
-\contentsline {subsection}{\numberline {5.11}Templateseite Bildergalerie Detail}{54}{subsection.5.11}
-\contentsline {section}{\numberline {6}Projektplan}{55}{section.6}
-\contentsline {subsection}{\numberline {6.1}Arbeitsaufteilung}{55}{subsection.6.1}
-\contentsline {paragraph}{Datenbankmodellierung}{55}{section*.304}
-\contentsline {paragraph}{Konzept}{55}{section*.305}
-\contentsline {paragraph}{GUI}{55}{section*.306}
-\contentsline {paragraph}{Implementierung Use-Cases Benutzer}{55}{section*.307}
-\contentsline {paragraph}{Implementierung Use-Cases aktiver Benutzer}{55}{section*.308}
-\contentsline {paragraph}{Implementierung Use-Case Angestellter}{55}{section*.309}
-\contentsline {paragraph}{Implementierung Sonderfeature}{55}{section*.310}
-\contentsline {paragraph}{Tests}{55}{section*.311}
-\contentsline {subsection}{\numberline {6.2}Meilensteine}{56}{subsection.6.2}
+\contentsline {subsection}{\numberline {2.15}Use-Case Freischaltung der Bezugspersonen}{18}{subsection.2.15}
+\contentsline {paragraph}{Identifier}{18}{section*.98}
+\contentsline {paragraph}{Beschreibung}{18}{section*.99}
+\contentsline {paragraph}{Ausl"oser}{18}{section*.100}
+\contentsline {paragraph}{Beteiligte Akteure}{18}{section*.101}
+\contentsline {paragraph}{Vorbedingungen}{18}{section*.102}
+\contentsline {paragraph}{Schritte}{18}{section*.103}
+\contentsline {paragraph}{Alternative Schritte}{18}{section*.104}
+\contentsline {paragraph}{Nachbedingungen}{18}{section*.105}
+\contentsline {subsection}{\numberline {2.16}Use-Case Kinderstammblatt einsehen (Mitarbeiter)}{19}{subsection.2.16}
+\contentsline {paragraph}{Identifier}{19}{section*.106}
+\contentsline {paragraph}{Beschreibung}{19}{section*.107}
+\contentsline {paragraph}{Ausl"oser}{19}{section*.108}
+\contentsline {paragraph}{Beteiligte Akteure}{19}{section*.109}
+\contentsline {paragraph}{Vorbedingungen}{19}{section*.110}
+\contentsline {paragraph}{Schritte}{19}{section*.111}
+\contentsline {paragraph}{Alternative Schritte}{19}{section*.112}
+\contentsline {paragraph}{Nachbedingungen}{19}{section*.113}
+\contentsline {subsection}{\numberline {2.17}Use-Case Planer einsehen}{20}{subsection.2.17}
+\contentsline {paragraph}{Identifier}{20}{section*.114}
+\contentsline {paragraph}{Beschreibung}{20}{section*.115}
+\contentsline {paragraph}{Ausl"oser}{20}{section*.116}
+\contentsline {paragraph}{Beteiligte Akteure}{20}{section*.117}
+\contentsline {paragraph}{Vorbedingungen}{20}{section*.118}
+\contentsline {paragraph}{Schritte}{20}{section*.119}
+\contentsline {paragraph}{Alternative Schritte}{20}{section*.120}
+\contentsline {paragraph}{Nachbedingungen}{20}{section*.121}
+\contentsline {subsection}{\numberline {2.18}Use-Case Aufgaben der Eltern eintragen}{21}{subsection.2.18}
+\contentsline {paragraph}{Identifier}{21}{section*.122}
+\contentsline {paragraph}{Beschreibung}{21}{section*.123}
+\contentsline {paragraph}{Ausl"oser}{21}{section*.124}
+\contentsline {paragraph}{Beteiligte Akteure}{21}{section*.125}
+\contentsline {paragraph}{Vorbedingungen}{21}{section*.126}
+\contentsline {paragraph}{Schritte}{21}{section*.127}
+\contentsline {subsection}{\numberline {2.19}Use-Case Einsehen der eigenen Aufgaben}{22}{subsection.2.19}
+\contentsline {paragraph}{Beschreibung}{22}{section*.128}
+\contentsline {paragraph}{Ausl"oser}{22}{section*.129}
+\contentsline {paragraph}{Beteiligte Akteure}{22}{section*.130}
+\contentsline {paragraph}{Vorbedingungen}{22}{section*.131}
+\contentsline {paragraph}{Schritte}{22}{section*.132}
+\contentsline {paragraph}{Alternative Schritte}{22}{section*.133}
+\contentsline {paragraph}{Nachbedingungen}{22}{section*.134}
+\contentsline {subsection}{\numberline {2.20}Use-Case Auditlog einsehen}{23}{subsection.2.20}
+\contentsline {paragraph}{Identifier}{23}{section*.135}
+\contentsline {paragraph}{Beschreibung}{23}{section*.136}
+\contentsline {paragraph}{Ausl"oser}{23}{section*.137}
+\contentsline {paragraph}{Beteiligte Akteure}{23}{section*.138}
+\contentsline {paragraph}{Vorbedingungen}{23}{section*.139}
+\contentsline {paragraph}{Schritte}{23}{section*.140}
+\contentsline {paragraph}{Alternative Schritte}{23}{section*.141}
+\contentsline {paragraph}{Nachbedingungen}{23}{section*.142}
+\contentsline {subsection}{\numberline {2.21}Use-Case Bring- und Abholzeiten eintragen (Eltern)}{24}{subsection.2.21}
+\contentsline {paragraph}{Identifier}{24}{section*.143}
+\contentsline {paragraph}{Beschreibung}{24}{section*.144}
+\contentsline {paragraph}{Ausl"oser}{24}{section*.145}
+\contentsline {paragraph}{Beteiligte Akteure}{24}{section*.146}
+\contentsline {paragraph}{Vorbedingungen}{24}{section*.147}
+\contentsline {paragraph}{Schritte}{24}{section*.148}
+\contentsline {paragraph}{Alternative Schritte}{24}{section*.149}
+\contentsline {paragraph}{Nachbedingungen}{24}{section*.150}
+\contentsline {subsection}{\numberline {2.22}Use-Case Mittagessen anmelden/abmelden}{25}{subsection.2.22}
+\contentsline {paragraph}{Identifier}{25}{section*.151}
+\contentsline {paragraph}{Beschreibung}{25}{section*.152}
+\contentsline {paragraph}{Ausl"oser}{25}{section*.153}
+\contentsline {paragraph}{Beteiligte Akteure}{25}{section*.154}
+\contentsline {paragraph}{Vorbedingungen}{25}{section*.155}
+\contentsline {paragraph}{Schritte}{25}{section*.156}
+\contentsline {paragraph}{Alternative Schritte}{25}{section*.157}
+\contentsline {paragraph}{Nachbedingungen}{25}{section*.158}
+\contentsline {subsection}{\numberline {2.23}Use-Case Eigene Daten bearbeiten}{26}{subsection.2.23}
+\contentsline {paragraph}{Identifier}{26}{section*.159}
+\contentsline {paragraph}{Beschreibung}{26}{section*.160}
+\contentsline {paragraph}{Ausl"oser}{26}{section*.161}
+\contentsline {paragraph}{Beteiligte Akteure}{26}{section*.162}
+\contentsline {paragraph}{Vorbedingungen}{26}{section*.163}
+\contentsline {paragraph}{Schritte}{26}{section*.164}
+\contentsline {paragraph}{Alternative Schritte}{26}{section*.165}
+\contentsline {paragraph}{Nachbedingungen}{26}{section*.166}
+\contentsline {subsection}{\numberline {2.24}Use-Case Anmeldung f\IeC {\"u}r E-Mail-Benachrichtigungen}{27}{subsection.2.24}
+\contentsline {paragraph}{Identifier}{27}{section*.167}
+\contentsline {paragraph}{Beschreibung}{27}{section*.168}
+\contentsline {paragraph}{Ausl"oser}{27}{section*.169}
+\contentsline {paragraph}{Beteiligte Akteure}{27}{section*.170}
+\contentsline {paragraph}{Vorbedingungen}{27}{section*.171}
+\contentsline {paragraph}{Schritte}{27}{section*.172}
+\contentsline {paragraph}{Alternative Schritte}{27}{section*.173}
+\contentsline {paragraph}{Nachbedingungen}{27}{section*.174}
+\contentsline {subsection}{\numberline {2.25}Use-Case Abmeldung von E-Mail-Benachrichtigungen}{28}{subsection.2.25}
+\contentsline {paragraph}{Identifier}{28}{section*.175}
+\contentsline {paragraph}{Beschreibung}{28}{section*.176}
+\contentsline {paragraph}{Ausl"oser}{28}{section*.177}
+\contentsline {paragraph}{Beteiligte Akteure}{28}{section*.178}
+\contentsline {paragraph}{Vorbedingungen}{28}{section*.179}
+\contentsline {paragraph}{Schritte}{28}{section*.180}
+\contentsline {paragraph}{Alternative Schritte}{28}{section*.181}
+\contentsline {paragraph}{Nachbedingungen}{28}{section*.182}
+\contentsline {subsection}{\numberline {2.26}Use-Case Messageboard "offnen}{29}{subsection.2.26}
+\contentsline {paragraph}{Identifier}{29}{section*.183}
+\contentsline {paragraph}{Beschreibung}{29}{section*.184}
+\contentsline {paragraph}{Ausl"oser}{29}{section*.185}
+\contentsline {paragraph}{Beteiligte Akteure}{29}{section*.186}
+\contentsline {paragraph}{Vorbedingungen}{29}{section*.187}
+\contentsline {paragraph}{Schritte}{29}{section*.188}
+\contentsline {paragraph}{Alternative Schritte}{29}{section*.189}
+\contentsline {paragraph}{Nachbedingungen}{29}{section*.190}
+\contentsline {subsection}{\numberline {2.27}Use-Case Nachricht auf Messageboard posten}{30}{subsection.2.27}
+\contentsline {paragraph}{Identifier}{30}{section*.191}
+\contentsline {paragraph}{Beschreibung}{30}{section*.192}
+\contentsline {paragraph}{Ausl"oser}{30}{section*.193}
+\contentsline {paragraph}{Beteiligte Akteure}{30}{section*.194}
+\contentsline {paragraph}{Vorbedingungen}{30}{section*.195}
+\contentsline {paragraph}{Schritte}{30}{section*.196}
+\contentsline {paragraph}{Alternative Schritte}{30}{section*.197}
+\contentsline {paragraph}{Nachbedingungen}{30}{section*.198}
+\contentsline {subsection}{\numberline {2.28}Use-Case Privatnachricht senden (Sonderfunktion)}{31}{subsection.2.28}
+\contentsline {paragraph}{Identifier}{31}{section*.199}
+\contentsline {paragraph}{Beschreibung}{31}{section*.200}
+\contentsline {paragraph}{Ausl"oser}{31}{section*.201}
+\contentsline {paragraph}{Beteiligte Akteure}{31}{section*.202}
+\contentsline {paragraph}{Vorbedingungen}{31}{section*.203}
+\contentsline {paragraph}{Schritte}{31}{section*.204}
+\contentsline {paragraph}{Alternative Schritte}{31}{section*.205}
+\contentsline {paragraph}{Nachbedingungen}{31}{section*.206}
+\contentsline {section}{\numberline {3}Klassendiagramm}{32}{section.3}
+\contentsline {subsection}{\numberline {3.1}Klassendiagramm}{32}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Child}{33}{subsection.3.2}
+\contentsline {paragraph}{Absence}{33}{section*.207}
+\contentsline {paragraph}{Custody}{33}{section*.208}
+\contentsline {paragraph}{Pairtime}{33}{section*.209}
+\contentsline {paragraph}{Sibling}{33}{section*.210}
+\contentsline {subsection}{\numberline {3.3}Employee}{33}{subsection.3.3}
+\contentsline {paragraph}{Status}{33}{section*.211}
+\contentsline {paragraph}{WorkRole}{33}{section*.212}
+\contentsline {subsection}{\numberline {3.4}Nursery}{33}{subsection.3.4}
+\contentsline {paragraph}{AuditLog}{33}{section*.213}
+\contentsline {paragraph}{Lunch}{34}{section*.214}
+\contentsline {paragraph}{Message}{34}{section*.215}
+\contentsline {paragraph}{NurseryInformation}{34}{section*.216}
+\contentsline {subsection}{\numberline {3.5}User}{34}{subsection.3.5}
+\contentsline {paragraph}{UserRole}{34}{section*.217}
+\contentsline {section}{\numberline {4}Software Stack}{35}{section.4}
+\contentsline {subsection}{\numberline {4.1}Spring Framework}{36}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Prime Faces/ CSS}{36}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}MySQL}{36}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Testen}{36}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Version Control}{36}{subsection.4.5}
+\contentsline {section}{\numberline {5}GUI-Prototypen}{37}{section.5}
+\contentsline {subsection}{\numberline {5.1}Loginseite}{37}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Templateseite Elternteil}{38}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Templateseite Mitarbeiter}{38}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Templateseite Kontaktliste}{39}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Templateseite Daten bearbeiten}{39}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Templateseite Stammblatt}{40}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Templateseite Tagesplaner}{40}{subsection.5.7}
+\contentsline {subsection}{\numberline {5.8}Templateseite Messageboard}{41}{subsection.5.8}
+\contentsline {subsection}{\numberline {5.9}Templateseite Auditlog}{41}{subsection.5.9}
+\contentsline {subsection}{\numberline {5.10}Templateseite Bildergalerie}{42}{subsection.5.10}
+\contentsline {subsection}{\numberline {5.11}Templateseite Bildergalerie Detail}{42}{subsection.5.11}
+\contentsline {section}{\numberline {6}Projektplan}{43}{section.6}
+\contentsline {subsection}{\numberline {6.1}Arbeitsaufteilung}{43}{subsection.6.1}
+\contentsline {paragraph}{Datenbankmodellierung}{43}{section*.218}
+\contentsline {paragraph}{Konzept}{43}{section*.219}
+\contentsline {paragraph}{GUI}{43}{section*.220}
+\contentsline {paragraph}{Implementierung Use-Cases Benutzer}{43}{section*.221}
+\contentsline {paragraph}{Implementierung Use-Cases aktiver Benutzer}{43}{section*.222}
+\contentsline {paragraph}{Implementierung Use-Case Angestellter}{43}{section*.223}
+\contentsline {paragraph}{Implementierung Sonderfeature}{43}{section*.224}
+\contentsline {paragraph}{Tests}{43}{section*.225}
+\contentsline {subsection}{\numberline {6.2}Meilensteine}{44}{subsection.6.2}
