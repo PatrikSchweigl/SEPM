@@ -110,6 +110,9 @@ public class ChildController {
         this.child = child;
         doReloadChild();
     }
+    public void setChild2(Child child) {
+        this.child = child;
+    }
 
 
 

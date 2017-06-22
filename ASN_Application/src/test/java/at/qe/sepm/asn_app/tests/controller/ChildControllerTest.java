@@ -142,7 +142,7 @@ public class ChildControllerTest {
             parentController.doSaveParent();
 
             // Save the child in the database.
-            childController.setChild(child);
+            childController.setChild2(child);
             childController.setParentUserName(parent1.getUsername());
             child = childController.doSaveChild();
 
