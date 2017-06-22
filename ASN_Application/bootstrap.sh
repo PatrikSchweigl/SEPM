@@ -76,8 +76,9 @@ quit
 EOFMYSQL
 
 
-    	#Change directory to the source code
+    #Change directory to the source code
 	cd /vagrant/
 	
+	mvn test
 	#Run the application
     mvn spring-boot:run
