@@ -51,9 +51,28 @@ public class LunchService {
         return lunchRepository.findOne(id);
     }
 
+    /**
+     * getLunchInTimeWindowIE
+     * returns all Lunches in the time window specified by the two parameters
+     * IE stands for Inclusive Exclusive, meaning that all dates INCLUDING start and EXCLUDING end will be searched
+     *
+     * @param start date
+     * @param end   date
+     * @return List of lunch in the time window
+     */
     public List<Lunch> getLunchInTimeWindowIE(Date start, Date end) {
         return lunchRepository.getLunchInTimeWindowIE(start, end);
     }
+
+    /**
+     * getLunchInTimeWindowII
+     * returns all Lunches in the time window specified by the two parameters
+     * II stands for Inclusive Inclusive, meaning that all dates INCLUDING start and end will be searched
+     *
+     * @param start date
+     * @param end   date
+     * @return List of lunch in the time window
+     */
 
     public List<Lunch> getLunchInTimeWindowII(Date start, Date end) {
         return lunchRepository.getLunchInTimeWindowII(start, end);

@@ -51,6 +51,9 @@ public class CommentController {
         this.message = message;
         doReloadMessage();
     }
+    public void setMessage2(Comment message) {
+        this.message = message;
+    }
 
 
     public void doReloadMessage() {

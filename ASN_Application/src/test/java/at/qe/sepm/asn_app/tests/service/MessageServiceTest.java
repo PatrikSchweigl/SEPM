@@ -15,10 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -86,6 +83,10 @@ public class MessageServiceTest {
         message.setDate(date);
         message.setMessage(content);
         message.setUsername(username);
+
+        Collection<Message> messages = messageService.getAllMessages();
+        assertNotNull(messages);
+
 
         // Compare all attributes with getters.
         assertEquals(date.toString(), message.getDate());

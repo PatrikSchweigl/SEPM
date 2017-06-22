@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Auki on 13.06.2017.
+ * Created by Lukas Aukenthaler on 13.06.2017.
  */
 
 @Component

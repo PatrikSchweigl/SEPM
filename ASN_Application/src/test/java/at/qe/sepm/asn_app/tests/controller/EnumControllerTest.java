@@ -25,7 +25,6 @@ import static org.junit.Assert.assertTrue;
 @Scope("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@WebAppConfiguration
 public class EnumControllerTest {
 
     @Autowired

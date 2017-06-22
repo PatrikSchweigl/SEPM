@@ -1,6 +1,8 @@
 package at.qe.sepm.asn_app.tests;
 
+import at.qe.sepm.asn_app.tests.bean.BeanTestSuite;
 import at.qe.sepm.asn_app.tests.constraints.ConstraintsTestSuite;
+import at.qe.sepm.asn_app.tests.controller.ControllerTestSuite;
 import at.qe.sepm.asn_app.tests.service.ServiceTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -13,6 +15,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        BeanTestSuite.class,
+        ControllerTestSuite.class,
         ConstraintsTestSuite.class,
         ServiceTestSuite.class
 })

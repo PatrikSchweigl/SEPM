@@ -36,8 +36,6 @@ public class PDFBean {
     public PDFBean() {
     }
 
-    ;
-
     public void createPDFChild() throws DocumentException, IOException {
         Font catFont = new Font(Font.TIMES_ROMAN, 24, Font.BOLD);
         Font redFont = new Font(Font.TIMES_ROMAN, 18, Font.NORMAL);
@@ -46,7 +44,7 @@ public class PDFBean {
         if (child == null) {
             return;
         }
-        String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + child.getFirstName() + child.getLastName()
+        String DEST = "src/main/webapp/resources/downloads/Stammblatt" + child.getFirstName() + child.getLastName()
                 + ".pdf";
         File file = new File(DEST);
         Document document = new Document();
@@ -175,7 +173,7 @@ public class PDFBean {
 
             return;
         }
-        String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + employee.getFirstName()
+        String DEST = "src/main/webapp/resources/downloads/Stammblatt" + employee.getFirstName()
                 + employee.getLastName() + ".pdf";
         File file = new File(DEST);
         Document document = new Document();
@@ -287,7 +285,7 @@ public class PDFBean {
         if (parent == null) {
             return;
         }
-        String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + parent.getFirstName()
+        String DEST = "src/main/webapp/resources/downloads/Stammblatt" + parent.getFirstName()
                 + parent.getLastName() + ".pdf";
         File file = new File(DEST);
         Document document = new Document();
@@ -398,7 +396,7 @@ public class PDFBean {
         if (caregiver == null) {
             return;
         }
-        String DEST = "src/main/webapp/resources/Downloads/Stammblatt" + caregiver.getFirstName()
+        String DEST = "src/main/webapp/resources/downloads/Stammblatt" + caregiver.getFirstName()
                 + caregiver.getLastName() + ".pdf";
         File file = new File(DEST);
         Document document = new Document();

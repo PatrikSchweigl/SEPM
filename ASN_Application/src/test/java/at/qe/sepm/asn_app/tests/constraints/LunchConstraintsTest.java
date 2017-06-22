@@ -101,7 +101,6 @@ public class LunchConstraintsTest {
         assertFalse(lunchConstraints.checkIfLunchExists(lunch1));
 
         // Create a lunch one day before the initial lunch.
-        calendar.clear();
         calendar.set(2017, Calendar.JULY, 3, 23, 59);
         lunch2.setCost(lunch1.getCost());
         lunch2.setDate(calendar.getTime());

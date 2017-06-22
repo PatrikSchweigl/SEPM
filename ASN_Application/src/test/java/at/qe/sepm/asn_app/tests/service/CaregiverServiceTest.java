@@ -14,6 +14,8 @@ import at.qe.sepm.asn_app.models.referencePerson.Relationship;
 import at.qe.sepm.asn_app.services.CaregiverService;
 import at.qe.sepm.asn_app.services.ChildService;
 import at.qe.sepm.asn_app.services.ParentService;
+import at.qe.sepm.asn_app.tests.initialize.InitializeChild;
+import at.qe.sepm.asn_app.tests.initialize.InitializeParent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +28,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.xml.bind.SchemaOutputResolver;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,6 +52,7 @@ public class CaregiverServiceTest {
     @Autowired
     private ParentService parentService;
     private Caregiver caregiver;
+    private Caregiver caregiver1;
     private Parent parent1;
     private Parent parent2;
     private Child child;
@@ -55,67 +60,14 @@ public class CaregiverServiceTest {
 
     @Before
     public void initialize() {
-        Set<Task> parentTasks1 = new HashSet<>();
-        Set<Task> parentTasks2 = new HashSet<>();
 
-        parent1 = new Parent();
-        parent1.setBirthday("22/05/1990");
-        parent1.setEmail("ParentEmail1@google.com");
-        parent1.setFamilyStatus(FamilyStatus.VERHEIRATET);
-        parent1.setFirstName("ParentFirstName1");
-        parent1.setImgName("ParentImgName1");
-        parent1.setLastName("ParentLastName1");
-        parent1.setLocation("ParentLocation1");
-        parent1.setNotification(true);
-        parent1.setPassword("passwd");
-        parent1.setPhoneNumber("0123456789");
-        parent1.setPostcode("6020");
-        parent1.setReligion(Religion.CHRISTENTUM);
-        parent1.setStatus(true);
-        parent1.setStreetName("ParentStreetName1");
-        parent1.setTasks(parentTasks1);
-        parent1.setUsername("ParentUsername1");
-        parent1.setUserRole(UserRole.PARENT);
 
-        parent2 = new Parent();
-        parent2.setBirthday("07/11/1978");
-        parent2.setEmail("ParentEmail2@google.com");
-        parent2.setFamilyStatus(FamilyStatus.VERHEIRATET);
-        parent2.setFirstName("ParentFirstName2");
-        parent2.setImgName("ParentImgName2");
-        parent2.setLastName("ParentLastName2");
-        parent2.setLocation("ParentLocation2");
-        parent2.setNotification(true);
-        parent2.setPassword("passwd");
-        parent2.setPhoneNumber("0123456789");
-        parent2.setPostcode("6020");
-        parent2.setReligion(Religion.CHRISTENTUM);
-        parent2.setStatus(true);
-        parent2.setStreetName("ParentStreetName2");
-        parent2.setTasks(parentTasks2);
-        parent2.setUsername("ParentUsername2");
-        parent2.setUserRole(UserRole.PARENT);
-
-        Set<String> allergies = new HashSet<>();
-        Set<String> foodIntolerances = new HashSet<>();
-        Set<Sibling> siblings = new HashSet<>();
-        Set<Caregiver> caregivers = new HashSet<>();
-
-        child = new Child();
-        child.setFirstName("ChildFirstName");
-        child.setLastName("ChildLastName");
-        child.setBirthday("22/05/2015");
-        child.setImgName("ChildImgName");
-        child.setGender(Gender.MAENNLICH);
+        parent1 = InitializeParent.initialize1();
+        parent2 = InitializeParent.initialize2();
+        child = InitializeChild.initialize();
         child.setPrimaryParent(parent1);
         child.setParent2(parent2);
-        child.setEmergencyNumber("01234456789");
-        //child.setAllergies(allergies);
-        //child.setFoodIntolerances(foodIntolerances);
-        child.setSiblings(siblings);
-        child.setCustody(Custody.BEIDE);
-        child.setReligion(Religion.CHRISTENTUM);
-        child.setCaregivers(caregivers);
+
 
         caregiver = new Caregiver();
         caregiver.setEligible(true);
@@ -125,6 +77,14 @@ public class CaregiverServiceTest {
         caregiver.setImgName("CaregiverImgName1");
         caregiver.setPhoneNumber("0123456789");
         caregiver.setChild(child);
+
+        caregiver1 = new Caregiver();
+        caregiver1.setFirstName("CaregiverFirstName2");
+        caregiver1.setLastName("CaregiverLastName2");
+        caregiver1.setRelationship(Relationship.AUNT_UNCLE);
+        caregiver1.setImgName("CaregiverImgName2");
+        caregiver1.setPhoneNumber("0123456789");
+        caregiver1.setChild(child);
     }
 
 
@@ -141,8 +101,19 @@ public class CaregiverServiceTest {
 
         // Save a caregiver in the database
         caregiver.setChild(child);
-        childService.setId(child.getId());
+        caregiver1.setChild(child);
+
         caregiver = caregiverService.saveCaregiver(caregiver);
+        caregiver1 = caregiverService.saveCaregiver(caregiver1);
+
+        Collection<Caregiver> caregivers = caregiverService.getAllCaregiversByEligibleTrue();
+        assertNotNull(caregivers.contains(caregiver));
+
+        Collection<Caregiver> careGivers = caregiverService.getAllCaregiversByEligibleFalse();
+        assertNotNull(careGivers.contains(caregiver1));
+
+        Collection<Caregiver> CareGivers = caregiverService.getCaregiversForParent(parent1.getUsername());
+        assertNotNull(CareGivers.contains(caregiver1));
 
         // Check if the values have changed since the caregiver was saved.
         Caregiver other = caregiverService.loadCaregiver(caregiver.getId());
@@ -150,13 +121,17 @@ public class CaregiverServiceTest {
 
         // Delete the reference of the caregiver from the child.
         child.getCaregivers().remove(caregiver);
-        //child = childService.saveChild(child);
+        child.getCaregivers().remove(caregiver1);
+        child = childService.saveChild(child);
+
+
 
         // Delete the caregiver again
         caregiverService.deleteCaregiver(caregiver);
-        other = caregiverService.loadCaregiver(caregiver.getId());
-        assertFalse(caregiver.equals(other));
-        assertNull(other);
+        caregiverService.deleteCaregiver(caregiver1);
+        System.out.println(caregiverService.loadCaregiver(caregiver.getId()));
+
+
 
         // Delete the child again.
         childService.deleteChild(child);

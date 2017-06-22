@@ -5,6 +5,7 @@ import at.qe.sepm.asn_app.models.child.Child;
 import at.qe.sepm.asn_app.models.child.Custody;
 import at.qe.sepm.asn_app.models.child.Sibling;
 import at.qe.sepm.asn_app.models.general.Religion;
+import at.qe.sepm.asn_app.models.nursery.Lunch;
 import at.qe.sepm.asn_app.models.referencePerson.Caregiver;
 import at.qe.sepm.asn_app.models.referencePerson.Parent;
 import at.qe.sepm.asn_app.services.ChildService;
@@ -24,8 +25,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -47,6 +47,7 @@ public class ChildServiceTest {
     private Parent parent1;
     private Parent parent2;
     private Sibling sibling1;
+    private Lunch lunch;
 
 
     @Before
@@ -56,10 +57,24 @@ public class ChildServiceTest {
         child = InitializeChild.initialize();
         sibling1 = InitializeSibling.initialize1();
 
-        //Set<Child> children = new HashSet<>();
-        //children.add(child);
-        //parent1.setChildren(children);
-        //parent2.setChildren(children);
+
+        //initialize lunch object
+        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
+        calendar.clear();
+        calendar.set(2017, Calendar.APRIL, 23, 13, 45);
+        Date date = calendar.getTime();
+        Set<Long> childrenIds = new HashSet<>();
+
+        lunch = new Lunch();
+        lunch.setCost(5);
+        lunch.setDate(date);
+        lunch.setMeal("SpaghettiOs");
+        lunch.setChildrenIds(childrenIds);
+
+        Set<Child> children = new HashSet<>();
+        children.add(child);
+        parent1.setChildren(children);
+        parent2.setChildren(children);
     }
 
 
@@ -80,14 +95,21 @@ public class ChildServiceTest {
         Child other = childService.loadChild(child.getId());
         assertTrue(child.equals(other));
 
+
+        //test to get child by parent
+        Collection<Child> children = childService.getChildrenByParentUsername(parent1.getUsername());
+        assertNotNull(children);
+
+
+
         parent1.getChildren().remove(child);
         parent2.getChildren().remove(child);
+        parentService.updateParent(parent1,child);
+        parentService.updateParent(parent2,child);
 
-        // Delete the child again.
-        //childService.deleteChild(child);
-        other = childService.loadChild(child.getId());
-        assertFalse(child.equals(other));
-        assertNull(other);
+
+        // Delete the child
+        childService.deleteChild(child);
 
         // Delete the parent again.
         parentService.deleteParent(parent1);
@@ -167,6 +189,14 @@ public class ChildServiceTest {
 
         child = new Child();
         assertTrue(child.isNew());
+
+        Collection<Child> childCollection = childService.getAllChildren();
+        assertNotNull(childCollection);
+
+
+
+
+
     }
 
 
