@@ -26,7 +26,7 @@ public class InitializeParent {
         parent.setEmail("ParentEmail1@google.com");
         parent.setFamilyStatus(FamilyStatus.VERHEIRATET);
         parent.setFirstName("ParentFirstName1");
-        parent.setImgName("ParentImgName1");
+        parent.setImgName("emptypicture.png");
         parent.setLastName("ParentLastName1");
         parent.setLocation("ParentLocation1");
         parent.setNotification(true);
@@ -37,7 +37,7 @@ public class InitializeParent {
         parent.setStatus(true);
         parent.setStreetName("ParentStreetName1");
         parent.setTasks(tasks);
-        parent.setUsername("ParentUsername1");
+        parent.setUsername("parentusername1");
         parent.setUserRole(UserRole.PARENT);
 
         return parent;
@@ -65,7 +65,7 @@ public class InitializeParent {
         parent.setStatus(true);
         parent.setStreetName("ParentStreetName2");
         parent.setTasks(tasks);
-        parent.setUsername("ParentUsername2");
+        parent.setUsername("parentusername2");
         parent.setUserRole(UserRole.PARENT);
 
         return parent;

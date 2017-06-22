@@ -30,7 +30,7 @@ public class InitializeChild {
         child.setFirstName("ChildFirstName");
         child.setLastName("ChildLastName");
         child.setBirthday("22/05/2015");
-        child.setImgName("ChildImgName");
+        child.setImgName("emptypicture.png");
         child.setGender(Gender.MAENNLICH);
         child.setPrimaryParent(parent1);
         child.setParent2(parent2);

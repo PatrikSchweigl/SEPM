@@ -19,7 +19,7 @@ public class InitializeEmployee {
         employee.setEmail("EmployeeEmail@google.com");
         employee.setFamilyStatus(FamilyStatus.VERWITTWED);
         employee.setFirstName("EmployeeFirstName");
-        employee.setImgName("EmployeeImgName");
+        employee.setImgName("emptypicture.png");
         employee.setLastName("EmployeeLastName");
         employee.setLocation("EmpoyeeLocation");
         employee.setNotification(false);
