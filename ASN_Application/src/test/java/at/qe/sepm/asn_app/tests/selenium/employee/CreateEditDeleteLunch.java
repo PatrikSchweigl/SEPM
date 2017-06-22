@@ -42,10 +42,13 @@ public class CreateEditDeleteLunch {
         driver.findElement(By.id("password")).sendKeys("passwd");
         // close password change dialog
         driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
+		Thread.sleep(1000);
         // navigate
         driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
+		Thread.sleep(1000);
         // create lunch
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[6]/a/i")).click();
+		Thread.sleep(1000);
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
         // fill form

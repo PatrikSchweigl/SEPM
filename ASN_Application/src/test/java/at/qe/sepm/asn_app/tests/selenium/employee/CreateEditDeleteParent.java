@@ -40,12 +40,15 @@ public class CreateEditDeleteParent {
         driver.findElement(By.id("username")).sendKeys("cheng");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("passwd");
-        // close password change dialog
         driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
-        // navigate
+		Thread.sleep(1000);
+		// close password change dialog
         driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
-        // create parent
-        driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[3]/a/i")).click();
+		Thread.sleep(1000);
+		// navigate
+		driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[3]/a/i")).click();
+		Thread.sleep(1000);
+		// create parent
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
         // fill form
