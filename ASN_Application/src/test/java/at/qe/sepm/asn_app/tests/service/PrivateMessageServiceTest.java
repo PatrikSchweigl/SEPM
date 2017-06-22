@@ -88,6 +88,13 @@ public class PrivateMessageServiceTest {
         assertEquals(usernameSender, privateMessage.getUsernameSender());
     }
 
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(privateMessage.toString());
+        assertNotEquals("", privateMessage.toString());
+    }
+
 
     @After
     public void cleanUp() {

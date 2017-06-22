@@ -129,6 +129,16 @@ public class ParentServiceTest {
     }
 
 
+    @Test
+    public void furtherMethods() {
+        // Test toString()
+        assertNotNull(parent.toString());
+        assertNotEquals("",parent.toString());
+    }
+
+
+
+
     @After
     public void cleanUp() {
         parent = null;

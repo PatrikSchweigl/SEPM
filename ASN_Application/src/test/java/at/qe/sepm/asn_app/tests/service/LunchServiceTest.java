@@ -106,6 +106,7 @@ public class LunchServiceTest {
 
 
         // Test toString()
+        assertNotNull(lunch.toString());
         assertNotEquals("", lunch.toString());
     }
 

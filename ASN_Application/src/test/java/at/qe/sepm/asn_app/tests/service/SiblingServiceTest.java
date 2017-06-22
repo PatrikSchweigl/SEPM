@@ -114,6 +114,7 @@ public class SiblingServiceTest {
     @Test
     public void testFurtherMethods() {
         // Print all information with toString();
+        assertNotNull(sibling.toString());
         assertNotEquals("", sibling.toString());
 
 

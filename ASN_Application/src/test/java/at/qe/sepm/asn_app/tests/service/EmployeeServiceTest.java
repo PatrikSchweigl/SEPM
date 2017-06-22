@@ -129,6 +129,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void testFurtherMethods() {
+        assertNotNull(employee.toString());
         assertNotEquals("", employee.toString());
 
     }
