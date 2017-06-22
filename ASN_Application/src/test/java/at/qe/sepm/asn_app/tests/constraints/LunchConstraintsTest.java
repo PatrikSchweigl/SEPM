@@ -153,30 +153,14 @@ public class LunchConstraintsTest {
         assertFalse(lunchConstraints.checkIfNurseryInformationExists(lunch1));
 
 
-        calendar.clear();
+        //calendar.clear();
         calendar.set(2017, Calendar.JULY, 11, 10, 0);
         Date date1 = calendar.getTime();
-
-        NurseryInformation nurseryInformation1 = new NurseryInformation();
-        nurseryInformation1.setBringStart(date1);
-        nurseryInformation1.setBringEnd(date1);
-        nurseryInformation1.setPickUpStart(date1);
-        nurseryInformation1.setPickUpEnd(date1);
-        nurseryInformation1.setMaxOccupancy(21);
-        nurseryInformation1.setTodaysDate(date1);
-        nurseryInformation1.setOriginDate(date1);
-
-        // Save the nurseryInformation in the database.
-        nurseryInformation1 = nurseryInformationService.saveNurseryInformation(nurseryInformation1);
-
+        lunch1.setDate(date1);
 
         assertTrue(lunchConstraints.checkIfNurseryInformationExists(lunch1));
 
-        // Delete the nurseryInformation again.
-        nurseryInformationService.deleteNurseryInformation(nurseryInformation1);
-        assertFalse(lunchConstraints.checkIfNurseryInformationExists(lunch1));
-
-        // Delete the lunch again.
+        //Delete the lunch again.
         lunchService.deleteLunch(lunch1);
     }
 

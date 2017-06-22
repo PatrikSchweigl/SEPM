@@ -11,6 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
+
+/**
+ * Log in as the admin, go to the calendar view and create
+ * an appointment. Edit the appointment, delete it and then
+ * log the admin out.
+ */
 public class CalendarAppointment {
     private WebDriver driver;
     private String baseUrl;
