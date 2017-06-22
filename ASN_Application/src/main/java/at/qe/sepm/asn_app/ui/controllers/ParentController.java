@@ -104,6 +104,9 @@ public class ParentController {
         this.parent = parent;
         doReloadParent();
     }
+    public void setParent2(Parent parent) {
+        this.parent = parent;
+    }
 
 
     public void doChangePassword(String password) {

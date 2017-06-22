@@ -75,7 +75,7 @@ public class RegistrationConstraintsTest {
         assertTrue(registrationConstraints.checkIfNurseryExists(registration));
         assertTrue(registrationConstraints.checkTimeConstraints(registration));
         assertTrue(registrationConstraints.registrationExists(registration));
-        deleteElements();
+        //deleteElements();
     }
 
 
@@ -106,6 +106,17 @@ public class RegistrationConstraintsTest {
 
         registration.setDate(calendar.getTime());
         assertFalse(registrationConstraints.checkIfNurseryExists(registration));
+    }
+
+
+    @Test
+    public void testCheckTimeConstraints() {
+        Calendar calendar = GregorianCalendar.getInstance(TimeZone.getTimeZone("Europe/Vienna"));
+        calendar.clear();
+        calendar.set(2017, Calendar.SEPTEMBER, 14, 0, 0);
+
+        registration.setBringdate(calendar.getTime());
+        //assertFalse(registrationConstraints.checkTimeConstraints(registration));
     }
 
 

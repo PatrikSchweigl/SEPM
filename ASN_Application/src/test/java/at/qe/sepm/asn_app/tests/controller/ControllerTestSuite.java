@@ -14,6 +14,7 @@ import org.junit.runners.Suite.SuiteClasses;
         CaregiverControllerTest.class,
         ChildControllerTest.class,
         CommentControllerTest.class,
+        EmployeeControllerTest.class,
         EnumControllerTest.class,
         LunchControllerTest.class,
         MessageControllerTest.class,

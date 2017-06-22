@@ -47,8 +47,10 @@ public class ParentService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
-            auditLogRepository.save(log);
+            if (getAuthenticatedUser() != null) {
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + parent.getUsername() + " [" + parent.getUserRole() + "]", new Date());
+                auditLogRepository.save(log);
+            }
         }
         String pwd = userService.generatePasswordNew(parent.getEmail());
         mailService.sendEmail(parent.getEmail(), "Care4Fun-App - Registrierung",

@@ -150,7 +150,7 @@ public class CaregiverControllerTest {
             parentController.doSaveParent();
 
             // Save the child in the database.
-            childController.setChild(child);
+            childController.setChild2(child);
             childController.setParentUserName(parent1.getUsername());
             child = childController.doSaveChild();
 
@@ -178,9 +178,9 @@ public class CaregiverControllerTest {
 
             // Delete the parent again.
             parentEditController.setParent2(parent1);
-            parentEditController.doDeleteParent();
+            //parentEditController.doDeleteParent();
             parentEditController.setParent2(parent2);
-            parentEditController.doDeleteParent();
+            //parentEditController.doDeleteParent();
         }
         finally {
             context.release();
