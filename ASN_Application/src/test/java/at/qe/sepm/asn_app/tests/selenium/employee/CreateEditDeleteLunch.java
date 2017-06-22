@@ -33,7 +33,7 @@ public class CreateEditDeleteLunch {
     }
 
     @Test
-    public void testCreateEditDeleteChild() throws Exception {
+    public void testCreateEditDeleteLunch() throws Exception {
         // login
         driver.get(baseUrl + "/login.xhtml");
         driver.findElement(By.id("username")).clear();

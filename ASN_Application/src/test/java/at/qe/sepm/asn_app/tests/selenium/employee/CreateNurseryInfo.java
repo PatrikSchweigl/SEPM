@@ -32,7 +32,7 @@ public class CreateNurseryInfo {
     }
 
     @Test
-    public void testCreateEditDeleteChild() throws Exception {
+    public void testCreateNurseryInfo() throws Exception {
         // login
         driver.get(baseUrl + "/login.xhtml");
         driver.findElement(By.id("username")).clear();
