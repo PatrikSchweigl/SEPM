@@ -10,9 +10,13 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+		CalendarSwitchViews.class,
+		CreateAndDeleteHoliday.class,
         CreateEditDeleteChild.class,
         CreateEditDeleteLunch.class,
-        CreateEditDeleteParent.class
+        CreateEditDeleteParent.class,
+		CreateEditDeleteTask.class,
+		CreateNurseryInfo.class
 })
 
 public class EmployeeTestSuite {
