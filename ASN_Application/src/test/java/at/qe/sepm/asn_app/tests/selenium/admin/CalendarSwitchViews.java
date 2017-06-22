@@ -19,7 +19,7 @@ public class CalendarSwitchViews {
     @Before
     public void setUp() throws Exception {
         driver = InitializeSelenium.initialize();
-        baseUrl = "http://192.168.33.10:8080/";
+        baseUrl = InitializeSelenium.BASE_URL;
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
