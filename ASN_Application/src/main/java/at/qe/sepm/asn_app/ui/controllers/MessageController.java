@@ -67,10 +67,12 @@ public class MessageController extends Thread {
     }
 
     public Message doSaveMessage() {
+        Message messageReturn = null;
         if (message == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Leere Nachrichten können nicht gesendet werden!", null));
         } else {
             message = messageService.saveMessage(message);
+            messageReturn = message;
             Thread t = new Thread();
             t.start();
 
@@ -80,7 +82,7 @@ public class MessageController extends Thread {
             init();
             initList();
         }
-        return message;
+        return messageReturn;
     }
 
     @Override
