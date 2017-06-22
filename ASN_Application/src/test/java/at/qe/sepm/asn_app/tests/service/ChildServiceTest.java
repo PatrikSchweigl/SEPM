@@ -80,15 +80,15 @@ public class ChildServiceTest {
 
     @DirtiesContext
     @Test
-    @WithMockUser(username = "cheng", authorities = {"EMPLOYEE"})
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void test1() {
         // Save the parents in the database.
-        parent1 = parentService.saveParent(parent1);
-        parent2 = parentService.saveParent(parent2);
+        parentService.saveParent(parent1);
+        parentService.saveParent(parent2);
 
         // Save the child in the database.
-        child.setPrimaryParent(parent1);
-        child.setParent2(parent2);
+        //child.setPrimaryParent(parent1);
+        //child.setParent2(parent2);
         child = childService.saveChild(child);
 
         // Check if the values have changed since the child was saved.

@@ -44,8 +44,10 @@ public class ChildService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + child.getFirstName() + " " + child.getLastName(), new Date());
-            auditLogRepository.save(log);
+            if (getAuthenticatedUser() != null) {
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + child.getFirstName() + " " + child.getLastName(), new Date());
+                auditLogRepository.save(log);
+            }
         }
         child = childRepository.save(child);
         return child;
@@ -67,8 +69,10 @@ public class ChildService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
-            auditLogRepository.save(log);
+            if (getAuthenticatedUser() != null) {
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + child.getFirstName() + " " + child.getLastName(), new Date());
+                auditLogRepository.save(log);
+            }
         }
 
         childRepository.delete(child);

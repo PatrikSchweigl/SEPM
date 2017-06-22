@@ -60,9 +60,11 @@ public class UserService {
     }
 
     public UserData saveUser(UserData userData) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),
-                "SAVED: " + userData.getUsername(), new Date());
-        auditLogService.saveAuditLog(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),
+                    "SAVED: " + userData.getUsername(), new Date());
+            auditLogService.saveAuditLog(log);
+        }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userData.setPassword(passwordEncoder.encode("passwd"));
         return userRepository.save(userData);
@@ -120,9 +122,13 @@ public class UserService {
      */
     @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteUser(UserData userData) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),
-                "DELETED: " + userData.getUsername() + " [" + userData.getUserRole() + "]", new Date());
-        auditLogService.saveAuditLog(log);
+        if (getAuthenticatedUser() != null) {
+            if (getAuthenticatedUser() != null) {
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(),
+                        "DELETED: " + userData.getUsername() + " [" + userData.getUserRole() + "]", new Date());
+                auditLogService.saveAuditLog(log);
+            }
+        }
         userRepository.delete(userData);
     }
 

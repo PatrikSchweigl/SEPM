@@ -43,16 +43,22 @@ public class MessageService {
 
 
     public Message saveMessage(Message message) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "MESSAGE POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "MESSAGE POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+            auditLogRepository.save(log);
+        }
         message.setDate(new Date());
-        message.setUsername(getAuthenticatedUser().getUsername());
+        if (getAuthenticatedUser() != null) {
+            message.setUsername(getAuthenticatedUser().getUsername());
+        }
         return messageRepository.save(message);
     }
 
     public void deleteMessage(Message message) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "MESSAGE DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+            auditLogRepository.save(log);
+        }
         messageRepository.delete(message);
     }
 

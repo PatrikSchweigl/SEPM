@@ -45,8 +45,10 @@ public class EmployeeService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [EMPLOYEE]", new Date());
-            auditLogRepository.save(log);
+            if (getAuthenticatedUser() != null) {
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CREATED/CHANGED: " + employee.getUsername() + " [EMPLOYEE]", new Date());
+                auditLogRepository.save(log);
+            }
         }
         String pwd = userService.generatePasswordNew(employee.getEmail());
         mailService.sendEmail(employee.getEmail(), "Care4Fun-App - Registrierung",
@@ -73,8 +75,10 @@ public class EmployeeService {
         // Needed for JUnit because in that case no user is logged in.
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
-            auditLogRepository.save(log);
+            if (getAuthenticatedUser() != null) {
+                AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED: " + employee.getUsername() + " [" + employee.getUserRole() + "]", new Date());
+                auditLogRepository.save(log);
+            }
         }
         employeeRepository.delete(employee);
 

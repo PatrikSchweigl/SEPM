@@ -41,8 +41,10 @@ public class LunchService {
     }
 
     public Lunch saveLunch(Lunch lunch) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CHANGED/CREATED Lunch: " + lunch.getMeal() + " " + lunch.getDate(), new Date());
-        auditLogRepository.save(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "CHANGED/CREATED Lunch: " + lunch.getMeal() + " " + lunch.getDate(), new Date());
+            auditLogRepository.save(log);
+        }
         lunch = lunchRepository.save(lunch);
         return lunch;
     }
@@ -79,8 +81,10 @@ public class LunchService {
     }
 
     public void deleteLunch(Lunch lunch) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED Lunch: " + lunch.getMeal() + " " + lunch.getDate(), new Date());
-        auditLogRepository.save(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "DELETED Lunch: " + lunch.getMeal() + " " + lunch.getDate(), new Date());
+            auditLogRepository.save(log);
+        }
         lunchRepository.delete(lunch);
     }
 

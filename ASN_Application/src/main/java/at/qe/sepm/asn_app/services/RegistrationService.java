@@ -48,18 +48,22 @@ public class RegistrationService {
     }
 
     public Registration saveRegistration(Registration registration) {
-        AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
-                "REGISTER: " + registration.getChild().getFirstName() + " " + registration.getChild().getLastName(),
-                new Date());
-        auditLogService.saveAuditLog(auditLog);
+        if (userService.getAuthenticatedUser() != null) {
+            AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
+                    "REGISTER: " + registration.getChild().getFirstName() + " " + registration.getChild().getLastName(),
+                    new Date());
+            auditLogService.saveAuditLog(auditLog);
+        }
         return registrationRepository.save(registration);
     }
 
     public void deleteRegistration(Registration registration) {
-        AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
-                "DEREGISTER: " + registration.getChild().getFirstName() + " " + registration.getChild().getLastName() + " [" + registration.getId() + "]",
-                new Date());
-        auditLogService.saveAuditLog(auditLog);
+        if (userService.getAuthenticatedUser() != null) {
+            AuditLog auditLog = new AuditLog(userService.getAuthenticatedUser().getUsername(),
+                    "DEREGISTER: " + registration.getChild().getFirstName() + " " + registration.getChild().getLastName() + " [" + registration.getId() + "]",
+                    new Date());
+            auditLogService.saveAuditLog(auditLog);
+        }
         registrationRepository.delete(registration);
     }
 

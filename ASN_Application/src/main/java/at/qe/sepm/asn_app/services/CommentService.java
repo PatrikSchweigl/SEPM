@@ -43,16 +43,22 @@ public class CommentService {
 
 
     public Comment saveMessage(Comment message) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "COMMENT POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "COMMENT POSTED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+            auditLogRepository.save(log);
+        }
         message.setDate(new Date());
-        message.setUsername(getAuthenticatedUser().getUsername());
+        if (getAuthenticatedUser() != null) {
+            message.setUsername(getAuthenticatedUser().getUsername());
+        }
         return commentRepository.save(message);
     }
 
     public void deleteMessage(Comment message) {
-        AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "COMMENT DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
-        auditLogRepository.save(log);
+        if (getAuthenticatedUser() != null) {
+            AuditLog log = new AuditLog(getAuthenticatedUser().getUsername(), "COMMENT DELETED: " + getAuthenticatedUser().getUsername() + " [" + getAuthenticatedUser().getUserRole() + "] ", new Date());
+            auditLogRepository.save(log);
+        }
         commentRepository.delete(message);
     }
 
