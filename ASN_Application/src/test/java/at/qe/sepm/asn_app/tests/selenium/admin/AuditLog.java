@@ -12,6 +12,17 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
+
+/**
+ * Preferably this test should be executed at the end of all tests
+ * because it is only possible to view entries in the AuditLog if
+ * something has changed in the application. If this test gets
+ * executed from a clean database this test won't fail, but it won't
+ * show any entries in the AuditLog.
+ *
+ * Log in as the admin, go to the AuditLog and search / sort for
+ * different kind of elements. After that the admin logs out again.
+ */
 public class AuditLog {
     private WebDriver driver;
     private String baseUrl;
