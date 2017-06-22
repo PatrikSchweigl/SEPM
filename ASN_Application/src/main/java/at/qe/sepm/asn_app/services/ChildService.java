@@ -87,7 +87,5 @@ public class ChildService {
         return childRepository.getChildrenByFirstnameAndParentUsername(username, childFirstname);
     }
 
-    public void setId(Long id) {
-    }
 
 }

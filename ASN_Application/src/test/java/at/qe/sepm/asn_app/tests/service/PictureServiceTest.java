@@ -96,6 +96,9 @@ public class PictureServiceTest {
         picture.setTitle(title);
         picture.setUrl(url);
 
+        Collection<Picture> pictures = pictureService.getAllPictures();
+        assertNotNull(pictures);
+
         // Compare all attributes with getters.
         assertEquals(comments, picture.getComment());
         assertEquals(date, picture.getDate());

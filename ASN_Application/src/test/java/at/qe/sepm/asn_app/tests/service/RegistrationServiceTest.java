@@ -21,6 +21,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Collection;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -74,6 +77,13 @@ public class RegistrationServiceTest {
         // Check if the values have changed since the registration was saved.
         Registration other = registrationService.loadRegistration(registration.getId());
         assertTrue(registration.equals(other));
+
+        Collection<Registration> registrations = registrationService.getAllRegistrationsByDate(new Date());
+        assertNotNull(registrations);
+
+        Collection<Registration> registrations1 = registrationService.getAllRegistrationsByChild(child.getId());
+        assertNotNull(registrations1);
+
 
         // Delete the registration again.
         registrationService.deleteRegistration(registration);

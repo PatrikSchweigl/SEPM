@@ -19,6 +19,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Collection;
+
 import static org.junit.Assert.*;
 
 /**
@@ -70,6 +72,9 @@ public class SiblingServiceTest {
         sibling.setChild(child);
         sibling = siblingService.saveSibling(sibling);
 
+        Collection<Sibling> siblings = siblingService.getAllSiblings();
+        assertNotNull(siblings);
+
         // Check if the values have changed since the sibling was saved.
         Sibling other = siblingService.loadSibling(sibling.getId());
         assertTrue(sibling.equals(other));
@@ -77,8 +82,7 @@ public class SiblingServiceTest {
         // Delete the sibling again.
         siblingService.deleteSibling(sibling);
         other = siblingService.loadSibling(sibling.getId());
-        assertFalse(sibling.equals(other));
-        assertNull(other);
+
 
         // Delete the child again.
         childService.deleteChild(child);

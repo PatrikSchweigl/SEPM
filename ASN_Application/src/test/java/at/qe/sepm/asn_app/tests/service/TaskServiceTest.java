@@ -18,10 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -132,6 +129,20 @@ public class TaskServiceTest {
         // Check if the values have changed since the task was saved.
         Task other = taskService.loadTask(task.getId());
         assertTrue(task.equals(other));
+
+        Collection<Task> tasks = taskService.getAllTasks();
+        assertNotNull(tasks);
+
+        Collection<Task> tasks1 = taskService.getAllTasksByReceiver(receiver.getId());
+        assertNotNull(tasks1);
+
+        Collection<Task> tasks2 = taskService.getTasksByImportance(true);
+        assertNotNull(tasks2);
+
+        Collection<Task> tasks3 = taskService.getAllTasksByReceiverAndImportance(receiver.getId());
+        assertNotNull(tasks3);
+
+
 
         // Delete the task again.
         taskService.deleteTask(task);
