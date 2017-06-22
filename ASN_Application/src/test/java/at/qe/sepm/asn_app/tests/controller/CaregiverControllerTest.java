@@ -144,9 +144,9 @@ public class CaregiverControllerTest {
 
         try {
             // Save the parents in the database.
-            parentController.setParent(parent1);
+            parentController.setParent2(parent1);
             parentController.doSaveParent();
-            parentController.setParent(parent2);
+            parentController.setParent2(parent2);
             parentController.doSaveParent();
 
             // Save the child in the database.
