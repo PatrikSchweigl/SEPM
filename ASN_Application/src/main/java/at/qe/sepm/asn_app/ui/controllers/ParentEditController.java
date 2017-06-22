@@ -26,7 +26,6 @@ import java.util.Collection;
  * on 15.05.2017
  */
 @Component
-//@Scope("view")
 @Scope("view")
 public class ParentEditController {
 
@@ -106,16 +105,5 @@ public class ParentEditController {
         parentController.initList();
     }
 
-    public void doResetPassword() {
-        mailService.sendEmail(parent.getEmail(), "Care4Fun - Password wurde geändert",
-                "Guten Tag " + parent.getFirstName() + " " + parent.getLastName() + "\n\n" +
-                        "Soeben wurde Ihr Passwort zurückgesetzt.\n\n" +
-                        "Ihr Benutzername: " + parent.getUsername() + "\n" +
-                        "Ihr Passwort: passwd" +
-                        "\n\nBitte ändern Sie nach dem ersten Login Ihr Password.\n" +
-                        "Sollten Probleme auftreten, bitte umgehend beim Administrator melden.\n\n" +
-                        "Viel Spaß wünscht das Kinderkrippen-Team!");
-        parentService.resetPassword(parent);
-    }
 
 }

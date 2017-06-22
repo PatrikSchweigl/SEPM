@@ -14,9 +14,6 @@ import java.util.Collection;
 @ViewScoped
 public class PrivateMessageService implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     @Autowired
     private PrivateMessageRepository privateMessageRepository;

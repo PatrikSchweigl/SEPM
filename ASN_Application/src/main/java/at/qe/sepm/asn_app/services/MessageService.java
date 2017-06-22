@@ -26,9 +26,7 @@ import java.util.List;
 @Component
 @Scope("application")
 public class MessageService {
-    /**
-     *
-     */
+
 
     @Autowired
     private MessageRepository messageRepository;

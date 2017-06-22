@@ -42,6 +42,8 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
+
+
     protected String determineTargetUrl(Authentication authentication) {
         boolean isAdmin = false;
         boolean isEmployee = false;

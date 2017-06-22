@@ -64,9 +64,6 @@ public class ChildController {
     public Collection<Child> getChildrenByParentUsername(String usrn) {
         return childService.getChildrenByParentUsername(usrn);
     }
-    /*
-    public Collection<Child> getChildrenByParent(Parent parent){return childService.getChildrenByParent(parent);}
-    */
 
     public Collection<Child> getChildrenByLunchToday() {
         Date today = new Date();
@@ -88,7 +85,6 @@ public class ChildController {
         try {
             birth = new SimpleDateFormat("dd/MM/yyyy").parse(child.getBirthday());
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return birth.getDate() == d.getDate() && birth.getMonth() == d.getMonth();
@@ -115,14 +111,7 @@ public class ChildController {
         doReloadChild();
     }
 
-    /**
-     * Needed for JUnit tests
-     *
-     * @param child The child to be saved in the database.
-     */
-    public void setChild2(Child child) {
-        this.child = child;
-    }
+
 
     public void findParentByUsername(String usrn) {
         child.setPrimaryParent(parentService.loadParent(usrn));

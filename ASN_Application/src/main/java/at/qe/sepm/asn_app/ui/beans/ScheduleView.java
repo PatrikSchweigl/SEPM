@@ -41,9 +41,6 @@ import java.util.Set;
 @Scope("view")
 public class ScheduleView implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     private ScheduleModel eventModel;

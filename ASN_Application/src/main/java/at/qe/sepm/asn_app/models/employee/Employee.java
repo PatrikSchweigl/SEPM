@@ -38,7 +38,7 @@ public class Employee extends UserData {
     private WorkRole workRole;
 
 
-    public Employee() {//required for jpa repository
+    public Employee() {
     }
 
 

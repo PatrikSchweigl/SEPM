@@ -17,18 +17,6 @@ public interface CaregiverRepository extends AbstractRepository<Caregiver, Long>
 
     @Query("SELECT c FROM Caregiver c WHERE c.eligible = FALSE")
     Collection<Caregiver> getCaregiversByEligibleFalse();
-    /*
-    List<Caregiver> findByUsernameContaining(String username);
-
-    @Query("SELECT u FROM UserData u WHERE CONCAT(u.firstName, ' ', u.lastName) = :wholeName")
-    List<Caregiver> findByWholeNameConcat(@Param("wholeName") String wholeName);
-
-    @Query("SELECT u FROM UserData u WHERE :role = u.userRole")
-    List<Caregiver> findByRole(@Param("role") UserRole role);
-
-    @Query("SELECT u FROM UserData u WHERE u.userRole = 'ADMIN'")
-    List<Caregiver> findAllAdmin();
-    */
 
     @Query("SELECT c FROM Caregiver c WHERE c.eligible = TRUE")
     Collection<Caregiver> getCaregiversByEligibleTrue();

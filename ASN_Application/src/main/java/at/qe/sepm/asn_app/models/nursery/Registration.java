@@ -25,7 +25,7 @@ public class Registration implements Persistable<Long> {
     @ManyToOne(optional = false)
     private Child child;
     @NotNull
-    private Date date;  //date should hold Year/Month/Day only - no timestamps -> easier to compare
+    private Date date;
     @NotNull
     private Date bringdate;
 
