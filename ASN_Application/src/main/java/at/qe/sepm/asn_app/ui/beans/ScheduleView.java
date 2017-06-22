@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Created by Auki on 02.05.2017.
+ * Created by Lukas Aukenthaler on 02.05.2017.
  */
 
 @Component
