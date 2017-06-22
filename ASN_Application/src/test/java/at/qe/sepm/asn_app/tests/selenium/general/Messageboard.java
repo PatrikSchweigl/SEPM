@@ -34,7 +34,6 @@ public class Messageboard {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[5]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117")).click();
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("messages:messageInput")).clear();
@@ -53,7 +52,6 @@ public class Messageboard {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[11]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117")).click();
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("messages:messageInput")).clear();
@@ -72,7 +70,6 @@ public class Messageboard {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[4]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117")).click();
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("messages:messageInput")).clear();
@@ -89,7 +86,6 @@ public class Messageboard {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[5]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.xpath("//a[@id='messages:j_idt120:2:j_idt124']/span/i")).click();
         driver.findElement(By.xpath("//a[@id='messages:j_idt121:2:j_idt125']/span/i")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("messages:j_idt133")).click();
@@ -107,7 +103,6 @@ public class Messageboard {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[11]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.xpath("//a[@id='messages:j_idt120:1:j_idt124']/span/i")).click();
         driver.findElement(By.xpath("//a[@id='messages:j_idt121:1:j_idt125']/span/i")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("messages:j_idt132")).click();
@@ -124,7 +119,6 @@ public class Messageboard {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[4]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.xpath("//a[@id='messages:j_idt120:0:j_idt124']/span/i")).click();
         driver.findElement(By.xpath("//a[@id='messages:j_idt121:0:j_idt125']/span/i")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("messages:j_idt132")).click();

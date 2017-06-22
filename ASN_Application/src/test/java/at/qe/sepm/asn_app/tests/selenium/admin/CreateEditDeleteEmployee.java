@@ -34,7 +34,6 @@ public class CreateEditDeleteEmployee {
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[3]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117")).click();
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("employeeForm:usernameCreate")).clear();
@@ -69,12 +68,8 @@ public class CreateEditDeleteEmployee {
         Thread.sleep(1000);
         driver.findElement(By.id("employeeForm:roleCreate_2")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("employeeForm:j_idt172")).click();
         driver.findElement(By.id("employeeForm:j_idt173")).click();
         Thread.sleep(5000);
-        //driver.navigate().refresh();
-        //Thread.sleep(1000);
-        //driver.findElement(By.id("employeeForm:employeeTable:1:j_idt143")).click();
         driver.findElement(By.id("employeeForm:employeeTable:1:j_idt144")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("employeeForm:firstnameEdit")).clear();
@@ -105,17 +100,13 @@ public class CreateEditDeleteEmployee {
         Thread.sleep(1000);
         driver.findElement(By.id("employeeForm:Role_2")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("employeeForm:j_idt201")).click();
         driver.findElement(By.id("employeeForm:j_idt202")).click();
         Thread.sleep(1000);
         driver.navigate().refresh();
         Thread.sleep(1000);
-        //driver.findElement(By.id("employeeForm:employeeTable:1:j_idt144")).click();
         driver.findElement(By.id("employeeForm:employeeTable:1:j_idt145")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("employeeForm:j_idt205")).click();
         driver.findElement(By.id("employeeForm:j_idt224")).click();
-        //driver.findElement(By.id("employeeForm")).click();
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[2]/a/i")).click();
     }

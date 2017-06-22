@@ -64,8 +64,6 @@ public class PrivateMessage {
         Thread.sleep(1000);
 
         // Send the message.
-        //WebElement tab = driver.findElement(By.id("form:messageInput"));
-        //tab.sendKeys(Keys.TAB);
         driver.findElement(By.id("form:j_idt78")).click();
         Thread.sleep(1000);
 
@@ -105,7 +103,6 @@ public class PrivateMessage {
         driver.findElement(By.id("j_idt49:j_idt59:3:j_idt63")).click();
         Thread.sleep(1000);
 
-        // ?????????
         // Write a message
         driver.findElement(By.id("privateMessageSend_title")).click();
         Thread.sleep(1000);

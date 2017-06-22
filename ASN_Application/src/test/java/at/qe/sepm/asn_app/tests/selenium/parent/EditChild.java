@@ -52,7 +52,6 @@ public class EditChild {
 
         // Choose a parent from the list.
         driver.findElement(By.xpath("//div[@id='childForm:parent']/div[3]/table/tbody/tr[3]/td[2]")).click();
-        //driver.findElement(By.name("bernd")).click();
         Thread.sleep(1000);
 
         // Set all data for the child.
@@ -74,7 +73,6 @@ public class EditChild {
         Thread.sleep(1000);
 
         // Save the child.
-        //driver.findElement(By.xpath("//div[@id='childForm:childDataAdd']/table[2]/tbody/tr/td")).click();
         driver.findElement(By.id("childForm:j_idt192")).click();
         Thread.sleep(1000);
 
@@ -181,7 +179,6 @@ public class EditChild {
         // Change to the children view.
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[2]/a/i")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.linkText("Kinder")).click();
 
         // Sort to find the first child (should be the auto-generated child).
         driver.findElement(By.id("childForm:childTable:j_idt134")).click();
@@ -190,15 +187,6 @@ public class EditChild {
         // Click on the first element.
         driver.findElement(By.id("childForm:childTable:0:j_idt141")).click();
         Thread.sleep(1000);
-
-        // Search for the child in the search bar.
-        /*driver.findElement(By.id("childForm:childTable:globxalFilter")).clear();
-        driver.findElement(By.id("childForm:childTable:globalFilter")).sendKeys("ChildFirstName");
-
-        // Click on the first element (should be only left to assure no errors).
-        driver.findElement(By.id("childForm:childTable:0:j_idt141")).click();
-        Thread.sleep(1000);
-        */
 
         // Close the show child modal again.
         driver.findElement(By.xpath("//div[@id='childForm:childEditDialog']/div/a/span")).click();

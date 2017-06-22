@@ -40,7 +40,6 @@ public class CalendarAppointment {
         driver.findElement(By.id("password")).sendKeys("passwd");
         driver.findElement(By.cssSelector("form.login-form > button.login-button")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.linkText("Kalender")).click();
 
         // Go to the calendar and click on a future week day.
         driver.findElement(By.xpath("//div[@id='content2']/aside/section/ul/li[2]/a/i")).click();

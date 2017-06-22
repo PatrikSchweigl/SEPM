@@ -88,7 +88,7 @@ public class AuditLog {
         driver.findElement(By.id("j_idt118:auditLogTable:globalFilter")).sendKeys("");
         Thread.sleep(1000);
 
-        // Reload the page to refreshen the list.
+        // Reload the page to refresh the list.
         driver.navigate().refresh();
         Thread.sleep(1000);
         new Select(driver.findElement(By.id("j_idt118:auditLogTable:j_id2"))).selectByVisibleText("50");
@@ -107,8 +107,6 @@ public class AuditLog {
         driver.findElement(By.id("j_idt118:auditLogTable:j_idt136")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("j_idt118:auditLogTable:j_idt136")).click();
-        //Thread.sleep(1000);
-        //driver.findElement(By.xpath("//tbody[@id='j_idt118:auditLogTable_data']/tr/td[3]")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("j_idt118:auditLogTable:j_idt138")).click();
         Thread.sleep(1000);

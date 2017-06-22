@@ -48,39 +48,24 @@ public class CalendarSwitchViews {
         Thread.sleep(1000);
         driver.findElement(By.xpath("(//button[@type='button'])[7]")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117:j_idt118")).click();
         driver.findElement(By.id("j_idt118:j_idt119")).click();
         Thread.sleep(1000);
-        // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
-        //driver.findElement(By.xpath("//div[@id='j_idt120']/h3[2]")).click();
         driver.findElement(By.xpath("//div[@id='j_idt121']/h3[2]")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117:j_idt118")).click();
         driver.findElement(By.id("j_idt118:j_idt119")).click();
         Thread.sleep(1000);
-        // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
-        //driver.findElement(By.id("j_idt117:j_idt119")).click();
         driver.findElement(By.id("j_idt118:j_idt120")).click();
         Thread.sleep(1000);
-        // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
-        //driver.findElement(By.xpath("//div[@id='j_idt119']/h3[2]")).click();
         driver.findElement(By.xpath("//div[@id='j_idt120']/h3[2]")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117")).click();
         driver.findElement(By.id("j_idt118")).click();
         Thread.sleep(1000);
-        // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
-        //driver.findElement(By.id("j_idt117:j_idt120")).click();
         driver.findElement(By.id("j_idt118:j_idt121")).click();
         Thread.sleep(1000);
-        // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
-        //driver.findElement(By.xpath("//div[@id='j_idt120']/h3[2]")).click();
         driver.findElement(By.xpath("//div[@id='j_idt121']/h3[2]")).click();
         Thread.sleep(1000);
-        //driver.findElement(By.id("j_idt117:j_idt118")).click();
         driver.findElement(By.id("j_idt118:j_idt119")).click();
         Thread.sleep(1000);
-        // ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _self | 30000]]
         driver.findElement(By.xpath("//div[@id='header']/div/header/nav/div/ul/li[2]/a/i")).click();
     }
 

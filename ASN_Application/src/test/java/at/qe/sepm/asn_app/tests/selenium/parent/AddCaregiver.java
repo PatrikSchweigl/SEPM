@@ -75,16 +75,6 @@ public class AddCaregiver {
         driver.findElement(By.id("childForm:caregiverTable:globalFilter")).clear();
         driver.findElement(By.id("childForm:caregiverTable:globalFilter")).sendKeys("FirstName");
         Thread.sleep(1000);
-        //driver.navigate().refresh();
-        //Thread.sleep(1000);
-
-        // Click on the caregiver to show all data.
-        //driver.findElement(By.id("childForm:caregiverTable:0:j_idt163")).click();
-        //Thread.sleep(1000);
-
-        // Close the caregiver again
-        //driver.findElement(By.xpath("//div[@id='childForm:caregiverEditDialog']/div/a/span")).click();
-        //Thread.sleep(1000);
 
         // Clear the search bar again.
         driver.findElement(By.id("childForm:caregiverTable:globalFilter")).clear();

@@ -86,7 +86,7 @@ public class CalendarLunchFastSignUp {
         driver.findElement(By.id("sheduleForm:j_idt242")).click();
         Thread.sleep(1000);
 
-        // Since the page refresehs and we are on the main page of the parent we need to
+        // Since the page refreshes and we are on the main page of the parent we need to
         // close the password change modal again.
         driver.findElement(By.xpath("//div[@id='dialogForm:dialogTest']/div/a/span")).click();
         Thread.sleep(1000);
