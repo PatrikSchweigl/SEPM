@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import javax.faces.context.FacesContext;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -61,20 +64,28 @@ public class EmployeeControllerTest {
     @Test
     @WithMockUser(username = "admin", authorities = {"ADMIN"})
     public void test1() {
-        // Save the employee in the database.
-        employeeController.setEmployee(employee);
-        employeeController.doSaveEmployee();
+        FacesContext context = ContextMocker.mockFacesContext();
+        RequestContext requestContext = ContextMocker.mockRequestContext();
+        try {
+            // Save the employee in the database.
+            employeeController.setEmployee2(employee);
+            employeeController.doSaveEmployee();
 
-        // Check if the values have changed since the parent was saved.
-        Employee other = employeeService.loadEmployee(employee.getUsername());
-        assertTrue(employee.equals(other));
+            // Check if the values have changed since the parent was saved.
+            Employee other = employeeService.loadEmployee(employee.getUsername());
+            assertTrue(employee.equals(other));
 
-        // Delete the parent again
-        employeeEditController.setEmployee(employee);
-        employeeEditController.doDeleteEmployee();
-        other = employeeService.loadEmployee(employee.getUsername());
-        assertFalse(employee.equals(other));
-        assertNull(other);
+            // Delete the parent again
+            employeeEditController.setEmployee(employee);
+            employeeEditController.doDeleteEmployee();
+            other = employeeService.loadEmployee(employee.getUsername());
+            assertFalse(employee.equals(other));
+            assertNull(other);
+        }
+        finally {
+            context.release();
+            requestContext.release();
+        }
     }
 
 

@@ -24,8 +24,8 @@ import org.junit.runners.Suite.SuiteClasses;
         RegistrationServiceTest.class,
         SiblingServiceTest.class,
         TaskServiceTest.class,
-        UserServiceTest.class,
-})
+        UserServiceTest.class
+        })
 
 public class ServiceTestSuite {
 }

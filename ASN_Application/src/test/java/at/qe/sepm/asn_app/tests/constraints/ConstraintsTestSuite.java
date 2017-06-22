@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
         PasswordConstraintsTest.class,
         RegistrationConstraintsTest.class,
         UserConstraintsTest.class
-})
+        })
 
 public class ConstraintsTestSuite {
 }

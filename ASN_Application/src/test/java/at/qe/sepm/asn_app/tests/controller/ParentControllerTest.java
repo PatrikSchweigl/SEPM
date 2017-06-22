@@ -13,12 +13,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.faces.context.FacesContext;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,20 +74,28 @@ public class ParentControllerTest {
 
     @Test
     public void test1() {
-        // Save a parent in the database
-        parentController.setParent(parent);
-        parentController.doSaveParent();
+        FacesContext context = ContextMocker.mockFacesContext();
+        RequestContext requestContext = ContextMocker.mockRequestContext();
+        try {
+            // Save a parent in the database
+            parentController.setParent2(parent);
+            parentController.doSaveParent();
 
-        // Check if the values have changed since the parent was saved.
-        Parent other = parentService.loadParent(parent.getUsername());
-        assertTrue(parent.equals(other));
+            // Check if the values have changed since the parent was saved.
+            Parent other = parentService.loadParent(parent.getUsername());
+            assertTrue(parent.equals(other));
 
-        // Delete the parent again
-        parentEditController.setParent2(parent);
-        parentEditController.doDeleteParent();
-        other = parentService.loadParent(parent.getUsername());
-        assertFalse(parent.equals(other));
-        assertNull(other);
+            // Delete the parent again
+            parentEditController.setParent2(parent);
+            parentEditController.doDeleteParent();
+            other = parentService.loadParent(parent.getUsername());
+            assertFalse(parent.equals(other));
+            assertNull(other);
+        }
+        finally {
+            context.release();
+            requestContext.release();
+        }
     }
 
 

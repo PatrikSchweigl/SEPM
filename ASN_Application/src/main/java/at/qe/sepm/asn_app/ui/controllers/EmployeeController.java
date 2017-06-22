@@ -36,7 +36,9 @@ public class EmployeeController {
         this.employee = employee;
         doReloadEmployee();
     }
-
+    public void setEmployee2(Employee employee) {
+        this.employee = employee;
+    }
 
 
     public void setEmployees(Collection<Employee> employees) {

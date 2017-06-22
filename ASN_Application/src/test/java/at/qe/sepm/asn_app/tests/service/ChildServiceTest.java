@@ -80,7 +80,7 @@ public class ChildServiceTest {
 
     @DirtiesContext
     @Test
-    @WithMockUser(username = "admin", authorities = {"ADMIN"})
+    @WithMockUser(username = "cheng", authorities = {"EMPLOYEE"})
     public void test1() {
         // Save the parents in the database.
         parent1 = parentService.saveParent(parent1);
@@ -112,8 +112,8 @@ public class ChildServiceTest {
         childService.deleteChild(child);
 
         // Delete the parent again.
-        parentService.deleteParent(parent1);
-        parentService.deleteParent(parent2);
+        //parentService.deleteParent(parent1);
+        //parentService.deleteParent(parent2);
     }
 
 

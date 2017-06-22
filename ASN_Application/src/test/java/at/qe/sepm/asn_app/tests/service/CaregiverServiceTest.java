@@ -60,8 +60,6 @@ public class CaregiverServiceTest {
 
     @Before
     public void initialize() {
-
-
         parent1 = InitializeParent.initialize1();
         parent2 = InitializeParent.initialize2();
         child = InitializeChild.initialize();
@@ -137,8 +135,8 @@ public class CaregiverServiceTest {
         childService.deleteChild(child);
 
         // Delete the parent again.
-        parentService.deleteParent(parent1);
-        parentService.deleteParent(parent2);
+        //parentService.deleteParent(parent1);
+        //parentService.deleteParent(parent2);
     }
 
 

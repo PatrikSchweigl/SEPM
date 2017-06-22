@@ -88,8 +88,8 @@ public class SiblingServiceTest {
         childService.deleteChild(child);
 
         // Delete the parent again.
-        parentService.deleteParent(parent1);
-        parentService.deleteParent(parent2);
+        //parentService.deleteParent(parent1);
+        //parentService.deleteParent(parent2);
     }
 
 
