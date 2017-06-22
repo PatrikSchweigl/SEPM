@@ -50,11 +50,6 @@ public class LunchController {
     public void init() {
         lunchAll = lunchService.findAll();
     }
-    /*
-	 * public void processSignUp(){ Lunch l; for(int i = 0; i < 5; i++){
-	 * if(thisWeekLunch.size() > i) { l = thisWeekLunch.get(i); if (signUp[i]) {
-	 * l.addChild(child); lunchService.saveLunch(l); } } } }
-	 */
 
     /**
      * getCurrentWeek calculates dates for the current week (mon-fri) and tries
@@ -195,8 +190,6 @@ public class LunchController {
 
     public void doSaveLunchEdit() {
         lunchEdit = lunchService.saveLunch(lunchEdit);
-        // mailService.sendEmail("Patrik.Schweigl@student.uibk.ac.at", "Test",
-        // "Hallo, ich bin es, das System!");
         lunchEdit = null;
         initNewLunchEdit();
     }
@@ -221,7 +214,6 @@ public class LunchController {
         lunchEdit = lunchService.loadLunch(lunchEdit.getId());
     }
 
-    //getters, setters -------------------------------------------------------------------------------------------
     public Long getChildId() {
         return childId;
     }
@@ -236,12 +228,8 @@ public class LunchController {
 
     public void setLunchEdit(Lunch lunchEdit) {
         this.lunchEdit = lunchEdit;
-        // doReloadLunch();
     }
 
-    public void setLunchEdit2(Lunch lunchEdit) {
-        this.lunchEdit = lunchEdit;
-    }
 
     public Lunch getLunch() {
         return lunch;
@@ -249,7 +237,6 @@ public class LunchController {
 
     public void setLunch(Lunch lunch) {
         this.lunch = lunch;
-        // doReloadLunch();
     }
 
     public boolean[] getSignUp() {

@@ -56,6 +56,13 @@ public class UserServiceTest {
         assertNull(other);
     }
 
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(userData.toString());
+        assertNotEquals("", userData.toString());
+    }
+
 
     @After
     public void cleanUp() {

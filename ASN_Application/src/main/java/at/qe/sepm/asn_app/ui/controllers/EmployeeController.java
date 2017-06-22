@@ -37,14 +37,7 @@ public class EmployeeController {
         doReloadEmployee();
     }
 
-    /**
-     * Needed for JUNit tests
-     *
-     * @param employee
-     */
-    public void setEmployee2(Employee employee) {
-        this.employee = employee;
-    }
+
 
     public void setEmployees(Collection<Employee> employees) {
         this.employees = employees;

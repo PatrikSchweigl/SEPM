@@ -89,6 +89,13 @@ public class RegistrationServiceTest {
         parentService.deleteParent(parent2);
     }
 
+    @Test
+    public void testFurtherMethods() {
+        // Test toString()
+        assertNotNull(registration.toString());
+        assertNotEquals("", registration.toString());
+    }
+
 
     @After
     public void cleanUp() {

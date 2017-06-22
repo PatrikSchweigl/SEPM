@@ -39,14 +39,7 @@ public class EmployeeEditController {
         doReloadEmployee();
     }
 
-    /**
-     * Needed for JUnit tests
-     *
-     * @param employee
-     */
-    public void setEmployee2(Employee employee) {
-        this.employee = employee;
-    }
+
 
     public void doReloadEmployee() {
         employee = employeeService.loadEmployee(employee.getUsername());

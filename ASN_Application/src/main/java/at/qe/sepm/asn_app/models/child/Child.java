@@ -84,7 +84,7 @@ public class Child implements Persistable<Long> {
     @Expose
     private Religion religion;
 
-    //@ElementCollection(targetClass = Caregiver.class)
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     @ElementCollection
     private Set<Caregiver> caregivers;
@@ -243,21 +243,7 @@ public class Child implements Persistable<Long> {
      * @see Parent
      * @see Sibling
      */
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Child child = (Child) o;
-
-        return id.equals(child.id);
-    }
-       */
-
-    /*@Override
-    public int hashCode() {
-        return id.hashCode();
-    }*/
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

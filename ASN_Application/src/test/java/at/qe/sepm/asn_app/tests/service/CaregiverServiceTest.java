@@ -200,6 +200,7 @@ public class CaregiverServiceTest {
     @Test
     public void testFurtherMethods() {
         // Print all information with toString();
+        assertNotNull(caregiver.toString());
         assertNotEquals("", caregiver.toString());
 
 

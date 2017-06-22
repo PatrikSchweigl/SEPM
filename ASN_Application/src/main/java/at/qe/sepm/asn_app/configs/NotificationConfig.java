@@ -32,8 +32,7 @@ public class NotificationConfig {
     @Autowired
     private LunchService lunchService;
 
-    @Scheduled(cron = "0 0 10 * * *") // 60000 for one minute - "0 0 10 * * *"
-    // 10 AM everyday
+    @Scheduled(cron = "0 0 10 * * *") // 60000 for one minute - "0 0 10 * * *" 10 AM everyday
     public void taskReminder() {
         Collection<UserData> list = userService.getParentsByNotification();
         String footer = "Das Kinderkrippen-Team bedankt sich für Ihre Mitarbeit!";
@@ -68,11 +67,7 @@ public class NotificationConfig {
 
                     dateToCompare.setTime(t.getBeginDate().getTime() - (min * 60 * 1000) - (hrs * 60 * 60 * 1000));
 
-                    if ((dateToCompare.getTime() - today.getTime()) == 345600000) { // 4
-                        // days
-                        // before
-                        // the
-                        // task
+                    if ((dateToCompare.getTime() - today.getTime()) == 345600000) { // 4 days before the task
                         send = true;
                         taskMsg += t.getDescription() + "\t|\t" + t.getFormattedDate(t.getBeginDate()) + "\t|\t"
                                 + t.getFormattedDate(t.getEndingDate()) + "\n";

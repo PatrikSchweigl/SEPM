@@ -116,15 +116,8 @@ public class CaregiverController {
         doReloadCaregiverEdit();
     }
 
-    /**
-     * Needed for JUnit tests
-     */
-    public void setCaregiverEdit2(Caregiver caregiver) {
-        this.caregiverEdit = caregiver;
-    }
 
     public void doReloadCaregiverEdit() {
-        //child = childService.loadUser(child.getUsername());
         caregiverEdit = caregiverService.loadCaregiver(caregiverEdit.getId());
     }
 
@@ -149,11 +142,6 @@ public class CaregiverController {
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('caregiverEditDialog').hide()");
         }
-    }
-
-    public void doDeleteCaregiverEdit() {
-        caregiverService.deleteCaregiver(caregiverEdit);
-        caregiverEdit = null;
     }
 
 

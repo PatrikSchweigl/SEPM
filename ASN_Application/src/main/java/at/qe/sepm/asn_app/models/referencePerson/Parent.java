@@ -90,24 +90,6 @@ public class Parent extends UserData {
                 ? getId().equals(((Parent) other).getId())
                 : (other == this);
     }
-    /*public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Parent)) {
-            return false;
-        }
-
-        Parent other = (Parent) obj;
-        if (this.getFirstName().equals(other.getFirstName()) &&
-                this.getLastName().equals(other.getLastName()) &&
-                this.getUserRole().equals(other.getUserRole()) &&
-                familyStatus.equals(other.familyStatus) &&
-                this.getBirthday().equals(other.getBirthday())) {
-            return true;
-        }
-        return false;
-    }*/
 
     @Override
     public int hashCode() {

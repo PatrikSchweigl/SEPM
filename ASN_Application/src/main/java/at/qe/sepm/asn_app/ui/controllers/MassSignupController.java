@@ -196,8 +196,6 @@ public class MassSignupController {
         }
     }
 
-    // getters,, setters ===========================================================================================
-
 
     public String[] getStrings() {
         return strings;

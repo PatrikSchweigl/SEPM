@@ -104,6 +104,7 @@ public class CommentServiceTest {
     @Test
     public void testFurtherMethods() {
         // Print all information with toString();
+        assertNotNull(comment.toString());
         assertNotEquals("", comment.toString());
 
 

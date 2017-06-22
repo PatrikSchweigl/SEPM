@@ -104,6 +104,7 @@ public class MessageServiceTest {
 
 
         // Test toString()
+        assertNotNull(message.toString());
         assertNotEquals("", message.toString());
 
     }

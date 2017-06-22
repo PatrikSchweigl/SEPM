@@ -21,9 +21,6 @@ import java.util.List;
 @Component
 @Scope("application")
 public class CommentService {
-    /**
-     *
-     */
 
     @Autowired
     private CommentRepository commentRepository;

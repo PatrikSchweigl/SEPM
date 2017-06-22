@@ -18,8 +18,6 @@ import java.util.Collection;
 @Scope("view")
 public class TaskController {
 
-    //Controller to provide tasks and create tasks
-
     @Autowired
     private TaskService taskService;
 

@@ -52,9 +52,6 @@ public class CommentController {
         doReloadMessage();
     }
 
-    public void setMessage2(Comment message) {
-        this.message = message;
-    }
 
     public void doReloadMessage() {
         message = commentService.loadMessage(message.getId());
@@ -72,7 +69,6 @@ public class CommentController {
     }
 
     public void doDeleteMessage(Comment message) {
-        Comment commi = commentService.loadMessage(message.getId());
         commentService.deleteMessage(message);
         initList();
     }

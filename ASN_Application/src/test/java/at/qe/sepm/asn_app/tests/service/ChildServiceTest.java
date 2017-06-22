@@ -151,6 +151,7 @@ public class ChildServiceTest {
     @Test
     public void testFurtherMethods() {
         // Test toString()
+        assertNotNull(child.toString());
         assertNotEquals("", child.toString());
 
         // Test isNew()

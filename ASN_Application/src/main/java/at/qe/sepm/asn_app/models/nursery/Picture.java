@@ -115,7 +115,6 @@ public class Picture implements Persistable<Long> {
         }
 
         Picture other = (Picture) obj;
-        //this.comment.equals(other.comment) &&
         return this.date.equals(other.date) &&
                 this.publisher.equals(other.publisher) &&
                 this.title.equals(other.title) &&

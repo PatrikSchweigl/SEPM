@@ -128,6 +128,7 @@ public class NurseryInformationServiceTest {
 
 
         // Test toString()
+        assertNotNull(nurseryInformation.toString());
         assertNotEquals("", nurseryInformation.toString());
 
     }

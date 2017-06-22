@@ -154,7 +154,7 @@ public class LunchConstraintsTest {
 
 
         calendar.clear();
-        calendar.set(2017, Calendar.AUGUST, 11, 10, 0);
+        calendar.set(2017, Calendar.JULY, 11, 10, 0);
         Date date1 = calendar.getTime();
 
         NurseryInformation nurseryInformation1 = new NurseryInformation();

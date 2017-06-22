@@ -122,7 +122,6 @@ public class Lunch implements Persistable<Long> {
     @Override
     public Long getId() {
         return id;
-        //return new Long(id);
     }
 
     @Override
