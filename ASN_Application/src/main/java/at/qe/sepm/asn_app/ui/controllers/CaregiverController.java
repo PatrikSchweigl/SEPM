@@ -17,7 +17,7 @@ import java.util.Collection;
 
 
 /**
- * Created by Auki on 24.04.2017.
+ * Created by Lukas Aukenthaler on 24.04.2017.
  */
 
 @Component

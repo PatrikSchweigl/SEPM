@@ -4,7 +4,7 @@ import at.qe.sepm.asn_app.models.child.Child;
 import com.google.gson.annotations.Expose;
 
 /**
- * Created by Auki on 13.06.2017.
+ * Created by Lukas Aukenthaler on 13.06.2017.
  */
 public class LunchReport {
     @Expose
